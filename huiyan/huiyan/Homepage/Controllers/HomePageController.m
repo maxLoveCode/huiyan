@@ -7,6 +7,7 @@
 //
 
 #import "HomePageController.h"
+#import "HomePageCell.h"
 
 #define bannerHeight 187
 #define menuHeight 72.5
@@ -27,11 +28,11 @@
 -(UITableView *)recommendTableView
 {
     if (!_recommendTableView) {
-        _recommendTableView = [[UITableView alloc] init];
+        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-50) style:UITableViewStylePlain];
         _recommendTableView.delegate = self;
         _recommendTableView.dataSource = self;
         
-        [_recommendTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"recommends"];
+        [_recommendTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"recommends"];
         
 #ifdef DEBUG
         [_recommendTableView setBackgroundColor:[UIColor redColor]];
@@ -67,7 +68,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _recommendTableView) {
-        return 1;
+        return 5;
     }
     else
     {
@@ -131,13 +132,13 @@
             return menuHeight;
         }
     }
-    return 40;
+    return [HomePageCell cellHeight];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _recommendTableView) {
-        UITableViewCell* cell;
+        HomePageCell* cell = [_recommendTableView dequeueReusableCellWithIdentifier:@"recommends" forIndexPath:indexPath];
         return cell;
     }
     else
@@ -146,6 +147,10 @@
         
         if (indexPath.section == 1) {
             [cell.contentView addSubview:self.menuView];
+        }
+        else if(indexPath.section == 2)
+        {
+            [cell.contentView addSubview:self.recommendTableView];
         }
         return cell;
     }

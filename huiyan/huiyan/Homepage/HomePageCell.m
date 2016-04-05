@@ -8,6 +8,7 @@
 
 #import "HomePageCell.h"
 #import "Constant.h"
+
 @implementation HomePageCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -34,8 +35,8 @@
 {
     if (!_title_lab) {
         self.title_lab = [[UILabel alloc]init];
-        self.title_lab.font  = kFONT(21);
-        self.title_lab.textColor = kTitleBlackColor;
+        self.title_lab.font  = kFONT(14);
+        self.title_lab.textColor = COLOR_WithHex(0x2f2f2f);
     }
     return _title_lab;
 }
@@ -45,8 +46,8 @@
     if(!_actor_lab){
         
         self.actor_lab = [[UILabel alloc]init];
-        self.actor_lab.font = kFONT16;
-        self.actor_lab.textColor = kTitlrGrayColor;
+        self.actor_lab.font = kFONT12;
+        self.actor_lab.textColor = COLOR_WithHex(0x565656);
     }
     return _actor_lab;
 }
@@ -55,8 +56,8 @@
 {
     if (!_description_lab) {
         self.description_lab = [[UILabel alloc]init];
-        self.description_lab.font = kFONT16;
-        self.description_lab.textColor = kTitlrGrayColor;
+        self.description_lab.font = kFONT12;
+        self.description_lab.textColor = COLOR_WithHex(0xa5a5a5);
         self.description_lab.numberOfLines = 2;
     }
     return _description_lab;
@@ -68,6 +69,11 @@
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 17, CGRectGetMinY(self.image_pic.frame) + 12, kScreen_Width - 150, 21);
     self.actor_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame) + 12, kScreen_Width - 150, 16);
     self.description_lab.frame = CGRectMake(CGRectGetMinX(self.actor_lab.frame), CGRectGetMaxY(self.actor_lab.frame) + 12, kScreen_Width - 150, 32);
+}
+
++ (CGFloat)cellHeight
+{
+    return 133.0;
 }
 
 #pragma mark Debug

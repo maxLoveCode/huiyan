@@ -17,4 +17,6 @@
 //menuControllerView
 @property (strong, nonatomic) UICollectionView* menuView;
 
+@property (strong, nonatomic) NSMutableArray* dataSource;
+
 @end
