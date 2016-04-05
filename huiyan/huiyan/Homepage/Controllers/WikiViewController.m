@@ -100,6 +100,11 @@
     NSLog(@"搜索");
 }
 
-
+- (void)refreshData:(UIButton *)sender{
+    if (sender.tag == 104) {
+        [self.head_view removeFromSuperview];
+       
+    }
+}
 
 @end

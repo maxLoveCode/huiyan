@@ -7,7 +7,7 @@
 //
 
 #import "HomePageController.h"
-
+#import "WikiViewController.h"
 #define bannerHeight 187
 #define menuHeight 72.5
 
@@ -189,6 +189,11 @@
         [cell.contentView setBackgroundColor:[UIColor greenColor]];
     }
     return cell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.item == 3) {
+        UIWindowDidBecomeKeyNotification
+    }
 }
 
 @end
