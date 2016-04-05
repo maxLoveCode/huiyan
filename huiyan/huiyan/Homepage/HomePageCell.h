@@ -15,4 +15,6 @@
 @property (nonatomic, strong) UILabel *actor_lab;
 @property (nonatomic, strong) UILabel *description_lab;
 
++ (CGFloat)cellHeight;
+
 @end
