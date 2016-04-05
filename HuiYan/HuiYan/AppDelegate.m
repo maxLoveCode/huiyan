@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "HomePageController.h"
+#import "Constant.h"
 @interface AppDelegate ()
 
 @end
@@ -44,9 +45,7 @@
 }
 - (void)addAllController{
     HomePageController *homepage = [[HomePageController alloc]initWithStyle:UITableViewStyleGrouped];
-    UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage];
-    
-    
+    UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage]; 
     UITabBarController *tabCon = [[UITabBarController alloc]init];
     tabCon.viewControllers = @[homeNav];
     self.window.rootViewController = tabCon;

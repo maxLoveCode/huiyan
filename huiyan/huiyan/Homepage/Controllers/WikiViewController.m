@@ -26,8 +26,6 @@
     [super viewDidLoad];
     self.title  = @"戏曲百科";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = COLOR_WithHex(0xe54863);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(search:)];
     [self head_view];
     [self line_scrollView];
@@ -89,6 +87,7 @@
     return 10.0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
     UIView *head_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
     head_view.backgroundColor = COLOR_WithHex(0xefefef);
     UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
@@ -100,6 +99,7 @@
     
     
     return  head_view;
+
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

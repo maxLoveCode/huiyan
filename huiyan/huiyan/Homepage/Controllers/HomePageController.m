@@ -12,26 +12,59 @@
 #define bannerHeight 187
 #define menuHeight 72.5
 
+@interface HomePageController()
+{
+    CGFloat scrollOffset;
+    BOOL statusBarHidden;
+}
+@end
+
 @implementation HomePageController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = COLOR_WithHex(0xe54863);
+        [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
 
 #ifdef DEBUG
     NSLog(@"Homepage loaded");
 #endif
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    scrollOffset =-20;
+    statusBarHidden = YES;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+    
+    [super viewWillAppear:animated];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+   // [self.view setFrame:CGRectOffset(self.view.frame, 0, -(self.navigationController.navigationBar.frame.size.height))];
+
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 -(UITableView *)recommendTableView
 {
     if (!_recommendTableView) {
-        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-50) style:UITableViewStylePlain];
+        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 133*5) style:UITableViewStylePlain];
         _recommendTableView.delegate = self;
         _recommendTableView.dataSource = self;
-        
+        _recommendTableView.scrollEnabled = NO;
         [_recommendTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"recommends"];
         
 #ifdef DEBUG
@@ -96,7 +129,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-        return 10;
+        if (section != 2) {
+            return 10;
+        }
+        else
+            return 64;
     }
     return 0.01;
 }
@@ -131,6 +168,8 @@
         {
             return menuHeight;
         }
+        else
+            return self.recommendTableView.frame.size.height;
     }
     return [HomePageCell cellHeight];
 }
@@ -144,8 +183,10 @@
     else
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homePage" forIndexPath:indexPath];
-        
-        if (indexPath.section == 1) {
+        if (indexPath.section ==0) {
+            [cell.contentView setBackgroundColor:[UIColor orangeColor]];
+        }
+        else if (indexPath.section == 1) {
             [cell.contentView addSubview:self.menuView];
         }
         else if(indexPath.section == 2)
@@ -199,6 +240,42 @@
     if (indexPath.item == 3) {
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
         [self.navigationController pushViewController:wikiCon animated:YES];
+    }
+}
+
+#pragma mark statusbar transparent
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+#pragma scroll delegate
+-(void)scrollViewDidBeginDecelerating:(UIScrollView *)scrollView
+{
+
+}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.tableView) {
+#ifdef DEBUG
+        NSLog(@"tableview scrolling %lf", scrollView.contentOffset.y);
+#endif
+        if (scrollView.contentOffset.y-scrollOffset>44 && statusBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO animated:NO];
+            statusBarHidden = !statusBarHidden;
+        }
+        
+        if (scrollView.contentOffset.y-scrollOffset<=44&& !statusBarHidden) {
+            
+            [self.navigationController setNavigationBarHidden:YES animated:NO];
+            statusBarHidden = !statusBarHidden;
+        }
     }
 }
 
