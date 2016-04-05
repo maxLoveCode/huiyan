@@ -7,8 +7,12 @@
 //
 
 #import "HomePageController.h"
+<<<<<<< HEAD
 #import "HomePageCell.h"
 
+=======
+#import "WikiViewController.h"
+>>>>>>> ca62905c89dda1681fd242a4e75d5f60515ef978
 #define bannerHeight 187
 #define menuHeight 72.5
 
@@ -194,6 +198,11 @@
         [cell.contentView setBackgroundColor:[UIColor greenColor]];
     }
     return cell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.item == 3) {
+        
+    }
 }
 
 @end
