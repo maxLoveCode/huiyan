@@ -17,4 +17,17 @@
 
 #define kMargin 15// 边距
 
+/**字体设置*/
+#define kFONT18  [UIFont systemFontOfSize:18]
+#define kFONT17  [UIFont systemFontOfSize:17]
+#define kFONT16  [UIFont systemFontOfSize:16]
+#define kFONT15  [UIFont systemFontOfSize:15]
+#define kFONT14  [UIFont systemFontOfSize:14]
+#define kFONT13  [UIFont systemFontOfSize:13]
+#define kFONT12  [UIFont systemFontOfSize:12]
+#define kFONT11  [UIFont systemFontOfSize:11]
+
+#define kFONT(s) [UIFont systemFontOfSize:s]
+
+
 #endif /* Constant_h */
