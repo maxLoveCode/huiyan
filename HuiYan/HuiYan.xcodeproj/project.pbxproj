@@ -65,8 +65,8 @@
 		55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiViewController.m; sourceTree = "<group>"; };
 		55CCD7EB1CB39FAE00C3B8CA /* HomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageCell.h; sourceTree = "<group>"; };
 		55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageCell.m; sourceTree = "<group>"; };
-		55CCD7F21CB3AA9600C3B8CA /* HomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageModel.h; sourceTree = "<group>"; };
-		55CCD7F31CB3AA9600C3B8CA /* HomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageModel.m; sourceTree = "<group>"; };
+		55CCD7F21CB3AA9600C3B8CA /* HomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageModel.h; path = ../HomePageModel.h; sourceTree = "<group>"; };
+		55CCD7F31CB3AA9600C3B8CA /* HomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageModel.m; path = ../HomePageModel.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -186,12 +186,11 @@
 		55CCD7CE1CB3871800C3B8CA /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7CF1CB3871800C3B8CA /* Controllers */,
-				55CCD7D01CB3871800C3B8CA /* Models */,
-				55CCD7F21CB3AA9600C3B8CA /* HomePageModel.h */,
-				55CCD7F31CB3AA9600C3B8CA /* HomePageModel.m */,
+				55CCD7F51CB3B07C00C3B8CA /* Views */,
 				55CCD7EB1CB39FAE00C3B8CA /* HomePageCell.h */,
 				55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */,
+				55CCD7CF1CB3871800C3B8CA /* Controllers */,
+				55CCD7D01CB3871800C3B8CA /* Models */,
 			);
 			path = Homepage;
 			sourceTree = "<group>";
@@ -210,6 +209,8 @@
 		55CCD7D01CB3871800C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7F21CB3AA9600C3B8CA /* HomePageModel.h */,
+				55CCD7F31CB3AA9600C3B8CA /* HomePageModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -338,6 +339,13 @@
 				55CCD7E61CB38DB700C3B8CA /* ServerManager.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		55CCD7F51CB3B07C00C3B8CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
