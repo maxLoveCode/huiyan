@@ -14,6 +14,9 @@
 
 #define kTitleBGColor [UIColor colorWithHexString:@"020202"]
 #define kViewBGColor [UIColor colorWithHexString:@"efefef"]
+#define kTitleBlackColor [UIColor colorWithRed:47 green:47 blue:47 alpha:1.0]
+#define kTitlrGrayColor [UIColor colorWithRed:181 green:181 blue:181 alpha:1.0]
+
 
 #define kMargin 15// 边距
 
