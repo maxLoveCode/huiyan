@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIView* head_view;
 @property (nonatomic, strong) UIScrollView *image_scrollView;
 @property (nonatomic, strong) UILabel *line_scrollView;
+@property (nonatomic, strong) UIView *bg_view;
 
 @end
 
@@ -31,6 +32,13 @@
     [self line_scrollView];
     [self dramaTableView];
     [self image_scrollView];
+}
+- (UIView *)bg_view{
+    if (_bg_view == nil) {
+        self.bg_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
+        self.bg_view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    }
+    return _bg_view;
 }
 - (UILabel *)line_scrollView{
     if (_line_scrollView == nil) {
@@ -127,8 +135,10 @@
 
 - (void)refreshData:(UIButton *)sender{
     if (sender.tag == 104) {
-        [self.head_view removeFromSuperview];
-       
+//        [self.head_view removeFromSuperview];
+//        for (int i = 0; i < 7; i++) {
+//            UIButton btn
+//        }
     }
 }
 
