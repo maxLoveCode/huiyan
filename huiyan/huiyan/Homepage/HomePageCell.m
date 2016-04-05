@@ -11,30 +11,78 @@
 @implementation HomePageCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.image_pic = [[UIImageView alloc]init];
+        
         [self addSubview:self.image_pic];
+        [self addSubview:self.title_lab];
+        [self addSubview:self.actor_lab];
+        [self addSubview:self.description_lab];
+    }
+    
+    [self debugData];
+    return self;
+}
+
+-(UIImageView *)image_pic
+{
+    if (!_image_pic) {
+        self.image_pic = [[UIImageView alloc]init];
+    }
+    return _image_pic;
+}
+
+-(UILabel *)title_lab
+{
+    if (!_title_lab) {
         self.title_lab = [[UILabel alloc]init];
         self.title_lab.font  = kFONT(21);
-       self.title_lab.textColor = kTitleBlackColor;
-        [self addSubview:self.title_lab];
+        self.title_lab.textColor = kTitleBlackColor;
+    }
+    return _title_lab;
+}
+
+-(UILabel *)actor_lab
+{
+    if(!_actor_lab){
+        
         self.actor_lab = [[UILabel alloc]init];
         self.actor_lab.font = kFONT16;
         self.actor_lab.textColor = kTitlrGrayColor;
-        [self addSubview:self.actor_lab];
+    }
+    return _actor_lab;
+}
+
+-(UILabel *)description_lab
+{
+    if (!_description_lab) {
         self.description_lab = [[UILabel alloc]init];
         self.description_lab.font = kFONT16;
         self.description_lab.textColor = kTitlrGrayColor;
         self.description_lab.numberOfLines = 2;
-        [self addSubview:self.description_lab];
     }
-    return self;
+    return _description_lab;
 }
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.image_pic.frame = CGRectMake(kMargin, 10, 75, 112.5);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 17, CGRectGetMinY(self.image_pic.frame) + 12, kScreen_Width - 150, 21);
     self.actor_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame) + 12, kScreen_Width - 150, 16);
     self.description_lab.frame = CGRectMake(CGRectGetMinX(self.actor_lab.frame), CGRectGetMaxY(self.actor_lab.frame) + 12, kScreen_Width - 150, 32);
+}
+
+#pragma mark Debug
+- (void)debugData
+{
+    NSArray *title = @[@"昆剧选段<牡丹亭>", @"沪剧<金陵塔>", @"京剧<嘿嘿嘿>"];
+    NSArray *actors = @[@"贾宝玉",@"林黛玉",@"演员甲",@"我是一个人"];
+    NSArray *des = @[@"我是第一个介绍非常的短,大概就两行", @"我是第二个介绍就很长了哈哈哈哈哈哈", @"看看我这些话是不是很长我再试一试嘿嘿嘿嘿嘿你好不好今天好吗明天好吗我今天很开心哦,为什么这个介绍那么长呢哈哈哈哈哈哈"];
+    NSString* ranTitle = title[arc4random_uniform((int)[title count])];
+    NSString* ranActors = actors[arc4random_uniform((int)[actors count])];
+    NSString* ranDes = des[arc4random_uniform((int)[des count])];
+    
+    self.title_lab.text = ranTitle;
+    self.actor_lab.text = ranActors;
+    self.description_lab.text = ranDes;
 }
 
 @end
