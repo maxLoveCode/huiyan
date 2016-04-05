@@ -15,6 +15,8 @@
 		55CCD7991CB3640600C3B8CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CCD7971CB3640600C3B8CA /* LaunchScreen.storyboard */; };
 		55CCD7A41CB3640600C3B8CA /* huiyanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7A31CB3640600C3B8CA /* huiyanTests.m */; };
 		55CCD7AF1CB3640600C3B8CA /* huiyanUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7AE1CB3640600C3B8CA /* huiyanUITests.m */; };
+		55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7E01CB38B3200C3B8CA /* HomePageController.m */; };
+		55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7E61CB38DB700C3B8CA /* ServerManager.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,11 @@
 		55CCD7AA1CB3640600C3B8CA /* huiyanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = huiyanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CCD7AE1CB3640600C3B8CA /* huiyanUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = huiyanUITests.m; sourceTree = "<group>"; };
 		55CCD7B01CB3640600C3B8CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55CCD7DF1CB38B3200C3B8CA /* HomePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageController.h; sourceTree = "<group>"; };
+		55CCD7E01CB38B3200C3B8CA /* HomePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageController.m; sourceTree = "<group>"; };
+		55CCD7E31CB38D1C00C3B8CA /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		55CCD7E51CB38DB700C3B8CA /* ServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerManager.h; sourceTree = "<group>"; };
+		55CCD7E61CB38DB700C3B8CA /* ServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerManager.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,16 +132,17 @@
 		55CCD7881CB3640500C3B8CA /* huiyan */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7CD1CB385AC00C3B8CA /* ImageSource */,
-				55CCD7C01CB3811600C3B8CA /* Homepage */,
-				55CCD7BF1CB3811400C3B8CA /* New Group2 */,
-				55CCD7BE1CB3811000C3B8CA /* New Group1 */,
-				55CCD7BD1CB380E000C3B8CA /* Main */,
-				55CCD7BC1CB380CA00C3B8CA /* New Group */,
+				55CCD7E41CB38D8A00C3B8CA /* Helpers */,
+				55CCD7E21CB38CC800C3B8CA /* Define */,
 				55CCD78C1CB3640600C3B8CA /* AppDelegate.h */,
 				55CCD78D1CB3640600C3B8CA /* AppDelegate.m */,
 				55CCD78F1CB3640600C3B8CA /* ViewController.h */,
 				55CCD7901CB3640600C3B8CA /* ViewController.m */,
+				55CCD7D31CB38A0600C3B8CA /* Finding */,
+				55CCD7D71CB38A0600C3B8CA /* Friends */,
+				55CCD7DB1CB38A0600C3B8CA /* Memain */,
+				55CCD7CE1CB3871800C3B8CA /* Homepage */,
+				55CCD7D21CB3871800C3B8CA /* ImageSource */,
 				55CCD7921CB3640600C3B8CA /* Main.storyboard */,
 				55CCD7951CB3640600C3B8CA /* Assets.xcassets */,
 				55CCD7971CB3640600C3B8CA /* LaunchScreen.storyboard */,
@@ -170,142 +178,155 @@
 			path = huiyanUITests;
 			sourceTree = "<group>";
 		};
-		55CCD7BC1CB380CA00C3B8CA /* New Group */ = {
+		55CCD7CE1CB3871800C3B8CA /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7CF1CB3871800C3B8CA /* Controllers */,
+				55CCD7D01CB3871800C3B8CA /* Models */,
+				55CCD7D11CB3871800C3B8CA /* Views */,
 			);
-			name = "New Group";
+			path = Homepage;
 			sourceTree = "<group>";
 		};
-		55CCD7BD1CB380E000C3B8CA /* Main */ = {
+		55CCD7CF1CB3871800C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7CC1CB3816600C3B8CA /* Model */,
-				55CCD7CB1CB3816300C3B8CA /* View */,
-				55CCD7CA1CB3816100C3B8CA /* New Group */,
+				55CCD7DF1CB38B3200C3B8CA /* HomePageController.h */,
+				55CCD7E01CB38B3200C3B8CA /* HomePageController.m */,
 			);
-			name = Main;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7BE1CB3811000C3B8CA /* New Group1 */ = {
+		55CCD7D01CB3871800C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7C91CB3815E00C3B8CA /* New Group2 */,
-				55CCD7C81CB3815B00C3B8CA /* New Group1 */,
-				55CCD7C71CB3815900C3B8CA /* New Group */,
 			);
-			name = "New Group1";
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7BF1CB3811400C3B8CA /* New Group2 */ = {
+		55CCD7D11CB3871800C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7C61CB3815200C3B8CA /* New Group2 */,
-				55CCD7C51CB3815000C3B8CA /* New Group1 */,
-				55CCD7C41CB3814D00C3B8CA /* New Group */,
 			);
-			name = "New Group2";
+			path = Views;
 			sourceTree = "<group>";
 		};
-		55CCD7C01CB3811600C3B8CA /* Homepage */ = {
+		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7C31CB3814900C3B8CA /* Controller */,
-				55CCD7C21CB3814600C3B8CA /* Model */,
-				55CCD7C11CB3814100C3B8CA /* View */,
 			);
-			name = Homepage;
+			path = ImageSource;
 			sourceTree = "<group>";
 		};
-		55CCD7C11CB3814100C3B8CA /* View */ = {
+		55CCD7D31CB38A0600C3B8CA /* Finding */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7D41CB38A0600C3B8CA /* Controllers */,
+				55CCD7D51CB38A0600C3B8CA /* Models */,
+				55CCD7D61CB38A0600C3B8CA /* Views */,
 			);
-			name = View;
+			path = Finding;
 			sourceTree = "<group>";
 		};
-		55CCD7C21CB3814600C3B8CA /* Model */ = {
+		55CCD7D41CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Model;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7C31CB3814900C3B8CA /* Controller */ = {
+		55CCD7D51CB38A0600C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Controller;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7C41CB3814D00C3B8CA /* New Group */ = {
+		55CCD7D61CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group";
+			path = Views;
 			sourceTree = "<group>";
 		};
-		55CCD7C51CB3815000C3B8CA /* New Group1 */ = {
+		55CCD7D71CB38A0600C3B8CA /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7D81CB38A0600C3B8CA /* Controllers */,
+				55CCD7D91CB38A0600C3B8CA /* Models */,
+				55CCD7DA1CB38A0600C3B8CA /* Views */,
 			);
-			name = "New Group1";
+			path = Friends;
 			sourceTree = "<group>";
 		};
-		55CCD7C61CB3815200C3B8CA /* New Group2 */ = {
+		55CCD7D81CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group2";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7C71CB3815900C3B8CA /* New Group */ = {
+		55CCD7D91CB38A0600C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group";
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7C81CB3815B00C3B8CA /* New Group1 */ = {
+		55CCD7DA1CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group1";
+			path = Views;
 			sourceTree = "<group>";
 		};
-		55CCD7C91CB3815E00C3B8CA /* New Group2 */ = {
+		55CCD7DB1CB38A0600C3B8CA /* Memain */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7DC1CB38A0600C3B8CA /* Controllers */,
+				55CCD7DD1CB38A0600C3B8CA /* Models */,
+				55CCD7DE1CB38A0600C3B8CA /* Views */,
 			);
-			name = "New Group2";
+			path = Memain;
 			sourceTree = "<group>";
 		};
-		55CCD7CA1CB3816100C3B8CA /* New Group */ = {
+		55CCD7DC1CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7CB1CB3816300C3B8CA /* View */ = {
+		55CCD7DD1CB38A0600C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = View;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7CC1CB3816600C3B8CA /* Model */ = {
+		55CCD7DE1CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Model;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		55CCD7CD1CB385AC00C3B8CA /* ImageSource */ = {
+		55CCD7E21CB38CC800C3B8CA /* Define */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7E31CB38D1C00C3B8CA /* Constant.h */,
 			);
-			name = ImageSource;
+			name = Define;
+			path = Homepage/Define;
+			sourceTree = "<group>";
+		};
+		55CCD7E41CB38D8A00C3B8CA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				55CCD7E51CB38DB700C3B8CA /* ServerManager.h */,
+				55CCD7E61CB38DB700C3B8CA /* ServerManager.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -490,7 +511,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
 				55CCD7911CB3640600C3B8CA /* ViewController.m in Sources */,
+				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 			);
