@@ -44,8 +44,12 @@
 -(UICollectionView* )menuView
 {
     if(!_menuView){
-        _menuView = [[UICollectionView alloc] init];
+        UICollectionViewFlowLayout *layout =[[UICollectionViewFlowLayout alloc] init];
+        _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, menuHeight) collectionViewLayout:layout];
         [_menuView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"menu"];
+        
+        _menuView.delegate = self;
+        _menuView.dataSource = self;
     }
     return _menuView;
 }
@@ -78,11 +82,11 @@
             case 0:
                 return 0.01;
             case 1:
-                return 10;
+                return 0.01;
             case 2:
-                return 10;
+                return 32;
             default:
-                return 10;
+                return 0.01;
         }
     }
     return 0;
@@ -90,8 +94,29 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
+    if (tableView == self.tableView) {
+        return 10;
+    }
     return 0.01;
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (tableView == self.tableView) {
+        if (section == 2) {
+            UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
+            [headerView setBackgroundColor:[UIColor whiteColor]];
+            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, 60, 12)];
+            label.text = @"热门推荐";
+            label.font = kFONT12;
+            [headerView addSubview:label];
+            
+            return headerView;
+        }
+    }
+    return nil;
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -119,7 +144,7 @@
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homePage" forIndexPath:indexPath];
         
-        if (indexPath.row == 1) {
+        if (indexPath.section == 1) {
             [cell.contentView addSubview:self.menuView];
         }
         return cell;
@@ -150,6 +175,19 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
+    if (indexPath.item ==0) {
+        [cell.contentView setBackgroundColor:[UIColor redColor]];
+    }
+    else if(indexPath.item ==1){
+        [cell.contentView setBackgroundColor:[UIColor orangeColor]];
+    }
+    else if(indexPath.item ==2){
+        [cell.contentView setBackgroundColor:[UIColor yellowColor]];
+    }
+    else
+    {
+        [cell.contentView setBackgroundColor:[UIColor greenColor]];
+    }
     return cell;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constant.h"
 
 @interface HomePageController : UITableViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 
