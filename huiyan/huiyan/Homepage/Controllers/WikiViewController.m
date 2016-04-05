@@ -71,7 +71,7 @@
 #pragma mark tableView代理方法
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UILabel *head_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
-    head_lab.backgroundColor = kViewBGColor;
+    head_lab.backgroundColor = COLOR_WithHex(0xefefef);
     return head_lab;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
