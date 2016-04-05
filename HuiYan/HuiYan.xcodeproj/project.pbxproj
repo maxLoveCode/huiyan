@@ -430,7 +430,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -748,7 +748,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

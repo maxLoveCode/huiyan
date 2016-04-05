@@ -197,7 +197,8 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.item == 3) {
-       
+        WikiViewController *wikiCon = [[WikiViewController alloc]init];
+        [self.navigationController pushViewController:wikiCon animated:YES];
     }
 }
 
