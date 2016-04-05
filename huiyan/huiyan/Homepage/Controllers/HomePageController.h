@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomePageController : UITableViewController
+@interface HomePageController : UITableViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 
 //热门推荐 recommendTableView
 @property (strong, nonatomic) UITableView* recommendTableView;
+
+//menuControllerView
+@property (strong, nonatomic) UICollectionView* menuView;
 
 @end
