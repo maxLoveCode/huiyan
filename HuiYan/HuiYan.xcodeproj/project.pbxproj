@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		55CCD78B1CB3640500C3B8CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD78A1CB3640500C3B8CA /* main.m */; };
 		55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD78D1CB3640600C3B8CA /* AppDelegate.m */; };
-		55CCD7911CB3640600C3B8CA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7901CB3640600C3B8CA /* ViewController.m */; };
 		55CCD7941CB3640600C3B8CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CCD7921CB3640600C3B8CA /* Main.storyboard */; };
 		55CCD7961CB3640600C3B8CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CCD7951CB3640600C3B8CA /* Assets.xcassets */; };
 		55CCD7991CB3640600C3B8CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CCD7971CB3640600C3B8CA /* LaunchScreen.storyboard */; };
@@ -44,8 +43,6 @@
 		55CCD78A1CB3640500C3B8CA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55CCD78C1CB3640600C3B8CA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		55CCD78D1CB3640600C3B8CA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		55CCD78F1CB3640600C3B8CA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		55CCD7901CB3640600C3B8CA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		55CCD7931CB3640600C3B8CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55CCD7951CB3640600C3B8CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55CCD7981CB3640600C3B8CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -136,14 +133,13 @@
 				55CCD7E21CB38CC800C3B8CA /* Define */,
 				55CCD78C1CB3640600C3B8CA /* AppDelegate.h */,
 				55CCD78D1CB3640600C3B8CA /* AppDelegate.m */,
-				55CCD78F1CB3640600C3B8CA /* ViewController.h */,
-				55CCD7901CB3640600C3B8CA /* ViewController.m */,
 				55CCD7D31CB38A0600C3B8CA /* Finding */,
 				55CCD7D71CB38A0600C3B8CA /* Friends */,
 				55CCD7DB1CB38A0600C3B8CA /* Memain */,
 				55CCD7CE1CB3871800C3B8CA /* Homepage */,
 				55CCD7D21CB3871800C3B8CA /* ImageSource */,
 				55CCD7921CB3640600C3B8CA /* Main.storyboard */,
+				55CCD7D11CB3871800C3B8CA /* Views */,
 				55CCD7951CB3640600C3B8CA /* Assets.xcassets */,
 				55CCD7971CB3640600C3B8CA /* LaunchScreen.storyboard */,
 				55CCD79A1CB3640600C3B8CA /* Info.plist */,
@@ -183,7 +179,6 @@
 			children = (
 				55CCD7CF1CB3871800C3B8CA /* Controllers */,
 				55CCD7D01CB3871800C3B8CA /* Models */,
-				55CCD7D11CB3871800C3B8CA /* Views */,
 			);
 			path = Homepage;
 			sourceTree = "<group>";
@@ -208,7 +203,8 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = Views;
+			name = Views;
+			path = Homepage/Views;
 			sourceTree = "<group>";
 		};
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
@@ -399,6 +395,7 @@
 				TargetAttributes = {
 					55CCD7851CB3640500C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 8WV7FK6JAM;
 					};
 					55CCD79E1CB3640600C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
@@ -511,7 +508,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
-				55CCD7911CB3640600C3B8CA /* ViewController.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
@@ -656,6 +652,7 @@
 			baseConfigurationReference = 3500AD8F3B45BD551DB23170 /* Pods-huiyan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = huiyan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = huayin.huiyan;
@@ -668,6 +665,7 @@
 			baseConfigurationReference = 2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = huiyan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = huayin.huiyan;

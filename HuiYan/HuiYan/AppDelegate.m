@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "HomePageController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [self addAllController];
     return YES;
 }
 
@@ -43,8 +43,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 - (void)addAllController{
+    HomePageController *homepage = [[HomePageController alloc]init];
+    UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage];
+    
+    
     UITabBarController *tabCon = [[UITabBarController alloc]init];
-    tabCon.viewControllers = @{};
+    tabCon.viewControllers = @[homeNav];
+    self.window.rootViewController = tabCon;
 }
 
 @end
