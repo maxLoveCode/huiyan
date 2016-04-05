@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface HomePageCell : UITableViewCell
+
 @property (nonatomic, strong) UIImageView *image_pic;
 @property (nonatomic, strong) UILabel *title_lab;
 @property (nonatomic, strong) UILabel *actor_lab;
 @property (nonatomic, strong) UILabel *description_lab;
+
 @end
