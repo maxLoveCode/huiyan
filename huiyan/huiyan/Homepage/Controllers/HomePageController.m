@@ -24,7 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.translucent = NO;
+    
     self.navigationController.navigationBar.barTintColor = COLOR_WithHex(0xe54863);
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
 
@@ -38,6 +38,7 @@
     scrollOffset =-20;
     statusBarHidden = YES;
     
+    self.navigationController.navigationBar.translucent = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 
@@ -56,6 +57,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 -(UITableView *)recommendTableView
@@ -264,17 +266,25 @@
 {
     if (scrollView == self.tableView) {
 #ifdef DEBUG
-        NSLog(@"tableview scrolling %lf", scrollView.contentOffset.y);
+        NSLog(@"tableview scrolling %.1lf, %.1lf", scrollView.contentOffset.y, scrollView.contentOffset.y-scrollOffset);
 #endif
-        if (scrollView.contentOffset.y-scrollOffset>44 && statusBarHidden) {
+        if (scrollView.contentOffset.y-scrollOffset-20>0 && statusBarHidden) {
             [self.navigationController setNavigationBarHidden:NO animated:NO];
             statusBarHidden = !statusBarHidden;
         }
         
-        if (scrollView.contentOffset.y-scrollOffset<=44&& !statusBarHidden) {
+        if (scrollView.contentOffset.y-scrollOffset-20<=0&& !statusBarHidden) {
             
             [self.navigationController setNavigationBarHidden:YES animated:NO];
+            
             statusBarHidden = !statusBarHidden;
+        }
+        
+        if (!statusBarHidden&&self.navigationController.navigationBar.alpha<=1.0 &&self.navigationController.navigationBar.alpha>0.0) {
+#ifdef DEBUG
+            NSLog(@"alpha %lf", self.navigationController.navigationBar.alpha);
+#endif
+            self.navigationController.navigationBar.alpha =(scrollView.contentOffset.y-scrollOffset-20)/24;
         }
     }
 }
