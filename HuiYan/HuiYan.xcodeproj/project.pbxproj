@@ -125,6 +125,7 @@
 		55CCD7881CB3640500C3B8CA /* huiyan */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7CD1CB385AC00C3B8CA /* ImageSource */,
 				55CCD7C01CB3811600C3B8CA /* Homepage */,
 				55CCD7BF1CB3811400C3B8CA /* New Group2 */,
 				55CCD7BE1CB3811000C3B8CA /* New Group1 */,
@@ -298,6 +299,13 @@
 			children = (
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		55CCD7CD1CB385AC00C3B8CA /* ImageSource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ImageSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
