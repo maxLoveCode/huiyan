@@ -125,16 +125,15 @@
 		55CCD7881CB3640500C3B8CA /* huiyan */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7CD1CB385AC00C3B8CA /* ImageSource */,
-				55CCD7C01CB3811600C3B8CA /* Homepage */,
-				55CCD7BF1CB3811400C3B8CA /* New Group2 */,
-				55CCD7BE1CB3811000C3B8CA /* New Group1 */,
-				55CCD7BD1CB380E000C3B8CA /* Main */,
-				55CCD7BC1CB380CA00C3B8CA /* New Group */,
 				55CCD78C1CB3640600C3B8CA /* AppDelegate.h */,
 				55CCD78D1CB3640600C3B8CA /* AppDelegate.m */,
 				55CCD78F1CB3640600C3B8CA /* ViewController.h */,
 				55CCD7901CB3640600C3B8CA /* ViewController.m */,
+				55CCD7D31CB38A0600C3B8CA /* Finding */,
+				55CCD7D71CB38A0600C3B8CA /* Friends */,
+				55CCD7DB1CB38A0600C3B8CA /* Memain */,
+				55CCD7CE1CB3871800C3B8CA /* Homepage */,
+				55CCD7D21CB3871800C3B8CA /* ImageSource */,
 				55CCD7921CB3640600C3B8CA /* Main.storyboard */,
 				55CCD7951CB3640600C3B8CA /* Assets.xcassets */,
 				55CCD7971CB3640600C3B8CA /* LaunchScreen.storyboard */,
@@ -170,142 +169,135 @@
 			path = huiyanUITests;
 			sourceTree = "<group>";
 		};
-		55CCD7BC1CB380CA00C3B8CA /* New Group */ = {
+		55CCD7CE1CB3871800C3B8CA /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7CF1CB3871800C3B8CA /* Controllers */,
+				55CCD7D01CB3871800C3B8CA /* Models */,
+				55CCD7D11CB3871800C3B8CA /* Views */,
 			);
-			name = "New Group";
+			path = Homepage;
 			sourceTree = "<group>";
 		};
-		55CCD7BD1CB380E000C3B8CA /* Main */ = {
+		55CCD7CF1CB3871800C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7CC1CB3816600C3B8CA /* Model */,
-				55CCD7CB1CB3816300C3B8CA /* View */,
-				55CCD7CA1CB3816100C3B8CA /* New Group */,
 			);
-			name = Main;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7BE1CB3811000C3B8CA /* New Group1 */ = {
+		55CCD7D01CB3871800C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7C91CB3815E00C3B8CA /* New Group2 */,
-				55CCD7C81CB3815B00C3B8CA /* New Group1 */,
-				55CCD7C71CB3815900C3B8CA /* New Group */,
 			);
-			name = "New Group1";
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7BF1CB3811400C3B8CA /* New Group2 */ = {
+		55CCD7D11CB3871800C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7C61CB3815200C3B8CA /* New Group2 */,
-				55CCD7C51CB3815000C3B8CA /* New Group1 */,
-				55CCD7C41CB3814D00C3B8CA /* New Group */,
 			);
-			name = "New Group2";
+			path = Views;
 			sourceTree = "<group>";
 		};
-		55CCD7C01CB3811600C3B8CA /* Homepage */ = {
+		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7C31CB3814900C3B8CA /* Controller */,
-				55CCD7C21CB3814600C3B8CA /* Model */,
-				55CCD7C11CB3814100C3B8CA /* View */,
 			);
-			name = Homepage;
+			path = ImageSource;
 			sourceTree = "<group>";
 		};
-		55CCD7C11CB3814100C3B8CA /* View */ = {
+		55CCD7D31CB38A0600C3B8CA /* Finding */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7D41CB38A0600C3B8CA /* Controllers */,
+				55CCD7D51CB38A0600C3B8CA /* Models */,
+				55CCD7D61CB38A0600C3B8CA /* Views */,
 			);
-			name = View;
+			path = Finding;
 			sourceTree = "<group>";
 		};
-		55CCD7C21CB3814600C3B8CA /* Model */ = {
+		55CCD7D41CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Model;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7C31CB3814900C3B8CA /* Controller */ = {
+		55CCD7D51CB38A0600C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Controller;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7C41CB3814D00C3B8CA /* New Group */ = {
+		55CCD7D61CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group";
+			path = Views;
 			sourceTree = "<group>";
 		};
-		55CCD7C51CB3815000C3B8CA /* New Group1 */ = {
+		55CCD7D71CB38A0600C3B8CA /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7D81CB38A0600C3B8CA /* Controllers */,
+				55CCD7D91CB38A0600C3B8CA /* Models */,
+				55CCD7DA1CB38A0600C3B8CA /* Views */,
 			);
-			name = "New Group1";
+			path = Friends;
 			sourceTree = "<group>";
 		};
-		55CCD7C61CB3815200C3B8CA /* New Group2 */ = {
+		55CCD7D81CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group2";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7C71CB3815900C3B8CA /* New Group */ = {
+		55CCD7D91CB38A0600C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group";
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7C81CB3815B00C3B8CA /* New Group1 */ = {
+		55CCD7DA1CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group1";
+			path = Views;
 			sourceTree = "<group>";
 		};
-		55CCD7C91CB3815E00C3B8CA /* New Group2 */ = {
+		55CCD7DB1CB38A0600C3B8CA /* Memain */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7DC1CB38A0600C3B8CA /* Controllers */,
+				55CCD7DD1CB38A0600C3B8CA /* Models */,
+				55CCD7DE1CB38A0600C3B8CA /* Views */,
 			);
-			name = "New Group2";
+			path = Memain;
 			sourceTree = "<group>";
 		};
-		55CCD7CA1CB3816100C3B8CA /* New Group */ = {
+		55CCD7DC1CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "New Group";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		55CCD7CB1CB3816300C3B8CA /* View */ = {
+		55CCD7DD1CB38A0600C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = View;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		55CCD7CC1CB3816600C3B8CA /* Model */ = {
+		55CCD7DE1CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		55CCD7CD1CB385AC00C3B8CA /* ImageSource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ImageSource;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
