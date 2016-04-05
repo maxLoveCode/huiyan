@@ -7,12 +7,8 @@
 //
 
 #import "HomePageController.h"
-<<<<<<< HEAD
 #import "HomePageCell.h"
-
-=======
 #import "WikiViewController.h"
->>>>>>> ca62905c89dda1681fd242a4e75d5f60515ef978
 #define bannerHeight 187
 #define menuHeight 72.5
 
