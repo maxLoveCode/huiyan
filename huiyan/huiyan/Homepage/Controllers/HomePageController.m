@@ -12,12 +12,24 @@
 #define bannerHeight 187
 #define menuHeight 72.5
 
+@interface HomePageController()
+{
+    CGFloat scrollOffset;
+    BOOL statusBarHidden;
+}
+@end
+
 @implementation HomePageController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    scrollOffset =-20;
+    statusBarHidden = YES;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
 
 #ifdef DEBUG
@@ -25,13 +37,26 @@
 #endif
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+   // [self.view setFrame:CGRectOffset(self.view.frame, 0, -(self.navigationController.navigationBar.frame.size.height))];
+    
+}
+
 -(UITableView *)recommendTableView
 {
     if (!_recommendTableView) {
-        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-50) style:UITableViewStylePlain];
+        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 133*5) style:UITableViewStylePlain];
         _recommendTableView.delegate = self;
         _recommendTableView.dataSource = self;
-        
+        _recommendTableView.scrollEnabled = NO;
         [_recommendTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"recommends"];
         
 #ifdef DEBUG
@@ -96,7 +121,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-        return 10;
+        if (section != 2) {
+            return 10;
+        }
+        else
+            return 64;
     }
     return 0.01;
 }
@@ -131,6 +160,8 @@
         {
             return menuHeight;
         }
+        else
+            return self.recommendTableView.frame.size.height;
     }
     return [HomePageCell cellHeight];
 }
@@ -200,6 +231,42 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.item == 3) {
         
+    }
+}
+
+#pragma mark statusbar transparent
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+#pragma scroll delegate
+-(void)scrollViewDidBeginDecelerating:(UIScrollView *)scrollView
+{
+
+}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.tableView) {
+#ifdef DEBUG
+        NSLog(@"tableview scrolling %lf", scrollView.contentOffset.y);
+#endif
+        if (scrollView.contentOffset.y-scrollOffset>44 && statusBarHidden) {
+            [self.navigationController setNavigationBarHidden:NO animated:NO];
+            statusBarHidden = !statusBarHidden;
+        }
+        
+        if (scrollView.contentOffset.y-scrollOffset<=44&& !statusBarHidden) {
+            
+            [self.navigationController setNavigationBarHidden:YES animated:NO];
+            statusBarHidden = !statusBarHidden;
+        }
     }
 }
 
