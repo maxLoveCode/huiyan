@@ -14,6 +14,10 @@
 @end
 
 @implementation WikiViewController
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.title  = @"戏曲百科";
+}
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    
 //}
