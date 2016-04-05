@@ -144,8 +144,10 @@
     else
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homePage" forIndexPath:indexPath];
-        
-        if (indexPath.section == 1) {
+        if (indexPath.section ==0) {
+            [cell.contentView setBackgroundColor:[UIColor orangeColor]];
+        }
+        else if (indexPath.section == 1) {
             [cell.contentView addSubview:self.menuView];
         }
         else if(indexPath.section == 2)

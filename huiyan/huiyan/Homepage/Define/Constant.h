@@ -29,11 +29,6 @@
 #define kTitleGrayColor [UIColor colorWithRed:181 green:181 blue:181 alpha:1.0]
 #define kNavigationColor [UIColor colorWithRed:224 green:48 blue:63 alpha:1.0]
 
-
-#define kViewBGColor [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:239 / 255.0 alpha:1.0]
-#define kTitleBlackColor [UIColor colorWithRed:47 / 255.0 green:47/ 255.0 blue:47 / 255.0 alpha:1.0]
-#define kTitlrGrayColor [UIColor colorWithRed:181 / 255.0 green:181 / 255.0blue:181 / 255.0 alpha:1.0]
-#define kNavigationColor [UIColor colorWithRed:224 / 255.0 green:48 / 255.0 blue:63 / 255.0 alpha:1.0]
 #define kTitleColor [UIColor colorWithRed:66 / 255.0 green:66 / 255.0 blue:66 / 255.0 alpha:1.0]
 
 #define kMargin 15// 边距
