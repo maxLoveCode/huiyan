@@ -378,6 +378,7 @@
 				TargetAttributes = {
 					55CCD7851CB3640500C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 8WV7FK6JAM;
 					};
 					55CCD79E1CB3640600C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
@@ -389,7 +390,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -633,6 +634,7 @@
 			baseConfigurationReference = 3500AD8F3B45BD551DB23170 /* Pods-huiyan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = huiyan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = huayin.huiyan;
@@ -645,6 +647,7 @@
 			baseConfigurationReference = 2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = huiyan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = huayin.huiyan;
@@ -701,7 +704,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,
