@@ -43,7 +43,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 - (void)addAllController{
-    HomePageController *homepage = [[HomePageController alloc]init];
+    HomePageController *homepage = [[HomePageController alloc]initWithStyle:UITableViewStyleGrouped];
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage];
     
     
