@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface ServerManager : NSObject
-
++ (ServerManager *)instance;
 @end
