@@ -144,6 +144,7 @@
 				55CCD7CE1CB3871800C3B8CA /* Homepage */,
 				55CCD7D21CB3871800C3B8CA /* ImageSource */,
 				55CCD7921CB3640600C3B8CA /* Main.storyboard */,
+				55CCD7D11CB3871800C3B8CA /* Views */,
 				55CCD7951CB3640600C3B8CA /* Assets.xcassets */,
 				55CCD7971CB3640600C3B8CA /* LaunchScreen.storyboard */,
 				55CCD79A1CB3640600C3B8CA /* Info.plist */,
@@ -183,7 +184,6 @@
 			children = (
 				55CCD7CF1CB3871800C3B8CA /* Controllers */,
 				55CCD7D01CB3871800C3B8CA /* Models */,
-				55CCD7D11CB3871800C3B8CA /* Views */,
 			);
 			path = Homepage;
 			sourceTree = "<group>";
@@ -208,7 +208,8 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = Views;
+			name = Views;
+			path = Homepage/Views;
 			sourceTree = "<group>";
 		};
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {

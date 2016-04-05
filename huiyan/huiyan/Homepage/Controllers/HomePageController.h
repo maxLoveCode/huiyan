@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomePageController : UIViewController
+@interface HomePageController : UITableViewController
+
+//热门推荐 recommendTableView
+@property (strong, nonatomic) UITableView* recommendTableView;
 
 @end
