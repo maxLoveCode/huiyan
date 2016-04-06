@@ -15,6 +15,7 @@
 #endif
 
 NSString *const b_URL = _BASE_URL;
+NSString *const version = @"v1_0";
 
 @implementation ServerManager
 
@@ -28,20 +29,30 @@ NSString *const b_URL = _BASE_URL;
         sharedInstance = [[self alloc] initWithBaseURL: [NSURL URLWithString:b_URL]];
     });
     
-    //Uncommenting this line makes the error go away
-    //sharedInstance.responseSerializer = [AFJSONResponseSerializer serializer];
-    
     NSDictionary *dic = @{@"username":@"huiyan",
                           @"password":@"huiyan"};
-    [sharedInstance GET:@"v1_0/api/token.php" parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
+    
+    [sharedInstance GET:[sharedInstance appendedURL:@"token.php"] parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
         NSLog(@"progress %@", downloadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"success %@", responseObject);
+        if ([[responseObject objectForKey:@"code"] integerValue] == 10000) {
+            sharedInstance.accessToken = [responseObject objectForKey:@"access_token"];
+        }
+        else
+        {
+            NSLog(@"access_token failed");
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error %@", error);
     }];
     
     return sharedInstance;
 }
+
+- (NSString*)appendedURL:(NSString*)url
+{
+    return [NSString stringWithFormat:@"%@/api/%@", version, url];
+}
+
 
 @end
