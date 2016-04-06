@@ -70,7 +70,7 @@
 }
 - (UIView *)head_view{
     if (!_head_view) {
-        self.head_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
+        self.head_view = [[UIView alloc]init];
         self.head_view.backgroundColor = COLOR_WithHex(0xefefef);
         UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
         up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
@@ -86,10 +86,11 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.image_pic.frame = CGRectMake(kMargin, 20, 75, 112.5);
+    self.image_pic.frame = CGRectMake(kMargin, 10, 75, 112.5);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 17, CGRectGetMinY(self.image_pic.frame) + 12, kScreen_Width - 150, 21);
     self.actor_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame) + 12, kScreen_Width - 150, 16);
     self.description_lab.frame = CGRectMake(CGRectGetMinX(self.actor_lab.frame), CGRectGetMaxY(self.actor_lab.frame) + 12, kScreen_Width - 150, 32);
+    self.head_view.frame = CGRectMake(0, CGRectGetMaxY(self.image_pic.frame) + 10, kScreen_Width, 10);
 }
 
 + (CGFloat)cellHeight
