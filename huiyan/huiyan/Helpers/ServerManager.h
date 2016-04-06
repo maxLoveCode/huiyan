@@ -15,4 +15,10 @@
 
 @interface ServerManager : AFHTTPSessionManager
 
+@property (nonatomic, copy) NSString* _accessToken;
+
+extern NSString *const b_URL;
+
++ (id)sharedInstance;
+
 @end

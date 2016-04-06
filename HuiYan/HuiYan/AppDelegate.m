@@ -33,7 +33,7 @@
             NSLog(@"====== UNIT TEST COMPLETION =====");
         }
         else{
-            NSLog(@"====== UNIT TEST FAILURE ======");
+            NSLog(@"======= UNIT TEST FAILURE =======");
         }
     }];
 #endif

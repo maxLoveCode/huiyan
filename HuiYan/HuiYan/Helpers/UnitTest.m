@@ -7,6 +7,7 @@
 //
 
 #import "UnitTest.h"
+#import "Constant.h"
 
 @implementation UnitTest
 
@@ -21,6 +22,7 @@
 
 -(void)testResult:(void(^)(BOOL result))completion
 {
+    manager = [ServerManager sharedInstance];
     completion(YES);
 }
 
