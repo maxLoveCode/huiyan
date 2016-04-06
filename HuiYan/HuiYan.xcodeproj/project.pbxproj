@@ -20,6 +20,7 @@
 		55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */; };
 		55CCD7ED1CB39FAE00C3B8CA /* HomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */; };
 		55CCD7F81CB3E17200C3B8CA /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7F71CB3E17200C3B8CA /* HomePageModel.m */; };
+		55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,8 @@
 		55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageCell.m; sourceTree = "<group>"; };
 		55CCD7F61CB3E17200C3B8CA /* HomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageModel.h; sourceTree = "<group>"; };
 		55CCD7F71CB3E17200C3B8CA /* HomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageModel.m; sourceTree = "<group>"; };
+		55CCD7FA1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+ShowHideBar.h"; sourceTree = "<group>"; };
+		55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+ShowHideBar.m"; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +144,7 @@
 		55CCD7881CB3640500C3B8CA /* huiyan */ = {
 			isa = PBXGroup;
 			children = (
+				55CCD7F91CB4A49500C3B8CA /* Category */,
 				55CCD7E41CB38D8A00C3B8CA /* Helpers */,
 				55CCD7E21CB38CC800C3B8CA /* Define */,
 				55CCD78C1CB3640600C3B8CA /* AppDelegate.h */,
@@ -353,6 +357,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		55CCD7F91CB4A49500C3B8CA /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				55CCD7FA1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.h */,
+				55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -535,6 +548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
 				55CCD7F81CB3E17200C3B8CA /* HomePageModel.m in Sources */,
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
 				55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */,

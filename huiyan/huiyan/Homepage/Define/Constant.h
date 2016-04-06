@@ -12,6 +12,7 @@
 #define kScreen_Width [[UIScreen mainScreen] bounds].size.width
 #define kScreen_Height [[UIScreen mainScreen] bounds].size.height
 
+//设置颜色
 #define COLOR_WITH_ARGB(a,r,g,b) [UIColor colorWithRed:\
 (r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
 
@@ -22,7 +23,6 @@
 (argb&0xFF000000)>>24, (argb&0xFF0000)>>16, (argb&0xFF00)>>8, (argb&0xFF))
 #define COLOR_WithHex(rgb) COLOR_WITH_RGB(\
 (rgb&0xFF0000)>>16, (rgb&0xFF00)>>8, (rgb&0xFF))
-
 
 
 #define kMargin 15// 边距
@@ -36,7 +36,6 @@
 #define kFONT13  [UIFont systemFontOfSize:13]
 #define kFONT12  [UIFont systemFontOfSize:12]
 #define kFONT11  [UIFont systemFontOfSize:11]
-
 #define kFONT(s) [UIFont systemFontOfSize:s]
 
 
