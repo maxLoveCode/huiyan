@@ -20,6 +20,7 @@
     [drama setID:(NSInteger*)[[json objectForKey:@"id"] integerValue]];
     [drama setActor:[json objectForKey:@"actor"]];
     [drama setTitle:[json objectForKey:@"title"]];
+    [drama setProfile:[json objectForKey:@"profile"]];
     
     return drama;
 }

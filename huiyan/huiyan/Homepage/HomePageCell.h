@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomePageModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface HomePageCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView *image_pic;
-@property (nonatomic, strong) UILabel *title_lab;
-@property (nonatomic, strong) UILabel *actor_lab;
-@property (nonatomic, strong) UILabel *description_lab;
+@property (nonatomic, strong) UIImageView * _Nullable image_pic;
+@property (nonatomic, strong) UILabel * _Nonnull title_lab;
+@property (nonatomic, strong) UILabel * _Nonnull actor_lab;
+@property (nonatomic, strong) UILabel * _Nonnull description_lab;
+
+-(void)setContent:(HomePageModel * _Nonnull)drama;
 
 + (CGFloat)cellHeight;
 
