@@ -29,15 +29,26 @@ NSString *const version = @"v1_0";
         sharedInstance = [[self alloc] initWithBaseURL: [NSURL URLWithString:b_URL]];
     });
     
+    if (!sharedInstance.accessToken) {
+        [sharedInstance getToken:sharedInstance];
+    }
+    
+    return sharedInstance;
+}
+
+- (void)getToken:(ServerManager*) sharedInstance
+{
+    __block int completed = 0;
+    
     NSDictionary *dic = @{@"username":@"huiyan",
                           @"password":@"huiyan"};
     
-    __block int completed = 0;
-    [sharedInstance GET:[sharedInstance appendedURL:@"token.php"] parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
+    [sharedInstance GET:[sharedInstance
+                         appendedURL:@"token.php"]
+             parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
         NSLog(@"progress %@", downloadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"%@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 10000) {
             sharedInstance.accessToken = [responseObject objectForKey:@"access_token"];
             completed = 1;
@@ -47,19 +58,17 @@ NSString *const version = @"v1_0";
             NSLog(@"access_token failed");
         }
         
-      
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error %@", error);
     }];
-
+    
     while (completed == 0)
     {
         // run runloop so that async dispatch can be handled on main thread AFTER the operation has
         // been marked as finished (even though the call backs haven't finished yet).
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate date]];
     }
-    
-    return sharedInstance;
+
 }
 
 - (NSString*)appendedURL:(NSString*)url
