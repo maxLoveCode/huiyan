@@ -229,6 +229,7 @@
     return 0.0;
 }
 
+#pragma mark <UICollectionViewDataSource>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
@@ -247,6 +248,7 @@
     }
     return cell;
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.item == 0) {
         TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];

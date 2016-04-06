@@ -9,13 +9,13 @@
 #import "WikiViewController.h"
 #import "Constant.h"
 #import "HomePageCell.h"
-#import "MCSwipableMenuViewController.h"
+#import "MCSwipeMenu.h"
 
 #define kLineNumber 3
 
 @interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property (nonatomic, strong) UITableView *dramaTableView;
-@property (nonatomic, strong) UIView* head_view;
+@property (nonatomic, strong) MCSwipeMenu* head_view;
 @property (nonatomic, strong) UIView *bg_view;
 
 @end
@@ -36,15 +36,7 @@
 
 - (UIView *)head_view{
     if (!_head_view) {
-        _head_view = [[UIView alloc]init];
-
-        MCSwipableMenuViewController *menuController = [[MCSwipableMenuViewController alloc] init];
-        [self addChildViewController:menuController];
-        menuController.menuHeight = 41.0;
-        menuController.menuWidth = kScreen_Width;
-        [_head_view setBackgroundColor:[UIColor greenColor]];
-        [_head_view addSubview:menuController.view];
-        [_head_view setFrame:menuController.view.frame];
+        _head_view = [[MCSwipeMenu alloc] init];
     }
     return _head_view;
 }
