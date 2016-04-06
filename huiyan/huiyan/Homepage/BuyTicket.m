@@ -93,5 +93,8 @@
     self.image_pic.frame = CGRectMake(kMargin, 10, 87, 225 / 2);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 17, CGRectGetMinY(self.image_pic.frame) + 12, kScreen_Width - 150, 14);
     self.time_lab.frame = CGRectMake(CGRectGetMaxX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame)+ 12, kScreen_Width - 150, 12);
+    self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame), CGRectGetMaxY(self.time_lab.frame) + 12, kScreen_Width - 150, 12);
+    self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame), CGRectGetMaxY(self.address_lab.frame) + 12, 150, 12);
+    self.buy_btn.frame = CGRectMake(kScreen_Width - 30 - 56, CGRectGetMaxY(self.image_pic.frame) - 20, 56, 20);
 }
 @end

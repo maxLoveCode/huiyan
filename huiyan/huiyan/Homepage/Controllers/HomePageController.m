@@ -88,7 +88,7 @@
         UICollectionViewFlowLayout *layout =[[UICollectionViewFlowLayout alloc] init];
         _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, menuHeight) collectionViewLayout:layout];
         [_menuView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"menu"];
-        
+        _menuView.scrollEnabled = NO;
         _menuView.delegate = self;
         _menuView.dataSource = self;
     }
