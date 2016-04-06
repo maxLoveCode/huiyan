@@ -22,7 +22,7 @@
 		55CCD7F81CB3E17200C3B8CA /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7F71CB3E17200C3B8CA /* HomePageModel.m */; };
 		55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */; };
 		55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */; };
-		55CCD8021CB4E32C00C3B8CA /* WikiViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD8011CB4E32C00C3B8CA /* WikiViewCell.m */; };
+		55CCD8021CB4E32C00C3B8CA /* BuyTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD8011CB4E32C00C3B8CA /* BuyTicket.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -77,8 +77,8 @@
 		55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+ShowHideBar.m"; sourceTree = "<group>"; };
 		55CCD7FD1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicketDetailsViewController.h; sourceTree = "<group>"; };
 		55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketDetailsViewController.m; sourceTree = "<group>"; };
-		55CCD8001CB4E32C00C3B8CA /* WikiViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiViewCell.h; sourceTree = "<group>"; };
-		55CCD8011CB4E32C00C3B8CA /* WikiViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiViewCell.m; sourceTree = "<group>"; };
+		55CCD8001CB4E32C00C3B8CA /* BuyTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicket.h; sourceTree = "<group>"; };
+		55CCD8011CB4E32C00C3B8CA /* BuyTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicket.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -202,8 +202,8 @@
 				55CCD7F51CB3B07C00C3B8CA /* Views */,
 				55CCD7EB1CB39FAE00C3B8CA /* HomePageCell.h */,
 				55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */,
-				55CCD8001CB4E32C00C3B8CA /* WikiViewCell.h */,
-				55CCD8011CB4E32C00C3B8CA /* WikiViewCell.m */,
+				55CCD8001CB4E32C00C3B8CA /* BuyTicket.h */,
+				55CCD8011CB4E32C00C3B8CA /* BuyTicket.m */,
 				55CCD7CF1CB3871800C3B8CA /* Controllers */,
 				55CCD7D01CB3871800C3B8CA /* Models */,
 			);
@@ -561,7 +561,7 @@
 				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
 				55CCD7F81CB3E17200C3B8CA /* HomePageModel.m in Sources */,
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
-				55CCD8021CB4E32C00C3B8CA /* WikiViewCell.m in Sources */,
+				55CCD8021CB4E32C00C3B8CA /* BuyTicket.m in Sources */,
 				55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
