@@ -64,7 +64,7 @@
         self.description_lab = [[UILabel alloc]init];
         self.description_lab.font = kFONT12;
         self.description_lab.textColor = COLOR_WithHex(0xa5a5a5);
-        self.description_lab.numberOfLines = 2;
+        self.description_lab.numberOfLines = 3;
     }
     return _description_lab;
 }
@@ -86,16 +86,17 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.image_pic.frame = CGRectMake(kMargin, 10, 75, 112.5);
-    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 17, CGRectGetMinY(self.image_pic.frame) + 12, kScreen_Width - 150, 21);
-    self.actor_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame) + 12, kScreen_Width - 150, 16);
-    self.description_lab.frame = CGRectMake(CGRectGetMinX(self.actor_lab.frame), CGRectGetMaxY(self.actor_lab.frame) + 12, kScreen_Width - 150, 32);
-    self.head_view.frame = CGRectMake(0, CGRectGetMaxY(self.image_pic.frame) + 10, kScreen_Width, 10);
+    self.image_pic.frame = CGRectMake(0, 0, kScreen_Width, 187);
+    self.title_lab.frame = CGRectMake(15, CGRectGetMaxY(self.image_pic.frame) + 12, kScreen_Width - 30, 28);
+    self.actor_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.title_lab.frame) + 12, kScreen_Width - 30, 14);
+    self.description_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.actor_lab.frame) + 12, kScreen_Width - 30, 36);
+    self.head_view.frame = CGRectMake(0, CGRectGetMaxY(self.description_lab.frame) + 12, kScreen_Width, 10);
+   // self.head_view.backgroundColor = [UIColor redColor];
 }
 
 + (CGFloat)cellHeight
 {
-    return 143.0;
+    return 301 + 22;
 }
 
 -(void)setContent:(HomePageModel*)drama
