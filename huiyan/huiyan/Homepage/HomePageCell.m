@@ -24,7 +24,7 @@
         [self addSubview:self.head_view];
     }
     
-    [self debugData];
+    //[self debugData];
     return self;
 }
 
@@ -32,7 +32,7 @@
 {
     if (!_image_pic) {
         self.image_pic = [[UIImageView alloc]init];
-        self.image_pic.backgroundColor  = [UIColor redColor];
+        //self.image_pic.backgroundColor  = [UIColor redColor];
     }
     return _image_pic;
 }
@@ -96,6 +96,14 @@
 + (CGFloat)cellHeight
 {
     return 301 + 22;
+}
+
+-(void)setContent:(HomePageModel*)drama
+{
+    self.title_lab.text = drama.title;
+    self.actor_lab.text = drama.actor;
+    self.description_lab.text = drama.profile;
+    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:drama.cover] placeholderImage:[UIImage imageNamed:@"arrow.png"]];
 }
 
 #pragma mark Debug

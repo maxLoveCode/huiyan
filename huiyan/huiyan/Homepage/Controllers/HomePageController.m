@@ -91,6 +91,8 @@
         _menuView.scrollEnabled = NO;
         _menuView.delegate = self;
         _menuView.dataSource = self;
+        
+        _menuView.scrollEnabled = NO;
     }
     return _menuView;
 }
@@ -108,7 +110,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _recommendTableView) {
-        return 5;
+        return [_dataSource count];
     }
     else
     {
@@ -185,6 +187,7 @@
 {
     if (tableView == _recommendTableView) {
         HomePageCell* cell = [_recommendTableView dequeueReusableCellWithIdentifier:@"recommends" forIndexPath:indexPath];
+        [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
         return cell;
     }
     else
