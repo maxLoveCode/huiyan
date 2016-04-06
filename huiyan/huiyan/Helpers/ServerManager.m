@@ -1,3 +1,4 @@
+
 //
 //  ServerManager.m
 //  huiyan
@@ -22,8 +23,7 @@ NSString *const version = @"v1_0";
 + (id)sharedInstance {
     static dispatch_once_t once;
     static ServerManager *sharedInstance;
-    
-    
+  
     dispatch_once(&once, ^{
     
         sharedInstance = [[self alloc] initWithBaseURL: [NSURL URLWithString:b_URL]];

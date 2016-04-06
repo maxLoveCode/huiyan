@@ -13,8 +13,6 @@
 @interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property (nonatomic, strong) UITableView *dramaTableView;
 @property (nonatomic, strong) UIView* head_view;
-@property (nonatomic, strong) UIScrollView *image_scrollView;
-@property (nonatomic, strong) UILabel *line_scrollView;
 @property (nonatomic, strong) UIView *bg_view;
 
 @end
@@ -29,25 +27,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(search:)];
     [self head_view];
-    [self line_scrollView];
     [self dramaTableView];
-    [self image_scrollView];
 }
-- (UIView *)bg_view{
-    if (_bg_view == nil) {
-        self.bg_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
-        self.bg_view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
-    }
-    return _bg_view;
-}
-- (UILabel *)line_scrollView{
-    if (_line_scrollView == nil) {
-        self.line_scrollView = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view.frame), kScreen_Width / kLineNumber, 2)];
-        self.line_scrollView.backgroundColor = COLOR_WithHex(0xe54863);
-        [self.view addSubview:self.line_scrollView];
-    }
-    return _line_scrollView;
-}
+
 - (UIView *)head_view{
     if (_head_view == nil) {
         self.head_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 41)];
@@ -69,19 +51,9 @@
     }
     return _head_view;
 }
-- (UIScrollView *)image_scrollView{
-    if (_image_scrollView == nil) {
-        self.image_scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.line_scrollView.frame), kScreen_Width, 150)];
-        self.image_scrollView.delegate = self;
-        self.image_scrollView.backgroundColor = [UIColor yellowColor];
-        [self.view addSubview:self.image_scrollView];
-        
-    }
-    return _image_scrollView;
-}
 - (UITableView *)dramaTableView{
     if (_dramaTableView == nil) {
-        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(self.image_scrollView.frame), kScreen_Width, kScreen_Height - 193)];
+        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(self.head_view.frame), kScreen_Width, kScreen_Height - 193)];
         self.dramaTableView.delegate = self;
         self.dramaTableView.dataSource = self;
         [self.dramaTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"drama"];
@@ -109,9 +81,6 @@
 #pragma mark scrollView 代理方法
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     float num =  scrollView.contentOffset.x / kScreen_Width;
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.line_scrollView setFrame:CGRectMake(kScreen_Width / kLineNumber * num, 41, kScreen_Width / kLineNumber, 2)];
-    }];
 }
 
 - (void)search:(UIBarButtonItem *)sender{
@@ -120,10 +89,7 @@
 
 - (void)refreshData:(UIButton *)sender{
     if (sender.tag == 104) {
-//        [self.head_view removeFromSuperview];
-//        for (int i = 0; i < 7; i++) {
-//            UIButton btn
-//        }
+
     }
 }
 
