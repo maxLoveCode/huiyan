@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "HomePageCell.h"
 #import "MCSwipeMenu.h"
+#import "ServerManager.h"
 
 #define kLineNumber 3
 
@@ -17,6 +18,8 @@
 @property (nonatomic, strong) UITableView *dramaTableView;
 @property (nonatomic, strong) MCSwipeMenu* head_view;
 @property (nonatomic, strong) UIView *bg_view;
+@property (nonatomic, strong) NSMutableArray* dataSource;
+@property (nonatomic, strong) ServerManager* serverManager;
 
 @end
 
@@ -29,9 +32,13 @@
     self.title  = @"戏曲百科";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(search:)];
+    [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
     [self.view addSubview:self.head_view];
     NSLog(@"%@",_head_view);
     [self.view addSubview:self.dramaTableView];
+    
+    _serverManager = [ServerManager sharedInstance];
+    [self getDramaList:@"0"];
 }
 
 - (UIView *)head_view{
@@ -43,7 +50,7 @@
 
 - (UITableView *)dramaTableView{
     if (_dramaTableView == nil) {
-        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(self.head_view.frame), kScreen_Width, kScreen_Height - 193)];
+        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(self.head_view.frame)+10, kScreen_Width, kScreen_Height - 163)];
         self.dramaTableView.delegate = self;
         self.dramaTableView.dataSource = self;
         [self.dramaTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"drama"];
@@ -59,17 +66,19 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return [_dataSource count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ID = @"drama";
     HomePageCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    
+    [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
     return cell;
     
 }
 #pragma mark scrollView 代理方法
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    float num =  scrollView.contentOffset.x / kScreen_Width;
+    //float num =  scrollView.contentOffset.x / kScreen_Width;
 }
 
 - (void)search:(UIBarButtonItem *)sender{
@@ -80,6 +89,31 @@
     if (sender.tag == 104) {
 
     }
+}
+
+- (void)getDramaList:(NSString*)category
+{
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    
+    NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
+                          @"cid":@"0"};
+    
+    [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
+            for(NSDictionary* drama in [responseObject objectForKey:@"data"])
+            {
+                [_dataSource addObject:[HomePage parseDramaJSON:drama]];
+            }
+            
+            //[_dramaTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
+            [_dramaTableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 @end
