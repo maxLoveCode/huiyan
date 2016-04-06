@@ -267,7 +267,7 @@
 {
     if (scrollView == self.tableView) {
 #ifdef DEBUG
-        NSLog(@"tableview scrolling %.1lf, %.1lf", scrollView.contentOffset.y, scrollView.contentOffset.y-scrollOffset);
+        //NSLog(@"tableview scrolling %.1lf, %.1lf", scrollView.contentOffset.y, scrollView.contentOffset.y-scrollOffset);
 #endif
         if (scrollView.contentOffset.y-scrollOffset-20>0 && statusBarHidden) {
             [self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -283,7 +283,7 @@
         
         if (!statusBarHidden&&self.navigationController.navigationBar.alpha<=1.0 &&self.navigationController.navigationBar.alpha>0.0) {
 #ifdef DEBUG
-            NSLog(@"alpha %lf", self.navigationController.navigationBar.alpha);
+            //NSLog(@"alpha %lf", self.navigationController.navigationBar.alpha);
 #endif
             self.navigationController.navigationBar.alpha =(scrollView.contentOffset.y-scrollOffset-20)/24;
         }

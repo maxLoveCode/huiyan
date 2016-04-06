@@ -8,7 +8,14 @@
 //  Singleton object class for unit testing 
 
 #import <Foundation/Foundation.h>
+#import "ServerManager.h"
 
 @interface UnitTest : NSObject
+{
+    ServerManager *manager;
+}
+
++ (UnitTest *)instance;
+-(void)testResult:(void(^)(BOOL result))completion;
 
 @end

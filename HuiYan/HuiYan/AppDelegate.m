@@ -9,6 +9,11 @@
 #import "AppDelegate.h"
 #import "HomePageController.h"
 #import "Constant.h"
+
+#ifdef DEBUG
+    #import "UnitTest.h"
+#endif
+
 @interface AppDelegate ()
 
 @end
@@ -19,6 +24,20 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self addAllController];
+    
+#ifdef DEBUG
+    UnitTest *test = [UnitTest instance];
+    NSLog(@"======== UNIT TEST START ========");
+    [test testResult:^(BOOL result) {
+        if (result) {
+            NSLog(@"====== UNIT TEST COMPLETION =====");
+        }
+        else{
+            NSLog(@"======= UNIT TEST FAILURE =======");
+        }
+    }];
+#endif
+    
     return YES;
    
 }
@@ -44,6 +63,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 - (void)addAllController{
     HomePageController *homepage = [[HomePageController alloc]initWithStyle:UITableViewStyleGrouped];
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage]; 
