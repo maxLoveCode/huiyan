@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.barTintColor = COLOR_WithHex(0xe54863);
+    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
 
     _serverManager = [ServerManager sharedInstance];
