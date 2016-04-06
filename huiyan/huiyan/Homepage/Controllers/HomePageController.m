@@ -296,11 +296,14 @@
 {
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
                           @"is_hot":@"1"};
-    [_serverManager GET:[_serverManager appendedURL:@"get_wiki_list.php"] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [_serverManager POST:[_serverManager appendedURL:@"get_wiki_list.php"] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"%@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        NSLog(@"%@", error);
     }];
 }
 
