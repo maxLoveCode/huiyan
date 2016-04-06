@@ -247,6 +247,7 @@
     }
     return cell;
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.item == 3) {
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
