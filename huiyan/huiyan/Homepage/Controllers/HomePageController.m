@@ -305,7 +305,7 @@
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
-                [_dataSource addObject:drama];
+                [_dataSource addObject:[HomePageModel parseDramaJSON:drama]];
             }
             
             [_recommendTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
@@ -317,18 +317,6 @@
     }];
 }
 
--(HomePageModel* )parseDramaJSON:(NSDictionary*)json
-{
-    HomePageModel* drama = [[HomePageModel alloc] init];
-    [drama setCover:[json objectForKey:@"cover"]];
-    [drama setContent:[json objectForKey:@"content"]];
-    [drama setCid:(NSInteger*)[[json objectForKey:@"cid"] integerValue]];
-    [drama setType:(NSInteger*)[[json objectForKey:@"type"] integerValue]];
-    [drama setID:(NSInteger*)[[json objectForKey:@"id"] integerValue]];
-    [drama setActor:[json objectForKey:@"actor"]];
-    [drama setTitle:[json objectForKey:@"title"]];
-    
-    return drama;
-}
+
 
 @end

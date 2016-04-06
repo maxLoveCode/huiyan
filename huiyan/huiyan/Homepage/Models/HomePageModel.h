@@ -26,4 +26,7 @@
 
 @property (nonatomic,copy) NSMutableArray *imgs;
 
+
++(HomePageModel* )parseDramaJSON:(NSDictionary*)json;
+
 @end
