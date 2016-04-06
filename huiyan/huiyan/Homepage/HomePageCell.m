@@ -9,6 +9,10 @@
 #import "HomePageCell.h"
 #import "Constant.h"
 
+@interface HomePageCell ()
+@property (nonatomic, strong) UIView *head_view;
+@end
+
 @implementation HomePageCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -17,6 +21,7 @@
         [self addSubview:self.title_lab];
         [self addSubview:self.actor_lab];
         [self addSubview:self.description_lab];
+        [self addSubview:self.head_view];
     }
     
     [self debugData];
@@ -27,6 +32,7 @@
 {
     if (!_image_pic) {
         self.image_pic = [[UIImageView alloc]init];
+        self.image_pic.backgroundColor  = [UIColor redColor];
     }
     return _image_pic;
 }
@@ -62,10 +68,25 @@
     }
     return _description_lab;
 }
+- (UIView *)head_view{
+    if (!_head_view) {
+        self.head_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
+        self.head_view.backgroundColor = COLOR_WithHex(0xefefef);
+        UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
+        up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+        [self.head_view addSubview:up_lab];
+        UILabel *down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
+        down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+        [self.head_view addSubview:down_lab];
+    }
+    return _head_view;
+}
+
+
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.image_pic.frame = CGRectMake(kMargin, 10, 75, 112.5);
+    self.image_pic.frame = CGRectMake(kMargin, 20, 75, 112.5);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 17, CGRectGetMinY(self.image_pic.frame) + 12, kScreen_Width - 150, 21);
     self.actor_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame) + 12, kScreen_Width - 150, 16);
     self.description_lab.frame = CGRectMake(CGRectGetMinX(self.actor_lab.frame), CGRectGetMaxY(self.actor_lab.frame) + 12, kScreen_Width - 150, 32);
@@ -73,7 +94,7 @@
 
 + (CGFloat)cellHeight
 {
-    return 133.0;
+    return 143.0;
 }
 
 #pragma mark Debug

@@ -85,30 +85,15 @@
         self.dramaTableView.delegate = self;
         self.dramaTableView.dataSource = self;
         [self.dramaTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"drama"];
-        self.dramaTableView.rowHeight = 265 / 2;
+        self.dramaTableView.rowHeight = [HomePageCell cellHeight];
+        self.dramaTableView.separatorStyle = NO;
         [self.view addSubview:self.dramaTableView];
     }
     return _dramaTableView;
 }
 #pragma mark tableView代理方法
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10.0;
-}
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
-    UIView *head_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
-    head_view.backgroundColor = COLOR_WithHex(0xefefef);
-    UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
-    up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-    [head_view addSubview:up_lab];
-    UILabel *down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
-     down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-    [head_view addSubview:down_lab];
-    
-    
-    return  head_view;
 
-}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
