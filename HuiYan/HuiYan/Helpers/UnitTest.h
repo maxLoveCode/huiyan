@@ -11,4 +11,7 @@
 
 @interface UnitTest : NSObject
 
++ (UnitTest *)instance;
+-(void)testResult:(void(^)(BOOL result))completion;
+
 @end
