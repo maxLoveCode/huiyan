@@ -38,5 +38,10 @@
 #define kFONT11  [UIFont systemFontOfSize:11]
 #define kFONT(s) [UIFont systemFontOfSize:s]
 
+//偏好设置
+#define kSETDEFAULTS(value,key) [[NSUserDefaults standardUserDefaults]setObject:value forKey:key]
+#define kOBJECTDEFAULTS(s) [[NSUserDefaults standardUserDefaults]objectForKey:s]
+
+
 
 #endif /* Constant_h */

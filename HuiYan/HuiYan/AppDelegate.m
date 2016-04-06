@@ -20,6 +20,7 @@
     // Override point for customization after application launch.
     [self addAllController];
     return YES;
+   
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
