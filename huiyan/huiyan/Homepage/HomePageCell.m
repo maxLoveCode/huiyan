@@ -52,8 +52,8 @@
     if(!_actor_lab){
         
         self.actor_lab = [[UILabel alloc]init];
-        self.actor_lab.font = kFONT12;
-        self.actor_lab.textColor = COLOR_WithHex(0x565656);
+        self.actor_lab.font = kFONT14;
+        self.actor_lab.textColor = COLOR_WithHex(0x2f2f2f);
     }
     return _actor_lab;
 }
@@ -63,7 +63,7 @@
     if (!_description_lab) {
         self.description_lab = [[UILabel alloc]init];
         self.description_lab.font = kFONT12;
-        self.description_lab.textColor = COLOR_WithHex(0xa5a5a5);
+        self.description_lab.textColor = COLOR_WithHex(0x565656);
         self.description_lab.numberOfLines = 3;
     }
     return _description_lab;
@@ -91,7 +91,6 @@
     self.actor_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.title_lab.frame) + 12, kScreen_Width - 30, 14);
     self.description_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.actor_lab.frame) + 12, kScreen_Width - 30, 36);
     self.head_view.frame = CGRectMake(0, CGRectGetMaxY(self.description_lab.frame) + 12, kScreen_Width, 10);
-   // self.head_view.backgroundColor = [UIColor redColor];
 }
 
 + (CGFloat)cellHeight
