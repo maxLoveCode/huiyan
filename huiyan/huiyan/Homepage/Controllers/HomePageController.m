@@ -63,7 +63,7 @@
 -(UITableView *)recommendTableView
 {
     if (!_recommendTableView) {
-        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 133*5) style:UITableViewStylePlain];
+        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*5-10) style:UITableViewStylePlain];
         _recommendTableView.delegate = self;
         _recommendTableView.dataSource = self;
         _recommendTableView.scrollEnabled = NO;
