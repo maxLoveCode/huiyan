@@ -28,6 +28,8 @@
     self.navigationController.navigationBar.barTintColor = COLOR_WithHex(0xe54863);
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
 
+    _serverManager = [ServerManager sharedInstance];
+    [self getRecommendDrama];
 #ifdef DEBUG
     NSLog(@"Homepage loaded");
 #endif
@@ -288,6 +290,18 @@
             self.navigationController.navigationBar.alpha =(scrollView.contentOffset.y-scrollOffset-20)/24;
         }
     }
+}
+
+-(void)getRecommendDrama
+{
+    NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
+                          @"is_hot":@"1"};
+    [_serverManager GET:[_serverManager appendedURL:@"get_wiki_list.php"] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 @end

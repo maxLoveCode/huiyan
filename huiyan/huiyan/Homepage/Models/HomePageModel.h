@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface HomePageModel : NSObject
+
 @property (nonatomic,copy) NSString *type;
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,copy) NSString *actor;
@@ -18,6 +19,5 @@
 @property (nonatomic,copy) NSString *imgs;
 @property (nonatomic,copy) NSString *createTime;
 @property (nonatomic,copy) NSString *createId;
-
 
 @end
