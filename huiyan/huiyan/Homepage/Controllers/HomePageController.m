@@ -9,6 +9,8 @@
 #import "HomePageController.h"
 #import "HomePageCell.h"
 #import "WikiViewController.h"
+#import "HomePageModel.h"
+
 #define bannerHeight 187
 #define menuHeight 72.5
 
@@ -294,19 +296,39 @@
 
 -(void)getRecommendDrama
 {
+    _dataSource = [[NSMutableArray alloc] init];
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
                           @"is_hot":@"1"};
-    [_serverManager POST:[_serverManager appendedURL:@"get_wiki_list.php"] parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+  
+    [_serverManager AnimatedPOST:[_serverManager appendedURL:@"get_wiki_list.php"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
+            for(NSDictionary* drama in [responseObject objectForKey:@"data"])
+            {
+                [_dataSource addObject:drama];
+            }
+            
+            [_recommendTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
+            [_recommendTableView reloadData];
+            [self.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         NSLog(@"%@", error);
     }];
+}
+
+-(HomePageModel* )parseDramaJSON:(NSDictionary*)json
+{
+    HomePageModel* drama = [[HomePageModel alloc] init];
+    [drama setCover:[json objectForKey:@"cover"]];
+    [drama setContent:[json objectForKey:@"content"]];
+    [drama setCid:(NSInteger*)[[json objectForKey:@"cid"] integerValue]];
+    [drama setType:(NSInteger*)[[json objectForKey:@"type"] integerValue]];
+    [drama setID:(NSInteger*)[[json objectForKey:@"id"] integerValue]];
+    [drama setActor:[json objectForKey:@"actor"]];
+    [drama setTitle:[json objectForKey:@"title"]];
     
-    
+    return drama;
 }
 
 @end

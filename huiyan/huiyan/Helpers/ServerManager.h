@@ -25,7 +25,7 @@ extern NSString  * _Nonnull const version;
 
 - (void)AnimatedPOST:(NSString * _Nonnull)URLString
           parameters:(nullable id)parameters
-             success:(nullable void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
-             failure:(nullable void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure;
+             success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, id _Nullable responseObject))success
+             failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure;
 
 @end
