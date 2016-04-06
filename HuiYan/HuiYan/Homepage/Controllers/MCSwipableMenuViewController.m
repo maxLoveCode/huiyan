@@ -7,6 +7,7 @@
 //
 
 #import "MCSwipableMenuViewController.h"
+#import "Constant.h"
 
 @interface MCSwipableMenuViewController ()
 
@@ -33,8 +34,12 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
-    
-    [self setframe];
+
+    //[self setframe];
+    [self.collectionView setBackgroundColor:[UIColor blueColor]];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,18 +60,38 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    
+    NSLog(@"test3");
+    return 5;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    NSLog(@"test2");
     return 5;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(kScreen_Width/4, kScreen_Width/4) ;
+}
+
+#pragma mark collection view cell paddings
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
-    [cell setBackgroundColor:[UIColor redColor]];
+    return 0.0;
+}	
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    NSLog(@"test");
+    [cell.contentView setBackgroundColor:[UIColor redColor]];
     
     return cell;
 }
@@ -105,7 +130,18 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 #pragma mark customize frame
 -(void)setframe
 {
-    [self.view setFrame:CGRectMake(0, 0, _menuWidth, _menuHeight)];
+    [self.collectionView setFrame:CGRectMake(0, 0, _menuWidth, _menuHeight)];
+}
+
+#pragma mark debug data
+-(void)debugData
+{
+    [_dataSource addObject:@{@"id":@"1", @"name":@"沪剧"}];
+    [_dataSource addObject:@{@"id":@"12", @"name":@"京剧"}];
+    [_dataSource addObject:@{@"id":@"10", @"name":@"黄梅"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    
+    [self.collectionView reloadData];
 }
 
 @end

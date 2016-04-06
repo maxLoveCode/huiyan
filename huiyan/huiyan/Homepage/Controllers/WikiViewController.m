@@ -43,8 +43,8 @@
         menuController.menuHeight = 41.0;
         menuController.menuWidth = kScreen_Width;
         [_head_view setBackgroundColor:[UIColor greenColor]];
-        [_head_view addSubview:menuController.view];
-        [_head_view setFrame:menuController.view.frame];
+        [_head_view addSubview:menuController.collectionView];
+        [_head_view setFrame:menuController.collectionView.frame];
     }
     return _head_view;
 }

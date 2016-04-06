@@ -228,6 +228,7 @@
     return 0.0;
 }
 
+#pragma mark <UICollectionViewDataSource>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
@@ -304,7 +305,7 @@
                           @"is_hot":@"1"};
   
     [_serverManager AnimatedPOST:[_serverManager appendedURL:@"get_wiki_list.php"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-        NSLog(@"%@", responseObject);
+        //NSLog(@"%@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
