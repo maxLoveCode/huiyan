@@ -6,13 +6,13 @@
 //  Copyright © 2016年 com.huayin. All rights reserved.
 //
 
-#import "HomePageModel.h"
+#import "HomePage.h"
 
-@implementation HomePageModel
+@implementation HomePage
 
-+(HomePageModel* )parseDramaJSON:(NSDictionary*)json
++(HomePage* )parseDramaJSON:(NSDictionary*)json
 {
-    HomePageModel* drama = [[HomePageModel alloc] init];
+    HomePage* drama = [[HomePage alloc] init];
     [drama setCover:[json objectForKey:@"cover"]];
     [drama setContent:[json objectForKey:@"content"]];
     [drama setCid:(NSInteger*)[[json objectForKey:@"cid"] integerValue]];

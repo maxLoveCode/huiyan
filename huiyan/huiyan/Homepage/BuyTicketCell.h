@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface BuyTicket : UITableViewCell
+#import "BuyTicket.h"
+#import "UIImageView+WebCache.h"
+@interface BuyTicketCell : UITableViewCell
 @property (nonatomic, strong) UIImageView *image_pic;
 @property (nonatomic, strong) UILabel *time_lab;
 @property (nonatomic, strong) UILabel *title_lab;
 @property (nonatomic, strong) UILabel *address_lab;
 @property (nonatomic, strong) UILabel *price_lab;
 @property (nonatomic, strong) UIButton *buy_btn;
+
+- (void) setContent:(BuyTicket *_Nonnull)ticket;
 @end

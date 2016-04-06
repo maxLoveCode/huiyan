@@ -98,7 +98,7 @@
     return 301 + 22;
 }
 
--(void)setContent:(HomePageModel*)drama
+-(void)setContent:(HomePage*)drama
 {
     self.title_lab.text = drama.title;
     self.actor_lab.text = drama.actor;

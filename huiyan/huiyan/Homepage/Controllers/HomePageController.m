@@ -9,7 +9,8 @@
 #import "HomePageController.h"
 #import "HomePageCell.h"
 #import "WikiViewController.h"
-#import "HomePageModel.h"
+#import "HomePage.h"
+#import "TicketBoxViewController.h"
 
 #define bannerHeight 187
 #define menuHeight 72.5
@@ -247,7 +248,14 @@
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.item == 3) {
+    if (indexPath.item == 0) {
+        TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
+        [self.navigationController pushViewController:tickCon animated:YES];
+    }else if (indexPath.item == 1){
+
+    }else if (indexPath.item == 2) {
+        
+    }else {
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
         [self.navigationController pushViewController:wikiCon animated:YES];
     }
@@ -303,12 +311,12 @@
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
                           @"is_hot":@"1"};
   
-    [_serverManager AnimatedPOST:[_serverManager appendedURL:@"get_wiki_list.php"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
-                [_dataSource addObject:[HomePageModel parseDramaJSON:drama]];
+                [_dataSource addObject:[HomePage parseDramaJSON:drama]];
             }
             
             [_recommendTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];

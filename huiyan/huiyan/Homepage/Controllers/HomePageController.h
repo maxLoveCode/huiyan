@@ -2,7 +2,7 @@
 //  HomePageController.h
 //  huiyan
 //
-//  Created by 华印mac－002 on 16/4/5.
+//  Created by 华印mac－002 on 16ser/4/5.
 //  Copyright © 2016年 com.huayin. All rights reserved.
 //
 

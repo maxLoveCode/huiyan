@@ -81,7 +81,7 @@ parameters:(id)parameters
 success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
 failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
-    [self POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [self POST:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         //show animates
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(task, responseObject);

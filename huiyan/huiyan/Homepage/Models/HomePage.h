@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HomePageModel : NSObject
+@interface HomePage : NSObject
 
 @property (nonatomic,assign) NSInteger *ID;
 
@@ -27,6 +27,6 @@
 @property (nonatomic,copy) NSMutableArray *imgs;
 
 
-+(HomePageModel* )parseDramaJSON:(NSDictionary*)json;
++(HomePage* )parseDramaJSON:(NSDictionary*)json;
 
 @end

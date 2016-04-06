@@ -6,14 +6,14 @@
 //  Copyright © 2016年 com.huayin. All rights reserved.
 //
 
-#import "BuyTicket.h"
+#import "BuyTicketCell.h"
 #import "Constant.h"
 
-@interface BuyTicket ()
+@interface BuyTicketCell ()
 @property (nonatomic, strong) UIView *head_view;
 @end
 
-@implementation BuyTicket
+@implementation BuyTicketCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle: style reuseIdentifier:reuseIdentifier]) {
         [self addSubview:self.image_pic];
@@ -96,5 +96,13 @@
     self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame), CGRectGetMaxY(self.time_lab.frame) + 12, kScreen_Width - 150, 12);
     self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame), CGRectGetMaxY(self.address_lab.frame) + 12, 150, 12);
     self.buy_btn.frame = CGRectMake(kScreen_Width - 30 - 56, CGRectGetMaxY(self.image_pic.frame) - 20, 56, 20);
+}
+- (void)setContent:(BuyTicket *)ticket{
+    self.title_lab.text = ticket.title;
+    self.time_lab.text  = ticket.date;
+    self.address_lab.text = ticket.address;
+    self.price_lab.text = ticket.price_range;
+    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:ticket.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
+  
 }
 @end
