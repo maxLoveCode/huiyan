@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Constant.h"
+#import "ServerManager.h"
 
 @interface HomePageController : UITableViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -18,5 +19,7 @@
 @property (strong, nonatomic) UICollectionView* menuView;
 
 @property (strong, nonatomic) NSMutableArray* dataSource;
+
+@property (strong, nonatomic) ServerManager* serverManager;
 
 @end
