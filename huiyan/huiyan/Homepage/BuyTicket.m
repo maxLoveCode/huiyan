@@ -10,7 +10,7 @@
 #import "Constant.h"
 
 @interface BuyTicket ()
-@property (nonatomic, strong) UIView head_view;
+@property (nonatomic, strong) UIView *head_view;
 @end
 
 @implementation BuyTicket
