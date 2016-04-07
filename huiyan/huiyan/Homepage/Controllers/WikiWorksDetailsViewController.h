@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WikiWorksDetailsViewController : UIViewController
-
+@property (nonatomic, strong) NSArray *dataSource;
 @end

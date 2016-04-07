@@ -10,6 +10,7 @@
 #import "HomePage.h"
 #import "ArticleTableViewCell.h"
 #import "Constant.h"
+#import "WikiWorksDetailsViewController.h"
 @interface WikiArtcleTableViewController ()
 
 @end
@@ -61,7 +62,10 @@
     
     return cell;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
+    [self.navigationController pushViewController:wikiCon animated:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.
