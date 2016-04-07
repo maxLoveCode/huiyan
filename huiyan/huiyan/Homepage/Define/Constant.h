@@ -23,7 +23,7 @@
 (argb&0xFF000000)>>24, (argb&0xFF0000)>>16, (argb&0xFF00)>>8, (argb&0xFF))
 #define COLOR_WithHex(rgb) COLOR_WITH_RGB(\
 (rgb&0xFF0000)>>16, (rgb&0xFF00)>>8, (rgb&0xFF))
-
+#define COLOR_THEME  COLOR_WithHex(0xe54863);
 
 #define kMargin 15// 边距
 

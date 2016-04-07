@@ -138,7 +138,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     [cell.contentView addSubview:label];
     
     UIView* underLine = [[UIView alloc] initWithFrame:CGRectMake(-5, CGRectGetHeight(collectionView.frame)-2, [self widthOfString:text withFont:font]+10, 2)];
-    [underLine setBackgroundColor:COLOR_WithHex(0xe54863)];
+    [underLine setBackgroundColor:COLOR_THEME];
     [cell.contentView addSubview:underLine];
     
     return cell;
