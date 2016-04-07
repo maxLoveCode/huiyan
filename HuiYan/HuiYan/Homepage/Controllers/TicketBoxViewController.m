@@ -10,19 +10,24 @@
 #import "Constant.h"
 #import "BuyTicketCell.h"
 #import "ServerManager.h"
-#define ticketHeight 107
+#import "BuyTicket.h"
+#import "MCSwipeMenu.h"
+#define ticketHeight 132
 
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketBoxTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) MCSwipeMenu *head_view;
 @end
 
 @implementation TicketBoxViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"购票";
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.head_view];
     [self.view addSubview:self.ticketBoxTableView];
     _serverManager = [ServerManager sharedInstance];
     [self getDataTicket:@"0"];
@@ -31,14 +36,21 @@
 
 - (UITableView *)ticketBoxTableView{
     if (!_ticketBoxTableView) {
-        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 41, kScreen_Width, ticketHeight * 5) style:UITableViewStylePlain];
+        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view.frame), kScreen_Width, ticketHeight * 5) style:UITableViewStylePlain];
         self.ticketBoxTableView.delegate  = self;
         self.ticketBoxTableView.dataSource = self;
         self.ticketBoxTableView.backgroundColor = [UIColor whiteColor];
         self.ticketBoxTableView.rowHeight = ticketHeight;
+        self.ticketBoxTableView.separatorStyle  = NO;
         [self.ticketBoxTableView registerClass:[BuyTicketCell class] forCellReuseIdentifier:@"ticketBox"];
     }
     return _ticketBoxTableView;
+}
+- (MCSwipeMenu *)head_view{
+    if (!_head_view) {
+        self.head_view = [[MCSwipeMenu alloc]init];
+    }
+    return _head_view;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,11 +61,12 @@
 #pragma mark - tableView delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return _dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BuyTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ticketBox" forIndexPath:indexPath];
+    [cell setContent:_dataSource[indexPath.row]];
     return cell;
 }
 
@@ -61,7 +74,16 @@
     _dataSource = [NSMutableArray array];
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,@"cid":cid};
     [_serverManager AnimatedPOST:@"get_opera_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"----%@",responseObject);
+        NSLog(@"------%@",responseObject);
+        if ([responseObject[@"code"] integerValue] == 30010) {
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                BuyTicket *model = [BuyTicket dataWithDic:dic];
+                [_dataSource addObject:model];
+            }
+            [self.ticketBoxTableView reloadData];
+            NSLog(@"dataSource  = %@",_dataSource[0]);
+            
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

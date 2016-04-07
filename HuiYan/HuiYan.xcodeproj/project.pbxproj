@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8C2451CB4AC7D00386540 /* UnitTest.m */; };
 		25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */; };
+		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
 		55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D9D01CB5056100277896 /* BuyTicket.m */; };
 		55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D9D31CB5151400277896 /* WikiWorksDetailsViewController.m */; };
-		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
 		55CCD78B1CB3640500C3B8CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD78A1CB3640500C3B8CA /* main.m */; };
 		55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD78D1CB3640600C3B8CA /* AppDelegate.m */; };
 		55CCD7941CB3640600C3B8CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CCD7921CB3640600C3B8CA /* Main.storyboard */; };
@@ -27,6 +27,7 @@
 		55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */; };
 		55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */; };
 		55CCD8021CB4E32C00C3B8CA /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */; };
+		55F90C3B1CB5F5A40065A7C2 /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,8 @@
 		55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketDetailsViewController.m; sourceTree = "<group>"; };
 		55CCD8001CB4E32C00C3B8CA /* BuyTicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuyTicketCell.h; path = ../BuyTicketCell.h; sourceTree = "<group>"; };
 		55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuyTicketCell.m; path = ../BuyTicketCell.m; sourceTree = "<group>"; };
+		55F90C381CB5F5A40065A7C2 /* ArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleTableViewCell.h; sourceTree = "<group>"; };
+		55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTableViewCell.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -383,6 +386,8 @@
 				55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */,
 				55CCD8001CB4E32C00C3B8CA /* BuyTicketCell.h */,
 				55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */,
+				55F90C381CB5F5A40065A7C2 /* ArticleTableViewCell.h */,
+				55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -586,6 +591,7 @@
 				55CCD8021CB4E32C00C3B8CA /* BuyTicketCell.m in Sources */,
 				55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
+				55F90C3B1CB5F5A40065A7C2 /* ArticleTableViewCell.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
