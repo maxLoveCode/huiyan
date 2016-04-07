@@ -12,6 +12,9 @@
 #import "MCSwipeMenu.h"
 #import "ServerManager.h"
 #import "WikiArtcleTableViewController.h"
+
+#import "ArticalViewController.h"
+
 #define kLineNumber 3
 
 @interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,MCSwipeMenuDelegate>
@@ -64,7 +67,7 @@
         _scrollView.contentSize = CGSizeMake(kScreen_Width * 2, kScreen_Height - 41 - 48);
         _scrollView.bounces = NO;
         _scrollView.scrollEnabled = NO;
-        _scrollView.backgroundColor = [UIColor redColor];
+        _scrollView.backgroundColor = COLOR_WithHex(0xefefef);
     }
     return _scrollView;
 }
@@ -96,7 +99,7 @@
 
 - (UITableView *)dramaTableView{
     if (_dramaTableView == nil) {
-        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 48 - 44 +40)];
+        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 48 - 74)];
         self.dramaTableView.delegate = self;
         self.dramaTableView.dataSource = self;
         [self.dramaTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"drama"];
@@ -125,6 +128,17 @@
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _dramaTableView) {
+        ArticalViewController * freeLookArtical = [[ArticalViewController alloc] init];
+        HomePage* data = [_dataSource objectAtIndex:indexPath.row];
+        [freeLookArtical setOriginData:data.content];
+        [freeLookArtical setTitle:data.title];
+        [self.navigationController pushViewController:freeLookArtical  animated:YES];
+    }
+}
+
 #pragma mark scrollView 代理方法
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     //float num =  scrollView.contentOffset.x / kScreen_Width;
@@ -149,7 +163,6 @@
                           @"cid":@"0"};
     
     [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-        NSLog(@"%@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
@@ -170,9 +183,9 @@
 - (void)handelSegemnetControl:(UISegmentedControl *)sender{
 
     if (sender.selectedSegmentIndex == 0) {
-        [self.scrollView setContentOffset:CGPointMake(0,CGRectGetMaxY(self.head_view.frame))];
+        [self.scrollView setContentOffset:CGPointMake(0,0)];
     }else{
-           [self.scrollView setContentOffset:CGPointMake(kScreen_Width,CGRectGetMaxY(self.head_view.frame))];
+           [self.scrollView setContentOffset:CGPointMake(kScreen_Width,0)];
     }
 }
 

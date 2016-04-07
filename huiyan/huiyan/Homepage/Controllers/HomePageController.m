@@ -63,6 +63,8 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.navigationController.navigationBar.translucent = NO;
+    
+    self.navigationController.navigationBar.alpha=1.0;
 }
 
 -(UITableView *)recommendTableView

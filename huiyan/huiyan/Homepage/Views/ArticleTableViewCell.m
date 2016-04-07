@@ -72,11 +72,12 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.head_view.frame = CGRectMake(0, 0, kScreen_Width, 10);
-    self.image_pic.frame = CGRectMake(0, 10, kScreen_Width, 187);
+    
+    self.image_pic.frame = CGRectMake(0, 0, kScreen_Width, 187);
     self.gray_view.frame = CGRectMake(0, CGRectGetMaxY(self.image_pic.frame) - 32, kScreen_Width, 32);
     self.video_pic.frame = CGRectMake(15, CGRectGetMaxY(self.image_pic.frame) - 32, 32, 32);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.video_pic.frame) + 15, CGRectGetMinX(self.gray_view.frame) + 9, 150, 14);
+    self.head_view.frame = CGRectMake(0, CGRectGetMaxY(self.gray_view.frame), kScreen_Width, 10);
 }
 
 + (CGFloat)cellHeight{

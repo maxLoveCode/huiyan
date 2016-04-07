@@ -62,7 +62,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
         }
         _bgView = [[UIScrollView alloc] initWithFrame:rect];
         _bgView.bounces = NO;
-        NSLog(@"bgview %@",self.bgView);
+        _bgView.showsHorizontalScrollIndicator = NO;
         [_bgView setBackgroundColor:[UIColor whiteColor]];
     }
     return _bgView;
