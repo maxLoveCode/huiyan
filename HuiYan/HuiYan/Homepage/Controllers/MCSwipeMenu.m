@@ -226,7 +226,6 @@ static NSString * const reuseIdentifier = @"swipableMenu";
             [_underLine setFrame:frame];
             
             if (right) {
-                NSLog(@"right");
                 if (_bgView.contentSize.width <= CGRectGetWidth(_bgView.frame)) {
                     
                 }
@@ -239,8 +238,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
                     [_bgView setContentOffset:CGPointMake(CGRectGetMinX(frame), 0)];
                 }
             }
-            else{
-                NSLog(@"left");
+            else{ 
                 if (_bgView.contentOffset.x -10 >0) {
                     [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x-10, 0)];
                 }
