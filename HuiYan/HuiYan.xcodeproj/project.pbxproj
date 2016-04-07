@@ -28,6 +28,7 @@
 		55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */; };
 		55CCD8021CB4E32C00C3B8CA /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */; };
 		55F90C3B1CB5F5A40065A7C2 /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */; };
+		55F90C421CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F90C411CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,8 @@
 		55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuyTicketCell.m; path = ../BuyTicketCell.m; sourceTree = "<group>"; };
 		55F90C381CB5F5A40065A7C2 /* ArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleTableViewCell.h; sourceTree = "<group>"; };
 		55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTableViewCell.m; sourceTree = "<group>"; };
+		55F90C401CB5FE9E0065A7C2 /* WikiArtcleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiArtcleTableViewController.h; sourceTree = "<group>"; };
+		55F90C411CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiArtcleTableViewController.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -228,6 +231,8 @@
 				55CCD7E01CB38B3200C3B8CA /* HomePageController.m */,
 				55CCD7E81CB39CD000C3B8CA /* WikiViewController.h */,
 				55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */,
+				55F90C401CB5FE9E0065A7C2 /* WikiArtcleTableViewController.h */,
+				55F90C411CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m */,
 				55CCD7FD1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.h */,
 				55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */,
 				25B6B3751CB4F324000F99F1 /* TicketBoxViewController.h */,
@@ -584,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */,
+				55F90C421CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m in Sources */,
 				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
 				55CCD7F81CB3E17200C3B8CA /* HomePage.m in Sources */,
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,

@@ -31,7 +31,7 @@
     [super viewDidLoad];
     self.title  = @"戏曲百科";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(search:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(search:)];
     [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
     [self.view addSubview:self.head_view];
     NSLog(@"%@",_head_view);
@@ -40,7 +40,6 @@
     _serverManager = [ServerManager sharedInstance];
     [self getDramaList:@"0"];
 }
-
 - (UIView *)head_view{
     if (!_head_view) {
         _head_view = [[MCSwipeMenu alloc] init];
