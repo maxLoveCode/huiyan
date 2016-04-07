@@ -14,7 +14,7 @@
 
 #define kLineNumber 3
 
-@interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+@interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,MCSwipeMenuDelegate>
 @property (nonatomic, strong) UITableView *dramaTableView;
 @property (nonatomic, strong) MCSwipeMenu* head_view;
 @property (nonatomic, strong) UIView *bg_view;
@@ -84,10 +84,9 @@
     NSLog(@"搜索");
 }
 
-- (void)refreshData:(UIButton *)sender{
-    if (sender.tag == 104) {
 
-    }
+- (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
+   
 }
 
 - (void)getDramaList:(NSString*)category
