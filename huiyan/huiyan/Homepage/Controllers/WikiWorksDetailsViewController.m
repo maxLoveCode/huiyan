@@ -19,7 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor  = [UIColor blackColor];
-    NSLog(@"%@",self.dataSource);
     [self.view addSubview:self.wikiDetailsTableView];
     // Do any additional setup after loading the view.
 }

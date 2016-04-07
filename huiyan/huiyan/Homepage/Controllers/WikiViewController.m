@@ -44,7 +44,6 @@
     self.navigationItem.titleView = self.segement;
     [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
     [self.view addSubview:self.head_view];
-    NSLog(@"%@",_head_view);
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.dramaTableView];
     [self addChildViewController:self.wikiArtcleTableView];

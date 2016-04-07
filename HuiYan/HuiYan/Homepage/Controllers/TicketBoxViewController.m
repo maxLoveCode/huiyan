@@ -74,14 +74,12 @@
     _dataSource = [NSMutableArray array];
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,@"cid":cid};
     [_serverManager AnimatedPOST:@"get_opera_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"------%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 30010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 BuyTicket *model = [BuyTicket dataWithDic:dic];
                 [_dataSource addObject:model];
             }
             [self.ticketBoxTableView reloadData];
-            NSLog(@"dataSource  = %@",_dataSource[0]);
             
         }
         

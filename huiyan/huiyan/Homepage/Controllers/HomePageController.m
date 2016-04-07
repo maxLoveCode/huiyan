@@ -316,7 +316,6 @@
                           @"is_hot":@"1"};
   
     [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-        NSLog(@"%@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
