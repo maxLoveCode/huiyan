@@ -238,7 +238,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
                     [_bgView setContentOffset:CGPointMake(CGRectGetMinX(frame), 0)];
                 }
             }
-            else{ 
+            else{
                 if (_bgView.contentOffset.x -10 >0) {
                     [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x-10, 0)];
                 }
