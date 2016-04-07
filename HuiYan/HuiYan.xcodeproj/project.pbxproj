@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */; };
+		257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */; };
+		257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */; };
+		257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC691CB64B1A004C3CDE /* HomePageCell.m */; };
 		25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8C2451CB4AC7D00386540 /* UnitTest.m */; };
 		25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */; };
 		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
@@ -22,13 +26,9 @@
 		55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7E01CB38B3200C3B8CA /* HomePageController.m */; };
 		55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7E61CB38DB700C3B8CA /* ServerManager.m */; };
 		55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */; };
-		55CCD7ED1CB39FAE00C3B8CA /* HomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */; };
 		55CCD7F81CB3E17200C3B8CA /* HomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7F71CB3E17200C3B8CA /* HomePage.m */; };
 		55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */; };
 		55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */; };
-		55CCD8021CB4E32C00C3B8CA /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */; };
-		55F90C3B1CB5F5A40065A7C2 /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */; };
-		55F90C421CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F90C411CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +50,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiArtcleTableViewController.h; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.h; sourceTree = SOURCE_ROOT; };
+		257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiArtcleTableViewController.m; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.m; sourceTree = SOURCE_ROOT; };
+		257FFC631CB64B0E004C3CDE /* ArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleTableViewCell.h; path = HuiYan/Homepage/Views/ArticleTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleTableViewCell.m; path = HuiYan/Homepage/Views/ArticleTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		257FFC661CB64B1A004C3CDE /* BuyTicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicketCell.h; sourceTree = "<group>"; };
+		257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketCell.m; sourceTree = "<group>"; };
+		257FFC681CB64B1A004C3CDE /* HomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageCell.h; sourceTree = "<group>"; };
+		257FFC691CB64B1A004C3CDE /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageCell.m; sourceTree = "<group>"; };
 		25A8C2441CB4AC7D00386540 /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitTest.h; path = HuiYan/Helpers/UnitTest.h; sourceTree = SOURCE_ROOT; };
 		25A8C2451CB4AC7D00386540 /* UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTest.m; path = HuiYan/Helpers/UnitTest.m; sourceTree = SOURCE_ROOT; };
 		25B6B3751CB4F324000F99F1 /* TicketBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TicketBoxViewController.h; path = HuiYan/Homepage/Controllers/TicketBoxViewController.h; sourceTree = SOURCE_ROOT; };
@@ -83,20 +91,12 @@
 		55CCD7E61CB38DB700C3B8CA /* ServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerManager.m; sourceTree = "<group>"; };
 		55CCD7E81CB39CD000C3B8CA /* WikiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiViewController.h; sourceTree = "<group>"; };
 		55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiViewController.m; sourceTree = "<group>"; };
-		55CCD7EB1CB39FAE00C3B8CA /* HomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageCell.h; path = ../HomePageCell.h; sourceTree = "<group>"; };
-		55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageCell.m; path = ../HomePageCell.m; sourceTree = "<group>"; };
 		55CCD7F61CB3E17200C3B8CA /* HomePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePage.h; sourceTree = "<group>"; };
 		55CCD7F71CB3E17200C3B8CA /* HomePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePage.m; sourceTree = "<group>"; };
 		55CCD7FA1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+ShowHideBar.h"; sourceTree = "<group>"; };
 		55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+ShowHideBar.m"; sourceTree = "<group>"; };
 		55CCD7FD1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicketDetailsViewController.h; sourceTree = "<group>"; };
 		55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketDetailsViewController.m; sourceTree = "<group>"; };
-		55CCD8001CB4E32C00C3B8CA /* BuyTicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuyTicketCell.h; path = ../BuyTicketCell.h; sourceTree = "<group>"; };
-		55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuyTicketCell.m; path = ../BuyTicketCell.m; sourceTree = "<group>"; };
-		55F90C381CB5F5A40065A7C2 /* ArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleTableViewCell.h; sourceTree = "<group>"; };
-		55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTableViewCell.m; sourceTree = "<group>"; };
-		55F90C401CB5FE9E0065A7C2 /* WikiArtcleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiArtcleTableViewController.h; sourceTree = "<group>"; };
-		55F90C411CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiArtcleTableViewController.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -231,10 +231,10 @@
 				55CCD7E01CB38B3200C3B8CA /* HomePageController.m */,
 				55CCD7E81CB39CD000C3B8CA /* WikiViewController.h */,
 				55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */,
-				55F90C401CB5FE9E0065A7C2 /* WikiArtcleTableViewController.h */,
-				55F90C411CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m */,
 				55CCD7FD1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.h */,
 				55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */,
+				257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */,
+				257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */,
 				25B6B3751CB4F324000F99F1 /* TicketBoxViewController.h */,
 				25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */,
 				55B3D9D21CB5151400277896 /* WikiWorksDetailsViewController.h */,
@@ -387,12 +387,12 @@
 		55CCD7F51CB3B07C00C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				55CCD7EB1CB39FAE00C3B8CA /* HomePageCell.h */,
-				55CCD7EC1CB39FAE00C3B8CA /* HomePageCell.m */,
-				55CCD8001CB4E32C00C3B8CA /* BuyTicketCell.h */,
-				55CCD8011CB4E32C00C3B8CA /* BuyTicketCell.m */,
-				55F90C381CB5F5A40065A7C2 /* ArticleTableViewCell.h */,
-				55F90C391CB5F5A40065A7C2 /* ArticleTableViewCell.m */,
+				257FFC631CB64B0E004C3CDE /* ArticleTableViewCell.h */,
+				257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */,
+				257FFC661CB64B1A004C3CDE /* BuyTicketCell.h */,
+				257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */,
+				257FFC681CB64B1A004C3CDE /* HomePageCell.h */,
+				257FFC691CB64B1A004C3CDE /* HomePageCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -588,20 +588,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
 				25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */,
-				55F90C421CB5FE9E0065A7C2 /* WikiArtcleTableViewController.m in Sources */,
 				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
 				55CCD7F81CB3E17200C3B8CA /* HomePage.m in Sources */,
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
-				55CCD8021CB4E32C00C3B8CA /* BuyTicketCell.m in Sources */,
 				55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */,
+				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
-				55F90C3B1CB5F5A40065A7C2 /* ArticleTableViewCell.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
+				257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */,
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
+				257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
-				55CCD7ED1CB39FAE00C3B8CA /* HomePageCell.m in Sources */,
 				25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,

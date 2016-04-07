@@ -81,7 +81,6 @@
         [_segement setTitleTextAttributes:noselectedDic forState:UIControlStateNormal];
         [_segement setTitleTextAttributes:selectedDic forState:UIControlStateSelected];
         [_segement addTarget:self action:@selector(handelSegemnetControl:) forControlEvents:UIControlEventValueChanged];
-        
     }
     return _segement;
 }
