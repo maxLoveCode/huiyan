@@ -10,14 +10,12 @@
 #import "Constant.h"
 #import "HomePageCell.h"
 #import "MCSwipeMenu.h"
-
 #define kLineNumber 3
 
 @interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property (nonatomic, strong) UITableView *dramaTableView;
 @property (nonatomic, strong) MCSwipeMenu* head_view;
 @property (nonatomic, strong) UIView *bg_view;
-
 @end
 
 @implementation WikiViewController

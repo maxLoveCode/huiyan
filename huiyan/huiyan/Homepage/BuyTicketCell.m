@@ -22,6 +22,7 @@
         [self addSubview:self.address_lab];
         [self addSubview:self.price_lab];
         [self addSubview:self.buy_btn];
+        [self addSubview:self.head_view];
     }
     return self;
 }
@@ -81,8 +82,9 @@
     return  _price_lab;
 }
 - (UIButton *)buy_btn{
-    if (!_price_lab) {
-        self.buy_btn = [[UIButton alloc]init];
+    if (!_buy_btn) {
+        self.buy_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.buy_btn.backgroundColor = [UIColor redColor];
     }
     return  _buy_btn;
 }
@@ -90,12 +92,12 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.head_view.frame = CGRectMake(0, 0, kScreen_Width, 10);
-    self.image_pic.frame = CGRectMake(kMargin, 10, 87, 225 / 2);
+    self.image_pic.frame = CGRectMake(kMargin, 20, 87, 225 / 2);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 17, CGRectGetMinY(self.image_pic.frame) + 12, kScreen_Width - 150, 14);
-    self.time_lab.frame = CGRectMake(CGRectGetMaxX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame)+ 12, kScreen_Width - 150, 12);
+    self.time_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame)+ 12, kScreen_Width - 150, 12);
     self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame), CGRectGetMaxY(self.time_lab.frame) + 12, kScreen_Width - 150, 12);
-    self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame), CGRectGetMaxY(self.address_lab.frame) + 12, 150, 12);
-    self.buy_btn.frame = CGRectMake(kScreen_Width - 30 - 56, CGRectGetMaxY(self.image_pic.frame) - 20, 56, 20);
+    self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame), CGRectGetMaxY(self.image_pic.frame) - 12, 150, 12);
+    self.buy_btn.frame = CGRectMake(kScreen_Width - 56- 15, CGRectGetMaxY(self.image_pic.frame) - 20, 56, 20);
 }
 - (void)setContent:(BuyTicket *)ticket{
     self.title_lab.text = ticket.title;
