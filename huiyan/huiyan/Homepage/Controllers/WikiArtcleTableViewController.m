@@ -9,6 +9,7 @@
 #import "WikiArtcleTableViewController.h"
 #import "HomePage.h"
 #import "ArticleTableViewCell.h"
+#import "Constant.h"
 @interface WikiArtcleTableViewController ()
 
 @end
@@ -19,11 +20,19 @@
     [super viewDidLoad];
     [self.tableView registerClass:[ArticleTableViewCell class] forCellReuseIdentifier:@"article"];
     self.tableView.rowHeight = [ArticleTableViewCell cellHeight];
+    self.tableView.frame = CGRectMake(kScreen_Width, 10, kScreen_Width, kScreen_Height - 41 - 48 - 44);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super initWithCoder:aDecoder]) {
+        
+    }
+    return self;
 }
 
 - (void)didReceiveMemoryWarning {
