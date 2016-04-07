@@ -10,7 +10,7 @@
 #import "BuyTicket.h"
 #import "UIImageView+WebCache.h"
 @interface BuyTicketCell : UITableViewCell
-@property (nonatomic, strong) UIImageView *_Nonnull image_pic;
+@property (nonatomic, strong) UIImageView * _Nonnull  image_pic;
 @property (nonatomic, strong) UILabel *_Nonnull time_lab;
 @property (nonatomic, strong) UILabel *_Nonnull title_lab;
 @property (nonatomic, strong) UILabel *_Nonnull address_lab;
