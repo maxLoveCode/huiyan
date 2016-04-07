@@ -10,6 +10,7 @@
 #import "Constant.h"
 
 #define defaultH 41
+#define labelTag 1000
 #define defaultW kScreen_Width
 
 static NSString * const reuseIdentifier = @"swipableMenu";
@@ -29,10 +30,12 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     self = [super init];
     
     _hasButton = YES;
+    _index = 0;
     
     [self setFrame:CGRectMake(0, 0, defaultW, defaultH)];
     
     [self debugData];
+    
     return self;
 }
 
@@ -41,6 +44,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     self = [super initWithFrame:frame];
     
     _hasButton = YES;
+    _index = 0;
     
     self.height = CGRectGetHeight(frame);
     self.width  = CGRectGetWidth(frame);
@@ -59,7 +63,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
         _bgView = [[UIScrollView alloc] initWithFrame:rect];
         _bgView.bounces = NO;
         NSLog(@"bgview %@",self.bgView);
-        [_bgView setBackgroundColor:[UIColor blueColor]];
+        [_bgView setBackgroundColor:[UIColor whiteColor]];
     }
     return _bgView;
 }
@@ -81,6 +85,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
         [_menuView setBackgroundColor:[UIColor whiteColor]];
         _menuView.delegate = self;
         _menuView.dataSource = self;
+        
     }
     return _menuView;
 }
@@ -132,16 +137,21 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     NSString* text  = [[_dataSource objectAtIndex:indexPath.item] objectForKey:@"name"];
     UIFont* font = [UIFont systemFontOfSize:14];
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [self widthOfString:text withFont:font], CGRectGetHeight(collectionView.frame))];
-    
+    label.tag = labelTag;
     label.font = font;
     label.text = text;
     [cell.contentView addSubview:label];
-    
-    UIView* underLine = [[UIView alloc] initWithFrame:CGRectMake(-5, CGRectGetHeight(collectionView.frame)-2, [self widthOfString:text withFont:font]+10, 2)];
-    underLine.backgroundColor = COLOR_THEME;
-    [cell.contentView addSubview:underLine];
-    
+    if (indexPath.item == _index) {
+        [self appendUnderline:cell.frame];
+    }
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    _index = indexPath.item;
+    [collectionView reloadData];
+    [self.delegate swipeMenu:self didSelectAtIndexPath:indexPath];
 }
 
 -(void)layoutSubviews
@@ -167,12 +177,12 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
     [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
     
-    NSLog(@"%lf",[self calulateLength]);
     [self.menuView setFrame:CGRectMake(0, 0, [self calulateLength], defaultH)];
     [self.bgView setContentSize:CGSizeMake([self calulateLength], -8)];
     [self.menuView reloadData];
 }
 
+// method of calcluating whole length
 -(CGFloat)calulateLength
 {
     CGFloat total = 0;
@@ -188,6 +198,55 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 - (CGFloat)widthOfString:(NSString *)string withFont:(UIFont *)font {
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
     return [[[NSAttributedString alloc] initWithString:string attributes:attributes] size].width;
+}
+
+- (void)appendUnderline:(CGRect)rect
+{
+    UIFont *font =[UIFont systemFontOfSize:14];
+    NSString* content = [[_dataSource objectAtIndex:_index]objectForKey:@"name"];
+    CGFloat length = [self widthOfString:content withFont:font];
+    
+    CGRect frame =CGRectMake(CGRectGetMinX(rect)-5, CGRectGetHeight(_menuView.frame)-2, length+10, 2);
+    
+    if (!_underLine) {
+        _underLine = [[UIView alloc] initWithFrame:frame];
+        _underLine.backgroundColor = COLOR_THEME;
+        
+        [_menuView addSubview:_underLine];
+    }
+    else
+    {
+        [UIView animateWithDuration:0.2 animations:^{
+            BOOL right;
+            if (CGRectGetMinX(_underLine.frame) <=CGRectGetMinX(frame)) {
+                right = YES;
+            }
+            else
+                right = NO;
+            [_underLine setFrame:frame];
+            
+            if (right) {
+                NSLog(@"right");
+                if (_bgView.contentSize.width <= CGRectGetWidth(_bgView.frame)) {
+                    
+                }
+                else if (_bgView.contentSize.width - CGRectGetWidth(_bgView.frame) < CGRectGetMinX(frame))
+                {
+                    
+                }
+                else
+                {
+                    [_bgView setContentOffset:CGPointMake(CGRectGetMinX(frame), 0)];
+                }
+            }
+            else{
+                NSLog(@"left");
+                if (_bgView.contentOffset.x -10 >0) {
+                    [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x-10, 0)];
+                }
+            }
+        }];
+    }
 }
 
 @end
