@@ -8,10 +8,11 @@
 
 #import "WikiWorksDetailsViewController.h"
 #import "Constant.h"
-
+#import "UIImageView+WebCache.h"
 #define kHeadHeight 187
 @interface WikiWorksDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *wikiDetailsTableView;
+@property (nonatomic, strong) UIImageView *head_view;
 @end
 
 @implementation WikiWorksDetailsViewController
@@ -20,6 +21,8 @@
     [super viewDidLoad];
     self.view.backgroundColor  = [UIColor blackColor];
     [self.view addSubview:self.wikiDetailsTableView];
+    [self.view addSubview:self.head_view];
+    NSLog(@"%@",self.homePage);
     // Do any additional setup after loading the view.
 }
 
@@ -28,9 +31,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIImageView *)head_view{
+    if (!_head_view) {
+        self.head_view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kHeadHeight)];
+        [self.head_view sd_setImageWithURL:[NSURL URLWithString:self.homePage.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
+    }
+    return _head_view;
+}
+
 - (UITableView *)wikiDetailsTableView{
     if (!_wikiDetailsTableView) {
-        self.wikiDetailsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kHeadHeight, kScreen_Width, kScreen_Height - kHeadHeight) style:UITableViewStylePlain];
+        self.wikiDetailsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kHeadHeight, kScreen_Width, kScreen_Height - kHeadHeight - 48 - 64 ) style:UITableViewStylePlain];
         self.wikiDetailsTableView.delegate = self;
         self.wikiDetailsTableView.dataSource = self;
         self.wikiDetailsTableView.separatorStyle = NO;
@@ -53,7 +64,7 @@
     if (indexPath.row == 0) {
         return 42;
     }else{
-        return 200;
+        return 242;
     }
 }
 
@@ -86,10 +97,11 @@
             title_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, 32)];
             title_lab.textColor = COLOR_WithHex(0x545454);
             title_lab.font = kFONT14;
-            title_lab.backgroundColor = [UIColor blueColor];
             title_lab.tag = 1000;
+            title_lab.numberOfLines = 0;
             [cell addSubview:title_lab];
         }
+        title_lab.text = self.homePage.title;
             return cell;
     }else{
 
@@ -101,11 +113,10 @@
             mes_lab.text = @"简介";
             mes_lab.tag = 1001;
             [cell addSubview:mes_lab];
-              mes_lab.backgroundColor = [UIColor redColor];
         }
        
         UILabel *line_lab = [cell viewWithTag:1002];
-        if (line_lab == nil) {
+        if (!line_lab) {
             UILabel *line_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 42, kScreen_Width - 30, 0.5)];
             line_lab.backgroundColor = COLOR_WithHex(0xdddddd);
             line_lab.font = kFONT14;
@@ -114,14 +125,16 @@
         }
         
         UILabel *des_lab = [cell viewWithTag:1003];
-        if (des_lab == nil) {
-            UILabel *des_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 52, kScreen_Width - 30, 400)];
-            des_lab.backgroundColor = COLOR_WithHex(0xa5a5a5);
-            des_lab.tag = 1003;
+        if (!des_lab) {
+            UILabel *des_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 52, kScreen_Width - 30, 200)];
+            des_lab.textColor = COLOR_WithHex(0xa5a5a5);
             des_lab.font = kFONT14;
+            des_lab.text = self.homePage.profile;
             [cell addSubview:des_lab];
-            des_lab.backgroundColor = [UIColor yellowColor];
+                des_lab.tag = 1003;
         }
+ 
+        NSLog(@"self.homePage.profile = %@",self.homePage.profile);
 
         return cell;
     }
