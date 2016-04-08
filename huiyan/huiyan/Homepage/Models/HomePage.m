@@ -13,7 +13,7 @@
 +(HomePage* )parseDramaJSON:(NSDictionary*)json
 {
     HomePage* drama = [[HomePage alloc] init];
-    [drama setCover:[json objectForKey:@"cover"]];
+    [drama setCover: [self stringFormatting:[json objectForKey:@"cover"]]];
     [drama setContent:[json objectForKey:@"content"]];
     [drama setCid:(NSInteger*)[[json objectForKey:@"cid"] integerValue]];
     [drama setType:(NSInteger*)[[json objectForKey:@"type"] integerValue]];
@@ -23,6 +23,15 @@
     [drama setProfile:[json objectForKey:@"profile"]];
     
     return drama;
+}
+
++(NSString*)stringFormatting:(NSString*)responseData
+{
+
+    responseData = [responseData stringByReplacingOccurrencesOfString:@" " withString:@""];
+    responseData = [responseData stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    
+    return responseData;
 }
 
 @end
