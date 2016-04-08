@@ -12,7 +12,7 @@
 #import "ServerManager.h"
 #import "BuyTicket.h"
 #import "MCSwipeMenu.h"
-#define ticketHeight 132
+#define ticketHeight 142
 
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketBoxTableView;
@@ -69,6 +69,7 @@
     [cell setContent:_dataSource[indexPath.row]];
     return cell;
 }
+
 
 - (void)getDataTicket:(NSString *)cid{
     _dataSource = [NSMutableArray array];

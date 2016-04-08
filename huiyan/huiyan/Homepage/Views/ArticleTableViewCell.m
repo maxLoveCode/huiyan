@@ -50,6 +50,7 @@
         self.title_lab = [[UILabel alloc]init];
         self.title_lab.font  = kFONT(14);
         self.title_lab.textColor = COLOR_WithHex(0xffffff);
+        self.title_lab.numberOfLines = 2;
     }
     return _title_lab;
 }

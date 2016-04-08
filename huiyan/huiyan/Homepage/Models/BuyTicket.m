@@ -17,7 +17,15 @@
     tick.content = dic[@"content"];
     tick.buy_tip = dic[@"buy_tip"];
     tick.title = dic[@"title"];
-    tick.cover = dic[@"cover"];
+    tick.cover = [self stringFormatting:dic[@"cover"]];
     return tick;
+}
++(NSString*)stringFormatting:(NSString*)responseData
+{
+    
+    responseData = [responseData stringByReplacingOccurrencesOfString:@" " withString:@""];
+    responseData = [responseData stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    
+    return responseData;
 }
 @end
