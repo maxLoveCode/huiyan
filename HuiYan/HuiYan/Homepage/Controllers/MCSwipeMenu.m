@@ -11,6 +11,7 @@
 
 #define defaultH 41
 #define labelTag 1000
+#define spacing 40
 #define defaultW kScreen_Width
 
 static NSString * const reuseIdentifier = @"swipableMenu";
@@ -29,7 +30,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 {
     self = [super init];
     
-    _hasButton = YES;
+    _hasButton = NO;
     _index = 0;
     
     [self setFrame:CGRectMake(0, 0, defaultW, defaultH)];
@@ -43,7 +44,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 {
     self = [super initWithFrame:frame];
     
-    _hasButton = YES;
+    _hasButton = NO;
     _index = 0;
     
     self.height = CGRectGetHeight(frame);
@@ -117,7 +118,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     UIFont* font = [UIFont systemFontOfSize:14];
     
 
-    return CGSizeMake([self widthOfString:text withFont:font], defaultH);
+    return CGSizeMake([self widthOfString:text withFont:font]+spacing, defaultH);
 }
 
 #pragma mark collection view cell paddings
@@ -127,7 +128,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
-    return 10.0;
+    return 0.0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -136,7 +137,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     [[[cell contentView] subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     NSString* text  = [[_dataSource objectAtIndex:indexPath.item] objectForKey:@"name"];
     UIFont* font = [UIFont systemFontOfSize:14];
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [self widthOfString:text withFont:font], CGRectGetHeight(collectionView.frame))];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(spacing/2, 0, [self widthOfString:text withFont:font], CGRectGetHeight(collectionView.frame))];
     label.tag = labelTag;
     label.font = font;
     label.text = text;
@@ -177,6 +178,24 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
     [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
     
+    [_dataSource addObject:@{@"id":@"1", @"name":@"沪剧"}];
+    [_dataSource addObject:@{@"id":@"12", @"name":@"京剧"}];
+    [_dataSource addObject:@{@"id":@"10", @"name":@"黄梅"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    [_dataSource addObject:@{@"id":@"1", @"name":@"沪剧"}];
+    [_dataSource addObject:@{@"id":@"12", @"name":@"京剧"}];
+    [_dataSource addObject:@{@"id":@"10", @"name":@"黄梅"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
+    [_dataSource addObject:@{@"id":@"11", @"name":@"杭州唱戏"}];
     [self.menuView setFrame:CGRectMake(0, 0, [self calulateLength], defaultH)];
     [self.bgView setContentSize:CGSizeMake([self calulateLength], -8)];
     [self.menuView reloadData];
@@ -190,7 +209,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     {
         NSString *string = [[_dataSource objectAtIndex:i] objectForKey:@"name"];
         UIFont* font = [UIFont systemFontOfSize:14];
-        total+=[self widthOfString:string withFont:font]+10;
+        total+=[self widthOfString:string withFont:font]+spacing;
     }
     return total-10;
 }
@@ -206,7 +225,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     NSString* content = [[_dataSource objectAtIndex:_index]objectForKey:@"name"];
     CGFloat length = [self widthOfString:content withFont:font];
     
-    CGRect frame =CGRectMake(CGRectGetMinX(rect)-5, CGRectGetHeight(_menuView.frame)-2, length+10, 2);
+    CGRect frame =CGRectMake(CGRectGetMinX(rect), CGRectGetHeight(_menuView.frame)-2, length+spacing, 2);
     
     if (!_underLine) {
         _underLine = [[UIView alloc] initWithFrame:frame];
@@ -217,15 +236,16 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     else
     {
         [UIView animateWithDuration:0.2 animations:^{
-            BOOL right;
-            if (CGRectGetMinX(_underLine.frame) <=CGRectGetMinX(frame)) {
-                right = YES;
+            int right = 0;
+            if (CGRectGetMinX(_underLine.frame) <CGRectGetMinX(frame)) {
+                right = 1;
             }
-            else
-                right = NO;
+            else if (CGRectGetMinX(_underLine.frame) > CGRectGetMinX(frame))
+                right = 2;
             [_underLine setFrame:frame];
             
-            if (right) {
+            if (right ==1) {
+                /*
                 if (_bgView.contentSize.width <= CGRectGetWidth(_bgView.frame)) {
                     
                 }
@@ -237,8 +257,12 @@ static NSString * const reuseIdentifier = @"swipableMenu";
                 {
                     [_bgView setContentOffset:CGPointMake(CGRectGetMinX(frame), 0)];
                 }
+                 */
+            if (_bgView.contentOffset.x +10 >0) {
+                    [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x+10, 0)];
+                }
             }
-            else{
+            else if (right ==2){
                 if (_bgView.contentOffset.x -10 >0) {
                     [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x-10, 0)];
                 }
