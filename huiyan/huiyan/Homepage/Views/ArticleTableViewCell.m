@@ -88,9 +88,7 @@
 - (void)setContent:(HomePage *)drama{
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:drama.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
     self.video_pic.image = [UIImage imageNamed:@"arrow"];
-    self.video_pic.backgroundColor = [UIColor redColor];
     self.title_lab.text = drama.title;
-    self.title_lab.backgroundColor = [UIColor blueColor];
     
 }
 @end
