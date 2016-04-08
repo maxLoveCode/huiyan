@@ -25,7 +25,7 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     NSError *error;
-    
+    //图文混排
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[_originData dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                       NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
     

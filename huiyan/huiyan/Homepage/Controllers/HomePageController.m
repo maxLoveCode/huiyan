@@ -317,7 +317,7 @@
   
     [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
-            NSLog(@"%@", responseObject);
+           // NSLog(@"%@", responseObject);
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
                 [_dataSource addObject:[HomePage parseDramaJSON:drama]];

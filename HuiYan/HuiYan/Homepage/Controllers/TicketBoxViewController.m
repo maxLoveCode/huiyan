@@ -12,6 +12,7 @@
 #import "ServerManager.h"
 #import "BuyTicket.h"
 #import "MCSwipeMenu.h"
+#import "BuyTicketDetailsViewController.h"
 #define ticketHeight 142
 
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -68,6 +69,13 @@
     BuyTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ticketBox" forIndexPath:indexPath];
     [cell setContent:_dataSource[indexPath.row]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    BuyTicketDetailsViewController *btdCon = [[BuyTicketDetailsViewController alloc]init];
+    btdCon.ticket = self.dataSource[indexPath.row];
+    [self.navigationController pushViewController:btdCon animated:YES];
+    
 }
 
 

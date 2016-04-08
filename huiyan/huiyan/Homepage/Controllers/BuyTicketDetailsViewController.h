@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BuyTicket.h"
 @interface BuyTicketDetailsViewController : UIViewController
-
+@property (nonatomic,strong) BuyTicket *ticket;
 @end

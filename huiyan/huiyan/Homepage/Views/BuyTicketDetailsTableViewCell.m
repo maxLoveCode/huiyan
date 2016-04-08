@@ -1,0 +1,170 @@
+//
+//  BuyTicketDetailsTableViewCell.m
+//  huiyan
+//
+//  Created by 华印mac－002 on 16/4/8.
+//  Copyright © 2016年 com.huayin. All rights reserved.
+//
+
+#import "BuyTicketDetailsTableViewCell.h"
+#import "Constant.h"
+#import "UIImageView+WebCache.h"
+@implementation BuyTicketDetailsTableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self addSubview:self.bg_view];
+        [self.bg_view addSubview:self.image_pic];
+        [self.bg_view  addSubview:self.title_lab];
+        [self.bg_view  addSubview:self.time_lab];
+        [self.bg_view  addSubview:self.address_lab];
+        [self.bg_view  addSubview:self.time_pic];
+        [self.bg_view  addSubview:self.address_pic];
+        [self.bg_view  addSubview:self.price_pic];
+        [self.bg_view  addSubview:self.price_lab];
+        [self addSubview:self.collect_btn];
+        [self addSubview:self.writeComment_btn];
+        [self addSubview:self.share_btn];
+    }
+    return self;
+}
+
+- (UIImageView *)bg_view{
+    if (!_bg_view) {
+        self.bg_view = [[UIImageView alloc]init];
+    }
+    return _bg_view;
+}
+
+- (UIImageView *)image_pic{
+    if (!_image_pic) {
+        self.image_pic = [[UIImageView alloc]init];
+    }
+    return _image_pic;
+}
+
+- (UIImageView *)time_pic{
+    if (!_time_pic) {
+        self.time_pic = [[UIImageView alloc]init];
+    }
+    return _time_pic;
+}
+
+- (UIImageView *)address_pic{
+    if (!_address_pic) {
+        self.address_pic = [[UIImageView alloc]init];
+    }
+    return _address_pic;
+}
+
+- (UIImageView *)price_pic{
+    if (!_price_pic) {
+        self.price_pic = [[UIImageView alloc]init];
+    }
+    return _price_pic;
+}
+
+- (UILabel *)title_lab{
+    if (!_title_lab) {
+        self.title_lab = [[UILabel alloc]init];
+        self.title_lab.font = kFONT(16);
+        self.title_lab.textColor = [UIColor whiteColor];
+    }
+    return _title_lab;
+}
+
+- (UILabel *)time_lab{
+    if (!_time_lab) {
+        self.time_lab = [[UILabel alloc]init];
+        self.time_lab.font = kFONT(14);
+        self.time_lab.textColor = [UIColor whiteColor];
+    }
+    return _time_lab;
+}
+
+- (UILabel *)address_lab{
+    if (!_address_lab) {
+        self.address_lab = [[UILabel alloc]init];
+        self.address_lab.font = kFONT(14);
+        self.address_lab.textColor = [UIColor whiteColor];
+    }
+    return _address_lab;
+}
+
+- (UILabel *)price_lab{
+    if (!_price_lab) {
+        self.price_lab = [[UILabel alloc]init];
+        self.price_lab.font = kFONT(14);
+        self.price_lab.textColor = [UIColor whiteColor];
+    }
+    return _price_lab;
+}
+
+- (UIButton *)collect_btn{
+    if (!_collect_btn) {
+        self.collect_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.collect_btn.layer.masksToBounds = YES;
+        self.collect_btn.layer.cornerRadius = 1;
+    }
+    return _collect_btn;
+}
+
+- (UIButton *)writeComment_btn{
+    if (!_writeComment_btn) {
+        self.writeComment_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.writeComment_btn.layer.masksToBounds = YES;
+        self.writeComment_btn.layer.cornerRadius = 1;
+    }
+    return _writeComment_btn;
+}
+
+- (UIButton *)share_btn{
+    if (!_share_btn) {
+        self.share_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.share_btn.layer.masksToBounds = YES;
+        self.share_btn.layer.cornerRadius = 1;
+    }
+    return _share_btn;
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    self.bg_view.frame = CGRectMake(0, 0, kScreen_Width, 187);
+    self.image_pic.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) - 122, 94, 122);
+    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + 15, CGRectGetMinY(self.image_pic.frame), kScreen_Width - 139, 32 * 1.5);
+    self.time_pic.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame), CGRectGetMaxY(self.title_lab.frame) + 5, 14, 14);
+    self.time_lab.frame = CGRectMake(CGRectGetMaxX(self.time_pic.frame) + 5, CGRectGetMinY(self.time_pic.frame), kScreen_Width - 150, 14);
+    self.address_pic.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.time_pic.frame) + 10, 14, 14);
+    self.address_lab.frame = CGRectMake(CGRectGetMaxX(self.address_pic.frame) + 5, CGRectGetMinY(self.address_pic.frame) , kScreen_Width - 150, 14);
+    self.price_pic.frame = CGRectMake(CGRectGetMinX(self.address_pic.frame), CGRectGetMaxY(self.address_pic.frame) + 10, 14, 14);
+    self.price_lab.frame = CGRectMake(CGRectGetMaxX(self.price_pic.frame) + 5, CGRectGetMinY(self.price_pic.frame), kScreen_Width - 150, 14);
+    self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 90) / 3, 20);
+    self.writeComment_btn.frame = CGRectMake(CGRectGetMaxX(self.collect_btn.frame) + 30, CGRectGetMinY(self.collect_btn.frame), (kScreen_Width - 90) / 3, 20);
+    self.share_btn.frame = CGRectMake(CGRectGetMaxX(self.writeComment_btn.frame) + 30, CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 90) / 3, 20);
+    self.bg_view.backgroundColor = [UIColor redColor];
+
+    
+}
+
++ (CGFloat)cellHeight{
+    return 187 + 20 + 30;
+}
+
+- (void)setContent:(BuyTicket *)ticket{
+    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:ticket.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
+    self.title_lab.text = ticket.title;
+    self.time_lab.text = ticket.date;
+    self.address_lab.text = ticket.address;
+    self.price_lab.text = ticket.price_range;
+    self.time_pic.image = [UIImage imageNamed:@"arrow"];
+    self.address_pic.image = [UIImage imageNamed:@"arrow"];
+    self.price_pic.image = [UIImage imageNamed:@"arrow"];
+    self.collect_btn.backgroundColor = [UIColor redColor];
+     self.writeComment_btn.backgroundColor = [UIColor redColor];
+     self.share_btn.backgroundColor = [UIColor redColor];
+}
+
+
+
+
+@end

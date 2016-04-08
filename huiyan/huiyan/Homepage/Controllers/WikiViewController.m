@@ -74,7 +74,7 @@
 - (UISegmentedControl *)segement{
     if (!_segement) {
         self.segement = [[UISegmentedControl alloc]initWithItems:@[@"文章",@"作品"]];
-        self.segement.frame = CGRectMake(0, 0, 100, 24);
+        self.segement.frame = CGRectMake(0, 0, 110, 24);
         self.segement.selectedSegmentIndex = 0;
         self.segement.tintColor = [UIColor whiteColor];
         NSDictionary *noselectedDic = @{NSFontAttributeName:[UIFont systemFontOfSize:14],NSForegroundColorAttributeName:[UIColor whiteColor]};
