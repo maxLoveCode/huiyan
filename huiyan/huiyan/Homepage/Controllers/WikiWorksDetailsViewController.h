@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomePage.h"
 
 @interface WikiWorksDetailsViewController : UIViewController
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong)HomePage *homePage;
 @end

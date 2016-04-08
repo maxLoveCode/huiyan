@@ -64,6 +64,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
+    wikiCon.homePage = self.dataSource[indexPath.row];
     [self.navigationController pushViewController:wikiCon animated:YES];
 }
 

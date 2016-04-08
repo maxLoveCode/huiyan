@@ -15,6 +15,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self addSubview:self.head_view];
         [self addSubview:self.image_pic];
+        [self addSubview:self.video_pic];
         [self addSubview:self.gray_view];
         [self addSubview:self.title_lab];
         
@@ -65,7 +66,7 @@
 
 - (UIImageView *)video_pic{
     if (!_video_pic) {
-        self.video_pic  = [UIImageView alloc];
+        self.video_pic  = [[UIImageView alloc]init];
     }
     return _video_pic;
 }
@@ -76,7 +77,7 @@
     self.image_pic.frame = CGRectMake(0, 0, kScreen_Width, 187);
     self.gray_view.frame = CGRectMake(0, CGRectGetMaxY(self.image_pic.frame) - 32, kScreen_Width, 32);
     self.video_pic.frame = CGRectMake(15, CGRectGetMaxY(self.image_pic.frame) - 32, 32, 32);
-    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.video_pic.frame) + 15, CGRectGetMinX(self.gray_view.frame) + 9, 150, 14);
+    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.video_pic.frame) + 15, CGRectGetMinY(self.gray_view.frame) + 9, 150, 14);
     self.head_view.frame = CGRectMake(0, CGRectGetMaxY(self.gray_view.frame), kScreen_Width, 10);
 }
 
@@ -87,7 +88,9 @@
 - (void)setContent:(HomePage *)drama{
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:drama.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
     self.video_pic.image = [UIImage imageNamed:@"arrow"];
+    self.video_pic.backgroundColor = [UIColor redColor];
     self.title_lab.text = drama.title;
+    self.title_lab.backgroundColor = [UIColor blueColor];
     
 }
 @end
