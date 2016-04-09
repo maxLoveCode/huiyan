@@ -9,10 +9,15 @@
 #import "WikiWorksDetailsViewController.h"
 #import "Constant.h"
 #import "UIImageView+WebCache.h"
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import "Masonry.h"
+#import "ZFPlayer.h"
 #define kHeadHeight 187
 @interface WikiWorksDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *wikiDetailsTableView;
 @property (nonatomic, strong) UIImageView *head_view;
+@property (strong, nonatomic) ZFPlayerView *playerView;
 @end
 
 @implementation WikiWorksDetailsViewController
@@ -24,6 +29,10 @@
     [self.view addSubview:self.head_view];
     NSLog(@"%@",self.homePage);
     // Do any additional setup after loading the view.
+}
+
+- (void)dealloc{
+    
 }
 
 - (void)didReceiveMemoryWarning {
