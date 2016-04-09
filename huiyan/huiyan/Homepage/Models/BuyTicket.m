@@ -18,6 +18,8 @@
     tick.buy_tip = dic[@"buy_tip"];
     tick.title = dic[@"title"];
     tick.cover = [self stringFormatting:dic[@"cover"]];
+    tick.ID = dic[@"id"];
+    tick.cid = dic[@"cid"];
     return tick;
 }
 +(NSString*)stringFormatting:(NSString*)responseData

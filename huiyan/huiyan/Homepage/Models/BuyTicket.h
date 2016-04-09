@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface BuyTicket : NSObject
-@property (nonatomic,strong) NSString *title;
-@property (nonatomic, strong) NSString *date;
-@property (nonatomic, strong) NSString *address;
-@property (nonatomic, strong) NSString *price_range;
-@property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) NSString *buy_tip;
-@property (nonatomic,strong) NSString *cover;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *date;
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *price_range;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *buy_tip;
+@property (nonatomic, copy) NSString *cover;
+@property (nonatomic, copy) NSString *ID;
+@property (nonatomic, copy) NSString *cid;
+
 + (BuyTicket *)dataWithDic:(NSDictionary *)dic;
 @end

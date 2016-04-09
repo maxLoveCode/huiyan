@@ -16,6 +16,7 @@
 		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
 		25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E07DB71CB65D180015AD73 /* ArticalViewController.m */; };
 		55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942D3E1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m */; };
+		55942D421CB7D77100EB041A /* CommentContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942D411CB7D77100EB041A /* CommentContent.m */; };
 		55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D9D01CB5056100277896 /* BuyTicket.m */; };
 		55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D9D31CB5151400277896 /* WikiWorksDetailsViewController.m */; };
 		55CCD78B1CB3640500C3B8CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD78A1CB3640500C3B8CA /* main.m */; };
@@ -71,6 +72,8 @@
 		3500AD8F3B45BD551DB23170 /* Pods-huiyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.debug.xcconfig"; sourceTree = "<group>"; };
 		55942D3D1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicketDetailsTableViewCell.h; sourceTree = "<group>"; };
 		55942D3E1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketDetailsTableViewCell.m; sourceTree = "<group>"; };
+		55942D401CB7D77100EB041A /* CommentContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentContent.h; sourceTree = "<group>"; };
+		55942D411CB7D77100EB041A /* CommentContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentContent.m; sourceTree = "<group>"; };
 		55B3D9CF1CB5056100277896 /* BuyTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicket.h; sourceTree = "<group>"; };
 		55B3D9D01CB5056100277896 /* BuyTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicket.m; sourceTree = "<group>"; };
 		55B3D9D21CB5151400277896 /* WikiWorksDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWorksDetailsViewController.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 				55CCD7F71CB3E17200C3B8CA /* HomePage.m */,
 				55B3D9CF1CB5056100277896 /* BuyTicket.h */,
 				55B3D9D01CB5056100277896 /* BuyTicket.m */,
+				55942D401CB7D77100EB041A /* CommentContent.h */,
+				55942D411CB7D77100EB041A /* CommentContent.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -599,6 +604,7 @@
 				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
 				55CCD7F81CB3E17200C3B8CA /* HomePage.m in Sources */,
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
+				55942D421CB7D77100EB041A /* CommentContent.m in Sources */,
 				25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
 				55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */,

@@ -68,6 +68,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BuyTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ticketBox" forIndexPath:indexPath];
     [cell setContent:_dataSource[indexPath.row]];
+       cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

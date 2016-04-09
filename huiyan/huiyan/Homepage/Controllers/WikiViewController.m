@@ -121,6 +121,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ID = @"drama";
     HomePageCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+       cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
     return cell;

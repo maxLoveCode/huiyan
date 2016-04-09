@@ -9,11 +9,12 @@
 #import "ArticalViewController.h"
 #import "Constant.h"
 
-@interface ArticalViewController ()
+@interface ArticalViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITextView* textView;
 @property (nonatomic, strong) UIScrollView* bgView;
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) UIView *gray_view;
 
 @end
 
@@ -22,7 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    //设置字体大小和颜色
+    [self.navigationController.navigationBar setTitleTextAttributes:
+  @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+    NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     NSError *error;
     //图文混排
@@ -51,7 +55,7 @@
 -(UILabel *)label
 {
     if (!_label) {
-        _label = [[UILabel alloc] initWithFrame:self.view.frame];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height - 48 - 10)];
         _label.numberOfLines = 0;
     }
     return _label;
@@ -61,8 +65,62 @@
 {
     if (!_bgView) {
         _bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-48)];
+        _bgView.delegate = self;
     }
     return _bgView;
 }
+
+- (UIView *)gray_view{
+    if (!_gray_view) {
+        self.gray_view = [[UILabel alloc]init];
+        self.gray_view.backgroundColor = [UIColor grayColor];
+        [self.gray_view.layer addSublayer:[self shadowAsInverse]];
+
+    }
+    return _gray_view;
+}
+
+- (CAGradientLayer *)shadowAsInverse
+{
+    CAGradientLayer *newShadow = [[CAGradientLayer alloc] init];
+    CGRect newShadowFrame = CGRectMake(0, 0, kScreen_Width,3 );
+    newShadow.frame = newShadowFrame;
+    //添加渐变的颜色组合（颜色透明度的改变）
+    newShadow.colors = [NSArray arrayWithObjects:
+                        (id)[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor] ,
+                        (id)[[[UIColor grayColor] colorWithAlphaComponent:0.4] CGColor],
+                        (id)[[[UIColor grayColor] colorWithAlphaComponent:0.3] CGColor],
+                        (id)[[[UIColor grayColor] colorWithAlphaComponent:0.2] CGColor],
+                        (id)[[[UIColor grayColor] colorWithAlphaComponent:0.1] CGColor],
+                        nil];
+    return newShadow;
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y == 0) {
+        [self.gray_view removeFromSuperview];
+    }
+    [self.view addSubview:self.gray_view];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y == 0) {
+        [self.gray_view removeFromSuperview];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat height = self.bgView.contentSize.height;
+    NSLog(@"---%f---%f",scrollView.contentOffset.y,height);
+    if (scrollView.contentOffset.y == CGRectGetHeight(self.label.frame)) {
+        
+    }
+}
+
+
+
+
+
 
 @end

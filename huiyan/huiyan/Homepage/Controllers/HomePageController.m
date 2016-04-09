@@ -191,11 +191,13 @@
     if (tableView == _recommendTableView) {
         HomePageCell* cell = [_recommendTableView dequeueReusableCellWithIdentifier:@"recommends" forIndexPath:indexPath];
         [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homePage" forIndexPath:indexPath];
+         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.section ==0) {
             [cell.contentView setBackgroundColor:[UIColor orangeColor]];
         }
@@ -317,7 +319,7 @@
   
     [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
-           // NSLog(@"%@", responseObject);
+
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
                 [_dataSource addObject:[HomePage parseDramaJSON:drama]];

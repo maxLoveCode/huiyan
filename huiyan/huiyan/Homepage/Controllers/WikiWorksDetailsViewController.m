@@ -102,6 +102,7 @@
             [cell addSubview:title_lab];
         }
         title_lab.text = self.homePage.title;
+           cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
     }else{
 
@@ -135,7 +136,7 @@
         }
  
         NSLog(@"self.homePage.profile = %@",self.homePage.profile);
-
+           cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 
