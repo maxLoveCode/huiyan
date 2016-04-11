@@ -9,5 +9,23 @@
 #import "Training.h"
 
 @implementation Training
-
++ (Training *)dataWithDic:(NSDictionary *)dic{
+    Training *train = [[Training alloc]init];
+    train.date = dic[@"date"];
+    train.address = dic[@"address"];
+    train.content = dic[@"content"];
+    train.title = dic[@"title"];
+    train.cover = [self stringFormatting:dic[@"cover"]];
+    train.ID = dic[@"id"];
+    train.count = dic[@"count"];
+    return train;
+}
++(NSString*)stringFormatting:(NSString*)responseData
+{
+    
+    responseData = [responseData stringByReplacingOccurrencesOfString:@" " withString:@""];
+    responseData = [responseData stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    
+    return responseData;
+}
 @end

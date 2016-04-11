@@ -11,8 +11,8 @@
 #import "WikiViewController.h"
 #import "HomePage.h"
 #import "TicketBoxViewController.h"
-
-#define bannerHeight 187
+#import "TrainingTableViewController.h"
+#define bannerHeight 187.5
 #define menuHeight 72.5
 
 @interface HomePageController()
@@ -265,7 +265,8 @@
         TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
         [self.navigationController pushViewController:tickCon animated:YES];
     }else if (indexPath.item == 1){
-
+        TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
+        [self.navigationController pushViewController:trainCon animated:YES];
     }else if (indexPath.item == 2) {
         
     }else {

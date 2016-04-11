@@ -132,6 +132,7 @@
         self.wikiDetailsTableView.dataSource = self;
         self.wikiDetailsTableView.separatorStyle = NO;
         [self.wikiDetailsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"wikidetails"];
+        self.wikiDetailsTableView.backgroundColor = COLOR_WithHex(0x2f2f2f2);
     }
     return _wikiDetailsTableView;
 }
