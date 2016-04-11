@@ -18,6 +18,7 @@
     train.cover = [self stringFormatting:dic[@"cover"]];
     train.ID = dic[@"id"];
     train.count = dic[@"count"];
+    train.price = dic[@"price"];
     return train;
 }
 +(NSString*)stringFormatting:(NSString*)responseData
