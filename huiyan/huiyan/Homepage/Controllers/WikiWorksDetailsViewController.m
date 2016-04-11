@@ -11,28 +11,66 @@
 #import "UIImageView+WebCache.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "ZFPlayer.h"
+#import "UITabBarController+ShowHideBar.h"
 #define kHeadHeight 187
 @interface WikiWorksDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *wikiDetailsTableView;
-@property (nonatomic, strong) UIImageView *head_view;
 @property (strong, nonatomic) ZFPlayerView *playerView;
+@property (nonatomic, strong) UIView *topView;
 @end
 
 @implementation WikiWorksDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor  = [UIColor blackColor];
+    self.view.backgroundColor  = [UIColor whiteColor];
+    
+    NSLog(@"%@",self.homePage.imgs);
+    
+    self.topView = [[UIView alloc] init];
+    _topView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:_topView];
+    [_topView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.mas_offset(20);
+    }];
+    
+    self.playerView = [[ZFPlayerView alloc] init];
+    [self.view addSubview:self.playerView];
+    [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+        make.left.right.equalTo(self.view);
+        // 注意此处，宽高比16：9优先级比1000低就行，在因为iPhone 4S宽高比不是16：9
+        make.height.equalTo(self.playerView.mas_width).multipliedBy(9.0f/16.0f).with.priority(750);
+    }];
+    
+    if (self.homePage.imgs == nil) {
+          self.playerView.videoURL = [NSURL URLWithString:@"http://7xsnr6.com1.z0.glb.clouddn.com/o_1ag1l6dhs150h5r9rkn1uqh9ca11.mp4"];
+    }
+  
+    // （可选设置）可以设置视频的填充模式，内部设置默认（ZFPlayerLayerGravityResizeAspect：等比例填充，直到一个维度到达区域边界）
+    self.playerView.playerLayerGravity = ZFPlayerLayerGravityResizeAspect;
+    // 打开断点下载功能（默认没有这个功能）
+    //self.playerView.hasDownload = YES;
+    
+    // 如果想从xx秒开始播放视频
+    //self.playerView.seekTime = 15;
+    __weak typeof(self) weakSelf = self;
+    self.playerView.goBackBlock = ^{
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
     [self.view addSubview:self.wikiDetailsTableView];
-    [self.view addSubview:self.head_view];
-    NSLog(@"%@",self.homePage);
+    
+    
+    
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)dealloc{
-    
+      [self.playerView cancelAutoFadeOutControlBar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,17 +78,56 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIImageView *)head_view{
-    if (!_head_view) {
-        self.head_view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kHeadHeight)];
-        [self.head_view sd_setImageWithURL:[NSURL URLWithString:self.homePage.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
-    }
-    return _head_view;
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    //[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+  
+    self.navigationController.navigationBarHidden = YES;
+    [self.tabBarController setHidden:YES];
 }
+
+- (BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
+        self.view.backgroundColor = [UIColor whiteColor];
+        //if use Masonry,Please open this annotation
+       
+         [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
+         make.top.equalTo(self.view).offset(0);
+         }];
+        [self.view addSubview:self.wikiDetailsTableView];
+        
+    }else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+        self.view.backgroundColor = [UIColor blackColor];
+        //if use Masonry,Please open this annotation
+        
+         [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
+         make.top.equalTo(self.view).offset(0);
+         }];
+        [self.wikiDetailsTableView removeFromSuperview];
+        
+    }
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+        self.navigationController.navigationBarHidden = NO;
+    [self.tabBarController setHidden:NO];
+}
+
 
 - (UITableView *)wikiDetailsTableView{
     if (!_wikiDetailsTableView) {
-        self.wikiDetailsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kHeadHeight, kScreen_Width, kScreen_Height - kHeadHeight - 48 - 64 ) style:UITableViewStylePlain];
+        self.wikiDetailsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.playerView.frame), kScreen_Width, kScreen_Height - CGRectGetHeight(self.playerView.frame) - 48 ) style:UITableViewStylePlain];
         self.wikiDetailsTableView.delegate = self;
         self.wikiDetailsTableView.dataSource = self;
         self.wikiDetailsTableView.separatorStyle = NO;
@@ -144,7 +221,7 @@
                 des_lab.tag = 1003;
         }
  
-        NSLog(@"self.homePage.profile = %@",self.homePage.profile);
+       // NSLog(@"self.homePage.profile = %@",self.homePage.profile);
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }

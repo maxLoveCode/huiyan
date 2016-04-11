@@ -84,7 +84,12 @@
 - (UIButton *)buy_btn{
     if (!_buy_btn) {
         self.buy_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.buy_btn.backgroundColor = [UIColor redColor];
+        self.buy_btn.backgroundColor = COLOR_THEME;
+        [self.buy_btn setTitle:@"购票" forState:UIControlStateNormal];
+        self.buy_btn.titleLabel.font = kFONT15;
+        [self.buy_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.buy_btn.layer.masksToBounds = YES;
+        self.buy_btn.layer.cornerRadius = 3;
     }
     return  _buy_btn;
 }
@@ -94,9 +99,9 @@
     self.head_view.frame = CGRectMake(0, 0, kScreen_Width, 10);
     self.image_pic.frame = CGRectMake(kMargin, 20, 87, 225 / 2);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + kMargin , CGRectGetMinY(self.image_pic.frame) , kScreen_Width - 150, 14 * 1.5);
-    self.time_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) + kMargin, CGRectGetMaxY(self.title_lab.frame), kScreen_Width - 150, 12 * 1.5);
-    self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame) + kMargin, CGRectGetMaxY(self.time_lab.frame) , kScreen_Width - 150, 12 * 1.5);
-    self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame) + kMargin, CGRectGetMaxY(self.image_pic.frame) - 12 * 1.5, 150, 12 * 1.5);
+    self.time_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.title_lab.frame), kScreen_Width - 150, 12 * 1.5);
+    self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame) , CGRectGetMaxY(self.time_lab.frame) , kScreen_Width - 150, 12 * 1.5);
+    self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame) , CGRectGetMaxY(self.image_pic.frame) - 12 * 1.5, 150, 12 * 1.5);
     self.buy_btn.frame = CGRectMake(kScreen_Width - 56- 15, CGRectGetMaxY(self.image_pic.frame) - 20, 56, 20);
 }
 - (void)setContent:(BuyTicket *)ticket{

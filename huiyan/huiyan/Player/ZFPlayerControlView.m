@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import "ZFPlayerControlView.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "ZFPlayer.h"
 
 @interface ZFPlayerControlView ()

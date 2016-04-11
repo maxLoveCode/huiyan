@@ -11,11 +11,13 @@
 #import "Constant.h"
 #import "ServerManager.h"
 #import "CommentContent.h"
+#import "UITabBarController+ShowHideBar.h"
 @interface BuyTicketDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketTableView;
 @property (nonatomic, strong) NSArray *head_title_arr;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UIView *tail_view;
 @end
 
 @implementation BuyTicketDetailsViewController
@@ -27,9 +29,18 @@
     self.head_title_arr = @[@"节目详情",@"购买需知",@"戏友点评"];
     [self.view addSubview:self.ticketTableView];
     _serverManager = [ServerManager sharedInstance];
+    [self.view addSubview:self.tail_view];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self get_opera_commentData];
+    [self.tabBarController setHidden:YES];
+}
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
 
 - (UITableView *)ticketTableView{
     if (!_ticketTableView) {
@@ -42,6 +53,23 @@
     return _ticketTableView;
 }
 
+- (UIView *)tail_view{
+    if (!_tail_view) {
+        self.tail_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
+        UIButton *head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        head_btn.frame = CGRectMake(0, 0, 48, 48);
+        [head_btn addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tail_view addSubview:head_btn];
+        
+        UIButton *tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        tail_btn.frame = CGRectMake(48, 0, kScreen_Width - 48, 48);
+        [tail_btn addTarget:self action:@selector(buyEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tail_view addSubview:tail_btn];
+        self.tail_view.backgroundColor = [UIColor redColor];
+        
+    }
+    return _tail_view;
+}
 
 #pragma mark - tabelViewDelegate
 
@@ -52,8 +80,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 1;
+    }else if (section == 3){
+        return self.dataSource.count;
     }else{
-         return 2;
+        return 2;
     }
    
 }
@@ -184,6 +214,8 @@
         return cell;
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
+        NSLog(@"%ld",(long)indexPath.row); 
+        CommentContent *model = self.dataSource[indexPath.row];
         if (indexPath.row == 0) {
             UILabel *name_lab = [cell viewWithTag:1002];
             if (!name_lab) {
@@ -192,6 +224,7 @@
                 name_lab.textColor = COLOR_WithHex(0xa5a5a5);
                 [cell addSubview:name_lab];
                 name_lab.tag = 1002;
+                name_lab.text = model.user_name;
             }
             UILabel *comment_lab = [cell viewWithTag:1003];
             if (!comment_lab) {
@@ -200,6 +233,7 @@
                 comment_lab.textColor = COLOR_WithHex(0x565656);
                 [cell addSubview:comment_lab];
                 comment_lab.tag = 1003;
+                comment_lab.text = model.content;
             }
             
             UILabel *time_lab = [cell viewWithTag:1004];
@@ -209,6 +243,7 @@
                 time_lab.textColor = COLOR_WithHex(0xa5a5a5);
                 [cell addSubview:time_lab];
                 time_lab.tag = 1004;
+                time_lab.text = model.createtime;
             }
 
         }else{
@@ -231,6 +266,7 @@
                 CommentContent *model = [CommentContent dataWithDic:dic];
                 [self.dataSource addObject:model];
             }
+            NSLog(@"%@",self.dataSource);
             [self.ticketTableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -238,5 +274,13 @@
     }];
 }
 
+#pragma mark - tailEvent
+- (void)callPhone:(UIButton *)sender{
+    
+}
+
+- (void)buyEvent:(UIButton *)sender{
+    
+}
 
 @end

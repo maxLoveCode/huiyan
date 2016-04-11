@@ -23,11 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //设置字体大小和颜色
-    [self.navigationController.navigationBar setTitleTextAttributes:
-  @{NSFontAttributeName:[UIFont systemFontOfSize:16],
-    NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+     self.navigationItem.leftBarButtonItem.title  = @"返回";
     NSError *error;
     //图文混排
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[_originData dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,

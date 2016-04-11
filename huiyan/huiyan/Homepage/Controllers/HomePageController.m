@@ -30,7 +30,14 @@
     
     self.navigationController.navigationBar.barTintColor = COLOR_THEME;
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
-
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    
     _serverManager = [ServerManager sharedInstance];
     [self getRecommendDrama];
 #ifdef DEBUG

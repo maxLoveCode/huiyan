@@ -24,7 +24,7 @@
 #import "ZFPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "ZFPlayerControlView.h"
 #import "ZFBrightnessView.h"
 #import "ZFPlayer.h"
@@ -350,7 +350,7 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
 //    }
     
     // 播放开始之前（加载中）设置站位图
-    UIImage *image = [UIImage imageNamed:ZFPlayerSrcName(@"loading_bgView")];
+    UIImage *image = [UIImage imageNamed:ZFPlayerSrcName(@"bg_view")];
     self.layer.contents = (id) image.CGImage;
     
     // 每次加载视频URL都设置重播为NO
