@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableView class] forCellReuseIdentifier:@"train"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"train"];
     self.title = @"培训";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
