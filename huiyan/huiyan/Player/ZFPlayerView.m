@@ -368,6 +368,7 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
     ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
     if (status == RealStatusViaWWAN) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前为数据网络，是否继续播放?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        
         alert.tag = 1000;
         [alert show];
         return;
