@@ -10,7 +10,8 @@
 #import "Constant.h"
 #define BinnerHeight 187.5
 @interface TrainingDetailsTableViewController ()
-
+@property (nonatomic, strong) NSArray *image_arr;
+@property (nonatomic, strong) NSArray *title_arr;
 @end
 
 @implementation TrainingDetailsTableViewController
@@ -19,6 +20,9 @@
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"train"];
     self.title = @"培训";
+    NSLog(@"%@",self.train);
+    self.image_arr = @[@"arrow",@"arrow",@"arrow"];
+    self.title_arr = @[self.train.date,self.train.address,self.train.price];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -50,8 +54,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-  
-    return 10;
+    if (indexPath.section == 0) {
+        return BinnerHeight + 30 + 32;
+    }else if (indexPath.section == 1){
+        return 32;
+    }else if (indexPath.section == 2){
+        return 32;
+    }else{
+        return 200;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -66,7 +77,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section != 0) {
+    if (section == 3) {
         UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
         [headerView setBackgroundColor:[UIColor whiteColor]];
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin * 2, 10, 60, 12)];
@@ -107,8 +118,24 @@
             title_lab.numberOfLines = 2;
             [cell.contentView addSubview:title_lab];
             title_lab.tag = 1001;
-            
+            title_lab.text = self.train.title;
         }
+    }else if(indexPath.section == 1){
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"train"];
+        }
+        cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row]];
+        cell.detailTextLabel.text = self.title_arr[indexPath.row];
+    }else if (indexPath.section == 2){
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"train"];
+        }
+        cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row]];
+        cell.textLabel.text = [NSString stringWithFormat:@"已有%ld人报名",(long)[self.train.count integerValue]];
+        cell.detailTextLabel.text = @"666";
+        
     }
     // Configure the cell...
     
