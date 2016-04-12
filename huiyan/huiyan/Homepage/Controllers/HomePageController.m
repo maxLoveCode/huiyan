@@ -37,7 +37,9 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
     
     _serverManager = [ServerManager sharedInstance];
     [self getRecommendDrama];
