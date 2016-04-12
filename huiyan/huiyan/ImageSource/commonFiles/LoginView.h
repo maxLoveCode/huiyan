@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIButton* forgotPass;
 @property (nonatomic, strong) UIButton* login;
 
-@property (nonatomic, strong) UIButton* signUp;
+@property (nonatomic, strong) UILabel* thirdParty;
 
 @property (nonatomic, strong) UIButton* weiXin;
 @property (nonatomic, strong) UIButton* QQ;

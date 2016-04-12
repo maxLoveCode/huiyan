@@ -39,7 +39,6 @@
     [self.bgView addSubview:self.password];
     [self.bgView addSubview:self.forgotPass];
     [self.bgView addSubview:self.login];
-    [self.bgView addSubview:self.signUp];
     [self.bgView addSubview:self.weiXin];
     [self.bgView addSubview:self.QQ];
     
