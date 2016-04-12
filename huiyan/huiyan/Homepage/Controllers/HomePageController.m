@@ -13,6 +13,7 @@
 #import "TicketBoxViewController.h"
 #import "TrainingTableViewController.h"
 #import "ArticalViewController.h"
+#import "LoginViewController.h"
 #define bannerHeight 187.5
 #define menuHeight 72.5
 
@@ -29,7 +30,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
+    
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
@@ -57,7 +58,7 @@
     self.navigationController.navigationBar.translucent = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
+    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
     
     [super viewWillAppear:animated];
     
@@ -279,7 +280,8 @@
         TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
         [self.navigationController pushViewController:trainCon animated:YES];
     }else if (indexPath.item == 2) {
-        
+        LoginViewController* login = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:login animated:YES];
     }else {
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
         [self.navigationController pushViewController:wikiCon animated:YES];
