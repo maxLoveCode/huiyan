@@ -81,7 +81,7 @@
 - (void)setContent:(Training *)train{
     self.title_lab.text = train.title;
     self.time_lab.text  = train.date;
-    self.count_lab.text = [NSString stringWithFormat:@"%d人报名",[train.count integerValue]];
+    self.count_lab.text = [NSString stringWithFormat:@"%d人报名",(int)[train.count integerValue]];
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:train.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
     
 }
