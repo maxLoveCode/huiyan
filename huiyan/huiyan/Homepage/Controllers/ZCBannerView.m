@@ -19,6 +19,8 @@ static NSString *const resuseIdentufier = @"banner";
 - (instancetype)init{
     if (self = [super init]) {
         [self setFrame:CGRectMake(0, 0, Width, Height)];
+        self.pageCount = 0;
+        [self addTimer];
     }
     return self;
 }
@@ -28,9 +30,11 @@ static NSString *const resuseIdentufier = @"banner";
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
         layout.itemSize = CGSizeMake(Width, Height);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        layout.minimumLineSpacing = 0;
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.bannerCollection = [[UICollectionView alloc]initWithFrame:self.frame collectionViewLayout:layout];
         self.bannerCollection.pagingEnabled = YES;
+        self.bannerCollection.bounces = NO;
         self.bannerCollection.delegate = self;
         self.bannerCollection.dataSource = self;
         self.bannerCollection.backgroundColor = [UIColor whiteColor];
@@ -40,6 +44,17 @@ static NSString *const resuseIdentufier = @"banner";
         [self addSubview:self.bannerCollection];
     }
     return _bannerCollection;
+}
+
+-(UIPageControl *)pageControl{
+    if (!_pageControl) {
+        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, Height - 20, 100, 20)];
+        _pageControl.numberOfPages = self.dataSource.count;
+        _pageControl.pageIndicatorTintColor = [UIColor grayColor];
+        _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+        [self addSubview:_pageControl];
+    }
+    return _pageControl;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -67,9 +82,55 @@ static NSString *const resuseIdentufier = @"banner";
    
     
 }
+//开启定时器
+- (void)addTimer{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
+    
+}
+
+- (void)removeTimer{
+    [self.timer invalidate];
+}
+
+- (void)nextImage{
+    self.pageCount++;
+    if (self.pageCount == self.dataSource.count) {
+        self.pageCount = 0;
+    }
+    self.pageControl.currentPage = self.pageCount;
+    
+   
+    [UIView animateWithDuration:1 animations:^{
+        [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    }];
+
+}
+
+#pragma mark --ScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == self.bannerCollection) {
+        [self removeTimer];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == self.bannerCollection) {
+        NSInteger index = self.bannerCollection.contentOffset.x / kScreen_Width;
+        self.pageControl.currentPage = index;
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (scrollView == self.bannerCollection) {
+        [self addTimer];
+    }
+}
+
 
 - (void)reloadMenu{
     [self.bannerCollection reloadData];
+    [self.pageControl reloadInputViews];
 }
 
 /*

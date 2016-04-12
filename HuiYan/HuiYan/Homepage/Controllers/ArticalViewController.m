@@ -8,7 +8,7 @@
 
 #import "ArticalViewController.h"
 #import "Constant.h"
-
+#import "UITabBarController+ShowHideBar.h"
 @interface ArticalViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITextView* textView;
@@ -48,6 +48,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
+}
 
 -(UILabel *)label
 {

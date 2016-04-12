@@ -15,11 +15,13 @@
 
 @end
 
-@interface ZCBannerView : UIView<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface ZCBannerView : UIView<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 @property (nonatomic, strong) UICollectionView *bannerCollection;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, assign)NSInteger index;
 @property (nonatomic, weak) id <ZCBannerDelegate> delegate;
-
+@property (nonatomic, strong)UIPageControl *pageControl;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger pageCount;
 - (void)reloadMenu;
 @end
