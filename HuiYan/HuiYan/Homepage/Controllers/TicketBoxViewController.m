@@ -15,7 +15,7 @@
 #import "BuyTicketDetailsViewController.h"
 #define ticketHeight 142
 
-@interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
 @property (nonatomic, strong) UITableView *ticketBoxTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -57,6 +57,7 @@
 - (MCSwipeMenu *)head_view{
     if (!_head_view) {
         self.head_view = [[MCSwipeMenu alloc]init];
+        self.head_view.delegate = self;
     }
     return _head_view;
 }
@@ -118,6 +119,12 @@
     }];
 }
 
+#pragma mark - menuDelegate
+- (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
+    NSMutableArray *source = menu.dataSource;
+    NSString *cate = [source[indexPath.item]objectForKey:@"id"];
+    [self getDataTicket:cate];
+}
 
 /*
 #pragma mark - Navigation

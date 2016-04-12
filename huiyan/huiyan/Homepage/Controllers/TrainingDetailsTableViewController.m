@@ -8,27 +8,62 @@
 
 #import "TrainingDetailsTableViewController.h"
 #import "Constant.h"
+#import "ZCBannerView.h"
+#import "UITabBarController+ShowHideBar.h"
 #define BinnerHeight 187.5
-@interface TrainingDetailsTableViewController ()
+@interface TrainingDetailsTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *image_arr;
 @property (nonatomic, strong) NSArray *title_arr;
 @property (nonatomic, strong) UITextView* textView;
 @property (nonatomic, assign) CGFloat cellHeight;
+@property (nonatomic, strong) UILabel *tail_lab;
+@property (nonatomic, strong) UITableView *trainDetailsTableView;
 @end
 
 @implementation TrainingDetailsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"train"];
+   
     self.title = @"培训";
     self.image_arr = @[@"arrow",@"arrow",@"arrow"];
     self.title_arr = @[self.train.date,self.train.address,self.train.price];
+        [self.view addSubview:self.tail_lab];
+    [self.view addSubview:self.trainDetailsTableView];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (UITableView *)trainDetailsTableView{
+    if (!_trainDetailsTableView) {
+        self.trainDetailsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 64) style:UITableViewStyleGrouped];
+        self.trainDetailsTableView.delegate = self;
+        self.trainDetailsTableView.dataSource = self;
+        self.trainDetailsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.trainDetailsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"train"];
+    }
+    return _trainDetailsTableView;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
+}
+
+- (UILabel *)tail_lab{
+    if (!_tail_lab) {
+        self.tail_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48)];
+        self.tail_lab.backgroundColor = COLOR_THEME;
+        self.tail_lab.textColor = [UIColor whiteColor];
+        self.tail_lab.font = kFONT18;
+        self.tail_lab.text = @"立即报名";
+        self.tail_lab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _tail_lab;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,6 +102,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
     return 10;
 }
 
@@ -104,9 +140,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"train" forIndexPath:indexPath];
     if (indexPath.section == 0) {
-        UIScrollView *binner_scr = [cell viewWithTag:1000];
+        ZCBannerView *binner_scr = [cell viewWithTag:1000];
         if (!binner_scr) {
-            binner_scr = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, BinnerHeight)];
+            binner_scr = [[ZCBannerView alloc]init];
+            binner_scr.dataSource = self.train.imgs;
+            [binner_scr reloadMenu];
             binner_scr.backgroundColor = [UIColor redColor];
             binner_scr.tag = 1000;
             [cell.contentView addSubview:binner_scr];
@@ -191,7 +229,7 @@
         self.cellHeight = CGRectGetHeight(label.frame);
     }
     // Configure the cell...
-    
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

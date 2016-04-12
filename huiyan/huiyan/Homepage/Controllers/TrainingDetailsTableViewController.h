@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Training.h"
-@interface TrainingDetailsTableViewController : UITableViewController
+@interface TrainingDetailsTableViewController : UIViewController
 @property (nonatomic, strong) Training  *train;
 @end

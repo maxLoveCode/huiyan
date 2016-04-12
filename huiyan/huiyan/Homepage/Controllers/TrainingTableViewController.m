@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[TrainingTableViewCell class
                                    ] forCellReuseIdentifier:@"train"];
     self.tableView.rowHeight = 152;
