@@ -52,7 +52,7 @@
     _serverManager = [ServerManager sharedInstance];
     
     [self getDramaCates];
-    [self getDramaList:@"0"];
+    [self getDramaList:@"0" page:0];
 }
 
 - (UIView *)head_view{
@@ -157,11 +157,11 @@
     NSMutableArray* source = menu.dataSource;
     NSString* cate = [[source objectAtIndex:indexPath.item] objectForKey:@"id"];
     
-    [self getDramaList:cate];
+    [self getDramaList:cate page:0];
 }
 
 
-- (void)getDramaList:(NSString*)category
+- (void)getDramaList:(NSString*)category page:(NSInteger)page
 {
     if (!_dataSource) {
         _dataSource = [[NSMutableArray alloc] init];
@@ -169,7 +169,8 @@
     [_dataSource removeAllObjects];
     
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
-                          @"cid":category};
+                          @"cid":category,
+                          @"page":[NSString stringWithFormat:@"%ld", page]};
     
     [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
