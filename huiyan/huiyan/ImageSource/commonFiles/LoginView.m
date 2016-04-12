@@ -116,12 +116,13 @@
     return _login;
 }
 
--(UIButton *)signUp
+-(UILabel *)thirdParty
 {
-    if(!_signUp){
-        _signUp = [[UIButton alloc] init];
+    if (!_thirdParty) {
+        _thirdParty = [[UILabel alloc] init];
+        _thirdParty.text = @"第三方登录";
     }
-    return _signUp;
+    return _thirdParty;
 }
 
 -(UIButton *)weiXin
