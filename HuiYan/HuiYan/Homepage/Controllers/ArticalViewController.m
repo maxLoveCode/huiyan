@@ -8,7 +8,7 @@
 
 #import "ArticalViewController.h"
 #import "Constant.h"
-
+#import "UITabBarController+ShowHideBar.h"
 @interface ArticalViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITextView* textView;
@@ -48,6 +48,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
+}
 
 -(UILabel *)label
 {
@@ -72,7 +76,6 @@
         self.gray_view = [[UILabel alloc]init];
         self.gray_view.backgroundColor = [UIColor grayColor];
         [self.gray_view.layer addSublayer:[self shadowAsInverse]];
-
     }
     return _gray_view;
 }

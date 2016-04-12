@@ -50,12 +50,15 @@
     [self.scrollView addSubview:self.wikiArtcleTableView.tableView];
     
     _serverManager = [ServerManager sharedInstance];
-    [self getDramaList:@"0"];
+    
+    [self getDramaCates];
+    [self getDramaList:@"0" page:0];
 }
 
 - (UIView *)head_view{
     if (!_head_view) {
         _head_view = [[MCSwipeMenu alloc] init];
+        _head_view.delegate = self;
     }
     return _head_view;
 }
@@ -150,17 +153,24 @@
 
 
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
-   
+    NSLog(@"0.0.0.0.0.0");
+    NSMutableArray* source = menu.dataSource;
+    NSString* cate = [[source objectAtIndex:indexPath.item] objectForKey:@"id"];
+    
+    [self getDramaList:cate page:0];
 }
 
-- (void)getDramaList:(NSString*)category
+
+- (void)getDramaList:(NSString*)category page:(NSInteger)page
 {
     if (!_dataSource) {
         _dataSource = [[NSMutableArray alloc] init];
     }
+    [_dataSource removeAllObjects];
     
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
-                          @"cid":@"0"};
+                          @"cid":category,
+                          @"page":[NSString stringWithFormat:@"%ld", page]};
     
     [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
@@ -168,11 +178,25 @@
             {
                 [_dataSource addObject:[HomePage parseDramaJSON:drama]];
             }
-            
+            NSLog(@"res%@", responseObject);
             //[_dramaTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
             self.wikiArtcleTableView.dataSource =_dataSource;
             [_dramaTableView reloadData];
             [_wikiArtcleTableView.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)getDramaCates
+{
+    NSDictionary *dic = @{@"access_token":_serverManager.accessToken};
+    
+    [_serverManager AnimatedPOST:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        if ([[responseObject objectForKey:@"code"] integerValue] == 20000) {
+            [self.head_view setDataSource:responseObject[@"data"]];
+            [self.head_view reloadMenu];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);

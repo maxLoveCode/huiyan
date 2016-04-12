@@ -15,7 +15,7 @@
 #import "BuyTicketDetailsViewController.h"
 #define ticketHeight 142
 
-@interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
 @property (nonatomic, strong) UITableView *ticketBoxTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -32,7 +32,14 @@
     [self.view addSubview:self.ticketBoxTableView];
     _serverManager = [ServerManager sharedInstance];
     [self getDataTicket:@"0"];
+    [self get_opera_cateData];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+
 }
 
 - (UITableView *)ticketBoxTableView{
@@ -50,6 +57,7 @@
 - (MCSwipeMenu *)head_view{
     if (!_head_view) {
         self.head_view = [[MCSwipeMenu alloc]init];
+        self.head_view.delegate = self;
     }
     return _head_view;
 }
@@ -79,6 +87,19 @@
     
 }
 
+- (void)get_opera_cateData{
+    NSDictionary *params = @{@"access_token":_serverManager.accessToken};
+    [_serverManager AnimatedPOST:@"get_opera_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"responseObject = %@",responseObject);
+        if ([responseObject[@"code"] integerValue] ==
+            30000) {
+                [self.head_view setDataSource:responseObject[@"data"]];
+            [self.head_view reloadMenu];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
 
 - (void)getDataTicket:(NSString *)cid{
     _dataSource = [NSMutableArray array];
@@ -98,6 +119,12 @@
     }];
 }
 
+#pragma mark - menuDelegate
+- (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
+    NSMutableArray *source = menu.dataSource;
+    NSString *cate = [source[indexPath.item]objectForKey:@"id"];
+    [self getDataTicket:cate];
+}
 
 /*
 #pragma mark - Navigation
