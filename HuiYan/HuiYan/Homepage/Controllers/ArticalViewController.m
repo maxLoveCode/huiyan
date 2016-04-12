@@ -72,7 +72,6 @@
         self.gray_view = [[UILabel alloc]init];
         self.gray_view.backgroundColor = [UIColor grayColor];
         [self.gray_view.layer addSublayer:[self shadowAsInverse]];
-
     }
     return _gray_view;
 }

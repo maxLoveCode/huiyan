@@ -12,6 +12,8 @@
 @interface TrainingDetailsTableViewController ()
 @property (nonatomic, strong) NSArray *image_arr;
 @property (nonatomic, strong) NSArray *title_arr;
+@property (nonatomic, strong) UITextView* textView;
+@property (nonatomic, assign) CGFloat cellHeight;
 @end
 
 @implementation TrainingDetailsTableViewController
@@ -20,7 +22,6 @@
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"train"];
     self.title = @"培训";
-    NSLog(@"%@",self.train);
     self.image_arr = @[@"arrow",@"arrow",@"arrow"];
     self.title_arr = @[self.train.date,self.train.address,self.train.price];
     // Uncomment the following line to preserve selection between presentations.
@@ -61,7 +62,7 @@
     }else if (indexPath.section == 2){
         return 32;
     }else{
-        return 200;
+        return self.cellHeight;
     }
 }
 
@@ -121,21 +122,73 @@
             title_lab.text = self.train.title;
         }
     }else if(indexPath.section == 1){
-        
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"train"];
+        UIImageView *image_pic = [cell viewWithTag:1002];
+        if (!image_pic) {
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 0, 32, 32)];
+            image_pic.image = [UIImage imageNamed:self.image_arr[indexPath.row]];
+            [cell.contentView addSubview:image_pic];
+            cell.tag = 1002;
         }
-        cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row]];
-        cell.detailTextLabel.text = self.title_arr[indexPath.row];
-    }else if (indexPath.section == 2){
+        UILabel *title_lab = [cell viewWithTag: 1003];
+        if (!title_lab) {
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin + 32, 0, kScreen_Width - 100, 32)];
+            title_lab.font = kFONT14;
+            title_lab.textColor = COLOR_WithHex(0xa5a5a5);
+            title_lab.text = self.title_arr[indexPath.row];
+            [cell.contentView addSubview:title_lab];
+            title_lab.tag = 1003;
+        };
+
+        }else if (indexPath.section == 2){
+            UIImageView *image_pic = [cell viewWithTag:1004];
+            if (!image_pic) {
+                image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 0, 32, 32)];
+                image_pic.image = [UIImage imageNamed:@"arrow"];
+                [cell.contentView addSubview:image_pic];
+                cell.tag = 1004;
+            }
+            UILabel *title_lab = [cell viewWithTag: 1005];
+            if (!title_lab) {
+                title_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin + 32, 0, kScreen_Width - 100, 32)];
+                title_lab.font = kFONT14;
+                title_lab.textColor = COLOR_WithHex(0xa5a5a5);
+                title_lab.text = [NSString stringWithFormat:@"已有%ld人报名",(long)[self.train.count integerValue]];
+                [cell.contentView addSubview:title_lab];
+                title_lab.tag = 1005;
+            };
+            UILabel *line_lab = [cell viewWithTag:1006];
+            if (!line_lab) {
+                line_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 30 - 32 - 1, 2, 0.5, 28)];
+                line_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+                [cell.contentView addSubview:line_lab];
+                line_lab.tag = 1006;
+            }
+            UIImageView *share_pic = [cell viewWithTag:1007];
+            if (!share_pic) {
+                share_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 32 - kMargin, 32, 32, 32)];
+                share_pic.image = [UIImage imageNamed:@"arrow"];
+                [cell.contentView addSubview:share_pic];
+                share_pic.tag = 1007;
+            }
+   
+    }else{
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height - 48 - 10)];
+        label.numberOfLines = 0;
+        NSError *error;
+        NSLog(@"self.train.cover  = %@",self.train.content );
+        //图文混排
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[self.train.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                                                                                          NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
         
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"train"];
-        }
-        cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row]];
-        cell.textLabel.text = [NSString stringWithFormat:@"已有%ld人报名",(long)[self.train.count integerValue]];
-        cell.detailTextLabel.text = @"666";
         
+        NSString* formatString = [attributedString string];
+        NSAttributedString *secondDecoding =[[NSAttributedString alloc] initWithData:[formatString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                                                                                        NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
+        self.textView.attributedText = secondDecoding;
+        label.attributedText = secondDecoding;
+        [label sizeToFit];
+        [cell.contentView addSubview:label];
+        self.cellHeight = CGRectGetHeight(label.frame);
     }
     // Configure the cell...
     

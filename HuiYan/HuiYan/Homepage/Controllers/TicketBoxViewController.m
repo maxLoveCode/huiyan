@@ -32,7 +32,14 @@
     [self.view addSubview:self.ticketBoxTableView];
     _serverManager = [ServerManager sharedInstance];
     [self getDataTicket:@"0"];
+    [self get_opera_cateData];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+
 }
 
 - (UITableView *)ticketBoxTableView{
@@ -79,6 +86,19 @@
     
 }
 
+- (void)get_opera_cateData{
+    NSDictionary *params = @{@"access_token":_serverManager.accessToken};
+    [_serverManager AnimatedPOST:@"get_opera_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"responseObject = %@",responseObject);
+        if ([responseObject[@"code"] integerValue] ==
+            30000) {
+                [self.head_view setDataSource:responseObject[@"data"]];
+            [self.head_view reloadMenu];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
 
 - (void)getDataTicket:(NSString *)cid{
     _dataSource = [NSMutableArray array];

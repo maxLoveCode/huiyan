@@ -35,8 +35,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     
     [self setFrame:CGRectMake(0, 0, defaultW, defaultH)];
     
-    [self debugData];
-    
+    //[self debugData];
     return self;
 }
 
@@ -50,9 +49,10 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     self.height = CGRectGetHeight(frame);
     self.width  = CGRectGetWidth(frame);
     
-    [self debugData];
+    //[self debugData];
     return self;
 }
+
 
 -(UIScrollView *)bgView
 {
@@ -269,6 +269,13 @@ static NSString * const reuseIdentifier = @"swipableMenu";
             }
         }];
     }
+}
+
+-(void)reloadMenu
+{
+    [self.menuView reloadData];
+    [self.menuView setFrame:CGRectMake(0, 0, [self calulateLength], defaultH)];
+    [self.bgView setContentSize:CGSizeMake([self calulateLength], -8)];
 }
 
 @end

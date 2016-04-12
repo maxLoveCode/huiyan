@@ -12,6 +12,7 @@
 #import "HomePage.h"
 #import "TicketBoxViewController.h"
 #import "TrainingTableViewController.h"
+#import "ArticalViewController.h"
 #define bannerHeight 187.5
 #define menuHeight 72.5
 
@@ -217,6 +218,13 @@
         }
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ArticalViewController *artCon = [[ArticalViewController alloc]init];
+    HomePage *homePage = self.dataSource[indexPath.row];
+    artCon.originData = homePage.content;
+    [self.navigationController pushViewController:artCon animated:YES];
 }
 
 #pragma mark UICollectionViewDelegate

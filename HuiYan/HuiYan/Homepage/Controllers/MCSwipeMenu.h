@@ -35,4 +35,6 @@
 
 @property (nonatomic, weak) id <MCSwipeMenuDelegate> delegate;
 
+-(void)reloadMenu;
+
 @end
