@@ -128,7 +128,7 @@
         return 32;
     }else{
         if (indexPath.row == 0) {
-            return 100;
+            return 110           ;
         }
         return 32;
     }

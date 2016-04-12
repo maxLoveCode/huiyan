@@ -37,6 +37,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    //侧滑关闭
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }

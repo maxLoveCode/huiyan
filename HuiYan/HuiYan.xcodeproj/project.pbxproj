@@ -51,6 +51,7 @@
 		558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CB01CBB945D006BD54D /* TrainingTableViewCell.m */; };
 		558F5CB71CBB9780006BD54D /* Training.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CB61CBB9780006BD54D /* Training.m */; };
 		558F5CBA1CBBAAFA006BD54D /* TrainingDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CB91CBBAAFA006BD54D /* TrainingDetailsTableViewController.m */; };
+		558F5CC61CBCDF0F006BD54D /* ZCBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CC51CBCDF0F006BD54D /* ZCBannerView.m */; };
 		55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942D3E1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m */; };
 		55942D421CB7D77100EB041A /* CommentContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942D411CB7D77100EB041A /* CommentContent.m */; };
 		55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D9D01CB5056100277896 /* BuyTicket.m */; };
@@ -151,6 +152,8 @@
 		558F5CB61CBB9780006BD54D /* Training.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Training.m; sourceTree = "<group>"; };
 		558F5CB81CBBAAFA006BD54D /* TrainingDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingDetailsTableViewController.h; sourceTree = "<group>"; };
 		558F5CB91CBBAAFA006BD54D /* TrainingDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingDetailsTableViewController.m; sourceTree = "<group>"; };
+		558F5CC41CBCDF0F006BD54D /* ZCBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCBannerView.h; sourceTree = "<group>"; };
+		558F5CC51CBCDF0F006BD54D /* ZCBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCBannerView.m; sourceTree = "<group>"; };
 		55942D3D1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicketDetailsTableViewCell.h; sourceTree = "<group>"; };
 		55942D3E1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketDetailsTableViewCell.m; sourceTree = "<group>"; };
 		55942D401CB7D77100EB041A /* CommentContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentContent.h; sourceTree = "<group>"; };
@@ -353,6 +356,8 @@
 				25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */,
 				25E07DB61CB65D180015AD73 /* ArticalViewController.h */,
 				25E07DB71CB65D180015AD73 /* ArticalViewController.m */,
+				558F5CC41CBCDF0F006BD54D /* ZCBannerView.h */,
+				558F5CC51CBCDF0F006BD54D /* ZCBannerView.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -783,6 +788,7 @@
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
 				550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */,
 				257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */,
+				558F5CC61CBCDF0F006BD54D /* ZCBannerView.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
 				558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */,
 				25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */,

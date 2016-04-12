@@ -8,6 +8,7 @@
 
 #import "TrainingDetailsTableViewController.h"
 #import "Constant.h"
+#import "ZCBannerView.h"
 #define BinnerHeight 187.5
 @interface TrainingDetailsTableViewController ()
 @property (nonatomic, strong) NSArray *image_arr;
@@ -20,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"train"];
     self.title = @"培训";
     self.image_arr = @[@"arrow",@"arrow",@"arrow"];
@@ -105,9 +107,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"train" forIndexPath:indexPath];
     if (indexPath.section == 0) {
-        UIScrollView *binner_scr = [cell viewWithTag:1000];
+        ZCBannerView *binner_scr = [cell viewWithTag:1000];
         if (!binner_scr) {
-            binner_scr = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, BinnerHeight)];
+            binner_scr = [[ZCBannerView alloc]init];
+            binner_scr.dataSource = self.train.imgs;
+            [binner_scr reloadMenu];
             binner_scr.backgroundColor = [UIColor redColor];
             binner_scr.tag = 1000;
             [cell.contentView addSubview:binner_scr];
@@ -192,7 +196,7 @@
         self.cellHeight = CGRectGetHeight(label.frame);
     }
     // Configure the cell...
-    
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
