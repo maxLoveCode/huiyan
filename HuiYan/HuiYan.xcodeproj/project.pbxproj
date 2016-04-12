@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		251F5E181CBCC28C000BC47D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E171CBCC28C000BC47D /* LoginViewController.m */; };
 		251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */; };
-		251F5E1E1CBCCEC3000BC47D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E1D1CBCCEC3000BC47D /* LoginView.m */; };
 		257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */; };
 		257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */; };
 		257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */; };
@@ -17,6 +15,14 @@
 		25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8C2451CB4AC7D00386540 /* UnitTest.m */; };
 		25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */; };
 		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
+		25C6252B1CBCF9F90068BFE8 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625281CBCF9F90068BFE8 /* LoginView.m */; };
+		25C6252C1CBCF9F90068BFE8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6252A1CBCF9F90068BFE8 /* LoginViewController.m */; };
+		25C625331CBCFA3E0068BFE8 /* qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252D1CBCFA3E0068BFE8 /* qq.png */; };
+		25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */; };
+		25C625351CBCFA3E0068BFE8 /* qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252F1CBCFA3E0068BFE8 /* qq@3x.png */; };
+		25C625361CBCFA3E0068BFE8 /* weChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C625301CBCFA3E0068BFE8 /* weChat.png */; };
+		25C625371CBCFA3E0068BFE8 /* weChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C625311CBCFA3E0068BFE8 /* weChat@2x.png */; };
+		25C625381CBCFA3E0068BFE8 /* weChat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C625321CBCFA3E0068BFE8 /* weChat@3x.png */; };
 		25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E07DB71CB65D180015AD73 /* ArticalViewController.m */; };
 		550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */; };
 		550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9771CB8ED6600E2E9DE /* ZFPlayerSingleton.m */; };
@@ -92,12 +98,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		251F5E161CBCC28C000BC47D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginViewController.h; sourceTree = "<group>"; };
-		251F5E171CBCC28C000BC47D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginViewController.m; sourceTree = "<group>"; };
 		251F5E191CBCC327000BC47D /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		251F5E1C1CBCCEC3000BC47D /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginView.h; sourceTree = "<group>"; };
-		251F5E1D1CBCCEC3000BC47D /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginView.m; sourceTree = "<group>"; };
 		257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiArtcleTableViewController.h; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.h; sourceTree = SOURCE_ROOT; };
 		257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiArtcleTableViewController.m; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.m; sourceTree = SOURCE_ROOT; };
 		257FFC631CB64B0E004C3CDE /* ArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleTableViewCell.h; path = HuiYan/Homepage/Views/ArticleTableViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -112,6 +114,16 @@
 		25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TicketBoxViewController.m; path = HuiYan/Homepage/Controllers/TicketBoxViewController.m; sourceTree = SOURCE_ROOT; };
 		25B6B37B1CB51380000F99F1 /* MCSwipeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSwipeMenu.h; path = HuiYan/Homepage/Controllers/MCSwipeMenu.h; sourceTree = SOURCE_ROOT; };
 		25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSwipeMenu.m; path = HuiYan/Homepage/Controllers/MCSwipeMenu.m; sourceTree = SOURCE_ROOT; };
+		25C625271CBCF9F90068BFE8 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = huiyan/commonFiles/LoginView.h; sourceTree = SOURCE_ROOT; };
+		25C625281CBCF9F90068BFE8 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = huiyan/commonFiles/LoginView.m; sourceTree = SOURCE_ROOT; };
+		25C625291CBCF9F90068BFE8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = huiyan/commonFiles/LoginViewController.h; sourceTree = SOURCE_ROOT; };
+		25C6252A1CBCF9F90068BFE8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = huiyan/commonFiles/LoginViewController.m; sourceTree = SOURCE_ROOT; };
+		25C6252D1CBCFA3E0068BFE8 /* qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq.png; sourceTree = "<group>"; };
+		25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@2x.png"; sourceTree = "<group>"; };
+		25C6252F1CBCFA3E0068BFE8 /* qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@3x.png"; sourceTree = "<group>"; };
+		25C625301CBCFA3E0068BFE8 /* weChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weChat.png; sourceTree = "<group>"; };
+		25C625311CBCFA3E0068BFE8 /* weChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weChat@2x.png"; sourceTree = "<group>"; };
+		25C625321CBCFA3E0068BFE8 /* weChat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weChat@3x.png"; sourceTree = "<group>"; };
 		25E07DB61CB65D180015AD73 /* ArticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticalViewController.h; path = HuiYan/Homepage/Controllers/ArticalViewController.h; sourceTree = SOURCE_ROOT; };
 		25E07DB71CB65D180015AD73 /* ArticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticalViewController.m; path = HuiYan/Homepage/Controllers/ArticalViewController.m; sourceTree = SOURCE_ROOT; };
 		2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.release.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.release.xcconfig"; sourceTree = "<group>"; };
@@ -239,10 +251,10 @@
 		251F5E151CBCC251000BC47D /* commonFiles */ = {
 			isa = PBXGroup;
 			children = (
-				251F5E161CBCC28C000BC47D /* LoginViewController.h */,
-				251F5E171CBCC28C000BC47D /* LoginViewController.m */,
-				251F5E1C1CBCCEC3000BC47D /* LoginView.h */,
-				251F5E1D1CBCCEC3000BC47D /* LoginView.m */,
+				25C625271CBCF9F90068BFE8 /* LoginView.h */,
+				25C625281CBCF9F90068BFE8 /* LoginView.m */,
+				25C625291CBCF9F90068BFE8 /* LoginViewController.h */,
+				25C6252A1CBCF9F90068BFE8 /* LoginViewController.m */,
 			);
 			name = commonFiles;
 			path = ImageSource/commonFiles;
@@ -410,6 +422,12 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				25C6252D1CBCFA3E0068BFE8 /* qq.png */,
+				25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */,
+				25C6252F1CBCFA3E0068BFE8 /* qq@3x.png */,
+				25C625301CBCFA3E0068BFE8 /* weChat.png */,
+				25C625311CBCFA3E0068BFE8 /* weChat@2x.png */,
+				25C625321CBCFA3E0068BFE8 /* weChat@3x.png */,
 				558F5CAA1CBB4762006BD54D /* bg_view.png */,
 				550BF9EF1CBB2AF000E2E9DE /* bottom_shadow.png */,
 				550BF9F01CBB2AF000E2E9DE /* brightness_bg.png */,
@@ -698,6 +716,8 @@
 				550BFA1D1CBB2AF000E2E9DE /* playgesture_BrightnessSun6@2x.png in Resources */,
 				550BFA0A1CBB2AF000E2E9DE /* bottom_shadow.png in Resources */,
 				550BFA1A1CBB2AF000E2E9DE /* play_back_full.png in Resources */,
+				25C625361CBCFA3E0068BFE8 /* weChat.png in Resources */,
+				25C625351CBCFA3E0068BFE8 /* qq@3x.png in Resources */,
 				550BFA1F1CBB2AF000E2E9DE /* repeat_video@2x.png in Resources */,
 				550BFA131CBB2AF000E2E9DE /* kr-video-player-play@3x.png in Resources */,
 				550BFA181CBB2AF000E2E9DE /* lock-nor@3x.png in Resources */,
@@ -707,6 +727,7 @@
 				550BFA201CBB2AF000E2E9DE /* repeat_video@3x.png in Resources */,
 				550BFA0B1CBB2AF000E2E9DE /* brightness_bg.png in Resources */,
 				550BFA0E1CBB2AF000E2E9DE /* kr-video-player-fullscreen@2x.png in Resources */,
+				25C625371CBCFA3E0068BFE8 /* weChat@2x.png in Resources */,
 				550BFA111CBB2AF000E2E9DE /* kr-video-player-pause@3x.png in Resources */,
 				550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */,
 				550BFA151CBB2AF000E2E9DE /* kr-video-player-shrinkscreen@3x.png in Resources */,
@@ -714,10 +735,13 @@
 				550BFA1B1CBB2AF000E2E9DE /* player_download.png in Resources */,
 				550BFA0D1CBB2AF000E2E9DE /* kr-video-player-close@3x.png in Resources */,
 				550BFA101CBB2AF000E2E9DE /* kr-video-player-pause@2x.png in Resources */,
+				25C625331CBCFA3E0068BFE8 /* qq.png in Resources */,
 				550BFA1E1CBB2AF000E2E9DE /* repeat_video.png in Resources */,
 				550BFA191CBB2AF000E2E9DE /* Management_Mask@2x.png in Resources */,
 				550BFA0F1CBB2AF000E2E9DE /* kr-video-player-fullscreen@3x.png in Resources */,
 				55CCD7961CB3640600C3B8CA /* Assets.xcassets in Resources */,
+				25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */,
+				25C625381CBCFA3E0068BFE8 /* weChat@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,7 +814,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				251F5E181CBCC28C000BC47D /* LoginViewController.m in Sources */,
 				558F5CBA1CBBAAFA006BD54D /* TrainingDetailsTableViewController.m in Sources */,
 				558F5CB71CBB9780006BD54D /* Training.m in Sources */,
 				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
@@ -809,6 +832,7 @@
 				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
+				25C6252B1CBCF9F90068BFE8 /* LoginView.m in Sources */,
 				257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */,
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
 				550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */,
@@ -820,8 +844,8 @@
 				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
-				251F5E1E1CBCCEC3000BC47D /* LoginView.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
+				25C6252C1CBCF9F90068BFE8 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

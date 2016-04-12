@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"登  录";
     
     _mainview = [[LoginView alloc] initWithFrame:self.view.frame];
     
@@ -30,8 +31,14 @@
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style: UIBarButtonItemStylePlain target:self action:@selector(signup)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
-    self.title = @"登录";
+    UIBarButtonItem* leftItem = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+    
 
     NSURL *url = [NSURL URLWithString:@"http://7xsnr6.com2.z0.glb.clouddn.com/123.png"];
     [_mainview.bgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -61,6 +68,14 @@
     [self.tabBarController setHidden:NO];
 }
 
+-(void)signup
+{
+    
+}
 
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

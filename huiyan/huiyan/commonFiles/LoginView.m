@@ -41,6 +41,7 @@
     [self.bgView addSubview:self.login];
     [self.bgView addSubview:self.weiXin];
     [self.bgView addSubview:self.QQ];
+    [self.bgView addSubview:self.thirdParty];
     
     [self addSubview:self.bgView];
     
@@ -57,6 +58,7 @@
         _mobile.text = @"请输入手机号";
         _mobile.textColor = [UIColor whiteColor];
         _mobile.delegate = self;
+        _mobile.userInteractionEnabled = YES;
         
         UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
         [_mobile setLeftViewMode:UITextFieldViewModeAlways];
@@ -75,6 +77,7 @@
         _password.text = @"请输入密码";
         _password.textColor = [UIColor whiteColor];
         _password.delegate = self;
+        _password.userInteractionEnabled = YES;
         
         UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
         [_password setLeftViewMode:UITextFieldViewModeAlways];
@@ -120,7 +123,9 @@
 {
     if (!_thirdParty) {
         _thirdParty = [[UILabel alloc] init];
-        _thirdParty.text = @"第三方登录";
+        _thirdParty.text = @"第三方账号登录";
+        _thirdParty.textColor = [UIColor whiteColor];
+        _thirdParty.textAlignment = NSTextAlignmentCenter;
     }
     return _thirdParty;
 }
@@ -129,6 +134,7 @@
 {
     if(!_weiXin){
         _weiXin = [[UIButton alloc] init];
+        [_weiXin setImage:[UIImage imageNamed:@"weChat"] forState:UIControlStateNormal];
     }
     return _weiXin;
 }
@@ -137,6 +143,7 @@
 {
     if (!_QQ) {
         _QQ = [[UIButton alloc] init];
+        [_QQ setImage:[UIImage imageNamed:@"qq"] forState:UIControlStateNormal];
     }
     return _QQ;
 }
@@ -145,6 +152,7 @@
 {
     if (!_bgView) {
         _bgView = [[UIImageView alloc] initWithFrame:self.frame];
+        [_bgView setUserInteractionEnabled:YES];
     }
     return _bgView;
 }
@@ -155,6 +163,9 @@
     [self.password setFrame:CGRectOffset(_referenceFrame, 0, gaps+itemHeight)];
     [self.forgotPass setFrame:CGRectOffset(self.password.frame, 0, gaps+itemHeight)];
     [self.login setFrame:CGRectOffset(self.forgotPass.frame, 0, gaps+itemHeight)];
+    [self.weiXin setFrame:CGRectMake(kScreen_Width/2-buttonGap/2-buttonWidth, kScreen_Height-botMargin-buttonWidth, buttonWidth, buttonWidth)];
+    [self.QQ setFrame:CGRectOffset(self.weiXin.frame, buttonWidth+buttonGap, 0)];
+    [self.thirdParty setFrame:CGRectMake(0, kScreen_Height-buttonGap-botMargin-buttonWidth-20, kScreen_Width, 20)];
 }
 
 
