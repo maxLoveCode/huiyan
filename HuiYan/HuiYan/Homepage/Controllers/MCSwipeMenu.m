@@ -150,6 +150,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"delegate");
     _index = indexPath.item;
     [collectionView reloadData];
     [self.delegate swipeMenu:self didSelectAtIndexPath:indexPath];
@@ -204,14 +205,15 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 // method of calcluating whole length
 -(CGFloat)calulateLength
 {
-    CGFloat total = 0;
+    CGFloat total = 20;
     for(int i =0; i<[_dataSource count]; i++)
     {
         NSString *string = [[_dataSource objectAtIndex:i] objectForKey:@"name"];
         UIFont* font = [UIFont systemFontOfSize:14];
         total+=[self widthOfString:string withFont:font]+spacing;
+        
     }
-    return total-10;
+    return total;
 }
 
 - (CGFloat)widthOfString:(NSString *)string withFont:(UIFont *)font {
@@ -235,39 +237,34 @@ static NSString * const reuseIdentifier = @"swipableMenu";
     }
     else
     {
-        [UIView animateWithDuration:0.2 animations:^{
-            int right = 0;
-            if (CGRectGetMinX(_underLine.frame) <CGRectGetMinX(frame)) {
-                right = 1;
-            }
-            else if (CGRectGetMinX(_underLine.frame) > CGRectGetMinX(frame))
-                right = 2;
-            [_underLine setFrame:frame];
-            
-            if (right ==1) {
-                /*
-                if (_bgView.contentSize.width <= CGRectGetWidth(_bgView.frame)) {
-                    
+        if (CGRectGetWidth(self.menuView.frame) <= kScreen_Width) {
+            [UIView animateWithDuration:0.2 animations:^{
+                 [_underLine setFrame:frame];
+            }];
+        }
+        else
+        {
+            [UIView animateWithDuration:0.2 animations:^{
+                int right = 0;
+                if (CGRectGetMinX(_underLine.frame) <CGRectGetMinX(frame)) {
+                    right = 1;
                 }
-                else if (_bgView.contentSize.width - CGRectGetWidth(_bgView.frame) < CGRectGetMinX(frame))
-                {
-                    
+                else if (CGRectGetMinX(_underLine.frame) > CGRectGetMinX(frame))
+                    right = 2;
+                [_underLine setFrame:frame];
+                
+                if (right ==1) {
+                if (_bgView.contentOffset.x +10 >0) {
+                        [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x+10, 0)];
+                    }
                 }
-                else
-                {
-                    [_bgView setContentOffset:CGPointMake(CGRectGetMinX(frame), 0)];
+                else if (right ==2){
+                    if (_bgView.contentOffset.x -10 >0) {
+                        [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x-10, 0)];
+                    }
                 }
-                 */
-            if (_bgView.contentOffset.x +10 >0) {
-                    [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x+10, 0)];
-                }
-            }
-            else if (right ==2){
-                if (_bgView.contentOffset.x -10 >0) {
-                    [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x-10, 0)];
-                }
-            }
-        }];
+            }];
+        }
     }
 }
 
