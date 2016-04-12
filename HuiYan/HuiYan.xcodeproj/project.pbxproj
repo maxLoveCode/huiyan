@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251F5E181CBCC28C000BC47D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E171CBCC28C000BC47D /* LoginViewController.m */; };
+		251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */; };
+		251F5E1E1CBCCEC3000BC47D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E1D1CBCCEC3000BC47D /* LoginView.m */; };
 		257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */; };
 		257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */; };
 		257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */; };
@@ -88,6 +91,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		251F5E161CBCC28C000BC47D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginViewController.h; sourceTree = "<group>"; };
+		251F5E171CBCC28C000BC47D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginViewController.m; sourceTree = "<group>"; };
+		251F5E191CBCC327000BC47D /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		251F5E1C1CBCCEC3000BC47D /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginView.h; sourceTree = "<group>"; };
+		251F5E1D1CBCCEC3000BC47D /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = ../../../../huiyan/huiyan/ImageSource/commonFiles/LoginView.m; sourceTree = "<group>"; };
 		257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiArtcleTableViewController.h; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.h; sourceTree = SOURCE_ROOT; };
 		257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiArtcleTableViewController.m; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.m; sourceTree = SOURCE_ROOT; };
 		257FFC631CB64B0E004C3CDE /* ArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleTableViewCell.h; path = HuiYan/Homepage/Views/ArticleTableViewCell.h; sourceTree = SOURCE_ROOT; };
@@ -224,6 +233,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		251F5E151CBCC251000BC47D /* commonFiles */ = {
+			isa = PBXGroup;
+			children = (
+				251F5E161CBCC28C000BC47D /* LoginViewController.h */,
+				251F5E171CBCC28C000BC47D /* LoginViewController.m */,
+				251F5E1C1CBCCEC3000BC47D /* LoginView.h */,
+				251F5E1D1CBCCEC3000BC47D /* LoginView.m */,
+			);
+			name = commonFiles;
+			path = ImageSource/commonFiles;
+			sourceTree = "<group>";
+		};
 		54238885983A1EE0C5DC7561 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +295,7 @@
 		55CCD7881CB3640500C3B8CA /* huiyan */ = {
 			isa = PBXGroup;
 			children = (
+				251F5E151CBCC251000BC47D /* commonFiles */,
 				550BF9721CB8EB9300E2E9DE /* Player */,
 				55CCD7F91CB4A49500C3B8CA /* Category */,
 				55CCD7E41CB38D8A00C3B8CA /* Helpers */,
@@ -547,6 +569,8 @@
 		55CCD7F91CB4A49500C3B8CA /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				251F5E191CBCC327000BC47D /* UIImage+ImageEffects.h */,
+				251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */,
 				55CCD7FA1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.h */,
 				55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */,
 			);
@@ -761,6 +785,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				251F5E181CBCC28C000BC47D /* LoginViewController.m in Sources */,
 				558F5CBA1CBBAAFA006BD54D /* TrainingDetailsTableViewController.m in Sources */,
 				558F5CB71CBB9780006BD54D /* Training.m in Sources */,
 				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
@@ -786,8 +811,10 @@
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
 				558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */,
 				25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */,
+				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
+				251F5E1E1CBCCEC3000BC47D /* LoginView.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
