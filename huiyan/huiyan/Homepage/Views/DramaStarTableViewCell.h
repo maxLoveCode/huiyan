@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DramaStarTableViewCell : UITableViewCell
+@property (nonatomic, strong) UIImageView *head_img;
+@property (nonatomic, strong) UIImageView *like_img;
+@property (nonatomic, strong) UIImageView *flower_img;
 
 @end
