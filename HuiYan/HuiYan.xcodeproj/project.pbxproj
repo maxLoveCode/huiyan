@@ -27,6 +27,9 @@
 		25C625471CBE00460068BFE8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625461CBE00460068BFE8 /* User.m */; };
 		25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6254A1CBE1C650068BFE8 /* StarDetailViewController.m */; };
 		25C625511CBE1F8F0068BFE8 /* StarVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625501CBE1F8F0068BFE8 /* StarVideoTableViewCell.m */; };
+		25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625531CBE48B90068BFE8 /* ExploreViewController.m */; };
+		25C625571CBE48C90068BFE8 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625561CBE48C90068BFE8 /* FriendsViewController.m */; };
+		25C6255A1CBE48EA0068BFE8 /* MeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625591CBE48EA0068BFE8 /* MeMainViewController.m */; };
 		25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E07DB71CB65D180015AD73 /* ArticalViewController.m */; };
 		550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */; };
 		550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9771CB8ED6600E2E9DE /* ZFPlayerSingleton.m */; };
@@ -135,6 +138,12 @@
 		25C6254A1CBE1C650068BFE8 /* StarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarDetailViewController.m; sourceTree = "<group>"; };
 		25C6254F1CBE1F8F0068BFE8 /* StarVideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarVideoTableViewCell.h; sourceTree = "<group>"; };
 		25C625501CBE1F8F0068BFE8 /* StarVideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarVideoTableViewCell.m; sourceTree = "<group>"; };
+		25C625521CBE48B90068BFE8 /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		25C625531CBE48B90068BFE8 /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
+		25C625551CBE48C90068BFE8 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
+		25C625561CBE48C90068BFE8 /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
+		25C625581CBE48EA0068BFE8 /* MeMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeMainViewController.h; sourceTree = "<group>"; };
+		25C625591CBE48EA0068BFE8 /* MeMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeMainViewController.m; sourceTree = "<group>"; };
 		25E07DB61CB65D180015AD73 /* ArticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticalViewController.h; path = HuiYan/Homepage/Controllers/ArticalViewController.h; sourceTree = SOURCE_ROOT; };
 		25E07DB71CB65D180015AD73 /* ArticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticalViewController.m; path = HuiYan/Homepage/Controllers/ArticalViewController.m; sourceTree = SOURCE_ROOT; };
 		2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.release.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.release.xcconfig"; sourceTree = "<group>"; };
@@ -512,6 +521,8 @@
 		55CCD7D41CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				25C625521CBE48B90068BFE8 /* ExploreViewController.h */,
+				25C625531CBE48B90068BFE8 /* ExploreViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -543,6 +554,8 @@
 		55CCD7D81CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				25C625551CBE48C90068BFE8 /* FriendsViewController.h */,
+				25C625561CBE48C90068BFE8 /* FriendsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -574,6 +587,8 @@
 		55CCD7DC1CB38A0600C3B8CA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				25C625581CBE48EA0068BFE8 /* MeMainViewController.h */,
+				25C625591CBE48EA0068BFE8 /* MeMainViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -867,11 +882,13 @@
 				55942D421CB7D77100EB041A /* CommentContent.m in Sources */,
 				550BF97E1CB8ED6600E2E9DE /* ZFPlayerControlView.m in Sources */,
 				25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */,
+				25C625571CBE48C90068BFE8 /* FriendsViewController.m in Sources */,
 				550BF97F1CB8ED6600E2E9DE /* ZFBrightnessView.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
 				55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */,
 				55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */,
 				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,
+				25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
@@ -881,6 +898,7 @@
 				257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */,
 				25C6253B1CBDDB210068BFE8 /* ZCBannerView.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
+				25C6255A1CBE48EA0068BFE8 /* MeMainViewController.m in Sources */,
 				558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */,
 				25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */,
 				25C625441CBE002E0068BFE8 /* LoginView.m in Sources */,
