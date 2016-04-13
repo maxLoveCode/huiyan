@@ -31,7 +31,7 @@
     [super viewDidLoad];
     
     
-        [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -180,7 +180,7 @@
             [headerView setBackgroundColor:[UIColor whiteColor]];
             UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, 60, 12)];
             label.text = @"热门推荐";
-            label.font = kFONT12;
+            label.font = kFONT14;
             [headerView addSubview:label];
             
             return headerView;
