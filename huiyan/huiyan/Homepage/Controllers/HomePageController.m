@@ -44,7 +44,10 @@
     }
     
     _serverManager = [ServerManager sharedInstance];
+    [self.view addSubview:self.banner_view];
     [self getRecommendDrama];
+    [self getBannerData];
+    
 #ifdef DEBUG
     NSLog(@"Homepage loaded");
 #endif
@@ -77,6 +80,13 @@
     self.navigationController.navigationBar.translucent = NO;
     
     self.navigationController.navigationBar.alpha=1.0;
+}
+
+- (ZCBannerView *)banner_view{
+    if (!_banner_view) {
+        self.banner_view = [[ZCBannerView alloc]init];
+    }
+    return _banner_view;
 }
 
 -(UITableView *)recommendTableView
@@ -331,6 +341,7 @@
         }
     }
 }
+#pragma mark 请求数据
 
 -(void)getRecommendDrama
 {
@@ -352,6 +363,19 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
+    }];
+}
+
+- (void)getBannerData{
+    NSDictionary *params = @{@"access_token":_serverManager.accessToken,@"key":@"app_banner"};
+    [_serverManager AnimatedPOST:@"get_app_config.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue]== 60000) {
+              self.banner_view.dataSource = [NSJSONSerialization JSONObjectWithData:[[responseObject[@"data"] objectForKey:@"imgs"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+            [self.banner_view reloadMenu];
+       
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
     }];
 }
 

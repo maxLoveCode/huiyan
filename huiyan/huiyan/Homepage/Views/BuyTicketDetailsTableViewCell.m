@@ -9,6 +9,7 @@
 #import "BuyTicketDetailsTableViewCell.h"
 #import "Constant.h"
 #import "UIImageView+WebCache.h"
+#import "UIImage+ImageEffects.h"
 @implementation BuyTicketDetailsTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -151,6 +152,13 @@
 }
 
 - (void)setContent:(BuyTicket *)ticket{
+    [self.bg_view sd_setImageWithURL:[NSURL URLWithString:ticket.cover]  placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
+       self.bg_view.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
+        
+    }];
+    
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:ticket.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
     self.title_lab.text = ticket.title;
     self.time_lab.text = ticket.date;
