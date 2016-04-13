@@ -10,14 +10,23 @@
 
 @interface LoginView : UIView
 
+@property (nonatomic, strong) UIView* u_mobile;
 @property (nonatomic, strong) UITextField* mobile;
-@property (nonatomic, strong) UITextField* password;
+@property (nonatomic, strong) UITextField* reg_mobile;
 
+@property (nonatomic, strong) UIView* u_pass_veri;
+@property (nonatomic, strong) UITextField* password;
+@property (nonatomic, strong) UITextField* vericode;
+
+@property (nonatomic, strong) UIView* thirdPart;
 @property (nonatomic, strong) UIButton* forgotPass;
+@property (nonatomic, strong) UITextField* confirmPass;
+
+@property (nonatomic, strong) UIView* lastPart;
 @property (nonatomic, strong) UIButton* login;
+@property (nonatomic, strong) UIButton* signUp;
 
 @property (nonatomic, strong) UILabel* thirdParty;
-
 @property (nonatomic, strong) UIButton* weiXin;
 @property (nonatomic, strong) UIButton* QQ;
 
