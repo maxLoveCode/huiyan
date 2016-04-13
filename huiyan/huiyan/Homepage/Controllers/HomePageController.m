@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #define bannerHeight 187.5
 #define menuHeight 72.5
+#define menuPicWidth 36
 
 @interface HomePageController()
 {
@@ -60,7 +61,7 @@
     
     self.navigationController.navigationBar.translucent = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.navigationController.navigationBar.barTintColor = COLOR_THEME;
     
     [super viewWillAppear:animated];
@@ -265,19 +266,19 @@
 #pragma mark <UICollectionViewDataSource>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *title = @[@"购票",@"培训",@"红团/红角",@"戏曲百科"];
+    NSArray *title = @[@"购  票",@"培   训",@"红团/红角",@"戏曲百科"];
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
         UIImageView *image_pic = [cell viewWithTag:500];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 4 / 2 - 25,5, 50 ,50)];
-            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.item + 1]];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 4 / 2 - menuPicWidth/2, 8, menuPicWidth ,menuPicWidth)];
+            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
         }
         UILabel *title_lab = [cell viewWithTag:501];
         if (!title_lab) {
-            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 55, kScreen_Width / 4, 16)];
-            title_lab.font = kFONT14;
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame)+5, kScreen_Width / 4, 16)];
+            title_lab.font = kFONT13;
             title_lab.textAlignment = NSTextAlignmentCenter;
             title_lab.textColor = COLOR_WithHex(0x020202);
             title_lab.text = title[indexPath.item];
