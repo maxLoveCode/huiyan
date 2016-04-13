@@ -127,7 +127,7 @@
 
 - (UITableView *)wikiDetailsTableView{
     if (!_wikiDetailsTableView) {
-        self.wikiDetailsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.playerView.frame), kScreen_Width, kScreen_Height - CGRectGetHeight(self.playerView.frame) - 48 ) style:UITableViewStylePlain];
+        self.wikiDetailsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.playerView.frame), kScreen_Width, kScreen_Height - CGRectGetHeight(self.playerView.frame) ) style:UITableViewStylePlain];
         self.wikiDetailsTableView.delegate = self;
         self.wikiDetailsTableView.dataSource = self;
         self.wikiDetailsTableView.separatorStyle = NO;

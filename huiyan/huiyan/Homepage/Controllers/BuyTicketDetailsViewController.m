@@ -59,7 +59,7 @@
 - (UIView *)tail_view{
     if (!_tail_view) {
         self.tail_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48)];
-        //self.tail_view.backgroundColor = [UIColor whiteColor];
+        self.tail_view.backgroundColor = COLOR_THEME;
         UIButton *head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         head_btn.frame = CGRectMake(0, 0, 48, 48);
         [head_btn addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
