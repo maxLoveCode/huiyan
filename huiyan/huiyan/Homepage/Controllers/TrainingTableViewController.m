@@ -11,6 +11,7 @@
 #import "TrainingTableViewCell.h"
 #import "ServerManager.h"
 #import "TrainingDetailsTableViewController.h"
+#import "UITabBarController+ShowHideBar.h"
 @interface TrainingTableViewController ()
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -34,7 +35,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
     [self getTrainData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {

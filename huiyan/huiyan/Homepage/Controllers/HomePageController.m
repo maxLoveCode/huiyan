@@ -31,20 +31,23 @@
     [super viewDidLoad];
     
     
-        [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
     //侧滑关闭
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
     _serverManager = [ServerManager sharedInstance];
+    [self.view addSubview:self.banner_view];
     [self getRecommendDrama];
+    [self getBannerData];
+    
 #ifdef DEBUG
     NSLog(@"Homepage loaded");
 #endif
@@ -79,6 +82,13 @@
     self.navigationController.navigationBar.alpha=1.0;
 }
 
+- (ZCBannerView *)banner_view{
+    if (!_banner_view) {
+        self.banner_view = [[ZCBannerView alloc]init];
+    }
+    return _banner_view;
+}
+
 -(UITableView *)recommendTableView
 {
     if (!_recommendTableView) {
@@ -106,7 +116,7 @@
         _menuView.scrollEnabled = NO;
         _menuView.delegate = self;
         _menuView.dataSource = self;
-        
+        _menuView.backgroundColor = [UIColor whiteColor];
         _menuView.scrollEnabled = NO;
     }
     return _menuView;
@@ -170,7 +180,7 @@
             [headerView setBackgroundColor:[UIColor whiteColor]];
             UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, 60, 12)];
             label.text = @"热门推荐";
-            label.font = kFONT12;
+            label.font = kFONT14;
             [headerView addSubview:label];
             
             return headerView;
@@ -255,20 +265,33 @@
 #pragma mark <UICollectionViewDataSource>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSArray *title = @[@"购票",@"培训",@"红团/红角",@"戏曲百科"];
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
-    if (indexPath.item ==0) {
-        [cell.contentView setBackgroundColor:[UIColor redColor]];
+        UIImageView *image_pic = [cell viewWithTag:500];
+        if (!image_pic) {
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 4 / 2 - 25,5, 50 ,50)];
+            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.item + 1]];
+            [cell.contentView addSubview:image_pic];
+            image_pic.tag = 500;
+        }
+        UILabel *title_lab = [cell viewWithTag:501];
+        if (!title_lab) {
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 55, kScreen_Width / 4, 16)];
+            title_lab.font = kFONT14;
+            title_lab.textAlignment = NSTextAlignmentCenter;
+            title_lab.textColor = COLOR_WithHex(0x020202);
+            title_lab.text = title[indexPath.item];
+            [cell.contentView addSubview:title_lab];
+                        title_lab.tag = 501;
+        }
+    UILabel *line_lab = [cell viewWithTag:502];
+    if (!line_lab) {
+        line_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 4 - 0.5, 0,0.5, kScreen_Width / 4)];
+        line_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+        [cell.contentView addSubview:line_lab];
+        line_lab.tag = 502;
     }
-    else if(indexPath.item ==1){
-        [cell.contentView setBackgroundColor:[UIColor orangeColor]];
-    }
-    else if(indexPath.item ==2){
-        [cell.contentView setBackgroundColor:[UIColor yellowColor]];
-    }
-    else
-    {
-        [cell.contentView setBackgroundColor:[UIColor greenColor]];
-    }
+
     return cell;
 }
 
@@ -331,6 +354,7 @@
         }
     }
 }
+#pragma mark 请求数据
 
 -(void)getRecommendDrama
 {
@@ -352,6 +376,19 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
+    }];
+}
+
+- (void)getBannerData{
+    NSDictionary *params = @{@"access_token":_serverManager.accessToken,@"key":@"app_banner"};
+    [_serverManager AnimatedPOST:@"get_app_config.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue]== 60000) {
+              self.banner_view.dataSource = [NSJSONSerialization JSONObjectWithData:[[responseObject[@"data"] objectForKey:@"imgs"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+            [self.banner_view reloadMenu];
+       
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
     }];
 }
 

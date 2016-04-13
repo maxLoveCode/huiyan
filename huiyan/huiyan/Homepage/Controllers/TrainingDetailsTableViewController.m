@@ -54,6 +54,11 @@
     [self.tabBarController setHidden:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
+}
+
 - (UILabel *)tail_lab{
     if (!_tail_lab) {
         self.tail_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48)];

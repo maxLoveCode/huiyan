@@ -12,7 +12,7 @@
 #import "MCSwipeMenu.h"
 #import "ServerManager.h"
 #import "WikiArtcleTableViewController.h"
-
+#import "UITabBarController+ShowHideBar.h"
 #import "ArticalViewController.h"
 
 #define kLineNumber 3
@@ -33,6 +33,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewDidLoad{
@@ -53,6 +54,11 @@
     
     [self getDramaCates];
     [self getDramaList:@"0" page:0];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (UIView *)head_view{

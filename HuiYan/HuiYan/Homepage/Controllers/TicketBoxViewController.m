@@ -13,6 +13,7 @@
 #import "BuyTicket.h"
 #import "MCSwipeMenu.h"
 #import "BuyTicketDetailsViewController.h"
+#import "UITabBarController+ShowHideBar.h"
 #define ticketHeight 142
 
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
@@ -38,8 +39,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
+}
 
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)ticketBoxTableView{
