@@ -53,6 +53,11 @@
     [self.tabBarController setHidden:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
+}
+
 -(UILabel *)label
 {
     if (!_label) {

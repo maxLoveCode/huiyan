@@ -335,11 +335,17 @@
     if ([textField.text isEqualToString: [_stringArray objectAtIndex:textField.tag]]) {
         textField.text = @"";
     }
+    if (textField == _confirmPass || textField == _password) {
+        textField.secureTextEntry = YES;
+    }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if ([textField.text isEqualToString:@""]) {
+        if (textField == _confirmPass || textField == _password) {
+            textField.secureTextEntry = NO;
+        }
         textField.text = [_stringArray objectAtIndex:textField.tag];
     }
 }
