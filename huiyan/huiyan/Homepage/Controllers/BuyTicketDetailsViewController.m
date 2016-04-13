@@ -25,11 +25,13 @@
 - (void)viewDidLoad{
     NSLog(@"%@",self.ticket);
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"购票详情";
     self.head_title_arr = @[@"节目详情",@"购买需知",@"戏友点评"];
+    [self.view addSubview:self.tail_view];
     [self.view addSubview:self.ticketTableView];
     _serverManager = [ServerManager sharedInstance];
-    [self.view addSubview:self.tail_view];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -44,7 +46,7 @@
 
 - (UITableView *)ticketTableView{
     if (!_ticketTableView) {
-        self.ticketTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 10) style:UITableViewStyleGrouped];
+        self.ticketTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 10 - 64 ) style:UITableViewStyleGrouped];
         self.ticketTableView.delegate = self;
         self.ticketTableView.dataSource = self;
         [self.ticketTableView registerClass:[BuyTicketDetailsTableViewCell class] forCellReuseIdentifier:@"ticket"];
@@ -55,17 +57,20 @@
 
 - (UIView *)tail_view{
     if (!_tail_view) {
-        self.tail_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
+        self.tail_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48)];
+        //self.tail_view.backgroundColor = [UIColor whiteColor];
         UIButton *head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         head_btn.frame = CGRectMake(0, 0, 48, 48);
         [head_btn addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
         [self.tail_view addSubview:head_btn];
         
         UIButton *tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        tail_btn.backgroundColor = COLOR_THEME;
+        [tail_btn setTitle:@"立即购买" forState:UIControlStateNormal];
+        [tail_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         tail_btn.frame = CGRectMake(48, 0, kScreen_Width - 48, 48);
         [tail_btn addTarget:self action:@selector(buyEvent:) forControlEvents:UIControlEventTouchUpInside];
         [self.tail_view addSubview:tail_btn];
-        self.tail_view.backgroundColor = [UIColor redColor];
         
     }
     return _tail_view;
