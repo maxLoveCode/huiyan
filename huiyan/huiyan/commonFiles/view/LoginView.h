@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class LoginView;
+
+@protocol LoginViewEvents <NSObject>
+
+-(void)loginViewDidSelectLogin:(LoginView*)loginView;
+-(void)loginViewDidSelectSignUp:(LoginView*)loginView;
+
+@end
+
 @interface LoginView : UIView
 
 @property (nonatomic, strong) UIView* u_mobile;
@@ -31,5 +40,7 @@
 @property (nonatomic, strong) UIButton* QQ;
 
 @property (nonatomic, strong) UIImageView* bgView;
+
+@property (nonatomic, weak) id <LoginViewEvents> delegate;
 
 @end

@@ -19,5 +19,14 @@
 
 @implementation User
 
+-(instancetype)initWithMobile:(NSString*)mobile Password:(NSString*)password
+{
+    self = [super init];
+    if (self) {
+        self.mobile = mobile;
+        self.password = password;
+    }
+    return self;
+}
 
 @end
