@@ -7,7 +7,7 @@
 //
 
 #import "HomePageController.h"
-#import "HomePageCell.h"
+#import "RecommondedTableViewCell.h"
 #import "WikiViewController.h"
 #import "HomePage.h"
 #import "TicketBoxViewController.h"
@@ -92,11 +92,11 @@
 -(UITableView *)recommendTableView
 {
     if (!_recommendTableView) {
-        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*5-10) style:UITableViewStylePlain];
+        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, [RecommondedTableViewCell cellHeight]*5-10) style:UITableViewStylePlain];
         _recommendTableView.delegate = self;
         _recommendTableView.dataSource = self;
         _recommendTableView.scrollEnabled = NO;
-        [_recommendTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"recommends"];
+        [_recommendTableView registerClass:[RecommondedTableViewCell class] forCellReuseIdentifier:@"recommends"];
         _recommendTableView.separatorStyle = NO;
         
 #ifdef DEBUG
@@ -205,13 +205,13 @@
         else
             return self.recommendTableView.frame.size.height;
     }
-    return [HomePageCell cellHeight];
+    return [RecommondedTableViewCell cellHeight];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _recommendTableView) {
-        HomePageCell* cell = [_recommendTableView dequeueReusableCellWithIdentifier:@"recommends" forIndexPath:indexPath];
+        RecommondedTableViewCell* cell = [_recommendTableView dequeueReusableCellWithIdentifier:@"recommends" forIndexPath:indexPath];
         [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -370,7 +370,7 @@
                 [_dataSource addObject:[HomePage parseDramaJSON:drama]];
             }
             
-            [_recommendTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
+            [_recommendTableView setFrame:CGRectMake(0, 0, kScreen_Width, [RecommondedTableViewCell cellHeight]*[_dataSource count]-10)];
             [_recommendTableView reloadData];
             [self.tableView reloadData];
         }

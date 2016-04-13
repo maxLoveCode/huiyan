@@ -12,25 +12,38 @@
 #import "ServerManager.h"
 #import "TrainingDetailsTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
-@interface TrainingTableViewController ()
+#import "Constant.h"
+@interface TrainingTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UITableView *trainTableView;
 @end
 
 @implementation TrainingTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[TrainingTableViewCell class
-                                   ] forCellReuseIdentifier:@"train"];
-    self.tableView.rowHeight = 152;
     self.serverManager = [ServerManager sharedInstance];
+    [self.view addSubview:self.trainTableView];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (UITableView *)trainTableView{
+    if (!_trainTableView) {
+        self.trainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64) style:UITableViewStylePlain];
+        self.trainTableView.delegate = self;
+        self.trainTableView.dataSource = self;
+        self.trainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.trainTableView registerClass:[TrainingTableViewCell class
+                                       ] forCellReuseIdentifier:@"train"];
+        self.trainTableView.rowHeight = 152;
+
+    }
+    return _trainTableView;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -90,7 +103,7 @@
                 Training *train =  [Training dataWithDic:dic];
                 [self.dataSource addObject:train];
             }
-            [self.tableView reloadData];
+            [self.trainTableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
