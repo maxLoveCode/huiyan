@@ -23,4 +23,7 @@
 @property (strong, nonatomic) ServerManager* serverManager;
 
 @property (nonatomic, strong)ZCBannerView  *banner_view;
+
+@property (nonatomic, strong) NSArray *image_arr;
+@property (nonatomic, strong) NSArray *title_arr;
 @end
