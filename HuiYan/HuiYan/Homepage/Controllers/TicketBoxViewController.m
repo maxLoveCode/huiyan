@@ -95,7 +95,7 @@
 - (void)get_opera_cateData{
     NSDictionary *params = @{@"access_token":_serverManager.accessToken};
     [_serverManager AnimatedPOST:@"get_opera_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"responseObject = %@",responseObject);
+       // NSLog(@"responseObject = %@",responseObject);
         if ([responseObject[@"code"] integerValue] ==
             30000) {
                 [self.head_view setDataSource:responseObject[@"data"]];

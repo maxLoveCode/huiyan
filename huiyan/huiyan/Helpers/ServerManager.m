@@ -81,13 +81,22 @@ parameters:(id)parameters
 success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
 failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
-    [self POST:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-        //show animates
+//    [self POST:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+//        //show animates
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        success(task, responseObject);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        failure(task, error);
+//    }];
+    
+    [self GET:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(task, responseObject);
+          success(task, responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure(task, error);
+          failure(task, error);
     }];
+    
 }
 
 
