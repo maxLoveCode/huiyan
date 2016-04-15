@@ -52,6 +52,7 @@
 		25C625821CBE49C10068BFE8 /* tab_mine@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6256E1CBE49C10068BFE8 /* tab_mine@3x.png */; };
 		25C625881CC089330068BFE8 /* DramaStarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625871CC089330068BFE8 /* DramaStarViewController.m */; };
 		25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6258A1CC0897C0068BFE8 /* DramaStarTableViewCell.m */; };
+		25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6258D1CC08CDC0068BFE8 /* DramaStar.m */; };
 		25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E07DB71CB65D180015AD73 /* ArticalViewController.m */; };
 		550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */; };
 		550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9771CB8ED6600E2E9DE /* ZFPlayerSingleton.m */; };
@@ -191,6 +192,8 @@
 		25C625871CC089330068BFE8 /* DramaStarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaStarViewController.m; sourceTree = "<group>"; };
 		25C625891CC0897C0068BFE8 /* DramaStarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaStarTableViewCell.h; sourceTree = "<group>"; };
 		25C6258A1CC0897C0068BFE8 /* DramaStarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaStarTableViewCell.m; sourceTree = "<group>"; };
+		25C6258C1CC08CDC0068BFE8 /* DramaStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaStar.h; sourceTree = "<group>"; };
+		25C6258D1CC08CDC0068BFE8 /* DramaStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaStar.m; sourceTree = "<group>"; };
 		25E07DB61CB65D180015AD73 /* ArticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticalViewController.h; path = HuiYan/Homepage/Controllers/ArticalViewController.h; sourceTree = SOURCE_ROOT; };
 		25E07DB71CB65D180015AD73 /* ArticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticalViewController.m; path = HuiYan/Homepage/Controllers/ArticalViewController.m; sourceTree = SOURCE_ROOT; };
 		2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.release.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.release.xcconfig"; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				55942D411CB7D77100EB041A /* CommentContent.m */,
 				558F5CB51CBB9780006BD54D /* Training.h */,
 				558F5CB61CBB9780006BD54D /* Training.m */,
+				25C6258C1CC08CDC0068BFE8 /* DramaStar.h */,
+				25C6258D1CC08CDC0068BFE8 /* DramaStar.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1001,6 +1006,7 @@
 				25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */,
 				25C625441CBE002E0068BFE8 /* LoginView.m in Sources */,
 				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
+				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
