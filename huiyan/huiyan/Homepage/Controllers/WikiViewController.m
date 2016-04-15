@@ -71,7 +71,7 @@
 
 - (UIScrollView *)scrollView{
     if (!_scrollView) {
-        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,41 , kScreen_Width, kScreen_Height - 41 - 48)];
+        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,41 , kScreen_Width, kScreen_Height - 41 - 64)];
         _scrollView.contentSize = CGSizeMake(kScreen_Width * 2, kScreen_Height - 41 - 48);
         _scrollView.bounces = NO;
         _scrollView.scrollEnabled = NO;
@@ -107,7 +107,7 @@
 
 - (UITableView *)dramaTableView{
     if (_dramaTableView == nil) {
-        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 48 - 74)];
+        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 64 - 10 )];
         self.dramaTableView.delegate = self;
         self.dramaTableView.dataSource = self;
         [self.dramaTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"drama"];
@@ -176,7 +176,7 @@
     
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
                           @"cid":category,
-                          @"page":[NSString stringWithFormat:@"%ld", page]};
+                          @"page":[NSString stringWithFormat:@"%ld", (long)page]};
     
     [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {

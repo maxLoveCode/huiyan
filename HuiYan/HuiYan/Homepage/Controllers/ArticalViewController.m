@@ -9,6 +9,7 @@
 #import "ArticalViewController.h"
 #import "Constant.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "UITabBarController+ShowHideBar.h"
 @interface ArticalViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITextView* textView;
@@ -43,6 +44,7 @@
     [self.view addSubview:self.bgView];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -61,7 +63,7 @@
 -(UILabel *)label
 {
     if (!_label) {
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height - 48 - 10)];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height  - 64)];
         _label.numberOfLines = 0;
     }
     return _label;
@@ -70,7 +72,8 @@
 -(UIScrollView *)bgView
 {
     if (!_bgView) {
-        _bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height-48)];
+        _bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
+        _bgView.backgroundColor = [UIColor whiteColor];
         _bgView.delegate = self;
     }
     return _bgView;

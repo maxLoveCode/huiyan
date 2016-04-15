@@ -12,5 +12,11 @@
 @property (nonatomic, strong) UIImageView *head_img;
 @property (nonatomic, strong) UIImageView *like_img;
 @property (nonatomic, strong) UIImageView *flower_img;
+@property (nonatomic, strong) UILabel *name_lab;
+@property (nonatomic, strong) UILabel *des_lab;
+@property (nonatomic, strong) UILabel *like_lab;
+@property (nonatomic, strong) UILabel *flower_lab;
+@property (nonatomic, strong) UIButton *invatation_btn;
+- (void)setContent;
 
 @end

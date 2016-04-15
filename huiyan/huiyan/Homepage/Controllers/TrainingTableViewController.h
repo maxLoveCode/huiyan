@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TrainingTableViewController : UITableViewController
+@interface TrainingTableViewController : UIViewController
 
 @end
