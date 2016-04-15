@@ -12,14 +12,17 @@
 #import "LoginView.h"
 #import "Constant.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "User.h"
+#import "ServerManager.h"
 
 #define animateDuration 0.25
 #define animateDelay 0.2
 
-@interface LoginViewController ()
+@interface LoginViewController () <LoginViewEvents>
 
 @property (strong,nonatomic) LoginView* mainview;
 @property (strong,nonatomic) UIBarButtonItem* rightItem;
+@property (strong,nonatomic) ServerManager* serverManager;
 
 @end
 
@@ -28,8 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登  录";
+    _serverManager = [ServerManager sharedInstance];
     
     _mainview = [[LoginView alloc] initWithFrame:self.view.frame];
+    _mainview.delegate = self;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -64,6 +69,7 @@
 {
     [super viewWillDisappear:animated];
     [self.tabBarController setHidden:NO];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 -(void)signup
@@ -132,6 +138,50 @@
     }];
     
     _rightItem.tag = -_rightItem.tag;
+}
+
+-(void)loginViewDidSelectLogin:(LoginView*)loginView
+{
+    NSLog(@"select1");
+    User* user = [[User alloc] initWithMobile:loginView.mobile.text Password:loginView.password.text];
+    [self postToServerByUser:user Url:@"user_login.php" isLogin:YES];
+}
+
+-(void)loginViewDidSelectSignUp:(LoginView*)loginView
+{
+     NSLog(@"select2");
+    User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.password.text];
+    [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
+}
+
+-(void)postToServerByUser:(User*)user Url:(NSString*)url isLogin:(BOOL)isLogin
+{
+    NSDictionary* dic = @{@"access_token":_serverManager.accessToken,
+                          @"mobile": user.mobile,
+                          @"password": user.password};
+    [_serverManager AnimatedPOST:url parameters:dic  success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject[@"msg"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+//verifiy the textfiled data
+-(void)verification
+{
+    BOOL result = YES;
+    if (!result) {
+        [self showAlert];
+    }
+}
+
+-(void)showAlert
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

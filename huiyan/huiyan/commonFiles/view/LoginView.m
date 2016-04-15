@@ -232,6 +232,7 @@
         [_login setBackgroundColor:[UIColor whiteColor]];
         [_login setTitleColor:COLOR_WithHex(0xe54863) forState:UIControlStateNormal];
         [_login setTitle:@"登录" forState:UIControlStateNormal];
+        [_login addTarget:self action:@selector(loginButton) forControlEvents:UIControlEventTouchUpInside];
         _login.layer.cornerRadius = 5;
         _login.layer.masksToBounds = YES;
     }
@@ -245,6 +246,7 @@
         [_signUp setBackgroundColor:[UIColor whiteColor]];
         [_signUp setTitleColor:COLOR_WithHex(0xe54863) forState:UIControlStateNormal];
         [_signUp setTitle:@"注册" forState:UIControlStateNormal];
+        [_signUp addTarget:self action:@selector(signUpButton) forControlEvents:UIControlEventTouchUpInside];
         _signUp.layer.cornerRadius = 5;
         _signUp.layer.masksToBounds = YES;
     }
@@ -362,6 +364,15 @@
     [_password resignFirstResponder];
     [_vericode resignFirstResponder];
     [_confirmPass resignFirstResponder];
+}
+
+#pragma mark button event listener
+-(void)loginButton{
+    [self.delegate loginViewDidSelectLogin:self];
+}
+
+-(void)signUpButton{
+    [self.delegate loginViewDidSelectSignUp:self];
 }
 
 @end
