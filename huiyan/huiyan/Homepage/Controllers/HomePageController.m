@@ -14,6 +14,7 @@
 #import "TrainingTableViewController.h"
 #import "ArticalViewController.h"
 #import "LoginViewController.h"
+#import "DramaStarViewController.h"
 #define bannerHeight 187.5
 #define menuHeight 72.5
 #define menuPicWidth 36
@@ -304,8 +305,8 @@
         TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
         [self.navigationController pushViewController:trainCon animated:YES];
     }else if (indexPath.item == 2) {
-        LoginViewController* login = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:login animated:YES];
+       DramaStarViewController * drama = [[DramaStarViewController alloc] init];
+        [self.navigationController pushViewController:drama animated:YES];
     }else {
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
         [self.navigationController pushViewController:wikiCon animated:YES];

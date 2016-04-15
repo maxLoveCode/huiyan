@@ -1,3 +1,4 @@
+
 //
 //  ZCBannerView.m
 //  huiyan
@@ -20,10 +21,10 @@ static NSString *const resuseIdentufier = @"banner";
     if (self = [super init]) {
         [self setFrame:CGRectMake(0, 0, Width, Height)];
         self.pageCount = 0;
-        [self addTimer];
     }
     return self;
 }
+
 
 - (UICollectionView *)bannerCollection{
     if (!_bannerCollection) {
@@ -41,10 +42,18 @@ static NSString *const resuseIdentufier = @"banner";
         self.bannerCollection.showsVerticalScrollIndicator = NO;
         self.bannerCollection.showsHorizontalScrollIndicator = NO;
         [self.bannerCollection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:resuseIdentufier];
-        [self addSubview:self.bannerCollection];
+        
+        
     }
     return _bannerCollection;
 }
+
+- (void)layoutSubviews{
+    
+    [super layoutSubviews];
+        //[self addTimer];
+}
+
 
 -(UIPageControl *)pageControl{
     if (!_pageControl) {
@@ -52,7 +61,7 @@ static NSString *const resuseIdentufier = @"banner";
         _pageControl.numberOfPages = self.dataSource.count;
         _pageControl.pageIndicatorTintColor = COLOR_WithHex(0xefefef);
         _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-        [self addSubview:_pageControl];
+       
     }
     return _pageControl;
 }
@@ -68,7 +77,8 @@ static NSString *const resuseIdentufier = @"banner";
     UIImageView *image_pic = [cell viewWithTag:1000];
     if (!image_pic) {
         image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Width, Height)];
-        [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"arrow"]];
+        
+        [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"1"]];
         [cell.contentView addSubview:image_pic];
         image_pic.tag = 1000;
     }
@@ -100,9 +110,10 @@ static NSString *const resuseIdentufier = @"banner";
     self.pageControl.currentPage = self.pageCount;
     
    
-    [UIView animateWithDuration:1 animations:^{
-        [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-    }];
+   // [UIView animateWithDuration:1 animations:^{
+        [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:1] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    [self.bannerCollection reloadData];
+   // }];
 
 }
 
@@ -123,7 +134,7 @@ static NSString *const resuseIdentufier = @"banner";
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (scrollView == self.bannerCollection) {
-        [self addTimer];
+       // [self addTimer];
     }
 }
 
@@ -131,6 +142,9 @@ static NSString *const resuseIdentufier = @"banner";
 - (void)reloadMenu{
     [self.bannerCollection reloadData];
     [self.pageControl reloadInputViews];
+    [self addSubview:self.bannerCollection];
+    [self addSubview:self.pageControl];
+
 }
 
 /*
