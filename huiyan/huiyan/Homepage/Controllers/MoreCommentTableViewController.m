@@ -8,15 +8,17 @@
 
 #import "MoreCommentTableViewController.h"
 #import "ServerManager.h"
+#import "CommentContent.h"
 @interface MoreCommentTableViewController ()
-
+@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) ServerManager *serverManager;
 @end
 
 @implementation MoreCommentTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.serverManager = [ServerManager sharedInstance];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -62,7 +64,7 @@
                 [self.dataSource addObject:model];
             }
             NSLog(@"%@",self.dataSource);
-            [self.ticketTableView reloadData];
+            [self.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
