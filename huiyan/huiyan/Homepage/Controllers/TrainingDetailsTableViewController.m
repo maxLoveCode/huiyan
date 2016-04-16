@@ -147,7 +147,7 @@
     if (indexPath.section == 0) {
         ZCBannerView *binner_scr = [cell viewWithTag:1000];
         if (!binner_scr) {
-            binner_scr = [[ZCBannerView alloc]init];
+            binner_scr = [[ZCBannerView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, BinnerHeight)];
             binner_scr.dataSource = self.train.imgs;
             [binner_scr reloadMenu];
             binner_scr.backgroundColor = [UIColor redColor];

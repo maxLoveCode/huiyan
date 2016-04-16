@@ -15,6 +15,7 @@
 #import "ServerManager.h"
 #import "MCSwipeMenu.h"
 #import "DramaStar.h"
+#import "StarDetailViewController.h"
 #define kSwipeMenu 41
 #define kBannerHeight 150
 @interface DramaStarViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
@@ -124,6 +125,11 @@
          return cell;
     }
    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    StarDetailViewController *star = [[StarDetailViewController alloc]init];
+    [self.navigationController pushViewController:star animated:YES];
 }
 
 - (void)get_actor_cateData{

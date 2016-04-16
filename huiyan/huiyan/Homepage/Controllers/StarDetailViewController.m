@@ -9,7 +9,7 @@
 #import "StarDetailViewController.h"
 #import "StarVideoTableViewCell.h"
 #import "Constant.h"
-
+#import "UITabBarController+ShowHideBar.h"
 #define headCell 180
 #define menuCell 32
 
@@ -24,6 +24,15 @@
     // Do any additional setup after loading the view.
     
     _dataSource = [[NSMutableArray alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

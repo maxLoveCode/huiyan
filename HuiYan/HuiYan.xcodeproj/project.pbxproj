@@ -107,6 +107,8 @@
 		55CCD7F81CB3E17200C3B8CA /* HomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7F71CB3E17200C3B8CA /* HomePage.m */; };
 		55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */; };
 		55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */; };
+		55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */; };
+		55DAFFB11CC228D40093B180 /* MoreCommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +281,10 @@
 		55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+ShowHideBar.m"; sourceTree = "<group>"; };
 		55CCD7FD1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicketDetailsViewController.h; sourceTree = "<group>"; };
 		55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketDetailsViewController.m; sourceTree = "<group>"; };
+		55DAFFAC1CC2208E0093B180 /* TicketCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCommentTableViewCell.h; sourceTree = "<group>"; };
+		55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCommentTableViewCell.m; sourceTree = "<group>"; };
+		55DAFFAF1CC228D40093B180 /* MoreCommentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreCommentTableViewController.h; sourceTree = "<group>"; };
+		55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreCommentTableViewController.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -479,6 +485,8 @@
 				55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */,
 				55CCD7FD1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.h */,
 				55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */,
+				55DAFFAF1CC228D40093B180 /* MoreCommentTableViewController.h */,
+				55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */,
 				558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */,
 				558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */,
 				558F5CB81CBBAAFA006BD54D /* TrainingDetailsTableViewController.h */,
@@ -722,6 +730,8 @@
 				25C625501CBE1F8F0068BFE8 /* StarVideoTableViewCell.m */,
 				558F5D031CBE50F0006BD54D /* RecommondedTableViewCell.h */,
 				558F5D041CBE50F0006BD54D /* RecommondedTableViewCell.m */,
+				55DAFFAC1CC2208E0093B180 /* TicketCommentTableViewCell.h */,
+				55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -995,6 +1005,7 @@
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
+				55DAFFB11CC228D40093B180 /* MoreCommentTableViewController.m in Sources */,
 				257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */,
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
 				550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */,
@@ -1010,6 +1021,7 @@
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
+				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
 				25C625511CBE1F8F0068BFE8 /* StarVideoTableViewCell.m in Sources */,
 				25C625431CBE002E0068BFE8 /* LoginViewController.m in Sources */,

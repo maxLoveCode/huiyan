@@ -65,8 +65,8 @@ static NSString *const resuseIdentufier = @"banner";
     if (!_pageControl) {
         self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, CGRectGetHeight(self.bannerCollection.frame) - 20, 100, 20)];
         _pageControl.numberOfPages = self.dataSource.count;
-        _pageControl.pageIndicatorTintColor = COLOR_WithHex(0xefefef);
-        _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+        _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+        _pageControl.currentPageIndicatorTintColor = COLOR_THEME;
        
     }
     return _pageControl;

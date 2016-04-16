@@ -12,6 +12,7 @@
 #import "ServerManager.h"
 #import "CommentContent.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "TicketCommentTableViewCell.h"
 @interface BuyTicketDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketTableView;
 @property (nonatomic, strong) NSArray *head_title_arr;
@@ -47,18 +48,20 @@
 
 - (UITableView *)ticketTableView{
     if (!_ticketTableView) {
-        self.ticketTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 10 - 64 ) style:UITableViewStyleGrouped];
+        self.ticketTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48  - 64 ) style:UITableViewStyleGrouped];
         self.ticketTableView.delegate = self;
         self.ticketTableView.dataSource = self;
         [self.ticketTableView registerClass:[BuyTicketDetailsTableViewCell class] forCellReuseIdentifier:@"ticket"];
+        self.ticketTableView.backgroundColor = [UIColor whiteColor];
         [self.ticketTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"normalcell"];
+        [self.ticketTableView registerClass:[TicketCommentTableViewCell class] forCellReuseIdentifier:@"comment"];
     }
     return _ticketTableView;
 }
 
 - (UIView *)tail_view{
     if (!_tail_view) {
-        self.tail_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48)];
+        self.tail_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64 - 2, kScreen_Width, 50)];
         self.tail_view.backgroundColor = COLOR_THEME;
         UIButton *head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         head_btn.frame = CGRectMake(0, 0, 48, 48);
@@ -87,7 +90,7 @@
     if (section == 0) {
         return 1;
     }else if (section == 3){
-        return self.dataSource.count;
+        return self.dataSource.count + 1;
     }else{
         return 2;
     }
@@ -133,10 +136,11 @@
         }
         return 32;
     }else{
-        if (indexPath.row == 0) {
-            return 110           ;
+        if (indexPath.section == 3 && indexPath.row < self.dataSource.count) {
+            return 70;
         }
-        return 32;
+            return 32;
+
     }
     
 }
@@ -165,6 +169,19 @@
     return nil;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *head_view = [[UIView alloc]init];
+    head_view.backgroundColor = COLOR_WithHex(0xefefef);
+    UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
+    up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+    [head_view addSubview:up_lab];
+    UILabel *down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
+    down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+    [head_view addSubview:down_lab];
+    return head_view;
+}
+
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -182,21 +199,27 @@
         if (indexPath.row == 0) {
             UILabel *content_lab = [cell viewWithTag:1000];
             if (!content_lab) {
-                content_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, kScreen_Width - 30, 12)];
+                content_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, kScreen_Width - 30, 50)];
                 content_lab.font = kFONT12;
                 content_lab.textColor = COLOR_WithHex(0x565656);
                 [cell addSubview:content_lab];
                 content_lab.tag = 1000;
                 content_lab.text = self.ticket.content;
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
             
         }else{
-       cell.textLabel.text = @"查看更多详情";
-            cell.textLabel.font = kFONT12;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if (!cell) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textLabel.text = @"查看更多详情";
+                cell.textLabel.font = kFONT12;
+
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-         return cell;
+        
        
     }else if (indexPath.section == 2){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
@@ -210,6 +233,8 @@
                 [cell addSubview:buy_tip_lab];
                 buy_tip_lab.tag = 1001;
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }else{
             cell.textLabel.text = @"查看更多详情";
             cell.textLabel.font = kFONT12;
@@ -219,52 +244,31 @@
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
-        NSLog(@"%ld",(long)indexPath.row); 
-        CommentContent *model = self.dataSource[indexPath.row];
-        if (indexPath.row == 0) {
-            UILabel *name_lab = [cell viewWithTag:1002];
-            if (!name_lab) {
-                name_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, kScreen_Width - 30, 12 * 1.5)];
-                name_lab.font = kFONT12;
-                name_lab.textColor = COLOR_WithHex(0xa5a5a5);
-                [cell addSubview:name_lab];
-                name_lab.tag = 1002;
-                name_lab.text = model.user_name;
-            }
-            UILabel *comment_lab = [cell viewWithTag:1003];
-            if (!comment_lab) {
-                comment_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(name_lab.frame), kScreen_Width - 30, 60)];
-                comment_lab.font = kFONT12;
-                comment_lab.textColor = COLOR_WithHex(0x565656);
-                [cell addSubview:comment_lab];
-                comment_lab.tag = 1003;
-                comment_lab.text = model.content;
-            }
-            
-            UILabel *time_lab = [cell viewWithTag:1004];
-            if (!time_lab) {
-                time_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(comment_lab.frame) + 5, kScreen_Width - 30, 12)];
-                time_lab.font = kFONT11;
-                time_lab.textColor = COLOR_WithHex(0xa5a5a5);
-                [cell addSubview:time_lab];
-                time_lab.tag = 1004;
-                time_lab.text = model.createtime;
-            }
+  
+
+        if (indexPath.row < self.dataSource.count) {
+            CommentContent *model = self.dataSource[indexPath.row];
+            TicketCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment" forIndexPath:indexPath];
+            [cell setContent:model];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
 
         }else{
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
+            NSLog(@"%ld",(long)indexPath.row);
             cell.textLabel.text = @"查看更多详情";
             cell.textLabel.font = kFONT12;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                return cell;
+        
     }
 }
 
 - (void)get_opera_commentData{
     self.dataSource = [[NSMutableArray alloc]init];
-    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.ticket.ID};
+    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.ticket.ID,@"page":@"0"};
     [_serverManager AnimatedPOST:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30020) {
             NSArray *data = responseObject[@"data"];
