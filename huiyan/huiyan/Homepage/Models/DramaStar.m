@@ -9,5 +9,15 @@
 #import "DramaStar.h"
 
 @implementation DramaStar
++ (DramaStar *)dramaWithDic:(NSDictionary *)dic{
+    DramaStar *drama = [[DramaStar alloc]init];
+    drama.avator = dic[@"avatar"];
+    drama.profile = dic[@"profile"];
+    drama.flower = dic[@"flower"];
+    drama.userID = dic[@"id"] ;
+    drama.nickName = dic[@"nickname"];
+    drama.cid = dic[@"cid"];
+    return drama;
+}
 
 @end

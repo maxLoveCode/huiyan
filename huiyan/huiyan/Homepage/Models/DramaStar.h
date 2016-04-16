@@ -10,5 +10,9 @@
 #import "User.h"
 
 @interface DramaStar : User
-
+@property (nonatomic, copy) NSString *avator;
+@property (nonatomic,copy) NSString *profile;
+@property (nonatomic,copy) NSString *flower;
+@property (nonatomic,strong) NSString *cid;
++ (DramaStar *)dramaWithDic:(NSDictionary *)dic;
 @end

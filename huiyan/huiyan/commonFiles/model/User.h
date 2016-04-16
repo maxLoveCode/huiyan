@@ -10,7 +10,7 @@
 
 @interface User : NSObject
 
-@property (nonatomic, assign) NSInteger* userID;
+@property (nonatomic, copy) NSString* userID;
 @property (nonatomic, copy) NSString* nickName;
 @property (nonatomic, copy) NSString* mobile;
 @property (nonatomic, copy) NSString* password;

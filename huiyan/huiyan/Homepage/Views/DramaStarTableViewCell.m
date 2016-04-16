@@ -28,6 +28,7 @@
 - (UIImageView *)head_img{
     if (!_head_img) {
         self.head_img = [[UIImageView alloc]init];
+        self.head_img.contentMode = UIViewContentModeScaleToFill;
     }
     return _head_img;
 }
@@ -98,6 +99,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.head_img.frame = CGRectMake(kMargin, kMargin, 110, 110);
+   // self.head_img.backgroundColor = [UIColor redColor];
     self.name_lab.frame = CGRectMake(CGRectGetMaxX(self.head_img.frame) + 12, CGRectGetMinY(self.head_img.frame), kScreen_Width - 110 - 2 * kMargin - 12, 16 * 1.5);
     self.des_lab.frame = CGRectMake(CGRectGetMinX(self.name_lab.frame), CGRectGetMaxY(self.name_lab.frame), CGRectGetWidth(self.name_lab.frame), 110 - 24);
     self.like_img.frame = CGRectMake(kMargin, CGRectGetMaxY(self.head_img.frame) + 15, 25, 25);
@@ -105,6 +107,32 @@
     self.flower_img.frame = CGRectMake(CGRectGetMaxX(self.like_lab.frame) + 10, CGRectGetMinY(self.like_lab.frame), 25, 25);
     self.flower_lab.frame = CGRectMake(CGRectGetMaxX(self.flower_img.frame) + 10, CGRectGetMinY(self.flower_img.frame), 80, 25);
     self.invatation_btn.frame = CGRectMake(kScreen_Width - 15 - 70, CGRectGetMinY(self.flower_lab.frame), 70, 25);
+}
+
+- (void)setContent:(DramaStar *)drama{
+    [self.head_img sd_setImageWithURL:[NSURL URLWithString:drama.avator] placeholderImage:[UIImage imageNamed:@"arrow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        UIImage *origin =  self.head_img.image;
+      origin = [DramaStarTableViewCell imageWithImage:origin scaledToSize:CGSizeMake(110, 110)];
+        self.head_img.image = origin;
+        
+    }];
+    self.like_img.image = [UIImage imageNamed:@"arrow"];
+    self.flower_img.image = [UIImage imageNamed:@"arrow"];
+    self.name_lab.text = drama.nickName;
+    self.des_lab.text = drama.profile;
+    self.like_lab.text = [NSString stringWithFormat:@"赞  %@",@"11"];
+    self.flower_lab.text = [NSString stringWithFormat:@"花  %@",drama.flower];
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 

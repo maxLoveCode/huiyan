@@ -9,7 +9,7 @@
 #import "ZCBannerView.h"
 #import "Constant.h"
 #import "UIImageView+WebCache.h"
-#define Height 187.5
+
 #define Width kScreen_Width
 
 static NSString *const resuseIdentufier = @"banner";
@@ -18,17 +18,24 @@ static NSString *const resuseIdentufier = @"banner";
 
 - (instancetype)init{
     if (self = [super init]) {
-        [self setFrame:CGRectMake(0, 0, Width, Height)];
         self.pageCount = 0;
     }
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self == [super initWithFrame:frame]) {
+        self.height = CGRectGetHeight(frame);
+        self.width = CGRectGetWidth(frame);
+       
+    }
+    return self;
+}
 
 - (UICollectionView *)bannerCollection{
     if (!_bannerCollection) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        layout.itemSize = CGSizeMake(Width, Height);
+        layout.itemSize = CGSizeMake(Width, self.height);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -56,7 +63,7 @@ static NSString *const resuseIdentufier = @"banner";
 
 -(UIPageControl *)pageControl{
     if (!_pageControl) {
-        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, Height - 20, 100, 20)];
+        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, CGRectGetHeight(self.bannerCollection.frame) - 20, 100, 20)];
         _pageControl.numberOfPages = self.dataSource.count;
         _pageControl.pageIndicatorTintColor = COLOR_WithHex(0xefefef);
         _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
@@ -75,9 +82,13 @@ static NSString *const resuseIdentufier = @"banner";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:resuseIdentufier forIndexPath:indexPath];
     UIImageView *image_pic = [cell viewWithTag:1000];
     if (!image_pic) {
-        image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Width, Height)];
+        image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Width, self.height)];
         
-        [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"1"]];
+        [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"1"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            UIImage *origin =  image_pic.image;
+            origin = [ZCBannerView imageWithImage:origin scaledToSize:CGSizeMake(kScreen_Width ,self.height)];
+            image_pic.image = origin;
+        }];
         [cell.contentView addSubview:image_pic];
         image_pic.tag = 1000;
     }
@@ -110,7 +121,7 @@ static NSString *const resuseIdentufier = @"banner";
     
    
    // [UIView animateWithDuration:1 animations:^{
-        [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:1] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+        [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     [self.bannerCollection reloadData];
    // }];
 
@@ -133,7 +144,7 @@ static NSString *const resuseIdentufier = @"banner";
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (scrollView == self.bannerCollection) {
-       // [self addTimer];
+        [self addTimer];
     }
 }
 
@@ -143,7 +154,19 @@ static NSString *const resuseIdentufier = @"banner";
     [self.pageControl reloadInputViews];
     [self addSubview:self.bannerCollection];
     [self addSubview:self.pageControl];
+    [self addTimer];
 
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 /*

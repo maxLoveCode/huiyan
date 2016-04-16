@@ -14,6 +14,7 @@
 #import "DramaStarTableViewCell.h"
 #import "ServerManager.h"
 #import "MCSwipeMenu.h"
+#import "DramaStar.h"
 #define kSwipeMenu 41
 #define kBannerHeight 150
 @interface DramaStarViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *img_arr;
 @property (nonatomic, strong) NSArray *imgSource_arr;
 @property (nonatomic, strong) MCSwipeMenu *head_view;
+@property (nonatomic, strong) ZCBannerView *banner_view;
 
 @end
 
@@ -36,7 +38,7 @@
     [self get_actor_bannerData];
     [self get_actor_listData:@"0" page:@"0"];
     [self.view addSubview:self.dramaStarTableView];
-    
+    self.automaticallyAdjustsScrollViewInsets  = NO;
     // Do any additional setup after loading the view.
 }
 
@@ -61,7 +63,7 @@
 
 - (UITableView *)dramaStarTableView{
     if (!_dramaStarTableView) {
-        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu, kScreen_Width, kScreen_Height - kSwipeMenu - 64) style:UITableViewStyleGrouped];
+        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu  , kScreen_Width, kScreen_Height - kSwipeMenu - 64) style:UITableViewStyleGrouped];
         self.dramaStarTableView.delegate = self;
         self.dramaStarTableView.dataSource = self;
         self.dramaStarTableView.separatorStyle = UITableViewCellAccessoryNone;
@@ -81,8 +83,13 @@
     return self.dataSource.count + 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
+        return 10;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -99,19 +106,21 @@
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"normal"];
         }
-        ZCBannerView *banner = [cell viewWithTag:1000];
-        if (!banner) {
-            ZCBannerView *banner = [[ZCBannerView alloc]init];
-            banner.backgroundColor = [UIColor redColor];
-            banner.dataSource = self.img_arr;
-            [banner reloadMenu];
-            [cell.contentView addSubview:banner];
-            banner.tag = 1000;
+        self.banner_view = [cell viewWithTag:1000];
+        if (!self.banner_view) {
+            self.banner_view = [[ZCBannerView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kBannerHeight )];
+            self.banner_view.bannerCollection.backgroundColor = [UIColor redColor];
+            [cell.contentView addSubview:self.banner_view];
+            self.banner_view.tag = 1000;
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
          return cell;
         
     }else{
     DramaStarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dramaStar" forIndexPath:indexPath];
+        [cell setContent:self.dataSource[indexPath.section -1]];
+        
+           cell.selectionStyle = UITableViewCellSelectionStyleNone;
          return cell;
     }
    
@@ -134,18 +143,15 @@
 - (void)get_actor_bannerData{
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken};
      self.img_arr = [NSMutableArray array];
-    self.img_arr = [@[@"http://7xsnr6.com1.z0.glb.clouddn.com/o_1ag4ontasu5i75e5sm96l1q729.jpg",
-                    @"http://7xsnr6.com1.z0.glb.clouddn.com/o_1ag4o9jr411c21v0f15p4176m18to9.jpg",
-                      @"http://7xsnr6.com1.z0.glb.clouddn.com/o_1ag4p266k1ah51r6g8aueas15cu9.jpg"]mutableCopy];
        [self.serverManager AnimatedPOST:@"get_actor_banner.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 50020) {
             self.imgSource_arr = responseObject[@"data"];
             for (NSDictionary *dic in self.imgSource_arr) {
-               NSString *responseData = [dic[@"image"] stringByReplacingOccurrencesOfString:@" " withString:@""];
-                responseData = [responseData stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-              //  [self.img_arr addObject:responseData];
+                [self.img_arr addObject:dic[@"image"]];
             }
             NSLog(@"%@",self.img_arr);
+            self.banner_view.dataSource = self.img_arr;
+            [self.banner_view reloadMenu];
             [self.dramaStarTableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -159,7 +165,11 @@
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"cid":cid,@"page":page};
     [self.serverManager AnimatedPOST:@"get_actor_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 50010) {
-            
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                DramaStar *drama = [DramaStar dramaWithDic:dic];
+                [self.dataSource addObject:drama];
+            }
+            [self.dramaStarTableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -178,6 +188,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

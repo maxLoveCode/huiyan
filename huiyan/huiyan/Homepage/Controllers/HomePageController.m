@@ -86,7 +86,7 @@
 
 - (ZCBannerView *)banner_view{
     if (!_banner_view) {
-        self.banner_view = [[ZCBannerView alloc]init];
+        self.banner_view = [[ZCBannerView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, bannerHeight)];
     }
     return _banner_view;
 }
