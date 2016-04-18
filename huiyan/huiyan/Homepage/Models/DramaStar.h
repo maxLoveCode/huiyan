@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *avator;
 @property (nonatomic,copy) NSString *profile;
 @property (nonatomic,copy) NSString *flower;
-@property (nonatomic,strong) NSString *cid;
+@property (nonatomic,copy) NSString *cid;
+@property (nonatomic,copy) NSString *is_fans;
 + (DramaStar *)dramaWithDic:(NSDictionary *)dic;
 @end

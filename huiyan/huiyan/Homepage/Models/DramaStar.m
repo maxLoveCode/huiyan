@@ -17,6 +17,7 @@
     drama.userID = dic[@"id"] ;
     drama.nickName = dic[@"nickname"];
     drama.cid = dic[@"cid"];
+    drama.is_fans = dic[@"is_fans"];
     return drama;
 }
 

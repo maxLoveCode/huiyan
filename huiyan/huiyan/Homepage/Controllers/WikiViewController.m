@@ -107,24 +107,31 @@
 
 - (UITableView *)dramaTableView{
     if (_dramaTableView == nil) {
-        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 64 - 10 )];
+        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 64)];
         self.dramaTableView.delegate = self;
         self.dramaTableView.dataSource = self;
         [self.dramaTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"drama"];
-        self.dramaTableView.rowHeight = [HomePageCell cellHeight];
         self.dramaTableView.separatorStyle = NO;
+        self.dramaTableView.rowHeight = [HomePageCell cellHeight];
     }
     return _dramaTableView;
 }
 #pragma mark tableView代理方法
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0.01;
+    }
+    return 10.0;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return [_dataSource count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_dataSource count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -132,7 +139,8 @@
     HomePageCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
+    [cell setContent:[_dataSource objectAtIndex:indexPath.section]];
+    NSLog(@"cell = %@",cell);
     return cell;
     
 }
@@ -141,7 +149,7 @@
 {
     if (tableView == _dramaTableView) {
         ArticalViewController * freeLookArtical = [[ArticalViewController alloc] init];
-        HomePage* data = [_dataSource objectAtIndex:indexPath.row];
+        HomePage* data = [_dataSource objectAtIndex:indexPath.section];
         [freeLookArtical setOriginData:data.content];
         [freeLookArtical setTitle:data.title];
         [self.navigationController pushViewController:freeLookArtical  animated:YES];

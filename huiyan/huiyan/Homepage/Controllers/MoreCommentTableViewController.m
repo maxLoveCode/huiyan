@@ -9,6 +9,7 @@
 #import "MoreCommentTableViewController.h"
 #import "ServerManager.h"
 #import "CommentContent.h"
+#import "TicketCommentTableViewCell.h"
 @interface MoreCommentTableViewController ()
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -18,7 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.serverManager = [ServerManager sharedInstance];
+    
+    self.tableView.rowHeight = 70;
+        self.serverManager = [ServerManager sharedInstance];
+    [self get_opera_commentData:@"0"];
+    [self.tableView registerClass:[TicketCommentTableViewCell class] forCellReuseIdentifier:@"comment"];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -34,28 +39,27 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return 1;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    TicketCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment" forIndexPath:indexPath];
+    [cell setContent:self.dataSource[indexPath.section]];
     
     // Configure the cell...
     
     return cell;
 }
-*/
 
-- (void)get_opera_commentData:(NSString *)oid page:(NSString *)page{
+
+- (void)get_opera_commentData:(NSString *)page{
     self.dataSource = [[NSMutableArray alloc]init];
-    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":oid,@"page":page};
+    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.oid,@"page":page};
     [_serverManager AnimatedPOST:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30020) {
             NSArray *data = responseObject[@"data"];

@@ -13,6 +13,7 @@
 #import "CommentContent.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "TicketCommentTableViewCell.h"
+#import "MoreCommentTableViewController.h"
 @interface BuyTicketDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketTableView;
 @property (nonatomic, strong) NSArray *head_title_arr;
@@ -210,6 +211,7 @@
             return cell;
             
         }else{
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
             if (!cell) {
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textLabel.text = @"查看更多详情";
@@ -236,6 +238,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else{
+             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
             cell.textLabel.text = @"查看更多详情";
             cell.textLabel.font = kFONT12;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -244,8 +247,6 @@
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
-  
-
         if (indexPath.row < self.dataSource.count) {
             CommentContent *model = self.dataSource[indexPath.row];
             TicketCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment" forIndexPath:indexPath];
@@ -262,6 +263,20 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
+        
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        
+    }else if (indexPath.section == 2 && indexPath.row == 1){
+        
+    }else if (indexPath.section == 3 && indexPath.row == self.dataSource.count){
+        MoreCommentTableViewController *moreCon = [[MoreCommentTableViewController alloc]init];
+        moreCon.oid = self.ticket.ID;
+            [self.navigationController pushViewController:moreCon animated:YES];
+    }else{
         
     }
 }

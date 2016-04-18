@@ -120,7 +120,6 @@
     }else{
     DramaStarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dramaStar" forIndexPath:indexPath];
         [cell setContent:self.dataSource[indexPath.section -1]];
-        
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
          return cell;
     }
@@ -129,6 +128,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     StarDetailViewController *star = [[StarDetailViewController alloc]init];
+    star.drama = self.dataSource[indexPath.section -1];
     [self.navigationController pushViewController:star animated:YES];
 }
 

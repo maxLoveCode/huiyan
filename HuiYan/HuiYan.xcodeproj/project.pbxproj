@@ -109,6 +109,7 @@
 		55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */; };
 		55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */; };
 		55DAFFB11CC228D40093B180 /* MoreCommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */; };
+		55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFB31CC47EEE0093B180 /* StarDetailTableViewCell.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -285,6 +286,8 @@
 		55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCommentTableViewCell.m; sourceTree = "<group>"; };
 		55DAFFAF1CC228D40093B180 /* MoreCommentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreCommentTableViewController.h; sourceTree = "<group>"; };
 		55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreCommentTableViewController.m; sourceTree = "<group>"; };
+		55DAFFB21CC47EEE0093B180 /* StarDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarDetailTableViewCell.h; sourceTree = "<group>"; };
+		55DAFFB31CC47EEE0093B180 /* StarDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarDetailTableViewCell.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -732,6 +735,8 @@
 				558F5D041CBE50F0006BD54D /* RecommondedTableViewCell.m */,
 				55DAFFAC1CC2208E0093B180 /* TicketCommentTableViewCell.h */,
 				55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */,
+				55DAFFB21CC47EEE0093B180 /* StarDetailTableViewCell.h */,
+				55DAFFB31CC47EEE0093B180 /* StarDetailTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1019,6 +1024,7 @@
 				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
 				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
+				55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
 				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
