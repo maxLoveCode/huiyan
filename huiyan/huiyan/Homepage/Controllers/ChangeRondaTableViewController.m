@@ -1,57 +1,29 @@
 //
-//  MoreCommentTableViewController.m
+//  ChangeRondaTableViewController.m
 //  huiyan
 //
-//  Created by 华印mac－002 on 16/4/16.
+//  Created by 华印mac－002 on 16/4/20.
 //  Copyright © 2016年 com.huayin. All rights reserved.
 //
 
-#import "MoreCommentTableViewController.h"
-#import "ServerManager.h"
-#import "CommentContent.h"
-#import "TicketCommentTableViewCell.h"
-#import "UITabBarController+ShowHideBar.h"
+#import "ChangeRondaTableViewController.h"
 #import "Constant.h"
-@interface MoreCommentTableViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, strong) ServerManager *serverManager;
-@property (nonatomic, strong) UITableView *tableView;
+@interface ChangeRondaTableViewController ()
+@property (nonatomic, strong) NSArray *dataSource;
 @end
 
-@implementation MoreCommentTableViewController
+@implementation ChangeRondaTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64);
-    self.tableView.rowHeight = 70;
-        self.serverManager = [ServerManager sharedInstance];
-    [self get_opera_commentData:@"0"];
-    [self.tableView registerClass:[TicketCommentTableViewCell class] forCellReuseIdentifier:@"comment"];
-    [self.view addSubview:self.tableView];
+    self.title = @"选择场次";
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"normalcell"];
+    self.tableView.rowHeight = 45;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (UITableView *)tableView{
-    if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-    }
-    return _tableView;
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tabBarController  setHidden:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,43 +34,35 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.dataSource.count;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+
+    return self.dataSource.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TicketCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment" forIndexPath:indexPath];
-    [cell setContent:self.dataSource[indexPath.section]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
+    UILabel *time_lab = [cell viewWithTag:1000];
+    if (!time_lab) {
+        time_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 100, 0, 100, 45)];
+        time_lab.font = kFONT14;
+        time_lab.textColor = COLOR_WithHex(0xe54863);
+        [cell.contentView addSubview:time_lab];
+        time_lab.tag = 1000;
+    }
+    
+    
+    
+    
     
     // Configure the cell...
     
     return cell;
 }
-
-
-- (void)get_opera_commentData:(NSString *)page{
-    self.dataSource = [[NSMutableArray alloc]init];
-    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.oid,@"page":page};
-    [_serverManager AnimatedPOST:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] integerValue] == 30020) {
-            NSArray *data = responseObject[@"data"];
-            for (NSDictionary *dic in data) {
-                CommentContent *model = [CommentContent dataWithDic:dic];
-                [self.dataSource addObject:model];
-            }
-         //   NSLog(@"%@",self.dataSource);
-            [self.tableView reloadData];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
-}
-
-
 
 
 /*

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MoreCommentTableViewController : UITableViewController
+@interface MoreCommentTableViewController : UIViewController
 @property (nonatomic,copy) NSString *oid;
 @end

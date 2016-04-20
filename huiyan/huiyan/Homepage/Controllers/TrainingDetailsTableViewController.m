@@ -218,7 +218,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height - 48 - 10)];
         label.numberOfLines = 0;
         NSError *error;
-        NSLog(@"self.train.cover  = %@",self.train.content );
+        //NSLog(@"self.train.cover  = %@",self.train.content );
         //图文混排
         NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[self.train.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                           NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];

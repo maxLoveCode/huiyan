@@ -140,7 +140,7 @@
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell setContent:[_dataSource objectAtIndex:indexPath.section]];
-    NSLog(@"cell = %@",cell);
+  //  NSLog(@"cell = %@",cell);
     return cell;
     
 }
@@ -192,7 +192,7 @@
             {
                 [_dataSource addObject:[HomePage parseDramaJSON:drama]];
             }
-            NSLog(@"res%@", responseObject);
+         //   NSLog(@"res%@", responseObject);
             //[_dramaTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
             self.wikiArtcleTableView.dataSource =_dataSource;
             [_dramaTableView reloadData];

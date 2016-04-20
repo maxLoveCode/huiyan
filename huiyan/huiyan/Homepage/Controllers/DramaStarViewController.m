@@ -155,7 +155,7 @@
             for (NSDictionary *dic in self.imgSource_arr) {
                 [self.img_arr addObject:dic[@"image"]];
             }
-            NSLog(@"%@",self.img_arr);
+        //    NSLog(@"%@",self.img_arr);
             self.banner_view.dataSource = self.img_arr;
             [self.banner_view reloadMenu];
             [self.dramaStarTableView reloadData];

@@ -110,6 +110,10 @@
 		55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */; };
 		55DAFFB11CC228D40093B180 /* MoreCommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */; };
 		55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFB31CC47EEE0093B180 /* StarDetailTableViewCell.m */; };
+		55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFB61CC4D7A40093B180 /* StarVideo.m */; };
+		55DAFFB91CC5C6710093B180 /* video_list_cell_big_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DAFFB81CC5C6710093B180 /* video_list_cell_big_icon@2x.png */; };
+		55DAFFBC1CC5D9D90093B180 /* MoreDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFBB1CC5D9D90093B180 /* MoreDetailsTableViewCell.m */; };
+		55DAFFBF1CC774C60093B180 /* ChangeRondaTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFBE1CC774C60093B180 /* ChangeRondaTableViewController.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -288,6 +292,13 @@
 		55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreCommentTableViewController.m; sourceTree = "<group>"; };
 		55DAFFB21CC47EEE0093B180 /* StarDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarDetailTableViewCell.h; sourceTree = "<group>"; };
 		55DAFFB31CC47EEE0093B180 /* StarDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarDetailTableViewCell.m; sourceTree = "<group>"; };
+		55DAFFB51CC4D7A40093B180 /* StarVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarVideo.h; sourceTree = "<group>"; };
+		55DAFFB61CC4D7A40093B180 /* StarVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarVideo.m; sourceTree = "<group>"; };
+		55DAFFB81CC5C6710093B180 /* video_list_cell_big_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_list_cell_big_icon@2x.png"; sourceTree = "<group>"; };
+		55DAFFBA1CC5D9D90093B180 /* MoreDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreDetailsTableViewCell.h; sourceTree = "<group>"; };
+		55DAFFBB1CC5D9D90093B180 /* MoreDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreDetailsTableViewCell.m; sourceTree = "<group>"; };
+		55DAFFBD1CC774C60093B180 /* ChangeRondaTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeRondaTableViewController.h; sourceTree = "<group>"; };
+		55DAFFBE1CC774C60093B180 /* ChangeRondaTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeRondaTableViewController.m; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -488,6 +499,8 @@
 				55CCD7E91CB39CD000C3B8CA /* WikiViewController.m */,
 				55CCD7FD1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.h */,
 				55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */,
+				55DAFFBD1CC774C60093B180 /* ChangeRondaTableViewController.h */,
+				55DAFFBE1CC774C60093B180 /* ChangeRondaTableViewController.m */,
 				55DAFFAF1CC228D40093B180 /* MoreCommentTableViewController.h */,
 				55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */,
 				558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */,
@@ -523,6 +536,8 @@
 				558F5CB61CBB9780006BD54D /* Training.m */,
 				25C6258C1CC08CDC0068BFE8 /* DramaStar.h */,
 				25C6258D1CC08CDC0068BFE8 /* DramaStar.m */,
+				55DAFFB51CC4D7A40093B180 /* StarVideo.h */,
+				55DAFFB61CC4D7A40093B180 /* StarVideo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -538,6 +553,7 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				55DAFFB81CC5C6710093B180 /* video_list_cell_big_icon@2x.png */,
 				25C6255B1CBE49C10068BFE8 /* 1.png */,
 				25C6255C1CBE49C10068BFE8 /* 2.png */,
 				25C6255D1CBE49C10068BFE8 /* 3.png */,
@@ -737,6 +753,8 @@
 				55DAFFAD1CC2208E0093B180 /* TicketCommentTableViewCell.m */,
 				55DAFFB21CC47EEE0093B180 /* StarDetailTableViewCell.h */,
 				55DAFFB31CC47EEE0093B180 /* StarDetailTableViewCell.m */,
+				55DAFFBA1CC5D9D90093B180 /* MoreDetailsTableViewCell.h */,
+				55DAFFBB1CC5D9D90093B180 /* MoreDetailsTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -873,6 +891,7 @@
 				550BFA1D1CBB2AF000E2E9DE /* playgesture_BrightnessSun6@2x.png in Resources */,
 				550BFA0A1CBB2AF000E2E9DE /* bottom_shadow.png in Resources */,
 				25C6257C1CBE49C10068BFE8 /* tab_homePage_selected@3x.png in Resources */,
+				55DAFFB91CC5C6710093B180 /* video_list_cell_big_icon@2x.png in Resources */,
 				550BFA1A1CBB2AF000E2E9DE /* play_back_full.png in Resources */,
 				25C625701CBE49C10068BFE8 /* 2.png in Resources */,
 				25C6256F1CBE49C10068BFE8 /* 1.png in Resources */,
@@ -1010,6 +1029,7 @@
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
+				55DAFFBF1CC774C60093B180 /* ChangeRondaTableViewController.m in Sources */,
 				55DAFFB11CC228D40093B180 /* MoreCommentTableViewController.m in Sources */,
 				257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */,
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
@@ -1025,12 +1045,14 @@
 				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */,
+				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
 				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
 				25C625511CBE1F8F0068BFE8 /* StarVideoTableViewCell.m in Sources */,
 				25C625431CBE002E0068BFE8 /* LoginViewController.m in Sources */,
+				55DAFFBC1CC5D9D90093B180 /* MoreDetailsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

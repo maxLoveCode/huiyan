@@ -27,7 +27,7 @@
     [super viewDidLoad];
     self.view.backgroundColor  = [UIColor whiteColor];
     
-    NSLog(@"%@",self.homePage.imgs);
+    //NSLog(@"%@",self.homePage.imgs);
     
     self.topView = [[UIView alloc] init];
     _topView.backgroundColor = [UIColor blackColor];

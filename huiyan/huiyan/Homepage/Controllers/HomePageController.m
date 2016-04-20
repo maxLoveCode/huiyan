@@ -272,7 +272,7 @@
         UIImageView *image_pic = [cell viewWithTag:500];
         if (!image_pic) {
             image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 4 / 2 - menuPicWidth/2, 8, menuPicWidth ,menuPicWidth)];
-            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
+            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.item + 1]];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
         }

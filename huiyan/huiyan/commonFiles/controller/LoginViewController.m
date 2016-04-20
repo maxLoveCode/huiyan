@@ -142,14 +142,14 @@
 
 -(void)loginViewDidSelectLogin:(LoginView*)loginView
 {
-    NSLog(@"select1");
+   // NSLog(@"select1");
     User* user = [[User alloc] initWithMobile:loginView.mobile.text Password:loginView.password.text];
     [self postToServerByUser:user Url:@"user_login.php" isLogin:YES];
 }
 
 -(void)loginViewDidSelectSignUp:(LoginView*)loginView
 {
-     NSLog(@"select2");
+     //NSLog(@"select2");
     User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.password.text];
     [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
 }
@@ -160,7 +160,7 @@
                           @"mobile": user.mobile,
                           @"password": user.password};
     [_serverManager AnimatedPOST:url parameters:dic  success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject[@"msg"]);
+        //NSLog(@"%@",responseObject[@"msg"]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];

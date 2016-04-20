@@ -46,7 +46,7 @@ NSString *const version = @"v1_0";
     [sharedInstance GET:[sharedInstance
                          appendedURL:@"token.php"]
              parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
-        NSLog(@"progress %@", downloadProgress);
+      //  NSLog(@"progress %@", downloadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([[responseObject objectForKey:@"code"] integerValue] == 10000) {
