@@ -186,7 +186,7 @@
                           @"cid":category,
                           @"page":[NSString stringWithFormat:@"%ld", (long)page]};
     
-    [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
@@ -207,7 +207,7 @@
 {
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken};
     
-    [_serverManager AnimatedPOST:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20000) {
             [self.head_view setDataSource:responseObject[@"data"]];
             [self.head_view reloadMenu];

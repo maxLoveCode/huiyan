@@ -164,6 +164,7 @@
         UIButton *timer = [[UIButton alloc] initWithFrame:CGRectMake(itemWidth/3*2+15, 0, itemWidth/3-15, itemHeight-20)];
         timer.titleLabel.font = [UIFont systemFontOfSize:12];
         [timer setTitle:@"获取验证码" forState:UIControlStateNormal];
+        self.timer = timer;
         [_vericode setRightViewMode:UITextFieldViewModeAlways];
         [_vericode setRightView:timer];
         

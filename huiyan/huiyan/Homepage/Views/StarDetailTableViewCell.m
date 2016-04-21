@@ -27,7 +27,7 @@
         [self.bg_img addSubview:self.giftList_lab];
         [self.bg_img addSubview:self.name_lab];
         [self.bg_img addSubview:self.focus_btn];
-    
+        self.userInteractionEnabled = YES;
     }
     return  self;
 }
@@ -35,6 +35,7 @@
 - (UIImageView *)bg_img{
     if (!_bg_img) {
         self.bg_img = [[UIImageView alloc]init];
+        self.bg_img.userInteractionEnabled = YES;
     }
     return _bg_img;
 }
@@ -146,6 +147,7 @@
         self.focus_btn.backgroundColor = COLOR_THEME;
         self.focus_btn.layer.masksToBounds = YES;
         self.focus_btn.layer.cornerRadius = 3;
+        [self.focus_btn addTarget:self action:@selector(focus:) forControlEvents:UIControlEventTouchUpInside];
         [self.focus_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _focus_btn;
@@ -179,6 +181,12 @@
     self.name_lab.text = drama.nickName;
     self.fansNum_lab.text = [NSString stringWithFormat:@"粉丝数: %@人",drama.is_fans];
     
+}
+
+- (void)focus:(UIButton *)sender{
+    if (self.focus) {
+        self.focus(sender);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

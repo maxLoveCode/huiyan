@@ -290,7 +290,7 @@
 - (void)get_opera_commentData{
     self.dataSource = [[NSMutableArray alloc]init];
     NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.ticket.ID,@"page":@"0"};
-    [_serverManager AnimatedPOST:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30020) {
             NSArray *data = responseObject[@"data"];
             for (NSDictionary *dic in data) {

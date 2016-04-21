@@ -114,6 +114,8 @@
 		55DAFFB91CC5C6710093B180 /* video_list_cell_big_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DAFFB81CC5C6710093B180 /* video_list_cell_big_icon@2x.png */; };
 		55DAFFBC1CC5D9D90093B180 /* MoreDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFBB1CC5D9D90093B180 /* MoreDetailsTableViewCell.m */; };
 		55DAFFBF1CC774C60093B180 /* ChangeRondaTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFBE1CC774C60093B180 /* ChangeRondaTableViewController.m */; };
+		55DAFFC21CC866EA0093B180 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFC11CC866EA0093B180 /* MainTabBarViewController.m */; };
+		55DAFFC51CC8A37D0093B180 /* NSString+Md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFC41CC8A37D0093B180 /* NSString+Md5.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -299,6 +301,10 @@
 		55DAFFBB1CC5D9D90093B180 /* MoreDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreDetailsTableViewCell.m; sourceTree = "<group>"; };
 		55DAFFBD1CC774C60093B180 /* ChangeRondaTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeRondaTableViewController.h; sourceTree = "<group>"; };
 		55DAFFBE1CC774C60093B180 /* ChangeRondaTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeRondaTableViewController.m; sourceTree = "<group>"; };
+		55DAFFC01CC866EA0093B180 /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
+		55DAFFC11CC866EA0093B180 /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
+		55DAFFC31CC8A37D0093B180 /* NSString+Md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Md5.h"; sourceTree = "<group>"; };
+		55DAFFC41CC8A37D0093B180 /* NSString+Md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Md5.m"; sourceTree = "<group>"; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -436,6 +442,8 @@
 				55CCD7E21CB38CC800C3B8CA /* Define */,
 				55CCD78C1CB3640600C3B8CA /* AppDelegate.h */,
 				55CCD78D1CB3640600C3B8CA /* AppDelegate.m */,
+				55DAFFC01CC866EA0093B180 /* MainTabBarViewController.h */,
+				55DAFFC11CC866EA0093B180 /* MainTabBarViewController.m */,
 				55CCD7D31CB38A0600C3B8CA /* Finding */,
 				55CCD7D71CB38A0600C3B8CA /* Friends */,
 				55CCD7DB1CB38A0600C3B8CA /* Memain */,
@@ -766,6 +774,8 @@
 				251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */,
 				55CCD7FA1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.h */,
 				55CCD7FB1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m */,
+				55DAFFC31CC8A37D0093B180 /* NSString+Md5.h */,
+				55DAFFC41CC8A37D0093B180 /* NSString+Md5.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1017,6 +1027,7 @@
 				55942D421CB7D77100EB041A /* CommentContent.m in Sources */,
 				550BF97E1CB8ED6600E2E9DE /* ZFPlayerControlView.m in Sources */,
 				25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */,
+				55DAFFC51CC8A37D0093B180 /* NSString+Md5.m in Sources */,
 				25C625571CBE48C90068BFE8 /* FriendsViewController.m in Sources */,
 				550BF97F1CB8ED6600E2E9DE /* ZFBrightnessView.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
@@ -1040,6 +1051,7 @@
 				25C6255A1CBE48EA0068BFE8 /* MeMainViewController.m in Sources */,
 				558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */,
 				25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */,
+				55DAFFC21CC866EA0093B180 /* MainTabBarViewController.m in Sources */,
 				25C625441CBE002E0068BFE8 /* LoginView.m in Sources */,
 				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
 				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
@@ -1190,9 +1202,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = huayin.huiyan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1204,9 +1216,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = huayin.huiyan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

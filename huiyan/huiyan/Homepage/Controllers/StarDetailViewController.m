@@ -21,6 +21,8 @@
 @interface StarDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) ZFPlayerView *playerView;
+@property (nonatomic, strong) UIButton *focus_btn;
+
 @end
 
 @implementation StarDetailViewController
@@ -147,6 +149,23 @@
         if (indexPath.section == 0) {
             StarDetailTableViewCell *starDetail = [_mainTable dequeueReusableCellWithIdentifier:@"starMain" forIndexPath:indexPath];
             [starDetail setContent:self.drama];
+            self.focus_btn = starDetail.focus_btn;
+            NSLog(@"%@",self.drama.is_fans);
+            if ([self.drama.is_fans integerValue] == 1) {
+                [starDetail.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
+                [starDetail.focus_btn setBackgroundColor:[UIColor grayColor]];
+            }else{
+                [starDetail.focus_btn setTitle:@"+  关注" forState:UIControlStateNormal];
+                UIColor *color = COLOR_THEME;
+                 [starDetail.focus_btn setBackgroundColor:color];
+            }
+            starDetail.focus = ^(UIButton *btn){
+                if ([btn.titleLabel.text isEqualToString:@"取消关注"] ) {
+                    [self focus:@"cancel"];
+                }else{
+                    [self focus:@"follow"];
+                }
+            };
             starDetail.selectionStyle = UITableViewCellSelectionStyleNone;
             return starDetail;
         }else{
@@ -162,6 +181,7 @@
                 [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
                 [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
                 weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
+                [weakSelf write_play_recordData:model.ID];
                 
             };
 
@@ -179,13 +199,51 @@
 - (void)get_actor_movieData:(NSString *)page{
     self.dataSource = [NSMutableArray array];
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"page":@"0"};
-    [self.serverManager AnimatedPOST:@"get_actor_movie.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [self.serverManager AnimatedGET:@"get_actor_movie.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50030) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 StarVideo *model = [StarVideo starVideoWithDic:dic];
                 [self.dataSource addObject:model];
             }
             [self.mainTable reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
+- (void)focus:(NSString *)isfocus{
+    NSString *type = isfocus;
+    NSDictionary *params = [NSDictionary dictionary];
+    NSString *user_id = kOBJECTDEFAULTS(@"user_id");
+    params = @{@"access_token":self.serverManager.accessToken,@"type":type,@"user_id":user_id,@"follow_id":self.drama.userID};
+    NSLog(@"params = %@",params);
+    [self.serverManager AnimatedPOST:@"do_fans.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 80020) {
+            if ([isfocus isEqualToString:@"cancel"]) {
+                [self.focus_btn setTitle:@"+  关注" forState:UIControlStateNormal];
+                UIColor *color = COLOR_THEME;
+                [self.focus_btn setBackgroundColor:color];
+            }else{
+                [self.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
+                [self.focus_btn setBackgroundColor:[UIColor grayColor]];
+            }
+            NSLog(@"mag = %@",responseObject[@"msg"]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
+    
+}
+
+- (void)write_play_recordData:(NSString *)movid_id{
+    NSLog(@"cid = %@   accessken = %@",movid_id,self.serverManager.accessToken);
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"movie_id":movid_id};
+    NSLog(@"%@",params);
+    [self.serverManager AnimatedPOST:@"write_play_record.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 50050) {
+            NSLog(@"%@",responseObject[@"msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

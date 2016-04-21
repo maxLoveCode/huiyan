@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DramaStar.h"
+typedef void(^FocusActorBlock) (UIButton *);
 @interface StarDetailTableViewCell : UITableViewCell
 @property (nonatomic,strong) UIImageView *bg_img;
 @property (nonatomic,strong) UIButton *return_btn;
@@ -22,4 +23,5 @@
 @property (nonatomic,strong) UILabel *fansNum_lab;
 @property (nonatomic,strong) UIButton *focus_btn;
 - (void)setContent:(DramaStar *)drama;
+@property (nonatomic,copy) FocusActorBlock focus;
 @end
