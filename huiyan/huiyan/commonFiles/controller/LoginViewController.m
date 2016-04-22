@@ -16,6 +16,10 @@
 #import "ServerManager.h"
 #import "MainTabBarViewController.h"
 #import "NSString+Md5.h"
+#import "UMSocial.h"
+#import "ThirdUser.h"
+#import "Tools.h"
+#import <AFNetworking.h>
 #define animateDuration 0.25
 #define animateDelay 0.2
 
@@ -138,21 +142,34 @@
 
 -(void)loginViewDidSelectLogin:(LoginView*)loginView
 {
-    User* user = [[User alloc] initWithMobile:loginView.mobile.text Password:loginView.password.text];
-    [self postToServerByUser:user Url:@"user_login.php" isLogin:YES];
+    if ([loginView.mobile.text isEqualToString:@""] ||[loginView.mobile.text isEqualToString:@"请输入手机号"]) {
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
+        }];
+        return;
+    }else if ([loginView.password.text isEqualToString:@"请输入密码"] || [loginView.password.text isEqualToString:@""]){
+        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:^{
+        }];
+        return;
+    }else{
+            User* user = [[User alloc] initWithMobile:loginView.mobile.text Password:loginView.password.text];
+            [self postToServerByUser:user Url:@"user_login.php" isLogin:YES];
+  }
 }
 
 -(void)loginViewDidSelectSignUp:(LoginView*)loginView
 {
      //NSLog(@"select2");
     if ([loginView.reg_mobile.text isEqualToString:@""] ||[loginView.reg_mobile.text isEqualToString:@"请输入手机号"]) {
-        KALERTVIEW(@"请输入手机号");
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
+        }];
         return;
     }else if ([loginView.vericode.text isEqualToString:@"请输入验证码"] || [loginView.vericode.text isEqualToString:@""]){
-        KALERTVIEW(@"请输入验证码");
+        [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:^{
+        }];
         return;
     }else if ([loginView.confirmPass.text isEqualToString:@""] || [loginView.confirmPass.text isEqualToString:@"请输入密码"]){
-        KALERTVIEW(@"请输入密码");
+        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:^{
+        }];
         return;
     }else{
         NSDictionary *parmas = @{@"access_token":self.serverManager.accessToken,@"mobile":loginView.reg_mobile.text,@"vcode":loginView.vericode.text};
@@ -215,7 +232,8 @@
 
 - (void)sendVcode{
     if ([_mainview.reg_mobile.text isEqualToString:@"请输入手机号"] || [_mainview.reg_mobile.text isEqualToString:@""]) {
-         KALERTVIEW(@"请输入手机号");
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
+        }];
     }else{
 
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"mobile":self.mainview.reg_mobile.text,@"scene":@"register"};
@@ -252,5 +270,88 @@
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+- (void)qqLand{
+    NSLog(@"qq");
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        //          获取微博用户名、uid、token等
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+            NSLog(@"%@",response);
+            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            NSString *sex = @"0";
+            if ([response.thirdPlatformUserProfile[@"gender"] isEqualToString:@"男"]) {
+                sex = @"1";
+            }else{
+                sex = @"2";
+            }
+            ThirdUser *user = [[ThirdUser alloc]init];
+            user.type = @"qq";
+            user.opnid = snsAccount.openId;
+            user.nickname = snsAccount.userName;
+            user.sex = sex;
+            user.avatar = snsAccount.iconURL;
+            NSLog(@"%@",user);
+            [self getThird_loginData:user];
+            
+        }});
+}
+
+- (void)weixinLand{
+    NSLog(@"weixin");
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+              NSLog(@"------%@",[snsAccount description]);
+            NSString *const UMSCustomAccountGenderMale;
+            NSString *const UMSCustomAccountGenderFeMale;
+            NSLog(@"---%@---%@",UMSCustomAccountGenderMale,UMSCustomAccountGenderFeMale);
+            NSString *sex = @"0";
+            if ([response.thirdPlatformUserProfile[@"sex"] integerValue]  == 1) {
+                sex = @"1";
+            }else{
+                sex = @"2";
+            }
+            ThirdUser *user = [[ThirdUser alloc]init];
+            user.type = @"wx";
+            user.opnid = snsAccount.openId;
+            user.nickname = snsAccount.userName;
+            user.sex = sex;
+            user.avatar = snsAccount.iconURL;
+            NSLog(@"%@",user);
+            [self getThird_loginData:user];
+            
+        }
+        
+    });
+    
+    
+}
+
+
+
+- (void)getThird_loginData:(ThirdUser *)thirdUser{
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"type":thirdUser.type,@"openid":thirdUser.opnid,@"nickname":thirdUser.nickname,@"sex":thirdUser.sex,@"avatar":thirdUser.avatar};
+    [self.serverManager AnimatedPOST:@"third_login.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 70020) {
+            NSLog(@"data = %@",responseObject[@"data"]);
+            kSETDEFAULTS([responseObject[@"data"] objectForKey:@"user_id"], @"user_id");
+            MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
+            [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
+            }];
+
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
 
 @end

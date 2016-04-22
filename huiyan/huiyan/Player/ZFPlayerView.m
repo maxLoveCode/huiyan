@@ -28,7 +28,7 @@
 #import "ZFPlayerControlView.h"
 #import "ZFBrightnessView.h"
 #import "ZFPlayer.h"
-
+#import "Tools.h"
 static const CGFloat ZFPlayerAnimationTimeInterval             = 7.0f;
 static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
 
