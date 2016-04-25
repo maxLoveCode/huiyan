@@ -15,6 +15,8 @@
 #import "TicketCommentTableViewCell.h"
 #import "MoreCommentTableViewController.h"
 #import "MoreDetailsTableViewCell.h"
+#import "ArticalViewController.h"
+#import "ChangeRondaTableViewController.h"
 @interface BuyTicketDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketTableView;
 @property (nonatomic, strong) NSArray *head_title_arr;
@@ -38,7 +40,6 @@
     [self.view addSubview:self.head_btn];
     [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.ticketTableView];
-       NSLog(@"1111%@ ---2222%@ ---3333 %@ --- 444%@",self.view,self.head_btn,self.tail_btn,self.ticketTableView);
     _serverManager = [ServerManager sharedInstance];
   
 }
@@ -145,12 +146,12 @@
       return  [BuyTicketDetailsTableViewCell cellHeight];
     }else if(indexPath.section == 1){
         if (indexPath.row == 0) {
-            return 100;
+            return 60;
         }
         return 32;
     }else if(indexPath.section == 2){
         if (indexPath.row == 0) {
-            return 100;
+            return 60;
         }
         return 32;
     }else{
@@ -275,9 +276,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1 && indexPath.row == 1) {
+        ArticalViewController *artCon = [[ArticalViewController alloc]init];
+        artCon.originData = self.ticket.content;
+        [self.navigationController pushViewController:artCon animated:YES];
         
     }else if (indexPath.section == 2 && indexPath.row == 1){
-        
+        ArticalViewController *artCon = [[ArticalViewController alloc]init];
+        artCon.originData = self.ticket.buy_tip;
+        [self.navigationController pushViewController:artCon animated:YES];
     }else if (indexPath.section == 3 && indexPath.row == self.dataSource.count){
         MoreCommentTableViewController *moreCon = [[MoreCommentTableViewController alloc]init];
         moreCon.oid = self.ticket.ID;
@@ -312,6 +318,9 @@
 
 - (void)buy{
     NSLog(@"buy");
+    ChangeRondaTableViewController *rondaCon = [[ChangeRondaTableViewController alloc]init];
+    rondaCon.oid = self.ticket.ID;
+    [self.navigationController pushViewController:rondaCon animated:YES];
 }
 
 @end

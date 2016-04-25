@@ -85,6 +85,7 @@
 		550BFA221CBB2AF000E2E9DE /* top_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA071CBB2AF000E2E9DE /* top_shadow.png */; };
 		550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA081CBB2AF000E2E9DE /* unlock-nor@2x.png */; };
 		550BFA241CBB2AF000E2E9DE /* unlock-nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA091CBB2AF000E2E9DE /* unlock-nor@3x.png */; };
+		557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */; };
 		558F5CAB1CBB4762006BD54D /* bg_view.png in Resources */ = {isa = PBXBuildFile; fileRef = 558F5CAA1CBB4762006BD54D /* bg_view.png */; };
 		558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */; };
 		558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CB01CBB945D006BD54D /* TrainingTableViewCell.m */; };
@@ -269,6 +270,8 @@
 		550BFA071CBB2AF000E2E9DE /* top_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_shadow.png; sourceTree = "<group>"; };
 		550BFA081CBB2AF000E2E9DE /* unlock-nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-nor@2x.png"; sourceTree = "<group>"; };
 		550BFA091CBB2AF000E2E9DE /* unlock-nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-nor@3x.png"; sourceTree = "<group>"; };
+		5570011E1CCDEEFB003EB02F /* UIWebViewTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWebViewTicketController.h; sourceTree = "<group>"; };
+		5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWebViewTicketController.m; sourceTree = "<group>"; };
 		558F5CAA1CBB4762006BD54D /* bg_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_view.png; sourceTree = "<group>"; };
 		558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingTableViewController.h; sourceTree = "<group>"; };
 		558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingTableViewController.m; sourceTree = "<group>"; };
@@ -691,6 +694,8 @@
 				55CCD7FE1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m */,
 				55DAFFBD1CC774C60093B180 /* ChangeRondaTableViewController.h */,
 				55DAFFBE1CC774C60093B180 /* ChangeRondaTableViewController.m */,
+				5570011E1CCDEEFB003EB02F /* UIWebViewTicketController.h */,
+				5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */,
 				55DAFFAF1CC228D40093B180 /* MoreCommentTableViewController.h */,
 				55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */,
 				558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */,
@@ -1236,6 +1241,7 @@
 				25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */,
 				25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
+				557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
 				55DAFFBF1CC774C60093B180 /* ChangeRondaTableViewController.m in Sources */,

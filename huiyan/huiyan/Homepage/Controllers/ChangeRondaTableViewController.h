@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChangeRondaTableViewController : UITableViewController
-
+@interface ChangeRondaTableViewController : UIViewController
+@property (nonatomic,copy) NSString *oid;
 @end

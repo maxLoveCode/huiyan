@@ -8,8 +8,13 @@
 
 #import "ChangeRondaTableViewController.h"
 #import "Constant.h"
-@interface ChangeRondaTableViewController ()
+#import "ServerManager.h"
+#import "UIWebViewTicketController.h"
+#import "UITabBarController+ShowHideBar.h"
+@interface ChangeRondaTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation ChangeRondaTableViewController
@@ -17,13 +22,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"选择场次";
+    self.serverManager = [ServerManager sharedInstance];
+     self.dataSource = [NSArray array];
+    
+    [self get_opera_dateData];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"normalcell"];
     self.tableView.rowHeight = 45;
+    [self.view addSubview:self.tableView];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (UITableView *)tableView{
+    if (!_tableView) {
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+    }
+    return _tableView;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,13 +62,20 @@
 
 #pragma mark - Table view data source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
     return self.dataSource.count;
 }
 
@@ -48,14 +84,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
     UILabel *time_lab = [cell viewWithTag:1000];
     if (!time_lab) {
-        time_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 100, 0, 100, 45)];
+        time_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 150, 0, 300, 45)];
         time_lab.font = kFONT14;
         time_lab.textColor = COLOR_WithHex(0xe54863);
+        time_lab.textAlignment = NSTextAlignmentCenter;
+        time_lab.text = [self.dataSource[indexPath.row] objectForKey:@"date"];
         [cell.contentView addSubview:time_lab];
         time_lab.tag = 1000;
     }
-    
-    
     
     
     
@@ -64,6 +100,27 @@
     return cell;
 }
 
+- (void)get_opera_dateData{
+   
+    NSDictionary *params = @{@"access_token":_serverManager.accessToken,@"oid":self.oid};
+    [self.serverManager AnimatedGET:@"get_opera_date.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 30030) {
+            self.dataSource = responseObject[@"data"];
+            NSLog(@"--- %@",responseObject[@"data"]);
+        }
+        [self.tableView reloadData];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dic = self.dataSource[indexPath.section];
+    UIWebViewTicketController *webCon = [[UIWebViewTicketController alloc]init];
+    webCon.ID = dic[@"id"];
+    webCon.oid = dic[@"oid"];
+    [self.navigationController pushViewController:webCon animated:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.
