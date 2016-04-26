@@ -7,12 +7,16 @@
 //
 
 #import "AppDelegate.h"
-#import "HomePageController.h"
-#import "ExploreViewController.h"
-#import "FriendsViewController.h"
-#import "MeMainViewController.h"
+#import "MainTabBarViewController.h"
 #import "Constant.h"
-
+#import "LoginViewController.h"
+//友盟
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+//百度地图
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -28,9 +32,18 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
+    //友盟
+    [UMSocialData setAppKey:@"57189b72e0f55ad2c30015b6"];
+    [UMSocialWechatHandler setWXAppId:@"wx2201898143065bfd" appSecret:@"b38e8146284e786e41402ddcb0b93539" url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:@"1105277071" appKey:@"x0ZYCDoulIQ2jjzi" url:@"http://www.umeng.com/social"];
+    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
+    [MAMapServices sharedServices].apiKey = @"f14d06129778c6fa6b9ee5c5f108b099";
+    [AMapSearchServices sharedServices].apiKey = @"f14d06129778c6fa6b9ee5c5f108b099";
     
-    [self addAllController];
     
+    
+    MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
+    self.window.rootViewController = mainTab;
     
 #ifdef DEBUG
     UnitTest *test = [UnitTest instance];
@@ -48,6 +61,11 @@
    
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    return result;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -63,6 +81,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [UMSocialSnsService  applicationDidBecomeActive];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -70,52 +89,5 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)addAllController{
-    UIColor *color  = COLOR_THEME;
-    HomePageController *homepage = [[HomePageController alloc]initWithStyle:UITableViewStyleGrouped];
-    
-    FriendsViewController *friend = [[FriendsViewController alloc]init];
-    
-    ExploreViewController *explore = [[ExploreViewController alloc]init];
-   
-    
-    MeMainViewController *meMain = [[MeMainViewController alloc]init];
-
-    
-    UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage];
-    homeNav.tabBarItem.title = @"首页";
-    [homeNav.tabBarItem setImage:[UIImage imageNamed:@"tab_homePage"]];
-    [homeNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_homePage_selected"]];
-    homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [homeNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
-    UINavigationController *friendNav = [[UINavigationController alloc]initWithRootViewController:friend];
-    friendNav.tabBarItem.title = @"戏友";
-    [friendNav.tabBarItem setImage:[UIImage imageNamed:@"tab_firend"]];
-    [friendNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_firend_selected"]];
-    friendNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [friendNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
-    UINavigationController *exploreNav = [[UINavigationController alloc]initWithRootViewController:explore];
-    exploreNav.tabBarItem.title  = @"发现";
-    [exploreNav.tabBarItem setImage:[UIImage imageNamed:@"tab_explorer"]];
-    [exploreNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_explorer_selected"]];
-    exploreNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [exploreNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
-    UINavigationController *meMainNav = [[UINavigationController alloc]initWithRootViewController:meMain];
-    meMainNav.tabBarItem.title = @"我的";
-    [meMainNav.tabBarItem setImage:[UIImage imageNamed:@"tab_mine"]];
-    [meMainNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_mine_selected"]];
-    meMainNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [meMainNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
-    UITabBarController *tabCon = [[UITabBarController alloc]init];
-    [tabCon.tabBar setTintColor:color];
-    tabCon.tabBar.translucent  = NO;
-    tabCon.tabBar.opaque = YES;
-    tabCon.viewControllers = @[homeNav,friendNav,exploreNav,meMainNav];
-    self.window.rootViewController = tabCon;
-}
 
 @end

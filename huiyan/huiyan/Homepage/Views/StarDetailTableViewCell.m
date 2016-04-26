@@ -27,7 +27,7 @@
         [self.bg_img addSubview:self.giftList_lab];
         [self.bg_img addSubview:self.name_lab];
         [self.bg_img addSubview:self.focus_btn];
-    
+        self.userInteractionEnabled = YES;
     }
     return  self;
 }
@@ -35,6 +35,7 @@
 - (UIImageView *)bg_img{
     if (!_bg_img) {
         self.bg_img = [[UIImageView alloc]init];
+        self.bg_img.userInteractionEnabled = YES;
     }
     return _bg_img;
 }
@@ -59,6 +60,7 @@
     if (!_edit_btn) {
         self.edit_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.edit_btn setTitle:@"编辑" forState:UIControlStateNormal];
+        self.edit_btn.titleLabel.textAlignment = NSTextAlignmentRight;
         [self.edit_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _edit_btn;
@@ -143,6 +145,9 @@
         self.focus_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.focus_btn setTitle:@"+关注" forState:UIControlStateNormal];
         self.focus_btn.backgroundColor = COLOR_THEME;
+        self.focus_btn.layer.masksToBounds = YES;
+        self.focus_btn.layer.cornerRadius = 3;
+        [self.focus_btn addTarget:self action:@selector(focus:) forControlEvents:UIControlEventTouchUpInside];
         [self.focus_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _focus_btn;
@@ -152,7 +157,7 @@
     [super layoutSubviews];
     self.bg_img.frame = CGRectMake(0, 0, kScreen_Width, 200);
     self.return_btn.frame = CGRectMake(kMargin, kMargin, 20, 20);
-    self.edit_btn.frame = CGRectMake(kScreen_Width - kMargin - 20 - 32, CGRectGetMinY(self.return_btn.frame), 32, 50);
+    self.edit_btn.frame = CGRectMake(kScreen_Width - kMargin - 20 - 40, CGRectGetMinY(self.return_btn.frame), 40, 50);
     self.head_img.frame = CGRectMake(kMargin, CGRectGetMaxY(self.return_btn.frame) + 20, 81, 81);
     self.focus_btn.frame = CGRectMake(kScreen_Width - 15 - 88, CGRectGetMaxY(self.fansNum_lab.frame), 88, 33);
     self.giftList_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.focus_btn.frame) + 30, 100, 16);
@@ -174,8 +179,14 @@
     [self.return_btn setImage:[UIImage imageNamed:@"1"] forState:UIControlStateNormal];
     [self.head_img sd_setImageWithURL:[NSURL URLWithString:drama.avator] placeholderImage:[UIImage imageNamed:@"1"]];
     self.name_lab.text = drama.nickName;
-    self.fansNum_lab.text = [NSString stringWithFormat:@"粉丝数: %@",drama.is_fans];
+    self.fansNum_lab.text = [NSString stringWithFormat:@"粉丝数: %@人",drama.is_fans];
     
+}
+
+- (void)focus:(UIButton *)sender{
+    if (self.focus) {
+        self.focus(sender);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -123,6 +123,10 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
    // CGFloat height = self.bgView.contentSize.height;
+<<<<<<< HEAD
+=======
+   // NSLog(@"---%f---%f",scrollView.contentOffset.y,height);
+>>>>>>> cad69dba4ead7dee24f5d8eaac5f5ad372591378
     if (scrollView.contentOffset.y == CGRectGetHeight(self.label.frame)) {
         
     }

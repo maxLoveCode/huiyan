@@ -15,6 +15,7 @@
 #import "ArticalViewController.h"
 #import "LoginViewController.h"
 #import "DramaStarViewController.h"
+#import "LoginViewController.h"
 #define bannerHeight 187.5
 #define menuHeight 72.5
 #define menuPicWidth 36
@@ -272,7 +273,7 @@
         UIImageView *image_pic = [cell viewWithTag:500];
         if (!image_pic) {
             image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 4 / 2 - menuPicWidth/2, 8, menuPicWidth ,menuPicWidth)];
-            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
+            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.item + 1]];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
         }
@@ -305,8 +306,15 @@
         TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
         [self.navigationController pushViewController:trainCon animated:YES];
     }else if (indexPath.item == 2) {
-       DramaStarViewController * drama = [[DramaStarViewController alloc] init];
-        [self.navigationController pushViewController:drama animated:YES];
+        NSString *user_id = kOBJECTDEFAULTS(@"user_id");
+        if (user_id && ![user_id isEqualToString:@""]) {
+            DramaStarViewController * dramaCon = [[DramaStarViewController alloc] init];
+            [self.navigationController pushViewController:dramaCon animated:YES];
+        }else{
+            LoginViewController *loginCon = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginCon animated:YES];
+        }
+  
     }else {
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
         [self.navigationController pushViewController:wikiCon animated:YES];
@@ -364,7 +372,7 @@
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
                           @"is_hot":@"1"};
   
-    [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
 
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
@@ -383,7 +391,7 @@
 
 - (void)getBannerData{
     NSDictionary *params = @{@"access_token":_serverManager.accessToken,@"key":@"app_banner"};
-    [_serverManager AnimatedPOST:@"get_app_config.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_app_config.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue]== 60000) {
               self.banner_view.dataSource = [NSJSONSerialization JSONObjectWithData:[[responseObject[@"data"] objectForKey:@"imgs"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
             [self.banner_view reloadMenu];

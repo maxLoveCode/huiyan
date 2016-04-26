@@ -10,25 +10,60 @@
 #import "ServerManager.h"
 #import "CommentContent.h"
 #import "TicketCommentTableViewCell.h"
-@interface MoreCommentTableViewController ()
+#import "UITabBarController+ShowHideBar.h"
+#import "Constant.h"
+#import <MJRefresh.h>
+@interface MoreCommentTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UITableView *tableView;
 @end
-
+static int number_page = 0;
 @implementation MoreCommentTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.dataSource = [[NSMutableArray alloc]init];;
+    self.tableView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64);
     self.tableView.rowHeight = 70;
         self.serverManager = [ServerManager sharedInstance];
     [self get_opera_commentData:@"0"];
     [self.tableView registerClass:[TicketCommentTableViewCell class] forCellReuseIdentifier:@"comment"];
+       [self.view addSubview:self.tableView];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self get_opera_commentData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        number_page ++;
+        [self get_opera_commentData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    [self.tableView.mj_header beginRefreshing];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (UITableView *)tableView{
+    if (!_tableView) {
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+    }
+    return _tableView;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController  setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,26 +84,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TicketCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment" forIndexPath:indexPath];
-    [cell setContent:self.dataSource[indexPath.section]];
+    if (self.dataSource.count > 0) {
+         [cell setContent:self.dataSource[indexPath.section]];
+    }
+   
     
     // Configure the cell...
     
     return cell;
 }
 
-
 - (void)get_opera_commentData:(NSString *)page{
-    self.dataSource = [[NSMutableArray alloc]init];
     NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.oid,@"page":page};
-    [_serverManager AnimatedPOST:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30020) {
             NSArray *data = responseObject[@"data"];
             for (NSDictionary *dic in data) {
                 CommentContent *model = [CommentContent dataWithDic:dic];
                 [self.dataSource addObject:model];
             }
-            NSLog(@"%@",self.dataSource);
             [self.tableView reloadData];
+             [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);

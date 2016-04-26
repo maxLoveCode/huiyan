@@ -140,7 +140,7 @@
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell setContent:[_dataSource objectAtIndex:indexPath.section]];
-    NSLog(@"cell = %@",cell);
+  //  NSLog(@"cell = %@",cell);
     return cell;
     
 }
@@ -186,13 +186,13 @@
                           @"cid":category,
                           @"page":[NSString stringWithFormat:@"%ld", (long)page]};
     
-    [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
                 [_dataSource addObject:[HomePage parseDramaJSON:drama]];
             }
-            NSLog(@"res%@", responseObject);
+         //   NSLog(@"res%@", responseObject);
             //[_dramaTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
             self.wikiArtcleTableView.dataSource =_dataSource;
             [_dramaTableView reloadData];
@@ -207,7 +207,7 @@
 {
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken};
     
-    [_serverManager AnimatedPOST:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20000) {
             [self.head_view setDataSource:responseObject[@"data"]];
             [self.head_view reloadMenu];

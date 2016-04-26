@@ -42,6 +42,6 @@
 #define kSETDEFAULTS(value,key) [[NSUserDefaults standardUserDefaults]setObject:value forKey:key]
 #define kOBJECTDEFAULTS(s) [[NSUserDefaults standardUserDefaults]objectForKey:s]
 
-
+#define KALERTVIEW(msg) [[[UIAlertView alloc] initWithTitle:@"温馨提示" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show]
 
 #endif /* Constant_h */

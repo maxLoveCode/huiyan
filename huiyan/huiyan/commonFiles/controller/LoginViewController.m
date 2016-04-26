@@ -14,7 +14,12 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "User.h"
 #import "ServerManager.h"
-
+#import "MainTabBarViewController.h"
+#import "NSString+Md5.h"
+#import "UMSocial.h"
+#import "ThirdUser.h"
+#import "Tools.h"
+#import <AFNetworking.h>
 #define animateDuration 0.25
 #define animateDelay 0.2
 
@@ -23,6 +28,8 @@
 @property (strong,nonatomic) LoginView* mainview;
 @property (strong,nonatomic) UIBarButtonItem* rightItem;
 @property (strong,nonatomic) ServerManager* serverManager;
+@property (nonatomic, strong) NSTimer *thetimer;
+@property (nonatomic, strong) NSDate *star;
 
 @end
 
@@ -52,6 +59,7 @@
     }];
     
     self.view = _mainview;
+    [self.mainview.timer addTarget:self action:@selector(sendVcode) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,20 +85,12 @@
     [self signUpAnimates];
 }
 
--(void)back
-{
-    [self.navigationController popViewControllerAnimated:NO];
-}
 
 -(void)navigationBarItem
 {
     _rightItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style: UIBarButtonItemStylePlain target:self action:@selector(signup)];
     _rightItem.tag = -1;
     self.navigationItem.rightBarButtonItem = _rightItem;
-    
-    UIBarButtonItem* leftItem = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = leftItem;
-    
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
 }
 
@@ -142,25 +142,80 @@
 
 -(void)loginViewDidSelectLogin:(LoginView*)loginView
 {
-    NSLog(@"select1");
-    User* user = [[User alloc] initWithMobile:loginView.mobile.text Password:loginView.password.text];
-    [self postToServerByUser:user Url:@"user_login.php" isLogin:YES];
+    if ([loginView.mobile.text isEqualToString:@""] ||[loginView.mobile.text isEqualToString:@"请输入手机号"]) {
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
+        }];
+        return;
+    }else if ([loginView.password.text isEqualToString:@"请输入密码"] || [loginView.password.text isEqualToString:@""]){
+        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:^{
+        }];
+        return;
+    }else{
+            User* user = [[User alloc] initWithMobile:loginView.mobile.text Password:loginView.password.text];
+            [self postToServerByUser:user Url:@"user_login.php" isLogin:YES];
+  }
 }
 
 -(void)loginViewDidSelectSignUp:(LoginView*)loginView
 {
-     NSLog(@"select2");
-    User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.password.text];
-    [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
+     //NSLog(@"select2");
+    if ([loginView.reg_mobile.text isEqualToString:@""] ||[loginView.reg_mobile.text isEqualToString:@"请输入手机号"]) {
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
+        }];
+        return;
+    }else if ([loginView.vericode.text isEqualToString:@"请输入验证码"] || [loginView.vericode.text isEqualToString:@""]){
+        [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:^{
+        }];
+        return;
+    }else if ([loginView.confirmPass.text isEqualToString:@""] || [loginView.confirmPass.text isEqualToString:@"请输入密码"]){
+        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:^{
+        }];
+        return;
+    }else{
+        NSDictionary *parmas = @{@"access_token":self.serverManager.accessToken,@"mobile":loginView.reg_mobile.text,@"vcode":loginView.vericode.text};
+        [self.serverManager AnimatedPOST:@"check_vcode.php" parameters:parmas success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+            if ([responseObject[@"code"]integerValue] == 90010) {
+                NSLog(@"%@",responseObject[@"msg"]);
+                User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.confirmPass.text];
+                [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error = %@",error);
+        }];
+    }
+    
+    
+    
+   
 }
+
 
 -(void)postToServerByUser:(User*)user Url:(NSString*)url isLogin:(BOOL)isLogin
 {
     NSDictionary* dic = @{@"access_token":_serverManager.accessToken,
                           @"mobile": user.mobile,
-                          @"password": user.password};
+                          @"password": [NSString getMd5_32Bit_String:user.password]};
     [_serverManager AnimatedPOST:url parameters:dic  success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject[@"msg"]);
+        //NSLog(@"%@",responseObject[@"msg"]);
+        if (isLogin == YES) {
+            if ([responseObject[@"code"] integerValue] == 70010) {
+                NSLog(@"%@",responseObject[@"msg"]);
+                kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
+                MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
+                [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
+                }];
+            }
+        }else{
+            if ([responseObject[@"code"] integerValue] == 70000) {
+                NSLog(@"%@",responseObject[@"msg"]);
+                kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
+                MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
+                [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
+                }];
+            }
+
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
@@ -175,6 +230,38 @@
     }
 }
 
+- (void)sendVcode{
+    if ([_mainview.reg_mobile.text isEqualToString:@"请输入手机号"] || [_mainview.reg_mobile.text isEqualToString:@""]) {
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
+        }];
+    }else{
+
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"mobile":self.mainview.reg_mobile.text,@"scene":@"register"};
+        NSLog(@"%@",params);
+    [self.serverManager AnimatedPOST:@"send_vcode.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 90000) {
+            NSLog(@"%@",responseObject[@"msg"]);
+            if (!_thetimer) {
+                self.thetimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fireTimer) userInfo:nil repeats:YES];
+                self.star = [NSDate date];
+                [_mainview.timer setEnabled:NO];
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    }
+}
+
+- (void)fireTimer{
+    [_mainview.timer setTitle:[NSString stringWithFormat:@"%i秒",(int)(60 + [self.star timeIntervalSinceNow])] forState:UIControlStateDisabled];
+    if (-[self.star timeIntervalSinceNow] > 60) {
+        [self.thetimer invalidate];
+        [_mainview.timer setEnabled:YES];
+        self.thetimer = nil;
+    }
+}
+
 -(void)showAlert
 {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
@@ -183,5 +270,88 @@
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+- (void)qqLand{
+    NSLog(@"qq");
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        //          获取微博用户名、uid、token等
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
+            NSLog(@"%@",response);
+            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            NSString *sex = @"0";
+            if ([response.thirdPlatformUserProfile[@"gender"] isEqualToString:@"男"]) {
+                sex = @"1";
+            }else{
+                sex = @"2";
+            }
+            ThirdUser *user = [[ThirdUser alloc]init];
+            user.type = @"qq";
+            user.opnid = snsAccount.openId;
+            user.nickname = snsAccount.userName;
+            user.sex = sex;
+            user.avatar = snsAccount.iconURL;
+            NSLog(@"%@",user);
+            [self getThird_loginData:user];
+            
+        }});
+}
+
+- (void)weixinLand{
+    NSLog(@"weixin");
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+              NSLog(@"------%@",[snsAccount description]);
+            NSString *const UMSCustomAccountGenderMale;
+            NSString *const UMSCustomAccountGenderFeMale;
+            NSLog(@"---%@---%@",UMSCustomAccountGenderMale,UMSCustomAccountGenderFeMale);
+            NSString *sex = @"0";
+            if ([response.thirdPlatformUserProfile[@"sex"] integerValue]  == 1) {
+                sex = @"1";
+            }else{
+                sex = @"2";
+            }
+            ThirdUser *user = [[ThirdUser alloc]init];
+            user.type = @"wx";
+            user.opnid = snsAccount.openId;
+            user.nickname = snsAccount.userName;
+            user.sex = sex;
+            user.avatar = snsAccount.iconURL;
+            NSLog(@"%@",user);
+            [self getThird_loginData:user];
+            
+        }
+        
+    });
+    
+    
+}
+
+
+
+- (void)getThird_loginData:(ThirdUser *)thirdUser{
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"type":thirdUser.type,@"openid":thirdUser.opnid,@"nickname":thirdUser.nickname,@"sex":thirdUser.sex,@"avatar":thirdUser.avatar};
+    [self.serverManager AnimatedPOST:@"third_login.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 70020) {
+            NSLog(@"data = %@",responseObject[@"data"]);
+            kSETDEFAULTS([responseObject[@"data"] objectForKey:@"user_id"], @"user_id");
+            MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
+            [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
+            }];
+
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
 
 @end

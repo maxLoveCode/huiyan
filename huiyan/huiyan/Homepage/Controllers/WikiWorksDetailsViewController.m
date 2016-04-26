@@ -27,8 +27,10 @@
     [super viewDidLoad];
     self.view.backgroundColor  = [UIColor whiteColor];
     
-    NSLog(@"%@",self.homePage.imgs);
-    
+    //NSLog(@"%@",self.homePage.imgs);
+    [[UIDevice currentDevice] setValue:
+     [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
+                                forKey:@"orientation"];
     self.topView = [[UIView alloc] init];
     _topView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_topView];
@@ -89,6 +91,14 @@
 }
 
 - (BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
+- (BOOL)shouldAutorotate{
+    return YES;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     return YES;
 }
 

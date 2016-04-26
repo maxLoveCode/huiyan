@@ -134,7 +134,7 @@
 
 - (void)get_actor_cateData{
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken};
-    [self.serverManager AnimatedPOST:@"get_actor_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [self.serverManager AnimatedGET:@"get_actor_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 50000) {
           [self.head_view setDataSource:responseObject[@"data"]];
             [self.head_view reloadMenu];
@@ -149,13 +149,13 @@
 - (void)get_actor_bannerData{
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken};
      self.img_arr = [NSMutableArray array];
-       [self.serverManager AnimatedPOST:@"get_actor_banner.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+       [self.serverManager AnimatedGET:@"get_actor_banner.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 50020) {
             self.imgSource_arr = responseObject[@"data"];
             for (NSDictionary *dic in self.imgSource_arr) {
                 [self.img_arr addObject:dic[@"image"]];
             }
-            NSLog(@"%@",self.img_arr);
+        //    NSLog(@"%@",self.img_arr);
             self.banner_view.dataSource = self.img_arr;
             [self.banner_view reloadMenu];
             [self.dramaStarTableView reloadData];
@@ -168,8 +168,9 @@
 
 - (void)get_actor_listData:(NSString *)cid page:(NSString *)page{
     self.dataSource = [NSMutableArray array];
-    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"cid":cid,@"page":page};
-    [self.serverManager AnimatedPOST:@"get_actor_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    NSString *user_id = kOBJECTDEFAULTS(@"user_id");
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"cid":cid,@"page":page,@"user_id":user_id};
+    [self.serverManager AnimatedGET:@"get_actor_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 50010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 DramaStar *drama = [DramaStar dramaWithDic:dic];
