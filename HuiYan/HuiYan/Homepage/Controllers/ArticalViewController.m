@@ -33,6 +33,9 @@
     
     
     NSString* formatString = [attributedString string];
+    NSLog(@"%@", formatString);
+    
+    [self resizeImage:formatString];
     NSAttributedString *secondDecoding =[[NSAttributedString alloc] initWithData:[formatString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                   NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
     self.textView.attributedText = secondDecoding;
@@ -119,14 +122,20 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    CGFloat height = self.bgView.contentSize.height;
-    NSLog(@"---%f---%f",scrollView.contentOffset.y,height);
+   // CGFloat height = self.bgView.contentSize.height;
     if (scrollView.contentOffset.y == CGRectGetHeight(self.label.frame)) {
         
     }
 }
 
-
+-(NSString*)resizeImage:(NSString*)source
+{
+    NSAttributedString* ats = [[NSAttributedString alloc] initWithString:source];
+    NSString* substring = @"<img";
+    NSRange range = [[ats string] rangeOfString:substring];
+    NSLog(@"range is %@", range);
+    return [ats string];
+}
 
 
 
