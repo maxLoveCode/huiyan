@@ -86,6 +86,10 @@
 		550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA081CBB2AF000E2E9DE /* unlock-nor@2x.png */; };
 		550BFA241CBB2AF000E2E9DE /* unlock-nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA091CBB2AF000E2E9DE /* unlock-nor@3x.png */; };
 		557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */; };
+		5570012A1CCF365E003EB02F /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001231CCF365E003EB02F /* WebViewJavascriptBridge.m */; };
+		5570012B1CCF365E003EB02F /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001251CCF365E003EB02F /* WebViewJavascriptBridge_JS.m */; };
+		5570012C1CCF365E003EB02F /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001271CCF365E003EB02F /* WebViewJavascriptBridgeBase.m */; };
+		5570012D1CCF365E003EB02F /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001291CCF365E003EB02F /* WKWebViewJavascriptBridge.m */; };
 		558F5CAB1CBB4762006BD54D /* bg_view.png in Resources */ = {isa = PBXBuildFile; fileRef = 558F5CAA1CBB4762006BD54D /* bg_view.png */; };
 		558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */; };
 		558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CB01CBB945D006BD54D /* TrainingTableViewCell.m */; };
@@ -272,6 +276,14 @@
 		550BFA091CBB2AF000E2E9DE /* unlock-nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-nor@3x.png"; sourceTree = "<group>"; };
 		5570011E1CCDEEFB003EB02F /* UIWebViewTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWebViewTicketController.h; sourceTree = "<group>"; };
 		5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWebViewTicketController.m; sourceTree = "<group>"; };
+		557001221CCF365E003EB02F /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		557001231CCF365E003EB02F /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		557001241CCF365E003EB02F /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
+		557001251CCF365E003EB02F /* WebViewJavascriptBridge_JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge_JS.m; sourceTree = "<group>"; };
+		557001261CCF365E003EB02F /* WebViewJavascriptBridgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridgeBase.h; sourceTree = "<group>"; };
+		557001271CCF365E003EB02F /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
+		557001281CCF365E003EB02F /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		557001291CCF365E003EB02F /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		558F5CAA1CBB4762006BD54D /* bg_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_view.png; sourceTree = "<group>"; };
 		558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingTableViewController.h; sourceTree = "<group>"; };
 		558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingTableViewController.m; sourceTree = "<group>"; };
@@ -507,9 +519,25 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		557001211CCF365E003EB02F /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				557001221CCF365E003EB02F /* WebViewJavascriptBridge.h */,
+				557001231CCF365E003EB02F /* WebViewJavascriptBridge.m */,
+				557001241CCF365E003EB02F /* WebViewJavascriptBridge_JS.h */,
+				557001251CCF365E003EB02F /* WebViewJavascriptBridge_JS.m */,
+				557001261CCF365E003EB02F /* WebViewJavascriptBridgeBase.h */,
+				557001271CCF365E003EB02F /* WebViewJavascriptBridgeBase.m */,
+				557001281CCF365E003EB02F /* WKWebViewJavascriptBridge.h */,
+				557001291CCF365E003EB02F /* WKWebViewJavascriptBridge.m */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
 		55B918F21CCA1D8800717F8E /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				557001211CCF365E003EB02F /* WebViewJavascriptBridge */,
 				55B918F31CCA1FAF00717F8E /* UMSocial_Sdk_5.0.1 */,
 				55B9190E1CCA1FAF00717F8E /* UMSocial_Sdk_Extra_Frameworks */,
 			);
@@ -1242,17 +1270,20 @@
 				25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
 				557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */,
+				5570012D1CCF365E003EB02F /* WKWebViewJavascriptBridge.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
 				55DAFFBF1CC774C60093B180 /* ChangeRondaTableViewController.m in Sources */,
 				55DAFFB11CC228D40093B180 /* MoreCommentTableViewController.m in Sources */,
 				257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */,
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
+				5570012C1CCF365E003EB02F /* WebViewJavascriptBridgeBase.m in Sources */,
 				550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */,
 				257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */,
 				25C6253B1CBDDB210068BFE8 /* ZCBannerView.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
 				25C6255A1CBE48EA0068BFE8 /* MeMainViewController.m in Sources */,
+				5570012A1CCF365E003EB02F /* WebViewJavascriptBridge.m in Sources */,
 				558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */,
 				25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */,
 				55DAFFC21CC866EA0093B180 /* MainTabBarViewController.m in Sources */,
@@ -1269,6 +1300,7 @@
 				25C625511CBE1F8F0068BFE8 /* StarVideoTableViewCell.m in Sources */,
 				25C625431CBE002E0068BFE8 /* LoginViewController.m in Sources */,
 				55DAFFBC1CC5D9D90093B180 /* MoreDetailsTableViewCell.m in Sources */,
+				5570012B1CCF365E003EB02F /* WebViewJavascriptBridge_JS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

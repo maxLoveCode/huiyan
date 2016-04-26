@@ -31,8 +31,7 @@
 - (void)viewDidLoad{
    // NSLog(@"%@",self.ticket);
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.backgroundColor = [UIColor yellowColor];
+
 
     self.view.userInteractionEnabled = YES;
     self.title = @"购票详情";

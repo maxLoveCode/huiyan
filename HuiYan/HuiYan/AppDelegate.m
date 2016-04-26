@@ -14,6 +14,9 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
+//百度地图
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -34,6 +37,9 @@
     [UMSocialWechatHandler setWXAppId:@"wx2201898143065bfd" appSecret:@"b38e8146284e786e41402ddcb0b93539" url:@"http://www.umeng.com/social"];
     [UMSocialQQHandler setQQWithAppId:@"1105277071" appKey:@"x0ZYCDoulIQ2jjzi" url:@"http://www.umeng.com/social"];
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
+    [MAMapServices sharedServices].apiKey = @"f14d06129778c6fa6b9ee5c5f108b099";
+    [AMapSearchServices sharedServices].apiKey = @"f14d06129778c6fa6b9ee5c5f108b099";
+    
     
     
     MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
