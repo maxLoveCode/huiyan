@@ -11,4 +11,7 @@
 @interface UIWebViewTicketController : UIViewController
 @property (nonatomic,copy) NSString *ID;
 @property (nonatomic,copy) NSString *oid;
+@property (nonatomic, weak) UIButton * backItem;
+@property (nonatomic, weak) UIButton * closeItem;
+@property (nonatomic, weak) UIActivityIndicatorView * activityView;
 @end
