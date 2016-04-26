@@ -17,7 +17,7 @@
                BlueprintIdentifier = "55CCD7851CB3640500C3B8CA"
                BuildableName = "huiyan.app"
                BlueprintName = "huiyan"
-               ReferencedContainer = "container:HuiYan.xcodeproj">
+               ReferencedContainer = "container:huiyan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "55CCD79E1CB3640600C3B8CA"
                BuildableName = "huiyanTests.xctest"
                BlueprintName = "huiyanTests"
-               ReferencedContainer = "container:HuiYan.xcodeproj">
+               ReferencedContainer = "container:huiyan.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "55CCD7A91CB3640600C3B8CA"
                BuildableName = "huiyanUITests.xctest"
                BlueprintName = "huiyanUITests"
-               ReferencedContainer = "container:HuiYan.xcodeproj">
+               ReferencedContainer = "container:huiyan.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,7 +55,7 @@
             BlueprintIdentifier = "55CCD7851CB3640500C3B8CA"
             BuildableName = "huiyan.app"
             BlueprintName = "huiyan"
-            ReferencedContainer = "container:HuiYan.xcodeproj">
+            ReferencedContainer = "container:huiyan.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -78,7 +78,7 @@
             BlueprintIdentifier = "55CCD7851CB3640500C3B8CA"
             BuildableName = "huiyan.app"
             BlueprintName = "huiyan"
-            ReferencedContainer = "container:HuiYan.xcodeproj">
+            ReferencedContainer = "container:huiyan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -97,7 +97,7 @@
             BlueprintIdentifier = "55CCD7851CB3640500C3B8CA"
             BuildableName = "huiyan.app"
             BlueprintName = "huiyan"
-            ReferencedContainer = "container:HuiYan.xcodeproj">
+            ReferencedContainer = "container:huiyan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
