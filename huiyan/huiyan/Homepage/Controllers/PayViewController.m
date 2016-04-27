@@ -9,10 +9,15 @@
 #import "PayViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "Order.h"
+#import "DataSigner.h"
+#import "MQPayClient.h"
 @interface PayViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic, strong) NSArray *title_arr;
+@property (nonatomic, strong) NSDictionary *data_dic;
 @end
 
 @implementation PayViewController
@@ -22,6 +27,12 @@
     NSLog(@"%@",self.data_str);
     self.title_arr = @[@"支付宝",@"微信支付"];
     [self.view addSubview:self.tableView];
+    NSData *jsonData = [self.data_str dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    self.data_dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    NSLog(@"%@",self.data_dic);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -216,10 +227,119 @@
 
 - (void)weixinPay{
     NSLog(@"weixin");
+    NSString *notify;
+     NSString *amount;
+    //订单号
+    NSString* orderstring;
+    [MQPayClient shareInstance].notifyUrl = notify;
+    [[MQPayClient shareInstance]weiXinPayWithTitle:@"设备预约" money:amount tradeNo:orderstring successBlock:^(NSDictionary *res) {
+        NSString* resultcode = [res objectForKey:@"code"];
+        NSLog(@"%@, %@",res, resultcode);
+        if ([resultcode integerValue] == 0) {
+            KALERTVIEW(@"购买成功");
+        }
+        else
+        {
+            KALERTVIEW(@"购买失败,请联系客服");
+        }
+      
+    } failureBlock:^(NSDictionary *result) {
+        KALERTVIEW(@"购买失败,请联系客服");
+    }];
 }
 
 - (void)aliPay{
-    NSLog(@"alipay");
+    NSLog(@"支付包支付");
+    //初始化订单信息
+    /*
+     *商户的唯一的parnter和seller。
+     *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
+     */
+    /*============================================================================*/
+    /*=======================需要填写商户app申请的===================================*/
+    /*============================================================================*/
+    NSString *partner = @"2088021412701123";
+    NSString *seller = @"zhifubao@huayinwenhua.com";
+    NSString *privateKey = @"MIICXAIBAAKBgQDEcf//TAUh+3g+LyU08tLclkfp2mqzkQ5XEif23xeXuJhYsDTpzU0Ob15EB16aoUa4E5nOhcxwdnASaB18evvVQtf1ERkC2HQqjf/5fR/inNLtLlJ/nsCIaFQ+fmSPYivvbHYZ1ufpl78smPsVhHKPj9Z3E3zgvo6kAq3/QbUBlQIDAQABAoGAd4rL9saDBRfrJyQ3Zw4xROzqnCM+9UDbUh8JVNCToc9CXg30VSaKsrMQ0SMO7dggmdnLqgJ/0xwvvPPApcSNRDsIzQ+62XoN7oaaSiApDjExeTMRyz/HfR357K4EgDey9gAsh4yxz8aQ5TrIhRnqZJtNmw/QmDm1NASrBBCPN+ECQQDwqN7bDKnMklXXYzzjW4CtcRpAnOc9AaDFrxpkmLuQ2Y3itQDOBo4P+sv+3kGVrQdSmNsUzs0Nfh07YdsTOuHNAkEA0Pehro30WcTTYZLAFvoTd2lOW53/IO1nyiQ6f1Nt6CP6smcsqAvArhdaFrPU2QvUrgXYJT+FQ0ancI/3nC126QJAIm/nw+yh95YRFosq0VXsqeT/XrOVG1O6T89otXBtlqKq/P/tp42kkoDO5B+lvudNnvIkl2uoR//96ttr3+qTGQJAJdhDKtbAoyVXVvt52G9v6RdkPolttCvquRw4j+ivJfSmKXswBjsiqSTHhwcIjEptORsL2ysW2mlIV8VrBZjiSQJBANSRLnRbCM8hn6MlmjkhwEbWCRUBMg8bF1Y2jh0oXR5vBOWdAbFIzHEhw7IXt56F/AYoOi1iKvNEeIKQ3nCslNc=";
+    /*============================================================================*/
+    /*============================================================================*/
+    /*============================================================================*/
+    //partner和seller获取失败,提示
+    if ([partner length] == 0 ||
+        [seller length] == 0 ||
+        [privateKey length] == 0){
+        
+        NSLog(@"缺少partner或者seller或者私钥。");
+        return;
+    }
+    
+    /*
+     *生成订单信息及签名
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    Order *order = [[Order alloc] init];
+    order.partner = partner;
+    order.seller = seller;
+    order.tradeNO = self.data_dic[@"oid"]; //订单ID（由商家自行制定）
+//    //商品标题
+    order.productName = [NSString stringWithFormat:@"汇演订单:%@",self.data_dic[@"ono"]];
+//    //商品描述
+    order.productDescription = @"描述";
+//    //商品价格
+    //order.amount = self.data_dic[@"total_price"];
+    order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
+//    
+//#pragma mark 疑问1.
+//    order.notifyURL =  self.notifyURLTextField.text; //回调URL
+    
+    //以下配置信息是默认信息,不需要更改.
+    order.service = @"mobile.securitypay.pay";
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    order.itBPay = @"30m";
+    order.showUrl = @"m.alipay.com";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types,用于快捷支付成功后重新唤起商户应用
+    NSString *appScheme = @"huiyan";
+    
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    NSString *signedString = [signer signString:orderSpec];
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            NSLog(@"reslut = %@",resultDic);
+            NSLog(@"pay %@",resultDic);
+            NSLog(@"memo %@", [resultDic objectForKey:@"memo"]);
+            NSNumber *resultCode = [resultDic objectForKey:@"resultStatus"];
+            
+            if(resultCode.integerValue == 9000)
+            {
+                NSLog(@"支付成功");
+            }
+            else if (resultCode.integerValue  == 6001)
+            {
+                KALERTVIEW(@"用户终止支付");
+            }
+            else
+            {
+                KALERTVIEW(@"购买失败,请联系客服");
+            }
+
+        }];
+        
+    }
+    
+
 }
 
 

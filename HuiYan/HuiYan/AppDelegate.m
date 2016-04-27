@@ -12,7 +12,7 @@
 #import "LoginViewController.h"
 //微信与支付宝支付
 #import "WXApi.h"
-
+#import <AlipaySDK/AlipaySDK.h>
 #import "MQPayClient.h"
 //友盟
 #import "UMSocial.h"
@@ -79,6 +79,9 @@
         }
         
         //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
         
     }
     return result;
