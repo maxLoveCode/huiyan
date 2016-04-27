@@ -10,6 +10,10 @@
 #import "MainTabBarViewController.h"
 #import "Constant.h"
 #import "LoginViewController.h"
+//微信与支付宝支付
+#import "WXApi.h"
+
+#import "MQPayClient.h"
 //友盟
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
@@ -40,7 +44,8 @@
     //高德
     [MAMapServices sharedServices].apiKey = @"f14d06129778c6fa6b9ee5c5f108b099";
     [AMapSearchServices sharedServices].apiKey = @"f14d06129778c6fa6b9ee5c5f108b099";
-    
+    //微信支付
+    [[MQPayClient shareInstance]registerWeiXinApp:@"wxf40f735c21d329ae" mch_id:@"1268033901" mch_key:@"aTFiGZRxHCGoEBqj7KTKRMrF8IAYqVJ2" notifyUrl:@"www.qq.com"  withDescription:@"WeixinPay"];
     
     
     MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
@@ -62,9 +67,31 @@
    
 }
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
     BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        //微信返回
+        if ([sourceApplication hasPrefix:@"com.tencent"]) {
+            [MQPayClient weiXinHandleOpenURL:url];
+        }
+        
+        //跳转支付宝钱包进行支付，处理支付结果
+        
+    }
     return result;
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    //微信返回
+    if ([url.absoluteString hasPrefix:@"com.tencent"]) {
+        [MQPayClient weiXinHandleOpenURL:url];
+    };
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

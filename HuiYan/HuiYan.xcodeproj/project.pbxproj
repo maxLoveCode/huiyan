@@ -91,6 +91,13 @@
 		5570012C1CCF365E003EB02F /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001271CCF365E003EB02F /* WebViewJavascriptBridgeBase.m */; };
 		5570012D1CCF365E003EB02F /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001291CCF365E003EB02F /* WKWebViewJavascriptBridge.m */; };
 		5570012F1CCF54AE003EB02F /* back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5570012E1CCF54AE003EB02F /* back_arrow@2x.png */; };
+		557001B01CCF667B003EB02F /* MQPayClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001A41CCF667B003EB02F /* MQPayClient.m */; };
+		557001B11CCF667B003EB02F /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557001A71CCF667B003EB02F /* ApiXml.mm */; };
+		557001B21CCF667B003EB02F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557001A81CCF667B003EB02F /* libWeChatSDK.a */; };
+		557001B31CCF667B003EB02F /* MQUntils.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001AA1CCF667B003EB02F /* MQUntils.m */; };
+		557001B41CCF667B003EB02F /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 557001AB1CCF667B003EB02F /* read_me.txt */; };
+		557001B51CCF667B003EB02F /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557001AF1CCF667B003EB02F /* WXUtil.mm */; };
+		557001B81CCF738C003EB02F /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001B71CCF738C003EB02F /* PayViewController.m */; };
 		558F5CAB1CBB4762006BD54D /* bg_view.png in Resources */ = {isa = PBXBuildFile; fileRef = 558F5CAA1CBB4762006BD54D /* bg_view.png */; };
 		558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */; };
 		558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5CB01CBB945D006BD54D /* TrainingTableViewCell.m */; };
@@ -286,6 +293,20 @@
 		557001281CCF365E003EB02F /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		557001291CCF365E003EB02F /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		5570012E1CCF54AE003EB02F /* back_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_arrow@2x.png"; sourceTree = "<group>"; };
+		557001A31CCF667B003EB02F /* MQPayClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQPayClient.h; sourceTree = "<group>"; };
+		557001A41CCF667B003EB02F /* MQPayClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQPayClient.m; sourceTree = "<group>"; };
+		557001A61CCF667B003EB02F /* ApiXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiXml.h; sourceTree = "<group>"; };
+		557001A71CCF667B003EB02F /* ApiXml.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApiXml.mm; sourceTree = "<group>"; };
+		557001A81CCF667B003EB02F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		557001A91CCF667B003EB02F /* MQUntils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQUntils.h; sourceTree = "<group>"; };
+		557001AA1CCF667B003EB02F /* MQUntils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQUntils.m; sourceTree = "<group>"; };
+		557001AB1CCF667B003EB02F /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		557001AC1CCF667B003EB02F /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		557001AD1CCF667B003EB02F /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		557001AE1CCF667B003EB02F /* WXUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXUtil.h; sourceTree = "<group>"; };
+		557001AF1CCF667B003EB02F /* WXUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WXUtil.mm; sourceTree = "<group>"; };
+		557001B61CCF738C003EB02F /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
+		557001B71CCF738C003EB02F /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
 		558F5CAA1CBB4762006BD54D /* bg_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_view.png; sourceTree = "<group>"; };
 		558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingTableViewController.h; sourceTree = "<group>"; };
 		558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingTableViewController.m; sourceTree = "<group>"; };
@@ -410,6 +431,7 @@
 				55B919291CCA1FAF00717F8E /* libSocialWechat.a in Frameworks */,
 				55DAFFD21CC8F8150093B180 /* libsqlite3.tbd in Frameworks */,
 				55DAFFD01CC8F8060093B180 /* CoreGraphics.framework in Frameworks */,
+				557001B21CCF667B003EB02F /* libWeChatSDK.a in Frameworks */,
 				55DAFFCE1CC8F7F90093B180 /* SystemConfiguration.framework in Frameworks */,
 				55DAFFCC1CC8F7EF0093B180 /* libiconv.tbd in Frameworks */,
 				55DAFFCA1CC8F7DE0093B180 /* Security.framework in Frameworks */,
@@ -536,9 +558,37 @@
 			path = WebViewJavascriptBridge;
 			sourceTree = "<group>";
 		};
+		557001A21CCF667B003EB02F /* WeixinPay */ = {
+			isa = PBXGroup;
+			children = (
+				557001A31CCF667B003EB02F /* MQPayClient.h */,
+				557001A41CCF667B003EB02F /* MQPayClient.m */,
+				557001A51CCF667B003EB02F /* SDKExport */,
+			);
+			path = WeixinPay;
+			sourceTree = "<group>";
+		};
+		557001A51CCF667B003EB02F /* SDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				557001A61CCF667B003EB02F /* ApiXml.h */,
+				557001A71CCF667B003EB02F /* ApiXml.mm */,
+				557001A81CCF667B003EB02F /* libWeChatSDK.a */,
+				557001A91CCF667B003EB02F /* MQUntils.h */,
+				557001AA1CCF667B003EB02F /* MQUntils.m */,
+				557001AB1CCF667B003EB02F /* read_me.txt */,
+				557001AC1CCF667B003EB02F /* WXApi.h */,
+				557001AD1CCF667B003EB02F /* WXApiObject.h */,
+				557001AE1CCF667B003EB02F /* WXUtil.h */,
+				557001AF1CCF667B003EB02F /* WXUtil.mm */,
+			);
+			path = SDKExport;
+			sourceTree = "<group>";
+		};
 		55B918F21CCA1D8800717F8E /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				557001A21CCF667B003EB02F /* WeixinPay */,
 				557001211CCF365E003EB02F /* WebViewJavascriptBridge */,
 				55B918F31CCA1FAF00717F8E /* UMSocial_Sdk_5.0.1 */,
 				55B9190E1CCA1FAF00717F8E /* UMSocial_Sdk_Extra_Frameworks */,
@@ -726,6 +776,8 @@
 				55DAFFBE1CC774C60093B180 /* ChangeRondaTableViewController.m */,
 				5570011E1CCDEEFB003EB02F /* UIWebViewTicketController.h */,
 				5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */,
+				557001B61CCF738C003EB02F /* PayViewController.h */,
+				557001B71CCF738C003EB02F /* PayViewController.m */,
 				55DAFFAF1CC228D40093B180 /* MoreCommentTableViewController.h */,
 				55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */,
 				558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */,
@@ -1141,6 +1193,7 @@
 				550BFA131CBB2AF000E2E9DE /* kr-video-player-play@3x.png in Resources */,
 				25C6257F1CBE49C10068BFE8 /* tab_mine_selected@2x.png in Resources */,
 				550BFA181CBB2AF000E2E9DE /* lock-nor@3x.png in Resources */,
+				557001B41CCF667B003EB02F /* read_me.txt in Resources */,
 				25C625801CBE49C10068BFE8 /* tab_mine_selected@3x.png in Resources */,
 				25C6257D1CBE49C10068BFE8 /* tab_homePage@2x.png in Resources */,
 				550BFA221CBB2AF000E2E9DE /* top_shadow.png in Resources */,
@@ -1267,19 +1320,23 @@
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
 				55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */,
 				55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */,
+				557001B51CCF667B003EB02F /* WXUtil.mm in Sources */,
 				55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */,
 				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,
 				25C625881CC089330068BFE8 /* DramaStarViewController.m in Sources */,
+				557001B01CCF667B003EB02F /* MQPayClient.m in Sources */,
 				25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */,
 				25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
 				557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */,
+				557001B31CCF667B003EB02F /* MQUntils.m in Sources */,
 				5570012D1CCF365E003EB02F /* WKWebViewJavascriptBridge.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
 				55DAFFBF1CC774C60093B180 /* ChangeRondaTableViewController.m in Sources */,
 				55DAFFB11CC228D40093B180 /* MoreCommentTableViewController.m in Sources */,
 				257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */,
+				557001B81CCF738C003EB02F /* PayViewController.m in Sources */,
 				55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */,
 				5570012C1CCF365E003EB02F /* WebViewJavascriptBridgeBase.m in Sources */,
 				550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */,
@@ -1303,6 +1360,7 @@
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
 				25C625511CBE1F8F0068BFE8 /* StarVideoTableViewCell.m in Sources */,
 				25C625431CBE002E0068BFE8 /* LoginViewController.m in Sources */,
+				557001B11CCF667B003EB02F /* ApiXml.mm in Sources */,
 				55DAFFBC1CC5D9D90093B180 /* MoreDetailsTableViewCell.m in Sources */,
 				5570012B1CCF365E003EB02F /* WebViewJavascriptBridge_JS.m in Sources */,
 			);
@@ -1454,6 +1512,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1463,6 +1522,8 @@
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_5.0.1",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
+					"$(PROJECT_DIR)/huiyan/第三方/WeixinPay/SDKExport",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1479,6 +1540,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1488,6 +1550,8 @@
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_5.0.1",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
+					"$(PROJECT_DIR)/huiyan/第三方/WeixinPay/SDKExport",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
