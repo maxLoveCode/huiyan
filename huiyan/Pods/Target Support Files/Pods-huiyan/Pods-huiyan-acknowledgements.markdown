@@ -105,6 +105,10 @@ SOFTWARE.
 
 
 
+## RongCloudIMKit
+
+Copyright 2014 Rong Cloud
+
 ## SDWebImage
 
 Copyright (c) 2009 Olivier Poitrey <rs@dailymotion.com>

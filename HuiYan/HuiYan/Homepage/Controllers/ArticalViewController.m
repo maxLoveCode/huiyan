@@ -151,7 +151,6 @@
         }
         
         NSRange wholeTagRange = NSMakeRange(openingTagRange.location, NSMaxRange(closingTagRange) - openingTagRange.location);
-        NSString *wholeTagString = [plainString substringWithRange:wholeTagRange];
         //NSLog(@"wholeTagString == %@", wholeTagString);
         searchRange.location = NSMaxRange(wholeTagRange);
         searchRange.length = [plainString length] - NSMaxRange(wholeTagRange);

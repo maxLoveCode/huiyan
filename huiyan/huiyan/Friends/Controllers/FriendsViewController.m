@@ -7,14 +7,13 @@
 //
 
 #import "FriendsViewController.h"
-#define groupHeight 50.0
-@interface FriendsViewController ()<UITableViewDelegate,UITableViewDataSource>
-{
-    NSMutableArray* currentUnfolderedFans;
-    UITableViewCell* operation;
-}
-@property (nonatomic,strong) UITableView *fansTableView;
-@property (nonatomic,strong) NSMutableArray *fansGroupArray;
+#import "Constant.h"
+#import "ServerManager.h"
+@interface FriendsViewController ()
+
+@property (nonatomic, assign) NSString* token;
+@property (nonatomic, strong) ServerManager* serverManager;
+
 @end
 
 @implementation FriendsViewController
@@ -23,8 +22,20 @@
     [super viewDidLoad];
     self.title = @"戏友";
     self.view.backgroundColor = [UIColor whiteColor];
-     currentUnfolderedFans = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
+    
+    _token = [[NSUserDefaults standardUserDefaults] objectForKey:RongIdentity];
+    if (!_token) {
+        
+    }
+    
+    [[RCIM sharedRCIM] connectWithToken:@"YourTestUserToken" success:^(NSString *userId) {
+        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+    } error:^(RCConnectErrorCode status) {
+        NSLog(@"登陆的错误码为:%ld", (long)status);
+    } tokenIncorrect:^{
+        NSLog(@"token错误");
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

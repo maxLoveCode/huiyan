@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServerManager.h"
+#import <RongIMKit/RongIMKit.h>
 
 @interface FriendsViewController : UIViewController
 
