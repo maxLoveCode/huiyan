@@ -21,6 +21,9 @@
 //高德地图
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
+
+#import <RongIMKit/RongIMKit.h>
+
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -47,6 +50,8 @@
     //微信支付
     [[MQPayClient shareInstance]registerWeiXinApp:@"wxf40f735c21d329ae" mch_id:@"1268033901" mch_key:@"aTFiGZRxHCGoEBqj7KTKRMrF8IAYqVJ2" notifyUrl:@"www.qq.com"  withDescription:@"WeixinPay"];
     
+#pragma mark rongyun initialization
+    [[RCIM sharedRCIM] initWithAppKey:RongIMKey];
     
     MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
     self.window.rootViewController = mainTab;
@@ -64,7 +69,6 @@
     }];
 #endif
     return YES;
-   
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -77,12 +81,10 @@
         if ([sourceApplication hasPrefix:@"com.tencent"]) {
             [MQPayClient weiXinHandleOpenURL:url];
         }
-        
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@",resultDic);
         }];
-        
     }
     return result;
     return YES;

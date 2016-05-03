@@ -17,7 +17,7 @@
 
 #define kLineNumber 3
 
-@interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,MCSwipeMenuDelegate>
+@interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,MCSwipeMenuDelegate, UIViewControllerPreviewingDelegate>
 @property (nonatomic, strong) UITableView *dramaTableView;
 @property (nonatomic, strong) MCSwipeMenu* head_view;
 @property (nonatomic, strong) UIView *bg_view;
@@ -26,6 +26,9 @@
 @property (nonatomic, strong) UISegmentedControl *segement;
 @property (nonatomic, strong) WikiArtcleTableViewController *wikiArtcleTableView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+
+//register for the preview context
+@property (nonatomic, strong) id previewingContext;
 
 @end
 
@@ -54,6 +57,10 @@
     
     [self getDramaCates];
     [self getDramaList:@"0" page:0];
+    
+    if ([self isForceTouchAvailable]) {
+        self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.dramaTableView];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -167,7 +174,6 @@
 
 
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"0.0.0.0.0.0");
     NSMutableArray* source = menu.dataSource;
     NSString* cate = [[source objectAtIndex:indexPath.item] objectForKey:@"id"];
     
@@ -226,5 +232,29 @@
            [self.scrollView setContentOffset:CGPointMake(kScreen_Width,0)];
     }
 }
+
+#pragma mark 3D touch implementation
+- (BOOL)isForceTouchAvailable {
+    BOOL isForceTouchAvailable = NO;
+    if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
+        isForceTouchAvailable = self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable;
+    }
+    return isForceTouchAvailable;
+}
+
+-(UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    CGPoint cellPostion = [self.dramaTableView convertPoint:location fromView:self.view];
+    NSIndexPath *path = [self.dramaTableView indexPathForRowAtPoint:cellPostion];
+    
+    ArticalViewController * freeLookArtical = [[ArticalViewController alloc] init];
+    HomePage* data = [_dataSource objectAtIndex:path.section];
+    [freeLookArtical setOriginData:data.content];
+    [freeLookArtical setTitle:data.title];
+
+    return freeLookArtical;
+}
+
+
 
 @end

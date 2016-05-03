@@ -33,6 +33,9 @@
     
     
     NSString* formatString = [attributedString string];
+    //NSLog(@"source %@", formatString);
+    
+    [self resizeImage:formatString];
     NSAttributedString *secondDecoding =[[NSAttributedString alloc] initWithData:[formatString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                   NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
     self.textView.attributedText = secondDecoding;
@@ -120,13 +123,42 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
    // CGFloat height = self.bgView.contentSize.height;
-   // NSLog(@"---%f---%f",scrollView.contentOffset.y,height);
+
     if (scrollView.contentOffset.y == CGRectGetHeight(self.label.frame)) {
         
     }
 }
 
-
+-(NSString*)resizeImage:(NSString*)source
+{
+    NSAttributedString* ats = [[NSAttributedString alloc] initWithString:source];
+    
+    NSString* plainString = [ats string];
+    
+    NSString *substring = @"<img";
+    NSRange searchRange = NSMakeRange(0, [plainString length]);
+    NSRange openingTagRange = [plainString rangeOfString:substring options:0 range:searchRange];
+    
+    while  ( openingTagRange.location < [plainString length] )
+    {
+        searchRange.location = NSMaxRange(openingTagRange);
+        searchRange.length = [plainString length] - NSMaxRange(openingTagRange);
+        NSRange closingTagRange = [plainString rangeOfString:@">" options:0 range:searchRange];
+        
+        if (closingTagRange.location > [plainString length])
+        {
+            break;
+        }
+        
+        NSRange wholeTagRange = NSMakeRange(openingTagRange.location, NSMaxRange(closingTagRange) - openingTagRange.location);
+        //NSLog(@"wholeTagString == %@", wholeTagString);
+        searchRange.location = NSMaxRange(wholeTagRange);
+        searchRange.length = [plainString length] - NSMaxRange(wholeTagRange);
+        openingTagRange = [plainString rangeOfString:substring options:0 range:searchRange];
+    }
+    
+    return [ats string];
+}
 
 
 
