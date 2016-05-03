@@ -28,6 +28,7 @@
     self.title = @"培训";
     self.image_arr = @[@"arrow",@"arrow",@"arrow"];
     self.title_arr = @[self.train.date,self.train.address,self.train.price];
+    //NSLog(@"%@",self.train.content);
         [self.view addSubview:self.tail_lab];
     [self.view addSubview:self.trainDetailsTableView];
 
@@ -223,10 +224,11 @@
         NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[self.train.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                           NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
         
-        
+       // NSLog(@"attributedString = %@",attributedString);
         NSString* formatString = [attributedString string];
         NSAttributedString *secondDecoding =[[NSAttributedString alloc] initWithData:[formatString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                         NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
+        //NSLog(@"formatString = %@",formatString);
         self.textView.attributedText = secondDecoding;
         label.attributedText = secondDecoding;
         [label sizeToFit];
