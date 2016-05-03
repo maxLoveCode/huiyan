@@ -27,7 +27,7 @@
     [super viewDidLoad];
     self.view.backgroundColor  = [UIColor whiteColor];
     
-    //NSLog(@"%@",self.homePage.imgs);
+    NSLog(@"%@",self.homePage.type);
     [[UIDevice currentDevice] setValue:
      [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
                                 forKey:@"orientation"];
@@ -48,9 +48,17 @@
         make.height.equalTo(self.playerView.mas_width).multipliedBy(9.0f/16.0f).with.priority(750);
     }];
     
-    if (self.homePage.imgs == nil) {
-          self.playerView.videoURL = [NSURL URLWithString:@"http://7xsnr6.com1.z0.glb.clouddn.com/o_1ag1l6dhs150h5r9rkn1uqh9ca11.mp4"];
-    }
+
+        if ([self.homePage.type intValue] == 2 && self.homePage.imgs != nil) {
+            NSData *jsonData = [self.homePage.imgs dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *err;
+          NSArray *data_arr = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:&err];
+            self.playerView.videoURL = [NSURL URLWithString:data_arr[0]];
+        }else{
+             self.playerView.videoURL = [NSURL URLWithString:@"http://7xsnr6.com1.z0.glb.clouddn.com/o_1ag1l6dhs150h5r9rkn1uqh9ca11.mp4"];
+        }
   
     // （可选设置）可以设置视频的填充模式，内部设置默认（ZFPlayerLayerGravityResizeAspect：等比例填充，直到一个维度到达区域边界）
     self.playerView.playerLayerGravity = ZFPlayerLayerGravityResizeAspect;

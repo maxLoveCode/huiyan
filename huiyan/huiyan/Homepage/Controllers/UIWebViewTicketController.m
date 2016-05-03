@@ -11,6 +11,7 @@
 #import "ServerManager.h"
 #import "Constant.h"
 #import "WebViewJavascriptBridge.h"
+#import "PayViewController.h"
 @interface UIWebViewTicketController ()<UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView *webView;
 @property WebViewJavascriptBridge* bridge;
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     [self.view addSubview:self.webView];
     [self initNaviBar];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -49,8 +51,8 @@
          _webView.delegate = self;
         ServerManager *serverManager = [ServerManager sharedInstance];
         NSString *user_id = kOBJECTDEFAULTS(@"user_id");
-        NSString *urlStr = [NSString stringWithFormat:@"http://139.196.32.98/huiyan/index.php/Api/Opera/select_floor/access_token/%@/oid/%@/did/%@/uid/%@",serverManager.accessToken,self.oid,self.ID,user_id];
-        NSLog(@"url = %@",urlStr);
+        NSString *urlStr = [NSString stringWithFormat:@"%@/index.php/home/opera/select_floor/access_token/%@/oid/%@/did/%@/uid/%@",kServerUrl,serverManager.accessToken,self.oid,self.ID,user_id];
+       // NSLog(@"url = %@",urlStr);
         //activityView
         UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         activityView.center = self.view.center;
@@ -63,6 +65,10 @@
         self.bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];
         [self.bridge registerHandler:@"CallHandlerID" handler:^(id data, WVJBResponseCallback responseCallback) {
             NSLog(@"message from H5: %@", data);
+            PayViewController *payCon = [[PayViewController alloc]init];
+            payCon.data_str = data[@"key"];
+            [self.navigationController pushViewController:payCon animated:YES];
+            
         }];
 
         
@@ -86,7 +92,7 @@
     
     UIButton * closeItem = [[UIButton alloc]initWithFrame:CGRectMake(44+12, 0, 44, 44)];
     [closeItem setTitle:@"关闭" forState:UIControlStateNormal];
-    [closeItem setTitleColor:[UIColor colorWithRed:0.000 green:0.502 blue:1.000 alpha:1.000] forState:UIControlStateNormal];
+    [closeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
     closeItem.hidden = YES;
     self.closeItem = closeItem;
@@ -96,7 +102,6 @@
     self.navigationItem.leftBarButtonItem = leftItemBar;
     
 }
-
 
 #pragma mark - clickedBackItem
 - (void)clickedBackItem:(UIBarButtonItem *)btn{
@@ -139,11 +144,6 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     self.activityView.hidden = YES;
 }
-
-
-
-
-
 
 
 

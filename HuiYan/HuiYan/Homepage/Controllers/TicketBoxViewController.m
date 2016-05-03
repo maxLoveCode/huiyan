@@ -14,6 +14,7 @@
 #import "MCSwipeMenu.h"
 #import "BuyTicketDetailsViewController.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "ChangeRondaTableViewController.h"
 #define ticketHeight 142
 
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
@@ -81,6 +82,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BuyTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ticketBox" forIndexPath:indexPath];
     [cell setContent:_dataSource[indexPath.row]];
+    BuyTicket *model = _dataSource[indexPath.row];
+    cell.buy_btn.tag = [model.ID integerValue];;
+    [cell.buy_btn addTarget:self action:@selector(chageOpear:) forControlEvents:UIControlEventTouchUpInside];
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -123,6 +127,14 @@
         
     }];
 }
+
+- (void)chageOpear:(UIButton *)sender{
+    NSString *oid = [NSString stringWithFormat:@"%ld",(long)sender.tag];
+    ChangeRondaTableViewController *rondaCon = [[ChangeRondaTableViewController alloc]init];
+    rondaCon.oid = oid;
+    [self.navigationController pushViewController:rondaCon animated:YES];
+}
+
 
 #pragma mark - menuDelegate
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{

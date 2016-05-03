@@ -7,16 +7,43 @@
 //
 
 #import "ExploreViewController.h"
+#import "FindTableViewCell.h"
+#import "Constant.h"
 
-@interface ExploreViewController ()
-
+@interface ExploreViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation ExploreViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"发现";
+    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
+}
+
+
+- (UITableView *)tableView{
+    if (!_tableView) {
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48) style:UITableViewStylePlain];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.rowHeight = 60;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.tableView registerClass:[FindTableViewCell class] forCellReuseIdentifier:@"cell"];
+    }
+    return _tableView;
+}
+
+#pragma mark - tableViewdelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {

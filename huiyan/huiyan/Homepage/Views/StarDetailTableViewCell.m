@@ -13,8 +13,8 @@
 #define KHEADHight 20
 @implementation StarDetailTableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
         [self addSubview:self.bg_img];
         [self.bg_img addSubview:self.return_btn];
         [self.bg_img addSubview:self.edit_btn];
@@ -29,7 +29,7 @@
         [self.bg_img addSubview:self.focus_btn];
         self.userInteractionEnabled = YES;
     }
-    return  self;
+    return self;
 }
 
 - (UIImageView *)bg_img{
@@ -189,10 +189,5 @@
     }
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end

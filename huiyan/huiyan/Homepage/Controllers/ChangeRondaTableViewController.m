@@ -106,7 +106,7 @@
     [self.serverManager AnimatedGET:@"get_opera_date.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30030) {
             self.dataSource = responseObject[@"data"];
-            NSLog(@"--- %@",responseObject[@"data"]);
+           // NSLog(@"--- %@",responseObject[@"data"]);
         }
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

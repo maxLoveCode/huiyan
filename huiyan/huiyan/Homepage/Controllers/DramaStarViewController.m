@@ -17,7 +17,7 @@
 #import "DramaStar.h"
 #import "StarDetailViewController.h"
 #define kSwipeMenu 41
-#define kBannerHeight 150
+#define kBannerHeight kScreen_Width / 2
 @interface DramaStarViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
 @property (nonatomic, strong) UITableView *dramaStarTableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -129,6 +129,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     StarDetailViewController *star = [[StarDetailViewController alloc]init];
     star.drama = self.dataSource[indexPath.section -1];
+//    [self presentViewController:star animated:YES completion:^{
+//        
+//    }];
     [self.navigationController pushViewController:star animated:YES];
 }
 

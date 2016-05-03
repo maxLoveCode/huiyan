@@ -15,14 +15,15 @@
 #import "ServerManager.h"
 #import "StarVideo.h"
 #import <Masonry.h>
+#import "CoolNavi.h"
 #define headCell 180
 #define menuCell 32
-
+static CGFloat const kWindowHeight = 244.0f;
 @interface StarDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) ZFPlayerView *playerView;
 @property (nonatomic, strong) UIButton *focus_btn;
-
+@property (nonatomic, strong) CoolNavi *headerView;
 @end
 
 @implementation StarDetailViewController
@@ -32,17 +33,65 @@
     // Do any additional setup after loading the view.
     [self.view addSubview:self.mainTable];
     self.serverManager = [ServerManager sharedInstance];
+     self.view.backgroundColor  = [UIColor whiteColor];
+  //  [self.navigationController setNavigationBarHidden:YES];
+   // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self.view addSubview:self.headerView];
     [self get_actor_movieData:@"0"];
+}
+
+- (CoolNavi *)headerView{
+    if (!_headerView) {
+        self.headerView = [[CoolNavi alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kWindowHeight)];
+        [_headerView setContent:self.drama];
+        _headerView.scrollView = self.mainTable;
+        self.focus_btn = _headerView.focus_btn;
+        NSLog(@"%@",self.drama.is_fans);
+        if ([self.drama.is_fans integerValue] == 1) {
+            [_headerView.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
+            [_headerView.focus_btn setBackgroundColor:[UIColor grayColor]];
+        }else{
+            [_headerView.focus_btn setTitle:@"+  关注" forState:UIControlStateNormal];
+            UIColor *color = COLOR_THEME;
+            [_headerView.focus_btn setBackgroundColor:color];
+        }
+        _headerView.focus = ^(UIButton *btn){
+            if ([btn.titleLabel.text isEqualToString:@"取消关注"] ) {
+                [self focus:@"cancel"];
+            }else{
+                [self focus:@"follow"];
+            }
+        };
+    }
+    return _headerView;
+}
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear: animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+//    [UIApplication sharedApplication].statusBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.tabBarController setHidden:YES];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
+//- (BOOL)prefersStatusBarHidden{
+//    return YES;
+//}
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.tabBarController setHidden:NO];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    self.navigationController.navigationBarHidden = NO;
     [self.playerView resetPlayer];
 }
 
@@ -84,11 +133,11 @@
 -(UITableView *)mainTable
 {
     if (!_mainTable) {
-        _mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64 )style:UITableViewStyleGrouped];
+        _mainTable = [[UITableView alloc] init];
+    self.mainTable.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
         [_mainTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"main"];
-        [_mainTable registerClass:[StarDetailTableViewCell class] forCellReuseIdentifier:@"starMain"];
         _mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _mainTable;
@@ -109,24 +158,26 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _mainTable) {
-        return 1;
-    }
-    else
         return [_dataSource count];
+    }
+    return 1;
+        
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.mainTable) {
-        if (indexPath.section == 0) {
-            return 200;
-        }
+        return 261;
     }
-    return 261;
+    return 100;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1 + self.dataSource.count;
+    if (tableView == self.mainTable) {
+        return  self.dataSource.count;
+    }
+    return 1;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -146,31 +197,31 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _mainTable) {
-        if (indexPath.section == 0) {
-            StarDetailTableViewCell *starDetail = [_mainTable dequeueReusableCellWithIdentifier:@"starMain" forIndexPath:indexPath];
-            [starDetail setContent:self.drama];
-            self.focus_btn = starDetail.focus_btn;
-            NSLog(@"%@",self.drama.is_fans);
-            if ([self.drama.is_fans integerValue] == 1) {
-                [starDetail.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
-                [starDetail.focus_btn setBackgroundColor:[UIColor grayColor]];
-            }else{
-                [starDetail.focus_btn setTitle:@"+  关注" forState:UIControlStateNormal];
-                UIColor *color = COLOR_THEME;
-                 [starDetail.focus_btn setBackgroundColor:color];
-            }
-            starDetail.focus = ^(UIButton *btn){
-                if ([btn.titleLabel.text isEqualToString:@"取消关注"] ) {
-                    [self focus:@"cancel"];
-                }else{
-                    [self focus:@"follow"];
-                }
-            };
-            starDetail.selectionStyle = UITableViewCellSelectionStyleNone;
-            return starDetail;
-        }else{
+//            StarDetailTableViewCell *starDetail = [_mainTable dequeueReusableCellWithIdentifier:@"starMain" forIndexPath:indexPath];
+//            [starDetail.return_btn addTarget:self action:@selector(returnNav:) forControlEvents:UIControlEventTouchUpInside];
+//            [starDetail setContent:self.drama];
+//            self.focus_btn = starDetail.focus_btn;
+//            NSLog(@"%@",self.drama.is_fans);
+//            if ([self.drama.is_fans integerValue] == 1) {
+//                [starDetail.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
+//                [starDetail.focus_btn setBackgroundColor:[UIColor grayColor]];
+//            }else{
+//                [starDetail.focus_btn setTitle:@"+  关注" forState:UIControlStateNormal];
+//                UIColor *color = COLOR_THEME;
+//                 [starDetail.focus_btn setBackgroundColor:color];
+//            }
+//            starDetail.focus = ^(UIButton *btn){
+//                if ([btn.titleLabel.text isEqualToString:@"取消关注"] ) {
+//                    [self focus:@"cancel"];
+//                }else{
+//                    [self focus:@"follow"];
+//                }
+//            };
+//            starDetail.selectionStyle = UITableViewCellSelectionStyleNone;
+//            return starDetail;
+       
        StarVideoTableViewCell * cell = [_mainTable dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
-            StarVideo  *model = self.dataSource[indexPath.section - 1];
+            StarVideo  *model = self.dataSource[indexPath.section];
             [cell setContent:model];
             NSURL *videoURL = [NSURL URLWithString:model.movie];
             __block NSIndexPath *weakIndexPath = indexPath;
@@ -187,7 +238,7 @@
 
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-        }
+        
     }
     else
     {
@@ -195,6 +246,7 @@
         return cell;
     }
 }
+
 
 - (void)get_actor_movieData:(NSString *)page{
     self.dataSource = [NSMutableArray array];

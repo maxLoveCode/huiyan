@@ -10,7 +10,7 @@
 #import "Constant.h"
 #import "ZCBannerView.h"
 #import "UITabBarController+ShowHideBar.h"
-#define BinnerHeight 187.5
+#define BinnerHeight kScreen_Width / 2
 @interface TrainingDetailsTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *image_arr;
 @property (nonatomic, strong) NSArray *title_arr;

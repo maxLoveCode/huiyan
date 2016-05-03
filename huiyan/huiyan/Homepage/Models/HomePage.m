@@ -16,11 +16,12 @@
     [drama setCover: [self stringFormatting:[json objectForKey:@"cover"]]];
     [drama setContent:[json objectForKey:@"content"]];
     [drama setCid:(NSInteger*)[[json objectForKey:@"cid"] integerValue]];
-    [drama setType:(NSInteger*)[[json objectForKey:@"type"] integerValue]];
+    drama.type = json[@"type"];
     [drama setID:(NSInteger*)[[json objectForKey:@"id"] integerValue]];
     [drama setActor:[json objectForKey:@"actor"]];
     [drama setTitle:[json objectForKey:@"title"]];
     [drama setProfile:[json objectForKey:@"profile"]];
+    drama.imgs = json[@"imgs"];
     
     return drama;
 }

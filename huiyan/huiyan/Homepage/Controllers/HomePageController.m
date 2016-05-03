@@ -16,7 +16,7 @@
 #import "LoginViewController.h"
 #import "DramaStarViewController.h"
 #import "LoginViewController.h"
-#define bannerHeight 187.5
+#define bannerHeight kScreen_Width / 2
 #define menuHeight 72.5
 #define menuPicWidth 36
 
@@ -32,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = @"首页";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -170,7 +170,7 @@
             return 10;
         }
         else
-            return 64;
+            return 10;
     }
     return 0.01;
 }

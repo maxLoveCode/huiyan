@@ -309,10 +309,10 @@
         if (response.responseCode == UMSResponseCodeSuccess) {
 
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
-              NSLog(@"------%@",[snsAccount description]);
+             // NSLog(@"------%@",[snsAccount description]);
             NSString *const UMSCustomAccountGenderMale;
             NSString *const UMSCustomAccountGenderFeMale;
-            NSLog(@"---%@---%@",UMSCustomAccountGenderMale,UMSCustomAccountGenderFeMale);
+           // NSLog(@"---%@---%@",UMSCustomAccountGenderMale,UMSCustomAccountGenderFeMale);
             NSString *sex = @"0";
             if ([response.thirdPlatformUserProfile[@"sex"] integerValue]  == 1) {
                 sex = @"1";

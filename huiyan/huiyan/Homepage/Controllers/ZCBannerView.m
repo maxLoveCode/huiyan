@@ -49,7 +49,6 @@ static NSString *const resuseIdentufier = @"banner";
         self.bannerCollection.showsHorizontalScrollIndicator = NO;
         [self.bannerCollection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:resuseIdentufier];
         
-        
     }
     return _bannerCollection;
 }
@@ -57,7 +56,7 @@ static NSString *const resuseIdentufier = @"banner";
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-        //[self addTimer];
+ 
 }
 
 
@@ -83,15 +82,15 @@ static NSString *const resuseIdentufier = @"banner";
     UIImageView *image_pic = [cell viewWithTag:1000];
     if (!image_pic) {
         image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Width, self.height)];
-        
-        [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"1"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            UIImage *origin =  image_pic.image;
-            origin = [ZCBannerView imageWithImage:origin scaledToSize:CGSizeMake(kScreen_Width ,self.height)];
-            image_pic.image = origin;
-        }];
         [cell.contentView addSubview:image_pic];
         image_pic.tag = 1000;
     }
+    
+    [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"1"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        UIImage *origin =  image_pic.image;
+        origin = [ZCBannerView imageWithImage:origin scaledToSize:CGSizeMake(kScreen_Width ,self.height)];
+        image_pic.image = origin;
+    }];
     return cell;
 }
 
@@ -105,7 +104,6 @@ static NSString *const resuseIdentufier = @"banner";
 //开启定时器
 - (void)addTimer{
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
-    
 }
 
 - (void)removeTimer{
@@ -118,10 +116,10 @@ static NSString *const resuseIdentufier = @"banner";
         self.pageCount = 0;
     }
     self.pageControl.currentPage = self.pageCount;
-    
-   
+
    // [UIView animateWithDuration:1 animations:^{
-        [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    
+[self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     [self.bannerCollection reloadData];
    // }];
 
