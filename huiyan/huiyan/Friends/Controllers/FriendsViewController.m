@@ -7,14 +7,8 @@
 //
 
 #import "FriendsViewController.h"
-#import "Constant.h"
-#import "ServerManager.h"
-@interface FriendsViewController ()
+#import "ZCBannerView.h"
 
-@property (nonatomic, assign) NSString* token;
-@property (nonatomic, strong) ServerManager* serverManager;
-
-@end
 
 @implementation FriendsViewController
 
@@ -26,7 +20,7 @@
     
     _token = [[NSUserDefaults standardUserDefaults] objectForKey:RongIdentity];
     if (!_token) {
-        
+        [self.view addSubview:self.loginRequest];
     }
     
     [[RCIM sharedRCIM] connectWithToken:@"YourTestUserToken" success:^(NSString *userId) {
@@ -40,7 +34,24 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+-(UIView *)loginRequest
+{
+    if (!_loginRequest) {
+        _loginRequest = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        [_loginRequest addSubview:self.login];
+    }
+    return _loginRequest;
+}
+
+-(UIButton *)login
+{
+    if (!_login) {
+        _login = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_login setTitle:@"前往登录" forState: UIControlStateNormal];
+    }
+    return _login;
 }
 
 /*
