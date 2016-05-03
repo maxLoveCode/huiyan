@@ -67,6 +67,9 @@
     [self setViewControllers:navCon animated:YES];
 }
 
+//哪些界面支持自动转屏
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
