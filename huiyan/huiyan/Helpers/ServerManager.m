@@ -16,7 +16,7 @@
 #endif
 
 NSString *const b_URL = _BASE_URL;
-NSString *const version = @"v1_0";
+NSString *const version = @"api1_0";
 
 @implementation ServerManager
 
@@ -73,7 +73,7 @@ NSString *const version = @"v1_0";
 
 - (NSString*)appendedURL:(NSString*)url
 {
-    return [NSString stringWithFormat:@"%@/api/%@", version, url];
+    return [NSString stringWithFormat:@"%@/%@", version, url];
 }
 
 - (void)AnimatedGET:(NSString *)URLString

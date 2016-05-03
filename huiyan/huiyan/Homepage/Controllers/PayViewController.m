@@ -13,6 +13,7 @@
 #import "Order.h"
 #import "DataSigner.h"
 #import "MQPayClient.h"
+#import "DramaTicketDetailTableViewController.h"
 @interface PayViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSString *payType;
@@ -109,10 +110,10 @@
             price_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - kMargin- 100, 0, 100, 50)];
             price_lab.textColor = [UIColor orangeColor];
             price_lab.textAlignment = NSTextAlignmentRight;
-            price_lab.text = @"hhhhh";
             [cell.contentView addSubview:price_lab];
             price_lab.tag = 1001;
         }
+        price_lab.text = [NSString stringWithFormat:@"¥%@",self.data_dic[@"total_price"]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 1) {
@@ -131,10 +132,11 @@
                 price_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - kMargin- 100, 0, 100, 50)];
                 price_lab.textColor = [UIColor orangeColor];
                  price_lab.textAlignment = NSTextAlignmentRight;
-                price_lab.text = @"hhhhh";
                 [cell.contentView addSubview:price_lab];
                 price_lab.tag = 10001;
             }
+            price_lab.text = [NSString stringWithFormat:@"¥%@",self.data_dic[@"total_price"]];
+
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else{
@@ -226,27 +228,33 @@
 }
 
 - (void)weixinPay{
-    NSLog(@"weixin");
-    NSString *notify;
-     NSString *amount;
-    //订单号
-    NSString* orderstring;
-    [MQPayClient shareInstance].notifyUrl = notify;
-    [[MQPayClient shareInstance]weiXinPayWithTitle:@"设备预约" money:amount tradeNo:orderstring successBlock:^(NSDictionary *res) {
-        NSString* resultcode = [res objectForKey:@"code"];
-        NSLog(@"%@, %@",res, resultcode);
-        if ([resultcode integerValue] == 0) {
-            KALERTVIEW(@"购买成功");
-        }
-        else
-        {
-            KALERTVIEW(@"购买失败,请联系客服");
-        }
-      
-    } failureBlock:^(NSDictionary *result) {
-        KALERTVIEW(@"购买失败,请联系客服");
-    }];
+    DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
+    dramCon.data_dic = self.data_dic;
+    [self.navigationController pushViewController:dramCon animated:YES];
 }
+
+//- (void)weixinPay{
+//    NSLog(@"weixin");
+//    NSString *notify;
+//     NSString *amount;
+//    //订单号
+//    NSString* orderstring;
+//    [MQPayClient shareInstance].notifyUrl = notify;
+//    [[MQPayClient shareInstance]weiXinPayWithTitle:@"设备预约" money:amount tradeNo:orderstring successBlock:^(NSDictionary *res) {
+//        NSString* resultcode = [res objectForKey:@"code"];
+//        NSLog(@"%@, %@",res, resultcode);
+//        if ([resultcode integerValue] == 0) {
+//            KALERTVIEW(@"购买成功");
+//        }
+//        else
+//        {
+//            KALERTVIEW(@"购买失败,请联系客服");
+//        }
+//      
+//    } failureBlock:^(NSDictionary *result) {
+//        KALERTVIEW(@"购买失败,请联系客服");
+//    }];
+//}
 
 - (void)aliPay{
     NSLog(@"支付包支付");

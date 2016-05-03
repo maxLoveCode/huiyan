@@ -12,7 +12,7 @@
 
 @property (nonatomic,assign) NSInteger *ID;
 
-@property (nonatomic,assign) NSInteger *type;
+@property (nonatomic,copy) NSString *type;
 @property (nonatomic,assign) NSInteger *cid;
 
 @property (nonatomic,copy) NSString *title;
@@ -24,7 +24,7 @@
 @property (nonatomic,copy) NSString *createTime;
 @property (nonatomic,copy) NSString *createId;
 
-@property (nonatomic,copy) NSMutableArray *imgs;
+@property (nonatomic,copy) NSString *imgs;
 
 
 +(HomePage* )parseDramaJSON:(NSDictionary*)json;

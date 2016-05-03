@@ -51,8 +51,8 @@
          _webView.delegate = self;
         ServerManager *serverManager = [ServerManager sharedInstance];
         NSString *user_id = kOBJECTDEFAULTS(@"user_id");
-        NSString *urlStr = [NSString stringWithFormat:@"http://139.196.32.98/huiyan/index.php/Api/Opera/select_floor/access_token/%@/oid/%@/did/%@/uid/%@",serverManager.accessToken,self.oid,self.ID,user_id];
-        NSLog(@"url = %@",urlStr);
+        NSString *urlStr = [NSString stringWithFormat:@"%@/index.php/home/opera/select_floor/access_token/%@/oid/%@/did/%@/uid/%@",kServerUrl,serverManager.accessToken,self.oid,self.ID,user_id];
+       // NSLog(@"url = %@",urlStr);
         //activityView
         UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         activityView.center = self.view.center;

@@ -11,7 +11,9 @@
 @interface FindTableViewCell : UITableViewCell
 @property (nonatomic,strong) UIImageView *head_pic;
 @property (nonatomic,strong) UILabel *name_lab;
-@property (nonatomic,strong) UILabel *occupation_lab;
+@property (nonatomic,strong) UIImageView *sex_pic;
+@property (nonatomic,strong) UILabel *occupation_one;
+@property (nonatomic,strong) UILabel *occupation_two;
 @property (nonatomic,strong) UILabel *distance_lab;
 
 @end

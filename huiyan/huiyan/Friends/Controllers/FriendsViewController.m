@@ -7,15 +7,23 @@
 //
 
 #import "FriendsViewController.h"
-
-@interface FriendsViewController ()
-
+#define groupHeight 50.0
+@interface FriendsViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
+    NSMutableArray* currentUnfolderedFans;
+    UITableViewCell* operation;
+}
+@property (nonatomic,strong) UITableView *fansTableView;
+@property (nonatomic,strong) NSMutableArray *fansGroupArray;
 @end
 
 @implementation FriendsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"戏友";
+    self.view.backgroundColor = [UIColor whiteColor];
+     currentUnfolderedFans = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
 }
 

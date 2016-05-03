@@ -88,6 +88,8 @@
 		5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBEA1CD0B8CB00CCD668 /* FindTableViewCell.m */; };
 		5556CBEE1CD0BB3300CCD668 /* FindFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBED1CD0BB3300CCD668 /* FindFriend.m */; };
 		5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBF01CD0C5FE00CCD668 /* MQPayClient.m */; };
+		5556CBF71CD0E30600CCD668 /* DramaTicketDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBF61CD0E30600CCD668 /* DramaTicketDetailTableViewController.m */; };
+		5556CC071CD37C7300CCD668 /* CoolNavi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC061CD37C7300CCD668 /* CoolNavi.m */; };
 		557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */; };
 		5570012A1CCF365E003EB02F /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001231CCF365E003EB02F /* WebViewJavascriptBridge.m */; };
 		5570012B1CCF365E003EB02F /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001251CCF365E003EB02F /* WebViewJavascriptBridge_JS.m */; };
@@ -303,6 +305,10 @@
 		5556CBED1CD0BB3300CCD668 /* FindFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriend.m; sourceTree = "<group>"; };
 		5556CBEF1CD0C5FE00CCD668 /* MQPayClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQPayClient.h; sourceTree = "<group>"; };
 		5556CBF01CD0C5FE00CCD668 /* MQPayClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQPayClient.m; sourceTree = "<group>"; };
+		5556CBF51CD0E30600CCD668 /* DramaTicketDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaTicketDetailTableViewController.h; sourceTree = "<group>"; };
+		5556CBF61CD0E30600CCD668 /* DramaTicketDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaTicketDetailTableViewController.m; sourceTree = "<group>"; };
+		5556CC051CD37C7300CCD668 /* CoolNavi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoolNavi.h; sourceTree = "<group>"; };
+		5556CC061CD37C7300CCD668 /* CoolNavi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolNavi.m; sourceTree = "<group>"; };
 		5570011E1CCDEEFB003EB02F /* UIWebViewTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWebViewTicketController.h; sourceTree = "<group>"; };
 		5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWebViewTicketController.m; sourceTree = "<group>"; };
 		557001221CCF365E003EB02F /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
@@ -829,6 +835,8 @@
 		55B918F21CCA1D8800717F8E /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				5556CC051CD37C7300CCD668 /* CoolNavi.h */,
+				5556CC061CD37C7300CCD668 /* CoolNavi.m */,
 				55B2C8F21CD09DEC0070787A /* Alipay */,
 				557001A21CCF667B003EB02F /* WeixinPay */,
 				557001211CCF365E003EB02F /* WebViewJavascriptBridge */,
@@ -1024,6 +1032,8 @@
 				55DAFFB01CC228D40093B180 /* MoreCommentTableViewController.m */,
 				558F5CAC1CBB9429006BD54D /* TrainingTableViewController.h */,
 				558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */,
+				5556CBF51CD0E30600CCD668 /* DramaTicketDetailTableViewController.h */,
+				5556CBF61CD0E30600CCD668 /* DramaTicketDetailTableViewController.m */,
 				558F5CB81CBBAAFA006BD54D /* TrainingDetailsTableViewController.h */,
 				558F5CB91CBBAAFA006BD54D /* TrainingDetailsTableViewController.m */,
 				257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */,
@@ -1556,6 +1566,7 @@
 				557EDE7F1CD0A4AB0039267E /* NSDataEx.m in Sources */,
 				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
 				558F5D051CBE50F0006BD54D /* RecommondedTableViewCell.m in Sources */,
+				5556CBF71CD0E30600CCD668 /* DramaTicketDetailTableViewController.m in Sources */,
 				55CCD7F81CB3E17200C3B8CA /* HomePage.m in Sources */,
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
 				55942D421CB7D77100EB041A /* CommentContent.m in Sources */,
@@ -1610,6 +1621,7 @@
 				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */,
+				5556CC071CD37C7300CCD668 /* CoolNavi.m in Sources */,
 				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,

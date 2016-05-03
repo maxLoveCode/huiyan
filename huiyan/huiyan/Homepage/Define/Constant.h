@@ -24,8 +24,8 @@
 #define COLOR_WithHex(rgb) COLOR_WITH_RGB(\
 (rgb&0xFF0000)>>16, (rgb&0xFF00)>>8, (rgb&0xFF))
 #define COLOR_THEME  COLOR_WithHex(0xe54863);
-
 #define kMargin 15// 边距
+#define kServerUrl @"http://139.196.32.98/huiyan/api1_0"
 
 /**字体设置*/
 #define kFONT18  [UIFont systemFontOfSize:18]
