@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huiyan/Homepage/Controllers/UIWebViewTicketController.m"
-            timestampString = "483929481.294718"
+            filePath = "huiyan/Homepage/Controllers/TrainingDetailsTableViewController.m"
+            timestampString = "483954329.843631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "-viewWillDisappear:"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

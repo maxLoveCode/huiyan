@@ -394,7 +394,7 @@
     NSDictionary *params = @{@"access_token":_serverManager.accessToken,@"key":@"app_banner"};
     [_serverManager AnimatedGET:@"get_app_config.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue]== 60000) {
-              self.banner_view.dataSource = [NSJSONSerialization JSONObjectWithData:[[responseObject[@"data"] objectForKey:@"imgs"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+            self.banner_view.dataSource = [responseObject[@"data"] objectForKey:@"value"];
             [self.banner_view reloadMenu];
        
         }

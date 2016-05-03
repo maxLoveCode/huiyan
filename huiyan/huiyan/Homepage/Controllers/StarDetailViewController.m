@@ -134,7 +134,7 @@ static CGFloat const kWindowHeight = 244.0f;
 {
     if (!_mainTable) {
         _mainTable = [[UITableView alloc] init];
-    self.mainTable.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.mainTable.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 64);
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
         [_mainTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"main"];

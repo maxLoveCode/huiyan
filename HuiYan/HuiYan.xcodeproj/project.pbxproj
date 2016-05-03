@@ -91,6 +91,8 @@
 		5556CBF71CD0E30600CCD668 /* DramaTicketDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBF61CD0E30600CCD668 /* DramaTicketDetailTableViewController.m */; };
 		5556CC071CD37C7300CCD668 /* CoolNavi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC061CD37C7300CCD668 /* CoolNavi.m */; };
 		5556CC0C1CD83F0100CCD668 /* PersonMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC0B1CD83F0100CCD668 /* PersonMessage.m */; };
+		5556CC0F1CD8992B00CCD668 /* LookTicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC0E1CD8992B00CCD668 /* LookTicketDetailViewController.m */; };
+		5556CC151CD89DD700CCD668 /* LookTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC141CD89DD700CCD668 /* LookTicketCell.m */; };
 		557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */; };
 		5570012A1CCF365E003EB02F /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001231CCF365E003EB02F /* WebViewJavascriptBridge.m */; };
 		5570012B1CCF365E003EB02F /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001251CCF365E003EB02F /* WebViewJavascriptBridge_JS.m */; };
@@ -312,6 +314,10 @@
 		5556CC061CD37C7300CCD668 /* CoolNavi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolNavi.m; sourceTree = "<group>"; };
 		5556CC0A1CD83F0100CCD668 /* PersonMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessage.h; sourceTree = "<group>"; };
 		5556CC0B1CD83F0100CCD668 /* PersonMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessage.m; sourceTree = "<group>"; };
+		5556CC0D1CD8992B00CCD668 /* LookTicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookTicketDetailViewController.h; sourceTree = "<group>"; };
+		5556CC0E1CD8992B00CCD668 /* LookTicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookTicketDetailViewController.m; sourceTree = "<group>"; };
+		5556CC131CD89DD700CCD668 /* LookTicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookTicketCell.h; sourceTree = "<group>"; };
+		5556CC141CD89DD700CCD668 /* LookTicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookTicketCell.m; sourceTree = "<group>"; };
 		5570011E1CCDEEFB003EB02F /* UIWebViewTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWebViewTicketController.h; sourceTree = "<group>"; };
 		5570011F1CCDEEFB003EB02F /* UIWebViewTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWebViewTicketController.m; sourceTree = "<group>"; };
 		557001221CCF365E003EB02F /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
@@ -1037,6 +1043,8 @@
 				558F5CAD1CBB9429006BD54D /* TrainingTableViewController.m */,
 				5556CBF51CD0E30600CCD668 /* DramaTicketDetailTableViewController.h */,
 				5556CBF61CD0E30600CCD668 /* DramaTicketDetailTableViewController.m */,
+				5556CC0D1CD8992B00CCD668 /* LookTicketDetailViewController.h */,
+				5556CC0E1CD8992B00CCD668 /* LookTicketDetailViewController.m */,
 				558F5CB81CBBAAFA006BD54D /* TrainingDetailsTableViewController.h */,
 				558F5CB91CBBAAFA006BD54D /* TrainingDetailsTableViewController.m */,
 				257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */,
@@ -1274,6 +1282,8 @@
 		55CCD7F51CB3B07C00C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5556CC131CD89DD700CCD668 /* LookTicketCell.h */,
+				5556CC141CD89DD700CCD668 /* LookTicketCell.m */,
 				25C625891CC0897C0068BFE8 /* DramaStarTableViewCell.h */,
 				25C6258A1CC0897C0068BFE8 /* DramaStarTableViewCell.m */,
 				257FFC631CB64B0E004C3CDE /* ArticleTableViewCell.h */,
@@ -1595,6 +1605,7 @@
 				557EDE7E1CD0A4AB0039267E /* MD5DataSigner.m in Sources */,
 				25C625881CC089330068BFE8 /* DramaStarViewController.m in Sources */,
 				25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */,
+				5556CC0F1CD8992B00CCD668 /* LookTicketDetailViewController.m in Sources */,
 				25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
 				557001201CCDEEFB003EB02F /* UIWebViewTicketController.m in Sources */,
@@ -1628,6 +1639,7 @@
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */,
 				5556CC071CD37C7300CCD668 /* CoolNavi.m in Sources */,
+				5556CC151CD89DD700CCD668 /* LookTicketCell.m in Sources */,
 				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
