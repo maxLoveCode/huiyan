@@ -12,7 +12,7 @@
 #import "Constant.h"
 #import "ServerManager.h"
 
-@interface FriendsViewController : UIViewController
+@interface FriendsViewController : RCConversationListViewController
 
 
 @property (nonatomic, assign) NSString* token;

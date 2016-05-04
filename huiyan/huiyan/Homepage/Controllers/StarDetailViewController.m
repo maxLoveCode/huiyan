@@ -55,11 +55,12 @@ static CGFloat const kWindowHeight = 244.0f;
             UIColor *color = COLOR_THEME;
             [_headerView.focus_btn setBackgroundColor:color];
         }
+        __weak StarDetailViewController *weakref = self;
         _headerView.focus = ^(UIButton *btn){
             if ([btn.titleLabel.text isEqualToString:@"取消关注"] ) {
-                [self focus:@"cancel"];
+                [weakref focus:@"cancel"];
             }else{
-                [self focus:@"follow"];
+                [weakref focus:@"follow"];
             }
         };
     }

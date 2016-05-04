@@ -71,4 +71,17 @@
     [self.navigationController pushViewController:view animated:YES];
 }
 
+-(RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    RCConversationBaseCell* cell = [[RCConversationBaseCell alloc]init];
+    cell.model = model;
+    return cell;
+}
+
+-(void)didTapCellPortrait:(RCConversationModel *)model
+{
+    
+}
+
 @end
