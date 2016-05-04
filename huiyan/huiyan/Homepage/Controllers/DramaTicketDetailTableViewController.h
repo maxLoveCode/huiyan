@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DramaTicketDetailTableViewController : UIViewController
-@property (nonatomic,strong) NSDictionary *data_dic;
+@property (nonatomic,copy) NSString *ID;
+@property (nonatomic,copy) NSString *order_no;
+@property (nonatomic,copy) NSString *trade_no;
+@property (nonatomic,copy) NSString *pay_type;
 @end

@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "ServerManager.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "LookTicketCell.h"
 @interface LookTicketDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -37,7 +38,10 @@
         self.mainTableView.delegate = self;
         self.mainTableView.dataSource = self;
         self.mainTableView.separatorStyle = UITableViewCellSelectionStyleNone;
-     //   self.mainTableView registerClass:<#(nullable Class)#> forCellReuseIdentifier:<#(nonnull NSString *)#>
+        [self.mainTableView registerClass:[LookTicketCell class] forCellReuseIdentifier:@"one"];
+        [self.mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"two"];
+        [self.mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"three"];
+        [self.mainTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"four"];
         
     }
     return _mainTableView;
@@ -59,8 +63,27 @@
     return 1;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        LookTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"one" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else if (indexPath.section == 1){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"two" forIndexPath:indexPath];
+        UILabel *name_lab = [cell viewWithTag:1000];
+      
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    }else if (indexPath.section == 2){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"three" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"third" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+}
 
 @end

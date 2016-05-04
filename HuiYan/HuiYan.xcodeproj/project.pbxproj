@@ -126,6 +126,7 @@
 		558F5D051CBE50F0006BD54D /* RecommondedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558F5D041CBE50F0006BD54D /* RecommondedTableViewCell.m */; };
 		55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942D3E1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m */; };
 		55942D421CB7D77100EB041A /* CommentContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 55942D411CB7D77100EB041A /* CommentContent.m */; };
+		55AD324F1CD9C748000ACE39 /* PayData.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD324E1CD9C748000ACE39 /* PayData.m */; };
 		55B3D9D11CB5056100277896 /* BuyTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D9D01CB5056100277896 /* BuyTicket.m */; };
 		55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D9D31CB5151400277896 /* WikiWorksDetailsViewController.m */; };
 		55B9191B1CCA1FAF00717F8E /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55B918F41CCA1FAF00717F8E /* UMSocialLocalizable.strings */; };
@@ -454,6 +455,8 @@
 		55942D3E1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketDetailsTableViewCell.m; sourceTree = "<group>"; };
 		55942D401CB7D77100EB041A /* CommentContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentContent.h; sourceTree = "<group>"; };
 		55942D411CB7D77100EB041A /* CommentContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentContent.m; sourceTree = "<group>"; };
+		55AD324D1CD9C748000ACE39 /* PayData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayData.h; sourceTree = "<group>"; };
+		55AD324E1CD9C748000ACE39 /* PayData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayData.m; sourceTree = "<group>"; };
 		55B3D9CF1CB5056100277896 /* BuyTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicket.h; sourceTree = "<group>"; };
 		55B3D9D01CB5056100277896 /* BuyTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicket.m; sourceTree = "<group>"; };
 		55B3D9D21CB5151400277896 /* WikiWorksDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiWorksDetailsViewController.h; sourceTree = "<group>"; };
@@ -1078,6 +1081,8 @@
 				25C6258D1CC08CDC0068BFE8 /* DramaStar.m */,
 				55DAFFB51CC4D7A40093B180 /* StarVideo.h */,
 				55DAFFB61CC4D7A40093B180 /* StarVideo.m */,
+				55AD324D1CD9C748000ACE39 /* PayData.h */,
+				55AD324E1CD9C748000ACE39 /* PayData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1642,6 +1647,7 @@
 				5556CC151CD89DD700CCD668 /* LookTicketCell.m in Sources */,
 				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
+				55AD324F1CD9C748000ACE39 /* PayData.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
 				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,

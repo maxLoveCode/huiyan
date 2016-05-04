@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PayData.h"
 @interface LookTicketDetailViewController : UIViewController
-
+@property (nonatomic, strong) PayData *payData;
 @end

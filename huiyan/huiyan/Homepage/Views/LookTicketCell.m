@@ -8,6 +8,7 @@
 
 #import "LookTicketCell.h"
 #import "Constant.h"
+#import "UIImageView+WebCache.h"
 @implementation LookTicketCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -118,5 +119,8 @@
     self.barCode_pic.frame = CGRectMake(CGRectGetWidth(self.line_lab.frame) / 2 - 75, CGRectGetMaxY(self.code_lab.frame) + 5, 150, 150);
 }
 
+- (void)setContent:(PayData *)payData{
+
+}
 
 @end

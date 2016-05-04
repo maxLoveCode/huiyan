@@ -228,9 +228,7 @@
 }
 
 - (void)weixinPay{
-    DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
-    dramCon.data_dic = self.data_dic;
-    [self.navigationController pushViewController:dramCon animated:YES];
+   
 }
 
 //- (void)weixinPay{
@@ -333,6 +331,12 @@
             if(resultCode.integerValue == 9000)
             {
                 NSLog(@"支付成功");
+                DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
+                
+                dramCon.ID = self.data_dic[@"oid"];
+                dramCon.order_no = self.data_dic[@"ono"];
+              //  dramCon.trade_no =
+                [self.navigationController pushViewController:dramCon animated:YES];
             }
             else if (resultCode.integerValue  == 6001)
             {

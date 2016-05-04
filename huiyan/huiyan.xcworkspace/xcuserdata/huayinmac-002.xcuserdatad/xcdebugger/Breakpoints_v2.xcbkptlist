@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huiyan/Homepage/Controllers/TrainingDetailsTableViewController.m"
-            timestampString = "483954329.843631"
+            filePath = "huiyan/Homepage/Controllers/PayViewController.m"
+            timestampString = "484034282.272656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
+            landmarkName = "-aliPay"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
