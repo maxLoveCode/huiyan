@@ -255,6 +255,9 @@
     return freeLookArtical;
 }
 
-
+-(void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    
+}
 
 @end
