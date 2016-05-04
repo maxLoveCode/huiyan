@@ -40,7 +40,6 @@
 {
     if (!_loginRequest) {
         _loginRequest = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
-        [_loginRequest setBackgroundColor:[UIColor redColor]];
         [_loginRequest addSubview:self.login];
     }
     return _loginRequest;
@@ -50,7 +49,17 @@
 {
     if (!_login) {
         _login = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_login setTitle:@"前往登录" forState: UIControlStateNormal];
+        [_login setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        NSMutableAttributedString* tncString = [[NSMutableAttributedString alloc] initWithString:@" 请先去登录 "];
+        
+        [tncString addAttribute:NSUnderlineStyleAttributeName
+                          value:@(NSUnderlineStyleSingle)
+                          range:(NSRange){0,[tncString length]}];
+        [tncString addAttribute:NSForegroundColorAttributeName  value:[UIColor
+                                                                       darkTextColor] range:(NSRange){0,[tncString length]}];
+        [tncString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:(NSRange){0,[tncString length]}];
+        
+        [_login setAttributedTitle:tncString forState:UIControlStateNormal];
         [_login addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _login;

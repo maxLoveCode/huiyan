@@ -310,10 +310,6 @@
         if (response.responseCode == UMSResponseCodeSuccess) {
 
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
-             // NSLog(@"------%@",[snsAccount description]);
-            NSString *const UMSCustomAccountGenderMale;
-            NSString *const UMSCustomAccountGenderFeMale;
-           // NSLog(@"---%@---%@",UMSCustomAccountGenderMale,UMSCustomAccountGenderFeMale);
             NSString *sex = @"0";
             if ([response.thirdPlatformUserProfile[@"sex"] integerValue]  == 1) {
                 sex = @"1";
@@ -326,7 +322,6 @@
             user.nickname = snsAccount.userName;
             user.sex = sex;
             user.avatar = snsAccount.iconURL;
-            NSLog(@"%@",user);
             [self getThird_loginData:user];
             
         }
