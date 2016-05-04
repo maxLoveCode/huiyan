@@ -196,7 +196,6 @@
                           @"mobile": user.mobile,
                           @"password": [NSString getMd5_32Bit_String:user.password]};
     [_serverManager AnimatedPOST:url parameters:dic  success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        //NSLog(@"%@",responseObject[@"msg"]);
         if (isLogin == YES) {
             if ([responseObject[@"code"] integerValue] == 70010) {
                 NSLog(@"%@",responseObject[@"msg"]);

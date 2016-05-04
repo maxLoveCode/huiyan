@@ -8,6 +8,7 @@
 
 #import "FriendsViewController.h"
 #import "ZCBannerView.h"
+#import "LoginViewController.h"
 
 
 @implementation FriendsViewController
@@ -23,7 +24,7 @@
         [self.view addSubview:self.loginRequest];
     }
     
-    [[RCIM sharedRCIM] connectWithToken:@"YourTestUserToken" success:^(NSString *userId) {
+    [[RCIM sharedRCIM] connectWithToken:_token success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%ld", (long)status);
@@ -66,7 +67,8 @@
 }
 
 -(void)loginAction{
-    
+    LoginViewController* view = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 @end
