@@ -7,14 +7,9 @@
 //
 
 #import "FriendsViewController.h"
-#import "Constant.h"
-#import "ServerManager.h"
-@interface FriendsViewController ()
+#import "ZCBannerView.h"
+#import "LoginViewController.h"
 
-@property (nonatomic, assign) NSString* token;
-@property (nonatomic, strong) ServerManager* serverManager;
-
-@end
 
 @implementation FriendsViewController
 
@@ -26,10 +21,10 @@
     
     _token = [[NSUserDefaults standardUserDefaults] objectForKey:RongIdentity];
     if (!_token) {
-        
+        [self.view addSubview:self.loginRequest];
     }
     
-    [[RCIM sharedRCIM] connectWithToken:@"YourTestUserToken" success:^(NSString *userId) {
+    [[RCIM sharedRCIM] connectWithToken:_token success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%ld", (long)status);
@@ -40,17 +35,40 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UIView *)loginRequest
+{
+    if (!_loginRequest) {
+        _loginRequest = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        [_loginRequest addSubview:self.login];
+    }
+    return _loginRequest;
 }
-*/
+
+-(UIButton *)login
+{
+    if (!_login) {
+        _login = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_login setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        NSMutableAttributedString* tncString = [[NSMutableAttributedString alloc] initWithString:@" 请先去登录 "];
+        
+        [tncString addAttribute:NSUnderlineStyleAttributeName
+                          value:@(NSUnderlineStyleSingle)
+                          range:(NSRange){0,[tncString length]}];
+        [tncString addAttribute:NSForegroundColorAttributeName  value:[UIColor
+                                                                       darkTextColor] range:(NSRange){0,[tncString length]}];
+        [tncString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:(NSRange){0,[tncString length]}];
+        
+        [_login setAttributedTitle:tncString forState:UIControlStateNormal];
+        [_login addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _login;
+}
+
+-(void)loginAction{
+    LoginViewController* view = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
+}
 
 @end

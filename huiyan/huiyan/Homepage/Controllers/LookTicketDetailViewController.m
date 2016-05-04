@@ -66,11 +66,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         LookTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"one" forIndexPath:indexPath];
+        [cell setContent:self.payData];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 1){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"two" forIndexPath:indexPath];
         UILabel *name_lab = [cell viewWithTag:1000];
+        if (!name_lab) {
+            name_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 5, 100, 16)];
+            name_lab.textColor = COLOR_THEME;
+           
+            
+        }
       
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

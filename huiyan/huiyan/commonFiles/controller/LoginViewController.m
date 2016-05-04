@@ -196,7 +196,6 @@
                           @"mobile": user.mobile,
                           @"password": [NSString getMd5_32Bit_String:user.password]};
     [_serverManager AnimatedPOST:url parameters:dic  success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        //NSLog(@"%@",responseObject[@"msg"]);
         if (isLogin == YES) {
             if ([responseObject[@"code"] integerValue] == 70010) {
                 NSLog(@"%@",responseObject[@"msg"]);
@@ -310,8 +309,6 @@
         if (response.responseCode == UMSResponseCodeSuccess) {
 
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
-             // NSLog(@"------%@",[snsAccount description]);
-           // NSLog(@"---%@---%@",UMSCustomAccountGenderMale,UMSCustomAccountGenderFeMale);
             NSString *sex = @"0";
             if ([response.thirdPlatformUserProfile[@"sex"] integerValue]  == 1) {
                 sex = @"1";
@@ -324,7 +321,6 @@
             user.nickname = snsAccount.userName;
             user.sex = sex;
             user.avatar = snsAccount.iconURL;
-            NSLog(@"%@",user);
             [self getThird_loginData:user];
             
         }

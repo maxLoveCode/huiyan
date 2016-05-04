@@ -114,6 +114,7 @@ static CGFloat const kWindowHeight = 244.0f;
         [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(0);
         }];
+        [self.view addSubview:self.headerView];
 
         
     }else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight){
@@ -122,6 +123,7 @@ static CGFloat const kWindowHeight = 244.0f;
         [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(0);
         }];
+        [self.headerView removeFromSuperview];
     }
 }
 

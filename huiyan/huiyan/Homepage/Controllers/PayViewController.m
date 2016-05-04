@@ -286,7 +286,8 @@
     Order *order = [[Order alloc] init];
     order.partner = partner;
     order.seller = seller;
-    order.tradeNO = self.data_dic[@"oid"]; //订单ID（由商家自行制定）
+    order.tradeNO = self.data_dic[@"ono"]; //订单ID（由商家自行制定）
+    NSLog(@"%@",self.data_dic[@"ono"]);
 //    //商品标题
     order.productName = [NSString stringWithFormat:@"汇演订单:%@",self.data_dic[@"ono"]];
 //    //商品描述
@@ -296,7 +297,7 @@
     order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
 //    
 //#pragma mark 疑问1.
-//    order.notifyURL =  self.notifyURLTextField.text; //回调URL
+    order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/alipay"; //回调URL
     
     //以下配置信息是默认信息,不需要更改.
     order.service = @"mobile.securitypay.pay";
@@ -331,12 +332,12 @@
             if(resultCode.integerValue == 9000)
             {
                 NSLog(@"支付成功");
-                DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
-                
-                dramCon.ID = self.data_dic[@"oid"];
-                dramCon.order_no = self.data_dic[@"ono"];
-              //  dramCon.trade_no =
-                [self.navigationController pushViewController:dramCon animated:YES];
+//                DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
+//                
+//                dramCon.ID = self.data_dic[@"oid"];
+//                dramCon.order_no = self.data_dic[@"ono"];
+//              //  dramCon.trade_no =
+//                [self.navigationController pushViewController:dramCon animated:YES];
             }
             else if (resultCode.integerValue  == 6001)
             {
@@ -353,6 +354,8 @@
     
 
 }
+
+
 
 
 @end

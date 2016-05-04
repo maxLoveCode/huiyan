@@ -120,7 +120,13 @@
 }
 
 - (void)setContent:(PayData *)payData{
-
+    self.title_lab.text = payData.opera_title;
+    self.time_lab.text = payData.opera_date;
+    self.name_lab.text = payData.theater_name;
+    self.seat_lab.text = payData.tickets;
+    self.mobile_lab.text = [NSString stringWithFormat:@"手机号 :%@",@"22"];
+    self.code_lab.text = [NSString stringWithFormat:@"验证码: %@",payData.code_num];
+    [self.barCode_pic sd_setImageWithURL:[NSURL URLWithString:payData.code_img] placeholderImage:[UIImage imageNamed:@"arrow"]];
 }
 
 @end
