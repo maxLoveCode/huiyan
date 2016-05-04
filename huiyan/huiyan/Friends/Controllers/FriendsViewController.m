@@ -40,6 +40,7 @@
 {
     if (!_loginRequest) {
         _loginRequest = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        [_loginRequest setBackgroundColor:[UIColor redColor]];
         [_loginRequest addSubview:self.login];
     }
     return _loginRequest;
@@ -50,18 +51,13 @@
     if (!_login) {
         _login = [UIButton buttonWithType:UIButtonTypeCustom];
         [_login setTitle:@"前往登录" forState: UIControlStateNormal];
+        [_login addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _login;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)loginAction{
+    
 }
-*/
 
 @end
