@@ -13,34 +13,24 @@
 
 @implementation FriendsViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.displayConversationTypeArray = @[@(ConversationType_PRIVATE),@(ConversationType_SYSTEM)];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"戏友";
     self.view.backgroundColor = [UIColor whiteColor];
-    // Do any additional setup after loading the view.
-    
-    _token = [[NSUserDefaults standardUserDefaults] objectForKey:RongIdentity];
-    if (!_token) {
-        [self.view addSubview:self.loginRequest];
-    }
-    
-    self.displayConversationTypeArray = @[@(ConversationType_PRIVATE),@(ConversationType_SYSTEM)];                                                                                                                                                                                                                                                                                                                                                                    
-    [[RCIM sharedRCIM] connectWithToken:_token success:^(NSString *userId) {
-        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-    } error:^(RCConnectErrorCode status) {
-        NSLog(@"登陆的错误码为:%ld", (long)status);
-    } tokenIncorrect:^{
-        NSLog(@"token错误");
-    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    
+    //NSLog(@"%@",self.conversationListDataSource);
 }
 
 -(UIView *)loginRequest
@@ -88,6 +78,16 @@
 -(void)didTapCellPortrait:(RCConversationModel *)model
 {
     
+}
+
+-(void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath
+{
+    RCConversationViewController* vc = [[RCConversationViewController alloc] init];
+    vc.targetId = model.targetId;
+    vc.conversationType = model.conversationType;
+    
+    [self.navigationController pushViewController:vc
+                                         animated:YES];
 }
 
 @end

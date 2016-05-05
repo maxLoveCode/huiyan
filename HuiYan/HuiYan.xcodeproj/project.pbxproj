@@ -15,6 +15,7 @@
 		25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8C2451CB4AC7D00386540 /* UnitTest.m */; };
 		25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */; };
 		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
+		25C216581CDB2246007C69BB /* chatUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C216571CDB2246007C69BB /* chatUsers.m */; };
 		25C625331CBCFA3E0068BFE8 /* qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252D1CBCFA3E0068BFE8 /* qq.png */; };
 		25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */; };
 		25C625351CBCFA3E0068BFE8 /* qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252F1CBCFA3E0068BFE8 /* qq@3x.png */; };
@@ -212,6 +213,8 @@
 		25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TicketBoxViewController.m; path = HuiYan/Homepage/Controllers/TicketBoxViewController.m; sourceTree = SOURCE_ROOT; };
 		25B6B37B1CB51380000F99F1 /* MCSwipeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSwipeMenu.h; path = HuiYan/Homepage/Controllers/MCSwipeMenu.h; sourceTree = SOURCE_ROOT; };
 		25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSwipeMenu.m; path = HuiYan/Homepage/Controllers/MCSwipeMenu.m; sourceTree = SOURCE_ROOT; };
+		25C216561CDB2246007C69BB /* chatUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chatUsers.h; path = huiyan/Homepage/Models/chatUsers.h; sourceTree = SOURCE_ROOT; };
+		25C216571CDB2246007C69BB /* chatUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = chatUsers.m; path = huiyan/Homepage/Models/chatUsers.m; sourceTree = SOURCE_ROOT; };
 		25C6252D1CBCFA3E0068BFE8 /* qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq.png; sourceTree = "<group>"; };
 		25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@2x.png"; sourceTree = "<group>"; };
 		25C6252F1CBCFA3E0068BFE8 /* qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@3x.png"; sourceTree = "<group>"; };
@@ -1211,6 +1214,8 @@
 		55CCD7D91CB38A0600C3B8CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				25C216561CDB2246007C69BB /* chatUsers.h */,
+				25C216571CDB2246007C69BB /* chatUsers.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1594,6 +1599,7 @@
 				550BF97F1CB8ED6600E2E9DE /* ZFBrightnessView.m in Sources */,
 				5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */,
 				5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */,
+				25C216581CDB2246007C69BB /* chatUsers.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
 				55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */,
 				557EDE1C1CD0A3980039267E /* Order.m in Sources */,
