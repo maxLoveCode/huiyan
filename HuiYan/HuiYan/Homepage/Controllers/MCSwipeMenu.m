@@ -264,7 +264,8 @@ static NSString * const reuseIdentifier = @"swipableMenu";
                 
                 if (right ==1) {
                 if (_bgView.contentOffset.x +10 >0) {
-                    if (_bgView.contentOffset.x +_bgView.frame.size.width +10>_bgView.contentSize.width) {
+                    if (_bgView.contentOffset.x +_bgView.frame.size.width +10
+                        >_bgView.contentSize.width) {
                         return;
                         }
                         [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x+10, 0)];
@@ -272,7 +273,8 @@ static NSString * const reuseIdentifier = @"swipableMenu";
                 }
                 else if (right ==2){
                     if (_bgView.contentOffset.x -10 >0) {
-                        [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x-10, 0)];
+                        [_bgView setContentOffset:
+                                CGPointMake(_bgView.contentOffset.x-10, 0)];
                     }
                 }
             }];

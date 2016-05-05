@@ -16,9 +16,7 @@
 #define buttonWidth 56
 
 @interface BuyTicketCell ()
-@property (nonatomic, strong) UIView *head_view;
-@property (nonatomic, strong) UILabel *up_lab;
-@property (nonatomic, strong) UILabel *down_lab;
+@property (nonatomic, strong) UIView *down_lab;
 @end
 
 @implementation BuyTicketCell
@@ -30,6 +28,7 @@
         [self addSubview:self.address_lab];
         [self addSubview:self.price_lab];
         [self addSubview:self.buy_btn];
+        [self addSubview:self.down_lab];
     }
     return self;
 }
@@ -77,10 +76,10 @@
     return  _price_lab;
 }
 
-- (UILabel *)down_lab
+- (UIView *)down_lab
 {
     if (!_down_lab) {
-        self.down_lab = [[UILabel alloc] init];
+        self.down_lab = [[UIView alloc] init];
         [self.down_lab setBackgroundColor:COLOR_WithHex(0xdddddd)];
     }
     return _down_lab;
@@ -108,6 +107,7 @@
     self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame) , CGRectGetMaxY(self.time_lab.frame) , labelWidth, 13 * 1.5);
     self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame) , CGRectGetMaxY(self.image_pic.frame) - 12 * 1.5, 150, 13 * 1.5);
     self.buy_btn.frame = CGRectMake(kScreen_Width - buttonWidth- kMargin, CGRectGetMaxY(self.image_pic.frame) - 20, buttonWidth, 20);
+    [self.down_lab setFrame:CGRectMake(0, CGRectGetMaxY(self.image_pic.frame)+9, kScreen_Width, 1)];
 }
 
 - (void)setContent:(BuyTicket *)ticket{
