@@ -9,10 +9,14 @@
 #import "BuyTicketCell.h"
 #import "Constant.h"
 
+#define titleFontSize 14
+#define imageWidth 87
+#define imageHeight 225/2
+#define cellTopMargin 10
+#define buttonWidth 56
+
 @interface BuyTicketCell ()
-@property (nonatomic, strong) UIView *head_view;
-@property (nonatomic, strong) UILabel *up_lab;
-@property (nonatomic, strong) UILabel *down_lab;
+@property (nonatomic, strong) UIView *down_lab;
 @end
 
 @implementation BuyTicketCell
@@ -24,35 +28,9 @@
         [self addSubview:self.address_lab];
         [self addSubview:self.price_lab];
         [self addSubview:self.buy_btn];
-        [self addSubview:self.head_view];
-        [self.head_view addSubview:self.up_lab];
-        [self.head_view addSubview:self.down_lab];
+        [self addSubview:self.down_lab];
     }
     return self;
-}
-- (UIView *)head_view{
-    if (!_head_view) {
-        self.head_view = [[UIView alloc]init];
-        self.head_view.backgroundColor = COLOR_WithHex(0xefefef);
-    }
-    return _head_view;
-}
-
-- (UILabel *)up_lab{
-    if (!_up_lab) {
-        self.up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
-        self.up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-    }
-    return _up_lab;
-    
-}
-
-- (UILabel *)down_lab{
-    if (!_down_lab) {
-        self.down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
-        self.down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-    }
-    return _down_lab;
 }
 
 - (UIImageView *)image_pic{
@@ -74,7 +52,7 @@
 - (UILabel *)time_lab{
     if (!_time_lab) {
         self.time_lab = [[UILabel alloc]init];
-        self.time_lab.font = kFONT12;
+        self.time_lab.font = kFONT13;
         self.time_lab.textColor = COLOR_WithHex(0x565656);
     }
     return  _time_lab;
@@ -83,7 +61,7 @@
 - (UILabel *)address_lab{
     if (!_address_lab) {
         self.address_lab = [[UILabel alloc]init];
-        self.address_lab.font = kFONT12;
+        self.address_lab.font = kFONT13;
         self.address_lab.textColor = COLOR_WithHex(0x565656);
     }
     return  _address_lab;
@@ -92,11 +70,21 @@
 - (UILabel *)price_lab{
     if (!_price_lab) {
         self.price_lab = [[UILabel alloc]init];
-        self.price_lab.font = kFONT12;
+        self.price_lab.font = kFONT13;
         self.price_lab.textColor = COLOR_WithHex(0xf94747);
     }
     return  _price_lab;
 }
+
+- (UIView *)down_lab
+{
+    if (!_down_lab) {
+        self.down_lab = [[UIView alloc] init];
+        [self.down_lab setBackgroundColor:COLOR_WithHex(0xdddddd)];
+    }
+    return _down_lab;
+}
+
 - (UIButton *)buy_btn{
     if (!_buy_btn) {
         self.buy_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -112,20 +100,22 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.head_view.frame = CGRectMake(0, 0, kScreen_Width, 10);
-    self.image_pic.frame = CGRectMake(kMargin, 20, 87, 225 / 2);
-    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + kMargin , CGRectGetMinY(self.image_pic.frame) , kScreen_Width - 150, 14 * 1.5);
-    self.time_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.title_lab.frame), kScreen_Width - 150, 12 * 1.5);
-    self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame) , CGRectGetMaxY(self.time_lab.frame) , kScreen_Width - 150, 12 * 1.5);
-    self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame) , CGRectGetMaxY(self.image_pic.frame) - 12 * 1.5, 150, 12 * 1.5);
-    self.buy_btn.frame = CGRectMake(kScreen_Width - 56- 15, CGRectGetMaxY(self.image_pic.frame) - 20, 56, 20);
+    CGFloat labelWidth = kScreen_Width- imageWidth- 4*kMargin - buttonWidth;
+    self.image_pic.frame = CGRectMake(kMargin, cellTopMargin, imageWidth, imageHeight);
+    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + kMargin , CGRectGetMinY(self.image_pic.frame)+cellTopMargin/2 , labelWidth, titleFontSize * 1.5);
+    self.time_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.title_lab.frame)+cellTopMargin/2, labelWidth, 13 * 1.5);
+    self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame) , CGRectGetMaxY(self.time_lab.frame) , labelWidth, 13 * 1.5);
+    self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame) , CGRectGetMaxY(self.image_pic.frame) - 12 * 1.5, 150, 13 * 1.5);
+    self.buy_btn.frame = CGRectMake(kScreen_Width - buttonWidth- kMargin, CGRectGetMaxY(self.image_pic.frame) - 20, buttonWidth, 20);
+    [self.down_lab setFrame:CGRectMake(0, CGRectGetMaxY(self.image_pic.frame)+9, kScreen_Width, 1)];
 }
+
 - (void)setContent:(BuyTicket *)ticket{
     self.title_lab.text = ticket.title;
     self.time_lab.text  = ticket.date;
     self.address_lab.text = ticket.address;
     self.price_lab.text = ticket.price_range;
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:ticket.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
-  
 }
+
 @end

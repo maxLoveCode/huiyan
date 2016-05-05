@@ -28,6 +28,7 @@
 @property (nonatomic, strong) UIScrollView* bgView;
 @property (nonatomic, strong) UICollectionView* menuView;
 @property (nonatomic, strong) UIButton* showAll;
+@property (nonatomic, strong) UIView* botEdge;
 
 @property (nonatomic, strong) UIView* underLine;
 

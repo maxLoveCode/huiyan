@@ -102,11 +102,6 @@
         _recommendTableView.scrollEnabled = NO;
         [_recommendTableView registerClass:[RecommondedTableViewCell class] forCellReuseIdentifier:@"recommends"];
         _recommendTableView.separatorStyle = NO;
-        
-#ifdef DEBUG
-        [_recommendTableView setBackgroundColor:[UIColor redColor]];
-#endif
-        
     }
     return _recommendTableView;
 }
