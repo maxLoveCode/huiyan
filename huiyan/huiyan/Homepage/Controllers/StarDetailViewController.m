@@ -36,12 +36,11 @@ static CGFloat const kWindowHeight = 244.0f;
      self.view.backgroundColor  = [UIColor whiteColor];
   //  [self.navigationController setNavigationBarHidden:YES];
    // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [self.view addSubview:self.headerView];
     [self get_actor_movieData:@"0"];
+    [self getHeaderView];
 }
 
-- (CoolNavi *)headerView{
-    if (!_headerView) {
+- (void)getHeaderView{
         self.headerView = [[CoolNavi alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), kWindowHeight)];
         [_headerView setContent:self.drama];
         _headerView.scrollView = self.mainTable;
@@ -63,8 +62,8 @@ static CGFloat const kWindowHeight = 244.0f;
                 [weakref focus:@"follow"];
             }
         };
-    }
-    return _headerView;
+     [self.view addSubview:self.headerView];
+
 }
 
 
@@ -94,6 +93,7 @@ static CGFloat const kWindowHeight = 244.0f;
     [UIApplication sharedApplication].statusBarHidden = NO;
     self.navigationController.navigationBarHidden = NO;
     [self.playerView resetPlayer];
+    
 }
 
 - (BOOL)shouldAutorotate{
@@ -111,20 +111,9 @@ static CGFloat const kWindowHeight = 244.0f;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
         self.view.backgroundColor = [UIColor whiteColor];
-        
-        [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(0);
-        }];
-        [self.view addSubview:self.headerView];
-
-        
+      
     }else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight){
         self.view.backgroundColor = [UIColor blackColor];
-        
-        [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(0);
-        }];
-        [self.headerView removeFromSuperview];
     }
 }
 

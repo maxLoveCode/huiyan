@@ -75,12 +75,12 @@
 }
 
 - (UILabel *)mobile_lab{
-    if (!_seat_lab) {
-        self.seat_lab = [[UILabel alloc]init];
-        self.seat_lab.font = kFONT14;
-        self.seat_lab.textAlignment = NSTextAlignmentLeft;
+    if (!_mobile_lab) {
+        self.mobile_lab = [[UILabel alloc]init];
+        self.mobile_lab.font = kFONT14;
+        self.mobile_lab.textAlignment = NSTextAlignmentLeft;
     }
-    return _seat_lab;
+    return _mobile_lab;
 }
 
 - (UILabel *)line_lab{
@@ -95,6 +95,8 @@
     if (!_code_lab) {
         self.code_lab = [[UILabel alloc]init];
         self.code_lab.textColor = COLOR_THEME;
+        self.code_lab.textAlignment = NSTextAlignmentCenter;
+        self.code_lab.font = kFONT12;
     }
     return _code_lab;
 }
@@ -102,21 +104,22 @@
 - (UIImageView *)barCode_pic{
     if (!_barCode_pic) {
         self.barCode_pic = [[UIImageView alloc]init];
+        self.barCode_pic.backgroundColor = [UIColor redColor];
     }
     return _barCode_pic;
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.bg_view.frame = CGRectMake(kMargin, 0, kScreen_Width - 2 * kMargin, 200);
-    self.title_lab.frame = CGRectMake(10, 10, CGRectGetWidth(self.bg_view.frame), 32 * 1.5);
-    self.time_lab.frame = CGRectMake(10, CGRectGetMaxY(self.title_lab.frame), CGRectGetWidth(self.title_lab.frame), 14 * 1.5);
-    self.name_lab.frame = CGRectMake(10, CGRectGetMaxY(self.time_lab.frame), CGRectGetWidth(self.time_lab.frame), 14 * 1.5);
-    self.seat_lab.frame = CGRectMake(10, CGRectGetMaxY(self.name_lab.frame), CGRectGetWidth(self.name_lab.frame), 14 * 1.5);
-    self.mobile_lab.frame = CGRectMake(10, CGRectGetMaxY(self.seat_lab.frame), CGRectGetWidth(self.seat_lab.frame), 14 * 1.5);
-    self.line_lab.frame = CGRectMake(0, CGRectGetMaxY(self.mobile_lab.frame), CGRectGetWidth(self.bg_view.frame), 1);
-    self.code_lab.frame = CGRectMake(CGRectGetWidth(self.bg_view.frame) / 2 - 100, CGRectGetMaxY(self.line_lab.frame) + 10, 200, 14);
-    self.barCode_pic.frame = CGRectMake(CGRectGetWidth(self.line_lab.frame) / 2 - 75, CGRectGetMaxY(self.code_lab.frame) + 5, 150, 150);
+    self.bg_view.frame = CGRectMake(kMargin, 0, kScreen_Width - 2 * kMargin, 340);
+    self.title_lab.frame = CGRectMake(5, 5, CGRectGetWidth(self.bg_view.frame), 32 * 1.5);
+    self.time_lab.frame = CGRectMake(5, CGRectGetMaxY(self.title_lab.frame) + 10, CGRectGetWidth(self.title_lab.frame), 14 * 1.5);
+    self.name_lab.frame = CGRectMake(5, CGRectGetMaxY(self.time_lab.frame) + 10, CGRectGetWidth(self.time_lab.frame) + 5, 14 * 1.5);
+    self.seat_lab.frame = CGRectMake(5, CGRectGetMaxY(self.name_lab.frame) + 10, CGRectGetWidth(self.name_lab.frame) + 5, 14 * 1.5);
+    self.mobile_lab.frame = CGRectMake(5, CGRectGetMaxY(self.seat_lab.frame) + 10, CGRectGetWidth(self.seat_lab.frame) + 5, 14 * 1.5);
+    self.line_lab.frame = CGRectMake(0, CGRectGetMaxY(self.mobile_lab.frame) + 10, CGRectGetWidth(self.bg_view.frame), 1);
+    self.code_lab.frame = CGRectMake(CGRectGetWidth(self.bg_view.frame) / 2 - 150, CGRectGetMaxY(self.line_lab.frame) + 10, 300, 14);
+    self.barCode_pic.frame = CGRectMake(CGRectGetWidth(self.line_lab.frame) / 2 - 50, CGRectGetMaxY(self.code_lab.frame) + 10, 100, 100);
 }
 
 - (void)setContent:(PayData *)payData{

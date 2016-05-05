@@ -47,6 +47,7 @@
     [super viewWillAppear:animated];
     [self.tabBarController setHidden:YES];
     
+    
 }
 
 - (MCSwipeMenu *)head_view{

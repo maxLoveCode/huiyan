@@ -173,8 +173,9 @@
 }
 
 - (void)getOpera_ticket_pay_callbackData{
-    NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"id":self.ID,@"order_no":self.order_no,@"trade_no":self.trade_no,@"pay_type":self.pay_type};
-    [self.serverManager AnimatedPOST:@"opera_ticket_pay_callback.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"oid":@"65"};
+    [self.serverManager AnimatedGET:@"opera_order_data.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 30040) {
             NSDictionary *dic = responseObject[@"data"];
             self.paydata = [PayData paydataWithDic:dic];
@@ -189,6 +190,9 @@
 - (void)lookDramaTicket:(UIButton *)sender
 {
     NSLog(@"111");
+    LookTicketDetailViewController *lokCon = [[LookTicketDetailViewController alloc]init];
+    lokCon.payData = self.paydata;
+    [self.navigationController pushViewController:lokCon animated:YES];
 }
 
 @end
