@@ -64,7 +64,7 @@ static NSString * const reuseIdentifier = @"swipableMenu";
         _bgView = [[UIScrollView alloc] initWithFrame:rect];
         _bgView.bounces = NO;
         _bgView.showsHorizontalScrollIndicator = NO;
-        [_bgView setBackgroundColor:[UIColor whiteColor]];
+        //[_bgView setBackgroundColor:[UIColor whiteColor]];
     }
     return _bgView;
 }
@@ -73,7 +73,6 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 {
     if (!_menuView) {
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        
         CGRect rect = CGRectMake(0, 0, defaultW, defaultH);
         if (_hasButton) {
             rect = CGRectMake(0, 0, defaultW-defaultH, defaultH);
@@ -89,6 +88,15 @@ static NSString * const reuseIdentifier = @"swipableMenu";
         
     }
     return _menuView;
+}
+
+-(UIView *)botEdge
+{
+    if (!_botEdge) {
+        _botEdge = [[UIView alloc] initWithFrame:CGRectMake(0, defaultH-1, kScreen_Width, 1)];
+        [_botEdge setBackgroundColor:COLOR_WithHex(0xdddddd)];
+    }
+    return _botEdge;
 }
 
 -(UIButton *)showAll
@@ -150,7 +158,6 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"delegate");
     _index = indexPath.item;
     [collectionView reloadData];
     [self.delegate swipeMenu:self didSelectAtIndexPath:indexPath];
@@ -158,6 +165,8 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 
 -(void)layoutSubviews
 {
+    
+    [self.menuView addSubview:self.botEdge];
     [self.bgView addSubview:self.menuView];
     [self addSubview:self.bgView];
     if (_hasButton) {
@@ -255,6 +264,9 @@ static NSString * const reuseIdentifier = @"swipableMenu";
                 
                 if (right ==1) {
                 if (_bgView.contentOffset.x +10 >0) {
+                    if (_bgView.contentOffset.x +_bgView.frame.size.width +10>_bgView.contentSize.width) {
+                        return;
+                        }
                         [_bgView setContentOffset:CGPointMake(_bgView.contentOffset.x+10, 0)];
                     }
                 }
@@ -271,7 +283,12 @@ static NSString * const reuseIdentifier = @"swipableMenu";
 -(void)reloadMenu
 {
     [self.menuView reloadData];
-    [self.menuView setFrame:CGRectMake(0, 0, [self calulateLength], defaultH)];
+    CGFloat newWidth = [self calulateLength];
+    if (newWidth < kScreen_Width) {
+        newWidth = kScreen_Width;
+    }
+    [self.menuView setFrame:CGRectMake(0, 0, newWidth, defaultH)];
+    [self.botEdge setFrame:CGRectMake(0, defaultH-1, newWidth, 1)];
     [self.bgView setContentSize:CGSizeMake([self calulateLength], -8)];
 }
 
