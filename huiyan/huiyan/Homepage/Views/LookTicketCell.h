@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PayData.h"
 @interface LookTicketCell : UITableViewCell
 @property (nonatomic,strong) UIView *bg_view;
 @property (nonatomic,strong) UILabel *title_lab;
@@ -18,4 +18,5 @@
 @property (nonatomic,strong) UILabel *code_lab;
 @property (nonatomic,strong) UIImageView *barCode_pic;
 @property (nonatomic,strong) UILabel *line_lab;
+- (void)setContent:(PayData *)payData;
 @end

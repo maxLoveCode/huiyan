@@ -191,12 +191,13 @@
 
 - (void)dealloc
 {
-    [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
+    [self.scrollView removeObserver:self forKeyPath:@"contentOffset" context:nil];
+   // [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview
 {
-    [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew) context:Nil];
+    [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew) context:nil];
     self.scrollView.contentInset = UIEdgeInsetsMake(self.frame.size.height, 0 ,0 , 0);
     self.scrollView.scrollIndicatorInsets = self.scrollView.contentInset;
 }

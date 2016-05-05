@@ -9,9 +9,13 @@
 #import "DramaTicketDetailTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
-
+#import "ServerManager.h"
+#import "PayData.h"
+#import "LookTicketDetailViewController.h"
 @interface DramaTicketDetailTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) PayData *paydata;
 @end
 
 @implementation DramaTicketDetailTableViewController
@@ -19,6 +23,8 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.title = @"戏票详情";
+    self.serverManager = [ServerManager sharedInstance];
+    [self getOpera_ticket_pay_callbackData];
     [self.view addSubview:self.tableView];
    
 }
@@ -110,7 +116,7 @@
             [cell.contentView addSubview:title_lab];
             title_lab.tag = 1004;
         }
-        title_lab.text = self.data_dic[@"title"];
+        title_lab.text = self.paydata.opera_title;
         UILabel *time_lab= [cell viewWithTag:1006];
         if (!time_lab) {
             time_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, CGRectGetMaxY(title_lab.frame), kScreen_Width - 2 * kMargin, 14 * 1.5)];
@@ -121,7 +127,7 @@
              time_lab.font = kFONT14;
             time_lab.tag = 1006;
         }
-        time_lab.text = self.data_dic[@"date"];
+        time_lab.text = self.paydata.opera_date;
         UILabel *site_lab = [cell viewWithTag:1008];
         if (!site_lab) {
             site_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, CGRectGetMaxY(time_lab.frame) + 5, kScreen_Width - 2 * kMargin, 14 * 1.5)];
@@ -131,7 +137,7 @@
             [cell.contentView addSubview:site_lab];
             site_lab.tag = 1008;
         }
-        site_lab.text = self.data_dic[@"theatre"];
+        site_lab.text = self.paydata.theater_name;
         UILabel *seat_lab = [cell viewWithTag:1010];
         if (!seat_lab) {
             seat_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, CGRectGetMaxY(site_lab.frame) + 5, kScreen_Width - 2 * kMargin, 14 * 1.5)];
@@ -141,7 +147,7 @@
             [cell.contentView addSubview:seat_lab];
             seat_lab.tag = 1010;
         }
-        seat_lab.text = self.data_dic[@"tickets"];
+        seat_lab.text = self.paydata.tickets;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -166,9 +172,27 @@
     }
 }
 
+- (void)getOpera_ticket_pay_callbackData{
+    NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"oid":@"65"};
+    [self.serverManager AnimatedGET:@"opera_order_data.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        if ([responseObject[@"code"] integerValue] == 30040) {
+            NSDictionary *dic = responseObject[@"data"];
+            self.paydata = [PayData paydataWithDic:dic];
+        }
+        [self.tableView reloadData];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
+
 - (void)lookDramaTicket:(UIButton *)sender
 {
     NSLog(@"111");
+    LookTicketDetailViewController *lokCon = [[LookTicketDetailViewController alloc]init];
+    lokCon.payData = self.paydata;
+    [self.navigationController pushViewController:lokCon animated:YES];
 }
 
 @end
