@@ -24,6 +24,7 @@
         [self.view addSubview:self.loginRequest];
     }
     
+    self.displayConversationTypeArray = @[@(ConversationType_PRIVATE),@(ConversationType_SYSTEM)];                                                                                                                                                                                                                                                                                                                                                                    
     [[RCIM sharedRCIM] connectWithToken:_token success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
     } error:^(RCConnectErrorCode status) {
@@ -35,6 +36,11 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
 }
 
 -(UIView *)loginRequest

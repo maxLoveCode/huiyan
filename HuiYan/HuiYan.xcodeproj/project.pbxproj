@@ -1800,7 +1800,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -1823,7 +1822,6 @@
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_5.0.1",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/Wechat",
-					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
 					"$(PROJECT_DIR)/huiyan/第三方/WeixinPay/SDKExport",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 				);
@@ -1842,7 +1840,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -1865,7 +1862,6 @@
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_5.0.1",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/Wechat",
-					"$(PROJECT_DIR)/huiyan/第三方/AlipaySDK",
 					"$(PROJECT_DIR)/huiyan/第三方/WeixinPay/SDKExport",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 				);
