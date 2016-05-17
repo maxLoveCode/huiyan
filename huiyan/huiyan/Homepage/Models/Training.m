@@ -19,8 +19,7 @@
     train.ID = dic[@"id"];
     train.count = dic[@"count"];
     train.price = dic[@"price"];
-    NSArray *data =[NSJSONSerialization JSONObjectWithData:[dic[@"imgs"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    train.imgs = data;
+    train.imgs = dic[@"imgs"] ;
     return train;
 }
 

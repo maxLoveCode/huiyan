@@ -22,18 +22,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    self.view.backgroundColor = [UIColor whiteColor];
     [self addAllController];
     // Do any additional setup after loading the view.
 }
 
 - (void)addAllController{
     UIColor *color  = COLOR_THEME;
-    HomePageController *homepage = [[HomePageController alloc]initWithStyle:UITableViewStyleGrouped];
+    NewHomePageViewController *homepage = [[NewHomePageViewController alloc]init];
     
-    FriendsViewController *friend = [[FriendsViewController alloc]init];
+    MessageViewController *mes = [[MessageViewController alloc]init];
     
-    ExploreViewController *explore = [[ExploreViewController alloc]init];
+    HomePageController *explore = [[HomePageController alloc]init];
     
     
     MeMainViewController *meMain = [[MeMainViewController alloc]init];
@@ -46,12 +46,12 @@
     homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [homeNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
-    UINavigationController *friendNav = [[UINavigationController alloc]initWithRootViewController:friend];
-    friendNav.tabBarItem.title = @"戏友";
-    [friendNav.tabBarItem setImage:[UIImage imageNamed:@"tab_firend"]];
-    [friendNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_firend_selected"]];
-    friendNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [friendNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    UINavigationController *mesNav = [[UINavigationController alloc]initWithRootViewController:mes];
+    mesNav.tabBarItem.title = @"消息";
+    [mesNav.tabBarItem setImage:[UIImage imageNamed:@"tab_firend"]];
+    [mesNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_firend_selected"]];
+    mesNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [mesNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
     UINavigationController *exploreNav = [[UINavigationController alloc]initWithRootViewController:explore];
     exploreNav.tabBarItem.title  = @"发现";
@@ -70,7 +70,7 @@
     [self.tabBar setTintColor:color];
     self.tabBar.translucent  = NO;
     self.tabBar.opaque = YES;
-    NSArray *navCon = @[homeNav,friendNav,exploreNav,meMainNav];
+    NSArray *navCon = @[homeNav,exploreNav,mesNav,meMainNav];
     [self setViewControllers:navCon animated:YES];
 }
 

@@ -18,22 +18,15 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic, strong) NSArray *title_arr;
-@property (nonatomic, strong) NSDictionary *data_dic;
+
 @end
 
 @implementation PayViewController
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    NSLog(@"%@",self.data_str);
     self.title_arr = @[@"支付宝",@"微信支付"];
     [self.view addSubview:self.tableView];
-    NSData *jsonData = [self.data_str dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    self.data_dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&err];
-    NSLog(@"%@",self.data_dic);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -113,7 +106,7 @@
             [cell.contentView addSubview:price_lab];
             price_lab.tag = 1001;
         }
-        price_lab.text = [NSString stringWithFormat:@"¥%@",self.data_dic[@"total_price"]];
+        price_lab.text = [NSString stringWithFormat:@"%@",self.data_dic[@"total_price"]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 1) {
@@ -135,7 +128,7 @@
                 [cell.contentView addSubview:price_lab];
                 price_lab.tag = 10001;
             }
-            price_lab.text = [NSString stringWithFormat:@"¥%@",self.data_dic[@"total_price"]];
+            price_lab.text = [NSString stringWithFormat:@"%@",self.data_dic[@"total_price"]];
 
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -228,33 +221,39 @@
 }
 
 - (void)weixinPay{
-    DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
-    dramCon.ID = self.data_dic[@"oid"];
-    [self.navigationController pushViewController:dramCon animated:YES];
+    NSLog(@"weixin");
+    NSString *notify;
+    NSString *amount;
+   // amount = [NSString stringWithFormat:@"%.0lf", self.data_dic[@"total_price"] * 100];
+    amount = [NSString stringWithFormat:@"%.2f", 0.01];
+    //订单号
+    NSString* orderstring = self.data_dic[@"ono"];
+    [MQPayClient shareInstance].notifyUrl = notify;
+    [[MQPayClient shareInstance]weiXinPayWithTitle:@"购票" money:amount tradeNo:orderstring successBlock:^(NSDictionary *res) {
+        NSString* resultcode = [res objectForKey:@"code"];
+        NSLog(@"%@, %@",res, resultcode);
+        if ([resultcode integerValue] == 0) {
+            DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
+            dramCon.ID = self.data_dic[@"oid"];
+            [self.navigationController pushViewController:dramCon animated:YES];
+        }
+        else
+        {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"购买失败,请联系客服" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+      
+    } failureBlock:^(NSDictionary *result) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"购买失败,请联系客服" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
 }
-
-//- (void)weixinPay{
-//    NSLog(@"weixin");
-//    NSString *notify;
-//     NSString *amount;
-//    //订单号
-//    NSString* orderstring;
-//    [MQPayClient shareInstance].notifyUrl = notify;
-//    [[MQPayClient shareInstance]weiXinPayWithTitle:@"设备预约" money:amount tradeNo:orderstring successBlock:^(NSDictionary *res) {
-//        NSString* resultcode = [res objectForKey:@"code"];
-//        NSLog(@"%@, %@",res, resultcode);
-//        if ([resultcode integerValue] == 0) {
-//            KALERTVIEW(@"购买成功");
-//        }
-//        else
-//        {
-//            KALERTVIEW(@"购买失败,请联系客服");
-//        }
-//      
-//    } failureBlock:^(NSDictionary *result) {
-//        KALERTVIEW(@"购买失败,请联系客服");
-//    }];
-//}
 
 - (void)aliPay{
     NSLog(@"支付包支付");
@@ -269,9 +268,6 @@
     NSString *partner = @"2088021412701123";
     NSString *seller = @"zhifubao@huayinwenhua.com";
     NSString *privateKey = @"MIICXAIBAAKBgQDEcf//TAUh+3g+LyU08tLclkfp2mqzkQ5XEif23xeXuJhYsDTpzU0Ob15EB16aoUa4E5nOhcxwdnASaB18evvVQtf1ERkC2HQqjf/5fR/inNLtLlJ/nsCIaFQ+fmSPYivvbHYZ1ufpl78smPsVhHKPj9Z3E3zgvo6kAq3/QbUBlQIDAQABAoGAd4rL9saDBRfrJyQ3Zw4xROzqnCM+9UDbUh8JVNCToc9CXg30VSaKsrMQ0SMO7dggmdnLqgJ/0xwvvPPApcSNRDsIzQ+62XoN7oaaSiApDjExeTMRyz/HfR357K4EgDey9gAsh4yxz8aQ5TrIhRnqZJtNmw/QmDm1NASrBBCPN+ECQQDwqN7bDKnMklXXYzzjW4CtcRpAnOc9AaDFrxpkmLuQ2Y3itQDOBo4P+sv+3kGVrQdSmNsUzs0Nfh07YdsTOuHNAkEA0Pehro30WcTTYZLAFvoTd2lOW53/IO1nyiQ6f1Nt6CP6smcsqAvArhdaFrPU2QvUrgXYJT+FQ0ancI/3nC126QJAIm/nw+yh95YRFosq0VXsqeT/XrOVG1O6T89otXBtlqKq/P/tp42kkoDO5B+lvudNnvIkl2uoR//96ttr3+qTGQJAJdhDKtbAoyVXVvt52G9v6RdkPolttCvquRw4j+ivJfSmKXswBjsiqSTHhwcIjEptORsL2ysW2mlIV8VrBZjiSQJBANSRLnRbCM8hn6MlmjkhwEbWCRUBMg8bF1Y2jh0oXR5vBOWdAbFIzHEhw7IXt56F/AYoOi1iKvNEeIKQ3nCslNc=";
-    /*============================================================================*/
-    /*============================================================================*/
-    /*============================================================================*/
     //partner和seller获取失败,提示
     if ([partner length] == 0 ||
         [seller length] == 0 ||
@@ -297,9 +293,9 @@
 //    //商品价格
     //order.amount = self.data_dic[@"total_price"];
     order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
-//    
+   
 //#pragma mark 疑问1.
-    order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/alipay"; //回调URL
+    order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/opera_alipay"; //回调URL
     
     //以下配置信息是默认信息,不需要更改.
     order.service = @"mobile.securitypay.pay";
@@ -341,11 +337,19 @@
             }
             else if (resultCode.integerValue  == 6001)
             {
-                KALERTVIEW(@"用户终止支付");
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"用户终止支付" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {}];
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
             }
             else
             {
-                KALERTVIEW(@"购买失败,请联系客服");
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"购买失败,请联系客服" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {}];
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
             }
 
         }];

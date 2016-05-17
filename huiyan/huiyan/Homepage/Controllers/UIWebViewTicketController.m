@@ -66,7 +66,12 @@
         [self.bridge registerHandler:@"CallHandlerID" handler:^(id data, WVJBResponseCallback responseCallback) {
             NSLog(@"message from H5: %@", data);
             PayViewController *payCon = [[PayViewController alloc]init];
-            payCon.data_str = data[@"key"];
+     
+            NSData *jsonData = [data[@"key"]dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *err;
+            payCon.data_dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:&err];
             [self.navigationController pushViewController:payCon animated:YES];
             
         }];

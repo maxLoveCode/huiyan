@@ -23,6 +23,7 @@
 @property (nonatomic,copy) NSString *order_no;
 @property (nonatomic,copy) NSString *pay_time;
 @property (nonatomic,copy) NSString *kefu_tel;
+@property (nonatomic,copy) NSString *mobile;
 + (PayData *)paydataWithDic:(NSDictionary *)dic;
 
 @end

@@ -32,8 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"首页";
-    
+    self.title = @"发现";
+    //侧滑关闭
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
@@ -41,10 +44,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
-    //侧滑关闭
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
+
     
     _serverManager = [ServerManager sharedInstance];
     [self.view addSubview:self.banner_view];
@@ -269,7 +269,7 @@
         UIImageView *image_pic = [cell viewWithTag:500];
         if (!image_pic) {
             image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 4 / 2 - menuPicWidth/2, 8, menuPicWidth ,menuPicWidth)];
-            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
+            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.item + 1]];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
         }
@@ -297,10 +297,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.item == 0) {
         TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
-        [self.navigationController pushViewController:tickCon animated:YES];
+        [self.navigationController pushViewController:tickCon animated:NO];
     }else if (indexPath.item == 1){
         TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
-        [self.navigationController pushViewController:trainCon animated:YES];
+        [self.navigationController pushViewController:trainCon animated:NO];
     }else if (indexPath.item == 2) {
         NSString *user_id = kOBJECTDEFAULTS(@"user_id");
         if (user_id && ![user_id isEqualToString:@""]) {

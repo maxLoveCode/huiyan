@@ -10,5 +10,4 @@
 
 @interface DramaTicketDetailTableViewController : UIViewController
 @property (nonatomic,copy) NSString *ID;
-@property (nonatomic,copy) NSString *pay_type;
 @end

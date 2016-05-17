@@ -19,8 +19,14 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.mainTableView];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -56,7 +62,7 @@
     }else if (indexPath.section == 2){
         return 130;
     }else{
-        return 50;
+        return 60;
     }
 }
 
@@ -122,6 +128,7 @@
             [cell.contentView addSubview:call_btn];
             call_btn.tag = 1006;
         }
+        [call_btn addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -146,7 +153,7 @@
             [cell.contentView addSubview:price_lab];
             price_lab.tag = 1010;
         }
-        price_lab.text = [NSString stringWithFormat:@"¥%@元(%@张)",self.payData.pay_price,self.payData.pay_num];
+        price_lab.text = [NSString stringWithFormat:@"%@元(%@张)",self.payData.pay_price,self.payData.pay_num];
         
         UILabel *codeNum_lab = [cell viewWithTag:1012];
         if (!codeNum_lab) {
@@ -201,15 +208,39 @@
             phone_lab.font = kFONT14;
             phone_lab.textColor = COLOR_THEME;
             phone_lab.textAlignment = NSTextAlignmentRight;
+            cell.contentView.userInteractionEnabled = YES;
+            phone_lab.userInteractionEnabled = YES;
             [cell.contentView addSubview:phone_lab];
             phone_lab.tag = 1020;
         }
+       
         phone_lab.text = self.payData.kefu_tel;
-        
-        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 3) {
+        //客服电话
+        NSLog(@"22");
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.payData.kefu_tel];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
+    }
+}
+
+//剧院电话
+- (void)callPhone:(UIButton *)sender{
+    NSLog(@"11");
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.payData.theater_tel];
+    UIWebView * callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
+
+}
+
+
 
 @end

@@ -25,6 +25,7 @@
      model.order_no =  dic[@"order_no"];
      model.pay_time =  dic[@"pay_time"];
      model.kefu_tel =  dic[@"kefu_tel"];
+    model.mobile = dic[@"mobile"];
     return model;
     
 }

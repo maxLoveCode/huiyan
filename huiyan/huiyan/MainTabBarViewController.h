@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HomePageController.h"
-#import "ExploreViewController.h"
-#import "FriendsViewController.h"
+#import "NewHomePageViewController.h"
+#import "MessageViewController.h"
 #import "MeMainViewController.h"
+#import "HomePageController.h"
 #import "Constant.h"
 @interface MainTabBarViewController : UITabBarController
 

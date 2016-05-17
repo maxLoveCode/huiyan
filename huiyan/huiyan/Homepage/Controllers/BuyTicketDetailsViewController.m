@@ -209,7 +209,7 @@
     BuyTicketDetailsTableViewCell *bt_cell
         = [tableView dequeueReusableCellWithIdentifier:@"ticket" forIndexPath:indexPath];
            bt_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [bt_cell.contentView  setBackgroundColor:[UIColor yellowColor]];
+        [bt_cell.contentView  setBackgroundColor:[UIColor whiteColor]];
     [bt_cell setContent:self.ticket];
         return bt_cell;
     }else if(indexPath.section == 1){

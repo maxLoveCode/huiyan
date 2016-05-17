@@ -13,6 +13,7 @@
 #import "TrainingDetailsTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
+#import "SignUpMessageTableViewController.h"
 @interface TrainingTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -83,6 +84,8 @@
     TrainingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"train" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setContent:self.dataSource[indexPath.section]];
+    cell.enroll_btn.tag = indexPath.section;
+    [cell.enroll_btn addTarget:self action:@selector(enroll:) forControlEvents:UIControlEventTouchUpInside];
     // Configure the cell...
     
     return cell;
@@ -108,6 +111,14 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
+}
+
+- (void)enroll:(UIButton *)sender{
+    Training *train = self.dataSource[sender.tag];
+    SignUpMessageTableViewController *signCon = [[SignUpMessageTableViewController alloc]init];
+    signCon.train = train;
+    [self.navigationController pushViewController:signCon animated:YES];
+    
 }
 
 /*

@@ -173,9 +173,9 @@
 }
 
 - (void)getOpera_ticket_pay_callbackData{
-    NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"oid":@"65"};
+    NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"oid":self.ID};
     [self.serverManager AnimatedGET:@"opera_order_data.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
+      //  NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 30040) {
             NSDictionary *dic = responseObject[@"data"];
             self.paydata = [PayData paydataWithDic:dic];

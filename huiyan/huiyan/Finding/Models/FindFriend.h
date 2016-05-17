@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface FindFriend : NSObject
-
+@property (nonatomic,copy) NSString *ID;
+@property (nonatomic,copy) NSString *nickname;
+@property (nonatomic,copy) NSString *avatar;
+@property (nonatomic,copy) NSString *sex;
+@property (nonatomic,strong) NSArray *like_wiki;
+@property (nonatomic,copy) NSString *distance;
++ (FindFriend *)findFriendWithData:(NSDictionary *)dic;
 @end

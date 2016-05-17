@@ -199,6 +199,7 @@
         if (isLogin == YES) {
             if ([responseObject[@"code"] integerValue] == 70010) {
                 NSLog(@"%@",responseObject[@"msg"]);
+                kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
@@ -208,6 +209,7 @@
             if ([responseObject[@"code"] integerValue] == 70000) {
                 NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
+                   kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                  kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
@@ -326,17 +328,14 @@
         }
         
     });
-    
-    
 }
-
-
 
 - (void)getThird_loginData:(ThirdUser *)thirdUser{
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"type":thirdUser.type,@"openid":thirdUser.opnid,@"nickname":thirdUser.nickname,@"sex":thirdUser.sex,@"avatar":thirdUser.avatar};
     [self.serverManager AnimatedPOST:@"third_login.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 70020) {
             NSLog(@"data = %@",responseObject[@"data"]);
+            kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
             kSETDEFAULTS([responseObject[@"data"] objectForKey:@"user_id"], @"user_id");
             kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
             MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];

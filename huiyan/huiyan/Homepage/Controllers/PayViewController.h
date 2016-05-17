@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PayViewController : UIViewController
-@property (nonatomic,copy) NSString *data_str;
+@property (nonatomic, strong) NSDictionary *data_dic;
 @end

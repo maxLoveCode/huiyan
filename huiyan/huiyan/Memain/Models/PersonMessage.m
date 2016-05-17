@@ -7,14 +7,14 @@
 //
 
 #import "PersonMessage.h"
-
+#import "NSString+ImageString.h"
 @implementation PersonMessage
 + (PersonMessage *)personWithDic:(NSDictionary *)dic{
     PersonMessage *per = [[PersonMessage alloc]init];
     per.ID = dic[@"id"];
     per.nickname = dic[@"nickname"];
     per.mobile = dic[@"mobile"];
-    per.avatar = dic[@"avatar"];
+    per.avatar = [NSString stringFormatting:dic[@"avatar"]];
     per.sex = dic[@"sex"];
     per.sex = dic[@"like_wiki"];
     return per;

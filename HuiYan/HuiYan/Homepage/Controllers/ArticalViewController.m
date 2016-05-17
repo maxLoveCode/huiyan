@@ -9,7 +9,6 @@
 #import "ArticalViewController.h"
 #import "Constant.h"
 #import "UITabBarController+ShowHideBar.h"
-#import "UITabBarController+ShowHideBar.h"
 @interface ArticalViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITextView* textView;

@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UITableView *wikiDetailsTableView;
 @property (strong, nonatomic) ZFPlayerView *playerView;
 @property (nonatomic, strong) UIView *topView;
+@property (nonatomic, assign) CGFloat height;
 @end
 
 @implementation WikiWorksDetailsViewController
@@ -169,7 +170,7 @@
     if (indexPath.row == 0) {
         return 42;
     }else{
-        return 242;
+        return 52 + self.height + 10;
     }
 }
 
@@ -181,7 +182,7 @@
     }
     UIView *head_view = [cell viewWithTag:999];
     if (head_view == nil) {
-        UIView *head_view = [[UIView alloc]init];
+        head_view = [[UIView alloc]init];
         head_view.backgroundColor = COLOR_WithHex(0xefefef);
         head_view.frame = CGRectMake(0, 0, kScreen_Width, 10);
         UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
@@ -191,7 +192,7 @@
         down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
         [head_view addSubview:down_lab];
         head_view.tag = 999;
-           [cell addSubview:head_view];
+           [cell.contentView addSubview:head_view];
     }
 
     
@@ -204,7 +205,7 @@
             title_lab.font = kFONT14;
             title_lab.tag = 1000;
             title_lab.numberOfLines = 0;
-            [cell addSubview:title_lab];
+            [cell.contentView addSubview:title_lab];
         }
         title_lab.text = self.homePage.title;
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -213,34 +214,41 @@
 
         UILabel *mes_lab = [cell viewWithTag:1001];
         if (!mes_lab) {
-            UILabel *mes_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, 32)];
+            mes_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, 32)];
             mes_lab.textColor = COLOR_WithHex(0x545454);
             mes_lab.font = kFONT14;
             mes_lab.text = @"简介";
             mes_lab.tag = 1001;
-            [cell addSubview:mes_lab];
+            [cell.contentView addSubview:mes_lab];
         }
        
         UILabel *line_lab = [cell viewWithTag:1002];
         if (!line_lab) {
-            UILabel *line_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 42, kScreen_Width - 30, 0.5)];
+           line_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 42, kScreen_Width - 30, 0.5)];
             line_lab.backgroundColor = COLOR_WithHex(0xdddddd);
             line_lab.font = kFONT14;
-            [cell addSubview:line_lab];
+            [cell.contentView addSubview:line_lab];
             line_lab.tag = 1002;
         }
         
         UILabel *des_lab = [cell viewWithTag:1003];
         if (!des_lab) {
-            UILabel *des_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 52, kScreen_Width - 30, 200)];
+            des_lab = [[UILabel alloc]init];
             des_lab.textColor = COLOR_WithHex(0xa5a5a5);
             des_lab.font = kFONT14;
-            des_lab.text = self.homePage.profile;
-            [cell addSubview:des_lab];
+            des_lab.numberOfLines = 0;
+            [cell.contentView addSubview:des_lab];
                 des_lab.tag = 1003;
         }
- 
-       // NSLog(@"self.homePage.profile = %@",self.homePage.profile);
+        des_lab.text = self.homePage.profile;
+        CGSize size =  [self.homePage.profile boundingRectWithSize:CGSizeMake(kScreen_Width - 30, MAXFLOAT)
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                 attributes:@{
+                                                              NSFontAttributeName :des_lab.font
+                                                              }
+                                                    context:nil].size;
+        [des_lab setFrame:CGRectMake(kMargin, 52, kScreen_Width - 30, size.height)];
+        self.height = size.height;
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
