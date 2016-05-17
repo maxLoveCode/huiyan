@@ -20,4 +20,6 @@
 @property (nonatomic, strong) UIView* loginRequest;
 @property (nonatomic, strong) UIButton* login;
 
+- (instancetype)init;
+
 @end

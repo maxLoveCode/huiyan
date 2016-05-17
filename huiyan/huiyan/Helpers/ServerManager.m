@@ -77,9 +77,9 @@ NSString *const version = @"api1_0";
 }
 
 - (void)AnimatedGET:(NSString *)URLString
-parameters:(id)parameters
-success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
-failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
+         parameters:(id)parameters
+            success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+            failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
     
     [self GET:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -89,7 +89,6 @@ failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
           failure(task, error);
     }];
-    
 }
 
 - (void)AnimatedPOST:(NSString *)URLString
