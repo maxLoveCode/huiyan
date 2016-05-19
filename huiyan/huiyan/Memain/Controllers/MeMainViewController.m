@@ -15,6 +15,7 @@
 #import "MeDramaTicketViewController.h"
 #import "BindMobileViewController.h"
 #import "UnBindMobileViewController.h"
+#import "MeTrainingViewController.h"
 @interface MeMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) PersonMessage *perData;
@@ -127,8 +128,8 @@
                 cell.imageView.image = [UIImage imageNamed:self.image_arr[5]];
                 cell.detailTextLabel.text = self.perData.mobile;
             }else{
-            cell.textLabel.text = self.title_arr[indexPath.row + 4];
-             cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row + 4]];
+            cell.textLabel.text = self.title_arr[indexPath.row + 5];
+             cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row + 5]];
                 if (indexPath.row == 0) {
                     if ([self.perData.mobile isEqualToString:@""] || self.perData.mobile  == nil) {
                          cell.detailTextLabel.text = @"未绑定";
@@ -158,8 +159,9 @@
         if (indexPath.row == 0) {
             MeDramaTicketViewController *meCon = [[MeDramaTicketViewController alloc]init];
             [self.navigationController pushViewController:meCon animated:YES];
-        }else {
-            
+        }else if(indexPath.row == 1) {
+            MeTrainingViewController *trainCON = [[MeTrainingViewController alloc]init];
+            [self.navigationController pushViewController:trainCON animated:NO];
         }
         
     }else if (indexPath.section == 2){

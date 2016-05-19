@@ -56,6 +56,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+     [self.view setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height )];
     [self.tabBarController setHidden:NO];
 }
 

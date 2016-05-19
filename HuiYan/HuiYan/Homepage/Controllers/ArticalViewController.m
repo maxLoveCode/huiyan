@@ -65,7 +65,7 @@
 -(UILabel *)label
 {
     if (!_label) {
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height  - 64)];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height)];
         _label.numberOfLines = 0;
     }
     return _label;
@@ -74,7 +74,7 @@
 -(UIScrollView *)bgView
 {
     if (!_bgView) {
-        _bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
+        _bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
         _bgView.backgroundColor = [UIColor whiteColor];
         _bgView.delegate = self;
     }

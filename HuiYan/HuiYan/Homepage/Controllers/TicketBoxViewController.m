@@ -33,12 +33,13 @@
     [self.view addSubview:self.ticketBoxTableView];
     _serverManager = [ServerManager sharedInstance];
     [self getDataTicket:@"0"];
-    [self get_opera_cateData];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tabBarController setHidden:YES];
+        [self get_opera_cateData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

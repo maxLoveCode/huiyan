@@ -85,6 +85,9 @@
 		550BFA221CBB2AF000E2E9DE /* top_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA071CBB2AF000E2E9DE /* top_shadow.png */; };
 		550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA081CBB2AF000E2E9DE /* unlock-nor@2x.png */; };
 		550BFA241CBB2AF000E2E9DE /* unlock-nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550BFA091CBB2AF000E2E9DE /* unlock-nor@3x.png */; };
+		554B97BB1CED5E0B00E471CB /* PersonTrainingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 554B97B91CED5E0B00E471CB /* PersonTrainingCell.m */; };
+		554B97BC1CED5E0B00E471CB /* PersonTrainingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554B97BA1CED5E0B00E471CB /* PersonTrainingCell.xib */; };
+		554B97BF1CED6A1400E471CB /* PersonTraining.m in Sources */ = {isa = PBXBuildFile; fileRef = 554B97BE1CED6A1400E471CB /* PersonTraining.m */; };
 		5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBEA1CD0B8CB00CCD668 /* FindTableViewCell.m */; };
 		5556CBEE1CD0BB3300CCD668 /* FindFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBED1CD0BB3300CCD668 /* FindFriend.m */; };
 		5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBF01CD0C5FE00CCD668 /* MQPayClient.m */; };
@@ -164,6 +167,7 @@
 		55A43E8C1CEC08F100BB73EF /* DramaStarInvitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A43E8A1CEC08F100BB73EF /* DramaStarInvitionViewController.m */; };
 		55A43E911CEC282700BB73EF /* DramaStarInvatationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A43E8F1CEC282700BB73EF /* DramaStarInvatationCell.m */; };
 		55A43E921CEC282700BB73EF /* DramaStarInvatationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A43E901CEC282700BB73EF /* DramaStarInvatationCell.xib */; };
+		55A43E951CED549100BB73EF /* MeTrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A43E941CED549100BB73EF /* MeTrainingViewController.m */; };
 		55AD324F1CD9C748000ACE39 /* PayData.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD324E1CD9C748000ACE39 /* PayData.m */; };
 		55AD32561CDB2426000ACE39 /* collect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55AD32501CDB2426000ACE39 /* collect@2x.png */; };
 		55AD32571CDB2426000ACE39 /* collect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55AD32511CDB2426000ACE39 /* collect@3x.png */; };
@@ -382,6 +386,11 @@
 		550BFA071CBB2AF000E2E9DE /* top_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_shadow.png; sourceTree = "<group>"; };
 		550BFA081CBB2AF000E2E9DE /* unlock-nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-nor@2x.png"; sourceTree = "<group>"; };
 		550BFA091CBB2AF000E2E9DE /* unlock-nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unlock-nor@3x.png"; sourceTree = "<group>"; };
+		554B97B81CED5E0B00E471CB /* PersonTrainingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonTrainingCell.h; sourceTree = "<group>"; };
+		554B97B91CED5E0B00E471CB /* PersonTrainingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTrainingCell.m; sourceTree = "<group>"; };
+		554B97BA1CED5E0B00E471CB /* PersonTrainingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonTrainingCell.xib; sourceTree = "<group>"; };
+		554B97BD1CED6A1400E471CB /* PersonTraining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonTraining.h; sourceTree = "<group>"; };
+		554B97BE1CED6A1400E471CB /* PersonTraining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTraining.m; sourceTree = "<group>"; };
 		5556CBE91CD0B8CB00CCD668 /* FindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindTableViewCell.h; sourceTree = "<group>"; };
 		5556CBEA1CD0B8CB00CCD668 /* FindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindTableViewCell.m; sourceTree = "<group>"; };
 		5556CBEC1CD0BB3300CCD668 /* FindFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriend.h; sourceTree = "<group>"; };
@@ -585,6 +594,8 @@
 		55A43E8E1CEC282700BB73EF /* DramaStarInvatationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaStarInvatationCell.h; sourceTree = "<group>"; };
 		55A43E8F1CEC282700BB73EF /* DramaStarInvatationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaStarInvatationCell.m; sourceTree = "<group>"; };
 		55A43E901CEC282700BB73EF /* DramaStarInvatationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DramaStarInvatationCell.xib; sourceTree = "<group>"; };
+		55A43E931CED549100BB73EF /* MeTrainingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeTrainingViewController.h; sourceTree = "<group>"; };
+		55A43E941CED549100BB73EF /* MeTrainingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeTrainingViewController.m; sourceTree = "<group>"; };
 		55AD324D1CD9C748000ACE39 /* PayData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayData.h; sourceTree = "<group>"; };
 		55AD324E1CD9C748000ACE39 /* PayData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayData.m; sourceTree = "<group>"; };
 		55AD32501CDB2426000ACE39 /* collect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect@2x.png"; sourceTree = "<group>"; };
@@ -1504,6 +1515,8 @@
 				558F22F11CE9B112008636E1 /* UnBindMobileViewController.h */,
 				558F22F21CE9B112008636E1 /* UnBindMobileViewController.m */,
 				558F22F31CE9B112008636E1 /* UnBindMobileViewController.xib */,
+				55A43E931CED549100BB73EF /* MeTrainingViewController.h */,
+				55A43E941CED549100BB73EF /* MeTrainingViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1513,6 +1526,8 @@
 			children = (
 				5556CC0A1CD83F0100CCD668 /* PersonMessage.h */,
 				5556CC0B1CD83F0100CCD668 /* PersonMessage.m */,
+				554B97BD1CED6A1400E471CB /* PersonTraining.h */,
+				554B97BE1CED6A1400E471CB /* PersonTraining.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1529,6 +1544,9 @@
 				558F22DD1CE86016008636E1 /* PersonDramaTicketCell.h */,
 				558F22DE1CE86016008636E1 /* PersonDramaTicketCell.m */,
 				558F22DF1CE86016008636E1 /* PersonDramaTicketCell.xib */,
+				554B97B81CED5E0B00E471CB /* PersonTrainingCell.h */,
+				554B97B91CED5E0B00E471CB /* PersonTrainingCell.m */,
+				554B97BA1CED5E0B00E471CB /* PersonTrainingCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1753,6 +1771,7 @@
 				55C41E251CE4559A0055A58B /* successful@2x.png in Resources */,
 				55A43E771CEB03DF00BB73EF /* NewHomePageDetailCellTableViewCell.xib in Resources */,
 				5570012F1CCF54AE003EB02F /* back_arrow@2x.png in Resources */,
+				554B97BC1CED5E0B00E471CB /* PersonTrainingCell.xib in Resources */,
 				55C41E271CE4559A0055A58B /* system@3x.png in Resources */,
 				55C41E211CE4559A0055A58B /* interaction@2x.png in Resources */,
 				558F22D51CE85469008636E1 /* wallet@2x.png in Resources */,
@@ -1964,6 +1983,7 @@
 				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,
 				557EDE7E1CD0A4AB0039267E /* MD5DataSigner.m in Sources */,
 				25C625881CC089330068BFE8 /* DramaStarViewController.m in Sources */,
+				55A43E951CED549100BB73EF /* MeTrainingViewController.m in Sources */,
 				25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */,
 				55C41DF61CE305800055A58B /* ImportantNotesCell.m in Sources */,
 				5556CC0F1CD8992B00CCD668 /* LookTicketDetailViewController.m in Sources */,
@@ -1987,6 +2007,7 @@
 				557EDE7D1CD0A4AB0039267E /* DataVerifier.m in Sources */,
 				5556CC0C1CD83F0100CCD668 /* PersonMessage.m in Sources */,
 				55C41DF11CE2FFFD0055A58B /* WriteSignUpCell.m in Sources */,
+				554B97BF1CED6A1400E471CB /* PersonTraining.m in Sources */,
 				5570012C1CCF365E003EB02F /* WebViewJavascriptBridgeBase.m in Sources */,
 				550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */,
 				55C41E2D1CE463480055A58B /* NSString+ImageString.m in Sources */,
@@ -2005,6 +2026,7 @@
 				55C41E071CE4223D0055A58B /* TrainPayViewController.m in Sources */,
 				25C625441CBE002E0068BFE8 /* LoginView.m in Sources */,
 				55C41DFE1CE322B20055A58B /* TrainOrdersCell.m in Sources */,
+				554B97BB1CED5E0B00E471CB /* PersonTrainingCell.m in Sources */,
 				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
 				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
