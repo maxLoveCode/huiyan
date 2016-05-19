@@ -16,6 +16,7 @@
 #import "BindMobileViewController.h"
 #import "UnBindMobileViewController.h"
 #import "MeTrainingViewController.h"
+#import "EditPersonMessageViewController.h"
 @interface MeMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) PersonMessage *perData;
@@ -107,7 +108,7 @@
     if (indexPath.section == 0) {
         PersonHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:@"head"];
        [cell setContent:self.perData];
-        NSLog(@"%@",self.perData);
+        [cell.edit_btn addTarget:self action:@selector(editPerson:) forControlEvents:UIControlEventTouchUpInside];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
@@ -192,6 +193,10 @@
     }
 }
 
+- (void)editPerson:(UIButton *)sender{
+    EditPersonMessageViewController *editCon = [[EditPersonMessageViewController alloc]init];
+    [self.navigationController pushViewController:editCon animated:NO];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -206,7 +211,7 @@
         [self.serverManager AnimatedGET:@"get_user_info.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
             if ([responseObject[@"code"]integerValue] == 80000) {
                 self.perData = [PersonMessage personWithDic:responseObject[@"data"]];
-                NSLog(@"mobile = %@",self.perData.mobile);
+              //  NSLog(@"mobile = %@",self.perData.mobile);
                 if (self.perData.mobile == nil || [self.perData.mobile isEqualToString:@""]) {
                     kSETDEFAULTS(@"no", @"mobile");
                 }else{
@@ -219,6 +224,8 @@
         }];
     }
 }
+
+
 /*
 #pragma mark - Navigation
 

@@ -88,6 +88,8 @@
 		554B97BB1CED5E0B00E471CB /* PersonTrainingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 554B97B91CED5E0B00E471CB /* PersonTrainingCell.m */; };
 		554B97BC1CED5E0B00E471CB /* PersonTrainingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554B97BA1CED5E0B00E471CB /* PersonTrainingCell.xib */; };
 		554B97BF1CED6A1400E471CB /* PersonTraining.m in Sources */ = {isa = PBXBuildFile; fileRef = 554B97BE1CED6A1400E471CB /* PersonTraining.m */; };
+		554B97C21CEDA25B00E471CB /* EditPersonMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554B97C11CEDA25B00E471CB /* EditPersonMessageViewController.m */; };
+		554B97C51CEDB6F800E471CB /* SexTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554B97C41CEDB6F800E471CB /* SexTableViewController.m */; };
 		5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBEA1CD0B8CB00CCD668 /* FindTableViewCell.m */; };
 		5556CBEE1CD0BB3300CCD668 /* FindFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBED1CD0BB3300CCD668 /* FindFriend.m */; };
 		5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBF01CD0C5FE00CCD668 /* MQPayClient.m */; };
@@ -391,6 +393,10 @@
 		554B97BA1CED5E0B00E471CB /* PersonTrainingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonTrainingCell.xib; sourceTree = "<group>"; };
 		554B97BD1CED6A1400E471CB /* PersonTraining.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonTraining.h; sourceTree = "<group>"; };
 		554B97BE1CED6A1400E471CB /* PersonTraining.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTraining.m; sourceTree = "<group>"; };
+		554B97C01CEDA25B00E471CB /* EditPersonMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonMessageViewController.h; sourceTree = "<group>"; };
+		554B97C11CEDA25B00E471CB /* EditPersonMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonMessageViewController.m; sourceTree = "<group>"; };
+		554B97C31CEDB6F800E471CB /* SexTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexTableViewController.h; sourceTree = "<group>"; };
+		554B97C41CEDB6F800E471CB /* SexTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexTableViewController.m; sourceTree = "<group>"; };
 		5556CBE91CD0B8CB00CCD668 /* FindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindTableViewCell.h; sourceTree = "<group>"; };
 		5556CBEA1CD0B8CB00CCD668 /* FindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindTableViewCell.m; sourceTree = "<group>"; };
 		5556CBEC1CD0BB3300CCD668 /* FindFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriend.h; sourceTree = "<group>"; };
@@ -1517,6 +1523,10 @@
 				558F22F31CE9B112008636E1 /* UnBindMobileViewController.xib */,
 				55A43E931CED549100BB73EF /* MeTrainingViewController.h */,
 				55A43E941CED549100BB73EF /* MeTrainingViewController.m */,
+				554B97C01CEDA25B00E471CB /* EditPersonMessageViewController.h */,
+				554B97C11CEDA25B00E471CB /* EditPersonMessageViewController.m */,
+				554B97C31CEDB6F800E471CB /* SexTableViewController.h */,
+				554B97C41CEDB6F800E471CB /* SexTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1958,6 +1968,7 @@
 				5556CBF71CD0E30600CCD668 /* DramaTicketDetailTableViewController.m in Sources */,
 				55CCD7F81CB3E17200C3B8CA /* HomePage.m in Sources */,
 				55CCD7E71CB38DB700C3B8CA /* ServerManager.m in Sources */,
+				554B97C51CEDB6F800E471CB /* SexTableViewController.m in Sources */,
 				558621701CE49F7F007D5049 /* PersonHeadCell.m in Sources */,
 				55C41DD91CDDEC870055A58B /* SignUpMessageTableViewController.m in Sources */,
 				55942D421CB7D77100EB041A /* CommentContent.m in Sources */,
@@ -2036,6 +2047,7 @@
 				558621731CE49F92007D5049 /* PersonNormalCell.m in Sources */,
 				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
+				554B97C21CEDA25B00E471CB /* EditPersonMessageViewController.m in Sources */,
 				558F22D91CE856FB008636E1 /* MeDramaTicketViewController.m in Sources */,
 				55AD324F1CD9C748000ACE39 /* PayData.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
