@@ -14,6 +14,7 @@
 #import <Masonry/Masonry.h>
 #import "ZFPlayer.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "NewHomePageDetailCellTableViewCell.h"
 #define kHeadHeight 187
 @interface WikiWorksDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *wikiDetailsTableView;
@@ -151,6 +152,7 @@
         self.wikiDetailsTableView.dataSource = self;
         self.wikiDetailsTableView.separatorStyle = NO;
         [self.wikiDetailsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"wikidetails"];
+        [self.wikiDetailsTableView registerNib:[UINib nibWithNibName:@"NewHomePageDetailCellTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"homepage"];
         self.wikiDetailsTableView.backgroundColor = COLOR_WithHex(0x2f2f2f2);
     }
     return _wikiDetailsTableView;
@@ -160,58 +162,44 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
 
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 42;
+    if (indexPath.section == 0) {
+        return 150;
     }else{
         return 52 + self.height + 10;
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if(section == 0){
+        return 10;
+    }
+    return 0.01;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"wikidetails" forIndexPath:indexPath];
-    if (cell == nil) {
-         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"wikidetails"];
-    }
-    UIView *head_view = [cell viewWithTag:999];
-    if (head_view == nil) {
-        head_view = [[UIView alloc]init];
-        head_view.backgroundColor = COLOR_WithHex(0xefefef);
-        head_view.frame = CGRectMake(0, 0, kScreen_Width, 10);
-        UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
-        up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-        [head_view addSubview:up_lab];
-        UILabel *down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
-        down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-        [head_view addSubview:down_lab];
-        head_view.tag = 999;
-           [cell.contentView addSubview:head_view];
-    }
 
-    
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         
-        UILabel *title_lab = [cell viewWithTag:1000];
-        if (!title_lab) {
-            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, 32)];
-            title_lab.textColor = COLOR_WithHex(0x545454);
-            title_lab.font = kFONT14;
-            title_lab.tag = 1000;
-            title_lab.numberOfLines = 0;
-            [cell.contentView addSubview:title_lab];
-        }
-        title_lab.text = self.homePage.title;
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
+        NewHomePageDetailCellTableViewCell *homecell = [tableView dequeueReusableCellWithIdentifier:@"homepage"];
+        [homecell setContent:self.homePage];
+           homecell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return homecell;
     }else{
-
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"wikidetails" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"wikidetails"];
+        }
         UILabel *mes_lab = [cell viewWithTag:1001];
         if (!mes_lab) {
             mes_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, 32)];

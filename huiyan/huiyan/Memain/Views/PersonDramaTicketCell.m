@@ -22,7 +22,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setContent:(PersonDramaTicket *)model{
+- (void)setContent:(PayData *)model{
     [self.head_pic sd_setImageWithURL:[NSURL URLWithString:model.opera_cover]];
     self.title_lab.text = model.opera_title;
     self.time_lab.text = model.opera_date;

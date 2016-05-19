@@ -12,6 +12,7 @@
 #import "ServerManager.h"
 #import "PayData.h"
 #import "LookTicketDetailViewController.h"
+
 @interface DramaTicketDetailTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -189,7 +190,6 @@
 
 - (void)lookDramaTicket:(UIButton *)sender
 {
-    NSLog(@"111");
     LookTicketDetailViewController *lokCon = [[LookTicketDetailViewController alloc]init];
     lokCon.payData = self.paydata;
     [self.navigationController pushViewController:lokCon animated:YES];

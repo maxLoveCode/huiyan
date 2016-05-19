@@ -10,6 +10,7 @@
 #import "WikiWorksDetailsViewController.h"
 #import "StarDetailViewController.h"
 #import "ZFPlayer.h"
+#import "DramaStarViewController.h"
 @interface MainTabBarViewController ()
 
 @end
@@ -24,14 +25,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addAllController];
-    // Do any additional setup after loading the view.
+     // Do any additional setup after loading the view.
 }
 
 - (void)addAllController{
     UIColor *color  = COLOR_THEME;
     NewHomePageViewController *homepage = [[NewHomePageViewController alloc]init];
     
-    MessageViewController *mes = [[MessageViewController alloc]init];
+    DramaStarViewController *drama = [[DramaStarViewController alloc]init];
     
     HomePageController *explore = [[HomePageController alloc]init];
     
@@ -46,14 +47,14 @@
     homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [homeNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
-    UINavigationController *mesNav = [[UINavigationController alloc]initWithRootViewController:mes];
-    mesNav.tabBarItem.title = @"消息";
-    [mesNav.tabBarItem setImage:[UIImage imageNamed:@"tab_firend"]];
-    [mesNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_firend_selected"]];
-    mesNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [mesNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
+    UINavigationController *dramaNav = [[UINavigationController alloc]initWithRootViewController:drama];
+    dramaNav.tabBarItem.title = @"红人";
+    [dramaNav.tabBarItem setImage:[UIImage imageNamed:@"tab_firend"]];
+    [dramaNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_firend_selected"]];
+    dramaNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [dramaNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     UINavigationController *exploreNav = [[UINavigationController alloc]initWithRootViewController:explore];
+    
     exploreNav.tabBarItem.title  = @"发现";
     [exploreNav.tabBarItem setImage:[UIImage imageNamed:@"tab_explorer"]];
     [exploreNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_explorer_selected"]];
@@ -70,7 +71,7 @@
     [self.tabBar setTintColor:color];
     self.tabBar.translucent  = NO;
     self.tabBar.opaque = YES;
-    NSArray *navCon = @[homeNav,exploreNav,mesNav,meMainNav];
+    NSArray *navCon = @[homeNav,dramaNav,exploreNav,meMainNav];
     [self setViewControllers:navCon animated:YES];
 }
 
@@ -98,6 +99,9 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (void)rightClick:(UIBarButtonItem *)sender{
+    NSLog(@"eeee");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

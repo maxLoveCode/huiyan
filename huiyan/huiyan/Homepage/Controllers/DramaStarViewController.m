@@ -7,7 +7,6 @@
 //
 
 #import "DramaStarViewController.h"
-#import "UITabBarController+ShowHideBar.h"
 #import "MCSwipeMenu.h"
 #import "ZCBannerView.h"
 #import "Constant.h"
@@ -16,6 +15,9 @@
 #import "MCSwipeMenu.h"
 #import "DramaStar.h"
 #import "StarDetailViewController.h"
+#import "MessageViewController.h"
+#import "SignUpMessageTableViewController.h"
+#import "DramaStarInvitionViewController.h"
 #define kSwipeMenu 41
 #define kBannerHeight kScreen_Width / 2
 @interface DramaStarViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
@@ -33,21 +35,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"红人";
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"interaction"] style:UIBarButtonItemStylePlain target:self action:@selector(rightClick:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    //侧滑关闭
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
     self.serverManager = [ServerManager sharedInstance];
     [self.view addSubview:self.head_view];
     [self get_actor_cateData];
     [self get_actor_bannerData];
     [self get_actor_listData:@"0" page:@"0"];
     [self.view addSubview:self.dramaStarTableView];
-    self.automaticallyAdjustsScrollViewInsets  = NO;
+   // self.automaticallyAdjustsScrollViewInsets  = NO;
     // Do any additional setup after loading the view.
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tabBarController setHidden:YES];
-    
-    
 }
 
 - (MCSwipeMenu *)head_view{
@@ -58,14 +65,9 @@
     return _head_view;
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
-}
-
 - (UITableView *)dramaStarTableView{
     if (!_dramaStarTableView) {
-        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu  , kScreen_Width, kScreen_Height - kSwipeMenu - 64) style:UITableViewStyleGrouped];
+        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu + 20 , kScreen_Width, kScreen_Height - 48 - 64) style:UITableViewStyleGrouped];
         self.dramaStarTableView.delegate = self;
         self.dramaStarTableView.dataSource = self;
         self.dramaStarTableView.separatorStyle = UITableViewCellAccessoryNone;
@@ -121,6 +123,9 @@
     }else{
     DramaStarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dramaStar" forIndexPath:indexPath];
         [cell setContent:self.dataSource[indexPath.section -1]];
+        DramaStar *star = self.dataSource[indexPath.section -1];
+        cell.invatation_btn.tag = [star.cid integerValue];
+        [cell.invatation_btn addTarget:self action:@selector(invatation:) forControlEvents:UIControlEventTouchUpInside];
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
          return cell;
     }
@@ -188,6 +193,12 @@
     }];
 }
 
+- (void)invatation:(UIButton *)sender{
+    DramaStarInvitionViewController *dramaCon = [[DramaStarInvitionViewController alloc]init];
+    dramaCon.cid = [NSString stringWithFormat:@"%d",sender.tag];
+    [self.navigationController pushViewController:dramaCon animated:NO];
+}
+
 #pragma mark - menuDelegate
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableArray *source = menu.dataSource;
@@ -200,7 +211,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)rightClick:(UIBarButtonItem *)sender{
+    MessageViewController *mes = [[MessageViewController alloc]init];
+    [self.navigationController pushViewController:mes animated:YES];
+}
 
 /*
 #pragma mark - Navigation

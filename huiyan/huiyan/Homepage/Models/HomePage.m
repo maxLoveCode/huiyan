@@ -22,7 +22,9 @@
     [drama setTitle:[json objectForKey:@"title"]];
     [drama setProfile:[json objectForKey:@"profile"]];
     drama.imgs = json[@"imgs"];
-    
+    drama.like_count = json[@"like_count"];
+    drama.play_count = json[@"play_count"];
+    drama.share_count = json[@"share_count"];
     return drama;
 }
 

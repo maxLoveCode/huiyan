@@ -29,8 +29,8 @@
     [super viewDidLoad];
    [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title_arr = @[@"我的戏票",@"我的培训",@"我的钱包",@"我的兴趣",@"绑定手机号",@"设置"];
-    self.image_arr = @[@"ticket",@"training",@"wallet",@"interest",@"phone",@"set"];
+    self.title_arr = @[@"我的戏票",@"我的培训",@"我的邀约",@"我的钱包",@"我的兴趣",@"绑定手机号",@"设置"];
+    self.image_arr = @[@"ticket",@"training",@"training",@"wallet",@"interest",@"phone",@"set"];
 
     // Do any additional setup after loading the view.
 }
@@ -73,7 +73,7 @@
         case 0:
             return 1;
         case 1:
-            return 2;
+            return 3;
         case 2:
             return 1;
         case 3:
@@ -116,11 +116,11 @@
             cell.textLabel.text = self.title_arr[indexPath.row];
             cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row]];
         }else if (indexPath.section == 2){
-            cell.textLabel.text = self.title_arr[2];
-             cell.imageView.image = [UIImage imageNamed:self.image_arr[2]];
-        }else if (indexPath.section == 3){
             cell.textLabel.text = self.title_arr[3];
              cell.imageView.image = [UIImage imageNamed:self.image_arr[3]];
+        }else if (indexPath.section == 3){
+            cell.textLabel.text = self.title_arr[4];
+             cell.imageView.image = [UIImage imageNamed:self.image_arr[4]];
         }else{
             if ([type isEqualToString:@"mobile"]) {
                 cell.textLabel.text = self.title_arr[5];
@@ -166,7 +166,7 @@
       
     }else if (indexPath.section == 3){
       
-    }else{
+    }else if (indexPath.section == 4){
         if ([type isEqualToString:@"mobile"]) {
             
         }else{
@@ -184,6 +184,8 @@
             }
         }
         
+        
+    }else{
         
     }
 }

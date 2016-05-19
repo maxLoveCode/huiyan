@@ -36,7 +36,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你可以用该手机和汇演账号密码登录,并可用于重置汇演账号密码" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qt-Ys-FFv">
-                    <rect key="frame" x="15" y="270" width="290" height="43"/>
+                    <rect key="frame" x="15" y="230" width="290" height="43"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="fY3-r6-sdg"/>
                     </constraints>
@@ -45,7 +45,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JiD-ev-PvC">
-                    <rect key="frame" x="15" y="363" width="290" height="40"/>
+                    <rect key="frame" x="15" y="303" width="290" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Bgd-8e-G1c"/>
                     </constraints>
@@ -58,14 +58,14 @@
             <constraints>
                 <constraint firstItem="Xny-Tg-gAR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="1NV-b9-c6y"/>
                 <constraint firstItem="JiD-ev-PvC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="3Mg-9q-BW7"/>
-                <constraint firstItem="JiD-ev-PvC" firstAttribute="top" secondItem="2Qt-Ys-FFv" secondAttribute="bottom" constant="50" id="B30-7v-RJJ"/>
+                <constraint firstItem="JiD-ev-PvC" firstAttribute="top" secondItem="2Qt-Ys-FFv" secondAttribute="bottom" constant="30" id="B30-7v-RJJ"/>
                 <constraint firstAttribute="trailing" secondItem="JiD-ev-PvC" secondAttribute="trailing" constant="15" id="Ds4-cI-jGR"/>
                 <constraint firstAttribute="trailing" secondItem="hX1-wv-aut" secondAttribute="trailing" constant="30" id="H6v-0m-M8D"/>
                 <constraint firstItem="hX1-wv-aut" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="JtJ-aV-WJ3"/>
                 <constraint firstAttribute="trailing" secondItem="Xny-Tg-gAR" secondAttribute="trailing" constant="30" id="P5v-jI-kHT"/>
                 <constraint firstItem="hX1-wv-aut" firstAttribute="top" secondItem="Xny-Tg-gAR" secondAttribute="bottom" constant="30" id="Yys-Vn-3GF"/>
                 <constraint firstItem="Xny-Tg-gAR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="cqZ-AN-pwl"/>
-                <constraint firstItem="2Qt-Ys-FFv" firstAttribute="top" secondItem="hX1-wv-aut" secondAttribute="bottom" constant="80" id="v1h-k2-fHH"/>
+                <constraint firstItem="2Qt-Ys-FFv" firstAttribute="top" secondItem="hX1-wv-aut" secondAttribute="bottom" constant="40" id="v1h-k2-fHH"/>
                 <constraint firstAttribute="trailing" secondItem="2Qt-Ys-FFv" secondAttribute="trailing" constant="15" id="ya8-0E-UxL"/>
                 <constraint firstItem="2Qt-Ys-FFv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="zo8-7b-XLv"/>
             </constraints>

@@ -19,13 +19,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huiyan/Memain/Controllers/BindMobileViewController.m"
-            timestampString = "485076643.021666"
+            filePath = "huiyan/Homepage/Controllers/StarDetailViewController.m"
+            timestampString = "485247357.442713"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-getCheck_vcode"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "-focus:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "huiyan/Homepage/Controllers/StarDetailViewController.m"
+            timestampString = "485247357.442713"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "-write_play_recordData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

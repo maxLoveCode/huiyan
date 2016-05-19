@@ -25,7 +25,6 @@
 @property (nonatomic, strong) UIButton *head_btn;
 @property (nonatomic, strong) UIButton *tail_btn;
 @end
-
 @implementation BuyTicketDetailsViewController
 
 - (void)viewDidLoad{

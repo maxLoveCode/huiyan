@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PersonDramaTicket.h"
+#import "PayData.h"
 @interface PersonDramaTicketCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *head_pic;
 @property (weak, nonatomic) IBOutlet UILabel *title_lab;
@@ -16,5 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *Count_lab;
 @property (weak, nonatomic) IBOutlet UIImageView *status_pic;
 
-- (void)setContent:(PersonDramaTicket *)model;
+- (void)setContent:(PayData *)model;
 @end

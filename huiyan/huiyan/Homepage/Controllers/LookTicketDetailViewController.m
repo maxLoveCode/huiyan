@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    //self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.mainTableView];
     
 }
@@ -41,7 +41,7 @@
 
 - (UITableView *)mainTableView{
     if (!_mainTableView) {
-        self.mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64) style:UITableViewStyleGrouped];
+        self.mainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         self.mainTableView.delegate = self;
         self.mainTableView.dataSource = self;
         self.mainTableView.separatorStyle = UITableViewCellSelectionStyleNone;

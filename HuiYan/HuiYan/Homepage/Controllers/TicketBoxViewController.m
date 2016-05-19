@@ -16,7 +16,6 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "ChangeRondaTableViewController.h"
 #define ticketHeight 132
-
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
 @property (nonatomic, strong) UITableView *ticketBoxTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -42,6 +41,12 @@
     [self.tabBarController setHidden:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+}
+
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.tabBarController setHidden:NO];
@@ -49,7 +54,7 @@
 
 - (UITableView *)ticketBoxTableView{
     if (!_ticketBoxTableView) {
-        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view.frame), kScreen_Width, ticketHeight * 5) style:UITableViewStyleGrouped];
+        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view.frame), kScreen_Width, kScreen_Height - 41) style:UITableViewStyleGrouped];
         self.ticketBoxTableView.delegate  = self;
         self.ticketBoxTableView.dataSource = self;
         //self.ticketBoxTableView.backgroundColor = [UIColor whiteColor];

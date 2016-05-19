@@ -11,19 +11,19 @@
 #import "ServerManager.h"
 #import "ZCBannerView.h"
 @interface HomePageController : UITableViewController<UICollectionViewDelegate, UICollectionViewDataSource>
-
-//热门推荐 recommendTableView
-@property (strong, nonatomic) UITableView* recommendTableView;
-
 //menuControllerView
 @property (strong, nonatomic) UICollectionView* menuView;
-
+@property (strong, nonatomic) UICollectionView* ticketCollectionView;
+@property (strong, nonatomic) UICollectionView* wikiCollectionView;
+@property (strong, nonatomic) UITableView* activityTableView;
 @property (strong, nonatomic) NSMutableArray* dataSource;
 
 @property (strong, nonatomic) ServerManager* serverManager;
 
-@property (nonatomic, strong)ZCBannerView  *banner_view;
-
 @property (nonatomic, strong) NSArray *image_arr;
 @property (nonatomic, strong) NSArray *title_arr;
+@property (nonatomic,strong) NSArray *head_title;
+@property(nonatomic,strong) NSMutableArray *ticketArr;
+@property (nonatomic,strong) NSMutableArray *actArr;
+@property (nonatomic,strong) NSMutableArray *wikiArr;
 @end

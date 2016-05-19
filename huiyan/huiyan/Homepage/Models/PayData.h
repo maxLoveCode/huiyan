@@ -11,6 +11,7 @@
 @interface PayData : NSObject
 @property (nonatomic,copy) NSString *opera_title;
 @property (nonatomic,copy) NSString *opera_date;
+@property (nonatomic,copy) NSString *opera_cover;
 @property (nonatomic,copy) NSString *floor;
 @property (nonatomic,copy) NSString *tickets;
 @property (nonatomic,copy) NSString *code_num;
@@ -24,6 +25,8 @@
 @property (nonatomic,copy) NSString *pay_time;
 @property (nonatomic,copy) NSString *kefu_tel;
 @property (nonatomic,copy) NSString *mobile;
+@property (nonatomic,copy) NSString *status;
+@property (nonatomic,copy) NSString *ID;
 + (PayData *)paydataWithDic:(NSDictionary *)dic;
 
 @end

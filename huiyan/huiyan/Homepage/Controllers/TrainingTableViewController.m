@@ -35,7 +35,7 @@
 
 - (UITableView *)trainTableView{
     if (!_trainTableView) {
-        self.trainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64) style:UITableViewStylePlain];
+        self.trainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStylePlain];
         self.trainTableView.delegate = self;
         self.trainTableView.dataSource = self;
         self.trainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

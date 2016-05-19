@@ -77,10 +77,10 @@
         }];
     }else{
         NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"mobile":self.mobile_textFiield.text,@"scene":@"third_bind"};
-        NSLog(@"%@",params);
+       // NSLog(@"%@",params);
         [self.serverManager AnimatedPOST:@"send_vcode.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
             if ([responseObject[@"code"] integerValue] == 90000) {
-                NSLog(@"%@",responseObject[@"msg"]);
+             //   NSLog(@"%@",responseObject[@"msg"]);
                 if (!_timer) {
                     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fireTimer) userInfo:nil repeats:YES];
                     self.star = [NSDate date];
@@ -117,6 +117,8 @@
     }
 
 }
+
+
 
 - (void)getCheck_vcode{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"mobile":self.mobile_textFiield.text,@"vcode":self.captcha_textField.text};

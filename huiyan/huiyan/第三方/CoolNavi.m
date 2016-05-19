@@ -10,21 +10,10 @@
 #import "UIImageView+WebCache.h"
 #import "Constant.h"
 #import "UIImage+ImageEffects.h"
-@interface CoolNavi()
-
-@property (nonatomic, strong) UIImageView *backImageView;
-@property (nonatomic, strong) UIImageView *headerImageView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *subTitleLabel;
-@property (nonatomic, assign) CGPoint prePoint;
-
-@end
-
-
 @implementation CoolNavi
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self addSubview:self.bg_img];
         [self.bg_img addSubview:self.edit_btn];
         [self.bg_img addSubview:self.head_img];
@@ -36,10 +25,11 @@
         [self.bg_img addSubview:self.giftList_lab];
         [self.bg_img addSubview:self.name_lab];
         [self.bg_img addSubview:self.focus_btn];
-         self.userInteractionEnabled = YES;
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
+
 
 - (UIImageView *)bg_img{
     if (!_bg_img) {
@@ -188,85 +178,5 @@
         self.focus(sender);
     }
 }
-
-- (void)dealloc
-{
-  //  [self.scrollView removeObserver:self forKeyPath:@"contentOffset" context:nil];
-   // [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-}
-
--(void)willMoveToSuperview:(UIView *)newSuperview
-{
-   // [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew) context:nil];
-    self.scrollView.contentInset = UIEdgeInsetsMake(self.frame.size.height, 0 ,0 , 0);
-    self.scrollView.scrollIndicatorInsets = self.scrollView.contentInset;
-}
-
-
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    CGPoint newOffset = [change[@"new"] CGPointValue];
-    [self updateSubViewsWithScrollOffset:newOffset];
-}
-
--(void)updateSubViewsWithScrollOffset:(CGPoint)newOffset
-{
-    
-    CGFloat destinaOffset = -64;
-    CGFloat startChangeOffset = -self.scrollView.contentInset.top;
-    newOffset = CGPointMake(newOffset.x, newOffset.y<startChangeOffset?startChangeOffset:(newOffset.y>destinaOffset?destinaOffset:newOffset.y));
-    
-    CGFloat subviewOffset = self.frame.size.height-40; // 子视图的偏移量
-    CGFloat newY = -newOffset.y-self.scrollView.contentInset.top;
-    CGFloat d = destinaOffset-startChangeOffset;
-    CGFloat alpha = 1-(newOffset.y-startChangeOffset)/d;
-    self.edit_btn.alpha = alpha;
-    self.fans_first_img.alpha = alpha;
-    self.fans_second_img.alpha = alpha;
-    self.fans_third_img.alpha = alpha;
-    self.more_img.alpha = alpha;
-    self.giftList_lab.alpha = alpha;
-    self.fansNum_lab.alpha = alpha;
-    self.edit_btn.alpha = alpha;
-    self.edit_btn.alpha = alpha;
-    self.edit_btn.alpha = alpha;
-    self.frame = CGRectMake(0, newY, self.frame.size.width, self.frame.size.height);
-
-    CGRectMake(0, -0.5*self.frame.size.height+(1.5*self.frame.size.height-64)*(1-alpha), self.backImageView.frame.size.width, self.backImageView.frame.size.height);
-    self.edit_btn.frame = CGRectMake(kScreen_Width - kMargin - 20 - 40, 80 +(subviewOffset-0.45*self.frame.size.height)*(1-alpha), 40, 50);
-    self.giftList_lab.frame = CGRectMake(kMargin, 244 - 36+(subviewOffset-0.8*self.frame.size.height)*(1-alpha), 100, 16);
-    self.fansNum_lab.frame = CGRectMake(108, 114 +(subviewOffset-0.45*self.frame.size.height)*(1-alpha), 300, 16 * 1.5);
-    
-    self.more_img.frame = CGRectMake(kScreen_Width - 15 - 20, 182+ 11 +(subviewOffset-0.8*self.frame.size.height)*(1-alpha), 20, 20);
-    self.fans_third_img.frame = CGRectMake(kScreen_Width - 210 +56+56, 182 +(subviewOffset-0.8*self.frame.size.height)*(1-alpha), 42, 42);
-    self.fans_second_img.frame  = CGRectMake(kScreen_Width - 210 + 56, 182 +(subviewOffset-0.8*self.frame.size.height)*(1-alpha), 42, 42);
-    self.fans_first_img.frame = CGRectMake(kScreen_Width - 210, 182 +(subviewOffset-0.8*self.frame.size.height)*(1-alpha), 42, 42);
-    
-    //调节大小
-    CGFloat f_imageReduce = 1-(newOffset.y-startChangeOffset)/(d*2) + 0.1;
-    //调节距离
-    CGAffineTransform f = CGAffineTransformMakeTranslation(0.5,(subviewOffset-0.51*self.frame.size.height)*(1-alpha));
-    self.focus_btn.transform = CGAffineTransformScale(f,
-                                                      f_imageReduce, f_imageReduce);
-    
-    //调节大小
-    CGFloat name_imageReduce = 1-(newOffset.y-startChangeOffset)/(d*2) + 0.2;
-    //调节距离
-    CGAffineTransform t_name = CGAffineTransformMakeTranslation(0,(subviewOffset-0.28*self.frame.size.height)*(1-alpha));
-    self.name_lab.transform = CGAffineTransformScale(t_name,
-                                                     name_imageReduce , name_imageReduce );
-    
-    CGFloat head_imageReduce = 1-(newOffset.y-startChangeOffset)/(d*2);
-    CGAffineTransform t_head = CGAffineTransformMakeTranslation(0.5,(subviewOffset-0.32*self.frame.size.height)*(1-alpha));
-    self.head_img.transform = CGAffineTransformScale(t_head,
-                                                       head_imageReduce, head_imageReduce);
-
-
-}
-
-
-
-
 
 @end

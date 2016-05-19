@@ -116,7 +116,10 @@ static int number_page = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    [cell setContent:self.dataSource[indexPath.section]];
+    if (self.dataSource.count > 0) {
+         [cell setContent:self.dataSource[indexPath.section]];
+    }
+   
     return cell;
 }
 

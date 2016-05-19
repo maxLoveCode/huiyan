@@ -26,6 +26,9 @@
      model.pay_time =  dic[@"pay_time"];
      model.kefu_tel =  dic[@"kefu_tel"];
     model.mobile = dic[@"mobile"];
+    model.ID = dic[@"id"];
+    model.status = dic[@"status"];
+    model.opera_cover = dic[@"opera_cover"];
     return model;
     
 }

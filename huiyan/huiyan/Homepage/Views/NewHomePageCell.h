@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomePage.h"
 @interface NewHomePageCell : UITableViewCell
 @property (strong, nonatomic) UIImageView *image_pic;
 @property (strong, nonatomic) UILabel *name_lab;
-
+- (void)setContent:(HomePage *)model;
 @end

@@ -9,10 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DramaStar.h"
 typedef void(^FocusActorBlock) (UIButton *);
-@interface CoolNavi : UIView
-@property (nonatomic, weak) UIScrollView *scrollView;
-// image action
-@property (nonatomic, copy) void(^imgActionBlock)();
+@interface CoolNavi : UITableViewCell
 @property (nonatomic,strong) UIImageView *bg_img;
 @property (nonatomic,strong) UIButton *edit_btn;
 @property (nonatomic,strong) UIImageView *head_img;
@@ -26,6 +23,4 @@ typedef void(^FocusActorBlock) (UIButton *);
 @property (nonatomic,strong) UIButton *focus_btn;
 @property (nonatomic,copy) FocusActorBlock focus;
 - (void)setContent:(DramaStar *)drama;
--(void)updateSubViewsWithScrollOffset:(CGPoint)newOffset;
-
 @end

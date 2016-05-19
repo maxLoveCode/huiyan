@@ -175,7 +175,6 @@
         NSDictionary *parmas = @{@"access_token":self.serverManager.accessToken,@"mobile":loginView.reg_mobile.text,@"vcode":loginView.vericode.text};
         [self.serverManager AnimatedPOST:@"check_vcode.php" parameters:parmas success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
             if ([responseObject[@"code"]integerValue] == 90010) {
-                NSLog(@"%@",responseObject[@"msg"]);
                 User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.confirmPass.text];
                 [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
             }

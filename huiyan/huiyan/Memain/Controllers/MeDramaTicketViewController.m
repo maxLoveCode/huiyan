@@ -11,6 +11,7 @@
 #import "ServerManager.h"
 #import "PersonDramaTicketCell.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "LookTicketDetailViewController.h"
 @interface MeDramaTicketViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -93,7 +94,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    LookTicketDetailViewController *lookCon = [[LookTicketDetailViewController alloc]init];
+    lookCon.payData = self.dataSource[indexPath.section];
+    [self.navigationController pushViewController:lookCon animated:NO];
 }
 
 #pragma mark-- 网络请求
@@ -104,7 +107,7 @@
     [self.serverManager AnimatedGET:@"my_opera_ticket.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80040) {
             for (NSDictionary *dic in responseObject[@"data"]) {
-                PersonDramaTicket *model = [PersonDramaTicket personDramaTicketWithDic:dic];
+                PayData *model = [PayData paydataWithDic:dic];
                 [self.dataSource addObject:model];
             }
             [self.tableView reloadData];

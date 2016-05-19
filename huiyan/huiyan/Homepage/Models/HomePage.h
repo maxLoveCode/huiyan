@@ -25,7 +25,9 @@
 @property (nonatomic,copy) NSString *createId;
 
 @property (nonatomic,copy) NSString *imgs;
-
+@property (nonatomic,copy) NSString *play_count;
+@property (nonatomic,copy) NSString *like_count;
+@property (nonatomic,copy) NSString *share_count;
 
 +(HomePage* )parseDramaJSON:(NSDictionary*)json;
 
