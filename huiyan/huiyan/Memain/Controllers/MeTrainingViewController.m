@@ -13,12 +13,13 @@
 #import "PersonTrainingCell.h"
 #import "PersonTraining.h"
 #import "TrainOrdersTableViewController.h"
+#import <MJRefresh.h>
 @interface MeTrainingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
 @end
-
+static int number_page = 0;
 @implementation MeTrainingViewController
 
 - (void)viewDidLoad {
@@ -27,7 +28,16 @@
     [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];
-    [self getMy_train_orderData];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self getMy_train_orderData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        number_page ++;
+        [self getMy_train_orderData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    [self.tableView.mj_header beginRefreshing];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -99,8 +109,8 @@
     [self.navigationController pushViewController:trainCon animated:NO];
 }
 
-- (void)getMy_train_orderData{
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id")};
+- (void)getMy_train_orderData:(NSString *)page{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"page":page};
     [self.serverManager AnimatedGET:@"my_train_order.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80050) {
             for (NSDictionary *dic in responseObject[@"data"]) {
@@ -108,6 +118,8 @@
                 [self.dataSource addObject:model];
             }
             [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

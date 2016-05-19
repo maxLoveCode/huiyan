@@ -73,8 +73,7 @@
 #pragma mark -- 发送验证码=
 - (void)sendVcode{
     if ([self.mobile_textFiield.text isEqualToString:@"请输入常用的手机号"] ||[self.mobile_textFiield.text isEqualToString:@""]) {
-        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:nil];
     }else{
         NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"mobile":self.mobile_textFiield.text,@"scene":@"third_bind"};
        // NSLog(@"%@",params);
@@ -104,14 +103,11 @@
 
 - (void)confirm:(UIButton *)sender{
     if ([self.mobile_textFiield.text isEqualToString:@"请输入常用的手机号"] ||[self.mobile_textFiield.text isEqualToString:@""]) {
-        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:nil];
     }else if ([self.captcha_textField.text isEqualToString:@"请输入验证码"] ||[self.captcha_textField.text isEqualToString:@""]){
-        [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:nil];
     }else if([self.passWord_textField.text isEqualToString:@"请输入密码"] ||[self.passWord_textField.text isEqualToString:@""]){
-        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:nil];
     }else{
         [self getCheck_vcode];
     }
@@ -136,8 +132,7 @@
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":user_id,@"mobile":self.mobile_textFiield.text,@"password": [NSString getMd5_32Bit_String:self.passWord_textField.text]};
     [self.serverManager AnimatedPOST:@"third_bind_mobile.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80060) {
-            [self presentViewController:[Tools showAlert:@"绑定成功"] animated:YES completion:^{
-            }];
+            [self presentViewController:[Tools showAlert:@"绑定成功"] animated:YES completion:nil];
             [self.navigationController popViewControllerAnimated:YES];
             
         }

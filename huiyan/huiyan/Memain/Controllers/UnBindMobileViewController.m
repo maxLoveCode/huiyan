@@ -148,8 +148,7 @@
         self.bind_type = YES;
     }else{
         if ([self.captcha_textField.text isEqualToString:@""] || [self.captcha_textField.text isEqualToString:@"短信验证码"]) {
-            [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:^{
-            }];
+            [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:nil];
         }else{
         [self getCheck_vcode];
         }

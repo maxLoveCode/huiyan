@@ -13,11 +13,13 @@
 #import "PersonMessage.h"
 #import "UIImageView+WebCache.h"
 #import "SexTableViewController.h"
-@interface EditPersonMessageViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "Tools.h"
+@interface EditPersonMessageViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSArray *titleArr;
 @property (nonatomic, strong) PersonMessage *perData;
+@property(nonatomic,strong)UIImage * selfPhoto;
 @end
 
 @implementation EditPersonMessageViewController
@@ -127,11 +129,168 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 2) {
+    if (indexPath.row == 0) {
+        UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"请选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [alertCon addAction:[UIAlertAction actionWithTitle:@"照相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction *UIAlertAction){
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.allowsEditing = YES;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }]];
+        [alertCon addAction:[UIAlertAction actionWithTitle:@"从相册中选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction *UIAlertAction){
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.allowsEditing = YES;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }]];
+        [alertCon addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertCon animated:YES completion:nil];
+        
+    }else if (indexPath.row == 1){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改昵称" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = self.perData.nickname;
+            textField.textColor = [UIColor blackColor];
+            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+            textField.borderStyle = UITextBorderStyleRoundedRect;
+        }];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
+            UITextField *field = alert.textFields[0];
+            if (![field.text isEqualToString:@""] && ![field.text isEqualToString:self.perData.nickname]) {
+                NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"nickname":field.text};
+                [self.serverManager AnimatedPOST:@"edit_user_info.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+                    if ([responseObject[@"code"] integerValue] == 80010) {
+                        [self get_user_infoData];
+                        [self presentViewController:[Tools showAlert:@"修改成功"] animated:YES completion:nil];
+                    }else{
+                        [self presentViewController:[Tools showAlert:@"修改失败"] animated:YES completion:nil];
+                    }
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    NSLog(@"error = %@",error);
+                }];
+            }
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else {
         SexTableViewController *sexCon = [[SexTableViewController alloc]init];
         [self.navigationController pushViewController:sexCon animated:YES];
     }
 }
+
+#pragma mark------------UIImagePickerController Delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
+        UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+        [self performSelector:@selector(saveImage:)  withObject:img afterDelay:0.5];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    //	[picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+//- (void)saveImage:(UIImage *)image {
+//    //    NSLog(@"保存头像！");
+//    //    [userPhotoButton setImage:image forState:UIControlStateNormal];
+//    BOOL success;
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSError *error;
+//    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *imageFilePath = [documentsDirectory stringByAppendingPathComponent:@"selfPhoto.jpg"];
+//    // NSLog(@"imageFile->>%@",imageFilePath);
+//    success = [fileManager fileExistsAtPath:imageFilePath];
+//    if(success) {
+//        success = [fileManager removeItemAtPath:imageFilePath error:&error];
+//    }
+//    
+//#warning 这里还都是缩略图，上传时候应该用大图标
+//    UIImage *smallImage = [self thumbnailWithImageWithoutScale:image size:CGSizeMake(100.0f, 100.0f)];
+//    [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
+//    _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
+//    //    [userPhotoButton setImage:selfPhoto forState:UIControlStateNormal];
+//    
+//    //七牛服务器
+//    [_people getQiniuAccessToken:^(NSMutableDictionary *result) {
+//        if ([[result objectForKey:@"code"]integerValue] == 60055) {
+//            NSString *token = [[result objectForKey:@"data"] objectForKey:@"qiniu_upload_token"];
+//            NSLog(@"token is %@",token);
+//            NSDate *date = [NSDate date];
+//            [SVProgressHUD showWithStatus:@"正在上传图片至服务器" maskType: SVProgressHUDMaskTypeClear];
+//            [_people PostImage:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+//                NSString* header_string = [resp objectForKey:@"key"];
+//                NSMutableDictionary* avatar_dic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:header_string,@"avatar", nil];
+//                [SVProgressHUD showWithStatus:@"正在修改个人信息" maskType: SVProgressHUDMaskTypeClear];
+//                [_people editInfo:^(NSMutableDictionary *result) {
+//                    self.selfPhoto = _selfPhoto;
+//                    [_people setAvatar:[NSString stringWithFormat:@"http://7xk6qx.com1.z0.glb.clouddn.com/%@", key]];
+//                    [self.tableView reloadData];
+//                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+//                    [[NSUserDefaults standardUserDefaults] setObject:[_people getAvatar] forKey:@"myAvatar"];
+//                } Index:0 Changes:avatar_dic];
+//            } Image:image Forkey:[NSString stringWithFormat:@"%@,%@",[_people getUserID],[Tools stringWithDate:date byType:date_type_YMDHMS_NoSperator]] Token:token failure:^(NSError *error) {
+//                ;
+//            }];
+//        }
+//        else
+//        {
+//            [SVProgressHUD showErrorWithStatus:@"上传失败"];
+//        }
+//    } failure:^(NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:@"上传失败"];
+//    }];
+//    
+//}
+
+// 改变图像的尺寸，方便上传服务器
+- (UIImage *) scaleFromImage: (UIImage *) image toSize: (CGSize) size
+{
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+//2.保持原来的长宽比，生成一个缩略图
+- (UIImage *)thumbnailWithImageWithoutScale:(UIImage *)image size:(CGSize)asize
+{
+    UIImage *newimage;
+    if (nil == image) {
+        newimage = nil;
+    }
+    else{
+        CGSize oldsize = image.size;
+        CGRect rect;
+        if (asize.width/asize.height > oldsize.width/oldsize.height) {
+            rect.size.width = asize.height*oldsize.width/oldsize.height;
+            rect.size.height = asize.height;
+            rect.origin.x = (asize.width - rect.size.width)/2;
+            rect.origin.y = 0;
+        }
+        else{
+            rect.size.width = asize.width;
+            rect.size.height = asize.width*oldsize.height/oldsize.width;
+            rect.origin.x = 0;
+            rect.origin.y = (asize.height - rect.size.height)/2;
+        }
+        UIGraphicsBeginImageContext(asize);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+        UIRectFill(CGRectMake(0, 0, asize.width, asize.height));//clear background
+        [image drawInRect:rect];
+        newimage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    return newimage;
+}
+
 
 - (void)get_user_infoData{
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
@@ -147,6 +306,7 @@
         }];
     }
 }
+
 
 /*
 #pragma mark - Navigation

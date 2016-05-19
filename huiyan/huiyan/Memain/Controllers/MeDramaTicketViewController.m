@@ -12,12 +12,13 @@
 #import "PersonDramaTicketCell.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "LookTicketDetailViewController.h"
+#import <MJRefresh.h>
 @interface MeDramaTicketViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
 @end
-
+static int number_page = 0;
 @implementation MeDramaTicketViewController
 
 - (void)viewDidLoad {
@@ -25,8 +26,18 @@
      [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
+     self.dataSource = [NSMutableArray array];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self getmy_opera_ticketData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        number_page ++;
+        [self getmy_opera_ticketData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
     if (user_id) {
-         [self getmy_opera_ticketData];
+         [self.tableView.mj_header beginRefreshing];
     }
    
    
@@ -100,10 +111,9 @@
 }
 
 #pragma mark-- 网络请求
-- (void)getmy_opera_ticketData{
+- (void)getmy_opera_ticketData:(NSString *)page{
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
-    self.dataSource = [NSMutableArray array];
-    NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"user_id":user_id};
+    NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"user_id":user_id,@"page":page};
     [self.serverManager AnimatedGET:@"my_opera_ticket.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80040) {
             for (NSDictionary *dic in responseObject[@"data"]) {
@@ -111,6 +121,8 @@
                 [self.dataSource addObject:model];
             }
             [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

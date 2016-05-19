@@ -65,10 +65,9 @@
     [self.serverManager AnimatedPOST:@"edit_user_info.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80010) {
              [self.navigationController popViewControllerAnimated:NO];
-            [self presentViewController:[Tools showAlert:@"修改成功"] animated:YES completion:^{
-            }];
-           
-            
+            [self presentViewController:[Tools showAlert:@"修改成功"] animated:YES completion:nil];
+        }else{
+            [self presentViewController:[Tools showAlert:@"修改失败"] animated:YES completion:nil];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

@@ -143,12 +143,10 @@
 -(void)loginViewDidSelectLogin:(LoginView*)loginView
 {
     if ([loginView.mobile.text isEqualToString:@""] ||[loginView.mobile.text isEqualToString:@"请输入手机号"]) {
-        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:nil];
         return;
     }else if ([loginView.password.text isEqualToString:@"请输入密码"] || [loginView.password.text isEqualToString:@""]){
-        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:nil];
         return;
     }else{
             User* user = [[User alloc] initWithMobile:loginView.mobile.text Password:loginView.password.text];
@@ -160,16 +158,13 @@
 {
      //NSLog(@"select2");
     if ([loginView.reg_mobile.text isEqualToString:@""] ||[loginView.reg_mobile.text isEqualToString:@"请输入手机号"]) {
-        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:nil];
         return;
     }else if ([loginView.vericode.text isEqualToString:@"请输入验证码"] || [loginView.vericode.text isEqualToString:@""]){
-        [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入验证码"] animated:YES completion:nil];
         return;
     }else if ([loginView.confirmPass.text isEqualToString:@""] || [loginView.confirmPass.text isEqualToString:@"请输入密码"]){
-        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:^{
-        }];
+        [self presentViewController:[Tools showAlert:@"请输入密码"] animated:YES completion:nil];
         return;
     }else{
         NSDictionary *parmas = @{@"access_token":self.serverManager.accessToken,@"mobile":loginView.reg_mobile.text,@"vcode":loginView.vericode.text};
