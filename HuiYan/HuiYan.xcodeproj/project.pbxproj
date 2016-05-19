@@ -12,7 +12,9 @@
 		257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */; };
 		257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */; };
 		257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC691CB64B1A004C3CDE /* HomePageCell.m */; };
+		25A770581CEDC72100E3701D /* MessageListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A770571CEDC72100E3701D /* MessageListTableViewController.m */; };
 		25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8C2451CB4AC7D00386540 /* UnitTest.m */; };
+		25B4026E1CEDACCC0003D908 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B4026D1CEDACCC0003D908 /* SettingTableViewController.m */; };
 		25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */; };
 		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
 		25C216581CDB2246007C69BB /* chatUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C216571CDB2246007C69BB /* chatUsers.m */; };
@@ -289,8 +291,12 @@
 		257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketCell.m; sourceTree = "<group>"; };
 		257FFC681CB64B1A004C3CDE /* HomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageCell.h; sourceTree = "<group>"; };
 		257FFC691CB64B1A004C3CDE /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageCell.m; sourceTree = "<group>"; };
+		25A770561CEDC72100E3701D /* MessageListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListTableViewController.h; sourceTree = "<group>"; };
+		25A770571CEDC72100E3701D /* MessageListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListTableViewController.m; sourceTree = "<group>"; };
 		25A8C2441CB4AC7D00386540 /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitTest.h; path = HuiYan/Helpers/UnitTest.h; sourceTree = SOURCE_ROOT; };
 		25A8C2451CB4AC7D00386540 /* UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTest.m; path = HuiYan/Helpers/UnitTest.m; sourceTree = SOURCE_ROOT; };
+		25B4026C1CEDACCC0003D908 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		25B4026D1CEDACCC0003D908 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		25B6B3751CB4F324000F99F1 /* TicketBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TicketBoxViewController.h; path = HuiYan/Homepage/Controllers/TicketBoxViewController.h; sourceTree = SOURCE_ROOT; };
 		25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TicketBoxViewController.m; path = HuiYan/Homepage/Controllers/TicketBoxViewController.m; sourceTree = SOURCE_ROOT; };
 		25B6B37B1CB51380000F99F1 /* MCSwipeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSwipeMenu.h; path = HuiYan/Homepage/Controllers/MCSwipeMenu.h; sourceTree = SOURCE_ROOT; };
@@ -1469,6 +1475,8 @@
 				25C625561CBE48C90068BFE8 /* FriendsViewController.m */,
 				55C41E131CE44A260055A58B /* MessageViewController.h */,
 				55C41E141CE44A260055A58B /* MessageViewController.m */,
+				25A770561CEDC72100E3701D /* MessageListTableViewController.h */,
+				25A770571CEDC72100E3701D /* MessageListTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1517,6 +1525,8 @@
 				558F22F31CE9B112008636E1 /* UnBindMobileViewController.xib */,
 				55A43E931CED549100BB73EF /* MeTrainingViewController.h */,
 				55A43E941CED549100BB73EF /* MeTrainingViewController.m */,
+				25B4026C1CEDACCC0003D908 /* SettingTableViewController.h */,
+				25B4026D1CEDACCC0003D908 /* SettingTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1949,6 +1959,7 @@
 				558F5CBA1CBBAAFA006BD54D /* TrainingDetailsTableViewController.m in Sources */,
 				558F5CB71CBB9780006BD54D /* Training.m in Sources */,
 				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
+				25B4026E1CEDACCC0003D908 /* SettingTableViewController.m in Sources */,
 				25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */,
 				55C41E2A1CE4621D0055A58B /* TrainOrderDetail.m in Sources */,
 				550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */,
@@ -1973,6 +1984,7 @@
 				5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */,
 				5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */,
 				25C216581CDB2246007C69BB /* chatUsers.m in Sources */,
+				25A770581CEDC72100E3701D /* MessageListTableViewController.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
 				55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */,
 				557EDE1C1CD0A3980039267E /* Order.m in Sources */,
