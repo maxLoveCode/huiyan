@@ -119,7 +119,7 @@
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        self.ticketCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 50) collectionViewLayout:layout];
+        self.ticketCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 80) collectionViewLayout:layout];
         self.ticketCollectionView.pagingEnabled = YES;
         self.ticketCollectionView.scrollEnabled = NO;
         self.ticketCollectionView.bounces = NO;
@@ -140,7 +140,7 @@
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        self.wikiCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 50) collectionViewLayout:layout];
+        self.wikiCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 80) collectionViewLayout:layout];
         self.wikiCollectionView.pagingEnabled = YES;
         self.wikiCollectionView.scrollEnabled = NO;
         self.wikiCollectionView.bounces = NO;
@@ -234,11 +234,11 @@
         if (indexPath.section == 0) {
             return 114;
         }else if (indexPath.section == 1){
-            return imageHeight + 50;
+            return imageHeight + 80;
         }else if(indexPath.section == 2){
             return actCellHeight * 3;
         }else{
-            return imageHeight + 50;
+            return imageHeight + 80;
         }
     }
     return actCellHeight;
@@ -253,7 +253,7 @@
         if (self.actArr.count > 0) {
              [cell setContent:self.actArr[indexPath.row]];
         }
-        cell.enroll_btn.tag = indexPath.section;
+        cell.enroll_btn.tag = indexPath.section ;
         [cell.enroll_btn addTarget:self action:@selector(enroll:) forControlEvents:UIControlEventTouchUpInside];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -348,7 +348,7 @@
           UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ticket" forIndexPath:indexPath];
         UIImageView *image_pic = [cell viewWithTag:506];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, imageWidth ,imageHeight)];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, -20, imageWidth ,imageHeight)];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 506;
         }
@@ -372,7 +372,7 @@
         UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"wiki" forIndexPath:indexPath];
         UIImageView *image_pic = [cell viewWithTag:506];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, imageWidth ,imageHeight)];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, -20, imageWidth ,imageHeight)];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 506;
         }
@@ -434,9 +434,8 @@
 }
 
 - (void)enroll:(UIButton *)sender{
-    Training *train = self.dataSource[sender.tag];
     SignUpMessageTableViewController *signCon = [[SignUpMessageTableViewController alloc]init];
-    signCon.train = train;
+    signCon.train = self.actArr[sender.tag];
     [self.navigationController pushViewController:signCon animated:NO];
     
 }
