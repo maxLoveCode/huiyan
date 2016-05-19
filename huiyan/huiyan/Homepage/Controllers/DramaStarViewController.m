@@ -195,7 +195,7 @@
 
 - (void)invatation:(UIButton *)sender{
     DramaStarInvitionViewController *dramaCon = [[DramaStarInvitionViewController alloc]init];
-    dramaCon.cid = [NSString stringWithFormat:@"%d",sender.tag];
+    dramaCon.cid = [NSString stringWithFormat:@"%ld",(long)sender.tag];
     [self.navigationController pushViewController:dramaCon animated:NO];
 }
 

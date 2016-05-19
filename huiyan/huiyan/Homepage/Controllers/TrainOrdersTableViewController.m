@@ -39,7 +39,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height )];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerNib:[UINib nibWithNibName:@"TrainOrdersCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"one"];
@@ -75,7 +75,7 @@
     }else{
         if (indexPath.row == 3) {
             if ([self.type isEqualToString:@"0"]) {
-                return 100;
+                return 80;
             }
             else{
                 return 50;
@@ -153,7 +153,7 @@
             if([self.type isEqualToString:@"0"]){
             UILabel *lab = [cell viewWithTag:1000];
             if (!lab) {
-                lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 15 - 250, 50, 250, 50)];
+                lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 15 - 300, 30, 300, 50)];
                 lab.text = @"相关款项将在3-5个工作日内返还到您的账户";
                 lab.font = kFONT14;
                 lab.textAlignment = NSTextAlignmentRight;

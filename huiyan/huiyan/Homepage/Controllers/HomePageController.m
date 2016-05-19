@@ -24,6 +24,7 @@
 #import "WikiWorksDetailsViewController.h"
 #import "TrainingDetailsTableViewController.h"
 #import "SignUpMessageTableViewController.h"
+#import "MessageViewController.h"
 #define bannerHeight kScreen_Width / 2
 #define menuHeight 114
 #define menuPicWidth 36
@@ -51,6 +52,8 @@
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"interaction"] style:UIBarButtonItemStylePlain target:self action:@selector(rightClick:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
@@ -234,11 +237,11 @@
         if (indexPath.section == 0) {
             return 114;
         }else if (indexPath.section == 1){
-            return imageHeight + 80;
+            return imageHeight + 60;
         }else if(indexPath.section == 2){
             return actCellHeight * 3;
         }else{
-            return imageHeight + 80;
+            return imageHeight + 60;
         }
     }
     return actCellHeight;
@@ -315,7 +318,7 @@
     
     if (collectionView == self.menuView) {
          UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
-    NSArray *title = @[@"购  票",@"培   训",@"戏曲百科"];
+    NSArray *title = @[@"购  票",@"活  动",@"戏曲百科"];
         UIImageView *image_pic = [cell viewWithTag:500];
         if (!image_pic) {
             image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width /
@@ -487,5 +490,9 @@
     }];
 }
 
+- (void)rightClick:(UIBarButtonItem *)sender{
+    MessageViewController *mes = [[MessageViewController alloc]init];
+    [self.navigationController pushViewController:mes animated:YES];
+}
 
 @end
