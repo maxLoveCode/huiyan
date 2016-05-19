@@ -10,6 +10,8 @@
 #import "Constant.h"
 #import "MessageCell.h"
 #import "ExploreViewController.h"
+#import "UITabBarController+ShowHideBar.h"
+#import "MessageListTableViewController.h"
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -31,6 +33,18 @@
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setHidden:YES];
+    [super viewDidAppear:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.tabBarController setHidden:NO];
+    [super viewWillDisappear:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +76,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 3) {
+    if (indexPath.row == 0) {
+       
+    }
+    else if (indexPath.row == 1) {
+        MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
+        [list setStyle: MessageTypeSystem];
+        [self.navigationController pushViewController:list animated:YES];
+    }
+    else if (indexPath.row == 2) {
+        MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
+        [list setStyle: MessageTypeNotification];
+        [self.navigationController pushViewController:list animated:YES];
+    }
+    else if (indexPath.row == 3) {
         ExploreViewController *explore = [[ExploreViewController alloc]init];
         [self.navigationController pushViewController:explore animated:YES];
     }

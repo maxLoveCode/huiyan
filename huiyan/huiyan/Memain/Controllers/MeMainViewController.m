@@ -16,6 +16,8 @@
 #import "BindMobileViewController.h"
 #import "UnBindMobileViewController.h"
 #import "MeTrainingViewController.h"
+#import "SettingTableViewController.h"
+
 #import "EditPersonMessageViewController.h"
 @interface MeMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -166,9 +168,9 @@
         }
         
     }else if (indexPath.section == 2){
-      
+        
     }else if (indexPath.section == 3){
-      
+        
     }else if (indexPath.section == 4){
         if ([type isEqualToString:@"mobile"]) {
             
@@ -183,7 +185,8 @@
                 [self.navigationController pushViewController:bind animated:NO];
                 }
             }else{
-                
+                SettingTableViewController * settingTable = [[SettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                [self.navigationController pushViewController:settingTable animated:YES];
             }
         }
         
