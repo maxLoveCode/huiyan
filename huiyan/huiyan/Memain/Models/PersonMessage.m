@@ -16,7 +16,7 @@
     per.mobile = dic[@"mobile"];
     per.avatar = [NSString stringFormatting:dic[@"avatar"]];
     per.sex = dic[@"sex"];
-    per.sex = dic[@"like_wiki"];
+    per.like_wiki = dic[@"like_wiki"];
     return per;
 }
 @end
