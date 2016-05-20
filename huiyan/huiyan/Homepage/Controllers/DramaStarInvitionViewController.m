@@ -11,6 +11,7 @@
 #import "Constant.h"
 #import "ServerManager.h"
 #import "DramaStarInvatationCell.h"
+#import "MHDatePicker.h"
 @interface DramaStarInvitionViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -22,6 +23,8 @@
 @property (strong, nonatomic) UITextField *personTextField;
 @property (strong, nonatomic) UITextField *mobileTextField;
 @property (strong, nonatomic) UITextField *contentTextField;
+@property (strong, nonatomic) MHDatePicker *selectDatePicker;
+@property (nonatomic, strong) UILabel *timeLab;
 @end
 
 
@@ -42,6 +45,15 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (UILabel *)timeLab{
+    if (!_timeLab) {
+        self.timeLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 0, 150, 50)];
+        self.timeLab.font = kFONT14;
+        self.timeLab.textColor = COLOR_WithHex(0xa5a5a5);
+    }
+    return _timeLab;
+}
+
 - (UIButton *)pay_btn{
     if (!_pay_btn) {
         self.pay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -49,7 +61,7 @@
         self.pay_btn.layer.masksToBounds = YES;
         self.pay_btn.layer.cornerRadius = 15;
         self.pay_btn.backgroundColor = COLOR_THEME;
-        [self.pay_btn setTitle:@"立即付款" forState:UIControlStateNormal];
+        [self.pay_btn setTitle:@"立即邀请" forState:UIControlStateNormal];
         [self.pay_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _pay_btn;
@@ -80,8 +92,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -91,6 +101,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.tabBarController setHidden:YES];
   //  [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
@@ -116,7 +127,8 @@
     }
     switch (indexPath.row) {
         case 0:
-            self.timeTextField = cell.name_textField;
+            self.timeTextField.hidden = YES;
+            [cell.contentView addSubview:self.timeLab];
             break;
         case 1:
             self.personTextField = cell.name_textField;

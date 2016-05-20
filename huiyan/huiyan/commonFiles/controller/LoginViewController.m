@@ -67,10 +67,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setHidden:YES];
+    [super viewDidAppear:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tabBarController setHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

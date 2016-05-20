@@ -90,14 +90,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setHidden:YES];
+    [super viewDidAppear:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
-    //[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-  
+    //[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault animated:YES]
     self.navigationController.navigationBarHidden = YES;
-    [self.tabBarController setHidden:YES];
 }
 
 - (BOOL)prefersStatusBarHidden{

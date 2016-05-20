@@ -49,8 +49,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tabBarController setHidden:YES];
     [self getTrainData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setHidden:YES];
+    [super viewDidAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

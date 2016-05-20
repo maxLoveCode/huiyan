@@ -26,12 +26,12 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.tabBarController setHidden:YES];
     [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

@@ -13,8 +13,8 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self addSubview:self.name_lab];
         [self addSubview:self.image_pic];
+        [self.image_pic addSubview:self.name_lab];
     }
     return  self;
 }
@@ -29,9 +29,9 @@
 - (UILabel *)name_lab{
     if (!_name_lab) {
         self.name_lab = [[UILabel alloc]init];
-        self.name_lab.font = kFONT16;
-        self.name_lab.textColor = COLOR_WithHex(0x2f2f2f);
+        self.name_lab.textColor = [UIColor whiteColor];
         self.name_lab.text = @"标题";
+        self.name_lab.font = [UIFont boldSystemFontOfSize:16];
         self.name_lab.textAlignment = NSTextAlignmentCenter;
     }
     return _name_lab;
@@ -39,8 +39,8 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    [self.image_pic setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width / 1.6)];
-    [self.name_lab setFrame:CGRectMake(0, CGRectGetMaxY(self.image_pic.frame), kScreen_Width, 50)];
+    [self.image_pic setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width *0.75)];
+    [self.name_lab setFrame:CGRectMake(0, CGRectGetHeight(self.image_pic.frame) / 2 - 8, kScreen_Width, 16)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

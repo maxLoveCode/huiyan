@@ -50,10 +50,15 @@ static int number_page = 0;
         // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setHidden:YES];
+    [super viewDidAppear:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
         self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

@@ -11,9 +11,8 @@
 @interface PersonHeadCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *head_pic;
 @property (weak, nonatomic) IBOutlet UILabel *name_lab;
-@property (weak, nonatomic) IBOutlet UIImageView *sex_pic;
+@property (strong, nonatomic) UIImageView *sex_pic;
 @property (weak, nonatomic) IBOutlet UIButton *edit_btn;
-@property (weak, nonatomic) IBOutlet UILabel *profession_lab;
 @property (weak, nonatomic) IBOutlet UILabel *fans_lab;
 @property (weak, nonatomic) IBOutlet UILabel *flower_lab;
 @property (weak, nonatomic) IBOutlet UIImageView *bg_image;

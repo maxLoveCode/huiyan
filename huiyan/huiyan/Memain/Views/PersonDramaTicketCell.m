@@ -28,6 +28,15 @@
     self.time_lab.text = model.opera_date;
     self.address_lab.text = model.theater_name;
     self.Count_lab.text = [NSString stringWithFormat:@"数量: %@张   总价: %@",model.pay_num,model.pay_price];
+    if ([model.status integerValue] == 0) {
+        self.status_pic.image = [UIImage imageNamed:@"no_pay"];
+    }else if ([model.status integerValue] == 1){
+         self.status_pic.image = [UIImage imageNamed:@"cancel"];
+    }else if ([model.status integerValue] == 2){
+         self.status_pic.image = [UIImage imageNamed:@"no_show"];
+    }else{
+         self.status_pic.image = [UIImage imageNamed:@"show"];
+    }
 }
 
 @end

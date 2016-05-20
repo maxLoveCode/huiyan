@@ -38,9 +38,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tabBarController setHidden:YES];
     self.serverManager = [ServerManager sharedInstance];
     [self get_user_infoData];
 }
@@ -52,6 +53,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.tabBarController setHidden:YES];
    // [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
