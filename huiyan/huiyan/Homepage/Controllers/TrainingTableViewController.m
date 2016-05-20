@@ -13,6 +13,7 @@
 #import "TrainingDetailsTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
+#import "SignUpMessageTableViewController.h"
 @interface TrainingTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -34,7 +35,7 @@
 
 - (UITableView *)trainTableView{
     if (!_trainTableView) {
-        self.trainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64) style:UITableViewStylePlain];
+        self.trainTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStylePlain];
         self.trainTableView.delegate = self;
         self.trainTableView.dataSource = self;
         self.trainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -83,6 +84,8 @@
     TrainingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"train" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setContent:self.dataSource[indexPath.section]];
+    cell.enroll_btn.tag = indexPath.section;
+    [cell.enroll_btn addTarget:self action:@selector(enroll:) forControlEvents:UIControlEventTouchUpInside];
     // Configure the cell...
     
     return cell;
@@ -97,7 +100,7 @@
 - (void)getTrainData{
     self.dataSource = [NSMutableArray array];
     NSDictionary *params = @{@"access_token":_serverManager.accessToken};
-    [self.serverManager AnimatedPOST:@"get_train_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [self.serverManager AnimatedGET:@"get_train_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 40000) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 Training *train =  [Training dataWithDic:dic];
@@ -108,6 +111,14 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
+}
+
+- (void)enroll:(UIButton *)sender{
+    Training *train = self.dataSource[sender.tag];
+    SignUpMessageTableViewController *signCon = [[SignUpMessageTableViewController alloc]init];
+    signCon.train = train;
+    [self.navigationController pushViewController:signCon animated:YES];
+    
 }
 
 /*

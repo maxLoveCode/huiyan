@@ -10,7 +10,6 @@
 #import "Constant.h"
 
 @interface HomePageCell ()
-@property (nonatomic, strong) UIView *head_view;
 @end
 
 @implementation HomePageCell
@@ -21,7 +20,6 @@
         [self addSubview:self.title_lab];
         [self addSubview:self.actor_lab];
         [self addSubview:self.description_lab];
-        [self addSubview:self.head_view];
     }
     
     //[self debugData];
@@ -68,20 +66,6 @@
     }
     return _description_lab;
 }
-- (UIView *)head_view{
-    if (!_head_view) {
-        self.head_view = [[UIView alloc]init];
-        self.head_view.backgroundColor = COLOR_WithHex(0xefefef);
-        UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
-        up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-        [self.head_view addSubview:up_lab];
-        UILabel *down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
-        down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-        [self.head_view addSubview:down_lab];
-    }
-    return _head_view;
-}
-
 
 
 - (void)layoutSubviews{
@@ -90,12 +74,11 @@
     self.title_lab.frame = CGRectMake(15, CGRectGetMaxY(self.image_pic.frame), kScreen_Width - 30, 28 *1.5);
     self.actor_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.title_lab.frame) , kScreen_Width - 30, 14 *1.5);
     self.description_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.actor_lab.frame) , kScreen_Width - 30, 36 *1.5);
-    self.head_view.frame = CGRectMake(0, CGRectGetMaxY(self.description_lab.frame) + 12, kScreen_Width, 10);
 }
 
 + (CGFloat)cellHeight
 {
-    return 301 + 22;
+    return 301 + 12;
 }
 
 -(void)setContent:(HomePage*)drama

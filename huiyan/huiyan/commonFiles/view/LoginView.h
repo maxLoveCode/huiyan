@@ -8,11 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class LoginView;
+
+@protocol LoginViewEvents <NSObject>
+
+-(void)loginViewDidSelectLogin:(LoginView*)loginView;
+-(void)loginViewDidSelectSignUp:(LoginView*)loginView;
+-(void)qqLand;
+- (void)weixinLand;
+
+@end
+
 @interface LoginView : UIView
 
 @property (nonatomic, strong) UIView* u_mobile;
 @property (nonatomic, strong) UITextField* mobile;
-@property (nonatomic, strong) UITextField* reg_mobile;
+@property (nonatomic, strong) UITextField* reg_mobile;//注册手机
 
 @property (nonatomic, strong) UIView* u_pass_veri;
 @property (nonatomic, strong) UITextField* password;
@@ -20,7 +31,7 @@
 
 @property (nonatomic, strong) UIView* thirdPart;
 @property (nonatomic, strong) UIButton* forgotPass;
-@property (nonatomic, strong) UITextField* confirmPass;
+@property (nonatomic, strong) UITextField* confirmPass;//注册密码
 
 @property (nonatomic, strong) UIView* lastPart;
 @property (nonatomic, strong) UIButton* login;
@@ -31,5 +42,8 @@
 @property (nonatomic, strong) UIButton* QQ;
 
 @property (nonatomic, strong) UIImageView* bgView;
+
+@property (nonatomic,strong) UIButton *timer;
+@property (nonatomic, weak) id <LoginViewEvents> delegate;
 
 @end

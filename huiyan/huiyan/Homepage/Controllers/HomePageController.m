@@ -14,9 +14,23 @@
 #import "TrainingTableViewController.h"
 #import "ArticalViewController.h"
 #import "LoginViewController.h"
-#define bannerHeight 187.5
-#define menuHeight 72.5
-
+#import "DramaStarViewController.h"
+#import "LoginViewController.h"
+#import "TrainingTableViewCell.h"
+#import "BuyTicket.h"
+#import "HomePageCell.h"
+#import "BuyTicketDetailsViewController.h"
+#import "Training.h"
+#import "WikiWorksDetailsViewController.h"
+#import "TrainingDetailsTableViewController.h"
+#import "SignUpMessageTableViewController.h"
+#import "MessageViewController.h"
+#define bannerHeight kScreen_Width / 2
+#define menuHeight 114
+#define menuPicWidth 36
+#define actCellHeight 152
+#define imageWidth (kScreen_Width - 84) / 3
+#define imageHeight (kScreen_Width - 84) / 3 * 1.3
 @interface HomePageController()
 {
     CGFloat scrollOffset;
@@ -29,24 +43,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
-       NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
+    self.title = @"发现";
     //侧滑关闭
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"interaction"] style:UIBarButtonItemStylePlain target:self action:@selector(rightClick:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
+    self.head_title = @[@"最新剧目",@"最新活动",@"百科推荐"];
     _serverManager = [ServerManager sharedInstance];
-    [self.view addSubview:self.banner_view];
-    [self getRecommendDrama];
-    [self getBannerData];
+    self.ticketArr  = [NSMutableArray array];
+    self.wikiArr = [NSMutableArray array];
+    self.actArr = [NSMutableArray array];
+    [self get_opera_listData];
+    [self get_wiki_listData];
+    [self get_train_listData];
     
 #ifdef DEBUG
     NSLog(@"Homepage loaded");
@@ -55,56 +73,31 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    scrollOffset =-20;
-    statusBarHidden = YES;
-    
-    self.navigationController.navigationBar.translucent = YES;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    
     [super viewWillAppear:animated];
     
 }
 
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-   // [self.view setFrame:CGRectOffset(self.view.frame, 0, -(self.navigationController.navigationBar.frame.size.height))];
-
-    
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-    self.navigationController.navigationBar.translucent = NO;
-    
-    self.navigationController.navigationBar.alpha=1.0;
 }
 
-- (ZCBannerView *)banner_view{
-    if (!_banner_view) {
-        self.banner_view = [[ZCBannerView alloc]init];
+- (UITableView *)activityTableView{
+    if (!_activityTableView) {
+        self.activityTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, actCellHeight * 3) style:UITableViewStylePlain];
+        self.activityTableView.delegate = self;
+        self.activityTableView.dataSource = self;
+        self.activityTableView.scrollEnabled = NO;
+        self.activityTableView.rowHeight = actCellHeight;
+        [self.activityTableView registerClass:[TrainingTableViewCell class] forCellReuseIdentifier:@"activity"];
     }
-    return _banner_view;
-}
-
--(UITableView *)recommendTableView
-{
-    if (!_recommendTableView) {
-        _recommendTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, [RecommondedTableViewCell cellHeight]*5-10) style:UITableViewStylePlain];
-        _recommendTableView.delegate = self;
-        _recommendTableView.dataSource = self;
-        _recommendTableView.scrollEnabled = NO;
-        [_recommendTableView registerClass:[RecommondedTableViewCell class] forCellReuseIdentifier:@"recommends"];
-        _recommendTableView.separatorStyle = NO;
-        
-#ifdef DEBUG
-        [_recommendTableView setBackgroundColor:[UIColor redColor]];
-#endif
-        
-    }
-    return _recommendTableView;
+    return _activityTableView;
 }
 
 -(UICollectionView* )menuView
@@ -122,25 +115,64 @@
     return _menuView;
 }
 
+- (UICollectionView *)ticketCollectionView{
+    if (!_ticketCollectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        layout.itemSize = CGSizeMake(imageWidth,imageHeight);
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.minimumLineSpacing = 0;
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        self.ticketCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 80) collectionViewLayout:layout];
+        self.ticketCollectionView.pagingEnabled = YES;
+        self.ticketCollectionView.scrollEnabled = NO;
+        self.ticketCollectionView.bounces = NO;
+        self.ticketCollectionView.delegate = self;
+        self.ticketCollectionView.dataSource = self;
+        self.ticketCollectionView.backgroundColor = [UIColor whiteColor];
+        self.ticketCollectionView.showsVerticalScrollIndicator = NO;
+        self.ticketCollectionView.showsHorizontalScrollIndicator = NO;
+        [self.ticketCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"ticket"];
+    }
+    return _ticketCollectionView;
+}
+
+- (UICollectionView *)wikiCollectionView{
+    if (!_wikiCollectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        layout.itemSize = CGSizeMake(imageWidth,imageHeight);
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.minimumLineSpacing = 0;
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        self.wikiCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 80) collectionViewLayout:layout];
+        self.wikiCollectionView.pagingEnabled = YES;
+        self.wikiCollectionView.scrollEnabled = NO;
+        self.wikiCollectionView.bounces = NO;
+        self.wikiCollectionView.delegate = self;
+        self.wikiCollectionView.dataSource = self;
+        self.wikiCollectionView.backgroundColor = [UIColor whiteColor];
+        self.wikiCollectionView.showsVerticalScrollIndicator = NO;
+        self.wikiCollectionView.showsHorizontalScrollIndicator = NO;
+        [self.wikiCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"wiki"];
+    }
+    return _wikiCollectionView;
+}
+
+
 #pragma mark UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView == _recommendTableView) {
+    if (tableView == self.activityTableView) {
         return 1;
     }
-    else
-        return 3;
+        return 4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == _recommendTableView) {
-        return [_dataSource count];
+    if (tableView == self.activityTableView) {
+        return 3;
     }
-    else
-    {
         return 1;
-    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -150,11 +182,11 @@
             case 0:
                 return 0.01;
             case 1:
-                return 0.01;
+                return 40;
             case 2:
-                return 32;
+                return 40;
             default:
-                return 0.01;
+                return 40;
         }
     }
     return 0;
@@ -163,11 +195,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-        if (section != 2) {
-            return 10;
+        if (section == 2) {
+            return 0.01;
         }
-        else
-            return 64;
+            return 10;
     }
     return 0.01;
 }
@@ -175,14 +206,27 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-        if (section == 2) {
-            UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
+        if (section != 0) {
+            UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
+            UILabel *h_lab = [[UILabel alloc]initWithFrame:CGRectMake(21, 21, 5, 16)];
+            h_lab.backgroundColor = COLOR_THEME;
+            h_lab.layer.masksToBounds = YES;
+            h_lab.layer.cornerRadius = 2;
+            [headerView addSubview:h_lab];
             [headerView setBackgroundColor:[UIColor whiteColor]];
-            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, 60, 12)];
-            label.text = @"热门推荐";
+            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(35,21, 60, 16)];
+            label.text = self.head_title[section - 1];
             label.font = kFONT14;
             [headerView addSubview:label];
-            
+            UIButton *more_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            more_btn.tag = section + 60;
+            more_btn.titleLabel.font = kFONT14;
+            more_btn.frame = CGRectMake(kScreen_Width - 21- 80,21, 100, 16);
+            more_btn.titleLabel.textAlignment = NSTextAlignmentRight;
+            [more_btn setTitle:@"查看更多  >" forState:UIControlStateNormal];
+            [more_btn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+            [more_btn addTarget:self action:@selector(lookMore:) forControlEvents:UIControlEventTouchUpInside];
+            [headerView addSubview:more_btn];
             return headerView;
         }
     }
@@ -192,64 +236,73 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.tableView)
-    {
-        if (indexPath.section == 0)
-        {
-            return bannerHeight;
+    if (tableView == self.tableView){
+        if (indexPath.section == 0) {
+            return 114;
+        }else if (indexPath.section == 1){
+            return imageHeight + 60;
+        }else if(indexPath.section == 2){
+            return actCellHeight * 3;
+        }else{
+            return imageHeight + 60;
         }
-        else if(indexPath.section == 1)
-        {
-            return menuHeight;
-        }
-        else
-            return self.recommendTableView.frame.size.height;
     }
-    return [RecommondedTableViewCell cellHeight];
+    return actCellHeight;
+    
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == _recommendTableView) {
-        RecommondedTableViewCell* cell = [_recommendTableView dequeueReusableCellWithIdentifier:@"recommends" forIndexPath:indexPath];
-        [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
+    if (tableView == self.activityTableView) {
+        TrainingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activity" forIndexPath:indexPath];
+        if (self.actArr.count > 0) {
+             [cell setContent:self.actArr[indexPath.row]];
+        }
+        cell.enroll_btn.tag = indexPath.section ;
+        [cell.enroll_btn addTarget:self action:@selector(enroll:) forControlEvents:UIControlEventTouchUpInside];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }
-    else
-    {
+    }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homePage" forIndexPath:indexPath];
          cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.section ==0) {
-            [cell.contentView setBackgroundColor:[UIColor orangeColor]];
+        
+            [cell.contentView addSubview:self.menuView];
         }
         else if (indexPath.section == 1) {
-            [cell.contentView addSubview:self.menuView];
+            [cell.contentView addSubview:self.ticketCollectionView];
         }
         else if(indexPath.section == 2)
         {
-            [cell.contentView addSubview:self.recommendTableView];
+            [cell.contentView addSubview:self.activityTableView];
+        }else if(indexPath.section == 3){
+            [cell.contentView addSubview:self.wikiCollectionView];
+
         }
+         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ArticalViewController *artCon = [[ArticalViewController alloc]init];
-    HomePage *homePage = self.dataSource[indexPath.row];
-    artCon.originData = homePage.content;
-    [self.navigationController pushViewController:artCon animated:YES];
+    if (tableView == self.activityTableView) {
+        TrainingDetailsTableViewController *traDetailCon = [[TrainingDetailsTableViewController alloc]init];
+        traDetailCon.train  = self.actArr[indexPath.row];
+        [self.navigationController pushViewController:traDetailCon animated:NO];
+    }
 }
 
 #pragma mark UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return 3;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreen_Width/4, kScreen_Width/4) ;
+    return CGSizeMake(kScreen_Width/3, 114) ;
 }
 
 #pragma mark collection view cell paddings
@@ -265,19 +318,22 @@
 #pragma mark <UICollectionViewDataSource>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *title = @[@"购票",@"培训",@"红团/红角",@"戏曲百科"];
-    UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
+    
+    if (collectionView == self.menuView) {
+         UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
+    NSArray *title = @[@"购  票",@"活  动",@"戏曲百科"];
         UIImageView *image_pic = [cell viewWithTag:500];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 4 / 2 - 25,5, 50 ,50)];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width /
+                                                                     3/ 2 - menuPicWidth/2, 28, menuPicWidth ,menuPicWidth)];
             image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
         }
         UILabel *title_lab = [cell viewWithTag:501];
         if (!title_lab) {
-            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 55, kScreen_Width / 4, 16)];
-            title_lab.font = kFONT14;
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame)+5, kScreen_Width / 3, 16)];
+            title_lab.font = kFONT13;
             title_lab.textAlignment = NSTextAlignmentCenter;
             title_lab.textColor = COLOR_WithHex(0x020202);
             title_lab.text = title[indexPath.item];
@@ -286,112 +342,160 @@
         }
     UILabel *line_lab = [cell viewWithTag:502];
     if (!line_lab) {
-        line_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 4 - 0.5, 0,0.5, kScreen_Width / 4)];
+    
+        line_lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 - 0.5, 0,0.5, 114)];
         line_lab.backgroundColor = COLOR_WithHex(0xdddddd);
         [cell.contentView addSubview:line_lab];
         line_lab.tag = 502;
     }
+        return cell;
+    }else if(collectionView == self.ticketCollectionView){
+    
+          UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ticket" forIndexPath:indexPath];
+        UIImageView *image_pic = [cell viewWithTag:506];
+        if (!image_pic) {
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, -20, imageWidth ,imageHeight)];
+            [cell.contentView addSubview:image_pic];
+            image_pic.tag = 506;
+        }
 
-    return cell;
+        UILabel *title_lab = [cell viewWithTag:508];
+        if (!title_lab) {
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame), kScreen_Width / 3, 30)];
+            title_lab.font = kFONT14;
+            title_lab.textAlignment = NSTextAlignmentCenter;
+            [cell.contentView addSubview:title_lab];
+            title_lab.tag = 508;
+        }
+        if (self.ticketArr.count > 0) {
+            BuyTicket *model = self.ticketArr[indexPath.item];
+            [image_pic sd_setImageWithURL:[NSURL URLWithString:model.cover]];
+            title_lab.text = model.title;
+            
+        }
+        return cell;
+    }else{
+        UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"wiki" forIndexPath:indexPath];
+        UIImageView *image_pic = [cell viewWithTag:506];
+        if (!image_pic) {
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, -20, imageWidth ,imageHeight)];
+            [cell.contentView addSubview:image_pic];
+            image_pic.tag = 506;
+        }
+        UILabel *title_lab = [cell viewWithTag:508];
+        if (!title_lab) {
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame), kScreen_Width / 3, 30)];
+            title_lab.font = kFONT14;
+            title_lab.textAlignment = NSTextAlignmentCenter;
+            [cell.contentView addSubview:title_lab];
+            title_lab.tag = 508;
+        }
+        if (self.wikiArr.count > 0) {
+            HomePage *model = self.wikiArr[indexPath.item];
+            [image_pic sd_setImageWithURL:[NSURL URLWithString:model.cover]];
+            title_lab.text = model.title;
+        }
+        return cell;
+    }
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.item == 0) {
+    if (collectionView == self.menuView) {
+        if (indexPath.item == 0) {
+            TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
+            [self.navigationController pushViewController:tickCon animated:NO];
+        }else if (indexPath.item == 1){
+            TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
+            [self.navigationController pushViewController:trainCon animated:NO];
+        }else {
+            WikiViewController *wikiCon = [[WikiViewController alloc]init];
+            [self.navigationController pushViewController:wikiCon animated:NO];
+        }
+
+    }else if (collectionView == self.ticketCollectionView){
+        BuyTicketDetailsViewController *btdCon = [[BuyTicketDetailsViewController alloc]init];
+        btdCon.ticket = self.ticketArr[indexPath.item];
+        NSLog(@"%@",btdCon.ticket);
+        [self.navigationController pushViewController:btdCon animated:NO];
+    }else if (collectionView == self.wikiCollectionView){
+        WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
+        wikiCon.homePage = self.wikiArr[indexPath.item];
+        [self.navigationController pushViewController:wikiCon animated:NO];
+    }
+   
+}
+
+- (void)lookMore:(UIButton *)sender{
+    if (sender.tag == 61) {
         TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
-        [self.navigationController pushViewController:tickCon animated:YES];
-    }else if (indexPath.item == 1){
+        [self.navigationController pushViewController:tickCon animated:NO];
+    }else if (sender.tag == 62){
         TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
-        [self.navigationController pushViewController:trainCon animated:YES];
-    }else if (indexPath.item == 2) {
-        LoginViewController* login = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:login animated:YES];
-    }else {
+        [self.navigationController pushViewController:trainCon animated:NO];
+    }else{
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
-        [self.navigationController pushViewController:wikiCon animated:YES];
+        [self.navigationController pushViewController:wikiCon animated:NO];
     }
 }
 
-#pragma mark statusbar transparent
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
+- (void)enroll:(UIButton *)sender{
+    SignUpMessageTableViewController *signCon = [[SignUpMessageTableViewController alloc]init];
+    signCon.train = self.actArr[sender.tag];
+    [self.navigationController pushViewController:signCon animated:NO];
+    
 }
 
-#pragma scroll delegate
--(void)scrollViewDidBeginDecelerating:(UIScrollView *)scrollView
-{
-
-}
-
--(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
-{
-
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView == self.tableView) {
-#ifdef DEBUG
-        //NSLog(@"tableview scrolling %.1lf, %.1lf", scrollView.contentOffset.y, scrollView.contentOffset.y-scrollOffset);
-#endif
-        if (scrollView.contentOffset.y-scrollOffset-20>0 && statusBarHidden) {
-            [self.navigationController setNavigationBarHidden:NO animated:NO];
-            statusBarHidden = !statusBarHidden;
-        }
-        
-        if (scrollView.contentOffset.y-scrollOffset-20<=0&& !statusBarHidden) {
-            
-            [self.navigationController setNavigationBarHidden:YES animated:NO];
-            
-            statusBarHidden = !statusBarHidden;
-        }
-        
-        if (!statusBarHidden&&self.navigationController.navigationBar.alpha<=1.0 &&self.navigationController.navigationBar.alpha>0.0) {
-#ifdef DEBUG
-            //NSLog(@"alpha %lf", self.navigationController.navigationBar.alpha);
-#endif
-            self.navigationController.navigationBar.alpha =(scrollView.contentOffset.y-scrollOffset-20)/24;
-        }
-    }
-}
 #pragma mark 请求数据
 
--(void)getRecommendDrama
-{
-    _dataSource = [[NSMutableArray alloc] init];
-    NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
-                          @"is_hot":@"1"};
-  
-    [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-        if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
-
-            for(NSDictionary* drama in [responseObject objectForKey:@"data"])
-            {
-                [_dataSource addObject:[HomePage parseDramaJSON:drama]];
+- (void)get_opera_listData{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
+    [self.serverManager AnimatedGET:@"get_opera_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 30010) {
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                BuyTicket *model = [BuyTicket dataWithDic:dic];
+                [self.ticketArr addObject:model];
             }
-            
-            [_recommendTableView setFrame:CGRectMake(0, 0, kScreen_Width, [RecommondedTableViewCell cellHeight]*[_dataSource count]-10)];
-            [_recommendTableView reloadData];
-            [self.tableView reloadData];
+            [self.ticketCollectionView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
+        NSLog(@"error = %@",error);
     }];
 }
 
-- (void)getBannerData{
-    NSDictionary *params = @{@"access_token":_serverManager.accessToken,@"key":@"app_banner"};
-    [_serverManager AnimatedPOST:@"get_app_config.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] integerValue]== 60000) {
-              self.banner_view.dataSource = [NSJSONSerialization JSONObjectWithData:[[responseObject[@"data"] objectForKey:@"imgs"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-            [self.banner_view reloadMenu];
-       
+- (void)get_wiki_listData{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
+    [self.serverManager AnimatedGET:@"get_wiki_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 20010) {
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                HomePage *model = [HomePage parseDramaJSON:dic];
+                [self.wikiArr addObject:model];
+            }
+            [self.wikiCollectionView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
+        NSLog(@"error = %@",error);
     }];
 }
 
+- (void)get_train_listData{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
+    [self.serverManager AnimatedGET:@"get_train_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 40000) {
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                Training *model = [Training dataWithDic:dic];
+                [self.actArr addObject:model];
+            }
+            [self.activityTableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
 
+- (void)rightClick:(UIBarButtonItem *)sender{
+    MessageViewController *mes = [[MessageViewController alloc]init];
+    [self.navigationController pushViewController:mes animated:YES];
+}
 
 @end

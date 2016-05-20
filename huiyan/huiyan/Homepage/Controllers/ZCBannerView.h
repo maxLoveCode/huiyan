@@ -16,6 +16,8 @@
 @end
 
 @interface ZCBannerView : UIView<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
+@property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat height;
 @property (nonatomic, strong) UICollectionView *bannerCollection;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, assign)NSInteger index;

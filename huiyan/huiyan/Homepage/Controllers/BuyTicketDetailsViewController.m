@@ -12,23 +12,31 @@
 #import "ServerManager.h"
 #import "CommentContent.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "TicketCommentTableViewCell.h"
+#import "MoreCommentTableViewController.h"
+#import "MoreDetailsTableViewCell.h"
+#import "ArticalViewController.h"
+#import "ChangeRondaTableViewController.h"
 @interface BuyTicketDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketTableView;
 @property (nonatomic, strong) NSArray *head_title_arr;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
-@property (nonatomic, strong) UIView *tail_view;
+@property (nonatomic, strong) UIButton *head_btn;
+@property (nonatomic, strong) UIButton *tail_btn;
 @end
-
 @implementation BuyTicketDetailsViewController
 
 - (void)viewDidLoad{
-    NSLog(@"%@",self.ticket);
+   // NSLog(@"%@",self.ticket);
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+
+
+    self.view.userInteractionEnabled = YES;
     self.title = @"购票详情";
     self.head_title_arr = @[@"节目详情",@"购买需知",@"戏友点评"];
-    [self.view addSubview:self.tail_view];
+    [self.view addSubview:self.head_btn];
+    [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.ticketTableView];
     _serverManager = [ServerManager sharedInstance];
   
@@ -38,43 +46,56 @@
     [super viewWillAppear:animated];
     [self get_opera_commentData];
     [self.tabBarController setHidden:YES];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+     [self.view setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height )];
     [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)ticketTableView{
     if (!_ticketTableView) {
-        self.ticketTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 10 - 64 ) style:UITableViewStyleGrouped];
+        self.ticketTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48  - 64 ) style:UITableViewStyleGrouped];
         self.ticketTableView.delegate = self;
         self.ticketTableView.dataSource = self;
         [self.ticketTableView registerClass:[BuyTicketDetailsTableViewCell class] forCellReuseIdentifier:@"ticket"];
+        self.ticketTableView.backgroundColor = [UIColor whiteColor];
         [self.ticketTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"normalcell"];
+        [self.ticketTableView registerClass:[TicketCommentTableViewCell class] forCellReuseIdentifier:@"comment"];
+        [self.ticketTableView registerClass:[MoreDetailsTableViewCell class] forCellReuseIdentifier:@"moreDetail"];
     }
     return _ticketTableView;
 }
 
-- (UIView *)tail_view{
-    if (!_tail_view) {
-        self.tail_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48)];
-        self.tail_view.backgroundColor = COLOR_THEME;
-        UIButton *head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        head_btn.frame = CGRectMake(0, 0, 48, 48);
-        [head_btn addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
-        [self.tail_view addSubview:head_btn];
-        
-        UIButton *tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        tail_btn.backgroundColor = COLOR_THEME;
-        [tail_btn setTitle:@"立即购买" forState:UIControlStateNormal];
-        [tail_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        tail_btn.frame = CGRectMake(48, 0, kScreen_Width - 48, 48);
-        [tail_btn addTarget:self action:@selector(buyEvent:) forControlEvents:UIControlEventTouchUpInside];
-        [self.tail_view addSubview:tail_btn];
-        
+
+- (UIButton *)head_btn{
+    if (!_head_btn) {
+        self.head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.head_btn.frame = CGRectMake(0, CGRectGetMaxY(self.ticketTableView.frame), 48, 48);
+        self.head_btn.backgroundColor = [UIColor redColor];
+        self.head_btn.userInteractionEnabled = YES;
+        [self.head_btn addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _tail_view;
+    return _head_btn;
+}
+
+- (UIButton *)tail_btn{
+    if (!_tail_btn) {
+        self.tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _tail_btn.backgroundColor = COLOR_THEME;
+        [_tail_btn setTitle:@"立即购买" forState:UIControlStateNormal];
+        [_tail_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _tail_btn.frame = CGRectMake(48, CGRectGetMaxY(self.ticketTableView.frame), kScreen_Width - 48, 48);
+        [_tail_btn addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _tail_btn;
 }
 
 #pragma mark - tabelViewDelegate
@@ -87,7 +108,7 @@
     if (section == 0) {
         return 1;
     }else if (section == 3){
-        return self.dataSource.count;
+        return self.dataSource.count + 1;
     }else{
         return 2;
     }
@@ -124,19 +145,20 @@
       return  [BuyTicketDetailsTableViewCell cellHeight];
     }else if(indexPath.section == 1){
         if (indexPath.row == 0) {
-            return 100;
+            return 60;
         }
         return 32;
     }else if(indexPath.section == 2){
         if (indexPath.row == 0) {
-            return 100;
+            return 60;
         }
         return 32;
     }else{
-        if (indexPath.row == 0) {
-            return 110           ;
+        if (indexPath.section == 3 && indexPath.row < self.dataSource.count) {
+            return 70;
         }
-        return 32;
+            return 32;
+
     }
     
 }
@@ -165,6 +187,19 @@
     return nil;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *head_view = [[UIView alloc]init];
+    head_view.backgroundColor = COLOR_WithHex(0xefefef);
+    UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
+    up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+    [head_view addSubview:up_lab];
+    UILabel *down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
+    down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+    [head_view addSubview:down_lab];
+    return head_view;
+}
+
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -174,33 +209,36 @@
     BuyTicketDetailsTableViewCell *bt_cell
         = [tableView dequeueReusableCellWithIdentifier:@"ticket" forIndexPath:indexPath];
            bt_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [bt_cell.contentView  setBackgroundColor:[UIColor yellowColor]];
+        [bt_cell.contentView  setBackgroundColor:[UIColor whiteColor]];
     [bt_cell setContent:self.ticket];
         return bt_cell;
     }else if(indexPath.section == 1){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
+
         if (indexPath.row == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
             UILabel *content_lab = [cell viewWithTag:1000];
             if (!content_lab) {
-                content_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, kScreen_Width - 30, 12)];
+                content_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, kScreen_Width - 30, 50)];
                 content_lab.font = kFONT12;
                 content_lab.textColor = COLOR_WithHex(0x565656);
                 [cell addSubview:content_lab];
                 content_lab.tag = 1000;
+                content_lab.numberOfLines = 0;
                 content_lab.text = self.ticket.content;
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
             
         }else{
-       cell.textLabel.text = @"查看更多详情";
-            cell.textLabel.font = kFONT12;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-         return cell;
+        
        
     }else if (indexPath.section == 2){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
         if(indexPath.row == 0){
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
             UILabel *buy_tip_lab = [cell viewWithTag:1001];
             if (!buy_tip_lab) {
                 buy_tip_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, kScreen_Width - 30, 12)];
@@ -210,69 +248,61 @@
                 [cell addSubview:buy_tip_lab];
                 buy_tip_lab.tag = 1001;
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }else{
-            cell.textLabel.text = @"查看更多详情";
-            cell.textLabel.font = kFONT12;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+            MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
+        
     }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalcell" forIndexPath:indexPath];
-        NSLog(@"%ld",(long)indexPath.row); 
-        CommentContent *model = self.dataSource[indexPath.row];
-        if (indexPath.row == 0) {
-            UILabel *name_lab = [cell viewWithTag:1002];
-            if (!name_lab) {
-                name_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, kScreen_Width - 30, 12 * 1.5)];
-                name_lab.font = kFONT12;
-                name_lab.textColor = COLOR_WithHex(0xa5a5a5);
-                [cell addSubview:name_lab];
-                name_lab.tag = 1002;
-                name_lab.text = model.user_name;
-            }
-            UILabel *comment_lab = [cell viewWithTag:1003];
-            if (!comment_lab) {
-                comment_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(name_lab.frame), kScreen_Width - 30, 60)];
-                comment_lab.font = kFONT12;
-                comment_lab.textColor = COLOR_WithHex(0x565656);
-                [cell addSubview:comment_lab];
-                comment_lab.tag = 1003;
-                comment_lab.text = model.content;
-            }
-            
-            UILabel *time_lab = [cell viewWithTag:1004];
-            if (!time_lab) {
-                time_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(comment_lab.frame) + 5, kScreen_Width - 30, 12)];
-                time_lab.font = kFONT11;
-                time_lab.textColor = COLOR_WithHex(0xa5a5a5);
-                [cell addSubview:time_lab];
-                time_lab.tag = 1004;
-                time_lab.text = model.createtime;
-            }
+        if (indexPath.row < self.dataSource.count) {
+            CommentContent *model = self.dataSource[indexPath.row];
+            TicketCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment" forIndexPath:indexPath];
+            [cell setContent:model];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
 
         }else{
-            cell.textLabel.text = @"查看更多详情";
-            cell.textLabel.font = kFONT12;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
-           cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                return cell;
+        
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        ArticalViewController *artCon = [[ArticalViewController alloc]init];
+        artCon.originData = self.ticket.content;
+        [self.navigationController pushViewController:artCon animated:YES];
+        
+    }else if (indexPath.section == 2 && indexPath.row == 1){
+        ArticalViewController *artCon = [[ArticalViewController alloc]init];
+        artCon.originData = self.ticket.buy_tip;
+        [self.navigationController pushViewController:artCon animated:YES];
+    }else if (indexPath.section == 3 && indexPath.row == self.dataSource.count){
+        MoreCommentTableViewController *moreCon = [[MoreCommentTableViewController alloc]init];
+        moreCon.oid = self.ticket.ID;
+            [self.navigationController pushViewController:moreCon animated:YES];
+    }else{
+        
     }
 }
 
 - (void)get_opera_commentData{
     self.dataSource = [[NSMutableArray alloc]init];
-    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.ticket.ID};
-    [_serverManager AnimatedPOST:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.ticket.ID,@"page":@"0"};
+    [_serverManager AnimatedGET:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30020) {
             NSArray *data = responseObject[@"data"];
             for (NSDictionary *dic in data) {
                 CommentContent *model = [CommentContent dataWithDic:dic];
                 [self.dataSource addObject:model];
             }
-            NSLog(@"%@",self.dataSource);
+         //   NSLog(@"%@",self.dataSource);
             [self.ticketTableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -282,11 +312,14 @@
 
 #pragma mark - tailEvent
 - (void)callPhone:(UIButton *)sender{
-    
+    NSLog(@"call");
 }
 
-- (void)buyEvent:(UIButton *)sender{
-    
+- (void)buy{
+    NSLog(@"buy");
+    ChangeRondaTableViewController *rondaCon = [[ChangeRondaTableViewController alloc]init];
+    rondaCon.oid = self.ticket.ID;
+    [self.navigationController pushViewController:rondaCon animated:YES];
 }
 
 @end

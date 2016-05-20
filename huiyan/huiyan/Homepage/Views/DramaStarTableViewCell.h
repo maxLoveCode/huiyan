@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DramaStar.h"
 @interface DramaStarTableViewCell : UITableViewCell
 @property (nonatomic, strong) UIImageView *head_img;
 @property (nonatomic, strong) UIImageView *like_img;
@@ -17,6 +17,6 @@
 @property (nonatomic, strong) UILabel *like_lab;
 @property (nonatomic, strong) UILabel *flower_lab;
 @property (nonatomic, strong) UIButton *invatation_btn;
-- (void)setContent;
+- (void)setContent:(DramaStar *)drama;
 
 @end

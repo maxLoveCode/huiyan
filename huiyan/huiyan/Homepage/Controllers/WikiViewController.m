@@ -17,7 +17,7 @@
 
 #define kLineNumber 3
 
-@interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,MCSwipeMenuDelegate>
+@interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,MCSwipeMenuDelegate, UIViewControllerPreviewingDelegate>
 @property (nonatomic, strong) UITableView *dramaTableView;
 @property (nonatomic, strong) MCSwipeMenu* head_view;
 @property (nonatomic, strong) UIView *bg_view;
@@ -26,6 +26,9 @@
 @property (nonatomic, strong) UISegmentedControl *segement;
 @property (nonatomic, strong) WikiArtcleTableViewController *wikiArtcleTableView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+
+//register for the preview context
+@property (nonatomic, strong) id previewingContext;
 
 @end
 
@@ -54,6 +57,15 @@
     
     [self getDramaCates];
     [self getDramaList:@"0" page:0];
+    
+    if ([self isForceTouchAvailable]) {
+        self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.dramaTableView];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -107,24 +119,31 @@
 
 - (UITableView *)dramaTableView{
     if (_dramaTableView == nil) {
-        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 64 - 10 )];
+        self.dramaTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,10, kScreen_Width, kScreen_Height - 41- 64)];
         self.dramaTableView.delegate = self;
         self.dramaTableView.dataSource = self;
         [self.dramaTableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"drama"];
-        self.dramaTableView.rowHeight = [HomePageCell cellHeight];
         self.dramaTableView.separatorStyle = NO;
+        self.dramaTableView.rowHeight = [HomePageCell cellHeight];
     }
     return _dramaTableView;
 }
 #pragma mark tableView代理方法
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0.01;
+    }
+    return 10.0;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return [_dataSource count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_dataSource count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -132,7 +151,8 @@
     HomePageCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    [cell setContent:[_dataSource objectAtIndex:indexPath.row]];
+    [cell setContent:[_dataSource objectAtIndex:indexPath.section]];
+  //  NSLog(@"cell = %@",cell);
     return cell;
     
 }
@@ -141,7 +161,7 @@
 {
     if (tableView == _dramaTableView) {
         ArticalViewController * freeLookArtical = [[ArticalViewController alloc] init];
-        HomePage* data = [_dataSource objectAtIndex:indexPath.row];
+        HomePage* data = [_dataSource objectAtIndex:indexPath.section];
         [freeLookArtical setOriginData:data.content];
         [freeLookArtical setTitle:data.title];
         [self.navigationController pushViewController:freeLookArtical  animated:YES];
@@ -159,7 +179,6 @@
 
 
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"0.0.0.0.0.0");
     NSMutableArray* source = menu.dataSource;
     NSString* cate = [[source objectAtIndex:indexPath.item] objectForKey:@"id"];
     
@@ -178,13 +197,13 @@
                           @"cid":category,
                           @"page":[NSString stringWithFormat:@"%ld", (long)page]};
     
-    [_serverManager AnimatedPOST:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
                 [_dataSource addObject:[HomePage parseDramaJSON:drama]];
             }
-            NSLog(@"res%@", responseObject);
+         //   NSLog(@"res%@", responseObject);
             //[_dramaTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
             self.wikiArtcleTableView.dataSource =_dataSource;
             [_dramaTableView reloadData];
@@ -199,7 +218,7 @@
 {
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken};
     
-    [_serverManager AnimatedPOST:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20000) {
             [self.head_view setDataSource:responseObject[@"data"]];
             [self.head_view reloadMenu];
@@ -217,6 +236,33 @@
     }else{
            [self.scrollView setContentOffset:CGPointMake(kScreen_Width,0)];
     }
+}
+
+#pragma mark 3D touch implementation
+- (BOOL)isForceTouchAvailable {
+    BOOL isForceTouchAvailable = NO;
+    if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
+        isForceTouchAvailable = self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable;
+    }
+    return isForceTouchAvailable;
+}
+
+-(UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    CGPoint cellPostion = [self.dramaTableView convertPoint:location fromView:self.view];
+    NSIndexPath *path = [self.dramaTableView indexPathForRowAtPoint:cellPostion];
+    
+    ArticalViewController * freeLookArtical = [[ArticalViewController alloc] init];
+    HomePage* data = [_dataSource objectAtIndex:path.section];
+    [freeLookArtical setOriginData:data.content];
+    [freeLookArtical setTitle:data.title];
+
+    return freeLookArtical;
+}
+
+-(void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    
 }
 
 @end

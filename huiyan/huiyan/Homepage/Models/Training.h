@@ -15,8 +15,8 @@
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *cover;
 @property (nonatomic, copy) NSString *ID;
-@property (nonatomic, strong) NSString *count;
-@property (nonatomic, strong) NSString *price;
+@property (nonatomic, copy) NSString *count;
+@property (nonatomic, copy) NSString *price;
 @property (nonatomic, strong) NSArray *imgs;
 
 + (Training *)dataWithDic:(NSDictionary *)dic;

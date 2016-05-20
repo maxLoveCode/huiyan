@@ -9,7 +9,7 @@
 #import "ZCBannerView.h"
 #import "Constant.h"
 #import "UIImageView+WebCache.h"
-#define Height 187.5
+
 #define Width kScreen_Width
 
 static NSString *const resuseIdentufier = @"banner";
@@ -18,9 +18,16 @@ static NSString *const resuseIdentufier = @"banner";
 
 - (instancetype)init{
     if (self = [super init]) {
-        [self setFrame:CGRectMake(0, 0, Width, Height)];
         self.pageCount = 0;
-        [self addTimer];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self == [super initWithFrame:frame]) {
+        self.height = CGRectGetHeight(frame);
+        self.width = CGRectGetWidth(frame);
+       
     }
     return self;
 }
@@ -28,7 +35,7 @@ static NSString *const resuseIdentufier = @"banner";
 - (UICollectionView *)bannerCollection{
     if (!_bannerCollection) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        layout.itemSize = CGSizeMake(Width, Height);
+        layout.itemSize = CGSizeMake(Width, self.height);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -41,18 +48,25 @@ static NSString *const resuseIdentufier = @"banner";
         self.bannerCollection.showsVerticalScrollIndicator = NO;
         self.bannerCollection.showsHorizontalScrollIndicator = NO;
         [self.bannerCollection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:resuseIdentufier];
-        [self addSubview:self.bannerCollection];
+        
     }
     return _bannerCollection;
 }
 
+- (void)layoutSubviews{
+    
+    [super layoutSubviews];
+ 
+}
+
+
 -(UIPageControl *)pageControl{
     if (!_pageControl) {
-        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, Height - 20, 100, 20)];
+        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, CGRectGetHeight(self.bannerCollection.frame) - 20, 100, 20)];
         _pageControl.numberOfPages = self.dataSource.count;
-        _pageControl.pageIndicatorTintColor = COLOR_WithHex(0xefefef);
-        _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-        [self addSubview:_pageControl];
+        _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+        _pageControl.currentPageIndicatorTintColor = COLOR_THEME;
+       
     }
     return _pageControl;
 }
@@ -67,11 +81,16 @@ static NSString *const resuseIdentufier = @"banner";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:resuseIdentufier forIndexPath:indexPath];
     UIImageView *image_pic = [cell viewWithTag:1000];
     if (!image_pic) {
-        image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Width, Height)];
-        [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"arrow"]];
+        image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Width, self.height)];
         [cell.contentView addSubview:image_pic];
         image_pic.tag = 1000;
     }
+    
+    [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"1"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        UIImage *origin =  image_pic.image;
+        origin = [ZCBannerView imageWithImage:origin scaledToSize:CGSizeMake(kScreen_Width ,self.height)];
+        image_pic.image = origin;
+    }];
     return cell;
 }
 
@@ -85,7 +104,6 @@ static NSString *const resuseIdentufier = @"banner";
 //开启定时器
 - (void)addTimer{
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
-    
 }
 
 - (void)removeTimer{
@@ -98,11 +116,12 @@ static NSString *const resuseIdentufier = @"banner";
         self.pageCount = 0;
     }
     self.pageControl.currentPage = self.pageCount;
+
+   // [UIView animateWithDuration:1 animations:^{
     
-   
-    [UIView animateWithDuration:1 animations:^{
-        [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-    }];
+[self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    [self.bannerCollection reloadData];
+   // }];
 
 }
 
@@ -131,6 +150,21 @@ static NSString *const resuseIdentufier = @"banner";
 - (void)reloadMenu{
     [self.bannerCollection reloadData];
     [self.pageControl reloadInputViews];
+    [self addSubview:self.bannerCollection];
+    [self addSubview:self.pageControl];
+    [self addTimer];
+
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 /*

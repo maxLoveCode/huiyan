@@ -9,7 +9,6 @@
 #import "ArticalViewController.h"
 #import "Constant.h"
 #import "UITabBarController+ShowHideBar.h"
-#import "UITabBarController+ShowHideBar.h"
 @interface ArticalViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITextView* textView;
@@ -33,6 +32,9 @@
     
     
     NSString* formatString = [attributedString string];
+    //NSLog(@"source %@", formatString);
+    
+    [self resizeImage:formatString];
     NSAttributedString *secondDecoding =[[NSAttributedString alloc] initWithData:[formatString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                   NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
     self.textView.attributedText = secondDecoding;
@@ -63,7 +65,7 @@
 -(UILabel *)label
 {
     if (!_label) {
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height  - 64)];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 30, kScreen_Height)];
         _label.numberOfLines = 0;
     }
     return _label;
@@ -72,7 +74,7 @@
 -(UIScrollView *)bgView
 {
     if (!_bgView) {
-        _bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
+        _bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
         _bgView.backgroundColor = [UIColor whiteColor];
         _bgView.delegate = self;
     }
@@ -119,14 +121,43 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    CGFloat height = self.bgView.contentSize.height;
-    NSLog(@"---%f---%f",scrollView.contentOffset.y,height);
+   // CGFloat height = self.bgView.contentSize.height;
+
     if (scrollView.contentOffset.y == CGRectGetHeight(self.label.frame)) {
         
     }
 }
 
-
+-(NSString*)resizeImage:(NSString*)source
+{
+    NSAttributedString* ats = [[NSAttributedString alloc] initWithString:source];
+    
+    NSString* plainString = [ats string];
+    
+    NSString *substring = @"<img";
+    NSRange searchRange = NSMakeRange(0, [plainString length]);
+    NSRange openingTagRange = [plainString rangeOfString:substring options:0 range:searchRange];
+    
+    while  ( openingTagRange.location < [plainString length] )
+    {
+        searchRange.location = NSMaxRange(openingTagRange);
+        searchRange.length = [plainString length] - NSMaxRange(openingTagRange);
+        NSRange closingTagRange = [plainString rangeOfString:@">" options:0 range:searchRange];
+        
+        if (closingTagRange.location > [plainString length])
+        {
+            break;
+        }
+        
+        NSRange wholeTagRange = NSMakeRange(openingTagRange.location, NSMaxRange(closingTagRange) - openingTagRange.location);
+        //NSLog(@"wholeTagString == %@", wholeTagString);
+        searchRange.location = NSMaxRange(wholeTagRange);
+        searchRange.length = [plainString length] - NSMaxRange(wholeTagRange);
+        openingTagRange = [plainString rangeOfString:substring options:0 range:searchRange];
+    }
+    
+    return [ats string];
+}
 
 
 

@@ -7,31 +7,87 @@
 //
 
 #import "FriendsViewController.h"
+#import "ZCBannerView.h"
+#import "LoginViewController.h"
 
-@interface FriendsViewController ()
-
-@end
 
 @implementation FriendsViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.displayConversationTypeArray = @[@(ConversationType_PRIVATE),@(ConversationType_SYSTEM)];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = @"戏友";
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated
+{
+    //NSLog(@"%@",self.conversationListDataSource);
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UIView *)loginRequest
+{
+    if (!_loginRequest) {
+        _loginRequest = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        [_loginRequest addSubview:self.login];
+    }
+    return _loginRequest;
 }
-*/
+
+-(UIButton *)login
+{
+    if (!_login) {
+        _login = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_login setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        NSMutableAttributedString* tncString = [[NSMutableAttributedString alloc] initWithString:@" 请先去登录 "];
+        
+        [tncString addAttribute:NSUnderlineStyleAttributeName
+                          value:@(NSUnderlineStyleSingle)
+                          range:(NSRange){0,[tncString length]}];
+        [tncString addAttribute:NSForegroundColorAttributeName  value:[UIColor
+                                                                       darkTextColor] range:(NSRange){0,[tncString length]}];
+        [tncString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:(NSRange){0,[tncString length]}];
+        
+        [_login setAttributedTitle:tncString forState:UIControlStateNormal];
+        [_login addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _login;
+}
+
+-(void)loginAction{
+    LoginViewController* view = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
+}
+
+-(RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    RCConversationBaseCell* cell = [[RCConversationBaseCell alloc]init];
+    cell.model = model;
+    return cell;
+}
+
+-(void)didTapCellPortrait:(RCConversationModel *)model
+{
+    
+}
+
+-(void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath
+{
+    RCConversationViewController* vc = [[RCConversationViewController alloc] init];
+    vc.targetId = model.targetId;
+    vc.conversationType = model.conversationType;
+    
+    [self.navigationController pushViewController:vc
+                                         animated:YES];
+}
 
 @end

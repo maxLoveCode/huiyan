@@ -14,7 +14,8 @@
 @property (nonatomic, strong) UIView *gray_view;
 @property (nonatomic, strong) UIImageView *video_pic;
 @property (nonatomic, strong) UIView *head_view;
-
+@property (nonatomic,strong) UILabel *up_lab;
+@property (nonatomic,strong) UILabel *down_lab;
 - (void)setContent:(HomePage *)drama;
 
 + (CGFloat)cellHeight;

@@ -106,6 +106,7 @@
         self.collect_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.collect_btn.layer.masksToBounds = YES;
         self.collect_btn.layer.cornerRadius = 1;
+        [self.collect_btn setImage:[UIImage imageNamed:@"collect"] forState:UIControlStateNormal];
     }
     return _collect_btn;
 }
@@ -115,6 +116,7 @@
         self.writeComment_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.writeComment_btn.layer.masksToBounds = YES;
         self.writeComment_btn.layer.cornerRadius = 1;
+        [self.writeComment_btn setImage:[UIImage imageNamed:@"evaluate"] forState:UIControlStateNormal];
     }
     return _writeComment_btn;
 }
@@ -124,6 +126,7 @@
         self.share_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.share_btn.layer.masksToBounds = YES;
         self.share_btn.layer.cornerRadius = 1;
+        [self.share_btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     }
     return _share_btn;
 }
@@ -139,11 +142,9 @@
     self.address_lab.frame = CGRectMake(CGRectGetMaxX(self.address_pic.frame) + 5, CGRectGetMinY(self.address_pic.frame) , kScreen_Width - 150, 14);
     self.price_pic.frame = CGRectMake(CGRectGetMinX(self.address_pic.frame), CGRectGetMaxY(self.address_pic.frame) + 10, 14, 14);
     self.price_lab.frame = CGRectMake(CGRectGetMaxX(self.price_pic.frame) + 5, CGRectGetMinY(self.price_pic.frame), kScreen_Width - 150, 14);
-    self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 90) / 3, 20);
-    self.writeComment_btn.frame = CGRectMake(CGRectGetMaxX(self.collect_btn.frame) + 30, CGRectGetMinY(self.collect_btn.frame), (kScreen_Width - 90) / 3, 20);
-    self.share_btn.frame = CGRectMake(CGRectGetMaxX(self.writeComment_btn.frame) + 30, CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 90) / 3, 20);
-    self.bg_view.backgroundColor = [UIColor redColor];
-
+    self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
+    self.writeComment_btn.frame = CGRectMake(CGRectGetMaxX(self.collect_btn.frame) + 20, CGRectGetMinY(self.collect_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1 );
+    self.share_btn.frame = CGRectMake(CGRectGetMaxX(self.writeComment_btn.frame) + 20, CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
     
 }
 
@@ -167,9 +168,7 @@
     self.time_pic.image = [UIImage imageNamed:@"arrow"];
     self.address_pic.image = [UIImage imageNamed:@"arrow"];
     self.price_pic.image = [UIImage imageNamed:@"arrow"];
-    self.collect_btn.backgroundColor = [UIColor redColor];
-     self.writeComment_btn.backgroundColor = [UIColor redColor];
-     self.share_btn.backgroundColor = [UIColor redColor];
+
 }
 
 

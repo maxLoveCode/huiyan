@@ -11,7 +11,9 @@
 @implementation CommentContent
 + (CommentContent *)dataWithDic:(NSDictionary *)dic{
     CommentContent *comment = [[CommentContent alloc]init];
-    comment.user_name = dic[@"user_name"];
+    if (![dic[@"user_name"] isKindOfClass:[NSNull class]]) {
+         comment.user_name = dic[@"user_name"];
+    }
     comment.content = dic[@"content"];
     comment.createtime = dic[@"createtime"];
     return comment;

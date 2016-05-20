@@ -14,7 +14,9 @@
 @property (nonatomic, strong) UILabel * _Nonnull title_lab;
 @property (nonatomic, strong) UILabel * _Nonnull actor_lab;
 @property (nonatomic, strong) UILabel * _Nonnull description_lab;
-@property (nonatomic, strong) UIView *head_view;
+@property (nonatomic, strong) UIView *_Nonnull head_view;
+@property (nonatomic,strong) UILabel *_Nonnull up_lab;
+@property (nonatomic,strong) UILabel *_Nonnull down_lab;
 -(void)setContent:(HomePage * _Nonnull)drama;
 
 + (CGFloat)cellHeight;

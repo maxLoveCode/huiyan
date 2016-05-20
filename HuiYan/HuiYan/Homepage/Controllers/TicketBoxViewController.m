@@ -14,8 +14,8 @@
 #import "MCSwipeMenu.h"
 #import "BuyTicketDetailsViewController.h"
 #import "UITabBarController+ShowHideBar.h"
-#define ticketHeight 142
-
+#import "ChangeRondaTableViewController.h"
+#define ticketHeight 132
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
 @property (nonatomic, strong) UITableView *ticketBoxTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -33,14 +33,20 @@
     [self.view addSubview:self.ticketBoxTableView];
     _serverManager = [ServerManager sharedInstance];
     [self getDataTicket:@"0"];
-    [self get_opera_cateData];
-    // Do any additional setup after loading the view.
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tabBarController setHidden:YES];
+        [self get_opera_cateData];
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -49,16 +55,17 @@
 
 - (UITableView *)ticketBoxTableView{
     if (!_ticketBoxTableView) {
-        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view.frame), kScreen_Width, ticketHeight * 5) style:UITableViewStylePlain];
+        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view.frame), kScreen_Width, kScreen_Height - 41) style:UITableViewStyleGrouped];
         self.ticketBoxTableView.delegate  = self;
         self.ticketBoxTableView.dataSource = self;
-        self.ticketBoxTableView.backgroundColor = [UIColor whiteColor];
+        //self.ticketBoxTableView.backgroundColor = [UIColor whiteColor];
         self.ticketBoxTableView.rowHeight = ticketHeight;
         self.ticketBoxTableView.separatorStyle  = NO;
         [self.ticketBoxTableView registerClass:[BuyTicketCell class] forCellReuseIdentifier:@"ticketBox"];
     }
     return _ticketBoxTableView;
 }
+
 - (MCSwipeMenu *)head_view{
     if (!_head_view) {
         self.head_view = [[MCSwipeMenu alloc]init];
@@ -73,29 +80,46 @@
 }
 
 #pragma mark - tableView delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+   return _dataSource.count;
+}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _dataSource.count;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BuyTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ticketBox" forIndexPath:indexPath];
-    [cell setContent:_dataSource[indexPath.row]];
+    [cell setContent:_dataSource[indexPath.section]];
+    BuyTicket *model = _dataSource[indexPath.section];
+    cell.buy_btn.tag = [model.ID integerValue];;
+    [cell.buy_btn addTarget:self action:@selector(changeOpear:) forControlEvents:UIControlEventTouchUpInside];
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     BuyTicketDetailsViewController *btdCon = [[BuyTicketDetailsViewController alloc]init];
-    btdCon.ticket = self.dataSource[indexPath.row];
+    btdCon.ticket = self.dataSource[indexPath.section];
     [self.navigationController pushViewController:btdCon animated:YES];
-    
 }
 
 - (void)get_opera_cateData{
     NSDictionary *params = @{@"access_token":_serverManager.accessToken};
-    [_serverManager AnimatedPOST:@"get_opera_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"responseObject = %@",responseObject);
+    [_serverManager AnimatedGET:@"get_opera_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] ==
             30000) {
                 [self.head_view setDataSource:responseObject[@"data"]];
@@ -109,7 +133,7 @@
 - (void)getDataTicket:(NSString *)cid{
     _dataSource = [NSMutableArray array];
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,@"cid":cid};
-    [_serverManager AnimatedPOST:@"get_opera_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [_serverManager AnimatedGET:@"get_opera_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 BuyTicket *model = [BuyTicket dataWithDic:dic];
@@ -124,6 +148,14 @@
     }];
 }
 
+- (void)changeOpear:(UIButton *)sender{
+    NSString *oid = [NSString stringWithFormat:@"%ld",(long)sender.tag];
+    ChangeRondaTableViewController *rondaCon = [[ChangeRondaTableViewController alloc]init];
+    rondaCon.oid = oid;
+    [self.navigationController pushViewController:rondaCon animated:YES];
+}
+
+
 #pragma mark - menuDelegate
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableArray *source = menu.dataSource;
@@ -131,14 +163,5 @@
     [self getDataTicket:cate];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

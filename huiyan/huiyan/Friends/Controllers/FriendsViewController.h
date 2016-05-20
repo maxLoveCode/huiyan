@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServerManager.h"
+#import <RongIMKit/RongIMKit.h>
+#import "Constant.h"
+#import "ServerManager.h"
 
-@interface FriendsViewController : UIViewController
+@interface FriendsViewController : RCConversationListViewController
+
+
+@property (nonatomic, assign) NSString* token;
+@property (nonatomic, strong) ServerManager* serverManager;
+@property (nonatomic, strong) UIView* loginRequest;
+@property (nonatomic, strong) UIButton* login;
+
+- (instancetype)init;
 
 @end

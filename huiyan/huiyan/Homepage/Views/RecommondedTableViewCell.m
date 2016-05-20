@@ -18,6 +18,8 @@
         [self addSubview:self.actor_lab];
         [self addSubview:self.description_lab];
         [self addSubview:self.head_view];
+        [self.head_view addSubview:self.up_lab];
+        [self.head_view addSubview:self.down_lab];
     }
     
     //[self debugData];
@@ -68,16 +70,26 @@
     if (!_head_view) {
         self.head_view = [[UIView alloc]init];
         self.head_view.backgroundColor = COLOR_WithHex(0xefefef);
-        UILabel *up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
-        up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-        [self.head_view addSubview:up_lab];
-        UILabel *down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
-        down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-        [self.head_view addSubview:down_lab];
     }
     return _head_view;
 }
 
+- (UILabel *)up_lab{
+    if (!_up_lab) {
+        self.up_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0.5)];
+        self.up_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+    }
+    return _up_lab;
+    
+}
+
+- (UILabel *)down_lab{
+    if (!_down_lab) {
+        self.down_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 9.5, kScreen_Width, 0.5)];
+        self.down_lab.backgroundColor = COLOR_WithHex(0xdddddd);
+    }
+    return _down_lab;
+}
 
 
 - (void)layoutSubviews{

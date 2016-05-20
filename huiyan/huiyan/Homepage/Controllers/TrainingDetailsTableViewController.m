@@ -10,13 +10,14 @@
 #import "Constant.h"
 #import "ZCBannerView.h"
 #import "UITabBarController+ShowHideBar.h"
-#define BinnerHeight 187.5
+#import "SignUpMessageTableViewController.h"
+#define BinnerHeight kScreen_Width / 2
 @interface TrainingDetailsTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSArray *image_arr;
 @property (nonatomic, strong) NSArray *title_arr;
 @property (nonatomic, strong) UITextView* textView;
 @property (nonatomic, assign) CGFloat cellHeight;
-@property (nonatomic, strong) UILabel *tail_lab;
+@property (nonatomic, strong) UIButton *tail_btn;
 @property (nonatomic, strong) UITableView *trainDetailsTableView;
 @end
 
@@ -28,7 +29,8 @@
     self.title = @"培训";
     self.image_arr = @[@"arrow",@"arrow",@"arrow"];
     self.title_arr = @[self.train.date,self.train.address,self.train.price];
-        [self.view addSubview:self.tail_lab];
+    //NSLog(@"%@",self.train.content);
+        [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.trainDetailsTableView];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -59,16 +61,23 @@
     [self.tabBarController setHidden:NO];
 }
 
-- (UILabel *)tail_lab{
-    if (!_tail_lab) {
-        self.tail_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48)];
-        self.tail_lab.backgroundColor = COLOR_THEME;
-        self.tail_lab.textColor = [UIColor whiteColor];
-        self.tail_lab.font = kFONT18;
-        self.tail_lab.text = @"立即报名";
-        self.tail_lab.textAlignment = NSTextAlignmentCenter;
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+}
+
+- (UIButton *)tail_btn{
+    if (!_tail_btn) {
+        self.tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.tail_btn.frame = CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48);
+       self.tail_btn.backgroundColor = COLOR_THEME;
+        [self.tail_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.tail_btn.titleLabel.font = kFONT18;
+        [self.tail_btn addTarget:self action:@selector(signUp:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tail_btn setTitle:@"立即报名" forState:UIControlStateNormal];
+        
     }
-    return _tail_lab;
+    return _tail_btn;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,7 +156,7 @@
     if (indexPath.section == 0) {
         ZCBannerView *binner_scr = [cell viewWithTag:1000];
         if (!binner_scr) {
-            binner_scr = [[ZCBannerView alloc]init];
+            binner_scr = [[ZCBannerView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, BinnerHeight)];
             binner_scr.dataSource = self.train.imgs;
             [binner_scr reloadMenu];
             binner_scr.backgroundColor = [UIColor redColor];
@@ -223,10 +232,12 @@
         NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[self.train.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                           NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
         
-        
+       // NSLog(@"attributedString = %@",attributedString);
         NSString* formatString = [attributedString string];
+         [self resizeImage:formatString];
         NSAttributedString *secondDecoding =[[NSAttributedString alloc] initWithData:[formatString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                                                                                                                                                         NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}documentAttributes:nil error:&error];
+        //NSLog(@"formatString = %@",formatString);
         self.textView.attributedText = secondDecoding;
         label.attributedText = secondDecoding;
         [label sizeToFit];
@@ -238,6 +249,42 @@
     return cell;
 }
 
+-(NSString*)resizeImage:(NSString*)source
+{
+    NSAttributedString* ats = [[NSAttributedString alloc] initWithString:source];
+    
+    NSString* plainString = [ats string];
+    
+    NSString *substring = @"<img";
+    NSRange searchRange = NSMakeRange(0, [plainString length]);
+    NSRange openingTagRange = [plainString rangeOfString:substring options:0 range:searchRange];
+    
+    while  ( openingTagRange.location < [plainString length] )
+    {
+        searchRange.location = NSMaxRange(openingTagRange);
+        searchRange.length = [plainString length] - NSMaxRange(openingTagRange);
+        NSRange closingTagRange = [plainString rangeOfString:@">" options:0 range:searchRange];
+        
+        if (closingTagRange.location > [plainString length])
+        {
+            break;
+        }
+        
+        NSRange wholeTagRange = NSMakeRange(openingTagRange.location, NSMaxRange(closingTagRange) - openingTagRange.location);
+        //NSLog(@"wholeTagString == %@", wholeTagString);
+        searchRange.location = NSMaxRange(wholeTagRange);
+        searchRange.length = [plainString length] - NSMaxRange(wholeTagRange);
+        openingTagRange = [plainString rangeOfString:substring options:0 range:searchRange];
+    }
+    
+    return [ats string];
+}
+
+- (void)signUp:(UIButton *)sender{
+    SignUpMessageTableViewController *signCon = [[SignUpMessageTableViewController alloc]init];
+    signCon.train = self.train;
+    [self.navigationController pushViewController:signCon animated:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.
