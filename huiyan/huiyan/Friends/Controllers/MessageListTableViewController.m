@@ -9,10 +9,13 @@
 #import "MessageListTableViewController.h"
 #import "ServerManager.h"
 #import "Constant.h"
+#import "Message.h"
 
 @interface MessageListTableViewController ()
 
 @property (strong, nonatomic) ServerManager* server;
+@property (assign, nonatomic) NSInteger* page;
+@property (strong, nonatomic) NSMutableArray* dataSource;
 
 -(void)getMessageList;
 
@@ -23,7 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _page = 0;
     _server = [ServerManager sharedInstance];
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    [_dataSource removeAllObjects];
     [self getMessageList];
 }
 
@@ -35,11 +43,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [_dataSource count];
 }
 
 /*
@@ -84,16 +92,25 @@
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
-
+*/  
 -(void)getMessageList
 {
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
     NSString* type;
+    
     type = (_style == MessageTypeSystem)?@"system":@"push";
      NSDictionary *parameters = @{@"access_token":_server.accessToken,@"user_id":user_id, @"type":type};
     [_server AnimatedGET:@"get_message_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
+        if ([responseObject[@"code"] isEqualToString:@"110000"]) {
+            [_dataSource removeAllObjects];
+            NSArray* data = responseObject[@"data"];
+            for(NSDictionary* msg in data)
+            {
+                [_dataSource addObject:[Message parseMessageFromJSON:msg]];
+            }
+            [self.tableView reloadData];
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
