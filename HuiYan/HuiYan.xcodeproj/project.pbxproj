@@ -116,6 +116,13 @@
 		557001B41CCF667B003EB02F /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 557001AB1CCF667B003EB02F /* read_me.txt */; };
 		557001B51CCF667B003EB02F /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557001AF1CCF667B003EB02F /* WXUtil.mm */; };
 		557001B81CCF738C003EB02F /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557001B71CCF738C003EB02F /* PayViewController.m */; };
+		5578A8351CEEF32200BD3061 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8311CEEF32200BD3061 /* cancel.png */; };
+		5578A8361CEEF32200BD3061 /* no_pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8321CEEF32200BD3061 /* no_pay.png */; };
+		5578A8371CEEF32200BD3061 /* no_show.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8331CEEF32200BD3061 /* no_show.png */; };
+		5578A8381CEEF32200BD3061 /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8341CEEF32200BD3061 /* show.png */; };
+		5578A8451CEEF9CA00BD3061 /* MHDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5578A8411CEEF9CA00BD3061 /* MHDatePicker.m */; };
+		5578A8461CEEF9CA00BD3061 /* MHSelectPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5578A8431CEEF9CA00BD3061 /* MHSelectPickerView.m */; };
+		5578A8471CEEF9CA00BD3061 /* MHSelectPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8441CEEF9CA00BD3061 /* MHSelectPickerView.xib */; };
 		557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557EDE121CD0A3980039267E /* AlipaySDK.bundle */; };
 		557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE131CD0A3980039267E /* AlipaySDK.framework */; };
 		557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE141CD0A3980039267E /* libcrypto.a */; };
@@ -454,6 +461,15 @@
 		557001AF1CCF667B003EB02F /* WXUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WXUtil.mm; sourceTree = "<group>"; };
 		557001B61CCF738C003EB02F /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
 		557001B71CCF738C003EB02F /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
+		5578A8311CEEF32200BD3061 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		5578A8321CEEF32200BD3061 /* no_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_pay.png; sourceTree = "<group>"; };
+		5578A8331CEEF32200BD3061 /* no_show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_show.png; sourceTree = "<group>"; };
+		5578A8341CEEF32200BD3061 /* show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show.png; sourceTree = "<group>"; };
+		5578A8401CEEF9CA00BD3061 /* MHDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHDatePicker.h; sourceTree = "<group>"; };
+		5578A8411CEEF9CA00BD3061 /* MHDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHDatePicker.m; sourceTree = "<group>"; };
+		5578A8421CEEF9CA00BD3061 /* MHSelectPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSelectPickerView.h; sourceTree = "<group>"; };
+		5578A8431CEEF9CA00BD3061 /* MHSelectPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSelectPickerView.m; sourceTree = "<group>"; };
+		5578A8441CEEF9CA00BD3061 /* MHSelectPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHSelectPickerView.xib; sourceTree = "<group>"; };
 		557EDE121CD0A3980039267E /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		557EDE131CD0A3980039267E /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		557EDE141CD0A3980039267E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -949,6 +965,18 @@
 			path = SDKExport;
 			sourceTree = "<group>";
 		};
+		5578A83F1CEEF97900BD3061 /* TimeDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				5578A8401CEEF9CA00BD3061 /* MHDatePicker.h */,
+				5578A8411CEEF9CA00BD3061 /* MHDatePicker.m */,
+				5578A8421CEEF9CA00BD3061 /* MHSelectPickerView.h */,
+				5578A8431CEEF9CA00BD3061 /* MHSelectPickerView.m */,
+				5578A8441CEEF9CA00BD3061 /* MHSelectPickerView.xib */,
+			);
+			path = TimeDatePicker;
+			sourceTree = "<group>";
+		};
 		557EDE1D1CD0A4AB0039267E /* openssl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1082,6 +1110,7 @@
 		55B918F21CCA1D8800717F8E /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				5578A83F1CEEF97900BD3061 /* TimeDatePicker */,
 				558621801CE5C88F007D5049 /* JPush */,
 				5556CC051CD37C7300CCD668 /* CoolNavi.h */,
 				5556CC061CD37C7300CCD668 /* CoolNavi.m */,
@@ -1346,6 +1375,10 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				5578A8311CEEF32200BD3061 /* cancel.png */,
+				5578A8321CEEF32200BD3061 /* no_pay.png */,
+				5578A8331CEEF32200BD3061 /* no_show.png */,
+				5578A8341CEEF32200BD3061 /* show.png */,
 				558F22BB1CE85469008636E1 /* heart@2x.png */,
 				558F22BC1CE85469008636E1 /* heart@3x.png */,
 				558F22BD1CE85469008636E1 /* interest@2x.png */,
@@ -1770,7 +1803,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1799,6 +1832,7 @@
 				550BFA0C1CBB2AF000E2E9DE /* kr-video-player-close@2x.png in Resources */,
 				25C625771CBE49C10068BFE8 /* tab_firend_selected@2x.png in Resources */,
 				558F5CAB1CBB4762006BD54D /* bg_view.png in Resources */,
+				5578A8361CEEF32200BD3061 /* no_pay.png in Resources */,
 				550BFA211CBB2AF000E2E9DE /* slider@2x.png in Resources */,
 				55B919221CCA1FAF00717F8E /* UMSLoginViewController.xib in Resources */,
 				550BFA241CBB2AF000E2E9DE /* unlock-nor@3x.png in Resources */,
@@ -1813,6 +1847,7 @@
 				558F22D31CE85469008636E1 /* training@2x.png in Resources */,
 				55C41E251CE4559A0055A58B /* successful@2x.png in Resources */,
 				55A43E771CEB03DF00BB73EF /* NewHomePageDetailCellTableViewCell.xib in Resources */,
+				5578A8351CEEF32200BD3061 /* cancel.png in Resources */,
 				5570012F1CCF54AE003EB02F /* back_arrow@2x.png in Resources */,
 				554B97BC1CED5E0B00E471CB /* PersonTrainingCell.xib in Resources */,
 				55C41E271CE4559A0055A58B /* system@3x.png in Resources */,
@@ -1880,12 +1915,14 @@
 				25C625371CBCFA3E0068BFE8 /* weChat@2x.png in Resources */,
 				550BFA111CBB2AF000E2E9DE /* kr-video-player-pause@3x.png in Resources */,
 				550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */,
+				5578A8381CEEF32200BD3061 /* show.png in Resources */,
 				550BFA151CBB2AF000E2E9DE /* kr-video-player-shrinkscreen@3x.png in Resources */,
 				55CCD7991CB3640600C3B8CA /* LaunchScreen.storyboard in Resources */,
 				558F22F51CE9B112008636E1 /* UnBindMobileViewController.xib in Resources */,
 				55C41E041CE325C80055A58B /* TrainOrdersMessageCell.xib in Resources */,
 				55C41E241CE4559A0055A58B /* pushMes@3x.png in Resources */,
 				55B9191D1CCA1FAF00717F8E /* UMSCommentDetailController.xib in Resources */,
+				5578A8471CEEF9CA00BD3061 /* MHSelectPickerView.xib in Resources */,
 				550BFA1B1CBB2AF000E2E9DE /* player_download.png in Resources */,
 				55B919231CCA1FAF00717F8E /* UMSnsAccountViewController.xib in Resources */,
 				558F22CB1CE85469008636E1 /* interest@2x.png in Resources */,
@@ -1905,6 +1942,7 @@
 				558F22CA1CE85469008636E1 /* heart@3x.png in Resources */,
 				55B9191B1CCA1FAF00717F8E /* UMSocialLocalizable.strings in Resources */,
 				550BFA191CBB2AF000E2E9DE /* Management_Mask@2x.png in Resources */,
+				5578A8371CEEF32200BD3061 /* no_show.png in Resources */,
 				25C625741CBE49C10068BFE8 /* tab_explorer_selected@3x.png in Resources */,
 				55C41E0D1CE428280055A58B /* successful.png in Resources */,
 				55B919241CCA1FAF00717F8E /* UMSShareListController.xib in Resources */,
@@ -1999,6 +2037,7 @@
 				55C41E2A1CE4621D0055A58B /* TrainOrderDetail.m in Sources */,
 				550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */,
 				557EDE7F1CD0A4AB0039267E /* NSDataEx.m in Sources */,
+				5578A8451CEEF9CA00BD3061 /* MHDatePicker.m in Sources */,
 				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
 				558F5D051CBE50F0006BD54D /* RecommondedTableViewCell.m in Sources */,
 				5556CBF71CD0E30600CCD668 /* DramaTicketDetailTableViewController.m in Sources */,
@@ -2027,6 +2066,7 @@
 				55CCD7EA1CB39CD000C3B8CA /* WikiViewController.m in Sources */,
 				557001B51CCF667B003EB02F /* WXUtil.mm in Sources */,
 				55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */,
+				5578A8461CEEF9CA00BD3061 /* MHSelectPickerView.m in Sources */,
 				557EDE7C1CD0A4AB0039267E /* DataSigner.m in Sources */,
 				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,
 				557EDE7E1CD0A4AB0039267E /* MD5DataSigner.m in Sources */,
@@ -2380,7 +2420,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

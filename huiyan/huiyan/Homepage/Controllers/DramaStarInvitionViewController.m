@@ -11,6 +11,7 @@
 #import "Constant.h"
 #import "ServerManager.h"
 #import "DramaStarInvatationCell.h"
+#import "MHDatePicker.h"
 @interface DramaStarInvitionViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -22,6 +23,8 @@
 @property (strong, nonatomic) UITextField *personTextField;
 @property (strong, nonatomic) UITextField *mobileTextField;
 @property (strong, nonatomic) UITextField *contentTextField;
+@property (strong, nonatomic) MHDatePicker *selectDatePicker;
+@property (nonatomic, strong) UILabel *timeLab;
 @end
 
 
@@ -40,6 +43,15 @@
     [self.view addSubview:self.pay_btn];
     [self.view addSubview:self.hint_lab];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (UILabel *)timeLab{
+    if (!_timeLab) {
+        self.timeLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 0, 150, 50)];
+        self.timeLab.font = kFONT14;
+        self.timeLab.textColor = COLOR_WithHex(0xa5a5a5);
+    }
+    return _timeLab;
 }
 
 - (UIButton *)pay_btn{
@@ -115,7 +127,8 @@
     }
     switch (indexPath.row) {
         case 0:
-            self.timeTextField = cell.name_textField;
+            self.timeTextField.hidden = YES;
+            [cell.contentView addSubview:self.timeLab];
             break;
         case 1:
             self.personTextField = cell.name_textField;

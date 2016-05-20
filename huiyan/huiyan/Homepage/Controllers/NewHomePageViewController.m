@@ -70,7 +70,7 @@ static int number_page = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerClass:[NewHomePageCell class] forCellReuseIdentifier:@"home"];
-        self.tableView.rowHeight = kScreen_Width / 1.6 + 50;
+        self.tableView.rowHeight =  kScreen_Width *0.75;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -89,7 +89,7 @@ static int number_page = 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
+    return 0.01;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
