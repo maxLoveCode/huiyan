@@ -49,7 +49,7 @@
         self.pay_btn.layer.masksToBounds = YES;
         self.pay_btn.layer.cornerRadius = 15;
         self.pay_btn.backgroundColor = COLOR_THEME;
-        [self.pay_btn setTitle:@"立即付款" forState:UIControlStateNormal];
+        [self.pay_btn setTitle:@"立即邀请" forState:UIControlStateNormal];
         [self.pay_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _pay_btn;
@@ -80,8 +80,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -91,6 +89,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.tabBarController setHidden:YES];
   //  [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 

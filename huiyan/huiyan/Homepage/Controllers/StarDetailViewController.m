@@ -42,6 +42,7 @@ static CGFloat const kWindowHeight = 244.0f;
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear: animated];
+    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -49,7 +50,6 @@ static CGFloat const kWindowHeight = 244.0f;
 //    [UIApplication sharedApplication].statusBarHidden = YES;
 //    self.navigationController.navigationBarHidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.tabBarController setHidden:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{

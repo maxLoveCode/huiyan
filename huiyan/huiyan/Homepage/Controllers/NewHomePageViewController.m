@@ -25,7 +25,8 @@ static int number_page = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
-    self.dataSource = [[NSMutableArray alloc]init];;
+    self.dataSource = [[NSMutableArray alloc]init];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"interaction"] style:UIBarButtonItemStylePlain target:self action:@selector(rightClick:)];
      self.navigationItem.rightBarButtonItem = rightItem;
     //侧滑关闭

@@ -17,7 +17,7 @@
 #import "UnBindMobileViewController.h"
 #import "MeTrainingViewController.h"
 #import "SettingTableViewController.h"
-
+#import "PersonInvitationViewController.h"
 #import "EditPersonMessageViewController.h"
 @interface MeMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -33,6 +33,7 @@
     [super viewDidLoad];
    [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.title_arr = @[@"我的戏票",@"我的培训",@"我的邀约",@"我的钱包",@"我的兴趣",@"绑定手机号",@"设置"];
     self.image_arr = @[@"ticket",@"training",@"training",@"wallet",@"interest",@"phone",@"set"];
 
@@ -110,6 +111,11 @@
     if (indexPath.section == 0) {
         PersonHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:@"head"];
        [cell setContent:self.perData];
+        if ([self.perData.sex isEqualToString:@"1"]) {
+            cell.sex_pic.image = [UIImage imageNamed:@"male"];
+        }else{
+            cell.sex_pic.image = [UIImage imageNamed:@"female"];
+        }
         [cell.edit_btn addTarget:self action:@selector(editPerson:) forControlEvents:UIControlEventTouchUpInside];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -165,6 +171,9 @@
         }else if(indexPath.row == 1) {
             MeTrainingViewController *trainCON = [[MeTrainingViewController alloc]init];
             [self.navigationController pushViewController:trainCON animated:NO];
+        }else{
+            PersonInvitationViewController *invaCon = [[PersonInvitationViewController alloc]init];
+            [self.navigationController pushViewController:invaCon animated:YES];
         }
         
     }else if (indexPath.section == 2){

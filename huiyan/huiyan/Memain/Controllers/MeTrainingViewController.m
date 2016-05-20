@@ -39,9 +39,9 @@ static int number_page = 0;
     }];
     [self.tableView.mj_header beginRefreshing];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -51,6 +51,7 @@ static int number_page = 0;
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.tabBarController setHidden:YES];
     //   [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
@@ -82,14 +83,11 @@ static int number_page = 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == self.dataSource.count) {
-        return 0.01;
-    }
-    return 10;
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.001;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

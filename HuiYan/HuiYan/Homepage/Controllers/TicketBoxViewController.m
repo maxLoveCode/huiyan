@@ -38,12 +38,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tabBarController setHidden:YES];
         [self get_opera_cateData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.tabBarController setHidden:YES];
     [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 

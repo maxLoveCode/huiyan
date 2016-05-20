@@ -17,6 +17,7 @@
     per.avatar = [NSString stringFormatting:dic[@"avatar"]];
     per.sex = dic[@"sex"];
     per.like_wiki = dic[@"like_wiki"];
+    per.send_flower_count = dic[@"send_flower_count"];
     return per;
 }
 @end
