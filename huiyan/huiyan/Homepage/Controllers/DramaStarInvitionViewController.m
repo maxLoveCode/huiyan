@@ -12,6 +12,7 @@
 #import "ServerManager.h"
 #import "DramaStarInvatationCell.h"
 #import "MHDatePicker.h"
+#import "Tools.h"
 @interface DramaStarInvitionViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) UITableView *tableView;
@@ -49,6 +50,7 @@
     if (!_timeLab) {
         self.timeLab = [[UILabel alloc]initWithFrame:CGRectMake(115, 0, 150, 50)];
         self.timeLab.font = kFONT14;
+        self.timeLab.text = @"请填写演出时间";
         self.timeLab.textColor = COLOR_WithHex(0xa5a5a5);
     }
     return _timeLab;
@@ -63,6 +65,7 @@
         self.pay_btn.backgroundColor = COLOR_THEME;
         [self.pay_btn setTitle:@"立即邀请" forState:UIControlStateNormal];
         [self.pay_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.pay_btn addTarget:self action:@selector(invitation:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _pay_btn;
 }
@@ -127,7 +130,7 @@
     }
     switch (indexPath.row) {
         case 0:
-            self.timeTextField.hidden = YES;
+            cell.name_textField.hidden = YES;
             [cell.contentView addSubview:self.timeLab];
             break;
         case 1:
@@ -147,6 +150,41 @@
     cell.selectionStyle = UITableViewCellAccessoryNone;
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        _selectDatePicker = [[MHDatePicker alloc] init];
+        _selectDatePicker.isBeforeTime = YES;
+        _selectDatePicker.datePickerMode = UIDatePickerModeDate;
+        __weak typeof(self) weakSelf = self;
+        [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
+            //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
+            //        weakSelf.myLabel2.text = string;
+            weakSelf.timeLab.text = [weakSelf dateStringWithDate:selectedDate DateFormat:@"yyyy年MM月dd日"];
+        }];
+
+    }
+}
+
+- (NSString *)dateStringWithDate:(NSDate *)date DateFormat:(NSString *)dateFormat
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateFormat];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
+    NSString *str = [dateFormatter stringFromDate:date];
+    return str ? str : @"";
+}
+
+- (void)invitation:(UIButton *)sender{
+    if (self.timeLab.text  == nil && [self.timeLab.text isEqualToString:@"请填写演出时间"]) {
+        [self presentViewController:[Tools showAlert:@"请填写时间" ] animated:YES completion:nil];
+    }else if(self.personTextField.text == nil && [self.personTextField.text isEqualToString:@"请填写联系人"]){
+        [self presentViewController:[Tools showAlert:@"请填写联系人" ] animated:YES completion:nil];
+    }else if (self.mobileTextField.text == nil || [self.mobileTextField.text isEqualToString:@"请填写联系人电话"]){
+         [self presentViewController:[Tools showAlert:@"请填写联系人电话" ] animated:YES completion:nil];
+    }
+}
+
 
 - (void)recoverKeyBorad:(UITapGestureRecognizer *)sender{
     [self.timeTextField resignFirstResponder];
