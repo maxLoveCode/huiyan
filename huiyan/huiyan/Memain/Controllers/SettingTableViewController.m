@@ -14,6 +14,7 @@
 {
     NSArray* firstSection;
     NSArray* secondSection;
+    NSArray* thirdSection;
 }
 
 @end
@@ -27,7 +28,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"setting"];
     firstSection = @[@"修改密码"];
     secondSection = @[@"去评分"];
-    
+    thirdSection = @[@"tui chu deng lu"];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -77,11 +78,25 @@
     if (indexPath.section == 1) {
         cell.textLabel.text = secondSection[indexPath.row];
     }
+    if (indexPath.section == 2){
+        cell.textLabel.text = thirdSection[indexPath.row];
+    }
     
     return cell;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        //change password
+    }
+    if (indexPath.section == 1) {
+        //comment app
+    }
+    if (indexPath.section == 2) {
+        [self logOut];
+    }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,5 +140,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)logOut
+{
+    
+}
 
 @end

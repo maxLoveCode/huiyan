@@ -266,6 +266,7 @@
 		55DAFFD61CC8F82B0093B180 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DAFFD51CC8F82B0093B180 /* libstdc++.tbd */; };
 		55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DAFFD71CC8F8350093B180 /* libz.tbd */; };
 		55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFDA1CC9B4AB0093B180 /* Tools.m */; };
+		59FE808A1CEECE480032318C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE80891CEECE480032318C /* Message.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
 
@@ -765,6 +766,8 @@
 		55DAFFD71CC8F8350093B180 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		55DAFFD91CC9B4AB0093B180 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		55DAFFDA1CC9B4AB0093B180 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		59FE80881CEECE480032318C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Message.h; path = HuiYan/Memain/Models/Message.h; sourceTree = SOURCE_ROOT; };
+		59FE80891CEECE480032318C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Message.m; path = HuiYan/Memain/Models/Message.m; sourceTree = SOURCE_ROOT; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1563,6 +1566,8 @@
 				554B97BE1CED6A1400E471CB /* PersonTraining.m */,
 				554B97CE1CEEBB6800E471CB /* Invitation.h */,
 				554B97CF1CEEBB6800E471CB /* Invitation.m */,
+				59FE80881CEECE480032318C /* Message.h */,
+				59FE80891CEECE480032318C /* Message.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1765,7 +1770,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2059,6 +2064,7 @@
 				257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */,
 				25C6253B1CBDDB210068BFE8 /* ZCBannerView.m in Sources */,
 				55CCD7E11CB38B3200C3B8CA /* HomePageController.m in Sources */,
+				59FE808A1CEECE480032318C /* Message.m in Sources */,
 				55C41DE91CE2CAE50055A58B /* SignUpCell.m in Sources */,
 				55C41E151CE44A260055A58B /* MessageViewController.m in Sources */,
 				25C6255A1CBE48EA0068BFE8 /* MeMainViewController.m in Sources */,
@@ -2374,7 +2380,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,
