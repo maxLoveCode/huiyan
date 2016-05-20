@@ -104,7 +104,7 @@
      NSDictionary *parameters = @{@"access_token":_server.accessToken,@"user_id":user_id, @"type":type};
     [_server AnimatedGET:@"get_message_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
-        if ([responseObject[@"code"] isEqualToString:@"110000"]) {
+        if ([responseObject[@"code"] integerValue] ==110000) {
             [_dataSource removeAllObjects];
             NSArray* data = responseObject[@"data"];
             for(NSDictionary* msg in data)
