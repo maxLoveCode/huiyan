@@ -58,7 +58,14 @@
                                                           error:&err];
     NSString *video_pic = [NSString stringWithFormat:@"%@?vframe/jpg/offset/1/w/800/h/500",data_arr[0]];
 
-    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:video_pic]];
+    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:video_pic]
+     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+         self.image_pic.alpha = 0;
+         [UIView animateWithDuration:0.2 animations:^{
+             self.image_pic.alpha = 1;
+         }];
+     }];
+
 }
 
 @end
