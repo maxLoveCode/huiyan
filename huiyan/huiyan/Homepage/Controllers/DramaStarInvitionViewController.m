@@ -152,18 +152,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        _selectDatePicker = [[MHDatePicker alloc] init];
-        _selectDatePicker.isBeforeTime = YES;
-        _selectDatePicker.datePickerMode = UIDatePickerModeDate;
-        __weak typeof(self) weakSelf = self;
-        [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
-            //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
-            //        weakSelf.myLabel2.text = string;
-            weakSelf.timeLab.text = [weakSelf dateStringWithDate:selectedDate DateFormat:@"yyyy年MM月dd日"];
-        }];
-
-    }
+//    if (indexPath.row == 0) {
+//        _selectDatePicker = [[MHDatePicker alloc] init];
+//        _selectDatePicker.isBeforeTime = YES;
+//        _selectDatePicker.datePickerMode = UIDatePickerModeDate;
+//        __weak typeof(self) weakSelf = self;
+//        [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
+//            //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
+//            //        weakSelf.myLabel2.text = string;
+//            weakSelf.timeLab.text = [weakSelf dateStringWithDate:selectedDate DateFormat:@"yyyy年MM月dd日"];
+//        }];
+//
+//    }
 }
 
 - (NSString *)dateStringWithDate:(NSDate *)date DateFormat:(NSString *)dateFormat
@@ -182,8 +182,13 @@
         [self presentViewController:[Tools showAlert:@"请填写联系人" ] animated:YES completion:nil];
     }else if (self.mobileTextField.text == nil || [self.mobileTextField.text isEqualToString:@"请填写联系人电话"]){
          [self presentViewController:[Tools showAlert:@"请填写联系人电话" ] animated:YES completion:nil];
+    }else if (self.mobileTextField.text == nil || [self.mobileTextField.text isEqualToString:@"请填写演出内容与要求"]){
+         [self presentViewController:[Tools showAlert:@"请填写演出内容与要求" ] animated:YES completion:nil];
+    }else{
+        
     }
 }
+
 
 
 - (void)recoverKeyBorad:(UITapGestureRecognizer *)sender{
