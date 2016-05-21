@@ -34,8 +34,11 @@
                                                                  }
                                                        context:nil].size;
     [self.sex_pic setFrame:CGRectMake(CGRectGetMaxX(self.head_pic.frame) + size.width + 25, 69, 16, 16)];
-    self.name_lab.text = model.nickname;
-    self.fans_lab.text = @"粉丝数:";
+    NSLog(@"------%@",model.like_wiki);
+
+
+
+    
     self.flower_lab.text = [NSString stringWithFormat:@"送出%@朵花",model.send_flower_count];
     [self.bg_image sd_setImageWithURL:[NSURL URLWithString:model.avatar] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];

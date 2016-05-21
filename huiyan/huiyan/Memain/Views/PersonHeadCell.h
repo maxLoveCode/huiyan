@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *name_lab;
 @property (strong, nonatomic) UIImageView *sex_pic;
 @property (weak, nonatomic) IBOutlet UIButton *edit_btn;
-@property (weak, nonatomic) IBOutlet UILabel *fans_lab;
+@property (weak, nonatomic) IBOutlet UILabel *likewiki_lab;
 @property (weak, nonatomic) IBOutlet UILabel *flower_lab;
 @property (weak, nonatomic) IBOutlet UIImageView *bg_image;
 - (void)setContent:(PersonMessage *)model;

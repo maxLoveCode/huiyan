@@ -14,7 +14,7 @@
 @property (nonatomic,copy) NSString *mobile;
 @property (nonatomic,copy) NSString *avatar;
 @property (nonatomic,copy) NSString *sex;
-@property (nonatomic,copy) NSString *like_wiki;
+@property (nonatomic,copy) NSArray *like_wiki;
 @property (nonatomic,copy) NSString *send_flower_count;
 + (PersonMessage *)personWithDic:(NSDictionary *)dic;
 @end
