@@ -67,7 +67,10 @@
 }
 
 -  (void)setContent:(HomePage *)model{
-    self.name_lab.text = model.title;
+//    self.name_lab.text = model.title;
+    NSMutableAttributedString* attrStr = [[NSMutableAttributedString alloc] initWithString: model.title];
+    [attrStr addAttribute:NSKernAttributeName value:@(4.0) range:NSMakeRange(0, attrStr.length)];
+    self.name_lab.attributedText = attrStr;
 //    NSData *jsonData = [model.imgs dataUsingEncoding:NSUTF8StringEncoding];
 //    NSError *err;
 //    NSArray *data_arr = [NSJSONSerialization JSONObjectWithData:jsonData
