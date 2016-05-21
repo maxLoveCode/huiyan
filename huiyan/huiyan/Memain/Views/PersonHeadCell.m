@@ -35,9 +35,13 @@
                                                        context:nil].size;
     [self.sex_pic setFrame:CGRectMake(CGRectGetMaxX(self.head_pic.frame) + size.width + 25, 69, 16, 16)];
     NSLog(@"------%@",model.like_wiki);
-
-
-
+    self.name_lab.text = model.nickname;
+    NSString *likiStr  = @"";
+    for (NSDictionary *dic in model.like_wiki) {
+       likiStr = [likiStr stringByAppendingString:[NSString stringWithFormat:@"%@ ",dic[@"name"]]];
+    }
+    
+    self.likewiki_lab.text = likiStr;
     
     self.flower_lab.text = [NSString stringWithFormat:@"送出%@朵花",model.send_flower_count];
     [self.bg_image sd_setImageWithURL:[NSURL URLWithString:model.avatar] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

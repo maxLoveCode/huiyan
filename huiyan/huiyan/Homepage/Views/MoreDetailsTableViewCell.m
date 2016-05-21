@@ -39,7 +39,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.title_lab.frame = CGRectMake(kMargin, 0, 100, 32);
-    self.image_pic.frame = CGRectMake(kScreen_Width - 50 - kMargin, 0, 50, 32);
+    self.image_pic.frame = CGRectMake(kScreen_Width - 50 - kMargin, 0, 32, 32);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

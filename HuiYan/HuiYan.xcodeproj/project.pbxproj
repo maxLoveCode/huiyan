@@ -123,6 +123,7 @@
 		5578A8451CEEF9CA00BD3061 /* MHDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5578A8411CEEF9CA00BD3061 /* MHDatePicker.m */; };
 		5578A8461CEEF9CA00BD3061 /* MHSelectPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5578A8431CEEF9CA00BD3061 /* MHSelectPickerView.m */; };
 		5578A8471CEEF9CA00BD3061 /* MHSelectPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8441CEEF9CA00BD3061 /* MHSelectPickerView.xib */; };
+		5578A8491CF03B3000BD3061 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8481CF03B3000BD3061 /* mask.png */; };
 		557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557EDE121CD0A3980039267E /* AlipaySDK.bundle */; };
 		557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE131CD0A3980039267E /* AlipaySDK.framework */; };
 		557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE141CD0A3980039267E /* libcrypto.a */; };
@@ -472,6 +473,7 @@
 		5578A8421CEEF9CA00BD3061 /* MHSelectPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSelectPickerView.h; sourceTree = "<group>"; };
 		5578A8431CEEF9CA00BD3061 /* MHSelectPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSelectPickerView.m; sourceTree = "<group>"; };
 		5578A8441CEEF9CA00BD3061 /* MHSelectPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHSelectPickerView.xib; sourceTree = "<group>"; };
+		5578A8481CF03B3000BD3061 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
 		557EDE121CD0A3980039267E /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		557EDE131CD0A3980039267E /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		557EDE141CD0A3980039267E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -1381,6 +1383,7 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				5578A8481CF03B3000BD3061 /* mask.png */,
 				5578A8311CEEF32200BD3061 /* cancel.png */,
 				5578A8321CEEF32200BD3061 /* no_pay.png */,
 				5578A8331CEEF32200BD3061 /* no_show.png */,
@@ -1839,6 +1842,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5578A8491CF03B3000BD3061 /* mask.png in Resources */,
 				550BFA0C1CBB2AF000E2E9DE /* kr-video-player-close@2x.png in Resources */,
 				25C625771CBE49C10068BFE8 /* tab_firend_selected@2x.png in Resources */,
 				558F5CAB1CBB4762006BD54D /* bg_view.png in Resources */,

@@ -95,7 +95,7 @@
 
 - (UISegmentedControl *)segement{
     if (!_segement) {
-        self.segement = [[UISegmentedControl alloc]initWithItems:@[@"文章",@"作品"]];
+        self.segement = [[UISegmentedControl alloc]initWithItems:@[@"百科",@"慕课"]];
         self.segement.frame = CGRectMake(0, 0, 110, 24);
         self.segement.selectedSegmentIndex = 0;
         self.segement.tintColor = [UIColor whiteColor];

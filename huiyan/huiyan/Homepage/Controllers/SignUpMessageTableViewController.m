@@ -15,6 +15,7 @@
 #import "TrainOrdersTableViewController.h"
 #import "TrainPayViewController.h"
 #import "ServerManager.h"
+#import "Tools.h"
 @interface SignUpMessageTableViewController ()
 @property (nonatomic, strong) UITextField *name_textFied;
 @property (nonatomic, strong) UITextField *mobile_textField;
@@ -154,6 +155,8 @@
             TrainPayViewController *trainCon = [[TrainPayViewController alloc]init];
             trainCon.data_dic = self.order_dic;
             [self.navigationController pushViewController:trainCon animated:YES];
+        }else{
+            [self presentViewController:[Tools showAlert:responseObject[@"msg"]] animated:YES completion:nil];
         }
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -196,7 +196,7 @@
         if ([responseObject[@"code"] integerValue] == 50090) {
              [self presentViewController:[Tools showAlert:@"邀请成功" ] animated:YES completion:nil];
         }else{
-            [self presentViewController:[Tools showAlert:@"邀请失败" ] animated:YES completion:nil];
+            [self presentViewController:[Tools showAlert:responseObject[@"msg"] ] animated:YES completion:nil];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

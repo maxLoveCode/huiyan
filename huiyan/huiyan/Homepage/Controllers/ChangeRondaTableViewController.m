@@ -121,7 +121,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *dic = self.dataSource[indexPath.section];
+    NSDictionary *dic = self.dataSource[indexPath.row];
     UIWebViewTicketController *webCon = [[UIWebViewTicketController alloc]init];
     webCon.ID = dic[@"id"];
     webCon.oid = dic[@"oid"];
