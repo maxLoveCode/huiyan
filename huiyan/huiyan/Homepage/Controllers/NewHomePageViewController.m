@@ -112,6 +112,11 @@ static int number_page = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
     wikiCon.homePage = self.dataSource[indexPath.section];
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+        
+    } completion:^(BOOL finished) {
+        
+    }];
     [self.navigationController pushViewController:wikiCon animated:YES];
 }
 
