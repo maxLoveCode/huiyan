@@ -8,6 +8,7 @@
 
 #import "MessageTableViewCell.h"
 #import "Constant.h"
+#import "Message.h"
 
 @implementation MessageTableViewCell
 
@@ -47,6 +48,12 @@
     [super layoutSubviews];
     [self.title setFrame:CGRectMake(kMargin, kMargin, 100, 14)];
     [self.content setFrame:CGRectMake(kMargin, kMargin+18, 100, 14)];
+}
+
+-(void)setCellContent:(Message*)msg
+{
+    self.content.text = msg.content;
+    self.title.text = msg.title;
 }
 
 @end

@@ -15,6 +15,7 @@
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self addSubview:self.image_pic];
         [self.image_pic addSubview:self.name_lab];
+        [self setBackgroundColor:[UIColor blackColor]];
     }
     return  self;
 }
@@ -57,7 +58,6 @@
                                                         options:NSJSONReadingMutableContainers
                                                           error:&err];
     NSString *video_pic = [NSString stringWithFormat:@"%@?vframe/jpg/offset/1/w/800/h/500",data_arr[0]];
-
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:video_pic]
      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
          //if (cacheType == SDImageCacheTypeNone) {

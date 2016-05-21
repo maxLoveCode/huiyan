@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Message.h"
 
 @interface MessageTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel* title;
 @property (nonatomic, strong) UILabel* content;
+
+-(void)setCellContent:(Message*)msg;
 
 @end

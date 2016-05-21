@@ -10,6 +10,7 @@
 #import "ServerManager.h"
 #import "Constant.h"
 #import "Message.h"
+#import "MessageTableViewCell.h"
 
 @interface MessageListTableViewController ()
 
@@ -28,6 +29,7 @@
     
     _page = 0;
     _server = [ServerManager sharedInstance];
+    [self.tableView registerClass:[MessageTableViewCell class] forCellReuseIdentifier:@"msg"];
     if (!_dataSource) {
         _dataSource = [[NSMutableArray alloc] init];
     }
@@ -52,15 +54,15 @@
     return [_dataSource count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+     MessageTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"msg" forIndexPath:indexPath];
     
-    // Configure the cell...
+    [cell setCellContent:[_dataSource objectAtIndex:indexPath.row]];
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
