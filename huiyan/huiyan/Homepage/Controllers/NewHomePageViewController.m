@@ -119,6 +119,9 @@ static int number_page = 0;
                 HomePage *model = [HomePage parseDramaJSON:dic];
                 [self.dataSource addObject:model];
             }
+            if ([responseObject[@"data"] count] %10 !=0) {
+                self.tableView.mj_footer = nil;
+            }
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];

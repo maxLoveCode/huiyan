@@ -1,51 +1,52 @@
 //
-//  MessageListTableViewController.m
+//  InterestsTableViewController.m
 //  huiyan
 //
-//  Created by 华印mac-001 on 16/5/19.
+//  Created by zc on 16/5/21.
 //  Copyright © 2016年 com.huayin. All rights reserved.
 //
 
-#import "MessageListTableViewController.h"
+#import "InterestsTableViewController.h"
 #import "ServerManager.h"
-#import "Constant.h"
-#import "Message.h"
-#import "MessageTableViewCell.h"
 #import "UITabBarController+ShowHideBar.h"
 
-@interface MessageListTableViewController ()
+@interface InterestsTableViewController ()
 
-@property (strong, nonatomic) ServerManager* server;
-@property (assign, nonatomic) NSInteger* page;
-@property (strong, nonatomic) NSMutableArray* dataSource;
-
--(void)getMessageList;
+@property (nonatomic, strong) ServerManager* serverManager;
 
 @end
 
-@implementation MessageListTableViewController
+@implementation InterestsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _page = 0;
-    _server = [ServerManager sharedInstance];
-    [self.tableView registerClass:[MessageTableViewCell class] forCellReuseIdentifier:@"msg"];
-    if (!_dataSource) {
-        _dataSource = [[NSMutableArray alloc] init];
-    }
-    [_dataSource removeAllObjects];
-    [self getMessageList];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setHidden:YES];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"interests"];
+//    _Interests = [[NSMutableArray alloc] init];
+    _serverManager = [ServerManager sharedInstance];
+    [self getDramaCates];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setHidden:YES];
+    [super viewDidAppear:YES];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [self.tabBarController setHidden:NO];
+    [super viewDidDisappear:YES];
 }
 
 #pragma mark - Table view data source
@@ -55,14 +56,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_dataSource count];
+    return [_Interests count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     MessageTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"msg" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"interests" forIndexPath:indexPath];
     
-    [cell setCellContent:[_dataSource objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [[_Interests objectAtIndex:indexPath.row] objectForKey:@"name"];
     
     return cell;
 }
@@ -100,27 +101,30 @@
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/  
--(void)getMessageList
+*/
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (void)getDramaCates
 {
-    NSString *user_id = kOBJECTDEFAULTS(@"user_id");
-    NSString* type;
+    NSDictionary *dic = @{@"access_token":_serverManager.accessToken};
     
-    type = (_style == MessageTypeSystem)?@"system":@"push";
-     NSDictionary *parameters = @{@"access_token":_server.accessToken,@"user_id":user_id, @"type":type};
-    [_server AnimatedGET:@"get_message_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-        if ([responseObject[@"code"] integerValue] ==110000) {
-            [_dataSource removeAllObjects];
-            NSArray* data = responseObject[@"data"];
-            for(NSDictionary* msg in data)
-            {
-                [_dataSource addObject:[Message parseMessageFromJSON:msg]];
-            }
+    [_serverManager AnimatedGET:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        if ([[responseObject objectForKey:@"code"] integerValue] == 20000) {
+            _Interests = responseObject[@"data"];
+            NSLog(@"%@", _Interests);
             [self.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 
