@@ -16,8 +16,8 @@
     
     // 设置普通状态的动画图片
     NSMutableArray *idleImages = [NSMutableArray array];
-    for (NSUInteger i = 1; i<=7; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"gifrefresher%zd", i]];
+    for (NSUInteger i = 0; i<=7; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"gifrefresh%zd", i]];
         [idleImages addObject:image];
     }
     [self setImages:idleImages forState:MJRefreshStateIdle];

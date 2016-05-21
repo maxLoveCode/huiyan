@@ -24,7 +24,6 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的邀约";
     // Do any additional setup after loading the view.
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];

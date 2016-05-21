@@ -42,29 +42,29 @@
     
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage];
     homeNav.tabBarItem.title = @"首页";
-    [homeNav.tabBarItem setImage:[UIImage imageNamed:@"tab_homePage"]];
-    [homeNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_homePage_selected"]];
-    homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [homeNav.tabBarItem setImage:[UIImage imageNamed:@"home"]];
+    [homeNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"homeSel"]];
+    homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(10, 10, 10, 0);
     [homeNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
     UINavigationController *dramaNav = [[UINavigationController alloc]initWithRootViewController:drama];
     dramaNav.tabBarItem.title = @"红人";
-    [dramaNav.tabBarItem setImage:[UIImage imageNamed:@"tab_firend"]];
-    [dramaNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_firend_selected"]];
-    dramaNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [dramaNav.tabBarItem setImage:[UIImage imageNamed:@"drama"]];
+    [dramaNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"dramaSel"]];
+    dramaNav.tabBarItem.imageInsets = UIEdgeInsetsMake(9, 0, -9, 0);
     [dramaNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     UINavigationController *exploreNav = [[UINavigationController alloc]initWithRootViewController:explore];
     
     exploreNav.tabBarItem.title  = @"发现";
-    [exploreNav.tabBarItem setImage:[UIImage imageNamed:@"tab_explorer"]];
-    [exploreNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_explorer_selected"]];
+    [exploreNav.tabBarItem setImage:[UIImage imageNamed:@"found"]];
+    [exploreNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"foundSel"]];
     exploreNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [exploreNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
     UINavigationController *meMainNav = [[UINavigationController alloc]initWithRootViewController:meMain];
     meMainNav.tabBarItem.title = @"我的";
-    [meMainNav.tabBarItem setImage:[UIImage imageNamed:@"tab_mine"]];
-    [meMainNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"tab_mine_selected"]];
+    [meMainNav.tabBarItem setImage:[UIImage imageNamed:@"mine"]];
+    [meMainNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"mineSel"]];
     meMainNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [meMainNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 

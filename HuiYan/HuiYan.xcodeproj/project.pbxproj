@@ -131,14 +131,22 @@
 		5578A8531CF03F7000BD3061 /* weixinpay.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84E1CF03F7000BD3061 /* weixinpay.png */; };
 		5578A8551CF0452900BD3061 /* finish_detail_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8541CF0452900BD3061 /* finish_detail_phone.png */; };
 		5578A8571CF0465C00BD3061 /* pay_finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8561CF0465C00BD3061 /* pay_finish.png */; };
-		5578A8701CF05EF100BD3061 /* gifrefresher0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8681CF05EF100BD3061 /* gifrefresher0.png */; };
-		5578A8711CF05EF100BD3061 /* gifrefresher1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8691CF05EF100BD3061 /* gifrefresher1.png */; };
-		5578A8721CF05EF100BD3061 /* gifrefresher2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A86A1CF05EF100BD3061 /* gifrefresher2.png */; };
-		5578A8731CF05EF100BD3061 /* gifrefresher3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A86B1CF05EF100BD3061 /* gifrefresher3.png */; };
-		5578A8741CF05EF100BD3061 /* gifrefresher4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A86C1CF05EF100BD3061 /* gifrefresher4.png */; };
-		5578A8751CF05EF100BD3061 /* gifrefresher5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A86D1CF05EF100BD3061 /* gifrefresher5.png */; };
-		5578A8761CF05EF100BD3061 /* gifrefresher6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A86E1CF05EF100BD3061 /* gifrefresher6.png */; };
-		5578A8771CF05EF100BD3061 /* gifrefresher7.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A86F1CF05EF100BD3061 /* gifrefresher7.png */; };
+		5578A8801CF0686F00BD3061 /* drama.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8781CF0686F00BD3061 /* drama.png */; };
+		5578A8811CF0686F00BD3061 /* dramaSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8791CF0686F00BD3061 /* dramaSel.png */; };
+		5578A8821CF0686F00BD3061 /* found.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A87A1CF0686F00BD3061 /* found.png */; };
+		5578A8831CF0686F00BD3061 /* foundSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A87B1CF0686F00BD3061 /* foundSel.png */; };
+		5578A8841CF0686F00BD3061 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A87C1CF0686F00BD3061 /* home.png */; };
+		5578A8851CF0686F00BD3061 /* homeSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A87D1CF0686F00BD3061 /* homeSel.png */; };
+		5578A8861CF0686F00BD3061 /* mine.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A87E1CF0686F00BD3061 /* mine.png */; };
+		5578A8871CF0686F00BD3061 /* mineSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A87F1CF0686F00BD3061 /* mineSel.png */; };
+		5578A8A01CF06BCB00BD3061 /* gifrefesh0.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8981CF06BCB00BD3061 /* gifrefesh0.png */; };
+		5578A8A11CF06BCB00BD3061 /* gifrefesh1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8991CF06BCB00BD3061 /* gifrefesh1.png */; };
+		5578A8A21CF06BCB00BD3061 /* gifrefesh2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A89A1CF06BCB00BD3061 /* gifrefesh2.png */; };
+		5578A8A31CF06BCB00BD3061 /* gifrefesh3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A89B1CF06BCB00BD3061 /* gifrefesh3.png */; };
+		5578A8A41CF06BCB00BD3061 /* gifrefesh4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A89C1CF06BCB00BD3061 /* gifrefesh4.png */; };
+		5578A8A51CF06BCB00BD3061 /* gifrefesh5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A89D1CF06BCB00BD3061 /* gifrefesh5.png */; };
+		5578A8A61CF06BCB00BD3061 /* gifrefesh6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A89E1CF06BCB00BD3061 /* gifrefesh6.png */; };
+		5578A8A71CF06BCB00BD3061 /* gifrefesh7.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A89F1CF06BCB00BD3061 /* gifrefesh7.png */; };
 		557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557EDE121CD0A3980039267E /* AlipaySDK.bundle */; };
 		557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE131CD0A3980039267E /* AlipaySDK.framework */; };
 		557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE141CD0A3980039267E /* libcrypto.a */; };
@@ -497,14 +505,22 @@
 		5578A84E1CF03F7000BD3061 /* weixinpay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixinpay.png; sourceTree = "<group>"; };
 		5578A8541CF0452900BD3061 /* finish_detail_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish_detail_phone.png; sourceTree = "<group>"; };
 		5578A8561CF0465C00BD3061 /* pay_finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay_finish.png; sourceTree = "<group>"; };
-		5578A8681CF05EF100BD3061 /* gifrefresher0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher0.png; sourceTree = "<group>"; };
-		5578A8691CF05EF100BD3061 /* gifrefresher1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher1.png; sourceTree = "<group>"; };
-		5578A86A1CF05EF100BD3061 /* gifrefresher2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher2.png; sourceTree = "<group>"; };
-		5578A86B1CF05EF100BD3061 /* gifrefresher3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher3.png; sourceTree = "<group>"; };
-		5578A86C1CF05EF100BD3061 /* gifrefresher4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher4.png; sourceTree = "<group>"; };
-		5578A86D1CF05EF100BD3061 /* gifrefresher5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher5.png; sourceTree = "<group>"; };
-		5578A86E1CF05EF100BD3061 /* gifrefresher6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher6.png; sourceTree = "<group>"; };
-		5578A86F1CF05EF100BD3061 /* gifrefresher7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefresher7.png; sourceTree = "<group>"; };
+		5578A8781CF0686F00BD3061 /* drama.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drama.png; sourceTree = "<group>"; };
+		5578A8791CF0686F00BD3061 /* dramaSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dramaSel.png; sourceTree = "<group>"; };
+		5578A87A1CF0686F00BD3061 /* found.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = found.png; sourceTree = "<group>"; };
+		5578A87B1CF0686F00BD3061 /* foundSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foundSel.png; sourceTree = "<group>"; };
+		5578A87C1CF0686F00BD3061 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		5578A87D1CF0686F00BD3061 /* homeSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeSel.png; sourceTree = "<group>"; };
+		5578A87E1CF0686F00BD3061 /* mine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mine.png; sourceTree = "<group>"; };
+		5578A87F1CF0686F00BD3061 /* mineSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mineSel.png; sourceTree = "<group>"; };
+		5578A8981CF06BCB00BD3061 /* gifrefesh0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh0.png; sourceTree = "<group>"; };
+		5578A8991CF06BCB00BD3061 /* gifrefesh1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh1.png; sourceTree = "<group>"; };
+		5578A89A1CF06BCB00BD3061 /* gifrefesh2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh2.png; sourceTree = "<group>"; };
+		5578A89B1CF06BCB00BD3061 /* gifrefesh3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh3.png; sourceTree = "<group>"; };
+		5578A89C1CF06BCB00BD3061 /* gifrefesh4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh4.png; sourceTree = "<group>"; };
+		5578A89D1CF06BCB00BD3061 /* gifrefesh5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh5.png; sourceTree = "<group>"; };
+		5578A89E1CF06BCB00BD3061 /* gifrefesh6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh6.png; sourceTree = "<group>"; };
+		5578A89F1CF06BCB00BD3061 /* gifrefesh7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifrefesh7.png; sourceTree = "<group>"; };
 		557EDE121CD0A3980039267E /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		557EDE131CD0A3980039267E /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		557EDE141CD0A3980039267E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -1418,14 +1434,22 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
-				5578A8681CF05EF100BD3061 /* gifrefresher0.png */,
-				5578A8691CF05EF100BD3061 /* gifrefresher1.png */,
-				5578A86A1CF05EF100BD3061 /* gifrefresher2.png */,
-				5578A86B1CF05EF100BD3061 /* gifrefresher3.png */,
-				5578A86C1CF05EF100BD3061 /* gifrefresher4.png */,
-				5578A86D1CF05EF100BD3061 /* gifrefresher5.png */,
-				5578A86E1CF05EF100BD3061 /* gifrefresher6.png */,
-				5578A86F1CF05EF100BD3061 /* gifrefresher7.png */,
+				5578A8981CF06BCB00BD3061 /* gifrefesh0.png */,
+				5578A8991CF06BCB00BD3061 /* gifrefesh1.png */,
+				5578A89A1CF06BCB00BD3061 /* gifrefesh2.png */,
+				5578A89B1CF06BCB00BD3061 /* gifrefesh3.png */,
+				5578A89C1CF06BCB00BD3061 /* gifrefesh4.png */,
+				5578A89D1CF06BCB00BD3061 /* gifrefesh5.png */,
+				5578A89E1CF06BCB00BD3061 /* gifrefesh6.png */,
+				5578A89F1CF06BCB00BD3061 /* gifrefesh7.png */,
+				5578A8781CF0686F00BD3061 /* drama.png */,
+				5578A8791CF0686F00BD3061 /* dramaSel.png */,
+				5578A87A1CF0686F00BD3061 /* found.png */,
+				5578A87B1CF0686F00BD3061 /* foundSel.png */,
+				5578A87C1CF0686F00BD3061 /* home.png */,
+				5578A87D1CF0686F00BD3061 /* homeSel.png */,
+				5578A87E1CF0686F00BD3061 /* mine.png */,
+				5578A87F1CF0686F00BD3061 /* mineSel.png */,
 				5578A8561CF0465C00BD3061 /* pay_finish.png */,
 				5578A8541CF0452900BD3061 /* finish_detail_phone.png */,
 				5578A84A1CF03F7000BD3061 /* alipay.png */,
@@ -1905,15 +1929,19 @@
 				25C625811CBE49C10068BFE8 /* tab_mine@2x.png in Resources */,
 				558F22E11CE86016008636E1 /* PersonDramaTicketCell.xib in Resources */,
 				55AD32571CDB2426000ACE39 /* collect@3x.png in Resources */,
+				5578A8A71CF06BCB00BD3061 /* gifrefesh7.png in Resources */,
 				25C625711CBE49C10068BFE8 /* 3.png in Resources */,
 				25C625781CBE49C10068BFE8 /* tab_firend_selected@3x.png in Resources */,
 				550BFA121CBB2AF000E2E9DE /* kr-video-player-play@2x.png in Resources */,
 				558F22D31CE85469008636E1 /* training@2x.png in Resources */,
+				5578A8A31CF06BCB00BD3061 /* gifrefesh3.png in Resources */,
 				55C41E251CE4559A0055A58B /* successful@2x.png in Resources */,
 				55A43E771CEB03DF00BB73EF /* NewHomePageDetailCellTableViewCell.xib in Resources */,
 				5578A8351CEEF32200BD3061 /* cancel.png in Resources */,
 				5570012F1CCF54AE003EB02F /* back_arrow@2x.png in Resources */,
+				5578A8821CF0686F00BD3061 /* found.png in Resources */,
 				554B97BC1CED5E0B00E471CB /* PersonTrainingCell.xib in Resources */,
+				5578A8841CF0686F00BD3061 /* home.png in Resources */,
 				55C41E271CE4559A0055A58B /* system@3x.png in Resources */,
 				55C41E211CE4559A0055A58B /* interaction@2x.png in Resources */,
 				558F22D51CE85469008636E1 /* wallet@2x.png in Resources */,
@@ -1924,19 +1952,16 @@
 				25C6257C1CBE49C10068BFE8 /* tab_homePage_selected@3x.png in Resources */,
 				55DAFFB91CC5C6710093B180 /* video_list_cell_big_icon@2x.png in Resources */,
 				550BFA1A1CBB2AF000E2E9DE /* play_back_full.png in Resources */,
-				5578A8771CF05EF100BD3061 /* gifrefresher7.png in Resources */,
-				5578A8711CF05EF100BD3061 /* gifrefresher1.png in Resources */,
-				5578A8731CF05EF100BD3061 /* gifrefresher3.png in Resources */,
 				55C41DFF1CE322B20055A58B /* TrainOrdersCell.xib in Resources */,
 				558F22F01CE97585008636E1 /* BindMobileViewController.xib in Resources */,
 				55B919251CCA1FAF00717F8E /* UMSocialSDKResourcesNew.bundle in Resources */,
-				5578A8721CF05EF100BD3061 /* gifrefresher2.png in Resources */,
 				25C625701CBE49C10068BFE8 /* 2.png in Resources */,
 				5578A8501CF03F7000BD3061 /* back_arrow@2x.png.zip in Resources */,
 				55A43E881CEC05DF00BB73EF /* DramaStarHead.xib in Resources */,
+				5578A8A51CF06BCB00BD3061 /* gifrefesh5.png in Resources */,
 				25C6256F1CBE49C10068BFE8 /* 1.png in Resources */,
 				55AD32631CDB5034000ACE39 /* male@3x.png in Resources */,
-				5578A8701CF05EF100BD3061 /* gifrefresher0.png in Resources */,
+				5578A8A41CF06BCB00BD3061 /* gifrefesh4.png in Resources */,
 				25C625361CBCFA3E0068BFE8 /* weChat.png in Resources */,
 				55AD32561CDB2426000ACE39 /* collect@2x.png in Resources */,
 				55AD325B1CDB2426000ACE39 /* share@3x.png in Resources */,
@@ -1957,8 +1982,8 @@
 				557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */,
 				55AD32611CDB5034000ACE39 /* female@3x.png in Resources */,
 				550BFA131CBB2AF000E2E9DE /* kr-video-player-play@3x.png in Resources */,
+				5578A8871CF0686F00BD3061 /* mineSel.png in Resources */,
 				55C41E201CE4559A0055A58B /* around@3x.png in Resources */,
-				5578A8751CF05EF100BD3061 /* gifrefresher5.png in Resources */,
 				25C6257F1CBE49C10068BFE8 /* tab_mine_selected@2x.png in Resources */,
 				55A43E921CEC282700BB73EF /* DramaStarInvatationCell.xib in Resources */,
 				55C41E261CE4559A0055A58B /* system@2x.png in Resources */,
@@ -1968,17 +1993,20 @@
 				557001B41CCF667B003EB02F /* read_me.txt in Resources */,
 				25C625801CBE49C10068BFE8 /* tab_mine_selected@3x.png in Resources */,
 				25C6257D1CBE49C10068BFE8 /* tab_homePage@2x.png in Resources */,
+				5578A8A21CF06BCB00BD3061 /* gifrefesh2.png in Resources */,
 				55C41E121CE4492F0055A58B /* MessageCell.xib in Resources */,
 				550BFA221CBB2AF000E2E9DE /* top_shadow.png in Resources */,
 				550BFA1C1CBB2AF000E2E9DE /* player_not_download.png in Resources */,
 				5578A8521CF03F7000BD3061 /* right_se.png in Resources */,
 				550BFA141CBB2AF000E2E9DE /* kr-video-player-shrinkscreen@2x.png in Resources */,
-				5578A8761CF05EF100BD3061 /* gifrefresher6.png in Resources */,
 				550BFA201CBB2AF000E2E9DE /* repeat_video@3x.png in Resources */,
 				55C41E0B1CE428280055A58B /* failure.png in Resources */,
 				55B919211CCA1FAF00717F8E /* UMShareEditViewControlleriPad.xib in Resources */,
+				5578A8801CF0686F00BD3061 /* drama.png in Resources */,
 				558F22CD1CE85469008636E1 /* phone@2x.png in Resources */,
 				5578A8571CF0465C00BD3061 /* pay_finish.png in Resources */,
+				5578A8861CF0686F00BD3061 /* mine.png in Resources */,
+				5578A8A11CF06BCB00BD3061 /* gifrefesh1.png in Resources */,
 				550BFA0B1CBB2AF000E2E9DE /* brightness_bg.png in Resources */,
 				550BFA0E1CBB2AF000E2E9DE /* kr-video-player-fullscreen@2x.png in Resources */,
 				25C6257B1CBE49C10068BFE8 /* tab_homePage_selected@2x.png in Resources */,
@@ -1995,9 +2023,11 @@
 				550BFA151CBB2AF000E2E9DE /* kr-video-player-shrinkscreen@3x.png in Resources */,
 				55CCD7991CB3640600C3B8CA /* LaunchScreen.storyboard in Resources */,
 				558F22F51CE9B112008636E1 /* UnBindMobileViewController.xib in Resources */,
+				5578A8811CF0686F00BD3061 /* dramaSel.png in Resources */,
 				5578A8531CF03F7000BD3061 /* weixinpay.png in Resources */,
 				55C41E041CE325C80055A58B /* TrainOrdersMessageCell.xib in Resources */,
 				55C41E241CE4559A0055A58B /* pushMes@3x.png in Resources */,
+				5578A8831CF0686F00BD3061 /* foundSel.png in Resources */,
 				55B9191D1CCA1FAF00717F8E /* UMSCommentDetailController.xib in Resources */,
 				5578A8471CEEF9CA00BD3061 /* MHSelectPickerView.xib in Resources */,
 				550BFA1B1CBB2AF000E2E9DE /* player_download.png in Resources */,
@@ -2006,10 +2036,10 @@
 				550BFA0D1CBB2AF000E2E9DE /* kr-video-player-close@3x.png in Resources */,
 				55B9191F1CCA1FAF00717F8E /* UMSCommentInputControlleriPad.xib in Resources */,
 				550BFA101CBB2AF000E2E9DE /* kr-video-player-pause@2x.png in Resources */,
-				5578A8741CF05EF100BD3061 /* gifrefresher4.png in Resources */,
 				55B919201CCA1FAF00717F8E /* UMShareEditViewController.xib in Resources */,
 				55AD32581CDB2426000ACE39 /* evaluate@2x.png in Resources */,
 				55C41DF21CE2FFFD0055A58B /* WriteSignUpCell.xib in Resources */,
+				5578A8A61CF06BCB00BD3061 /* gifrefesh6.png in Resources */,
 				25C625331CBCFA3E0068BFE8 /* qq.png in Resources */,
 				55AD32591CDB2426000ACE39 /* evaluate@3x.png in Resources */,
 				25C625791CBE49C10068BFE8 /* tab_firend@2x.png in Resources */,
@@ -2024,12 +2054,14 @@
 				25C625741CBE49C10068BFE8 /* tab_explorer_selected@3x.png in Resources */,
 				55C41E0D1CE428280055A58B /* successful.png in Resources */,
 				55B919241CCA1FAF00717F8E /* UMSShareListController.xib in Resources */,
+				5578A8A01CF06BCB00BD3061 /* gifrefesh0.png in Resources */,
 				558F22D01CE85469008636E1 /* set@3x.png in Resources */,
 				55C41DED1CE2E11B0055A58B /* SignUp.xib in Resources */,
 				55C41E1F1CE4559A0055A58B /* around@2x.png in Resources */,
 				550BFA0F1CBB2AF000E2E9DE /* kr-video-player-fullscreen@3x.png in Resources */,
 				55CCD7961CB3640600C3B8CA /* Assets.xcassets in Resources */,
 				25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */,
+				5578A8851CF0686F00BD3061 /* homeSel.png in Resources */,
 				558F22CE1CE85469008636E1 /* phone@3x.png in Resources */,
 				5578A84F1CF03F7000BD3061 /* alipay.png in Resources */,
 				25C625381CBCFA3E0068BFE8 /* weChat@3x.png in Resources */,
