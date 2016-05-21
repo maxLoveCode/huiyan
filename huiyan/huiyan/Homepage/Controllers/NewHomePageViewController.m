@@ -15,6 +15,7 @@
 #import <MJRefresh.h>
 #import "MessageViewController.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "GifRefresher.h"
 @interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -42,7 +43,7 @@ static int number_page = 0;
     [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
     [self get_wiki_listData:@"0"];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self get_wiki_listData:[NSString stringWithFormat:@"%d",number_page]];
