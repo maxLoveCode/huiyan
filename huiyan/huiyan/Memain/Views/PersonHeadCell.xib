@@ -43,13 +43,13 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weL-fa-jiU">
-                        <rect key="frame" x="116" y="102" width="150" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weL-fa-jiU">
+                        <rect key="frame" x="116" y="102" width="200" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="abW-8E-7EK"/>
-                            <constraint firstAttribute="width" constant="150" id="lkU-m2-QAD"/>
+                            <constraint firstAttribute="height" constant="28" id="abW-8E-7EK"/>
+                            <constraint firstAttribute="width" constant="200" id="lkU-m2-QAD"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -92,9 +92,9 @@
             <connections>
                 <outlet property="bg_image" destination="6h4-bi-gPx" id="NJG-Nq-pRw"/>
                 <outlet property="edit_btn" destination="IX6-GL-hcy" id="Cwu-f5-Lcy"/>
-                <outlet property="fans_lab" destination="weL-fa-jiU" id="g3Q-v0-Hof"/>
                 <outlet property="flower_lab" destination="Vxu-tS-Zo5" id="pAd-fs-XHx"/>
                 <outlet property="head_pic" destination="BvI-lL-czW" id="odk-zV-F2y"/>
+                <outlet property="likewiki_lab" destination="weL-fa-jiU" id="Qo0-TE-uYK"/>
                 <outlet property="name_lab" destination="a8F-6X-52p" id="taT-d8-cjh"/>
             </connections>
             <point key="canvasLocation" x="500.5" y="476.5"/>
