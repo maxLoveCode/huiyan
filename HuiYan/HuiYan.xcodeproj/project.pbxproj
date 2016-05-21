@@ -124,6 +124,11 @@
 		5578A8461CEEF9CA00BD3061 /* MHSelectPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5578A8431CEEF9CA00BD3061 /* MHSelectPickerView.m */; };
 		5578A8471CEEF9CA00BD3061 /* MHSelectPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8441CEEF9CA00BD3061 /* MHSelectPickerView.xib */; };
 		5578A8491CF03B3000BD3061 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8481CF03B3000BD3061 /* mask.png */; };
+		5578A84F1CF03F7000BD3061 /* alipay.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84A1CF03F7000BD3061 /* alipay.png */; };
+		5578A8501CF03F7000BD3061 /* back_arrow@2x.png.zip in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84B1CF03F7000BD3061 /* back_arrow@2x.png.zip */; };
+		5578A8511CF03F7000BD3061 /* right_hui.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84C1CF03F7000BD3061 /* right_hui.png */; };
+		5578A8521CF03F7000BD3061 /* right_se.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84D1CF03F7000BD3061 /* right_se.png */; };
+		5578A8531CF03F7000BD3061 /* weixinpay.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84E1CF03F7000BD3061 /* weixinpay.png */; };
 		557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557EDE121CD0A3980039267E /* AlipaySDK.bundle */; };
 		557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE131CD0A3980039267E /* AlipaySDK.framework */; };
 		557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE141CD0A3980039267E /* libcrypto.a */; };
@@ -474,6 +479,11 @@
 		5578A8431CEEF9CA00BD3061 /* MHSelectPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSelectPickerView.m; sourceTree = "<group>"; };
 		5578A8441CEEF9CA00BD3061 /* MHSelectPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHSelectPickerView.xib; sourceTree = "<group>"; };
 		5578A8481CF03B3000BD3061 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
+		5578A84A1CF03F7000BD3061 /* alipay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alipay.png; sourceTree = "<group>"; };
+		5578A84B1CF03F7000BD3061 /* back_arrow@2x.png.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "back_arrow@2x.png.zip"; sourceTree = "<group>"; };
+		5578A84C1CF03F7000BD3061 /* right_hui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_hui.png; sourceTree = "<group>"; };
+		5578A84D1CF03F7000BD3061 /* right_se.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_se.png; sourceTree = "<group>"; };
+		5578A84E1CF03F7000BD3061 /* weixinpay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixinpay.png; sourceTree = "<group>"; };
 		557EDE121CD0A3980039267E /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		557EDE131CD0A3980039267E /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		557EDE141CD0A3980039267E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -1383,6 +1393,11 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				5578A84A1CF03F7000BD3061 /* alipay.png */,
+				5578A84B1CF03F7000BD3061 /* back_arrow@2x.png.zip */,
+				5578A84C1CF03F7000BD3061 /* right_hui.png */,
+				5578A84D1CF03F7000BD3061 /* right_se.png */,
+				5578A84E1CF03F7000BD3061 /* weixinpay.png */,
 				5578A8481CF03B3000BD3061 /* mask.png */,
 				5578A8311CEEF32200BD3061 /* cancel.png */,
 				5578A8321CEEF32200BD3061 /* no_pay.png */,
@@ -1878,6 +1893,7 @@
 				558F22F01CE97585008636E1 /* BindMobileViewController.xib in Resources */,
 				55B919251CCA1FAF00717F8E /* UMSocialSDKResourcesNew.bundle in Resources */,
 				25C625701CBE49C10068BFE8 /* 2.png in Resources */,
+				5578A8501CF03F7000BD3061 /* back_arrow@2x.png.zip in Resources */,
 				55A43E881CEC05DF00BB73EF /* DramaStarHead.xib in Resources */,
 				25C6256F1CBE49C10068BFE8 /* 1.png in Resources */,
 				55AD32631CDB5034000ACE39 /* male@3x.png in Resources */,
@@ -1913,6 +1929,7 @@
 				55C41E121CE4492F0055A58B /* MessageCell.xib in Resources */,
 				550BFA221CBB2AF000E2E9DE /* top_shadow.png in Resources */,
 				550BFA1C1CBB2AF000E2E9DE /* player_not_download.png in Resources */,
+				5578A8521CF03F7000BD3061 /* right_se.png in Resources */,
 				550BFA141CBB2AF000E2E9DE /* kr-video-player-shrinkscreen@2x.png in Resources */,
 				550BFA201CBB2AF000E2E9DE /* repeat_video@3x.png in Resources */,
 				55C41E0B1CE428280055A58B /* failure.png in Resources */,
@@ -1930,9 +1947,11 @@
 				550BFA111CBB2AF000E2E9DE /* kr-video-player-pause@3x.png in Resources */,
 				550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */,
 				5578A8381CEEF32200BD3061 /* show.png in Resources */,
+				5578A8511CF03F7000BD3061 /* right_hui.png in Resources */,
 				550BFA151CBB2AF000E2E9DE /* kr-video-player-shrinkscreen@3x.png in Resources */,
 				55CCD7991CB3640600C3B8CA /* LaunchScreen.storyboard in Resources */,
 				558F22F51CE9B112008636E1 /* UnBindMobileViewController.xib in Resources */,
+				5578A8531CF03F7000BD3061 /* weixinpay.png in Resources */,
 				55C41E041CE325C80055A58B /* TrainOrdersMessageCell.xib in Resources */,
 				55C41E241CE4559A0055A58B /* pushMes@3x.png in Resources */,
 				55B9191D1CCA1FAF00717F8E /* UMSCommentDetailController.xib in Resources */,
@@ -1967,6 +1986,7 @@
 				55CCD7961CB3640600C3B8CA /* Assets.xcassets in Resources */,
 				25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */,
 				558F22CE1CE85469008636E1 /* phone@3x.png in Resources */,
+				5578A84F1CF03F7000BD3061 /* alipay.png in Resources */,
 				25C625381CBCFA3E0068BFE8 /* weChat@3x.png in Resources */,
 				558F22D11CE85469008636E1 /* ticket@2x.png in Resources */,
 			);

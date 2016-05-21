@@ -32,7 +32,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64) style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -100,6 +100,7 @@
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 1000;
         }
+        
         UILabel *lab = [cell viewWithTag:1002];
         if (!lab) {
             lab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMinX(image_pic.frame), CGRectGetMaxY(image_pic.frame) + 5, 100, 16)];
