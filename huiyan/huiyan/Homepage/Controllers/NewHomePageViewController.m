@@ -112,12 +112,17 @@ static int number_page = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
     wikiCon.homePage = self.dataSource[indexPath.section];
-    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionTransitionCurlUp animations:^{
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    [self.navigationController pushViewController:wikiCon animated:YES];
+    NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^(void) {
+                         cell.transform = CGAffineTransformMakeScale(-1, kScreen_Height/cell.frame.size.height);
+                     }
+                    completion:^(BOOL finished) {
+                        [self.navigationController pushViewController:wikiCon animated:YES];
+                        cell.transform = CGAffineTransformMakeScale(1, 1);
+                    }];
+
+    //[self.navigationController pushViewController:wikiCon animated:YES];
 }
 
 #pragma mark - 网络请求
