@@ -24,7 +24,7 @@
 
 #import "JPUSHService.h"//极光推送
 #import <RongIMKit/RongIMKit.h>
-
+#import "LoginViewController.h"
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -98,9 +98,15 @@
             NSLog(@"token错误");
         }];
     }
-    
-    MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
-    self.window.rootViewController = mainTab;
+    if (user_id) {
+        MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
+        self.window.rootViewController = mainTab;
+    }else{
+        LoginViewController *login = [[LoginViewController alloc]init];
+           UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:login];
+        self.window.rootViewController = navCon;
+    }
+   
     
 #ifdef DEBUG
     UnitTest *test = [UnitTest instance];

@@ -129,6 +129,8 @@
 		5578A8511CF03F7000BD3061 /* right_hui.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84C1CF03F7000BD3061 /* right_hui.png */; };
 		5578A8521CF03F7000BD3061 /* right_se.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84D1CF03F7000BD3061 /* right_se.png */; };
 		5578A8531CF03F7000BD3061 /* weixinpay.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A84E1CF03F7000BD3061 /* weixinpay.png */; };
+		5578A8551CF0452900BD3061 /* finish_detail_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8541CF0452900BD3061 /* finish_detail_phone.png */; };
+		5578A8571CF0465C00BD3061 /* pay_finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 5578A8561CF0465C00BD3061 /* pay_finish.png */; };
 		557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557EDE121CD0A3980039267E /* AlipaySDK.bundle */; };
 		557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE131CD0A3980039267E /* AlipaySDK.framework */; };
 		557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE141CD0A3980039267E /* libcrypto.a */; };
@@ -485,6 +487,8 @@
 		5578A84C1CF03F7000BD3061 /* right_hui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_hui.png; sourceTree = "<group>"; };
 		5578A84D1CF03F7000BD3061 /* right_se.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_se.png; sourceTree = "<group>"; };
 		5578A84E1CF03F7000BD3061 /* weixinpay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixinpay.png; sourceTree = "<group>"; };
+		5578A8541CF0452900BD3061 /* finish_detail_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish_detail_phone.png; sourceTree = "<group>"; };
+		5578A8561CF0465C00BD3061 /* pay_finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay_finish.png; sourceTree = "<group>"; };
 		557EDE121CD0A3980039267E /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		557EDE131CD0A3980039267E /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		557EDE141CD0A3980039267E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -1398,6 +1402,8 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				5578A8561CF0465C00BD3061 /* pay_finish.png */,
+				5578A8541CF0452900BD3061 /* finish_detail_phone.png */,
 				5578A84A1CF03F7000BD3061 /* alipay.png */,
 				5578A84B1CF03F7000BD3061 /* back_arrow@2x.png.zip */,
 				5578A84C1CF03F7000BD3061 /* right_hui.png */,
@@ -1912,6 +1918,7 @@
 				554B97CD1CEEB03E00E471CB /* PersonInvitationCell.xib in Resources */,
 				55C41E231CE4559A0055A58B /* pushMes@2x.png in Resources */,
 				558F22D61CE85469008636E1 /* wallet@3x.png in Resources */,
+				5578A8551CF0452900BD3061 /* finish_detail_phone.png in Resources */,
 				550BFA1F1CBB2AF000E2E9DE /* repeat_video@2x.png in Resources */,
 				25C625761CBE49C10068BFE8 /* tab_explorer@3x.png in Resources */,
 				558F22D41CE85469008636E1 /* training@3x.png in Resources */,
@@ -1940,6 +1947,7 @@
 				55C41E0B1CE428280055A58B /* failure.png in Resources */,
 				55B919211CCA1FAF00717F8E /* UMShareEditViewControlleriPad.xib in Resources */,
 				558F22CD1CE85469008636E1 /* phone@2x.png in Resources */,
+				5578A8571CF0465C00BD3061 /* pay_finish.png in Resources */,
 				550BFA0B1CBB2AF000E2E9DE /* brightness_bg.png in Resources */,
 				550BFA0E1CBB2AF000E2E9DE /* kr-video-player-fullscreen@2x.png in Resources */,
 				25C6257B1CBE49C10068BFE8 /* tab_homePage_selected@2x.png in Resources */,
