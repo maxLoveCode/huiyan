@@ -53,11 +53,16 @@ static int number_page = 0;
     }];
     [self.tableView.mj_header beginRefreshing];
     // Do any additional setup after loading the view.
-    _hidden = YES;
+    _hidden = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,7 +78,7 @@ static int number_page = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerClass:[NewHomePageCell class] forCellReuseIdentifier:@"home"];
-        self.tableView.rowHeight =  kScreen_Width *0.75;
+        self.tableView.rowHeight =  kScreen_Width *5/7-1;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -135,9 +140,17 @@ static int number_page = 0;
     [self.navigationController pushViewController:mes animated:YES];
 }
 
+
+#pragma mark scrollview delegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+   
+}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
     if (!_hidden) {
+        NSLog(@"1");
         [self.tabBarController setHidden:YES];
         _hidden = !_hidden;
     }
@@ -146,11 +159,12 @@ static int number_page = 0;
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (_hidden) {
+        NSLog(@"2");
+
         [self.tabBarController setHidden:NO];
         _hidden = !_hidden;
     }
 }
-
 
 /*
 #pragma mark - Navigation

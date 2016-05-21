@@ -17,6 +17,10 @@
     [drama setContent:[json objectForKey:@"content"]];
     [drama setCid:(NSInteger*)[[json objectForKey:@"cid"] integerValue]];
     drama.type = json[@"type"];
+    [drama setCover_1:[json objectForKey:@"cover_1"]];
+    if ([drama.cover_1 isEqualToString:@""]) {
+        [drama setCover_1:drama.cover];
+    }
     [drama setID:(NSInteger*)[[json objectForKey:@"id"] integerValue]];
     [drama setActor:[json objectForKey:@"actor"]];
     [drama setTitle:[json objectForKey:@"title"]];

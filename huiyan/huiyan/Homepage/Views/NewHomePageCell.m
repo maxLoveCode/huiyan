@@ -9,11 +9,13 @@
 #import "NewHomePageCell.h"
 #import "Constant.h"
 #import "UIImageView+WebCache.h"
+#define fontsize 18
 @implementation NewHomePageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self addSubview:self.image_pic];
+        [self.image_pic addSubview:self.mask];
         [self.image_pic addSubview:self.name_lab];
         [self setBackgroundColor:[UIColor blackColor]];
     }
@@ -32,16 +34,28 @@
         self.name_lab = [[UILabel alloc]init];
         self.name_lab.textColor = [UIColor whiteColor];
         self.name_lab.text = @"标题";
-        self.name_lab.font = [UIFont boldSystemFontOfSize:16];
+        self.name_lab.font = [UIFont boldSystemFontOfSize:fontsize];
+        self.name_lab.shadowColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.4];
+        self.name_lab.shadowOffset = CGSizeMake(1, 1);
         self.name_lab.textAlignment = NSTextAlignmentCenter;
     }
     return _name_lab;
 }
 
+-(UIImageView *)mask
+{
+    if (!_mask) {
+        _mask = [[UIImageView alloc] init];
+        _mask.alpha = 0.75;
+    }
+    return _mask;
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
-    [self.image_pic setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width *0.75)];
-    [self.name_lab setFrame:CGRectMake(0, CGRectGetHeight(self.image_pic.frame) / 2 - 8, kScreen_Width, 16)];
+    [self.image_pic setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width *5/7)];
+    [self.mask setFrame:self.image_pic.frame];
+    [self.name_lab setFrame:CGRectMake(0, CGRectGetHeight(self.image_pic.frame) / 2 - fontsize/2, kScreen_Width, fontsize)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -52,13 +66,15 @@
 
 -  (void)setContent:(HomePage *)model{
     self.name_lab.text = model.title;
-    NSData *jsonData = [model.imgs dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    NSArray *data_arr = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&err];
-    NSString *video_pic = [NSString stringWithFormat:@"%@?vframe/jpg/offset/1/w/800/h/500",data_arr[0]];
-    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:video_pic]
+//    NSData *jsonData = [model.imgs dataUsingEncoding:NSUTF8StringEncoding];
+//    NSError *err;
+//    NSArray *data_arr = [NSJSONSerialization JSONObjectWithData:jsonData
+//                                                        options:NSJSONReadingMutableContainers
+//                                                          error:&err];
+//    NSString *video_pic = [NSString stringWithFormat:@"%@?vframe/jpg/offset/1/w/800/h/500",data_arr[0]];
+    NSURL *url = [NSURL URLWithString: model.cover_1];
+    [self.mask setImage:[UIImage imageNamed:@"mask.png"]];
+    [self.image_pic sd_setImageWithURL:url
      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
          //if (cacheType == SDImageCacheTypeNone) {
              self.image_pic.alpha = 0;
