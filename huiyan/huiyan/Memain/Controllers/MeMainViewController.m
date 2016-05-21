@@ -19,6 +19,7 @@
 #import "SettingTableViewController.h"
 #import "PersonInvitationViewController.h"
 #import "EditPersonMessageViewController.h"
+#import "InterestsTableViewController.h"
 @interface MeMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) PersonMessage *perData;
@@ -177,9 +178,10 @@
         }
         
     }else if (indexPath.section == 2){
-        
+        //wallet
     }else if (indexPath.section == 3){
-        
+        InterestsTableViewController* interests = [[InterestsTableViewController alloc] init];
+        [self.navigationController pushViewController:interests animated:YES];
     }else if (indexPath.section == 4){
         if ([type isEqualToString:@"mobile"]) {
             
