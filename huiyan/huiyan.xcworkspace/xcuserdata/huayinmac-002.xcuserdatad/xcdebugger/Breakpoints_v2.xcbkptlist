@@ -52,12 +52,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "huiyan/Homepage/Controllers/DramaStarInvitionViewController.m"
-            timestampString = "485495345.426779"
+            timestampString = "485496428.156611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-invitation:"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "-getinvite_actorData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

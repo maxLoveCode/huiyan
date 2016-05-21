@@ -35,6 +35,7 @@
     self.title = @"邀约";
     self.title_arr = @[@"演出时间",@"联系人",@"联系电话",@"演出内容"];
     self.placeholder_arr = @[@"请填写演出时间",@"请填写联系人",@"请填写联系人电话",@"请填写演出内容与要求"];
+    self.serverManager = [ServerManager sharedInstance];
     self.view.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(recoverKeyBorad:)];
     tapGes.cancelsTouchesInView = NO;
@@ -151,18 +152,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (indexPath.row == 0) {
-//        _selectDatePicker = [[MHDatePicker alloc] init];
-//        _selectDatePicker.isBeforeTime = YES;
-//        _selectDatePicker.datePickerMode = UIDatePickerModeDate;
-//        __weak typeof(self) weakSelf = self;
-//        [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
-//            //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
-//            //        weakSelf.myLabel2.text = string;
-//            weakSelf.timeLab.text = [weakSelf dateStringWithDate:selectedDate DateFormat:@"yyyy年MM月dd日"];
-//        }];
-//
-//    }
+    if (indexPath.row == 0) {
+        _selectDatePicker = [[MHDatePicker alloc] init];
+        _selectDatePicker.isBeforeTime = YES;
+        _selectDatePicker.datePickerMode = UIDatePickerModeDate;
+        __weak typeof(self) weakSelf = self;
+        [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
+            //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
+            //        weakSelf.myLabel2.text = string;
+            weakSelf.timeLab.text = [weakSelf dateStringWithDate:selectedDate DateFormat:@"yyyy-MM-dd"];
+        }];
+
+    }
 }
 
 - (NSString *)dateStringWithDate:(NSDate *)date DateFormat:(NSString *)dateFormat
@@ -189,8 +190,9 @@
 }
 
 - (void)getinvite_actorData{
+    NSLog(@"%@---%@",self.ID,kOBJECTDEFAULTS(@"user_id"));
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"actor_id":self.ID,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"date":self.timeLab.text,@"name":self.personTextField.text,@"phone":self.mobileTextField.text,@"content":self.contentTextField.text};
-    [self.serverManager AnimatedPOST:@"invite_actor" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [self.serverManager AnimatedPOST:@"invite_actor.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50090) {
              [self presentViewController:[Tools showAlert:@"邀请成功" ] animated:YES completion:nil];
         }else{

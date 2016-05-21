@@ -24,16 +24,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="FjE-6n-mp5">
-                        <rect key="frame" x="115" y="0.0" width="180" height="50"/>
+                        <rect key="frame" x="115" y="0.0" width="190" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="180" id="aDY-CM-6uq"/>
                             <constraint firstAttribute="height" constant="50" id="qm0-YL-b19"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="aDY-CM-6uq"/>
+                            </mask>
+                        </variation>
                     </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="FjE-6n-mp5" secondAttribute="trailing" constant="15" id="4Yv-6y-J5g"/>
                     <constraint firstItem="nEw-FU-A8c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="61m-Xz-fFJ"/>
                     <constraint firstItem="nEw-FU-A8c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="TQd-3j-hhw"/>
                     <constraint firstItem="FjE-6n-mp5" firstAttribute="leading" secondItem="nEw-FU-A8c" secondAttribute="trailing" id="m3g-TP-9Or"/>
