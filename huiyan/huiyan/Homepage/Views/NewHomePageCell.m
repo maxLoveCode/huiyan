@@ -83,8 +83,10 @@
      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
          //if (cacheType == SDImageCacheTypeNone) {
              self.image_pic.alpha = 0;
-             [UIView animateWithDuration:0.5 animations:^{
+            self.name_lab.alpha = 0;
+             [UIView animateWithDuration:0.6 animations:^{
                  self.image_pic.alpha = 1;
+                 self.name_lab.alpha = 1;
              }];
          //}
      }];
