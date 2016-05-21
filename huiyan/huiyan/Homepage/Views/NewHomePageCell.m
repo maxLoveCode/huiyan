@@ -57,7 +57,7 @@
     [super layoutSubviews];
     [self.image_pic setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width *5/7)];
     [self.mask setFrame:self.image_pic.frame];
-    [self.name_lab setFrame:CGRectMake(0, CGRectGetHeight(self.image_pic.frame) / 2 - fontsize/2, kScreen_Width, fontsize)];
+    [self.name_lab setFrame:CGRectMake(0, CGRectGetHeight(self.image_pic.frame) / 2 - fontsize/2, kScreen_Width, fontsize*2)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -83,10 +83,12 @@
      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
          //if (cacheType == SDImageCacheTypeNone) {
              self.image_pic.alpha = 0;
-            self.name_lab.alpha = 0;
+             self.name_lab.alpha = 0;
+             self.name_lab.font =[UIFont boldSystemFontOfSize:2*fontsize];
              [UIView animateWithDuration:0.6 animations:^{
                  self.image_pic.alpha = 1;
                  self.name_lab.alpha = 1;
+                 self.name_lab.font =[UIFont boldSystemFontOfSize:fontsize];
              }];
          //}
      }];
