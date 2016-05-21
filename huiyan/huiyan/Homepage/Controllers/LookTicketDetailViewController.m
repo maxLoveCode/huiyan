@@ -27,7 +27,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+    //[self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -125,6 +125,7 @@
             call_btn = [UIButton buttonWithType:UIButtonTypeCustom];
             call_btn.frame = CGRectMake(kScreen_Width - kMargin - 49, 10, 50, 50);
             call_btn.backgroundColor = [UIColor redColor];
+              [call_btn setImage:[UIImage imageNamed:@"finish_detail_phone"] forState:UIControlStateNormal];
             [cell.contentView addSubview:call_btn];
             call_btn.tag = 1006;
         }

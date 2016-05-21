@@ -12,7 +12,7 @@
 #import "ServerManager.h"
 #import "PayData.h"
 #import "LookTicketDetailViewController.h"
-
+#import "UIImageView+WebCache.h"
 @interface DramaTicketDetailTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -100,6 +100,7 @@
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 1000;
         }
+        image_pic.image = [UIImage imageNamed:@"successful"];
         
         UILabel *lab = [cell viewWithTag:1002];
         if (!lab) {
