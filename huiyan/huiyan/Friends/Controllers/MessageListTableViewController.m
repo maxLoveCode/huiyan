@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"xiaoxi";
     _page = 0;
     _server = [ServerManager sharedInstance];
     [self.tableView registerClass:[MessageTableViewCell class] forCellReuseIdentifier:@"msg"];
@@ -58,6 +58,10 @@
     return [_dataSource count];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      MessageTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"msg" forIndexPath:indexPath];

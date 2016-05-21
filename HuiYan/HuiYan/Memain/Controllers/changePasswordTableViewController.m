@@ -1,47 +1,32 @@
 //
-//  SettingTableViewController.m
+//  changePasswordTableViewController.m
 //  huiyan
 //
-//  Created by 华印mac-001 on 16/5/19.
+//  Created by zc on 16/5/21.
 //  Copyright © 2016年 com.huayin. All rights reserved.
 //
 
-#import "SettingTableViewController.h"
-#import "UITabBarController+ShowHideBar.h"
-#import "Constant.h"
+#import "changePasswordTableViewController.h"
 
-@interface SettingTableViewController ()
+@interface changePasswordTableViewController ()
 {
-    NSArray* firstSection;
-    NSArray* secondSection;
-    NSArray* thirdSection;
+    NSArray* title;
 }
 
 @end
 
-@implementation SettingTableViewController
+@implementation changePasswordTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"设置";                                                                                           
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"setting"];
-    firstSection = @[@"修改密码"];
-    secondSection = @[@"去评分"];
-    thirdSection = @[@"tui chu deng lu"];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setHidden:YES];
-    [super viewWillAppear:YES];
-    [self.tableView setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [self.tabBarController setHidden:NO];
-    [super viewWillDisappear:YES];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    title = @[@"xiugaimima", @"zaicishuru"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,51 +37,23 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    if (section == 0) {
-        return [firstSection count];
-    }
-    else if (section == 1)
-    {
-        return [secondSection count];
-    }else {
-        return 1;
-    }
+    return 2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"setting" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"changePassword" forIndexPath:indexPath];
     
-    if (indexPath.section == 0) {
-        cell.textLabel.text = firstSection[indexPath.row];
-    }
-    if (indexPath.section == 1) {
-        cell.textLabel.text = secondSection[indexPath.row];
-    }
-    if (indexPath.section == 2){
-        cell.textLabel.text = thirdSection[indexPath.row];
-    }
+    
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 0) {
-        //change password
-    }
-    if (indexPath.section == 1) {
-        //comment app
-    }
-    if (indexPath.section == 2) {
-        [self logOut];
-    }
-}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -140,10 +97,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
--(void)logOut
-{
-    
-}
 
 @end

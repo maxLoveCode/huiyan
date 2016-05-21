@@ -290,6 +290,7 @@
 		55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DAFFD71CC8F8350093B180 /* libz.tbd */; };
 		55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFDA1CC9B4AB0093B180 /* Tools.m */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
+		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		59B23C6A1CEEF23100F2EB21 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */; };
 		59F6AB201CF01F040000DFB0 /* InterestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */; };
 		59FE808A1CEECE480032318C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE80891CEECE480032318C /* Message.m */; };
@@ -819,6 +820,8 @@
 		55DAFFDA1CC9B4AB0093B180 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		5925EF581CF05C2F00E3ACF3 /* GifRefresher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifRefresher.h; path = HuiYan/commonFiles/controller/GifRefresher.h; sourceTree = SOURCE_ROOT; };
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
+		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
+		5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changePasswordTableViewController.m; path = HuiYan/Memain/Controllers/changePasswordTableViewController.m; sourceTree = SOURCE_ROOT; };
 		59B23C681CEEF23100F2EB21 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = HuiYan/Memain/Models/MessageTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTableViewCell.m; path = HuiYan/Memain/Models/MessageTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		59F6AB1E1CF01F040000DFB0 /* InterestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterestsTableViewController.h; path = HuiYan/Memain/Controllers/InterestsTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1649,6 +1652,8 @@
 				554B97C71CEE9A4500E471CB /* PersonInvitationViewController.m */,
 				59F6AB1E1CF01F040000DFB0 /* InterestsTableViewController.h */,
 				59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */,
+				5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */,
+				5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2112,6 +2117,7 @@
 				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
 				25B4026E1CEDACCC0003D908 /* SettingTableViewController.m in Sources */,
 				25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */,
+				5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */,
 				554B97D01CEEBB6800E471CB /* Invitation.m in Sources */,
 				55C41E2A1CE4621D0055A58B /* TrainOrderDetail.m in Sources */,
 				550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */,
