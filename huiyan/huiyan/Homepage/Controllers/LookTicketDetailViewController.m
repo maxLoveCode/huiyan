@@ -124,7 +124,6 @@
         if (!call_btn) {
             call_btn = [UIButton buttonWithType:UIButtonTypeCustom];
             call_btn.frame = CGRectMake(kScreen_Width - kMargin - 49, 10, 50, 50);
-            call_btn.backgroundColor = [UIColor redColor];
               [call_btn setImage:[UIImage imageNamed:@"finish_detail_phone"] forState:UIControlStateNormal];
             [cell.contentView addSubview:call_btn];
             call_btn.tag = 1006;

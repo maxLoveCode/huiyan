@@ -66,7 +66,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 170;
+        return 200;
     }else if (indexPath.section == 1){
         return 150;
     }else{
@@ -95,12 +95,11 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"one" forIndexPath:indexPath];
         UIImageView  *image_pic = [cell viewWithTag:1000];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, 25, 100, 100)];
-            image_pic.backgroundColor = [UIColor redColor];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 50, 40, 100, 100)];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 1000;
         }
-        image_pic.image = [UIImage imageNamed:@"successful"];
+        image_pic.image = [UIImage imageNamed:@"pay_finish"];
         
         UILabel *lab = [cell viewWithTag:1002];
         if (!lab) {
