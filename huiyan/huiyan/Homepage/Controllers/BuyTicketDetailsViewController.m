@@ -44,19 +44,16 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self get_opera_commentData];
+       [self get_opera_commentData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.tabBarController setHidden:YES];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-     [self.view setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height )];
-    [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)ticketTableView{

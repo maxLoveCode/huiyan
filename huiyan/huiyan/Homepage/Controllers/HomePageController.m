@@ -25,6 +25,7 @@
 #import "TrainingDetailsTableViewController.h"
 #import "SignUpMessageTableViewController.h"
 #import "MessageViewController.h"
+#import "UITabBarController+ShowHideBar.h"
 #define bannerHeight kScreen_Width / 2
 #define menuHeight 114
 #define menuPicWidth 36
@@ -290,6 +291,7 @@
     if (tableView == self.activityTableView) {
         TrainingDetailsTableViewController *traDetailCon = [[TrainingDetailsTableViewController alloc]init];
         traDetailCon.train  = self.actArr[indexPath.row];
+        [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:traDetailCon animated:NO];
     }
 }
@@ -404,12 +406,15 @@
     if (collectionView == self.menuView) {
         if (indexPath.item == 0) {
             TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
+            [self.tabBarController setHidden:YES];
             [self.navigationController pushViewController:tickCon animated:NO];
         }else if (indexPath.item == 1){
             TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
+              [self.tabBarController setHidden:YES];
             [self.navigationController pushViewController:trainCon animated:NO];
         }else {
             WikiViewController *wikiCon = [[WikiViewController alloc]init];
+              [self.tabBarController setHidden:YES];
             [self.navigationController pushViewController:wikiCon animated:NO];
         }
 
@@ -417,10 +422,12 @@
         BuyTicketDetailsViewController *btdCon = [[BuyTicketDetailsViewController alloc]init];
         btdCon.ticket = self.ticketArr[indexPath.item];
         NSLog(@"%@",btdCon.ticket);
+          [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:btdCon animated:NO];
     }else if (collectionView == self.wikiCollectionView){
         WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
         wikiCon.homePage = self.wikiArr[indexPath.item];
+          [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:wikiCon animated:NO];
     }
    
@@ -429,12 +436,15 @@
 - (void)lookMore:(UIButton *)sender{
     if (sender.tag == 61) {
         TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
+          [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:tickCon animated:NO];
     }else if (sender.tag == 62){
         TrainingTableViewController *trainCon = [[TrainingTableViewController alloc]init];
+          [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:trainCon animated:NO];
     }else{
         WikiViewController *wikiCon = [[WikiViewController alloc]init];
+          [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:wikiCon animated:NO];
     }
 }
@@ -442,6 +452,7 @@
 - (void)enroll:(UIButton *)sender{
     SignUpMessageTableViewController *signCon = [[SignUpMessageTableViewController alloc]init];
     signCon.train = self.actArr[sender.tag];
+      [self.tabBarController setHidden:YES];
     [self.navigationController pushViewController:signCon animated:NO];
     
 }
@@ -495,6 +506,7 @@
 
 - (void)rightClick:(UIBarButtonItem *)sender{
     MessageViewController *mes = [[MessageViewController alloc]init];
+      [self.tabBarController setHidden:YES];
     [self.navigationController pushViewController:mes animated:YES];
 }
 

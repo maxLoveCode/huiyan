@@ -43,14 +43,12 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.tabBarController setHidden:YES];
     [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)ticketBoxTableView{
@@ -114,6 +112,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     BuyTicketDetailsViewController *btdCon = [[BuyTicketDetailsViewController alloc]init];
     btdCon.ticket = self.dataSource[indexPath.section];
+    [self.tabBarController setHidden:YES];
     [self.navigationController pushViewController:btdCon animated:YES];
 }
 

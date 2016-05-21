@@ -21,6 +21,16 @@
     [super viewDidLoad];
     //self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.mainTableView];
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    UIButton * closeItem = [[UIButton alloc]initWithFrame:CGRectMake(44+12, 0, 44, 44)];
+    [closeItem setTitle:@"返回" forState:UIControlStateNormal];
+    [closeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
+    [backView addSubview:closeItem];
+    UIBarButtonItem * leftItemBar = [[UIBarButtonItem alloc]initWithCustomView:backView];
+    self.navigationItem.leftBarButtonItem = leftItemBar;
+
+    
     
 }
 
@@ -241,6 +251,9 @@
 
 }
 
+- (void)clickedCloseItem:(UIButton *)sender{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
 
 
 @end
