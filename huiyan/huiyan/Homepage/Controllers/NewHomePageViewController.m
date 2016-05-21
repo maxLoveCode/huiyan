@@ -53,6 +53,7 @@ static int number_page = 0;
     }];
     [self.tableView.mj_header beginRefreshing];
     // Do any additional setup after loading the view.
+    self.tabBarController.tabBar.translucent = YES;
     _hidden = NO;
 }
 
@@ -115,11 +116,11 @@ static int number_page = 0;
     NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^(void) {
-                         cell.transform = CGAffineTransformMakeScale(-1, kScreen_Height/cell.frame.size.height);
+                         //cell.transform = CGAffineTransformMakeScale(-1, kScreen_Height/cell.frame.size.height);
                      }
                     completion:^(BOOL finished) {
-                        [self.navigationController pushViewController:wikiCon animated:YES];
-                        cell.transform = CGAffineTransformMakeScale(1, 1);
+                        [self.navigationController pushViewController:wikiCon animated:NO];
+                        //cell.transform = CGAffineTransformMakeScale(1, 1);
                     }];
 
     //[self.navigationController pushViewController:wikiCon animated:YES];
