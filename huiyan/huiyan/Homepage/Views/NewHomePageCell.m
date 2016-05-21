@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "UIImageView+WebCache.h"
 #define fontsize 18
+#define maskalpha 0.9
 @implementation NewHomePageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -46,7 +47,8 @@
 {
     if (!_mask) {
         _mask = [[UIImageView alloc] init];
-        _mask.alpha = 0.75;
+        _mask.alpha = maskalpha;
+        _mask.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.1];
     }
     return _mask;
 }
