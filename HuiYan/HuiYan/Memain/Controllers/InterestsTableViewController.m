@@ -13,6 +13,7 @@
 @interface InterestsTableViewController ()
 
 @property (nonatomic, strong) ServerManager* serverManager;
+@property (nonatomic, assign) BOOL edited;
 
 @end
 
@@ -27,9 +28,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"interests"];
-//    _Interests = [[NSMutableArray alloc] init];
+    _edited = NO;
     _serverManager = [ServerManager sharedInstance];
     [self getDramaCates];
+    [self getSelfInterests];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,10 +45,13 @@
     [super viewDidAppear:YES];
 }
 
--(void)viewDidDisappear:(BOOL)animated
+-(void)viewWillDisappear:(BOOL)animated
 {
+    if (_edited) {
+        [self updateInfo];
+    }
     [self.tabBarController setHidden:NO];
-    [super viewDidDisappear:YES];
+    [super viewWillDisappear:YES];
 }
 
 #pragma mark - Table view data source
@@ -64,10 +69,30 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"interests" forIndexPath:indexPath];
     
     cell.textLabel.text = [[_Interests objectAtIndex:indexPath.row] objectForKey:@"name"];
+    //NSLog(@"select:%@, hit %@", _selected, [_Interests objectAtIndex:indexPath.row]);
+    if([_selected containsObject:[_Interests objectAtIndex:indexPath.row]])
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSMutableArray* mutablecopy = [_selected mutableCopy];
+    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [mutablecopy removeObject:[_Interests objectAtIndex:indexPath.row]];
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [mutablecopy addObject:[_Interests objectAtIndex:indexPath.row]];
+    }
+    _edited = YES;
+    _selected = mutablecopy;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -120,12 +145,70 @@
     [_serverManager AnimatedGET:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20000) {
             _Interests = responseObject[@"data"];
-            NSLog(@"%@", _Interests);
+            [self trimAll];
             [self.tableView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+- (void)getSelfInterests
+{
+    NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
+                          @"user_id":[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"],
+                          @"field":@"like_wiki"};
+    
+    [_serverManager AnimatedGET:@"get_user_info.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        if ([[responseObject objectForKey:@"code"] integerValue] == 80000) {
+            _selected = (responseObject[@"data"])[@"like_wiki"];
+            [self.tableView reloadData];
+            _edited = NO;
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+-(void)updateInfo
+{
+    NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
+                          @"user_id":[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"],
+                          @"like_wiki":[self formatString]};
+    NSLog(@"%@", dic);
+    [_serverManager AnimatedPOST:@"edit_user_info.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([[responseObject objectForKey:@"code"] integerValue] == 80010) {
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+-(NSString*)formatString
+{
+    NSString*result=@"";
+    if ([_selected count] ==0) {
+        return @"";
+    }
+    for(NSDictionary* dic in _selected)
+    {
+        result = [NSString stringWithFormat:@"%@%@_",result, [dic objectForKey:@"id"]];
+    }
+    NSRange range = NSMakeRange(0, [result length]-1);
+    return [result substringWithRange:range];
+}
+
+-(void)trimAll
+{
+    NSMutableArray* mutablecopy = [_Interests mutableCopy];
+    for (NSDictionary* dic in _Interests) {
+        if ([[dic objectForKey:@"id"] integerValue] ==0) {
+            [mutablecopy removeObject:dic];
+            _Interests = mutablecopy;
+            break;
+        }
+    }
 }
 
 @end
