@@ -44,14 +44,14 @@
     homeNav.tabBarItem.title = @"首页";
     [homeNav.tabBarItem setImage:[UIImage imageNamed:@"home"]];
     [homeNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"homeSel"]];
-    homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(10, 10, 10, 0);
+    homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [homeNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
     UINavigationController *dramaNav = [[UINavigationController alloc]initWithRootViewController:drama];
     dramaNav.tabBarItem.title = @"红人";
     [dramaNav.tabBarItem setImage:[UIImage imageNamed:@"drama"]];
     [dramaNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"dramaSel"]];
-    dramaNav.tabBarItem.imageInsets = UIEdgeInsetsMake(9, 0, -9, 0);
+    dramaNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [dramaNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     UINavigationController *exploreNav = [[UINavigationController alloc]initWithRootViewController:explore];
     

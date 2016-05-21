@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="409" height="153"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmQ-0K-dk2">
-                        <rect key="frame" x="15" y="17" width="379" height="32"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmQ-0K-dk2">
+                        <rect key="frame" x="15" y="15" width="379" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="Lbk-QP-3Lj"/>
                         </constraints>
@@ -22,25 +22,22 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eZP-zV-1fB">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_detail_time" translatesAutoresizingMaskIntoConstraints="NO" id="eZP-zV-1fB">
                         <rect key="frame" x="15" y="57" width="20" height="20"/>
-                        <color key="backgroundColor" red="0.88607772439999999" green="0.1921032016" blue="0.5579400913" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="DM7-A3-IBJ"/>
                             <constraint firstAttribute="height" constant="20" id="ZSi-9c-MFU"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sPf-ex-GzE">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_detail_address.png" translatesAutoresizingMaskIntoConstraints="NO" id="sPf-ex-GzE">
                         <rect key="frame" x="15" y="87" width="20" height="20"/>
-                        <color key="backgroundColor" red="0.26698946952819824" green="0.94214671850204468" blue="0.12906578183174133" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="HeQ-kZ-9sa"/>
                             <constraint firstAttribute="height" constant="20" id="rI9-bR-2at"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S0M-cg-ugW">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_detail_price" translatesAutoresizingMaskIntoConstraints="NO" id="S0M-cg-ugW">
                         <rect key="frame" x="15" y="117" width="20" height="20"/>
-                        <color key="backgroundColor" red="0.97908717393875122" green="0.276854008436203" blue="0.0083870235830545425" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="hdt-xm-vGJ"/>
                             <constraint firstAttribute="height" constant="20" id="uLW-H3-qFL"/>
@@ -104,4 +101,9 @@
             <point key="canvasLocation" x="521.5" y="297"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ticket_detail_address.png" width="35" height="35"/>
+        <image name="ticket_detail_price" width="90" height="90"/>
+        <image name="ticket_detail_time" width="90" height="90"/>
+    </resources>
 </document>

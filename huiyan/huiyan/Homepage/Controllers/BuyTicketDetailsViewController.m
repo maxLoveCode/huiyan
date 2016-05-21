@@ -75,7 +75,7 @@
     if (!_head_btn) {
         self.head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.head_btn.frame = CGRectMake(0, CGRectGetMaxY(self.ticketTableView.frame), 48, 48);
-        self.head_btn.backgroundColor = [UIColor redColor];
+        [self.head_btn setImage:[UIImage imageNamed:@"service"] forState:UIControlStateNormal];
         self.head_btn.userInteractionEnabled = YES;
         [self.head_btn addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -261,7 +261,7 @@
             return cell;
 
         }else{
-        MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail" forIndexPath:indexPath];
+            MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -305,10 +305,27 @@
         NSLog(@"%@",error);
     }];
 }
+//
+//- (void)get_app_configData{
+//    self.dataSource = [[NSMutableArray alloc]init];
+//    NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"key":@"kefu_tel"};
+//    [_serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+//        if ([responseObject[@"code"] integerValue] == 60000) {
+//           NSString *str =
+//          
+//        }
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"%@",error);
+//    }];
+//}
 
 #pragma mark - tailEvent
 - (void)callPhone:(UIButton *)sender{
     NSLog(@"call");
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.ticket];
+    UIWebView * callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
 }
 
 - (void)buy{

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="355" height="155"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="355" height="154.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="355" height="154"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9KN-f7-abZ">
@@ -30,7 +30,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q6g-Wa-lL2">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_detail_time" translatesAutoresizingMaskIntoConstraints="NO" id="Q6g-Wa-lL2">
                         <rect key="frame" x="119" y="72" width="14" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="0z6-iv-53H"/>
@@ -55,7 +55,7 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x3g-de-Dqh">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_detail_address.png" translatesAutoresizingMaskIntoConstraints="NO" id="x3g-de-Dqh">
                         <rect key="frame" x="119" y="116" width="14" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="14" id="AmB-FD-467"/>
@@ -95,7 +95,11 @@
                 <outlet property="time_lab" destination="336-oZ-Fno" id="c86-gf-gCb"/>
                 <outlet property="title_lab" destination="hVd-05-Xuu" id="9LX-tA-gfP"/>
             </connections>
-            <point key="canvasLocation" x="389.5" y="283.5"/>
+            <point key="canvasLocation" x="504.5" y="314.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="ticket_detail_address.png" width="35" height="35"/>
+        <image name="ticket_detail_time" width="90" height="90"/>
+    </resources>
 </document>

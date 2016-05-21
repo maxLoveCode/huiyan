@@ -38,8 +38,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(search:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(search:)];
+//    self.navigationItem.rightBarButtonItem = rightItem;
     self.navigationItem.titleView = self.segement;
     [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
     [self.view addSubview:self.head_view];

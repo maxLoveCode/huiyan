@@ -18,7 +18,7 @@
         [self.head_view addSubview:self.down_lab];
         [self addSubview:self.image_pic];
         [self addSubview:self.video_pic];
-        [self addSubview:self.gray_view];
+      //  [self addSubview:self.gray_view];
         [self addSubview:self.title_lab];
         
     }
@@ -105,7 +105,7 @@
 
 - (void)setContent:(HomePage *)drama{
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:drama.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
-    self.video_pic.image = [UIImage imageNamed:@"arrow"];
+    self.video_pic.image = [UIImage imageNamed:@"videoimage"];
     self.title_lab.text = drama.title;
     
 }

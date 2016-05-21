@@ -31,7 +31,6 @@
 - (UIImageView *)image_pic{
     if (!_image_pic) {
         self.image_pic = [[UIImageView alloc]init];
-        self.image_pic.backgroundColor = [UIColor redColor];
     }
     return _image_pic;
 }
@@ -39,12 +38,12 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.title_lab.frame = CGRectMake(kMargin, 0, 100, 32);
-    self.image_pic.frame = CGRectMake(kScreen_Width - 50 - kMargin, 0, 32, 32);
+    self.image_pic.frame = CGRectMake(kScreen_Width - 20 - kMargin, 8, 16, 16);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    self.image_pic.image = [UIImage imageNamed:@"enter"];
     // Configure the view for the selected state
 }
 

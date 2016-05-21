@@ -24,12 +24,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"培训订单";
+    self.title = @"活动订单";
        self.title_arr = @[@"报名时间",@"联系人",@"联系电话",@"状态",@"订单编号"];
     [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
         [self getTrain_order_detailData];
-
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    UIButton * closeItem = [[UIButton alloc]initWithFrame:CGRectMake(44+12, 0, 44, 44)];
+    [closeItem setTitle:@"返回" forState:UIControlStateNormal];
+    [closeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
+    [backView addSubview:closeItem];
+    UIBarButtonItem * leftItemBar = [[UIBarButtonItem alloc]initWithCustomView:backView];
+    self.navigationItem.leftBarButtonItem = leftItemBar;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -97,7 +104,6 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-     UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 50)];
     if (section == 1) {
         UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 50)];
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 17, 5, 16)];
@@ -114,7 +120,7 @@
         [headView addSubview:line_lab];
         return headView;
     }else{
-        return headView;
+        return nil;
     }
    
 }
@@ -190,6 +196,10 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
+}
+
+- (void)clickedCloseItem:(UIButton *)sender{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /*

@@ -26,8 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.title = @"培训";
-    self.image_arr = @[@"arrow",@"arrow",@"arrow"];
+    self.title = @"活动";
+    self.image_arr = @[@"ticket_detail_time",@"ticket_detail_address",@"ticket_detail_price"];
     self.title_arr = @[self.train.date,self.train.address,self.train.price];
     //NSLog(@"%@",self.train.content);
         [self.view addSubview:self.tail_btn];
@@ -128,7 +128,7 @@
         UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
         [headerView setBackgroundColor:[UIColor whiteColor]];
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin * 2, 10, 60, 12)];
-        label.text = @"培训介绍";
+        label.text = @"活动介绍";
         label.font = kFONT12;
         [headerView addSubview:label];
         UILabel *color_label = [[UILabel alloc] initWithFrame:CGRectMake(kMargin, 10, 5, 15)];

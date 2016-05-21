@@ -10,6 +10,7 @@
 
 @implementation GifRefresher
 
+
 - (void)prepare
 {
     [super prepare];
@@ -17,21 +18,24 @@
     // 设置普通状态的动画图片
     NSMutableArray *idleImages = [NSMutableArray array];
     for (NSUInteger i = 0; i<=7; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"gifrefresh%zd", i]];
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"gifrefesh%zd", i]];
         [idleImages addObject:image];
     }
-    [self setImages:idleImages forState:MJRefreshStateIdle];
+
+    [self setImages:idleImages duration:1 forState:MJRefreshStateIdle];
     
     // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
     NSMutableArray *refreshingImages = [NSMutableArray array];
     for (NSUInteger i = 1; i<=7; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"gifrefresher%zd", i]];
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"gifrefesh%zd", i]];
         [refreshingImages addObject:image];
     }
-    [self setImages:refreshingImages forState:MJRefreshStatePulling];
+    self.lastUpdatedTimeLabel.hidden =YES;
+    self.stateLabel.hidden = YES;
+    self.backgroundColor = [UIColor lightGrayColor];
     
-    // 设置正在刷新状态的动画图片
-    [self setImages:refreshingImages forState:MJRefreshStateRefreshing];
+    [self setImages:idleImages duration:1 forState:MJRefreshStatePulling];
+    [self setImages:idleImages duration:1 forState:MJRefreshStateRefreshing];
 }
 
 @end

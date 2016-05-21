@@ -8,7 +8,7 @@
 
 #import "ImportantNotesCell.h"
 #import "Constant.h"
-#define kMessage @"1.报名成功后3-5个工作日内,将有工作人员与您联系。\n2.本次报名仅针对18岁以上人群。\n3.培训开始前一周可申请取消。"
+#define kMessage @"1.报名成功后3-5个工作日内,将有工作人员与您联系。\n2.本次报名仅针对18岁以上人群。\n3.活动开始前一周可申请取消。"
 @implementation ImportantNotesCell
 
 - (void)awakeFromNib {

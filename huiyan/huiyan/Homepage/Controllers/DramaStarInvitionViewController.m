@@ -74,7 +74,7 @@
     if (!_hint_lab) {
         self.hint_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, kScreen_Height - 100, kScreen_Width - 30, 50)];
         self.hint_lab.textColor = COLOR_WithHex(0xa65863);
-        self.hint_lab.text = @"*客服人员将在3-5个工作日内与您联系,请保持手机通讯正常并耐心等待。";
+        self.hint_lab.text = @"";
         self.hint_lab.font = kFONT12;
         self.hint_lab.numberOfLines = 2;
     }
@@ -194,7 +194,13 @@
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"actor_id":self.ID,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"date":self.timeLab.text,@"name":self.personTextField.text,@"phone":self.mobileTextField.text,@"content":self.contentTextField.text};
     [self.serverManager AnimatedPOST:@"invite_actor.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50090) {
-             [self presentViewController:[Tools showAlert:@"邀请成功" ] animated:YES completion:nil];
+            UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"邀请成功,客服人员将在1-5个工作日内与您联系,请保持手机通讯正常并耐心等待。" preferredStyle:UIAlertControllerStyleActionSheet];
+            [alertCon addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }]];
+            [self presentViewController:alertCon animated:YES completion:nil];
+            
+
         }else{
             [self presentViewController:[Tools showAlert:responseObject[@"msg"] ] animated:YES completion:nil];
         }

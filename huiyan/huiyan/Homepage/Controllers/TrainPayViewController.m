@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic, strong) NSArray *title_arr;
+@property (nonatomic, strong) NSArray *image_arr;
 
 @end
 
@@ -27,6 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title_arr = @[@"支付宝",@"微信支付"];
+     self.image_arr = @[@"alipay",@"weixinpay"];
     [self.view addSubview:self.tableView];
       NSLog(@"user_id = %@",kOBJECTDEFAULTS(@"user_id"));
 }
@@ -88,7 +90,7 @@
     if (section == 0) {
         return 1;
     }else if (section == 1){
-        return 3;
+        return 2;
     }else{
         return 1;
     }
@@ -145,9 +147,9 @@
             if (!pic) {
                 pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 15, 30, 30)];
                 [cell.contentView addSubview:pic];
-                pic.backgroundColor = [UIColor redColor];
                 pic.tag = 1002;
             }
+            pic.image = [UIImage imageNamed:self.image_arr[indexPath.row - 1]];
             UILabel *lab = [cell viewWithTag:1003];
             if (!lab) {
                 lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin + 40, 0, 100, 50)];
@@ -164,19 +166,21 @@
             }
             if ([self.payType isEqualToString:@"aliPay"]) {
                 if (indexPath.row == 1) {
-                    [change setBackgroundColor:[UIColor redColor]];
+                    change.image = [UIImage imageNamed:@"right_se"];
                 }else{
-                    [change setBackgroundColor:[UIColor greenColor]];
+                    change.image = [UIImage imageNamed:@"right_hui"];
                 }
             }else if ([self.payType isEqualToString:@"weixin"]){
                 if (indexPath.row == 2) {
-                    [change setBackgroundColor:[UIColor redColor]];
+                    change.image = [UIImage imageNamed:@"right_se"];
+                    
                 }else{
-                    [change setBackgroundColor:[UIColor greenColor]];
+                    change.image = [UIImage imageNamed:@"right_hui"];
                 }
             }else{
-                [change setBackgroundColor:[UIColor greenColor]];
+                change.image = [UIImage imageNamed:@"right_hui"];
             }
+            
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -195,13 +199,15 @@
             pay.tag = 1005;
         }
         if ([self.payType isEqualToString:@"aliPay"]) {
-            [pay setBackgroundColor:[UIColor greenColor]];
+            UIColor *color = COLOR_THEME;
+            [pay setBackgroundColor:color];
             [pay setEnabled:YES];
             [pay removeTarget:self action:@selector(weixinPay) forControlEvents:UIControlEventTouchUpInside];
             [pay addTarget:self action:@selector(aliPay) forControlEvents:UIControlEventTouchUpInside];
             
         }else if ([self.payType isEqualToString:@"weixin"]){
-            [pay setBackgroundColor:[UIColor greenColor]];
+            UIColor *color = COLOR_THEME;
+            [pay setBackgroundColor:color];
             [pay setEnabled:YES];
             [pay removeTarget:self action:@selector(aliPay) forControlEvents:UIControlEventTouchUpInside];
             [pay addTarget:self action:@selector(weixinPay) forControlEvents:UIControlEventTouchUpInside];

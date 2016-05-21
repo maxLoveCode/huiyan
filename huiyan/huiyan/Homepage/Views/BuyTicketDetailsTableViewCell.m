@@ -23,7 +23,7 @@
         [self.bg_view  addSubview:self.address_pic];
         [self.bg_view  addSubview:self.price_pic];
         [self.bg_view  addSubview:self.price_lab];
-        [self addSubview:self.collect_btn];
+        //[self addSubview:self.collect_btn];
         [self addSubview:self.writeComment_btn];
         [self addSubview:self.share_btn];
     }
@@ -143,8 +143,8 @@
     self.price_pic.frame = CGRectMake(CGRectGetMinX(self.address_pic.frame), CGRectGetMaxY(self.address_pic.frame) + 10, 14, 14);
     self.price_lab.frame = CGRectMake(CGRectGetMaxX(self.price_pic.frame) + 5, CGRectGetMinY(self.price_pic.frame), kScreen_Width - 150, 14);
     self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
-    self.writeComment_btn.frame = CGRectMake(CGRectGetMaxX(self.collect_btn.frame) + 20, CGRectGetMinY(self.collect_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1 );
-    self.share_btn.frame = CGRectMake(CGRectGetMaxX(self.writeComment_btn.frame) + 20, CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
+    self.writeComment_btn.frame = CGRectMake(15, CGRectGetMinY(self.collect_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1 );
+    self.share_btn.frame = CGRectMake(kScreen_Width - (kScreen_Width - 80) / 3 - 15 , CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
     
 }
 
@@ -165,9 +165,9 @@
     self.time_lab.text = ticket.date;
     self.address_lab.text = ticket.address;
     self.price_lab.text = ticket.price_range;
-    self.time_pic.image = [UIImage imageNamed:@"arrow"];
-    self.address_pic.image = [UIImage imageNamed:@"arrow"];
-    self.price_pic.image = [UIImage imageNamed:@"arrow"];
+    self.time_pic.image = [UIImage imageNamed:@"ticket_detail_time"];
+    self.address_pic.image = [UIImage imageNamed:@"ticket_detail_address"];
+    self.price_pic.image = [UIImage imageNamed:@"ticket_detail_price"];
 
 }
 
