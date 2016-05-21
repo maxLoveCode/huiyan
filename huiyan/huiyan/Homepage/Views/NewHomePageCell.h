@@ -11,5 +11,6 @@
 @interface NewHomePageCell : UITableViewCell
 @property (strong, nonatomic) UIImageView *image_pic;
 @property (strong, nonatomic) UILabel *name_lab;
+@property (strong, nonatomic) UIImageView *mask;
 - (void)setContent:(HomePage *)model;
 @end
