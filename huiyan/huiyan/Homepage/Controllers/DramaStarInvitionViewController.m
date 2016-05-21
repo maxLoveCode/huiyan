@@ -20,7 +20,6 @@
 @property (nonatomic, strong) NSArray *placeholder_arr;
 @property (nonatomic, strong) UIButton *pay_btn;
 @property (nonatomic, strong) UILabel *hint_lab;
-@property (strong, nonatomic) UITextField *timeTextField;
 @property (strong, nonatomic) UITextField *personTextField;
 @property (strong, nonatomic) UITextField *mobileTextField;
 @property (strong, nonatomic) UITextField *contentTextField;
@@ -185,14 +184,26 @@
     }else if (self.mobileTextField.text == nil || [self.mobileTextField.text isEqualToString:@"请填写演出内容与要求"]){
          [self presentViewController:[Tools showAlert:@"请填写演出内容与要求" ] animated:YES completion:nil];
     }else{
-        
+        [self getinvite_actorData];
     }
+}
+
+- (void)getinvite_actorData{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"actor_id":self.ID,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"date":self.timeLab.text,@"name":self.personTextField.text,@"phone":self.mobileTextField.text,@"content":self.contentTextField.text};
+    [self.serverManager AnimatedPOST:@"invite_actor" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 50090) {
+             [self presentViewController:[Tools showAlert:@"邀请成功" ] animated:YES completion:nil];
+        }else{
+            [self presentViewController:[Tools showAlert:@"邀请失败" ] animated:YES completion:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
 }
 
 
 
-- (void)recoverKeyBorad:(UITapGestureRecognizer *)sender{
-    [self.timeTextField resignFirstResponder];
+- (void)recoverKeyBorad:(UITapGestureRecognizer *)sende{
     [self.personTextField resignFirstResponder];
     [self.mobileTextField resignFirstResponder];
     [self.contentTextField resignFirstResponder];

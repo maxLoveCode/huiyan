@@ -10,4 +10,5 @@
 
 @interface DramaStarInvitionViewController : UIViewController
 @property(nonatomic,copy)NSString *cid;
+@property (nonatomic,copy) NSString *ID;
 @end

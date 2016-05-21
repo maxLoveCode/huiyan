@@ -14,10 +14,12 @@
 #import "WikiWorksDetailsViewController.h"
 #import <MJRefresh.h>
 #import "MessageViewController.h"
+#import "UITabBarController+ShowHideBar.h"
 @interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, assign) BOOL hidden;
 @end
 static int number_page = 0;
 @implementation NewHomePageViewController
@@ -51,6 +53,7 @@ static int number_page = 0;
     }];
     [self.tableView.mj_header beginRefreshing];
     // Do any additional setup after loading the view.
+    _hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -66,7 +69,7 @@ static int number_page = 0;
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48)];
+        self.tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height )];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerClass:[NewHomePageCell class] forCellReuseIdentifier:@"home"];
@@ -127,6 +130,22 @@ static int number_page = 0;
 - (void)rightClick:(UIBarButtonItem *)sender{
      MessageViewController *mes = [[MessageViewController alloc]init];
     [self.navigationController pushViewController:mes animated:YES];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (!_hidden) {
+        [self.tabBarController setHidden:YES];
+        _hidden = !_hidden;
+    }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (_hidden) {
+        [self.tabBarController setHidden:NO];
+        _hidden = !_hidden;
+    }
 }
 
 
