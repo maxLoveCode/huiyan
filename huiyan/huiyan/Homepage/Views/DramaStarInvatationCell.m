@@ -7,11 +7,12 @@
 //
 
 #import "DramaStarInvatationCell.h"
-
+#import "Constant.h"
 @implementation DramaStarInvatationCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self.name_textField setValue:COLOR_WithHex(0xa5a5a5) forKeyPath:@"_placeholderLabel.textColor"];
     // Initialization code
 }
 

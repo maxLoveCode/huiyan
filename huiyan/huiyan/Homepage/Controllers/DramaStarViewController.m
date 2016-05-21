@@ -135,12 +135,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    StarDetailViewController *star = [[StarDetailViewController alloc]init];
-    star.drama = self.dataSource[indexPath.section -1];
+//    StarDetailViewController *star = [[StarDetailViewController alloc]init];
+//    star.drama = self.dataSource[indexPath.section -1];
 //    [self presentViewController:star animated:YES completion:^{
 //        
 //    }];
-    [self.navigationController pushViewController:star animated:YES];
+    //[self.navigationController pushViewController:star animated:YES];
 }
 
 - (void)get_actor_cateData{
@@ -197,6 +197,8 @@
 
 - (void)invatation:(UIButton *)sender{
     DramaStarInvitionViewController *dramaCon = [[DramaStarInvitionViewController alloc]init];
+      DramaStar *star = self.dataSource[sender.tag];
+    dramaCon.ID = star.userID;
     dramaCon.cid = [NSString stringWithFormat:@"%ld",(long)sender.tag];
     [self.navigationController pushViewController:dramaCon animated:NO];
 }
