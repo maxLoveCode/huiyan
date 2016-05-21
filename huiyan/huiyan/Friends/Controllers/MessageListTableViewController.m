@@ -11,6 +11,7 @@
 #import "Constant.h"
 #import "Message.h"
 #import "MessageTableViewCell.h"
+#import "UITabBarController+ShowHideBar.h"
 
 @interface MessageListTableViewController ()
 
@@ -37,7 +38,10 @@
     [self getMessageList];
 }
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.tabBarController setHidden:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
