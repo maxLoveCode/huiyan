@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"xiaoxi";
+    self.title = @"消息";
     _page = 0;
     _server = [ServerManager sharedInstance];
     [self.tableView registerClass:[MessageTableViewCell class] forCellReuseIdentifier:@"msg"];

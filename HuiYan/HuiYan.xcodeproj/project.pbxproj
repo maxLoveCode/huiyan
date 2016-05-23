@@ -308,6 +308,8 @@
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		59934F871CF29E6800666B33 /* person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F851CF29E6800666B33 /* person@2x.png */; };
 		59934F881CF29E6800666B33 /* person@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F861CF29E6800666B33 /* person@3x.png */; };
+		59934F971CF2DBA500666B33 /* playnumber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F951CF2DBA500666B33 /* playnumber@2x.png */; };
+		59934F981CF2DBA500666B33 /* playnumber@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F961CF2DBA500666B33 /* playnumber@3x.png */; };
 		59B23C6A1CEEF23100F2EB21 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */; };
 		59F6AB201CF01F040000DFB0 /* InterestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */; };
 		59FE808A1CEECE480032318C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE80891CEECE480032318C /* Message.m */; };
@@ -857,6 +859,8 @@
 		5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changePasswordTableViewController.m; path = HuiYan/Memain/Controllers/changePasswordTableViewController.m; sourceTree = SOURCE_ROOT; };
 		59934F851CF29E6800666B33 /* person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@2x.png"; path = "HuiYan/ImageSource/person@2x.png"; sourceTree = SOURCE_ROOT; };
 		59934F861CF29E6800666B33 /* person@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@3x.png"; path = "HuiYan/ImageSource/person@3x.png"; sourceTree = SOURCE_ROOT; };
+		59934F951CF2DBA500666B33 /* playnumber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "playnumber@2x.png"; path = "HuiYan/ImageSource/playnumber@2x.png"; sourceTree = SOURCE_ROOT; };
+		59934F961CF2DBA500666B33 /* playnumber@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "playnumber@3x.png"; path = "HuiYan/ImageSource/playnumber@3x.png"; sourceTree = SOURCE_ROOT; };
 		59B23C681CEEF23100F2EB21 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = HuiYan/Memain/Models/MessageTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTableViewCell.m; path = HuiYan/Memain/Models/MessageTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		59F6AB1E1CF01F040000DFB0 /* InterestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterestsTableViewController.h; path = HuiYan/Memain/Controllers/InterestsTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1456,6 +1460,8 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				59934F951CF2DBA500666B33 /* playnumber@2x.png */,
+				59934F961CF2DBA500666B33 /* playnumber@3x.png */,
 				59934F851CF29E6800666B33 /* person@2x.png */,
 				59934F861CF29E6800666B33 /* person@3x.png */,
 				5578A8C61CF083EB00BD3061 /* service.png */,
@@ -2028,6 +2034,7 @@
 				25C625801CBE49C10068BFE8 /* tab_mine_selected@3x.png in Resources */,
 				25C6257D1CBE49C10068BFE8 /* tab_homePage@2x.png in Resources */,
 				5578A8A21CF06BCB00BD3061 /* gifrefesh2.png in Resources */,
+				59934F981CF2DBA500666B33 /* playnumber@3x.png in Resources */,
 				5578A8C31CF0825100BD3061 /* enter.png in Resources */,
 				55C41E121CE4492F0055A58B /* MessageCell.xib in Resources */,
 				550BFA221CBB2AF000E2E9DE /* top_shadow.png in Resources */,
@@ -2039,6 +2046,7 @@
 				55B919211CCA1FAF00717F8E /* UMShareEditViewControlleriPad.xib in Resources */,
 				558F22CD1CE85469008636E1 /* phone@2x.png in Resources */,
 				5578A8571CF0465C00BD3061 /* pay_finish.png in Resources */,
+				59934F971CF2DBA500666B33 /* playnumber@2x.png in Resources */,
 				5578A8A11CF06BCB00BD3061 /* gifrefesh1.png in Resources */,
 				550BFA0B1CBB2AF000E2E9DE /* brightness_bg.png in Resources */,
 				550BFA0E1CBB2AF000E2E9DE /* kr-video-player-fullscreen@2x.png in Resources */,
