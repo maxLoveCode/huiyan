@@ -49,20 +49,12 @@
     self.navigationController.navigationBar.translucent = YES;
 
     [self navigationBarItem];
-
-    NSURL *url = [NSURL URLWithString:@"http://7xsnr6.com2.z0.glb.clouddn.com/123.png"];
-    [_mainview.bgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [UIView animateWithDuration:animateDuration delay:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-            UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
-            _mainview.bgView.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
-        } completion:^(BOOL finished) {
-            
-        }];
-    }];
+    
     
     self.view = _mainview;
     [self.mainview.timer addTarget:self action:@selector(sendVcode) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -73,6 +65,44 @@
 {
     [self.tabBarController setHidden:YES];
     [super viewDidAppear:YES];
+    
+    NSString *launchImageName;
+    if([UIScreen mainScreen].bounds.size.height > 667.0f) {
+        launchImageName = @"LaunchImage-800-Portrait-736h"; // iphone6 plus
+    }
+    else if([UIScreen mainScreen].bounds.size.height > 568.0f) {
+        launchImageName = @"LaunchImage-800-667h"; // iphone6
+    }
+    else if([UIScreen mainScreen].bounds.size.height > 480.0f){
+        launchImageName = @"LaunchImage-700-568h";// iphone5/5plus
+    } else {
+        launchImageName = @"LaunchImage-700"; // iphone4 or below
+    }
+    UIImage *launchImage = [UIImage imageNamed:launchImageName];
+    
+    for (UIView* subview in [_mainview subviews]) {
+        if (subview!= _mainview.bgView) {
+            subview.alpha = 0;
+        }
+    }
+    
+    NSURL *url = [NSURL URLWithString:@"http://7xsnr6.com2.z0.glb.clouddn.com/123.png"];
+    [_mainview.bgView sd_setImageWithURL:url placeholderImage:launchImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            [UIView animateWithDuration:animateDuration delay:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+                UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
+                _mainview.bgView.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.5 animations:^{
+                    for (UIView* subview in [_mainview subviews]) {
+                        if (subview!= _mainview.bgView) {
+                            subview.alpha = 1;
+                        }
+                    }
+                }];
+            }];
+        }
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
