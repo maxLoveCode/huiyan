@@ -218,7 +218,6 @@
     UIImage *smallImage = [self thumbnailWithImageWithoutScale:image size:CGSizeMake(100.0f, 100.0f)];
     [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
     _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
-    //    [userPhotoButton setImage:selfPhoto forState:UIControlStateNormal];
     
     //七牛服务器
 //    [self getQiniuAccessToken:^(NSMutableDictionary *result) {
