@@ -32,7 +32,7 @@
     }
     self.lastUpdatedTimeLabel.hidden =YES;
     self.stateLabel.hidden = YES;
-    self.backgroundColor = [UIColor lightGrayColor];
+    //self.backgroundColor = [UIColor lightGrayColor];
     
     [self setImages:idleImages duration:1 forState:MJRefreshStatePulling];
     [self setImages:idleImages duration:1 forState:MJRefreshStateRefreshing];

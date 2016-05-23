@@ -65,6 +65,12 @@ static int number_page = 0;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.tableView.alpha = 0;
+    
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    [UIView animateWithDuration:1 animations:^{
+        self.tableView.alpha = 1;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

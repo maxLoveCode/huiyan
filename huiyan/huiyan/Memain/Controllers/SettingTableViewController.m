@@ -9,6 +9,7 @@
 #import "SettingTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
+#import "LoginViewController.h"
 
 @interface SettingTableViewController ()
 {
@@ -68,6 +69,15 @@
     }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section !=2) {
+        return 44;
+    }
+    else
+        return 50;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"setting" forIndexPath:indexPath];
@@ -79,6 +89,10 @@
         cell.textLabel.text = secondSection[indexPath.row];
     }
     if (indexPath.section == 2){
+        cell.contentView.backgroundColor = COLOR_THEME;
+        cell.textLabel.backgroundColor = COLOR_THEME;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;              
         cell.textLabel.text = thirdSection[indexPath.row];
     }
     
@@ -143,7 +157,14 @@
 
 -(void)logOut
 {
-    
+    LoginViewController *login = [[LoginViewController alloc]init];
+    UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:login];
+    [self.navigationController presentViewController:navCon animated:NO  completion:^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"user_id"];
+        [defaults removeObjectForKey:@"login_type"];
+        [defaults removeObjectForKey:@"rongcloud_token"];
+    }];
 }
 
 @end

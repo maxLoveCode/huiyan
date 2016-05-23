@@ -59,6 +59,18 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    _dramaStarTableView.alpha = 0;
+    
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    [UIView animateWithDuration:1 animations:^{
+        _dramaStarTableView.alpha = 1;
+        [self.dramaStarTableView setBackgroundColor:[UIColor whiteColor]];
+    }];
+}
+
 - (MCSwipeMenu *)head_view{
     if (!_head_view) {
         self.head_view = [[MCSwipeMenu alloc]init];
@@ -69,12 +81,13 @@
 
 - (UITableView *)dramaStarTableView{
     if (!_dramaStarTableView) {
-        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu + 20 , kScreen_Width, kScreen_Height - 48 - 64) style:UITableViewStyleGrouped];
+        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu + 20 , kScreen_Width, kScreen_Height - 44 - 64) style:UITableViewStyleGrouped];
         self.dramaStarTableView.delegate = self;
         self.dramaStarTableView.dataSource = self;
         self.dramaStarTableView.separatorStyle = UITableViewCellAccessoryNone;
         [self.dramaStarTableView registerClass:[DramaStarTableViewCell class] forCellReuseIdentifier:@"dramaStar"];
         [self.dramaStarTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"normal"];
+        [self.dramaStarTableView setBackgroundColor:[UIColor blackColor]];
     }
     return _dramaStarTableView;
 }

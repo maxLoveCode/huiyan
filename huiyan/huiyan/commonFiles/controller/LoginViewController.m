@@ -246,8 +246,8 @@
             if ([responseObject[@"code"] integerValue] == 70000) {
                 NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
-                   kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
-                 kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
+                kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
+                kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
