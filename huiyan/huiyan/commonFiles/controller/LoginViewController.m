@@ -80,24 +80,29 @@
     }
     UIImage *launchImage = [UIImage imageNamed:launchImageName];
     
-    for (UIView* subview in [_mainview subviews]) {
-        if (subview!= _mainview.bgView) {
-            subview.alpha = 0;
-        }
+    NSLog(@"appear");
+    for (UIView* subview in [_mainview.bgView subviews]) {
+        subview.alpha = 0;
+        NSLog(@"111");
+        subview.hidden = YES;
     }
     
+    //get the lauch screen at runtime
     NSURL *url = [NSURL URLWithString:@"http://7xsnr6.com2.z0.glb.clouddn.com/123.png"];
+    
+    //load online background image
     [_mainview.bgView sd_setImageWithURL:url placeholderImage:launchImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image) {
-            [UIView animateWithDuration:animateDuration delay:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+            
+            //animates fate after loaded
+            [UIView animateWithDuration:animateDuration*2 delay:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
                 UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
                 _mainview.bgView.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    for (UIView* subview in [_mainview subviews]) {
-                        if (subview!= _mainview.bgView) {
+                    for (UIView* subview in [_mainview.bgView subviews]) {
+                            subview.hidden = NO;
                             subview.alpha = 1;
-                        }
                     }
                 }];
             }];
