@@ -369,9 +369,14 @@
 
 //哪些界面支持自动转屏
 - (BOOL)shouldAutorotate{
+    
     return NO;
 }
 
+//viewController 支持哪些转屏方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
 - (void)getThird_loginData:(ThirdUser *)thirdUser{
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"type":thirdUser.type,@"openid":thirdUser.opnid,@"nickname":thirdUser.nickname,@"sex":thirdUser.sex,@"avatar":thirdUser.avatar};
     [self.serverManager AnimatedPOST:@"third_login.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
