@@ -58,7 +58,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, kScreen_Width, kScreen_Height - 28)];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, kScreen_Width, kScreen_Height)];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonHeadCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"head"];
@@ -101,13 +101,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 4) {
-        return 0.01;
+    if (section <3) {
+        return 10;
     }
-    return 10;
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 4) {
+        return  10;
+    }
     return 0.001;
 }
 
@@ -137,8 +140,8 @@
              cell.imageView.image = [UIImage imageNamed:self.image_arr[4]];
         }else{
             if ([type isEqualToString:@"mobile"]) {
-                cell.textLabel.text = self.title_arr[5];
-                cell.imageView.image = [UIImage imageNamed:self.image_arr[5]];
+                cell.textLabel.text = self.title_arr[6];
+                cell.imageView.image = [UIImage imageNamed:self.image_arr[6]];
                 cell.detailTextLabel.text = self.perData.mobile;
             }else{
             cell.textLabel.text = self.title_arr[indexPath.row + 5];
@@ -187,7 +190,8 @@
         [self.navigationController pushViewController:interests animated:YES];
     }else if (indexPath.section == 4){
         if ([type isEqualToString:@"mobile"]) {
-            
+            SettingTableViewController * settingTable = [[SettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:settingTable animated:YES];
         }else{
             if (indexPath.row == 0) {
                 if (self.perData.mobile != nil && ![self.perData.mobile isEqualToString:@""]) {

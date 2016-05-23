@@ -21,7 +21,7 @@
 @property (nonatomic,strong) UIButton *collect_btn;
 @property (nonatomic,strong) UIButton *writeComment_btn;
 @property (nonatomic,strong) UIButton  *share_btn;
-
+@property (nonatomic,strong) UITextField *write_textField;
 - (void)setContent:(BuyTicket *)ticket;
 
 + (CGFloat)cellHeight;
