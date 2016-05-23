@@ -20,6 +20,7 @@
 #import "PersonInvitationViewController.h"
 #import "EditPersonMessageViewController.h"
 #import "InterestsTableViewController.h"
+#import "WalletTableViewController.h"
 @interface MeMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) PersonMessage *perData;
@@ -182,6 +183,8 @@
         
     }else if (indexPath.section == 2){
         //wallet
+        WalletTableViewController* wallet = [[WalletTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:wallet animated:YES];
     }else if (indexPath.section == 3){
         InterestsTableViewController* interests = [[InterestsTableViewController alloc] init];
         [self.navigationController pushViewController:interests animated:YES];

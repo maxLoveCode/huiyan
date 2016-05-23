@@ -76,6 +76,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.tabBarController.tabBar.hidden = YES;
     if (indexPath.row == 0) {
        
     }
