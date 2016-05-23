@@ -29,7 +29,7 @@
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.view addSubview:self.tableView];
      self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    self.title_arr = @[@"互动消息",@"系统消息",@"推送消息",@"附近的人"];
+    self.title_arr = @[@"系统消息",@"推送消息",@"附近的人"];
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
     // Do any additional setup after loading the view.
@@ -64,7 +64,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -76,20 +76,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-       
-    }
-    else if (indexPath.row == 1) {
+//    if (indexPath.row == 0) {
+//       
+//    }
+     if (indexPath.row == 0) {
         MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
         [list setStyle: MessageTypeSystem];
         [self.navigationController pushViewController:list animated:YES];
     }
-    else if (indexPath.row == 2) {
+    else if (indexPath.row == 1) {
         MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
         [list setStyle: MessageTypeNotification];
         [self.navigationController pushViewController:list animated:YES];
     }
-    else if (indexPath.row == 3) {
+    else if (indexPath.row == 2) {
         ExploreViewController *explore = [[ExploreViewController alloc]init];
         [self.navigationController pushViewController:explore animated:YES];
     }

@@ -152,6 +152,7 @@
         
     }else if (indexPath.row == 1){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改昵称" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
             textField.placeholder = self.perData.nickname;
             textField.textColor = [UIColor blackColor];

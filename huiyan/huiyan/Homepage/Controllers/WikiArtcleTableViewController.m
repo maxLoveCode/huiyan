@@ -21,7 +21,7 @@
     [super viewDidLoad];
     [self.tableView registerClass:[ArticleTableViewCell class] forCellReuseIdentifier:@"article"];
     self.tableView.rowHeight = [ArticleTableViewCell cellHeight];
-    self.tableView.frame = CGRectMake(kScreen_Width, 10, kScreen_Width, kScreen_Height - 41 - 48 - 44);
+    self.tableView.frame = CGRectMake(kScreen_Width, 10, kScreen_Width, kScreen_Height - 41 - 48 - 44 + 20);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

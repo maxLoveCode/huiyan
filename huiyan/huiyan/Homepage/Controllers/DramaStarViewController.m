@@ -102,7 +102,7 @@
     if (indexPath.section == 0) {
         return kBannerHeight;
     }else{
-        return 180;
+        return 160;
     }
 }
 

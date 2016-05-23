@@ -52,10 +52,9 @@
     [self getTrainData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setHidden:YES];
+- (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
+    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -98,7 +97,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TrainingDetailsTableViewController *traDetailCon = [[TrainingDetailsTableViewController alloc]init];
+    [self.tabBarController setHidden:YES];
+    if (self.dataSource.count > 0) {
     traDetailCon.train  = self.dataSource[indexPath.section];
+    }
     [self.navigationController pushViewController:traDetailCon animated:YES];
 }
 

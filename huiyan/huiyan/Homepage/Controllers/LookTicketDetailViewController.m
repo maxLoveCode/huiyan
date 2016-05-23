@@ -21,12 +21,16 @@
     [super viewDidLoad];
     //self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.mainTableView];
+    
     UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    UIButton * closeItem = [[UIButton alloc]initWithFrame:CGRectMake(44+12, 0, 44, 44)];
-    [closeItem setTitle:@"返回" forState:UIControlStateNormal];
-    [closeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [closeItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
-    [backView addSubview:closeItem];
+    UIButton * backItem = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 56, 44)];
+    [backItem setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
+    [backItem setImageEdgeInsets:UIEdgeInsetsMake(0, -15, 0, 0)];
+    [backItem setTitle:@"返回" forState:UIControlStateNormal];
+    [backItem setTitleEdgeInsets:UIEdgeInsetsMake(0, -15, 0, 0)];
+    [backItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backItem addTarget:self action:@selector(clickedCloseItem:) forControlEvents:UIControlEventTouchUpInside];
+    [backView addSubview:backItem];
     UIBarButtonItem * leftItemBar = [[UIBarButtonItem alloc]initWithCustomView:backView];
     self.navigationItem.leftBarButtonItem = leftItemBar;
 

@@ -43,17 +43,20 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+    [self.tabBarController setHidden:YES];
+    self.navigationController.navigationBar.translucent = NO;
+      //[self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+     [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)ticketBoxTableView{
     if (!_ticketBoxTableView) {
-        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view.frame), kScreen_Width, kScreen_Height - 41) style:UITableViewStyleGrouped];
+        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 41, kScreen_Width, kScreen_Height - 41) style:UITableViewStyleGrouped];
         self.ticketBoxTableView.delegate  = self;
         self.ticketBoxTableView.dataSource = self;
         //self.ticketBoxTableView.backgroundColor = [UIColor whiteColor];
@@ -112,7 +115,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     BuyTicketDetailsViewController *btdCon = [[BuyTicketDetailsViewController alloc]init];
     btdCon.ticket = self.dataSource[indexPath.section];
-    [self.tabBarController setHidden:YES];
     [self.navigationController pushViewController:btdCon animated:YES];
 }
 

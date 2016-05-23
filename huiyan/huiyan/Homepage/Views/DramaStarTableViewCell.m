@@ -14,12 +14,12 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self addSubview:self.head_img];
-        [self addSubview:self.like_img];
-        [self addSubview:self.flower_img];
+      //  [self addSubview:self.like_img];
+        //[self addSubview:self.flower_img];
         [self addSubview:self.name_lab];
         [self addSubview:self.des_lab];
-        [self addSubview:self.like_lab];
-        [self addSubview:self.flower_lab];
+        //[self addSubview:self.like_lab];
+      //  [self addSubview:self.flower_lab];
         [self addSubview:self.invatation_btn];
     }
     return self;
@@ -102,11 +102,11 @@
    // self.head_img.backgroundColor = [UIColor redColor];
     self.name_lab.frame = CGRectMake(CGRectGetMaxX(self.head_img.frame) + 12, CGRectGetMinY(self.head_img.frame), kScreen_Width - 110 - 2 * kMargin - 12, 16 * 1.5);
     self.des_lab.frame = CGRectMake(CGRectGetMinX(self.name_lab.frame), CGRectGetMaxY(self.name_lab.frame), CGRectGetWidth(self.name_lab.frame), 110 - 24);
-    self.like_img.frame = CGRectMake(kMargin, CGRectGetMaxY(self.head_img.frame) + 15, 25, 25);
-    self.like_lab.frame = CGRectMake(CGRectGetMaxX(self.like_img.frame), CGRectGetMinY(self.like_img.frame), 60, 25);
-    self.flower_img.frame = CGRectMake(CGRectGetMaxX(self.like_lab.frame) + 10, CGRectGetMinY(self.like_lab.frame), 25, 25);
-    self.flower_lab.frame = CGRectMake(CGRectGetMaxX(self.flower_img.frame) + 10, CGRectGetMinY(self.flower_img.frame), 80, 25);
-    self.invatation_btn.frame = CGRectMake(kScreen_Width - 15 - 70, CGRectGetMinY(self.flower_lab.frame), 70, 25);
+//    self.like_img.frame = CGRectMake(kMargin, CGRectGetMaxY(self.head_img.frame) + 15, 25, 25);
+//    self.like_lab.frame = CGRectMake(CGRectGetMaxX(self.like_img.frame), CGRectGetMinY(self.like_img.frame), 60, 25);
+//    self.flower_img.frame = CGRectMake(CGRectGetMaxX(self.like_lab.frame) + 10, CGRectGetMinY(self.like_lab.frame), 25, 25);
+//    self.flower_lab.frame = CGRectMake(CGRectGetMaxX(self.flower_img.frame) + 10, CGRectGetMinY(self.flower_img.frame), 80, 25);
+    self.invatation_btn.frame = CGRectMake(kScreen_Width - 15 - 70, CGRectGetMaxY(self.des_lab.frame), 70, 25);
 }
 
 - (void)setContent:(DramaStar *)drama{

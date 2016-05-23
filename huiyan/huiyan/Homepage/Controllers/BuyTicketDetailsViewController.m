@@ -49,11 +49,15 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.tabBarController setHidden:YES];
+    self.navigationController.navigationBar.translucent = NO;
+   // [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)ticketTableView{
@@ -206,6 +210,7 @@
         = [tableView dequeueReusableCellWithIdentifier:@"ticket" forIndexPath:indexPath];
            bt_cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [bt_cell.contentView  setBackgroundColor:[UIColor whiteColor]];
+        [bt_cell.writeComment_btn addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
     [bt_cell setContent:self.ticket];
         return bt_cell;
     }else if(indexPath.section == 1){
@@ -333,6 +338,10 @@
     ChangeRondaTableViewController *rondaCon = [[ChangeRondaTableViewController alloc]init];
     rondaCon.oid = self.ticket.ID;
     [self.navigationController pushViewController:rondaCon animated:YES];
+}
+
+- (void)confirm:(UIButton *)sender{
+    
 }
 
 @end

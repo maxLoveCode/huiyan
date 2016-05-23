@@ -305,6 +305,8 @@
 		55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFDA1CC9B4AB0093B180 /* Tools.m */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
+		59934F871CF29E6800666B33 /* person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F851CF29E6800666B33 /* person@2x.png */; };
+		59934F881CF29E6800666B33 /* person@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F861CF29E6800666B33 /* person@3x.png */; };
 		59B23C6A1CEEF23100F2EB21 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */; };
 		59F6AB201CF01F040000DFB0 /* InterestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */; };
 		59FE808A1CEECE480032318C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE80891CEECE480032318C /* Message.m */; };
@@ -850,6 +852,8 @@
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
 		5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changePasswordTableViewController.m; path = HuiYan/Memain/Controllers/changePasswordTableViewController.m; sourceTree = SOURCE_ROOT; };
+		59934F851CF29E6800666B33 /* person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@2x.png"; path = "HuiYan/ImageSource/person@2x.png"; sourceTree = SOURCE_ROOT; };
+		59934F861CF29E6800666B33 /* person@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@3x.png"; path = "HuiYan/ImageSource/person@3x.png"; sourceTree = SOURCE_ROOT; };
 		59B23C681CEEF23100F2EB21 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = HuiYan/Memain/Models/MessageTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTableViewCell.m; path = HuiYan/Memain/Models/MessageTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		59F6AB1E1CF01F040000DFB0 /* InterestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterestsTableViewController.h; path = HuiYan/Memain/Controllers/InterestsTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1449,6 +1453,8 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				59934F851CF29E6800666B33 /* person@2x.png */,
+				59934F861CF29E6800666B33 /* person@3x.png */,
 				5578A8C61CF083EB00BD3061 /* service.png */,
 				5578A8C01CF0825100BD3061 /* enter.png */,
 				5578A8C11CF0825100BD3061 /* flower.png */,
@@ -1945,6 +1951,7 @@
 				558F5CAB1CBB4762006BD54D /* bg_view.png in Resources */,
 				5578A8361CEEF32200BD3061 /* no_pay.png in Resources */,
 				550BFA211CBB2AF000E2E9DE /* slider@2x.png in Resources */,
+				59934F881CF29E6800666B33 /* person@3x.png in Resources */,
 				55B919221CCA1FAF00717F8E /* UMSLoginViewController.xib in Resources */,
 				550BFA241CBB2AF000E2E9DE /* unlock-nor@3x.png in Resources */,
 				550BFA171CBB2AF000E2E9DE /* lock-nor@2x.png in Resources */,
@@ -2089,6 +2096,7 @@
 				55C41E1F1CE4559A0055A58B /* around@2x.png in Resources */,
 				550BFA0F1CBB2AF000E2E9DE /* kr-video-player-fullscreen@3x.png in Resources */,
 				55CCD7961CB3640600C3B8CA /* Assets.xcassets in Resources */,
+				59934F871CF29E6800666B33 /* person@2x.png in Resources */,
 				25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */,
 				558F22CE1CE85469008636E1 /* phone@3x.png in Resources */,
 				5578A8AA1CF06DF700BD3061 /* drama@2x.png in Resources */,
