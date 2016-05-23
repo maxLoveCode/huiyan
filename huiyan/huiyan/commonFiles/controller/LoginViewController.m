@@ -52,10 +52,12 @@
 
     NSURL *url = [NSURL URLWithString:@"http://7xsnr6.com2.z0.glb.clouddn.com/123.png"];
     [_mainview.bgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
-         _mainview.bgView.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
-        
+        [UIView animateWithDuration:animateDuration delay:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+            UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
+            _mainview.bgView.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
+        } completion:^(BOOL finished) {
+            
+        }];
     }];
     
     self.view = _mainview;
@@ -95,6 +97,7 @@
 {
     _rightItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style: UIBarButtonItemStylePlain target:self action:@selector(signup)];
     _rightItem.tag = -1;
+    [_rightItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = _rightItem;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
 }
@@ -272,7 +275,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)qqLand{
+- (void)qqLogin{
     NSLog(@"qq");
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
@@ -301,7 +304,7 @@
         }});
 }
 
-- (void)weixinLand{
+- (void)weixinLogin{
     NSLog(@"weixin");
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
