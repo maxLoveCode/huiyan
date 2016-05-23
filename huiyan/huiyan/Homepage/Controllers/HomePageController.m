@@ -419,7 +419,10 @@
 
     }else if (collectionView == self.ticketCollectionView){
         BuyTicketDetailsViewController *btdCon = [[BuyTicketDetailsViewController alloc]init];
-        btdCon.ticket = self.ticketArr[indexPath.item];
+        if (self.ticketArr.count > 0) {
+              btdCon.ticket = self.ticketArr[indexPath.item];
+        }
+      
         NSLog(@"%@",btdCon.ticket);
         
         [self.navigationController pushViewController:btdCon animated:NO];

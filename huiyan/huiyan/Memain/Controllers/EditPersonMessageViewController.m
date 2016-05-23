@@ -198,35 +198,34 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-//- (void)saveImage:(UIImage *)image {
-//    //    NSLog(@"保存头像！");
-//    //    [userPhotoButton setImage:image forState:UIControlStateNormal];
-//    BOOL success;
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSError *error;
-//    
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *imageFilePath = [documentsDirectory stringByAppendingPathComponent:@"selfPhoto.jpg"];
-//    // NSLog(@"imageFile->>%@",imageFilePath);
-//    success = [fileManager fileExistsAtPath:imageFilePath];
-//    if(success) {
-//        success = [fileManager removeItemAtPath:imageFilePath error:&error];
-//    }
-//    
-//#warning 这里还都是缩略图，上传时候应该用大图标
-//    UIImage *smallImage = [self thumbnailWithImageWithoutScale:image size:CGSizeMake(100.0f, 100.0f)];
-//    [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
-//    _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
-//    //    [userPhotoButton setImage:selfPhoto forState:UIControlStateNormal];
-//    
-//    //七牛服务器
-//    [_people getQiniuAccessToken:^(NSMutableDictionary *result) {
+- (void)saveImage:(UIImage *)image {
+    //    NSLog(@"保存头像！");
+    //    [userPhotoButton setImage:image forState:UIControlStateNormal];
+    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *imageFilePath = [documentsDirectory stringByAppendingPathComponent:@"selfPhoto.jpg"];
+    // NSLog(@"imageFile->>%@",imageFilePath);
+    success = [fileManager fileExistsAtPath:imageFilePath];
+    if(success) {
+        success = [fileManager removeItemAtPath:imageFilePath error:&error];
+    }
+    
+#warning 这里还都是缩略图，上传时候应该用大图标
+    UIImage *smallImage = [self thumbnailWithImageWithoutScale:image size:CGSizeMake(100.0f, 100.0f)];
+    [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
+    _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
+    //    [userPhotoButton setImage:selfPhoto forState:UIControlStateNormal];
+    
+    //七牛服务器
+//    [self getQiniuAccessToken:^(NSMutableDictionary *result) {
 //        if ([[result objectForKey:@"code"]integerValue] == 60055) {
 //            NSString *token = [[result objectForKey:@"data"] objectForKey:@"qiniu_upload_token"];
 //            NSLog(@"token is %@",token);
 //            NSDate *date = [NSDate date];
-//            [SVProgressHUD showWithStatus:@"正在上传图片至服务器" maskType: SVProgressHUDMaskTypeClear];
 //            [_people PostImage:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
 //                NSString* header_string = [resp objectForKey:@"key"];
 //                NSMutableDictionary* avatar_dic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:header_string,@"avatar", nil];
@@ -244,13 +243,13 @@
 //        }
 //        else
 //        {
-//            [SVProgressHUD showErrorWithStatus:@"上传失败"];
+//            //[SVProgressHUD showErrorWithStatus:@"上传失败"];
 //        }
 //    } failure:^(NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:@"上传失败"];
+//      
 //    }];
-//    
-//}
+    
+}
 
 // 改变图像的尺寸，方便上传服务器
 - (UIImage *) scaleFromImage: (UIImage *) image toSize: (CGSize) size
@@ -310,6 +309,24 @@
     }
 }
 
+#pragma mark -- 七牛上传
+//-(void)PostImage:(void (^)(QNResponseInfo *, NSString *, NSDictionary *))completion Image:(UIImage *)image Forkey:(NSString*)key Token:(NSString *)token failure:(void (^)(NSError *))failure
+//{
+//    NSData* compressedImage;
+//    if (image) {
+//        compressedImage = UIImageJPEGRepresentation(image, 1.0);
+//    }
+//    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+//    NSData *data = [@"Hello, World!" dataUsingEncoding : NSUTF8StringEncoding];
+//    [upManager putData:compressedImage key:key token:token
+//              complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+//                  NSLog(@"%@", info);
+//                  NSLog(@"%@", resp);
+//                  if (completion) {
+//                      completion(info,key,resp);
+//                  }
+//              } option:nil];
+//}
 
 /*
 #pragma mark - Navigation
