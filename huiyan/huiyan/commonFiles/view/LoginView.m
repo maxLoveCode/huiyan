@@ -281,7 +281,7 @@
     if(!_weiXin){
         _weiXin = [[UIButton alloc] init];
         [_weiXin setImage:[UIImage imageNamed:@"weChat"] forState:UIControlStateNormal];
-        [_weiXin addTarget:self action:@selector(weixinLand:) forControlEvents:UIControlEventTouchUpInside];
+        [_weiXin addTarget:self action:@selector(weixinLogin:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _weiXin;
 }
@@ -291,7 +291,7 @@
     if (!_QQ) {
         _QQ = [[UIButton alloc] init];
         [_QQ setImage:[UIImage imageNamed:@"qq"] forState:UIControlStateNormal];
-        [_QQ addTarget:self action:@selector(qqLand:) forControlEvents:UIControlEventTouchUpInside];
+        [_QQ addTarget:self action:@selector(qqLogin:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _QQ;
 }
@@ -378,15 +378,15 @@
     [self.delegate loginViewDidSelectSignUp:self];
 }
 
-- (void)weixinLand:(UIButton *)sender{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(weixinLand)]) {
-        [self.delegate weixinLand];
+- (void)weixinLogin:(UIButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(weixinLogin)]) {
+        [self.delegate weixinLogin];
     }
 }
 
-- (void)qqLand:(UIButton *)sender{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(qqLand)]) {
-        [self.delegate qqLand];
+- (void)qqLogin:(UIButton *)sender{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(qqLogin)]) {
+        [self.delegate qqLogin];
     }
 }
 

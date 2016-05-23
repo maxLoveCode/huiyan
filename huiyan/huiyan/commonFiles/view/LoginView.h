@@ -14,8 +14,8 @@
 
 -(void)loginViewDidSelectLogin:(LoginView*)loginView;
 -(void)loginViewDidSelectSignUp:(LoginView*)loginView;
--(void)qqLand;
-- (void)weixinLand;
+-(void)qqLogin;
+- (void)weixinLogin;
 
 @end
 
