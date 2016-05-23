@@ -13,6 +13,7 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "LookTicketDetailViewController.h"
 #import <MJRefresh.h>
+#import "GifRefresher.h"
 @interface MeDramaTicketViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -27,7 +28,7 @@ static int number_page = 0;
     self.serverManager = [ServerManager sharedInstance];
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
      self.dataSource = [NSMutableArray array];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self getmy_opera_ticketData:[NSString stringWithFormat:@"%d",number_page]];

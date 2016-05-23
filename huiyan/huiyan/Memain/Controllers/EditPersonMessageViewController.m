@@ -93,7 +93,7 @@
     if (indexPath.row == 0) {
         UIImageView *imagePic = [cell viewWithTag:1000];
         if (!imagePic) {
-            imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 72, 4, 42, 42)];
+            imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 102, 4, 42, 42)];
             imagePic.layer.masksToBounds = YES;
             imagePic.layer.cornerRadius = 21;
 
@@ -104,7 +104,7 @@
     }else if (indexPath.row == 1){
         UILabel *nameLab = [cell viewWithTag:1002];
         if (!nameLab) {
-            nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 230, 4, 200, 42)];
+            nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 260, 4, 200, 42)];
             nameLab.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:nameLab];
             nameLab.tag = 1002;
@@ -113,7 +113,7 @@
     }else {
         UILabel *sexLab = [cell viewWithTag:1004];
         if (!sexLab) {
-            sexLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 230, 4, 200, 42)];
+            sexLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 260, 4, 200, 42)];
             sexLab.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:sexLab];
             sexLab.tag = 1004;

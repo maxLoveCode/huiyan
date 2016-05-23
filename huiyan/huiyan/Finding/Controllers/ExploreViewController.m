@@ -15,6 +15,7 @@
 #import "FindFriend.h"
 #import <MJRefresh.h>
 #import "UITabBarController+ShowHideBar.h"
+#import "GifRefresher.h"
 @interface ExploreViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
@@ -37,7 +38,7 @@ static int number_page = 0;
       self.dataSource = [NSMutableArray array];
     self.serverManager = [ServerManager sharedInstance];
     [self configLocationManager];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];

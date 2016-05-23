@@ -14,6 +14,7 @@
 #import "PersonTraining.h"
 #import "TrainOrdersTableViewController.h"
 #import <MJRefresh.h>
+#import "GifRefresher.h"
 @interface MeTrainingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -28,7 +29,7 @@ static int number_page = 0;
     [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self getMy_train_orderData:[NSString stringWithFormat:@"%d",number_page]];
