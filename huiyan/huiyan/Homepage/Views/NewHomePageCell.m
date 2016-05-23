@@ -70,7 +70,10 @@
 //    self.name_lab.text = model.title;
     NSMutableAttributedString* attrStr = [[NSMutableAttributedString alloc] initWithString: model.title];
     [attrStr addAttribute:NSKernAttributeName value:@(4.0) range:NSMakeRange(0, attrStr.length)];
-    self.name_lab.attributedText = attrStr;
+    NSMutableAttributedString* loadStr = [[NSMutableAttributedString alloc] initWithString: @"耐心加载中..."];
+    [attrStr addAttribute:NSKernAttributeName value:@(4.0) range:NSMakeRange(0, attrStr.length)];
+    
+    self.name_lab.attributedText = loadStr;
 //    NSData *jsonData = [model.imgs dataUsingEncoding:NSUTF8StringEncoding];
 //    NSError *err;
 //    NSArray *data_arr = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -79,6 +82,7 @@
 //    NSString *video_pic = [NSString stringWithFormat:@"%@?vframe/jpg/offset/1/w/800/h/500",data_arr[0]];
     NSURL *url = [NSURL URLWithString: model.cover_1];
     [self.mask setImage:[UIImage imageNamed:@"mask.png"]];
+    
     [self.image_pic sd_setImageWithURL:url
      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
          //if (cacheType == SDImageCacheTypeNone) {
@@ -89,6 +93,7 @@
                  self.image_pic.alpha = 1;
                  self.name_lab.alpha = 1;
                  self.name_lab.font =[UIFont boldSystemFontOfSize:fontsize];
+                 self.name_lab.attributedText = attrStr;
              }];
          //}
      }];
