@@ -76,10 +76,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (indexPath.row == 0) {
-//       
-//    }
-     if (indexPath.row == 0) {
+    self.tabBarController.tabBar.hidden = YES;
+         if (indexPath.row == 0) {
         MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
         [list setStyle: MessageTypeSystem];
         [self.navigationController pushViewController:list animated:YES];

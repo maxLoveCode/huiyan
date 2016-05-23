@@ -13,6 +13,7 @@
 		257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC671CB64B1A004C3CDE /* BuyTicketCell.m */; };
 		257FFC6B1CB64B1A004C3CDE /* HomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC691CB64B1A004C3CDE /* HomePageCell.m */; };
 		25A770581CEDC72100E3701D /* MessageListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A770571CEDC72100E3701D /* MessageListTableViewController.m */; };
+		25A7705B1CF2915600E3701D /* WalletTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A7705A1CF2915600E3701D /* WalletTableViewController.m */; };
 		25A8C2461CB4AC7D00386540 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8C2451CB4AC7D00386540 /* UnitTest.m */; };
 		25B4026E1CEDACCC0003D908 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B4026D1CEDACCC0003D908 /* SettingTableViewController.m */; };
 		25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */; };
@@ -343,6 +344,8 @@
 		257FFC691CB64B1A004C3CDE /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageCell.m; sourceTree = "<group>"; };
 		25A770561CEDC72100E3701D /* MessageListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListTableViewController.h; sourceTree = "<group>"; };
 		25A770571CEDC72100E3701D /* MessageListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListTableViewController.m; sourceTree = "<group>"; };
+		25A770591CF2915600E3701D /* WalletTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletTableViewController.h; sourceTree = "<group>"; };
+		25A7705A1CF2915600E3701D /* WalletTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletTableViewController.m; sourceTree = "<group>"; };
 		25A8C2441CB4AC7D00386540 /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitTest.h; path = HuiYan/Helpers/UnitTest.h; sourceTree = SOURCE_ROOT; };
 		25A8C2451CB4AC7D00386540 /* UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTest.m; path = HuiYan/Helpers/UnitTest.m; sourceTree = SOURCE_ROOT; };
 		25B4026C1CEDACCC0003D908 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
@@ -1703,6 +1706,8 @@
 				59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */,
 				5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */,
 				5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */,
+				25A770591CF2915600E3701D /* WalletTableViewController.h */,
+				25A7705A1CF2915600E3701D /* WalletTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2207,6 +2212,7 @@
 				25C625571CBE48C90068BFE8 /* FriendsViewController.m in Sources */,
 				550BF97F1CB8ED6600E2E9DE /* ZFBrightnessView.m in Sources */,
 				5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */,
+				25A7705B1CF2915600E3701D /* WalletTableViewController.m in Sources */,
 				5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */,
 				25C216581CDB2246007C69BB /* chatUsers.m in Sources */,
 				25A770581CEDC72100E3701D /* MessageListTableViewController.m in Sources */,

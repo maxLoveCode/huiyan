@@ -28,7 +28,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"setting"];
     firstSection = @[@"修改密码"];
     secondSection = @[@"去评分"];
-    thirdSection = @[@"tui chu deng lu"];
+    thirdSection = @[@"退出登录"];
 }
 
 -(void)viewDidAppear:(BOOL)animated

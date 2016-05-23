@@ -43,6 +43,12 @@
     [self.tabBarController setHidden:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:YES];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
