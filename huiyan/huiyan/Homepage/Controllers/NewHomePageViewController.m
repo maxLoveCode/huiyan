@@ -114,7 +114,7 @@ static int number_page = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
     wikiCon.homePage = self.dataSource[indexPath.section];
-    NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    //NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^(void) {
                          //cell.transform = CGAffineTransformMakeScale(-1, kScreen_Height/cell.frame.size.height);
@@ -162,7 +162,6 @@ static int number_page = 0;
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     if (!_hidden) {
-        NSLog(@"1");
         [self.tabBarController setHidden:YES];
         _hidden = !_hidden;
     }
@@ -171,8 +170,6 @@ static int number_page = 0;
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (_hidden) {
-        NSLog(@"2");
-
         [self.tabBarController setHidden:NO];
         _hidden = !_hidden;
     }
