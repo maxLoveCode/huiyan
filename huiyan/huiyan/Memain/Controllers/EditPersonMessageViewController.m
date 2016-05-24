@@ -220,6 +220,7 @@
     [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
     _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
     
+    
     NSDictionary *qiniuDic = @{@"access_token":self.serverManager.accessToken};
     [self.serverManager AnimatedGET:@"get_qiniu_token.php" parameters:qiniuDic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue]== 120000) {
@@ -288,24 +289,6 @@
     }
 }
 
-#pragma mark -- 七牛上传
-//-(void)PostImage:(void (^)(QNResponseInfo *, NSString *, NSDictionary *))completion Image:(UIImage *)image Forkey:(NSString*)key Token:(NSString *)token failure:(void (^)(NSError *))failure
-//{
-//    NSData* compressedImage;
-//    if (image) {
-//        compressedImage = UIImageJPEGRepresentation(image, 1.0);
-//    }
-//    QNUploadManager *upManager = [[QNUploadManager alloc] init];
-//    NSData *data = [@"Hello, World!" dataUsingEncoding : NSUTF8StringEncoding];
-//    [upManager putData:compressedImage key:key token:token
-//              complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-//                  NSLog(@"%@", info);
-//                  NSLog(@"%@", resp);
-//                  if (completion) {
-//                      completion(info,key,resp);
-//                  }
-//              } option:nil];
-//}
 
 /*
 #pragma mark - Navigation

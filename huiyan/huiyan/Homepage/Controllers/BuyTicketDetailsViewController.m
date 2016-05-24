@@ -90,8 +90,6 @@
     if (!_tail_btn) {
         self.tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         _tail_btn.backgroundColor = COLOR_THEME;
-        _tail_btn.layer.masksToBounds = YES;
-        _tail_btn.layer.cornerRadius = 5;
         [_tail_btn setTitle:@"立即购买" forState:UIControlStateNormal];
         [_tail_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _tail_btn.frame = CGRectMake(48, CGRectGetMaxY(self.ticketTableView.frame), kScreen_Width - 48, 48);

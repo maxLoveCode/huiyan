@@ -68,7 +68,7 @@
             return 50;
         }
     }else{
-        return 50;
+        return 100;
     }
 }
 
@@ -189,7 +189,7 @@
         UIButton *pay = [cell viewWithTag:1005];
         if (!pay) {
             pay = [UIButton buttonWithType:UIButtonTypeCustom];
-            pay.frame = CGRectMake(0, 0, kScreen_Width , 50);
+            pay.frame = CGRectMake(15, 25, kScreen_Width - 30 , 50);
             pay.layer.masksToBounds = YES;
             pay.layer.cornerRadius = 5;
             [pay setTitle:@"确认支付" forState:UIControlStateNormal];
@@ -215,7 +215,7 @@
             [pay setBackgroundColor:[UIColor grayColor]];
             [pay setEnabled:NO];
         }
-        [cell.contentView setBackgroundColor: [UIColor groupTableViewBackgroundColor]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }

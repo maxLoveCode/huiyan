@@ -59,9 +59,9 @@
 - (UIButton *)pay_btn{
     if (!_pay_btn) {
         self.pay_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.pay_btn.frame = CGRectMake(15, kScreen_Height - 150, kScreen_Width - 30, 40);
+        self.pay_btn.frame = CGRectMake(15, kScreen_Height - 150, kScreen_Width - 30, 50);
         self.pay_btn.layer.masksToBounds = YES;
-        self.pay_btn.layer.cornerRadius = 15;
+        self.pay_btn.layer.cornerRadius = 5;
         self.pay_btn.backgroundColor = COLOR_THEME;
         [self.pay_btn setTitle:@"立即邀请" forState:UIControlStateNormal];
         [self.pay_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

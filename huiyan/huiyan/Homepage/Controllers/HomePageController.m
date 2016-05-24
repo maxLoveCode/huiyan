@@ -44,6 +44,7 @@
 {
     [super viewDidLoad];
     self.title = @"发现";
+    [self.tableView setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height -  64)];
     //侧滑关闭
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
