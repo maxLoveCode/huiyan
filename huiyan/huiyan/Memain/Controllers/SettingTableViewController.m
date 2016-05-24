@@ -10,6 +10,7 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
 #import "LoginViewController.h"
+#import "ForgotPassTableViewController.h"
 
 @interface SettingTableViewController ()
 {
@@ -30,6 +31,11 @@
     firstSection = @[@"修改密码"];
     secondSection = @[@"去评分"];
     thirdSection = @[@"退出登录"];
+    
+    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -42,6 +48,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [self.tabBarController setHidden:NO];
+    self.tabBarController.tabBar.hidden = NO;
     [super viewWillDisappear:YES];
 }
 
@@ -103,6 +110,12 @@
 {
     if (indexPath.section == 0) {
         //change password
+        ForgotPassTableViewController *cpt = [[ForgotPassTableViewController alloc] init];
+        [cpt setType:1];
+        UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:cpt];
+        [self.navigationController presentViewController:nav animated:NO completion:^{
+            
+        }];
     }
     if (indexPath.section == 1) {
         //comment app

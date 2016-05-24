@@ -60,6 +60,10 @@
     
     _stringArray = @[mobileDefault, passwordDefault];
     self.view = self.bgView;
+    
+//    if (!_type) {
+//        _type = 0;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +73,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -78,7 +83,27 @@
     [UIView animateWithDuration:1 animations:^{
         self.wrapperView.alpha = 1;
     }];
+    
+    self.tabBarController.tabBar.hidden = YES;
     [super viewWillAppear:animated];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    
+    self.tabBarController.tabBar.hidden = NO;
+    [super viewDidDisappear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+//    if (_type ==1) {
+//        self.navigationController.navigationBar.barTintColor = COLOR_THEME;
+//        [self.navigationController.navigationBar setTitleTextAttributes:
+//         @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+//           NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    }
 }
 
 
@@ -94,6 +119,11 @@
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:NO];
+    if (_type == 1) {
+        [self.navigationController dismissViewControllerAnimated:NO completion:^{
+            
+        }];
+    }
 }
 
 -(UIImageView *)bgView
