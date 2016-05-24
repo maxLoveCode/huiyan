@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "SexTableViewController.h"
 #import "Tools.h"
+
 @interface EditPersonMessageViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -29,7 +30,7 @@
     self.titleArr = @[@"头像",@"昵称",@"性别"];
     self.view.backgroundColor = COLOR_WithHex(0xdddddd);
     [self.view addSubview:self.tableView];
-    
+    self.title = @"个人信息";
     // Do any additional setup after loading the view.
 }
 
@@ -59,7 +60,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kMargin, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         self.tableView.scrollEnabled = NO;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
@@ -93,7 +94,7 @@
     if (indexPath.row == 0) {
         UIImageView *imagePic = [cell viewWithTag:1000];
         if (!imagePic) {
-            imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 102, 4, 42, 42)];
+            imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 92, 4, 42, 42)];
             imagePic.layer.masksToBounds = YES;
             imagePic.layer.cornerRadius = 21;
 
@@ -104,7 +105,7 @@
     }else if (indexPath.row == 1){
         UILabel *nameLab = [cell viewWithTag:1002];
         if (!nameLab) {
-            nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 260, 4, 200, 42)];
+            nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 250, 4, 200, 42)];
             nameLab.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:nameLab];
             nameLab.tag = 1002;
@@ -113,7 +114,7 @@
     }else {
         UILabel *sexLab = [cell viewWithTag:1004];
         if (!sexLab) {
-            sexLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 260, 4, 200, 42)];
+            sexLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 250, 4, 200, 42)];
             sexLab.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:sexLab];
             sexLab.tag = 1004;
@@ -228,8 +229,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
-   
-    
 }
 
 // 改变图像的尺寸，方便上传服务器
