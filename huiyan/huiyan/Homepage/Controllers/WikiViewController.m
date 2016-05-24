@@ -65,13 +65,11 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
-    [self.tabBarController setHidden:NO];
 }
 
 - (UIView *)head_view{
