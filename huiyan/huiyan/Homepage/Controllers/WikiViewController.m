@@ -49,7 +49,7 @@
     [self.scrollView addSubview:self.wikiArtcleTableView.tableView];
     
     _serverManager = [ServerManager sharedInstance];
-    
+    self.navigationController.navigationBar.translucent = NO;
     [self getDramaCates];
     [self getDramaList:@"0" page:0];
     
@@ -66,11 +66,11 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden = NO;
     [self.tabBarController setHidden:NO];
 }
 

@@ -21,6 +21,7 @@
 @implementation ArticalViewController
 
 - (void)viewDidLoad {
+    NSLog(@"ArticalViewController");                                                                                                                                 
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
@@ -44,6 +45,8 @@
     [self.bgView addSubview:self.label];
     [self.bgView setContentSize:CGSizeMake(CGRectGetWidth(self.label.frame), CGRectGetHeight(self.label.frame))];
     [self.view addSubview:self.bgView];
+    
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 
@@ -55,7 +58,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    [self.tabBarController setHidden:YES];
+    self.tabBarController.tabBar.hidden = YES;
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -63,8 +66,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
+    [super viewWillDisappear:animated];                                                            
 }
 
 -(UILabel *)label

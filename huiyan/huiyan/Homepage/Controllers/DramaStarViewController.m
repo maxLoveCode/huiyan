@@ -63,6 +63,8 @@
 {
     [super viewDidAppear:animated];
     _dramaStarTableView.alpha = 0;
+    
+
     [self.view setBackgroundColor:[UIColor blackColor]];
     [UIView animateWithDuration:1 animations:^{
         _dramaStarTableView.alpha = 1;

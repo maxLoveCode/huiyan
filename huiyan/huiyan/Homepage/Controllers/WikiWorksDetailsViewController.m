@@ -76,8 +76,6 @@
     [self.view addSubview:self.wikiDetailsTableView];
     
     
-    
-    
     // Do any additional setup after loading the view.
 }
 
@@ -92,13 +90,15 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.tabBarController setHidden:YES];
+    //[self.tabBarController setHidden:YES];
     [super viewDidAppear:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.tabBarController.tabBar.hidden = YES;
 
     //[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault animated:YES]
     self.navigationController.navigationBarHidden = YES;
