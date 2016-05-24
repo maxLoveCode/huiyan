@@ -119,6 +119,7 @@
             }completion:^(BOOL finished) {
                 if(finished)
                     self.tabBarController.tabBar.hidden = YES;
+                NSLog(@"tabbar hidden is YES");
             }];
         }
     }];
@@ -444,7 +445,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.tabBarController setHidden:YES];
     if (collectionView == self.menuView) {
+        
         if (indexPath.item == 0) {
             TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
             [self.navigationController pushViewController:tickCon animated:NO];
@@ -471,7 +475,6 @@
         WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
         wikiCon.homePage = self.wikiArr[indexPath.item];
         
-        [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:wikiCon animated:NO];
     }
    

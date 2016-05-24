@@ -39,6 +39,8 @@
     [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.ticketTableView];
     _serverManager = [ServerManager sharedInstance];
+    
+    self.navigationController.navigationBar.translucent = NO;
   
 }
 
@@ -49,15 +51,12 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.tabBarController setHidden:YES];
-    self.navigationController.navigationBar.translucent = NO;
    // [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)ticketTableView{
@@ -78,6 +77,7 @@
 - (UIButton *)head_btn{
     if (!_head_btn) {
         self.head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_head_btn setBackgroundColor:[UIColor whiteColor]];
         self.head_btn.frame = CGRectMake(0, CGRectGetMaxY(self.ticketTableView.frame), 48, 48);
         [self.head_btn setImage:[UIImage imageNamed:@"service"] forState:UIControlStateNormal];
         self.head_btn.userInteractionEnabled = YES;
