@@ -12,4 +12,5 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSString *oid;
 @property (nonatomic,copy) NSString *type;
+@property (nonatomic,copy) NSString *returntype;
 @end

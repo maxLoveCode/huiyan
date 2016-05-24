@@ -143,7 +143,7 @@
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"second" forIndexPath:indexPath];
             UIImageView *pic = [cell viewWithTag:1002];
             if (!pic) {
-                pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 0, 40, 40)];
+                pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 10, 30, 30)];
                 [cell.contentView addSubview:pic];
              
                 pic.tag = 1002;
@@ -189,7 +189,9 @@
         UIButton *pay = [cell viewWithTag:1005];
         if (!pay) {
             pay = [UIButton buttonWithType:UIButtonTypeCustom];
-            pay.frame = CGRectMake(0, 0, kScreen_Width, 50);
+            pay.frame = CGRectMake(0, 0, kScreen_Width , 50);
+            pay.layer.masksToBounds = YES;
+            pay.layer.cornerRadius = 5;
             [pay setTitle:@"确认支付" forState:UIControlStateNormal];
             [pay setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             pay.backgroundColor = [UIColor grayColor];
@@ -213,8 +215,7 @@
             [pay setBackgroundColor:[UIColor grayColor]];
             [pay setEnabled:NO];
         }
-
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.contentView setBackgroundColor: [UIColor groupTableViewBackgroundColor]];
         return cell;
     }
 }

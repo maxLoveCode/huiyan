@@ -69,7 +69,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+    //[self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,7 +104,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if(section == 0){
     return 10;
+    }else{
+        return 0.01;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -203,7 +207,11 @@
 }
 
 - (void)clickedCloseItem:(UIButton *)sender{
+    if ([self.returntype isEqualToString:@"1"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
     [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 /*

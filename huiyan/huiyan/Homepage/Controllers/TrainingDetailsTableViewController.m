@@ -74,6 +74,8 @@
         self.tail_btn.titleLabel.font = kFONT18;
         [self.tail_btn addTarget:self action:@selector(signUp:) forControlEvents:UIControlEventTouchUpInside];
         [self.tail_btn setTitle:@"立即报名" forState:UIControlStateNormal];
+        self.tail_btn.layer.masksToBounds = YES;
+        self.tail_btn.layer.cornerRadius = 5;
         
     }
     return _tail_btn;

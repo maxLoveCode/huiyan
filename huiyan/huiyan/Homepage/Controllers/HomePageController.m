@@ -26,7 +26,6 @@
 #import "SignUpMessageTableViewController.h"
 #import "MessageViewController.h"
 #import "UITabBarController+ShowHideBar.h"
-#import "UITabBarController+ShowHideBar.h"
 #define bannerHeight kScreen_Width / 2
 #define menuHeight 114
 #define menuPicWidth 36
@@ -243,11 +242,11 @@
         if (indexPath.section == 0) {
             return 114;
         }else if (indexPath.section == 1){
-            return imageHeight + 60;
+            return imageHeight + 70;
         }else if(indexPath.section == 2){
             return actCellHeight * 3;
         }else{
-            return imageHeight + 60;
+            return imageHeight + 70;
         }
     }
     return actCellHeight;

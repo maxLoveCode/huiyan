@@ -111,6 +111,7 @@ static int number_page = 0;
     PersonTraining *train = self.dataSource[indexPath.section];
     TrainOrdersTableViewController *trainCon = [[TrainOrdersTableViewController alloc]init];
     trainCon.oid = train.oid;
+    trainCon.returntype = @"1";
     [self.navigationController pushViewController:trainCon animated:NO];
 }
 

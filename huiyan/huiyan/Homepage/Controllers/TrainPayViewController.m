@@ -145,7 +145,7 @@
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"second" forIndexPath:indexPath];
             UIImageView *pic = [cell viewWithTag:1002];
             if (!pic) {
-                pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 15, 30, 30)];
+                pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 10, 30, 30)];
                 [cell.contentView addSubview:pic];
                 pic.tag = 1002;
             }
@@ -193,6 +193,8 @@
             pay = [UIButton buttonWithType:UIButtonTypeCustom];
             pay.frame = CGRectMake(0, 0, kScreen_Width, 50);
             [pay setTitle:@"确认支付" forState:UIControlStateNormal];
+            pay.layer.masksToBounds = YES;
+            pay.layer.cornerRadius = 5;
             [pay setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             pay.backgroundColor = [UIColor grayColor];
             [cell.contentView addSubview:pay];

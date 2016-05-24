@@ -84,6 +84,8 @@
                     self.star = [NSDate date];
                     [self.captcha_btn setEnabled:NO];
                 }
+            }else{
+                [self presentViewController:[Tools showAlert:responseObject[@"msg"]] animated:YES completion:nil];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error = %@",error);

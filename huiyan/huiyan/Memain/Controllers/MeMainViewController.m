@@ -21,6 +21,7 @@
 #import "EditPersonMessageViewController.h"
 #import "InterestsTableViewController.h"
 #import "WalletTableViewController.h"
+#import "UITabBarController+ShowHideBar.h"
 @interface MeMainViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) PersonMessage *perData;
@@ -52,6 +53,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tabBarController setHidden:NO];
     [self.navigationController setNavigationBarHidden:YES];
     UIColor *color = COLOR_THEME;
     [self.navigationController.navigationBar setBarTintColor:color];

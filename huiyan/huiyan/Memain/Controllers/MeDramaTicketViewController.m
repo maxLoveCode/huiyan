@@ -115,6 +115,7 @@ static int number_page = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     LookTicketDetailViewController *lookCon = [[LookTicketDetailViewController alloc]init];
     lookCon.payData = self.dataSource[indexPath.section];
+    lookCon.returntype = @"1";
     [self.navigationController pushViewController:lookCon animated:NO];
 }
 

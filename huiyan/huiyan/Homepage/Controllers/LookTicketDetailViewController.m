@@ -33,8 +33,6 @@
     [backView addSubview:backItem];
     UIBarButtonItem * leftItemBar = [[UIBarButtonItem alloc]initWithCustomView:backView];
     self.navigationItem.leftBarButtonItem = leftItemBar;
-
-    
     
 }
 
@@ -110,7 +108,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"two" forIndexPath:indexPath];
         UILabel *name_lab = [cell viewWithTag:1000];
         if (!name_lab) {
-            name_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 10, 100, 16)];
+            name_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 10, kScreen_Width - 100, 16)];
             name_lab.font = kFONT16;
             name_lab.textAlignment = NSTextAlignmentLeft;
             [cell.contentView addSubview:name_lab];
@@ -119,7 +117,7 @@
         name_lab.text = self.payData.theater_name;
         UILabel *add_lab = [cell viewWithTag:1002];
         if (!add_lab) {
-            add_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 45, 200, 14)];
+            add_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 45,kScreen_Width - 100 , 14)];
             add_lab.textColor = COLOR_THEME;
             add_lab.font = kFONT14;
             add_lab.textAlignment = NSTextAlignmentLeft;
@@ -171,7 +169,7 @@
         
         UILabel *codeNum_lab = [cell viewWithTag:1012];
         if (!codeNum_lab) {
-            codeNum_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 40, 300, 20)];
+            codeNum_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 40, kScreen_Width - 50, 20)];
             codeNum_lab.font = kFONT14;
             codeNum_lab.textColor = COLOR_WithHex(0xa5a5a5);
             codeNum_lab.textAlignment = NSTextAlignmentLeft;
@@ -182,7 +180,7 @@
         
         UILabel *time_lab = [cell viewWithTag:1014];
         if (!time_lab) {
-            time_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 70, 200, 20)];
+            time_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 70, kScreen_Width - 50, 20)];
             time_lab.font = kFONT14;
              time_lab.textColor = COLOR_WithHex(0xa5a5a5);
             time_lab.textAlignment = NSTextAlignmentLeft;
@@ -193,7 +191,7 @@
         
         UILabel *offer_lab = [cell viewWithTag:1016];
         if (!offer_lab) {
-            offer_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 100, 150, 20)];
+            offer_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 100, kScreen_Width - 50, 20)];
             offer_lab.font = kFONT14;
              offer_lab.textColor = COLOR_WithHex(0xa5a5a5);
             offer_lab.textAlignment = NSTextAlignmentLeft;
@@ -256,7 +254,11 @@
 }
 
 - (void)clickedCloseItem:(UIButton *)sender{
+    if ([self.returntype isEqualToString:@"1"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
     [self.navigationController popToRootViewControllerAnimated:NO];
+    }
 }
 
 

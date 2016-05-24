@@ -19,6 +19,7 @@
 #import "SignUpMessageTableViewController.h"
 #import "DramaStarInvitionViewController.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "UITabBarController+ShowHideBar.h"
 #define kSwipeMenu 41
 #define kBannerHeight kScreen_Width / 2
 @interface DramaStarViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>

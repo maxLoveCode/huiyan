@@ -43,10 +43,7 @@ static int number_page = 0;
         [self.dataSource removeAllObjects];
         [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
     }];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        number_page ++;
-        [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
+    
     [self.tableView.mj_header beginRefreshing];
         // Do any additional setup after loading the view.
 }
@@ -126,7 +123,7 @@ static int number_page = 0;
     if (self.dataSource.count > 0) {
          [cell setContent:self.dataSource[indexPath.section]];
     }
-   
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -145,6 +142,16 @@ static int number_page = 0;
                     FindFriend *model = [FindFriend findFriendWithData:dic];
                     [self.dataSource addObject:model];
                 }
+                if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                    self.tableView.mj_footer = nil;
+                }else {
+                    if (!self.tableView.mj_footer) {
+                        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                            number_page ++;
+                            [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
+                        }];                    }
+                }
+
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
                 [self.tableView.mj_footer endRefreshing];

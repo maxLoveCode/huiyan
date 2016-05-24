@@ -46,6 +46,7 @@ static int number_page = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.rowHeight = 160;
+        self.tableView.backgroundColor = [UIColor whiteColor];
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonInvitationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"invatation"];
     }
     return _tableView;
@@ -70,7 +71,7 @@ static int number_page = 0;
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height)];
+    self.navigationController.navigationBar.translucent = NO;
      [self.tabBarController setHidden:YES];
 }
 

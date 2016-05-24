@@ -23,9 +23,9 @@
         [self.bg_view  addSubview:self.address_pic];
         [self.bg_view  addSubview:self.price_pic];
         [self.bg_view  addSubview:self.price_lab];
-        [self addSubview:self.write_textField];
+        //[self addSubview:self.write_textField];
         //[self addSubview:self.collect_btn];
-        [self addSubview:self.writeComment_btn];
+        //[self addSubview:self.writeComment_btn];
         [self addSubview:self.share_btn];
     }
     return self;
