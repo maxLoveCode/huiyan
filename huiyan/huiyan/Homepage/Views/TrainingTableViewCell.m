@@ -65,7 +65,7 @@
         self.enroll_btn.layer.masksToBounds = YES;
         self.enroll_btn.layer.cornerRadius = 3;
         self.enroll_btn.layer.borderColor = color.CGColor;
-        self.enroll_btn.layer.borderWidth = 2;
+        self.enroll_btn.layer.borderWidth = 1.5;
     }
     return  _enroll_btn;
 }

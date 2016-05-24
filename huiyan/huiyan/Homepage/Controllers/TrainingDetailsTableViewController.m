@@ -34,7 +34,8 @@
     //NSLog(@"%@",self.train.content);
         [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.trainDetailsTableView];
-
+    
+    self.navigationController.navigationBar.translucent = NO; 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -61,7 +62,6 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
-    self.navigationController.navigationBar.translucent = NO;
   //  [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 

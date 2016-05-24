@@ -31,6 +31,8 @@
 #define actCellHeight 152
 #define imageWidth (kScreen_Width - 84) / 3
 #define imageHeight (kScreen_Width - 84) / 3 * 1.3
+#define titleLabelHeight 30
+
 @interface HomePageController()
 {
     CGFloat scrollOffset;
@@ -120,6 +122,7 @@
             }completion:^(BOOL finished) {
                 if(finished)
                     self.tabBarController.tabBar.hidden = YES;
+                NSLog(@"tabbar hidden is YES");
             }];
         }
     }];
@@ -160,11 +163,9 @@
 - (UICollectionView *)ticketCollectionView{
     if (!_ticketCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        layout.itemSize = CGSizeMake(imageWidth,imageHeight);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        self.ticketCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 80) collectionViewLayout:layout];
+        self.ticketCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + titleLabelHeight+ 40) collectionViewLayout:layout];
         self.ticketCollectionView.pagingEnabled = YES;
         self.ticketCollectionView.scrollEnabled = NO;
         self.ticketCollectionView.bounces = NO;
@@ -181,11 +182,9 @@
 - (UICollectionView *)wikiCollectionView{
     if (!_wikiCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        layout.itemSize = CGSizeMake(imageWidth,imageHeight);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        self.wikiCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + 80) collectionViewLayout:layout];
+        self.wikiCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width,imageHeight + titleLabelHeight+ 40) collectionViewLayout:layout];
         self.wikiCollectionView.pagingEnabled = YES;
         self.wikiCollectionView.scrollEnabled = NO;
         self.wikiCollectionView.bounces = NO;
@@ -224,11 +223,11 @@
             case 0:
                 return 0.01;
             case 1:
-                return 40;
+                return 32;
             case 2:
-                return 40;
+                return 32;
             default:
-                return 40;
+                return 32;
         }
     }
     return 0;
@@ -237,7 +236,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-        if (section == 0 || section == 1) {
+        if (section == 0 || section == 1 || section == 2) {
             return 10;
         }
         return 0.01;
@@ -245,30 +244,43 @@
     return 0.01;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (tableView == self.tableView) {
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
+        [view setBackgroundColor:[UIColor clearColor]];
+        return view;
+    }
+    return nil;
+}
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
         if (section != 0) {
-            UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
-            UILabel *h_lab = [[UILabel alloc]initWithFrame:CGRectMake(21, 21, 5, 16)];
+            UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
+            UILabel *h_lab = [[UILabel alloc]initWithFrame:CGRectMake(21, 7, 5, 19)];
             h_lab.backgroundColor = COLOR_THEME;
             h_lab.layer.masksToBounds = YES;
             h_lab.layer.cornerRadius = 2;
             [headerView addSubview:h_lab];
             [headerView setBackgroundColor:[UIColor whiteColor]];
-            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(35,21, 60, 16)];
+            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(35,3, 60, 29)];
             label.text = self.head_title[section - 1];
             label.font = kFONT14;
             [headerView addSubview:label];
             UIButton *more_btn = [UIButton buttonWithType:UIButtonTypeCustom];
             more_btn.tag = section + 60;
             more_btn.titleLabel.font = kFONT14;
-            more_btn.frame = CGRectMake(kScreen_Width - 21- 80,21, 100, 16);
+            more_btn.frame = CGRectMake(kScreen_Width - 21- 80,3, 100, 29);
             more_btn.titleLabel.textAlignment = NSTextAlignmentRight;
             [more_btn setTitle:@"查看更多  >" forState:UIControlStateNormal];
             [more_btn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
             [more_btn addTarget:self action:@selector(lookMore:) forControlEvents:UIControlEventTouchUpInside];
             [headerView addSubview:more_btn];
+            UIView* lab = [[UIView alloc] initWithFrame:CGRectMake(0, 31, kScreen_Width, 1)];
+            [lab setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+            [headerView addSubview:lab];
             return headerView;
         }
     }
@@ -307,6 +319,10 @@
         return cell;
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homePage" forIndexPath:indexPath];
+        for (UIView* view in [cell.contentView subviews])
+        {
+            [view removeFromSuperview];
+        }
          cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.section ==0) {
         
@@ -344,12 +360,15 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreen_Width/3, 114) ;
+    return CGSizeMake(kScreen_Width/3, imageHeight+titleLabelHeight) ;
 }
 
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
+    if (collectionView == _menuView) {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+    return UIEdgeInsetsMake(20, 0, 20, 0); // top, left, bottom, right
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -396,14 +415,14 @@
           UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ticket" forIndexPath:indexPath];
         UIImageView *image_pic = [cell viewWithTag:506];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, -20, imageWidth ,imageHeight)];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, imageWidth ,imageHeight)];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 506;
         }
 
         UILabel *title_lab = [cell viewWithTag:508];
         if (!title_lab) {
-            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(image_pic.frame), imageWidth, 30)];
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(image_pic.frame), imageWidth, titleLabelHeight)];
             title_lab.font = kFONT12;
             title_lab.numberOfLines = 2;
             title_lab.textAlignment = NSTextAlignmentCenter;
@@ -421,13 +440,13 @@
         UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"wiki" forIndexPath:indexPath];
         UIImageView *image_pic = [cell viewWithTag:506];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, -20, imageWidth ,imageHeight)];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(15, 0, imageWidth ,imageHeight)];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 506;
         }
         UILabel *title_lab = [cell viewWithTag:508];
         if (!title_lab) {
-            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(image_pic.frame), imageWidth, 30)];
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(image_pic.frame), imageWidth, titleLabelHeight)];
             title_lab.font = kFONT12;
             title_lab.numberOfLines = 2;
             title_lab.textAlignment = NSTextAlignmentCenter;
@@ -445,7 +464,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.tabBarController setHidden:YES];
     if (collectionView == self.menuView) {
+        
         if (indexPath.item == 0) {
             TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
             [self.navigationController pushViewController:tickCon animated:NO];
@@ -472,7 +494,6 @@
         WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
         wikiCon.homePage = self.wikiArr[indexPath.item];
         
-        [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:wikiCon animated:NO];
     }
    
