@@ -223,11 +223,11 @@
             case 0:
                 return 0.01;
             case 1:
-                return 28;
+                return 32;
             case 2:
-                return 28;
+                return 32;
             default:
-                return 28;
+                return 32;
         }
     }
     return 0;
@@ -258,27 +258,27 @@
 {
     if (tableView == self.tableView) {
         if (section != 0) {
-            UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 28)];
-            UILabel *h_lab = [[UILabel alloc]initWithFrame:CGRectMake(21, 7, 5, 16)];
+            UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
+            UILabel *h_lab = [[UILabel alloc]initWithFrame:CGRectMake(21, 7, 5, 19)];
             h_lab.backgroundColor = COLOR_THEME;
             h_lab.layer.masksToBounds = YES;
             h_lab.layer.cornerRadius = 2;
             [headerView addSubview:h_lab];
             [headerView setBackgroundColor:[UIColor whiteColor]];
-            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(35,3, 60, 25)];
+            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(35,3, 60, 29)];
             label.text = self.head_title[section - 1];
             label.font = kFONT14;
             [headerView addSubview:label];
             UIButton *more_btn = [UIButton buttonWithType:UIButtonTypeCustom];
             more_btn.tag = section + 60;
             more_btn.titleLabel.font = kFONT14;
-            more_btn.frame = CGRectMake(kScreen_Width - 21- 80,3, 100, 25);
+            more_btn.frame = CGRectMake(kScreen_Width - 21- 80,3, 100, 29);
             more_btn.titleLabel.textAlignment = NSTextAlignmentRight;
             [more_btn setTitle:@"查看更多  >" forState:UIControlStateNormal];
             [more_btn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
             [more_btn addTarget:self action:@selector(lookMore:) forControlEvents:UIControlEventTouchUpInside];
             [headerView addSubview:more_btn];
-            UIView* lab = [[UIView alloc] initWithFrame:CGRectMake(0, 27, kScreen_Width, 1)];
+            UIView* lab = [[UIView alloc] initWithFrame:CGRectMake(0, 31, kScreen_Width, 1)];
             [lab setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
             [headerView addSubview:lab];
             return headerView;
