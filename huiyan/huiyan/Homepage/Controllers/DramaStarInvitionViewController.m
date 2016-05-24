@@ -196,7 +196,7 @@
         if ([responseObject[@"code"] integerValue] == 50090) {
             UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"邀请成功,客服人员将在1-5个工作日内与您联系,请保持手机通讯正常并耐心等待。" preferredStyle:UIAlertControllerStyleActionSheet];
             [alertCon addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:NO];
             }]];
             [self presentViewController:alertCon animated:YES completion:nil];
             

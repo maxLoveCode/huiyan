@@ -19,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"WikiArticalTableViewController");
+    
     [self.tableView registerClass:[ArticleTableViewCell class] forCellReuseIdentifier:@"article"];
     self.tableView.rowHeight = [ArticleTableViewCell cellHeight];
     self.tableView.frame = CGRectMake(kScreen_Width, 10, kScreen_Width, kScreen_Height - 41 - 48 - 44 + 20);
@@ -40,6 +42,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Table view data source
 
@@ -66,6 +69,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
     wikiCon.homePage = self.dataSource[indexPath.row];
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:wikiCon animated:YES];
 }
 

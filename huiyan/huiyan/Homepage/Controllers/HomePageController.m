@@ -12,7 +12,6 @@
 #import "HomePage.h"
 #import "TicketBoxViewController.h"
 #import "TrainingTableViewController.h"
-#import "ArticalViewController.h"
 #import "LoginViewController.h"
 #import "DramaStarViewController.h"
 #import "LoginViewController.h"
@@ -66,18 +65,18 @@
     [self get_opera_listData];
     [self get_wiki_listData];
     [self get_train_listData];
-    
-#ifdef DEBUG
-    NSLog(@"Homepage loaded");
-#endif
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.barTintColor = COLOR_THEME;
     [super viewWillAppear:animated];
-       [self.tabBarController setHidden:NO];
-    
+    if (self.tabBarController.tabBar.hidden == YES) {
+        self.tabBarController.tabBar.hidden = NO;
+    }
+    [self.tabBarController setHidden:NO];
+    NSLog(@"homepage will appear");
 }
 
 
@@ -88,6 +87,46 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    
+    CGRect screenRect = [[UIScreen mainScreen]bounds];
+    float fHeight = screenRect.size.height;
+    UIDeviceOrientation orientation = [[UIDevice currentDevice]orientation];
+    if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+        fHeight = screenRect.size.width;
+    }
+    
+    
+    if(!self.tabBarController.tabBar.hidden) fHeight -= self.tabBarController.tabBar.frame.size.height;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        for(UIView *view in self.view.subviews){
+            if([view isKindOfClass:[UITabBar class]]){
+                [view setFrame:CGRectMake(view.frame.origin.x, fHeight, view.frame.size.width, view.frame.size.height)];
+            }else{
+                if(self.tabBarController.tabBar.hidden) [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, fHeight)];
+            }
+        }
+    }completion:^(BOOL finished){
+        if(!self.tabBarController.tabBar.hidden){
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                
+                for(UIView *view in self.view.subviews)
+                {
+                    if(![view isKindOfClass:[UITabBar class]])
+                        [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, fHeight)];
+                }
+            }completion:^(BOOL finished) {
+                if(finished)
+                    self.tabBarController.tabBar.hidden = YES;
+            }];
+        }
+    }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 
 - (UITableView *)activityTableView{
@@ -432,12 +471,14 @@
         WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
         wikiCon.homePage = self.wikiArr[indexPath.item];
         
+        [self.tabBarController setHidden:YES];
         [self.navigationController pushViewController:wikiCon animated:NO];
     }
    
 }
 
 - (void)lookMore:(UIButton *)sender{
+    [self.tabBarController setHidden:YES];
     if (sender.tag == 61) {
         TicketBoxViewController *tickCon = [[TicketBoxViewController alloc]init];
         
@@ -456,7 +497,7 @@
 - (void)enroll:(UIButton *)sender{
     SignUpMessageTableViewController *signCon = [[SignUpMessageTableViewController alloc]init];
     signCon.train = self.actArr[sender.tag];
-    
+    [self.tabBarController setHidden:YES];
     [self.navigationController pushViewController:signCon animated:NO];
     
 }
@@ -513,7 +554,7 @@
 
 - (void)rightClick:(UIBarButtonItem *)sender{
     MessageViewController *mes = [[MessageViewController alloc]init];
-      [self.tabBarController setHidden:YES];
+    [self.tabBarController setHidden:YES];
     [self.navigationController pushViewController:mes animated:YES];
 }
 
