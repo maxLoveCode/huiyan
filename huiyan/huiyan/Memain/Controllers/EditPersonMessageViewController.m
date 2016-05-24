@@ -191,6 +191,7 @@
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         NSData *data = UIImageJPEGRepresentation(img, 1.0);
         NSLog(@"----%@",data);
+        [self getUploadImage:data];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -242,8 +243,19 @@
     return newimage;
 }
 
-- (void)getUploadImage{
-    
+- (void)getUploadImage:(NSData *)image{
+    NSString *user_id = kOBJECTDEFAULTS(@"user_id");
+        NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":user_id};
+        [self.serverManager AnimatedGET:@"" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+            if ([responseObject[@"code"]integerValue] == 80000) {
+              
+                [self.tableView reloadData];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+
+
 }
 
 - (void)get_user_infoData{

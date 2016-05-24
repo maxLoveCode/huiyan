@@ -175,9 +175,9 @@
     self.time_lab.text = ticket.date;
     self.address_lab.text = ticket.theater_addr;
     self.price_lab.text = ticket.price_range;
-    self.time_pic.image = [UIImage imageNamed:@"ticket_detail_time"];
-    self.address_pic.image = [UIImage imageNamed:@"ticket_detail_address"];
-    self.price_pic.image = [UIImage imageNamed:@"ticket_detail_price"];
+    self.time_pic.image = [UIImage imageNamed:@"ticket_time"];
+    self.address_pic.image = [UIImage imageNamed:@"ticket_address"];
+    self.price_pic.image = [UIImage imageNamed:@"ticket_price"];
 
 }
 

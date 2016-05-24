@@ -27,7 +27,7 @@ static int number_page = 0;
     [super viewDidLoad];
     self.title = @"我的戏票";
      [self.view addSubview:self.tableView];
-    self.serverManager = [ServerManager sharedInstance];
+        self.serverManager = [ServerManager sharedInstance];
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
      self.dataSource = [NSMutableArray array];
     self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
@@ -78,6 +78,8 @@ static int number_page = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.rowHeight = 130;
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonDramaTicketCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"drama"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }

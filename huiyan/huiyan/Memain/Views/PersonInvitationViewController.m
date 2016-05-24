@@ -29,6 +29,7 @@ static int number_page = 0;
     self.title = @"我的邀约";
      self.navigationController.navigationBar.translucent = NO;
     // Do any additional setup after loading the view.
+  
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];
     [self.view addSubview:self.tableView];
@@ -47,7 +48,8 @@ static int number_page = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.rowHeight = 160;
-        self.tableView.backgroundColor = [UIColor whiteColor];
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonInvitationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"invatation"];
     }
     return _tableView;

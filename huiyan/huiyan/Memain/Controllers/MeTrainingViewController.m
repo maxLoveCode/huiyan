@@ -72,7 +72,8 @@ static int number_page = 0;
         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStylePlain];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
-        self.tableView.rowHeight = 200;
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.tableView.rowHeight = 190;
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonTrainingCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"train"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
