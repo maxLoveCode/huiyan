@@ -26,6 +26,7 @@
 #import "SignUpMessageTableViewController.h"
 #import "MessageViewController.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "UITabBarController+ShowHideBar.h"
 #define bannerHeight kScreen_Width / 2
 #define menuHeight 114
 #define menuPicWidth 36

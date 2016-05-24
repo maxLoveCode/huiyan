@@ -16,6 +16,7 @@
 #import "MessageViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "GifRefresher.h"
+#import "UITabBarController+ShowHideBar.h"
 @interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -60,6 +61,7 @@ static int number_page = 0;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated

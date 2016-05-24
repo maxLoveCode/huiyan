@@ -93,7 +93,7 @@
                                                           NSFontAttributeName :self.occupation_one.font
                                                           }
                                                 context:nil].size;
-    if ([wikiStr isEqualToString:@""]) {
+    if ([wikiStr isEqualToString:@" "]) {
         self.occupation_one.hidden = YES;
     }
     self.occupation_one.text = wikiStr;
