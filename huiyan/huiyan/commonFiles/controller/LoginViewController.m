@@ -20,6 +20,7 @@
 #import "ThirdUser.h"
 #import "Tools.h"
 #import <AFNetworking.h>
+#import "ForgotPassTableViewController.h"
 #define animateDuration 0.25
 #define animateDelay 0.2
 
@@ -80,7 +81,6 @@
     }
     UIImage *launchImage = [UIImage imageNamed:launchImageName];
     
-    NSLog(@"appear");
     for (UIView* subview in [_mainview.bgView subviews]) {
         subview.alpha = 0;
         NSLog(@"111");
@@ -183,6 +183,8 @@
     _rightItem.tag = -_rightItem.tag;
 }
 
+#pragma mark - loginview delegates
+
 -(void)loginViewDidSelectLogin:(LoginView*)loginView
 {
     if ([loginView.mobile.text isEqualToString:@""] ||[loginView.mobile.text isEqualToString:@"请输入手机号"]) {
@@ -216,14 +218,17 @@
                 User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.confirmPass.text];
                 [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
             }
+            [self showAlert:responseObject[@"msg"]];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error = %@",error);
         }];
     }
-    
-    
-    
-   
+}
+
+-(void)loginViewDidSelectForgotPassword:(LoginView *)loginView
+{
+    ForgotPassTableViewController* fpt = [[ForgotPassTableViewController alloc] init];
+    [self.navigationController pushViewController:fpt animated:NO];
 }
 
 
@@ -242,6 +247,8 @@
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
             }
+            else
+                [self showAlert:responseObject[@"msg"]];
         }else{
             if ([responseObject[@"code"] integerValue] == 70000) {
                 NSLog(@"%@",responseObject[@"msg"]);
@@ -252,6 +259,7 @@
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
             }
+                [self showAlert:responseObject[@"msg"]];
 
         }
         
@@ -265,7 +273,7 @@
 {
     BOOL result = YES;
     if (!result) {
-        [self showAlert];
+        [self showAlert:@""];
     }
 }
 
@@ -301,9 +309,9 @@
     }
 }
 
--(void)showAlert
+-(void)showAlert:(NSString*)string
 {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:string message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {}];
     [alert addAction:defaultAction];

@@ -200,6 +200,7 @@
         [tncString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:(NSRange){0,[tncString length]}];
         
         [_forgotPass setAttributedTitle:tncString forState:UIControlStateNormal];
+        [_forgotPass addTarget:self action:@selector(forgotPassword) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _forgotPass;
@@ -388,6 +389,10 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(qqLogin)]) {
         [self.delegate qqLogin];
     }
+}
+
+-(void)forgotPassword{
+    [self.delegate loginViewDidSelectForgotPassword:self];
 }
 
 @end

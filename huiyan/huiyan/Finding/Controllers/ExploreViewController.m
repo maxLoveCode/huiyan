@@ -64,7 +64,7 @@ static int number_page = 0;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.tabBarController setHidden:NO];
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 //获得位置
