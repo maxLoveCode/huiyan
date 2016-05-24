@@ -19,7 +19,7 @@
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic, strong) NSArray *title_arr;
 @property (nonatomic, strong) NSArray *image_arr;
-
+@property (nonatomic, strong) UIButton *pay;
 @end
 
 @implementation PayViewController
@@ -29,6 +29,7 @@
     self.title_arr = @[@"支付宝",@"微信支付"];
     self.image_arr = @[@"alipay",@"weixinpay"];
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.pay];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -41,6 +42,19 @@
     [super viewDidAppear:YES];
 }
 
+- (UIButton *)pay{
+    if (!_pay) {
+            self.pay = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.pay.frame = CGRectMake(20, 200, kScreen_Width - 40 , 42);
+            self.pay.layer.masksToBounds = YES;
+            self.pay.layer.cornerRadius = 5;
+            [self.pay setTitle:@"确认支付" forState:UIControlStateNormal];
+            [self.pay setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.pay.backgroundColor = [UIColor grayColor];
+    }
+    return _pay;
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.tabBarController setHidden:NO];
@@ -51,9 +65,10 @@
         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
+        self.tableView .scrollEnabled = NO;
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"first"];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"second"];
-        [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"third"];
+
     }
     return _tableView;
 }
@@ -68,7 +83,7 @@
             return 50;
         }
     }else{
-        return 100;
+        return 0;
     }
 }
 
@@ -81,7 +96,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -186,47 +201,45 @@
         }
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"third" forIndexPath:indexPath];
-        UIButton *pay = [cell viewWithTag:1005];
-        if (!pay) {
-            pay = [UIButton buttonWithType:UIButtonTypeCustom];
-            pay.frame = CGRectMake(15, 25, kScreen_Width - 30 , 50);
-            pay.layer.masksToBounds = YES;
-            pay.layer.cornerRadius = 5;
-            [pay setTitle:@"确认支付" forState:UIControlStateNormal];
-            [pay setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            pay.backgroundColor = [UIColor grayColor];
-            [cell.contentView addSubview:pay];
-            pay.tag = 1005;
-        }
-        if ([self.payType isEqualToString:@"aliPay"]) {
-            UIColor *color = COLOR_THEME;
-            [pay setBackgroundColor:color];
-            [pay setEnabled:YES];
-            [pay removeTarget:self action:@selector(weixinPay) forControlEvents:UIControlEventTouchUpInside];
-            [pay addTarget:self action:@selector(aliPay) forControlEvents:UIControlEventTouchUpInside];
-            
-        }else if ([self.payType isEqualToString:@"weixin"]){
-            UIColor *color = COLOR_THEME;
-            [pay setBackgroundColor:color];
-            [pay setEnabled:YES];
-            [pay removeTarget:self action:@selector(aliPay) forControlEvents:UIControlEventTouchUpInside];
-            [pay addTarget:self action:@selector(weixinPay) forControlEvents:UIControlEventTouchUpInside];
-        }else{
-            [pay setBackgroundColor:[UIColor grayColor]];
-            [pay setEnabled:NO];
-        }
+        
+       
+               [cell.contentView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        cell.separatorInset = UIEdgeInsetsMake(0, 10000, 0, 0);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (void)refreshBtn{
+    if ([self.payType isEqualToString:@"aliPay"]) {
+        UIColor *color = COLOR_THEME;
+        [_pay setBackgroundColor:color];
+        [_pay setEnabled:YES];
+        [_pay removeTarget:self action:@selector(weixinPay) forControlEvents:UIControlEventTouchUpInside];
+        [_pay addTarget:self action:@selector(aliPay) forControlEvents:UIControlEventTouchUpInside];
+        
+    }else if ([self.payType isEqualToString:@"weixin"]){
+        UIColor *color = COLOR_THEME;
+        [_pay setBackgroundColor:color];
+        [_pay setEnabled:YES];
+        [_pay removeTarget:self action:@selector(aliPay) forControlEvents:UIControlEventTouchUpInside];
+        [_pay addTarget:self action:@selector(weixinPay) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        [_pay setBackgroundColor:[UIColor grayColor]];
+        [_pay setEnabled:NO];
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
         if (indexPath.row == 1) {
             self.payType = @"aliPay";
+            [self refreshBtn];
             [self.tableView reloadData];
         }else if (indexPath.row == 2){
             self.payType = @"weixin";
+            [self refreshBtn];
             [self.tableView reloadData];
         }
     }

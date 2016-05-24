@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="388" height="235"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="388" height="234"/>
+                <rect key="frame" x="0.0" y="0.0" width="388" height="234.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W89-Zd-gKj">
@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="15" id="xex-WZ-pBV"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="报名须知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teM-YZ-S0f">
@@ -30,7 +30,7 @@
                             <constraint firstAttribute="height" constant="16" id="6xN-w0-81f"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bz-bH-t0G">
@@ -40,7 +40,7 @@
                             <constraint firstAttribute="height" constant="1" id="V6h-Vd-5gX"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CI7-hg-JLf">
@@ -49,14 +49,14 @@
                             <constraint firstAttribute="height" constant="80" id="sIp-rg-Jwc"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WZ-jc-6xu">
-                        <rect key="frame" x="15" y="167" width="358" height="50"/>
+                        <rect key="frame" x="20" y="167" width="348" height="42"/>
                         <color key="backgroundColor" red="0.88607772435897436" green="0.19210320157174157" blue="0.55794009131962974" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="SXx-3i-Vgp"/>
+                            <constraint firstAttribute="height" constant="42" id="SXx-3i-Vgp"/>
                         </constraints>
                         <state key="normal" title="确认报名">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -68,14 +68,14 @@
                     <constraint firstItem="7WZ-jc-6xu" firstAttribute="top" secondItem="CI7-hg-JLf" secondAttribute="bottom" constant="30" id="3cy-i1-gbb"/>
                     <constraint firstItem="teM-YZ-S0f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="4v7-lk-ORY"/>
                     <constraint firstItem="CI7-hg-JLf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Arq-1Z-pNq"/>
-                    <constraint firstItem="7WZ-jc-6xu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Bgg-dL-9eU"/>
+                    <constraint firstItem="7WZ-jc-6xu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Bgg-dL-9eU"/>
                     <constraint firstItem="teM-YZ-S0f" firstAttribute="leading" secondItem="W89-Zd-gKj" secondAttribute="trailing" constant="10" id="Gwu-iE-gzG"/>
                     <constraint firstItem="5Bz-bH-t0G" firstAttribute="top" secondItem="teM-YZ-S0f" secondAttribute="bottom" constant="10" id="MwD-ZG-AWP"/>
                     <constraint firstItem="W89-Zd-gKj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="UK7-aW-gzq"/>
                     <constraint firstAttribute="trailing" secondItem="5Bz-bH-t0G" secondAttribute="trailing" constant="15" id="XM4-M4-Xeq"/>
                     <constraint firstItem="CI7-hg-JLf" firstAttribute="top" secondItem="5Bz-bH-t0G" secondAttribute="bottom" constant="15" id="cQD-GK-McG"/>
                     <constraint firstItem="5Bz-bH-t0G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fLZ-XX-7dg"/>
-                    <constraint firstAttribute="trailing" secondItem="7WZ-jc-6xu" secondAttribute="trailing" constant="15" id="mCC-Qm-AJd"/>
+                    <constraint firstAttribute="trailing" secondItem="7WZ-jc-6xu" secondAttribute="trailing" constant="20" id="mCC-Qm-AJd"/>
                     <constraint firstAttribute="trailing" secondItem="teM-YZ-S0f" secondAttribute="trailing" constant="15" id="mR8-Hl-36n"/>
                     <constraint firstItem="W89-Zd-gKj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="oka-vB-wXb"/>
                 </constraints>
@@ -86,7 +86,7 @@
                 <outlet property="mes_lab" destination="CI7-hg-JLf" id="YvT-Gk-smG"/>
                 <outlet property="sure_btn" destination="7WZ-jc-6xu" id="X7J-Ya-IfT"/>
             </connections>
-            <point key="canvasLocation" x="145" y="352.5"/>
+            <point key="canvasLocation" x="-66" y="222.5"/>
         </tableViewCell>
     </objects>
 </document>

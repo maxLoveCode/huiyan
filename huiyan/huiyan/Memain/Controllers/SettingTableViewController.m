@@ -25,7 +25,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.view addSubview:self.exitBtn];
+    self.tableView.scrollEnabled = NO;
     self.title = @"设置";                                                                                           
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"setting"];
     firstSection = @[@"修改密码"];
@@ -38,6 +39,20 @@
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
+- (UIButton *)exitBtn{
+    if (!_exitBtn) {
+        self.exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.exitBtn.backgroundColor = COLOR_THEME;
+        [self.exitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.exitBtn setTitle:@"退出登录" forState:UIControlStateNormal];
+        self.exitBtn.frame = CGRectMake(20, 200, kScreen_Width - 40, 42);
+        self.exitBtn.layer.masksToBounds = YES;
+        self.exitBtn.layer.cornerRadius = 5;
+        [self.exitBtn addTarget:self action:@selector(logOut) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _exitBtn;
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [self.tabBarController setHidden:YES];
@@ -47,9 +62,11 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.tabBarController setHidden:NO];
-    self.tabBarController.tabBar.hidden = NO;
     [super viewWillDisappear:YES];
+    [self.tabBarController setHidden:NO];
+    self.navigationController.navigationBar.translucent = YES;
+    self.tabBarController.tabBar.hidden = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,7 +77,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -82,7 +99,7 @@
         return 44;
     }
     else
-        return 50;
+        return 0;
 }
 
 
@@ -96,11 +113,11 @@
         cell.textLabel.text = secondSection[indexPath.row];
     }
     if (indexPath.section == 2){
-        cell.contentView.backgroundColor = COLOR_THEME;
-        cell.textLabel.backgroundColor = COLOR_THEME;
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;              
-        cell.textLabel.text = thirdSection[indexPath.row];
+//        cell.contentView.backgroundColor = COLOR_THEME;
+//        cell.textLabel.backgroundColor = COLOR_THEME;
+//        cell.textLabel.textColor = [UIColor whiteColor];
+//        cell.textLabel.textAlignment = NSTextAlignmentCenter;              
+//        cell.textLabel.text = thirdSection[indexPath.row];
     }
     
     return cell;
@@ -119,9 +136,6 @@
     }
     if (indexPath.section == 1) {
         //comment app
-    }
-    if (indexPath.section == 2) {
-        [self logOut];
     }
 }
 /*

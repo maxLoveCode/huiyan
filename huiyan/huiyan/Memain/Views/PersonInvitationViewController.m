@@ -27,6 +27,7 @@ static int number_page = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的邀约";
+     self.navigationController.navigationBar.translucent = NO;
     // Do any additional setup after loading the view.
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];
@@ -42,7 +43,7 @@ static int number_page = 0;
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, - 64, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.rowHeight = 160;
@@ -71,8 +72,8 @@ static int number_page = 0;
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.navigationController.navigationBar.translucent = NO;
      [self.tabBarController setHidden:YES];
+     self.navigationController.navigationBar.translucent = YES;
 }
 
 #pragma mark -- TableViewDelegate
