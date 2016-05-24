@@ -91,26 +91,9 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tL-kc-uta">
-                        <rect key="frame" x="15" y="198" width="316" height="1"/>
-                        <color key="backgroundColor" red="0.87491987179999997" green="0.87491987179999997" blue="0.87491987179999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="MpF-03-XeK"/>
-                            <constraint firstAttribute="height" constant="1" id="VJ8-ch-tO5"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="MpF-03-XeK"/>
-                            </mask>
-                        </variation>
-                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="j2B-cg-baL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="5nm-0C-8W5"/>
-                    <constraint firstAttribute="trailing" secondItem="0tL-kc-uta" secondAttribute="trailing" constant="15" id="5ot-q4-oxM"/>
                     <constraint firstItem="qHl-7h-Gch" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="92V-ji-aET"/>
                     <constraint firstItem="uGx-Z0-7sA" firstAttribute="leading" secondItem="j2B-cg-baL" secondAttribute="trailing" constant="15" id="AOB-6Y-Nfs"/>
                     <constraint firstAttribute="trailing" secondItem="VAy-C8-HRd" secondAttribute="trailing" constant="15" id="ChR-TL-pVu"/>
@@ -122,29 +105,17 @@
                     <constraint firstAttribute="trailing" secondItem="FCu-5C-ozx" secondAttribute="trailing" constant="15" id="Kzi-6W-SWJ"/>
                     <constraint firstItem="VAy-C8-HRd" firstAttribute="top" secondItem="o1i-2m-xPs" secondAttribute="bottom" constant="20" id="QWt-UD-QFk"/>
                     <constraint firstItem="VAy-C8-HRd" firstAttribute="leading" secondItem="uGx-Z0-7sA" secondAttribute="trailing" constant="5" id="STs-el-xkR"/>
-                    <constraint firstItem="0tL-kc-uta" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="UaB-gK-Lrq"/>
                     <constraint firstAttribute="trailing" secondItem="o1i-2m-xPs" secondAttribute="trailing" constant="15" id="VxL-pz-M9z"/>
-                    <constraint firstItem="0tL-kc-uta" firstAttribute="top" secondItem="vIR-W4-JPK" secondAttribute="bottom" constant="11" id="W2M-Dr-YOp"/>
-                    <constraint firstAttribute="trailing" secondItem="0tL-kc-uta" secondAttribute="trailing" constant="15" id="W9R-z5-eWP"/>
                     <constraint firstItem="o1i-2m-xPs" firstAttribute="leading" secondItem="70m-zA-nfZ" secondAttribute="trailing" constant="5" id="WHR-U8-wbY"/>
                     <constraint firstItem="j2B-cg-baL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="bR9-7j-Y2M"/>
                     <constraint firstAttribute="trailing" secondItem="qHl-7h-Gch" secondAttribute="trailing" constant="15" id="bkC-fO-eYS"/>
                     <constraint firstItem="vIR-W4-JPK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="dtw-lg-icp"/>
                     <constraint firstItem="qHl-7h-Gch" firstAttribute="top" secondItem="j2B-cg-baL" secondAttribute="bottom" constant="15" id="gUL-mp-roG"/>
-                    <constraint firstItem="0tL-kc-uta" firstAttribute="top" secondItem="vIR-W4-JPK" secondAttribute="bottom" constant="15" id="hWX-d2-IEN"/>
                     <constraint firstItem="70m-zA-nfZ" firstAttribute="top" secondItem="FCu-5C-ozx" secondAttribute="bottom" constant="17" id="oHN-bD-lA3"/>
                     <constraint firstItem="70m-zA-nfZ" firstAttribute="leading" secondItem="j2B-cg-baL" secondAttribute="trailing" constant="15" id="r95-ZN-Hb5"/>
                     <constraint firstItem="o1i-2m-xPs" firstAttribute="top" secondItem="FCu-5C-ozx" secondAttribute="bottom" constant="13" id="rEk-Ko-vj6"/>
-                    <constraint firstItem="0tL-kc-uta" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="rgi-ey-W8A"/>
                     <constraint firstItem="uGx-Z0-7sA" firstAttribute="top" secondItem="70m-zA-nfZ" secondAttribute="bottom" constant="23" id="wvh-mQ-5X4"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="W2M-Dr-YOp"/>
-                        <exclude reference="W9R-z5-eWP"/>
-                        <exclude reference="rgi-ey-W8A"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressLab" destination="VAy-C8-HRd" id="lPo-Fz-Sjv"/>
@@ -154,7 +125,7 @@
                 <outlet property="statusLab" destination="7XE-ib-KnG" id="pDA-1a-qay"/>
                 <outlet property="timeLab" destination="o1i-2m-xPs" id="GaS-sG-5Fp"/>
             </connections>
-            <point key="canvasLocation" x="436" y="366"/>
+            <point key="canvasLocation" x="244" y="240"/>
         </tableViewCell>
     </objects>
     <resources>

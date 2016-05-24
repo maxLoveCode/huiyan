@@ -318,6 +318,12 @@
 		5993500C1CF3027700666B33 /* noTicket.png in Resources */ = {isa = PBXBuildFile; fileRef = 599350081CF3027700666B33 /* noTicket.png */; };
 		59B23C6A1CEEF23100F2EB21 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */; };
 		59D4AA8B1CF40530002545A9 /* noInvitation.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AA8A1CF40530002545A9 /* noInvitation.png */; };
+		59D4AB821CF46AE2002545A9 /* ticket_address.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB7C1CF46AE2002545A9 /* ticket_address.png */; };
+		59D4AB831CF46AE2002545A9 /* ticket_detail_address@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB7D1CF46AE2002545A9 /* ticket_detail_address@3x.png */; };
+		59D4AB841CF46AE2002545A9 /* ticket_detail_price@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB7E1CF46AE2002545A9 /* ticket_detail_price@3x.png */; };
+		59D4AB851CF46AE2002545A9 /* ticket_detail_time@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB7F1CF46AE2002545A9 /* ticket_detail_time@3x.png */; };
+		59D4AB861CF46AE2002545A9 /* ticket_price.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB801CF46AE2002545A9 /* ticket_price.png */; };
+		59D4AB871CF46AE2002545A9 /* ticket_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB811CF46AE2002545A9 /* ticket_time.png */; };
 		59F6AB201CF01F040000DFB0 /* InterestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */; };
 		59FE808A1CEECE480032318C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE80891CEECE480032318C /* Message.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
@@ -879,6 +885,12 @@
 		59B23C681CEEF23100F2EB21 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = HuiYan/Memain/Models/MessageTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTableViewCell.m; path = HuiYan/Memain/Models/MessageTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		59D4AA8A1CF40530002545A9 /* noInvitation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noInvitation.png; path = HuiYan/ImageSource/noInvitation.png; sourceTree = SOURCE_ROOT; };
+		59D4AB7C1CF46AE2002545A9 /* ticket_address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticket_address.png; path = HuiYan/ImageSource/ticket_address.png; sourceTree = SOURCE_ROOT; };
+		59D4AB7D1CF46AE2002545A9 /* ticket_detail_address@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ticket_detail_address@3x.png"; path = "HuiYan/ImageSource/ticket_detail_address@3x.png"; sourceTree = SOURCE_ROOT; };
+		59D4AB7E1CF46AE2002545A9 /* ticket_detail_price@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ticket_detail_price@3x.png"; path = "HuiYan/ImageSource/ticket_detail_price@3x.png"; sourceTree = SOURCE_ROOT; };
+		59D4AB7F1CF46AE2002545A9 /* ticket_detail_time@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ticket_detail_time@3x.png"; path = "HuiYan/ImageSource/ticket_detail_time@3x.png"; sourceTree = SOURCE_ROOT; };
+		59D4AB801CF46AE2002545A9 /* ticket_price.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticket_price.png; path = HuiYan/ImageSource/ticket_price.png; sourceTree = SOURCE_ROOT; };
+		59D4AB811CF46AE2002545A9 /* ticket_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticket_time.png; path = HuiYan/ImageSource/ticket_time.png; sourceTree = SOURCE_ROOT; };
 		59F6AB1E1CF01F040000DFB0 /* InterestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterestsTableViewController.h; path = HuiYan/Memain/Controllers/InterestsTableViewController.h; sourceTree = SOURCE_ROOT; };
 		59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterestsTableViewController.m; path = HuiYan/Memain/Controllers/InterestsTableViewController.m; sourceTree = SOURCE_ROOT; };
 		59FE80881CEECE480032318C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Message.h; path = HuiYan/Memain/Models/Message.h; sourceTree = SOURCE_ROOT; };
@@ -1476,6 +1488,12 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				59D4AB7C1CF46AE2002545A9 /* ticket_address.png */,
+				59D4AB7D1CF46AE2002545A9 /* ticket_detail_address@3x.png */,
+				59D4AB7E1CF46AE2002545A9 /* ticket_detail_price@3x.png */,
+				59D4AB7F1CF46AE2002545A9 /* ticket_detail_time@3x.png */,
+				59D4AB801CF46AE2002545A9 /* ticket_price.png */,
+				59D4AB811CF46AE2002545A9 /* ticket_time.png */,
 				59D4AA8A1CF40530002545A9 /* noInvitation.png */,
 				599350051CF3027700666B33 /* noActivity.png */,
 				599350061CF3027700666B33 /* noMessage.png */,
@@ -2002,6 +2020,7 @@
 				550BFA121CBB2AF000E2E9DE /* kr-video-player-play@2x.png in Resources */,
 				558F22D31CE85469008636E1 /* training@2x.png in Resources */,
 				5578A8A31CF06BCB00BD3061 /* gifrefesh3.png in Resources */,
+				59D4AB871CF46AE2002545A9 /* ticket_time.png in Resources */,
 				55C41E251CE4559A0055A58B /* successful@2x.png in Resources */,
 				55A43E771CEB03DF00BB73EF /* NewHomePageDetailCellTableViewCell.xib in Resources */,
 				5578A8351CEEF32200BD3061 /* cancel.png in Resources */,
@@ -2021,6 +2040,7 @@
 				558F22F01CE97585008636E1 /* BindMobileViewController.xib in Resources */,
 				55B919251CCA1FAF00717F8E /* UMSocialSDKResourcesNew.bundle in Resources */,
 				25C625701CBE49C10068BFE8 /* 2.png in Resources */,
+				59D4AB821CF46AE2002545A9 /* ticket_address.png in Resources */,
 				5578A8A51CF06BCB00BD3061 /* gifrefesh5.png in Resources */,
 				25C6256F1CBE49C10068BFE8 /* 1.png in Resources */,
 				55AD32631CDB5034000ACE39 /* male@3x.png in Resources */,
@@ -2079,6 +2099,7 @@
 				550BFA0B1CBB2AF000E2E9DE /* brightness_bg.png in Resources */,
 				550BFA0E1CBB2AF000E2E9DE /* kr-video-player-fullscreen@2x.png in Resources */,
 				25C6257B1CBE49C10068BFE8 /* tab_homePage_selected@2x.png in Resources */,
+				59D4AB831CF46AE2002545A9 /* ticket_detail_address@3x.png in Resources */,
 				5578A8B91CF0733300BD3061 /* videoimage.png in Resources */,
 				5578A8BD1CF07C4B00BD3061 /* ticket_detail_address.png in Resources */,
 				55C41E0C1CE428280055A58B /* failure@2x.png in Resources */,
@@ -2091,6 +2112,7 @@
 				5578A8B51CF06ED400BD3061 /* mine@2x.png in Resources */,
 				550BFA111CBB2AF000E2E9DE /* kr-video-player-pause@3x.png in Resources */,
 				5578A8BF1CF07C4B00BD3061 /* ticket_detail_time.png in Resources */,
+				59D4AB841CF46AE2002545A9 /* ticket_detail_price@3x.png in Resources */,
 				5578A8C71CF083EB00BD3061 /* service.png in Resources */,
 				550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */,
 				5578A8B21CF06ED400BD3061 /* foundSel@2x.png in Resources */,
@@ -2103,6 +2125,7 @@
 				55C41E041CE325C80055A58B /* TrainOrdersMessageCell.xib in Resources */,
 				55C41E241CE4559A0055A58B /* pushMes@3x.png in Resources */,
 				5578A8AB1CF06DF700BD3061 /* dramaSel@2x.png in Resources */,
+				59D4AB861CF46AE2002545A9 /* ticket_price.png in Resources */,
 				55B9191D1CCA1FAF00717F8E /* UMSCommentDetailController.xib in Resources */,
 				5578A8471CEEF9CA00BD3061 /* MHSelectPickerView.xib in Resources */,
 				5578A8C51CF0825100BD3061 /* like.png in Resources */,
@@ -2131,6 +2154,7 @@
 				5578A8371CEEF32200BD3061 /* no_show.png in Resources */,
 				25C625741CBE49C10068BFE8 /* tab_explorer_selected@3x.png in Resources */,
 				55C41E0D1CE428280055A58B /* successful.png in Resources */,
+				59D4AB851CF46AE2002545A9 /* ticket_detail_time@3x.png in Resources */,
 				55B919241CCA1FAF00717F8E /* UMSShareListController.xib in Resources */,
 				5578A8A01CF06BCB00BD3061 /* gifrefesh0.png in Resources */,
 				558F22D01CE85469008636E1 /* set@3x.png in Resources */,
