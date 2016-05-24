@@ -67,7 +67,7 @@
     [self.view setBackgroundColor:[UIColor blackColor]];
     [UIView animateWithDuration:1 animations:^{
         _dramaStarTableView.alpha = 1;
-        [self.dramaStarTableView setBackgroundColor:[UIColor whiteColor]];
+        [self.dramaStarTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     }];
 }
 
