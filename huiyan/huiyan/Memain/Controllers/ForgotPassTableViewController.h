@@ -10,4 +10,6 @@
 
 @interface ForgotPassTableViewController : UIViewController
 
+@property (assign, nonatomic) NSInteger type;
+
 @end
