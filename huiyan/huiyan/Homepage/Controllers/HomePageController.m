@@ -165,7 +165,7 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
-        self.ticketCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + titleLabelHeight+ 40) collectionViewLayout:layout];
+        self.ticketCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, imageHeight + titleLabelHeight+ 30) collectionViewLayout:layout];
         self.ticketCollectionView.pagingEnabled = YES;
         self.ticketCollectionView.scrollEnabled = NO;
         self.ticketCollectionView.bounces = NO;
@@ -184,7 +184,7 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
-        self.wikiCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width,imageHeight + titleLabelHeight+ 40) collectionViewLayout:layout];
+        self.wikiCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width,imageHeight + titleLabelHeight+ 30) collectionViewLayout:layout];
         self.wikiCollectionView.pagingEnabled = YES;
         self.wikiCollectionView.scrollEnabled = NO;
         self.wikiCollectionView.bounces = NO;
@@ -294,11 +294,11 @@
         if (indexPath.section == 0) {
             return 114;
         }else if (indexPath.section == 1){
-            return imageHeight + 70;
+            return imageHeight + titleLabelHeight+ 30;
         }else if(indexPath.section == 2){
             return actCellHeight * 3;
         }else{
-            return imageHeight + 70;
+            return imageHeight + titleLabelHeight+ 30;
         }
     }
     return actCellHeight;
@@ -368,7 +368,7 @@
     if (collectionView == _menuView) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     }
-    return UIEdgeInsetsMake(20, 0, 20, 0); // top, left, bottom, right
+    return UIEdgeInsetsMake(20, 0, 10, 0); // top, left, bottom, right
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
