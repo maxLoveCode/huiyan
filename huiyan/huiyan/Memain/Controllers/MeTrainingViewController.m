@@ -25,6 +25,7 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的活动";
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];

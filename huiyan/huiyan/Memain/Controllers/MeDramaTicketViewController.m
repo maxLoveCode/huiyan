@@ -24,6 +24,7 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的戏票";
      [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");

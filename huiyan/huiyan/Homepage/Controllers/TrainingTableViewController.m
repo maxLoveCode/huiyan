@@ -97,7 +97,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TrainingDetailsTableViewController *traDetailCon = [[TrainingDetailsTableViewController alloc]init];
-    [self.tabBarController setHidden:YES];
     if (self.dataSource.count > 0) {
     traDetailCon.train  = self.dataSource[indexPath.section];
     }

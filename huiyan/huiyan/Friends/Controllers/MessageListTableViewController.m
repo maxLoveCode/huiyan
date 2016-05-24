@@ -40,12 +40,14 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewDidDisappear:YES];
+   // [self.tabBarController setHidden:NO];
     self.tabBarController.tabBar.hidden = NO;
 }
 

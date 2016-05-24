@@ -14,6 +14,7 @@
 #import "Invitation.h"
 #import <MJRefresh.h>
 #import "ArticalViewController.h"
+#import "GifRefresher.h"
 @interface PersonInvitationViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -24,11 +25,12 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的邀约";
     // Do any additional setup after loading the view.
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];
     [self.view addSubview:self.tableView];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];

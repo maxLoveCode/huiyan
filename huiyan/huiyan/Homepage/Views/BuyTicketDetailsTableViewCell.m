@@ -159,7 +159,7 @@
 }
 
 + (CGFloat)cellHeight{
-    return 187 + 20 + 30;
+    return 187;
 }
 
 - (void)setContent:(BuyTicket *)ticket{
@@ -173,7 +173,7 @@
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:ticket.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
     self.title_lab.text = ticket.title;
     self.time_lab.text = ticket.date;
-    self.address_lab.text = ticket.address;
+    self.address_lab.text = ticket.theater_addr;
     self.price_lab.text = ticket.price_range;
     self.time_pic.image = [UIImage imageNamed:@"ticket_detail_time"];
     self.address_pic.image = [UIImage imageNamed:@"ticket_detail_address"];

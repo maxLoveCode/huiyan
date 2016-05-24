@@ -59,7 +59,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.view setBackgroundColor:COLOR_WithHex(0xefefef)];
     self.head_title = @[@"最新剧目",@"最新活动",@"百科推荐"];
-    _serverManager = [ServerManager sharedInstance];
+  
     self.ticketArr  = [NSMutableArray array];
     self.wikiArr = [NSMutableArray array];
     self.actArr = [NSMutableArray array];
@@ -76,7 +76,7 @@
 {
     self.navigationController.navigationBar.barTintColor = COLOR_THEME;
     [super viewWillAppear:animated];
-    [self.tabBarController setHidden:NO];
+       [self.tabBarController setHidden:NO];
     
 }
 
@@ -462,6 +462,7 @@
 #pragma mark 请求数据
 
 - (void)get_opera_listData{
+    self.serverManager = [ServerManager sharedInstance];
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
     [self.serverManager AnimatedGET:@"get_opera_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30010) {
@@ -477,6 +478,7 @@
 }
 
 - (void)get_wiki_listData{
+    self.serverManager = [ServerManager sharedInstance];
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
     [self.serverManager AnimatedGET:@"get_wiki_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 20010) {
@@ -492,6 +494,7 @@
 }
 
 - (void)get_train_listData{
+    self.serverManager = [ServerManager sharedInstance];
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
     [self.serverManager AnimatedGET:@"get_train_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 40000) {

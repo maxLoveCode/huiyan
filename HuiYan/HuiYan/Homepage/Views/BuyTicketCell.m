@@ -113,7 +113,7 @@
 - (void)setContent:(BuyTicket *)ticket{
     self.title_lab.text = ticket.title;
     self.time_lab.text  = ticket.date;
-    self.address_lab.text = ticket.address;
+    self.address_lab.text = ticket.theater_addr;
     self.price_lab.text = ticket.price_range;
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:ticket.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
 }

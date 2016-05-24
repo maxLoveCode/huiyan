@@ -219,6 +219,14 @@
     [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
     _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
     
+    NSDictionary *qiniuDic = @{@"access_token":self.serverManager.accessToken};
+    [self.serverManager AnimatedGET:@"get_qiniu_token.php" parameters:qiniuDic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue]== 120000) {
+            NSString *qiniutiken = [responseObject[@"data"] objectForKey:@"uptoken"];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
     //七牛服务器
 //    [self getQiniuAccessToken:^(NSMutableDictionary *result) {
 //        if ([[result objectForKey:@"code"]integerValue] == 60055) {

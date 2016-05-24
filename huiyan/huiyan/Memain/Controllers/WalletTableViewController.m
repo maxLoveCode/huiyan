@@ -9,7 +9,11 @@
 #import "WalletTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
-
+#import <AlipaySDK/AlipaySDK.h>
+#import "Order.h"
+#import "DataSigner.h"
+#import "MQPayClient.h"
+#import "ServerManager.h"
 #define cellHeight 44
 #define topupheight 180
 #define buttonHeight 60
@@ -20,15 +24,16 @@
     NSInteger select;
 }
 @property (nonatomic, strong) UICollectionView* topup;
-
+@property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation WalletTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.serverManager = [ServerManager sharedInstance];
+    [self get_recharge_diamondData];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"wallet"];
     
     self.title = @"我的钱包";
@@ -164,17 +169,17 @@
     else
     {
         UIButton* pay = [UIButton buttonWithType:UIButtonTypeCustom];
+
         [pay setFrame:CGRectMake(kMargin, 0,  kScreen_Width-2*kMargin, buttonHeight)];
         [pay setTitle:@"立即支付" forState: UIControlStateNormal];
         pay.backgroundColor = COLOR_THEME;
         pay.layer.cornerRadius = 4;
         pay.layer.masksToBounds = YES;
-        
         CGFloat indent_large_enought_to_hidden= 10000;
         cell.separatorInset = UIEdgeInsetsMake(0, indent_large_enought_to_hidden, 0, 0); // indent large engough for separator(including cell' content) to hidden separator
         cell.indentationWidth = indent_large_enought_to_hidden * -1; // adjust the cell's content to show normally
         cell.indentationLevel = 1; // must add this, otherwise default is 0, now actual indentation = indentationWidth * indentationLevel = 10000 * 1 = -10000
-        
+        [pay addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
         [cell setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
         [cell.contentView addSubview:pay];
     }
@@ -232,14 +237,132 @@
     [collectionView reloadData];
 }
 
--(void)pay
+-(void)pay:(UIButton *)sender
 {
-    if (!select) {
+//    if (!select) {
+//        return;
+//    }
+    NSString* price = topUpLevel[select];
+    NSLog(@"---%@",price);
+    [self aliPay:price];
+}
+
+- (void)aliPay:(NSString *)price{
+    NSLog(@"支付包支付");
+    //初始化订单信息
+    /*
+     *商户的唯一的parnter和seller。
+     *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
+     */
+    /*============================================================================*/
+    /*=======================需要填写商户app申请的===================================*/
+    /*============================================================================*/
+    NSString *partner = @"2088021412701123";
+    NSString *seller = @"zhifubao@huayinwenhua.com";
+    NSString *privateKey = @"MIICXAIBAAKBgQDEcf//TAUh+3g+LyU08tLclkfp2mqzkQ5XEif23xeXuJhYsDTpzU0Ob15EB16aoUa4E5nOhcxwdnASaB18evvVQtf1ERkC2HQqjf/5fR/inNLtLlJ/nsCIaFQ+fmSPYivvbHYZ1ufpl78smPsVhHKPj9Z3E3zgvo6kAq3/QbUBlQIDAQABAoGAd4rL9saDBRfrJyQ3Zw4xROzqnCM+9UDbUh8JVNCToc9CXg30VSaKsrMQ0SMO7dggmdnLqgJ/0xwvvPPApcSNRDsIzQ+62XoN7oaaSiApDjExeTMRyz/HfR357K4EgDey9gAsh4yxz8aQ5TrIhRnqZJtNmw/QmDm1NASrBBCPN+ECQQDwqN7bDKnMklXXYzzjW4CtcRpAnOc9AaDFrxpkmLuQ2Y3itQDOBo4P+sv+3kGVrQdSmNsUzs0Nfh07YdsTOuHNAkEA0Pehro30WcTTYZLAFvoTd2lOW53/IO1nyiQ6f1Nt6CP6smcsqAvArhdaFrPU2QvUrgXYJT+FQ0ancI/3nC126QJAIm/nw+yh95YRFosq0VXsqeT/XrOVG1O6T89otXBtlqKq/P/tp42kkoDO5B+lvudNnvIkl2uoR//96ttr3+qTGQJAJdhDKtbAoyVXVvt52G9v6RdkPolttCvquRw4j+ivJfSmKXswBjsiqSTHhwcIjEptORsL2ysW2mlIV8VrBZjiSQJBANSRLnRbCM8hn6MlmjkhwEbWCRUBMg8bF1Y2jh0oXR5vBOWdAbFIzHEhw7IXt56F/AYoOi1iKvNEeIKQ3nCslNc=";
+    //partner和seller获取失败,提示
+    if ([partner length] == 0 ||
+        [seller length] == 0 ||
+        [privateKey length] == 0){
+        
+        NSLog(@"缺少partner或者seller或者私钥。");
         return;
     }
-    NSString* price = topUpLevel[select];
-#warning price是价格,下面要支付跳转.
+    
+    /*
+     *生成订单信息及签名
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    Order *order = [[Order alloc] init];
+    order.partner = partner;
+    order.seller = seller;
+   // order.tradeNO = ; //订单ID（由商家自行制定）
+    //    //商品标题
+  //  order.productName = [NSString stringWithFormat:@"汇演订单:%@",self.data_dic[@"ono"]];
+    //    //商品描述
+    order.productDescription = @"描述";
+    //    //商品价格
+   // order.amount = price;
+    order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
+    
+    //#pragma mark 疑问1.
+    order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/opera_alipay"; //回调URL
+    
+    //以下配置信息是默认信息,不需要更改.
+    order.service = @"mobile.securitypay.pay";
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    order.itBPay = @"30m";
+    order.showUrl = @"m.alipay.com";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types,用于快捷支付成功后重新唤起商户应用
+    NSString *appScheme = @"huiyan";
+    
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    NSString *signedString = [signer signString:orderSpec];
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            NSLog(@"reslut = %@",resultDic);
+            NSLog(@"pay %@",resultDic);
+            NSLog(@"memo %@", [resultDic objectForKey:@"memo"]);
+            NSNumber *resultCode = [resultDic objectForKey:@"resultStatus"];
+            
+            if(resultCode.integerValue == 9000)
+            {
+                NSLog(@"支付成功");
+                
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"支付成功" message:[NSString stringWithFormat:@"您获得了%@钻石！",price] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {}];
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
+    
+            }
+            else if (resultCode.integerValue  == 6001)
+            {
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"用户终止支付" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {}];
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            else
+            {
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"购买失败,请联系客服" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {}];
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            
+        }];
+        
+    }
+    
     
 }
+
+- (void)get_recharge_diamondData{
+    NSDictionary *parameters = @{@"accesstoken":self.serverManager.accessToken};
+    [self.serverManager AnimatedGET:@"get_recharge_diamond.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 80090) {
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
 
 @end

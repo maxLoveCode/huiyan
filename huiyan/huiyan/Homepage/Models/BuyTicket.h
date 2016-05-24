@@ -11,7 +11,9 @@
 @interface BuyTicket : NSObject
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *date;
-@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *theater_name;
+@property (nonatomic, copy) NSString *theater_addr;
+@property (nonatomic, copy) NSString *theater_tel;
 @property (nonatomic, copy) NSString *price_range;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *buy_tip;

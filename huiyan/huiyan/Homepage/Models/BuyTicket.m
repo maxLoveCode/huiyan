@@ -12,7 +12,9 @@
 + (BuyTicket *)dataWithDic:(NSDictionary *)dic{
     BuyTicket *tick = [[BuyTicket alloc]init];
     tick.date = dic[@"date"];
-    tick.address = dic[@"address"];
+    tick.theater_addr = dic[@"theater_addr"];
+    tick.theater_tel = dic[@"theater_tel"];
+    tick.theater_name = dic[@"theater_name"];
     tick.price_range = dic[@"price_range"];
     tick.content = dic[@"content"];
     tick.buy_tip = dic[@"buy_tip"];

@@ -29,7 +29,7 @@
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.view addSubview:self.tableView];
      self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    self.title_arr = @[@"系统消息",@"推送消息",@"附近的人"];
+    self.title_arr = @[@"系统消息",@"推送消息",@"附近的戏友"];
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
     // Do any additional setup after loading the view.
@@ -37,14 +37,15 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+      [super viewDidAppear:YES];
     [self.tabBarController setHidden:YES];
-    [super viewDidAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.tabBarController setHidden:NO];
     [super viewWillDisappear:YES];
+    [self.tabBarController setHidden:NO];
+   
 }
 
 - (void)didReceiveMemoryWarning {

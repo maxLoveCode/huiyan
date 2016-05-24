@@ -35,9 +35,17 @@
     [super viewDidLoad];
    [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor whiteColor];
+    //侧滑关闭
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"homePage"];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.title_arr = @[@"我的戏票",@"我的活动",@"我的邀约",@"我的钱包",@"我的兴趣",@"绑定手机号",@"设置"];
-    self.image_arr = @[@"ticket",@"training",@"training",@"wallet",@"interest",@"phone",@"set"];
+    self.title_arr = @[@"我的戏票",@"我的活动",@"我的邀约",@"我的兴趣",@"绑定手机号",@"设置"];
+    self.image_arr = @[@"ticket",@"training",@"training",@"interest",@"phone",@"set"];
 
     // Do any additional setup after loading the view.
 }
@@ -71,7 +79,7 @@
 #pragma mark - tableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -82,8 +90,6 @@
         case 1:
             return 3;
         case 2:
-            return 1;
-        case 3:
             return 1;
         default:
             if ([type isEqualToString:@"mobile"]) {
@@ -102,14 +108,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section <3) {
+    if (section <2) {
         return 10;
     }
     return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 4) {
+    if (section == 3) {
         return  10;
     }
     return 0.001;
@@ -136,17 +142,14 @@
         }else if (indexPath.section == 2){
             cell.textLabel.text = self.title_arr[3];
              cell.imageView.image = [UIImage imageNamed:self.image_arr[3]];
-        }else if (indexPath.section == 3){
-            cell.textLabel.text = self.title_arr[4];
-             cell.imageView.image = [UIImage imageNamed:self.image_arr[4]];
         }else{
             if ([type isEqualToString:@"mobile"]) {
-                cell.textLabel.text = self.title_arr[6];
-                cell.imageView.image = [UIImage imageNamed:self.image_arr[6]];
+                cell.textLabel.text = self.title_arr[5];
+                cell.imageView.image = [UIImage imageNamed:self.image_arr[5]];
                 cell.detailTextLabel.text = self.perData.mobile;
             }else{
-            cell.textLabel.text = self.title_arr[indexPath.row + 5];
-             cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row + 5]];
+            cell.textLabel.text = self.title_arr[indexPath.row + 4];
+             cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row + 4]];
                 if (indexPath.row == 0) {
                     if ([self.perData.mobile isEqualToString:@""] || self.perData.mobile  == nil) {
                          cell.detailTextLabel.text = @"未绑定";
@@ -185,13 +188,9 @@
         }
         
     }else if (indexPath.section == 2){
-        //wallet
-        WalletTableViewController* wallet = [[WalletTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        [self.navigationController pushViewController:wallet animated:YES];
-    }else if (indexPath.section == 3){
         InterestsTableViewController* interests = [[InterestsTableViewController alloc] init];
         [self.navigationController pushViewController:interests animated:YES];
-    }else if (indexPath.section == 4){
+    }else if (indexPath.section == 3){
         if ([type isEqualToString:@"mobile"]) {
             SettingTableViewController * settingTable = [[SettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:settingTable animated:YES];

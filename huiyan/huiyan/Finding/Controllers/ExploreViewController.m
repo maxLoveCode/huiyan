@@ -30,7 +30,7 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"附近的人";
+    self.title = @"附近的戏友";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -64,7 +64,8 @@ static int number_page = 0;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.tabBarController setHidden:NO];
+   // [self.tabBarController setHidden:NO];
+      self.tabBarController.tabBar.hidden = NO;
 }
 
 //获得位置

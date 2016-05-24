@@ -111,13 +111,16 @@
 - (void)setContent:(FindFriend *)model{
     [self.head_pic sd_setImageWithURL:[NSURL URLWithString:model.avatar] ];
     self.name_lab.text = model.nickname;
-    CGSize size =  [model.nickname boundingRectWithSize:CGSizeMake(MAXFLOAT, 140)
-                                                   options:NSStringDrawingUsesLineFragmentOrigin
-                                                attributes:@{
-                                                             NSFontAttributeName :self.name_lab.font
-                                                             }
-                                                   context:nil].size;
-    
+//    CGSize size =  [model.nickname boundingRectWithSize:CGSizeMake(MAXFLOAT, 140)
+//                                                   options:NSStringDrawingUsesLineFragmentOrigin
+//                                                attributes:@{
+//                                                             NSFontAttributeName :self.name_lab.font
+//                                                             }
+//                                                   context:nil].size;
+    NSString *wikiStr = @"";
+    for (NSString *str in model.like_wiki) {
+        [wikiStr stringByAppendingString:str];
+    }
     
     self.distance_lab.text = model.distance;
     if ([model.like_wiki count]  == 1) {
