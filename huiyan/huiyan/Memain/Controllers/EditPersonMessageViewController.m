@@ -219,6 +219,7 @@
     [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
     _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
     
+    
     NSDictionary *qiniuDic = @{@"access_token":self.serverManager.accessToken};
     [self.serverManager AnimatedGET:@"get_qiniu_token.php" parameters:qiniuDic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue]== 120000) {
@@ -227,34 +228,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
-    //七牛服务器
-//    [self getQiniuAccessToken:^(NSMutableDictionary *result) {
-//        if ([[result objectForKey:@"code"]integerValue] == 60055) {
-//            NSString *token = [[result objectForKey:@"data"] objectForKey:@"qiniu_upload_token"];
-//            NSLog(@"token is %@",token);
-//            NSDate *date = [NSDate date];
-//            [_people PostImage:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-//                NSString* header_string = [resp objectForKey:@"key"];
-//                NSMutableDictionary* avatar_dic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:header_string,@"avatar", nil];
-//                [SVProgressHUD showWithStatus:@"正在修改个人信息" maskType: SVProgressHUDMaskTypeClear];
-//                [_people editInfo:^(NSMutableDictionary *result) {
-//                    self.selfPhoto = _selfPhoto;
-//                    [_people setAvatar:[NSString stringWithFormat:@"http://7xk6qx.com1.z0.glb.clouddn.com/%@", key]];
-//                    [self.tableView reloadData];
-//                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-//                    [[NSUserDefaults standardUserDefaults] setObject:[_people getAvatar] forKey:@"myAvatar"];
-//                } Index:0 Changes:avatar_dic];
-//            } Image:image Forkey:[NSString stringWithFormat:@"%@,%@",[_people getUserID],[Tools stringWithDate:date byType:date_type_YMDHMS_NoSperator]] Token:token failure:^(NSError *error) {
-//                ;
-//            }];
-//        }
-//        else
-//        {
-//            //[SVProgressHUD showErrorWithStatus:@"上传失败"];
-//        }
-//    } failure:^(NSError *error) {
-//      
-//    }];
+   
     
 }
 
@@ -316,24 +290,6 @@
     }
 }
 
-#pragma mark -- 七牛上传
-//-(void)PostImage:(void (^)(QNResponseInfo *, NSString *, NSDictionary *))completion Image:(UIImage *)image Forkey:(NSString*)key Token:(NSString *)token failure:(void (^)(NSError *))failure
-//{
-//    NSData* compressedImage;
-//    if (image) {
-//        compressedImage = UIImageJPEGRepresentation(image, 1.0);
-//    }
-//    QNUploadManager *upManager = [[QNUploadManager alloc] init];
-//    NSData *data = [@"Hello, World!" dataUsingEncoding : NSUTF8StringEncoding];
-//    [upManager putData:compressedImage key:key token:token
-//              complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-//                  NSLog(@"%@", info);
-//                  NSLog(@"%@", resp);
-//                  if (completion) {
-//                      completion(info,key,resp);
-//                  }
-//              } option:nil];
-//}
 
 /*
 #pragma mark - Navigation
