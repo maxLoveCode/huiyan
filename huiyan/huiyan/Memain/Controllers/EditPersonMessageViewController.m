@@ -189,7 +189,8 @@
     
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-        [self performSelector:@selector(saveImage:)  withObject:img afterDelay:0.5];
+        NSData *data = UIImageJPEGRepresentation(img, 1.0);
+        NSLog(@"----%@",data);
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -197,38 +198,6 @@
 {
     //	[picker dismissModalViewControllerAnimated:YES];
     [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)saveImage:(UIImage *)image {
-    //    NSLog(@"保存头像！");
-    //    [userPhotoButton setImage:image forState:UIControlStateNormal];
-    BOOL success;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error;
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *imageFilePath = [documentsDirectory stringByAppendingPathComponent:@"selfPhoto.jpg"];
-    // NSLog(@"imageFile->>%@",imageFilePath);
-    success = [fileManager fileExistsAtPath:imageFilePath];
-    if(success) {
-        success = [fileManager removeItemAtPath:imageFilePath error:&error];
-    }
-    
-#warning 这里还都是缩略图，上传时候应该用大图标
-    UIImage *smallImage = [self thumbnailWithImageWithoutScale:image size:CGSizeMake(100.0f, 100.0f)];
-    [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
-    _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
-    
-    
-    NSDictionary *qiniuDic = @{@"access_token":self.serverManager.accessToken};
-    [self.serverManager AnimatedGET:@"get_qiniu_token.php" parameters:qiniuDic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] integerValue]== 120000) {
-            NSString *qiniutiken = [responseObject[@"data"] objectForKey:@"uptoken"];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error = %@",error);
-    }];
 }
 
 // 改变图像的尺寸，方便上传服务器
@@ -273,6 +242,9 @@
     return newimage;
 }
 
+- (void)getUploadImage{
+    
+}
 
 - (void)get_user_infoData{
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");

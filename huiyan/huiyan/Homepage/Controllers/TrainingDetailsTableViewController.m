@@ -68,7 +68,7 @@
 - (UIButton *)tail_btn{
     if (!_tail_btn) {
         self.tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.tail_btn.frame = CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48);
+        self.tail_btn.frame = CGRectMake(20, kScreen_Height - 48 - 64, kScreen_Width - 40, 42);
        self.tail_btn.backgroundColor = COLOR_THEME;
         [self.tail_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.tail_btn.titleLabel.font = kFONT18;
