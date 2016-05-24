@@ -16,7 +16,6 @@
         [self addSubview:self.name_lab];
         [self addSubview:self.sex_pic];
         [self addSubview:self.occupation_one];
-        [self addSubview:self.occupation_two];
         [self addSubview:self.distance_lab];
     }
     return self;
@@ -61,32 +60,6 @@
     return _occupation_one;
 }
 
--(UILabel *)occupation_two{
-    if (!_occupation_two) {
-        self.occupation_two = [[UILabel alloc]init];
-        self.occupation_two.backgroundColor = COLOR_WithHex(0xdddddd);
-        self.occupation_two.layer.masksToBounds = YES;
-        self.occupation_two.layer.cornerRadius = 5;
-        self.occupation_two.textAlignment = NSTextAlignmentCenter;
-        self.occupation_two.font = kFONT12;
-        self.occupation_two.textColor = COLOR_WithHex(0x565656);
-    }
-    return _occupation_two;
-}
-
--(UILabel *)occupation_three{
-    if (!_occupation_three) {
-        self.occupation_three = [[UILabel alloc]init];
-        self.occupation_three.backgroundColor = COLOR_WithHex(0xdddddd);
-        self.occupation_three.layer.masksToBounds = YES;
-        self.occupation_three.layer.cornerRadius = 5;
-        self.occupation_three.textAlignment = NSTextAlignmentCenter;
-        self.occupation_three.font = kFONT12;
-        self.occupation_three.textColor = COLOR_WithHex(0x565656);
-    }
-    return _occupation_three;
-}
-
 - (UILabel *)distance_lab{
     if (!_distance_lab) {
         self.distance_lab = [[UILabel alloc]init];
@@ -102,44 +75,30 @@
     self.head_pic.frame = CGRectMake(kMargin, 10, 41, 41);
     self.name_lab.frame = CGRectMake(CGRectGetMaxX(self.head_pic.frame) + 12, CGRectGetMinX(self.head_pic.frame), 60, 16);
     self.sex_pic.frame = CGRectMake(CGRectGetMaxX(self.name_lab.frame), CGRectGetMinY(self.name_lab.frame), 16, 16);
-    self.occupation_one.frame = CGRectMake(CGRectGetMinX(self.name_lab.frame), CGRectGetMaxY(self.name_lab.frame) + 5, 50, 18);
-     self.occupation_two.frame = CGRectMake(CGRectGetMaxX(self.occupation_one.frame) + 5, CGRectGetMinY(self.occupation_one.frame), 50, 18);
-    self.occupation_three.frame = CGRectMake(CGRectGetMaxX(self.occupation_two.frame) + 5, CGRectGetMinY(self.occupation_two.frame), 50, 18);
+    self.occupation_one.frame = CGRectMake(CGRectGetMinX(self.name_lab.frame), CGRectGetMaxY(self.name_lab.frame) + 5, self.occwidth, 18);
     self.distance_lab.frame = CGRectMake(kScreen_Width - kMargin - 100, 0, 100, 60);
 }
 
 - (void)setContent:(FindFriend *)model{
     [self.head_pic sd_setImageWithURL:[NSURL URLWithString:model.avatar] ];
     self.name_lab.text = model.nickname;
-//    CGSize size =  [model.nickname boundingRectWithSize:CGSizeMake(MAXFLOAT, 140)
-//                                                   options:NSStringDrawingUsesLineFragmentOrigin
-//                                                attributes:@{
-//                                                             NSFontAttributeName :self.name_lab.font
-//                                                             }
-//                                                   context:nil].size;
+    
     NSString *wikiStr = @"";
     for (NSString *str in model.like_wiki) {
-        [wikiStr stringByAppendingString:str];
+       wikiStr =  [wikiStr stringByAppendingString:[NSString stringWithFormat:@"%@ ",str]];
     }
-    
-    self.distance_lab.text = model.distance;
-    if ([model.like_wiki count]  == 1) {
-        self.occupation_one.text = model.like_wiki[0];
-        self.occupation_two.hidden = YES;
-        self.occupation_three.hidden = YES;
-    }else if ([model.like_wiki count] ==2){
-        self.occupation_one.text = model.like_wiki[0];
-        self.occupation_two.text = model.like_wiki[1];
-        self.occupation_three.hidden = YES;
-    }else if([model.like_wiki count] ==3){
-        self.occupation_one.text = model.like_wiki[0];
-        self.occupation_two.text = model.like_wiki[1];
-        self.occupation_three.text = model.like_wiki[2];
-    }else{
-        self.occupation_two.hidden = YES;
+    CGSize size =  [wikiStr boundingRectWithSize:CGSizeMake(MAXFLOAT, 18)
+                                                options:NSStringDrawingUsesLineFragmentOrigin
+                                             attributes:@{
+                                                          NSFontAttributeName :self.occupation_one.font
+                                                          }
+                                                context:nil].size;
+    if ([wikiStr isEqualToString:@""]) {
         self.occupation_one.hidden = YES;
-        self.occupation_three.hidden = YES;
     }
+    self.occupation_one.text = wikiStr;
+    self.occwidth = size.width;
+    self.distance_lab.text = model.distance;
     if ([model.sex isEqualToString:@"1"]) {
         self.sex_pic.image = [UIImage imageNamed:@"male"];
     }else{

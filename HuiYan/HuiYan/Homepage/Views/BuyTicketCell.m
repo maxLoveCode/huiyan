@@ -102,9 +102,9 @@
     [super layoutSubviews];
     CGFloat labelWidth = kScreen_Width- imageWidth- 4*kMargin - buttonWidth;
     self.image_pic.frame = CGRectMake(kMargin, cellTopMargin, imageWidth, imageHeight);
-    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + kMargin , CGRectGetMinY(self.image_pic.frame)+cellTopMargin/2 , labelWidth, titleFontSize * 1.5);
-    self.time_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.title_lab.frame)+cellTopMargin/2, labelWidth, 13 * 1.5);
-    self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame) , CGRectGetMaxY(self.time_lab.frame) , labelWidth, 13 * 1.5);
+    self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.image_pic.frame) + kMargin , CGRectGetMinY(self.image_pic.frame)+cellTopMargin/2 , labelWidth + buttonWidth, titleFontSize * 1.5);
+    self.time_lab.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.title_lab.frame)+cellTopMargin/2, labelWidth + buttonWidth, 13 * 1.5);
+    self.address_lab.frame = CGRectMake(CGRectGetMinX(self.time_lab.frame) , CGRectGetMaxY(self.time_lab.frame) , labelWidth + buttonWidth, 13 * 1.5);
     self.price_lab.frame = CGRectMake(CGRectGetMinX(self.address_lab.frame) , CGRectGetMaxY(self.image_pic.frame) - 12 * 1.5, 150, 13 * 1.5);
     self.buy_btn.frame = CGRectMake(kScreen_Width - buttonWidth- kMargin, CGRectGetMaxY(self.image_pic.frame) - 20, buttonWidth, 20);
     [self.down_lab setFrame:CGRectMake(0, CGRectGetMaxY(self.image_pic.frame)+9, kScreen_Width, 1)];

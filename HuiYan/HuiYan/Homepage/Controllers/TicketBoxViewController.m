@@ -56,7 +56,7 @@
 
 - (UITableView *)ticketBoxTableView{
     if (!_ticketBoxTableView) {
-        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 41, kScreen_Width, kScreen_Height - 41) style:UITableViewStyleGrouped];
+        self.ticketBoxTableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 41, kScreen_Width, kScreen_Height - 41 - 64) style:UITableViewStyleGrouped];
         self.ticketBoxTableView.delegate  = self;
         self.ticketBoxTableView.dataSource = self;
         //self.ticketBoxTableView.backgroundColor = [UIColor whiteColor];

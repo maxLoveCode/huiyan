@@ -90,7 +90,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    self.image_pic.frame = CGRectMake(0, 0, kScreen_Width, 187);
+    self.image_pic.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Width / 7 * 5);
     self.gray_view.frame = CGRectMake(0, CGRectGetMaxY(self.image_pic.frame) - 32, kScreen_Width, 32);
     self.video_pic.frame = CGRectMake(15, CGRectGetMaxY(self.image_pic.frame) - 32, 32, 32);
     self.title_lab.frame = CGRectMake(CGRectGetMaxX(self.video_pic.frame) + 15, CGRectGetMinY(self.gray_view.frame) + 9, 150, 14);
@@ -100,7 +100,7 @@
 
 
 + (CGFloat)cellHeight{
-    return 197.0;
+    return kScreen_Width / 7 * 5;
 }
 
 - (void)setContent:(HomePage *)drama{

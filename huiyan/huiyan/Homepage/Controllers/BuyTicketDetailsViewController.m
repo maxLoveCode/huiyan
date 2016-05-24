@@ -327,7 +327,7 @@
 #pragma mark - tailEvent
 - (void)callPhone:(UIButton *)sender{
     NSLog(@"call");
-    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.ticket];
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.ticket.theater_tel];
     UIWebView * callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];

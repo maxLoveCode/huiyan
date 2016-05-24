@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UIImageView *bg_image;
 @end
 static int number_page = 0;
 @implementation PersonInvitationViewController
@@ -35,11 +36,7 @@ static int number_page = 0;
         [self.dataSource removeAllObjects];
         [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];
     }];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        number_page ++;
-        [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-        [self.tableView.mj_header beginRefreshing];
+           [self.tableView.mj_header beginRefreshing];
 
 }
 
@@ -52,6 +49,14 @@ static int number_page = 0;
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonInvitationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"invatation"];
     }
     return _tableView;
+}
+
+- (UIImageView *)bg_image{
+    if (!_bg_image) {
+        self.bg_image = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 94, 100, 188,106)];
+        self.bg_image.backgroundColor = [UIColor whiteColor];
+    }
+    return _bg_image;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -105,6 +110,24 @@ static int number_page = 0;
             for (NSDictionary *dic in responseObject[@"data"]) {
                 Invitation *model = [Invitation invitationWithDic:dic];
                 [self.dataSource addObject:model];
+            }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.tableView.mj_footer = nil;
+            }else {
+                if (!self.tableView.mj_footer) {
+                    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+
+                }
+            }
+            if (self.dataSource.count == 0 && [page isEqualToString:@"0"]) {
+                self.bg_image.image = [UIImage imageNamed:@"noInvitation"];
+                
+                [self.tableView addSubview:self.bg_image];
+            }else{
+                [self.bg_image removeFromSuperview];
             }
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];

@@ -363,8 +363,9 @@
 
         UILabel *title_lab = [cell viewWithTag:508];
         if (!title_lab) {
-            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame), kScreen_Width / 3, 30)];
-            title_lab.font = kFONT14;
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(image_pic.frame), imageWidth, 30)];
+            title_lab.font = kFONT12;
+            title_lab.numberOfLines = 2;
             title_lab.textAlignment = NSTextAlignmentCenter;
             [cell.contentView addSubview:title_lab];
             title_lab.tag = 508;
@@ -386,8 +387,9 @@
         }
         UILabel *title_lab = [cell viewWithTag:508];
         if (!title_lab) {
-            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame), kScreen_Width / 3, 30)];
-            title_lab.font = kFONT14;
+            title_lab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(image_pic.frame), imageWidth, 30)];
+            title_lab.font = kFONT12;
+            title_lab.numberOfLines = 2;
             title_lab.textAlignment = NSTextAlignmentCenter;
             [cell.contentView addSubview:title_lab];
             title_lab.tag = 508;
