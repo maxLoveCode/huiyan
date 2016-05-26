@@ -307,6 +307,7 @@
 		591C37E81CF6CB4D00E73CB1 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		591C37EA1CF6CB6900E73CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */; };
 		591C37EC1CF6CB8700E73CB1 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */; };
+		591C37EE1CF6CEB200E73CB1 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37ED1CF6CEB200E73CB1 /* UMMobClick.framework */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
@@ -879,6 +880,7 @@
 		591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		591C37ED1CF6CEB200E73CB1 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		5925EF581CF05C2F00E3ACF3 /* GifRefresher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifRefresher.h; path = HuiYan/commonFiles/controller/GifRefresher.h; sourceTree = SOURCE_ROOT; };
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -926,16 +928,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55DAFFD21CC8F8150093B180 /* libsqlite3.tbd in Frameworks */,
+				55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */,
 				55DAFFD61CC8F82B0093B180 /* libstdc++.tbd in Frameworks */,
 				591C37EC1CF6CB8700E73CB1 /* libz.1.2.5.tbd in Frameworks */,
 				591C37EA1CF6CB6900E73CB1 /* CoreLocation.framework in Frameworks */,
 				55DAFFCA1CC8F7DE0093B180 /* Security.framework in Frameworks */,
 				591C37E81CF6CB4D00E73CB1 /* JavaScriptCore.framework in Frameworks */,
-				55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */,
 				558621891CE84117007D5049 /* Foundation.framework in Frameworks */,
 				558621871CE840F6007D5049 /* CoreFoundation.framework in Frameworks */,
 				558621851CE840E2007D5049 /* CFNetwork.framework in Frameworks */,
 				55B919261CCA1FAF00717F8E /* libSocialQQ.a in Frameworks */,
+				591C37EE1CF6CEB200E73CB1 /* UMMobClick.framework in Frameworks */,
 				557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */,
 				55DAFFD41CC8F8210093B180 /* CoreTelephony.framework in Frameworks */,
 				55B919271CCA1FAF00717F8E /* TencentOpenAPI.framework in Frameworks */,
@@ -943,7 +947,6 @@
 				55B919291CCA1FAF00717F8E /* libSocialWechat.a in Frameworks */,
 				558621831CE5C89F007D5049 /* jpush-ios-2.1.6.a in Frameworks */,
 				557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */,
-				55DAFFD21CC8F8150093B180 /* libsqlite3.tbd in Frameworks */,
 				55DAFFD01CC8F8060093B180 /* CoreGraphics.framework in Frameworks */,
 				557001B21CCF667B003EB02F /* libWeChatSDK.a in Frameworks */,
 				55DAFFCE1CC8F7F90093B180 /* SystemConfiguration.framework in Frameworks */,
@@ -1253,6 +1256,7 @@
 		55B918F21CCA1D8800717F8E /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				591C37ED1CF6CEB200E73CB1 /* UMMobClick.framework */,
 				591C37E31CF6CAEC00E73CB1 /* BaiduTongji */,
 				5578A83F1CEEF97900BD3061 /* TimeDatePicker */,
 				558621801CE5C88F007D5049 /* JPush */,
@@ -2573,6 +2577,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
+					"$(PROJECT_DIR)/huiyan/第三方",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2620,6 +2625,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/huiyan/第三方/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
+					"$(PROJECT_DIR)/huiyan/第三方",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

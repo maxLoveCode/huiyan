@@ -21,6 +21,7 @@
 #import "Tools.h"
 #import <AFNetworking.h>
 #import "ForgotPassTableViewController.h"
+#import "UMMobClick/MobClick.h"
 #define animateDuration 0.25
 #define animateDelay 0.2
 
@@ -243,6 +244,7 @@
                 NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
+                  [MobClick profileSignInWithPUID:[responseObject[@"data"]objectForKey:@"user_id"]];
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
@@ -253,6 +255,7 @@
             if ([responseObject[@"code"] integerValue] == 70000) {
                 NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
+                 [MobClick profileSignInWithPUID:[responseObject[@"data"]objectForKey:@"user_id"]];
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                 kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
@@ -393,6 +396,7 @@
             kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
             kSETDEFAULTS([responseObject[@"data"] objectForKey:@"user_id"], @"user_id");
             kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
+             [MobClick profileSignInWithPUID:[responseObject[@"data"]objectForKey:@"user_id"]];
             MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
             [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
             }];

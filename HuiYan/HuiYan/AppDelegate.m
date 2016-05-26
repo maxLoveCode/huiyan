@@ -16,7 +16,7 @@
 #import "MQPayClient.h"
 //百度统计
 #import "BaiduMobstat.h"
-
+#import "UMMobClick/MobClick.h"
 //友盟
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
@@ -54,6 +54,7 @@
     [AMapLocationServices sharedServices].apiKey = @"6858031d8908c18c7724109124d4125b";
     //百度统计
     [self startBaiduMobileStat];
+    [self umengTrack];
     //Required
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
@@ -106,10 +107,12 @@
     if (user_id) {
         MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
         self.window.rootViewController = mainTab;
+        [MobClick profileSignInWithPUID:user_id];
     }else{
         LoginViewController *login = [[LoginViewController alloc]init];
            UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:login];
         self.window.rootViewController = navCon;
+        [MobClick profileSignInWithPUID:user_id];
     }
    
     
@@ -161,6 +164,18 @@
     statTracker.enableDebugOn = YES;
     
     [statTracker startWithAppId:@"c0e0a9d8df"]; // 设置您在mtj网站上添加的app的appkey,此处AppId即为应用的appKey
+}
+
+//友盟统计
+- (void)umengTrack {
+    //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick setLogEnabled:YES];
+    
+    UMConfigInstance.appKey = @"5746548967e58eb1d10025c4";
+    
+    UMConfigInstance.secret = @"secretstringaldfkals";
+    //    UMConfigInstance.eSType = E_UM_GAME;
+    [MobClick startWithConfigure:UMConfigInstance];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
