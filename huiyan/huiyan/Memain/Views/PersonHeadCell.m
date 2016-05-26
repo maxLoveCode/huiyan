@@ -9,6 +9,7 @@
 #import "PersonHeadCell.h"
 #import "UIImageView+WebCache.h"
 #import "UIImage+ImageEffects.h"
+#import "UIImage+UIImage_Crop.h"
 @implementation PersonHeadCell
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -26,7 +27,9 @@
 }
 
 - (void)setContent:(PersonMessage *)model{
-    [self.head_pic sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+    [self.head_pic sd_setImageWithURL:[NSURL URLWithString:model.avatar] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
     CGSize size =  [model.nickname boundingRectWithSize:CGSizeMake(MAXFLOAT, 16)
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                     attributes:@{
@@ -34,7 +37,6 @@
                                                                  }
                                                        context:nil].size;
     [self.sex_pic setFrame:CGRectMake(CGRectGetMaxX(self.head_pic.frame) + size.width + 25, 69, 16, 16)];
-    NSLog(@"------%@",model.like_wiki);
     self.name_lab.text = model.nickname;
     NSString *likiStr  = @"";
     for (NSDictionary *dic in model.like_wiki) {
@@ -47,6 +49,8 @@
     [self.bg_image sd_setImageWithURL:[NSURL URLWithString:model.avatar] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
         self.bg_image.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
+            UIImage* croped = [self.bg_image.image crop:self.bg_image.frame];
+            self.bg_image.image = croped;
     }];
 }
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251C22EB1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m in Sources */ = {isa = PBXBuildFile; fileRef = 251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */; };
+		251C22EF1CF46C9F0028D0E5 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 251C22ED1CF46C9F0028D0E5 /* MessageCell.m */; };
+		251C22F01CF46C9F0028D0E5 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251C22EE1CF46C9F0028D0E5 /* MessageCell.xib */; };
 		251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */; };
 		257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */; };
 		257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */; };
@@ -352,6 +355,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		251C22E91CF462DE0028D0E5 /* UIImage+UIImage_Crop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_Crop.h"; sourceTree = "<group>"; };
+		251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_Crop.m"; sourceTree = "<group>"; };
+		251C22EC1CF46C9F0028D0E5 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = huiyan/Homepage/Views/MessageCell.h; sourceTree = SOURCE_ROOT; };
+		251C22ED1CF46C9F0028D0E5 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = huiyan/Homepage/Views/MessageCell.m; sourceTree = SOURCE_ROOT; };
+		251C22EE1CF46C9F0028D0E5 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCell.xib; path = huiyan/Homepage/Views/MessageCell.xib; sourceTree = SOURCE_ROOT; };
 		251F5E191CBCC327000BC47D /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiArtcleTableViewController.h; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1723,6 +1731,12 @@
 		55CCD7DA1CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+=======
+				251C22EC1CF46C9F0028D0E5 /* MessageCell.h */,
+				251C22ED1CF46C9F0028D0E5 /* MessageCell.m */,
+				251C22EE1CF46C9F0028D0E5 /* MessageCell.xib */,
+>>>>>>> d7a1b4a7ff79e9de86c28991cde106776b58c0c9
 				59B23C681CEEF23100F2EB21 /* MessageTableViewCell.h */,
 				59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */,
 				5964F1C21CF5549C00E436CE /* MessageCell.h */,
@@ -1910,6 +1924,8 @@
 				55DAFFC41CC8A37D0093B180 /* NSString+Md5.m */,
 				55C41E2B1CE463480055A58B /* NSString+ImageString.h */,
 				55C41E2C1CE463480055A58B /* NSString+ImageString.m */,
+				251C22E91CF462DE0028D0E5 /* UIImage+UIImage_Crop.h */,
+				251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2075,6 +2091,7 @@
 				5578A8B31CF06ED400BD3061 /* home@2x.png in Resources */,
 				25C625351CBCFA3E0068BFE8 /* qq@3x.png in Resources */,
 				55C41DF71CE305800055A58B /* ImportantNotesCell.xib in Resources */,
+				251C22F01CF46C9F0028D0E5 /* MessageCell.xib in Resources */,
 				5578A8BE1CF07C4B00BD3061 /* ticket_detail_price.png in Resources */,
 				25C625821CBE49C10068BFE8 /* tab_mine@3x.png in Resources */,
 				25C625751CBE49C10068BFE8 /* tab_explorer@2x.png in Resources */,
@@ -2356,6 +2373,8 @@
 				59FE808A1CEECE480032318C /* Message.m in Sources */,
 				55C41DE91CE2CAE50055A58B /* SignUpCell.m in Sources */,
 				55C41E151CE44A260055A58B /* MessageViewController.m in Sources */,
+				251C22EF1CF46C9F0028D0E5 /* MessageCell.m in Sources */,
+				251C22EB1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m in Sources */,
 				25C6255A1CBE48EA0068BFE8 /* MeMainViewController.m in Sources */,
 				5570012A1CCF365E003EB02F /* WebViewJavascriptBridge.m in Sources */,
 				558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */,
