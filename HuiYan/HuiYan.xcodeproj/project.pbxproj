@@ -303,6 +303,10 @@
 		55DAFFD61CC8F82B0093B180 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DAFFD51CC8F82B0093B180 /* libstdc++.tbd */; };
 		55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DAFFD71CC8F8350093B180 /* libz.tbd */; };
 		55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFDA1CC9B4AB0093B180 /* Tools.m */; };
+		591C37E61CF6CB1400E73CB1 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E51CF6CB1400E73CB1 /* libBaiduMobStat.a */; };
+		591C37E81CF6CB4D00E73CB1 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		591C37EA1CF6CB6900E73CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */; };
+		591C37EC1CF6CB8700E73CB1 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
@@ -870,6 +874,11 @@
 		55DAFFD71CC8F8350093B180 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		55DAFFD91CC9B4AB0093B180 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		55DAFFDA1CC9B4AB0093B180 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		591C37E41CF6CB1400E73CB1 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
+		591C37E51CF6CB1400E73CB1 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
+		591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		5925EF581CF05C2F00E3ACF3 /* GifRefresher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifRefresher.h; path = HuiYan/commonFiles/controller/GifRefresher.h; sourceTree = SOURCE_ROOT; };
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -917,13 +926,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55DAFFD61CC8F82B0093B180 /* libstdc++.tbd in Frameworks */,
+				591C37EC1CF6CB8700E73CB1 /* libz.1.2.5.tbd in Frameworks */,
+				591C37EA1CF6CB6900E73CB1 /* CoreLocation.framework in Frameworks */,
+				55DAFFCA1CC8F7DE0093B180 /* Security.framework in Frameworks */,
+				591C37E81CF6CB4D00E73CB1 /* JavaScriptCore.framework in Frameworks */,
 				55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */,
 				558621891CE84117007D5049 /* Foundation.framework in Frameworks */,
 				558621871CE840F6007D5049 /* CoreFoundation.framework in Frameworks */,
 				558621851CE840E2007D5049 /* CFNetwork.framework in Frameworks */,
 				55B919261CCA1FAF00717F8E /* libSocialQQ.a in Frameworks */,
 				557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */,
-				55DAFFD61CC8F82B0093B180 /* libstdc++.tbd in Frameworks */,
 				55DAFFD41CC8F8210093B180 /* CoreTelephony.framework in Frameworks */,
 				55B919271CCA1FAF00717F8E /* TencentOpenAPI.framework in Frameworks */,
 				55B9191C1CCA1FAF00717F8E /* libUMSocial_Sdk_5.0.1.a in Frameworks */,
@@ -935,10 +948,10 @@
 				557001B21CCF667B003EB02F /* libWeChatSDK.a in Frameworks */,
 				55DAFFCE1CC8F7F90093B180 /* SystemConfiguration.framework in Frameworks */,
 				55DAFFCC1CC8F7EF0093B180 /* libiconv.tbd in Frameworks */,
-				55DAFFCA1CC8F7DE0093B180 /* Security.framework in Frameworks */,
 				550BF9B71CB8F06000E2E9DE /* MediaPlayer.framework in Frameworks */,
 				5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */,
 				557EDE1B1CD0A3980039267E /* libssl.a in Frameworks */,
+				591C37E61CF6CB1400E73CB1 /* libBaiduMobStat.a in Frameworks */,
 				55B9192A1CCA1FAF00717F8E /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -963,6 +976,9 @@
 		0ADB6E0A7C260ECCC8850B29 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */,
+				591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */,
+				591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */,
 				558621881CE84117007D5049 /* Foundation.framework */,
 				558621861CE840F6007D5049 /* CoreFoundation.framework */,
 				558621841CE840E2007D5049 /* CFNetwork.framework */,
@@ -1237,6 +1253,7 @@
 		55B918F21CCA1D8800717F8E /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				591C37E31CF6CAEC00E73CB1 /* BaiduTongji */,
 				5578A83F1CEEF97900BD3061 /* TimeDatePicker */,
 				558621801CE5C88F007D5049 /* JPush */,
 				5556CC051CD37C7300CCD668 /* CoolNavi.h */,
@@ -1914,6 +1931,16 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		591C37E31CF6CAEC00E73CB1 /* BaiduTongji */ = {
+			isa = PBXGroup;
+			children = (
+				591C37E41CF6CB1400E73CB1 /* BaiduMobStat.h */,
+				591C37E51CF6CB1400E73CB1 /* libBaiduMobStat.a */,
+			);
+			name = BaiduTongji;
+			path = "HuiYan/第三方/BaiduTongji";
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1996,7 +2023,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2559,6 +2586,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PODS_ROOT)/huiyan/第三方/JPush",
+					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2571,6 +2599,7 @@
 					"$(PROJECT_DIR)/huiyan/第三方/WeixinPay/SDKExport",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PROJECT_DIR)/huiyan/第三方/JPush",
+					"$(PROJECT_DIR)/HuiYan/第三方/BaiduTongji",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2604,6 +2633,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PODS_ROOT)/huiyan/第三方/JPush",
+					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2616,6 +2646,7 @@
 					"$(PROJECT_DIR)/huiyan/第三方/WeixinPay/SDKExport",
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PROJECT_DIR)/huiyan/第三方/JPush",
+					"$(PROJECT_DIR)/HuiYan/第三方/BaiduTongji",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2672,7 +2703,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

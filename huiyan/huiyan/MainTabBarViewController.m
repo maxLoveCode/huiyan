@@ -19,6 +19,7 @@
 
 - (void)awakeFromNib{
     self.selectedIndex = 0;
+    
 }
 
 - (void)viewDidLoad {
