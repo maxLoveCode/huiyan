@@ -25,6 +25,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addAllController];
+    
      // Do any additional setup after loading the view.
 }
 
@@ -41,28 +42,28 @@
     
     
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage];
-    homeNav.tabBarItem.title = @"首页";
+    homeNav.tabBarItem.title = @"首  页";
     [homeNav.tabBarItem setImage:[UIImage imageNamed:@"home"]];
     [homeNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"homeSel"]];
     homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [homeNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
     UINavigationController *dramaNav = [[UINavigationController alloc]initWithRootViewController:drama];
-    dramaNav.tabBarItem.title = @"红人";
+    dramaNav.tabBarItem.title = @"红  人";
     [dramaNav.tabBarItem setImage:[UIImage imageNamed:@"drama"]];
     [dramaNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"dramaSel"]];
     dramaNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [dramaNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     UINavigationController *exploreNav = [[UINavigationController alloc]initWithRootViewController:explore];
     
-    exploreNav.tabBarItem.title  = @"发现";
+    exploreNav.tabBarItem.title  = @"发  现";
     [exploreNav.tabBarItem setImage:[UIImage imageNamed:@"found"]];
     [exploreNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"foundSel"]];
     exploreNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [exploreNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
     UINavigationController *meMainNav = [[UINavigationController alloc]initWithRootViewController:meMain];
-    meMainNav.tabBarItem.title = @"我的";
+    meMainNav.tabBarItem.title = @"我  的";
     [meMainNav.tabBarItem setImage:[UIImage imageNamed:@"mine"]];
     [meMainNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"mineSel"]];
     meMainNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);

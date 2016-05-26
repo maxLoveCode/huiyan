@@ -9,6 +9,8 @@
 #import "SettingTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
+#import "LoginViewController.h"
+#import "ForgotPassTableViewController.h"
 
 @interface SettingTableViewController ()
 {
@@ -23,12 +25,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.view addSubview:self.exitBtn];
+    self.tableView.scrollEnabled = NO;
     self.title = @"设置";                                                                                           
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"setting"];
     firstSection = @[@"修改密码"];
     secondSection = @[@"去评分"];
-    thirdSection = @[@"tui chu deng lu"];
+    thirdSection = @[@"退出登录"];
+    
+    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
+
+- (UIButton *)exitBtn{
+    if (!_exitBtn) {
+        self.exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.exitBtn.backgroundColor = COLOR_THEME;
+        [self.exitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.exitBtn setTitle:@"退出登录" forState:UIControlStateNormal];
+        self.exitBtn.frame = CGRectMake(20, 200, kScreen_Width - 40, 42);
+        self.exitBtn.layer.masksToBounds = YES;
+        self.exitBtn.layer.cornerRadius = 5;
+        [self.exitBtn addTarget:self action:@selector(logOut) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _exitBtn;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -40,8 +62,11 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.tabBarController setHidden:NO];
     [super viewWillDisappear:YES];
+    [self.tabBarController setHidden:NO];
+    self.navigationController.navigationBar.translucent = YES;
+    self.tabBarController.tabBar.hidden = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +77,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -68,6 +93,15 @@
     }
 }
 
+-(CGFloat)tableView:( UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section !=2) {
+        return 44;
+    }
+    else
+        return 0;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"setting" forIndexPath:indexPath];
@@ -79,7 +113,11 @@
         cell.textLabel.text = secondSection[indexPath.row];
     }
     if (indexPath.section == 2){
-        cell.textLabel.text = thirdSection[indexPath.row];
+//        cell.contentView.backgroundColor = COLOR_THEME;
+//        cell.textLabel.backgroundColor = COLOR_THEME;
+//        cell.textLabel.textColor = [UIColor whiteColor];
+//        cell.textLabel.textAlignment = NSTextAlignmentCenter;              
+//        cell.textLabel.text = thirdSection[indexPath.row];
     }
     
     return cell;
@@ -89,12 +127,17 @@
 {
     if (indexPath.section == 0) {
         //change password
+        ForgotPassTableViewController *cpt = [[ForgotPassTableViewController alloc] init];
+        [cpt setType:1];
+        UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:cpt];
+        [self.navigationController presentViewController:nav animated:NO completion:^{
+            
+        }];
     }
     if (indexPath.section == 1) {
         //comment app
-    }
-    if (indexPath.section == 2) {
-        [self logOut];
+        // app id is 1116890013
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps ://itunes.apple.com/gb/app/yi-dong-cai-bian/id1116890013?mt=8"]];
     }
 }
 /*
@@ -143,7 +186,14 @@
 
 -(void)logOut
 {
-    
+    LoginViewController *login = [[LoginViewController alloc]init];
+    UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:login];
+    [self.navigationController presentViewController:navCon animated:NO  completion:^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"user_id"];
+        [defaults removeObjectForKey:@"login_type"];
+        [defaults removeObjectForKey:@"rongcloud_token"];
+    }];
 }
 
 @end

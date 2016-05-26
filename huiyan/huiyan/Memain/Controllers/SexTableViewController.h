@@ -10,6 +10,6 @@
 
 @interface SexTableViewController : UITableViewController
 @property (strong, nonatomic) void (^clickBlock)(int);
-
+@property(nonatomic, copy)NSString *sexType;
 -(void)loadSex:(BOOL)sex;
 @end

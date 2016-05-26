@@ -70,7 +70,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.image_pic.frame = CGRectMake(0, 0, kScreen_Width, 187);
+    self.image_pic.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Width / 7 * 5);
     self.title_lab.frame = CGRectMake(15, CGRectGetMaxY(self.image_pic.frame), kScreen_Width - 30, 28 *1.5);
     self.actor_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.title_lab.frame) , kScreen_Width - 30, 14 *1.5);
     self.description_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.actor_lab.frame) , kScreen_Width - 30, 36 *1.5);
@@ -78,7 +78,7 @@
 
 + (CGFloat)cellHeight
 {
-    return 301 + 12;
+    return 301 + 12 - 183 + kScreen_Width / 7 * 5;
 }
 
 -(void)setContent:(HomePage*)drama

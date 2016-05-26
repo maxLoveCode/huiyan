@@ -14,30 +14,37 @@
 #import "PersonTraining.h"
 #import "TrainOrdersTableViewController.h"
 #import <MJRefresh.h>
+#import "GifRefresher.h"
 @interface MeTrainingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UIImageView *bg_image;
 @end
 static int number_page = 0;
 @implementation MeTrainingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的活动";
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self getMy_train_orderData:[NSString stringWithFormat:@"%d",number_page]];
     }];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        number_page ++;
-        [self getMy_train_orderData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-    [self.tableView.mj_header beginRefreshing];
+        [self.tableView.mj_header beginRefreshing];
+}
+
+- (UIImageView *)bg_image{
+    if (!_bg_image) {
+        self.bg_image = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 94, 100, 188,106)];
+        self.bg_image.backgroundColor = [UIColor whiteColor];
+    }
+    return _bg_image;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -65,7 +72,8 @@ static int number_page = 0;
         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStylePlain];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
-        self.tableView.rowHeight = 200;
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.tableView.rowHeight = 190;
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonTrainingCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"train"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
@@ -104,6 +112,7 @@ static int number_page = 0;
     PersonTraining *train = self.dataSource[indexPath.section];
     TrainOrdersTableViewController *trainCon = [[TrainOrdersTableViewController alloc]init];
     trainCon.oid = train.oid;
+    trainCon.returntype = @"1";
     [self.navigationController pushViewController:trainCon animated:NO];
 }
 
@@ -114,6 +123,24 @@ static int number_page = 0;
             for (NSDictionary *dic in responseObject[@"data"]) {
                 PersonTraining *model = [PersonTraining PersonTrainingWithDic:dic];
                 [self.dataSource addObject:model];
+            }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.tableView.mj_footer = nil;
+            }else {
+                if (!self.tableView.mj_footer) {
+                    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self getMy_train_orderData:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+
+                }
+            }
+            if (self.dataSource.count == 0 && [page isEqualToString:@"0"]) {
+                self.bg_image.image = [UIImage imageNamed:@"noActivity"];
+                
+                [self.tableView addSubview:self.bg_image];
+            }else{
+                [self.bg_image removeFromSuperview];
             }
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];

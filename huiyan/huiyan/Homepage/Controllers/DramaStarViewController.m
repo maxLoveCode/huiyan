@@ -14,7 +14,7 @@
 #import "ServerManager.h"
 #import "MCSwipeMenu.h"
 #import "DramaStar.h"
-#import "StarDetailViewController.h"
+#import "DramaStarDetailViewController.h"
 #import "MessageViewController.h"
 #import "SignUpMessageTableViewController.h"
 #import "DramaStarInvitionViewController.h"
@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.title = @"红人";
+    self.title = @"红  人";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"interaction"] style:UIBarButtonItemStylePlain target:self action:@selector(rightClick:)];
     self.navigationItem.rightBarButtonItem = rightItem;
     //侧滑关闭
@@ -59,6 +59,24 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    _dramaStarTableView.alpha = 0;
+    
+
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    [UIView animateWithDuration:1 animations:^{
+        _dramaStarTableView.alpha = 1;
+        [self.dramaStarTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController setHidden:NO];
+}
+
 - (MCSwipeMenu *)head_view{
     if (!_head_view) {
         self.head_view = [[MCSwipeMenu alloc]init];
@@ -69,12 +87,13 @@
 
 - (UITableView *)dramaStarTableView{
     if (!_dramaStarTableView) {
-        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu + 20 , kScreen_Width, kScreen_Height - 48 - 64) style:UITableViewStyleGrouped];
+        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu + 20 , kScreen_Width, kScreen_Height - 44 - 64) style:UITableViewStyleGrouped];
         self.dramaStarTableView.delegate = self;
         self.dramaStarTableView.dataSource = self;
         self.dramaStarTableView.separatorStyle = UITableViewCellAccessoryNone;
         [self.dramaStarTableView registerClass:[DramaStarTableViewCell class] forCellReuseIdentifier:@"dramaStar"];
         [self.dramaStarTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"normal"];
+        [self.dramaStarTableView setBackgroundColor:[UIColor blackColor]];
     }
     return _dramaStarTableView;
 }
@@ -102,7 +121,7 @@
     if (indexPath.section == 0) {
         return kBannerHeight;
     }else{
-        return 180;
+        return 160;
     }
 }
 
@@ -135,12 +154,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    StarDetailViewController *star = [[StarDetailViewController alloc]init];
-//    star.drama = self.dataSource[indexPath.section -1];
-//    [self presentViewController:star animated:YES completion:^{
-//        
-//    }];
-    //[self.navigationController pushViewController:star animated:YES];
+    DramaStarDetailViewController *star = [[DramaStarDetailViewController alloc]init];
+    star.drama = self.dataSource[indexPath.section -1];
+    [self.navigationController pushViewController:star animated:YES];
 }
 
 - (void)get_actor_cateData{

@@ -15,5 +15,7 @@
 @property (nonatomic,copy) NSString *flower;
 @property (nonatomic,copy) NSString *cid;
 @property (nonatomic,copy) NSString *is_fans;
+@property (nonatomic,copy) NSString *fans_count;
+@property (nonatomic,copy) NSArray *gift_list;
 + (DramaStar *)dramaWithDic:(NSDictionary *)dic;
 @end

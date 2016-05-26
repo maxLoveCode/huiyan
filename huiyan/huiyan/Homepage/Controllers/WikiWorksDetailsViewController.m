@@ -27,9 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor  = [UIColor whiteColor];
     
-    NSLog(@"%@",self.homePage.type);
+    //NSLog(@"%@",self.homePage.type);
     [[UIDevice currentDevice] setValue:
      [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
                                 forKey:@"orientation"];
@@ -76,8 +77,6 @@
     [self.view addSubview:self.wikiDetailsTableView];
     
     
-    
-    
     // Do any additional setup after loading the view.
 }
 
@@ -92,14 +91,20 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.tabBarController setHidden:YES];
+    if (self.tabBarController.tabBar.hidden == YES) {
+        NSLog(@"hidden");
+    }
+    else
+    {
+        NSLog(@"not hidden");
+        [self.tabBarController setHidden:YES];
+    }
     [super viewDidAppear:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
     //[[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault animated:YES]
     self.navigationController.navigationBarHidden = YES;
 }
@@ -145,7 +150,8 @@
     [super viewWillDisappear:animated];
     [UIApplication sharedApplication].statusBarHidden = NO;
         self.navigationController.navigationBarHidden = NO;
-    [self.tabBarController setHidden:NO];
+    self.tabBarController.tabBar.hidden = NO;
+    //[self.tabBarController setHidden:NO];
 }
 
 

@@ -39,6 +39,8 @@
     [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.ticketTableView];
     _serverManager = [ServerManager sharedInstance];
+    
+    self.navigationController.navigationBar.translucent = NO;
   
 }
 
@@ -49,6 +51,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+   // [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 
 }
 
@@ -74,6 +77,7 @@
 - (UIButton *)head_btn{
     if (!_head_btn) {
         self.head_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_head_btn setBackgroundColor:[UIColor whiteColor]];
         self.head_btn.frame = CGRectMake(0, CGRectGetMaxY(self.ticketTableView.frame), 48, 48);
         [self.head_btn setImage:[UIImage imageNamed:@"service"] forState:UIControlStateNormal];
         self.head_btn.userInteractionEnabled = YES;
@@ -206,6 +210,7 @@
         = [tableView dequeueReusableCellWithIdentifier:@"ticket" forIndexPath:indexPath];
            bt_cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [bt_cell.contentView  setBackgroundColor:[UIColor whiteColor]];
+        [bt_cell.writeComment_btn addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
     [bt_cell setContent:self.ticket];
         return bt_cell;
     }else if(indexPath.section == 1){
@@ -322,7 +327,7 @@
 #pragma mark - tailEvent
 - (void)callPhone:(UIButton *)sender{
     NSLog(@"call");
-    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.ticket];
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.ticket.theater_tel];
     UIWebView * callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
@@ -333,6 +338,10 @@
     ChangeRondaTableViewController *rondaCon = [[ChangeRondaTableViewController alloc]init];
     rondaCon.oid = self.ticket.ID;
     [self.navigationController pushViewController:rondaCon animated:YES];
+}
+
+- (void)confirm:(UIButton *)sender{
+    
 }
 
 @end

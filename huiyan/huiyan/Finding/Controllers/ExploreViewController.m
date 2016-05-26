@@ -15,6 +15,7 @@
 #import "FindFriend.h"
 #import <MJRefresh.h>
 #import "UITabBarController+ShowHideBar.h"
+#import "GifRefresher.h"
 @interface ExploreViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
@@ -29,7 +30,7 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"附近的人";
+    self.title = @"附近的戏友";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -37,16 +38,6 @@ static int number_page = 0;
       self.dataSource = [NSMutableArray array];
     self.serverManager = [ServerManager sharedInstance];
     [self configLocationManager];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        number_page = 0;
-        [self.dataSource removeAllObjects];
-        [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        number_page ++;
-        [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-    [self.tableView.mj_header beginRefreshing];
         // Do any additional setup after loading the view.
 }
 
@@ -63,7 +54,8 @@ static int number_page = 0;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.tabBarController setHidden:NO];
+
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 //获得位置
@@ -89,7 +81,12 @@ static int number_page = 0;
         self.x_point = [NSString stringWithFormat:@"%f",cll.longitude];
         self.y_point = [NSString stringWithFormat:@"%f",cll.latitude];
         NSLog(@"location:%@ x = %@ y = %@", location,self.x_point,self.y_point);
-        [self getfind_listData:@"0"];
+        self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+            number_page = 0;
+            [self.dataSource removeAllObjects];
+            [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
+        }];
+           [self.tableView.mj_header beginRefreshing];
         if (regeocode)
         {
            // NSLog(@"reGeocode:%@", regeocode);
@@ -124,7 +121,7 @@ static int number_page = 0;
     if (self.dataSource.count > 0) {
          [cell setContent:self.dataSource[indexPath.section]];
     }
-   
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -143,6 +140,17 @@ static int number_page = 0;
                     FindFriend *model = [FindFriend findFriendWithData:dic];
                     [self.dataSource addObject:model];
                 }
+                if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                    self.tableView.mj_footer = nil;
+                }else {
+                    if (!self.tableView.mj_footer) {
+                        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                            number_page ++;
+                            [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
+                        }];
+                    }
+                }
+
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
                 [self.tableView.mj_footer endRefreshing];

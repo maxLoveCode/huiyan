@@ -13,8 +13,7 @@
 @property (nonatomic,strong) UILabel *name_lab;
 @property (nonatomic,strong) UIImageView *sex_pic;
 @property (nonatomic,strong) UILabel *occupation_one;
-@property (nonatomic,strong) UILabel *occupation_two;
 @property (nonatomic,strong) UILabel *distance_lab;
-@property (nonatomic,strong) UILabel *occupation_three;
+@property (nonatomic,assign) CGFloat occwidth;
 - (void)setContent:(FindFriend *)model;
 @end

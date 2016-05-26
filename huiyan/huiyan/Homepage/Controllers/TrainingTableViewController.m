@@ -31,6 +31,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = @"活动";
 }
 
 - (UITableView *)trainTableView{
@@ -52,15 +53,12 @@
     [self getTrainData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self.tabBarController setHidden:YES];
+- (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,7 +96,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TrainingDetailsTableViewController *traDetailCon = [[TrainingDetailsTableViewController alloc]init];
+    if (self.dataSource.count > 0) {
     traDetailCon.train  = self.dataSource[indexPath.section];
+    }
     [self.navigationController pushViewController:traDetailCon animated:YES];
 }
 

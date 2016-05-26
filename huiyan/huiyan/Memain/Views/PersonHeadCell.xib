@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="203"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a3v-Dg-rQF" id="aGr-DF-2ZL">
-                <rect key="frame" x="0.0" y="0.0" width="393" height="202"/>
+                <rect key="frame" x="0.0" y="0.0" width="393" height="202.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6h4-bi-gPx">
@@ -97,7 +97,7 @@
                 <outlet property="likewiki_lab" destination="weL-fa-jiU" id="Qo0-TE-uYK"/>
                 <outlet property="name_lab" destination="a8F-6X-52p" id="taT-d8-cjh"/>
             </connections>
-            <point key="canvasLocation" x="500.5" y="476.5"/>
+            <point key="canvasLocation" x="383.5" y="403.5"/>
         </tableViewCell>
     </objects>
 </document>

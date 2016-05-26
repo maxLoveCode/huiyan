@@ -14,12 +14,14 @@
 #import "UIImageView+WebCache.h"
 #import "SexTableViewController.h"
 #import "Tools.h"
+#import <AFNetworking.h>
 @interface EditPersonMessageViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSArray *titleArr;
 @property (nonatomic, strong) PersonMessage *perData;
 @property(nonatomic,strong)UIImage * selfPhoto;
+@property (nonatomic, strong) UIImageView *imagePic;
 @end
 
 @implementation EditPersonMessageViewController
@@ -29,7 +31,7 @@
     self.titleArr = @[@"头像",@"昵称",@"性别"];
     self.view.backgroundColor = COLOR_WithHex(0xdddddd);
     [self.view addSubview:self.tableView];
-    
+    self.title = @"个人信息";
     // Do any additional setup after loading the view.
 }
 
@@ -59,7 +61,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kMargin, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         self.tableView.scrollEnabled = NO;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
@@ -93,18 +95,19 @@
     if (indexPath.row == 0) {
         UIImageView *imagePic = [cell viewWithTag:1000];
         if (!imagePic) {
-            imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 72, 4, 42, 42)];
+            imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 92, 4, 42, 42)];
             imagePic.layer.masksToBounds = YES;
             imagePic.layer.cornerRadius = 21;
 
             [cell.contentView addSubview:imagePic];
             imagePic.tag = 1000;
+            self.imagePic = imagePic;
         }
         [imagePic sd_setImageWithURL:[NSURL URLWithString:self.perData.avatar]];
     }else if (indexPath.row == 1){
         UILabel *nameLab = [cell viewWithTag:1002];
         if (!nameLab) {
-            nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 230, 4, 200, 42)];
+            nameLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 250, 4, 200, 42)];
             nameLab.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:nameLab];
             nameLab.tag = 1002;
@@ -113,7 +116,7 @@
     }else {
         UILabel *sexLab = [cell viewWithTag:1004];
         if (!sexLab) {
-            sexLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 230, 4, 200, 42)];
+            sexLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 250, 4, 200, 42)];
             sexLab.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:sexLab];
             sexLab.tag = 1004;
@@ -152,6 +155,7 @@
         
     }else if (indexPath.row == 1){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"修改昵称" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
             textField.placeholder = self.perData.nickname;
             textField.textColor = [UIColor blackColor];
@@ -177,6 +181,7 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else {
         SexTableViewController *sexCon = [[SexTableViewController alloc]init];
+        sexCon.sexType = self.perData.sex;
         [self.navigationController pushViewController:sexCon animated:YES];
     }
 }
@@ -187,69 +192,63 @@
     
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-        [self performSelector:@selector(saveImage:)  withObject:img afterDelay:0.5];
+        NSData *data = UIImageJPEGRepresentation(img, 1.0);
+        [self getUploadImage:data];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)getUploadImage:(NSData *)image{
+    NSString *urlStr = [NSString stringWithFormat:@"http://139.196.32.98/huiyan/api1_0/index.php/Home/Qiniu/upload_file/access_token/%@",self.serverManager.accessToken];
+    NSDictionary *parameters = @{@"upload_file":image};
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFileData:image name:@"upload_file" fileName:@"somefilename.png" mimeType:@"image/png"];// you file to upload
+        
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:^(NSProgress * _Nonnull uploadProgress) {
+                      // This is not called back on the main queue.
+                      // You are responsible for dispatching to the main queue for UI updates
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          //Update the progress view
+                          //[progressView setProgress:uploadProgress.fractionCompleted];
+                      });
+                  }
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      NSLog(@"msg is %@", responseObject[@"msg"]);
+                      
+                      if (error) {
+                          NSLog(@"Error: %@", error);
+                      } else {
+                          NSLog(@"%@ %@", response, responseObject);
+                          if ([responseObject[@"data"] objectForKey:@"url"] != nil) {
+                              NSString *str = [responseObject[@"data"] objectForKey:@"url"];
+                              [self get_user_infoImageData:str];
+                              
+                          }else{
+                              [self presentViewController:[Tools showAlert:@"修改失败"] animated:YES completion:nil];
+                          }
+                          
+                      }
+                  }];
+    
+    [uploadTask resume];
+    
+    
+    
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     //	[picker dismissModalViewControllerAnimated:YES];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-
-//- (void)saveImage:(UIImage *)image {
-//    //    NSLog(@"保存头像！");
-//    //    [userPhotoButton setImage:image forState:UIControlStateNormal];
-//    BOOL success;
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSError *error;
-//    
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *imageFilePath = [documentsDirectory stringByAppendingPathComponent:@"selfPhoto.jpg"];
-//    // NSLog(@"imageFile->>%@",imageFilePath);
-//    success = [fileManager fileExistsAtPath:imageFilePath];
-//    if(success) {
-//        success = [fileManager removeItemAtPath:imageFilePath error:&error];
-//    }
-//    
-//#warning 这里还都是缩略图，上传时候应该用大图标
-//    UIImage *smallImage = [self thumbnailWithImageWithoutScale:image size:CGSizeMake(100.0f, 100.0f)];
-//    [UIImageJPEGRepresentation(smallImage, 1.0f) writeToFile:imageFilePath atomically:YES];//写入文件
-//    _selfPhoto = [UIImage imageWithContentsOfFile:imageFilePath];//读取图片文件
-//    //    [userPhotoButton setImage:selfPhoto forState:UIControlStateNormal];
-//    
-//    //七牛服务器
-//    [_people getQiniuAccessToken:^(NSMutableDictionary *result) {
-//        if ([[result objectForKey:@"code"]integerValue] == 60055) {
-//            NSString *token = [[result objectForKey:@"data"] objectForKey:@"qiniu_upload_token"];
-//            NSLog(@"token is %@",token);
-//            NSDate *date = [NSDate date];
-//            [SVProgressHUD showWithStatus:@"正在上传图片至服务器" maskType: SVProgressHUDMaskTypeClear];
-//            [_people PostImage:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-//                NSString* header_string = [resp objectForKey:@"key"];
-//                NSMutableDictionary* avatar_dic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:header_string,@"avatar", nil];
-//                [SVProgressHUD showWithStatus:@"正在修改个人信息" maskType: SVProgressHUDMaskTypeClear];
-//                [_people editInfo:^(NSMutableDictionary *result) {
-//                    self.selfPhoto = _selfPhoto;
-//                    [_people setAvatar:[NSString stringWithFormat:@"http://7xk6qx.com1.z0.glb.clouddn.com/%@", key]];
-//                    [self.tableView reloadData];
-//                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-//                    [[NSUserDefaults standardUserDefaults] setObject:[_people getAvatar] forKey:@"myAvatar"];
-//                } Index:0 Changes:avatar_dic];
-//            } Image:image Forkey:[NSString stringWithFormat:@"%@,%@",[_people getUserID],[Tools stringWithDate:date byType:date_type_YMDHMS_NoSperator]] Token:token failure:^(NSError *error) {
-//                ;
-//            }];
-//        }
-//        else
-//        {
-//            [SVProgressHUD showErrorWithStatus:@"上传失败"];
-//        }
-//    } failure:^(NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:@"上传失败"];
-//    }];
-//    
-//}
 
 // 改变图像的尺寸，方便上传服务器
 - (UIImage *) scaleFromImage: (UIImage *) image toSize: (CGSize) size
@@ -293,6 +292,19 @@
     return newimage;
 }
 
+- (void)get_user_infoImageData:(NSString *)userImage{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"avatar":userImage};
+    [self.serverManager AnimatedPOST:@"edit_user_info.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 80010) {
+            [self get_user_infoData];
+            [self presentViewController:[Tools showAlert:@"修改成功"] animated:YES completion:nil];
+        }else{
+            [self presentViewController:[Tools showAlert:@"修改失败"] animated:YES completion:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
 
 - (void)get_user_infoData{
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");

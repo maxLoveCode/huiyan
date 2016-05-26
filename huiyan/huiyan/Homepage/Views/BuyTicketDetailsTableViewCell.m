@@ -23,11 +23,20 @@
         [self.bg_view  addSubview:self.address_pic];
         [self.bg_view  addSubview:self.price_pic];
         [self.bg_view  addSubview:self.price_lab];
+        //[self addSubview:self.write_textField];
         //[self addSubview:self.collect_btn];
-        [self addSubview:self.writeComment_btn];
+        //[self addSubview:self.writeComment_btn];
         [self addSubview:self.share_btn];
     }
     return self;
+}
+
+- (UITextField *)write_textField{
+    if (!_write_textField) {
+        self.write_textField = [[UITextField alloc]init];
+        self.write_textField.placeholder = @"写点评";
+    }
+    return _write_textField;
 }
 
 - (UIImageView *)bg_view{
@@ -141,6 +150,7 @@
     self.address_pic.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.time_pic.frame) + 10, 14, 14);
     self.address_lab.frame = CGRectMake(CGRectGetMaxX(self.address_pic.frame) + 5, CGRectGetMinY(self.address_pic.frame) , kScreen_Width - 150, 14);
     self.price_pic.frame = CGRectMake(CGRectGetMinX(self.address_pic.frame), CGRectGetMaxY(self.address_pic.frame) + 10, 14, 14);
+    self.write_textField.frame = CGRectMake(kMargin, CGRectGetMaxY(self.bg_view.frame)+ 5, kScreen_Width / 3 * 2 - 20, 40);
     self.price_lab.frame = CGRectMake(CGRectGetMaxX(self.price_pic.frame) + 5, CGRectGetMinY(self.price_pic.frame), kScreen_Width - 150, 14);
     self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
     self.writeComment_btn.frame = CGRectMake(15, CGRectGetMinY(self.collect_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1 );
@@ -149,7 +159,7 @@
 }
 
 + (CGFloat)cellHeight{
-    return 187 + 20 + 30;
+    return 187;
 }
 
 - (void)setContent:(BuyTicket *)ticket{
@@ -163,11 +173,11 @@
     [self.image_pic sd_setImageWithURL:[NSURL URLWithString:ticket.cover] placeholderImage:[UIImage imageNamed:@"arrow"]];
     self.title_lab.text = ticket.title;
     self.time_lab.text = ticket.date;
-    self.address_lab.text = ticket.address;
+    self.address_lab.text = ticket.theater_addr;
     self.price_lab.text = ticket.price_range;
-    self.time_pic.image = [UIImage imageNamed:@"ticket_detail_time"];
-    self.address_pic.image = [UIImage imageNamed:@"ticket_detail_address"];
-    self.price_pic.image = [UIImage imageNamed:@"ticket_detail_price"];
+    self.time_pic.image = [UIImage imageNamed:@"ticket_time"];
+    self.address_pic.image = [UIImage imageNamed:@"ticket_address"];
+    self.price_pic.image = [UIImage imageNamed:@"ticket_price"];
 
 }
 

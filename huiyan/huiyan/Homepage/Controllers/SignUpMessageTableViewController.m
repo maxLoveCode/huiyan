@@ -40,7 +40,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -64, kScreen_Width, kScreen_Height)];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerNib:[UINib nibWithNibName:@"SignUp" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"one"];
@@ -54,17 +54,18 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
+    self.tabBarController.tabBar.hidden = NO;
     [self.view endEditing:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+    self.navigationController.navigationBar.translucent = NO;
 }
 #pragma mark -- tableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

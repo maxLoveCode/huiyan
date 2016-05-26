@@ -28,11 +28,14 @@
    
     self.title = @"活动";
     self.image_arr = @[@"ticket_detail_time",@"ticket_detail_address",@"ticket_detail_price"];
-    self.title_arr = @[self.train.date,self.train.address,self.train.price];
+    if (self.train != nil) {
+         self.title_arr = @[self.train.date,self.train.address,self.train.price];
+    }
     //NSLog(@"%@",self.train.content);
         [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.trainDetailsTableView];
-
+    
+    self.navigationController.navigationBar.translucent = NO; 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -59,18 +62,20 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
+  //  [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (UIButton *)tail_btn{
     if (!_tail_btn) {
         self.tail_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.tail_btn.frame = CGRectMake(0, kScreen_Height - 48 - 64, kScreen_Width, 48);
+        self.tail_btn.frame = CGRectMake(20, kScreen_Height - 48 - 64, kScreen_Width - 40, 42);
        self.tail_btn.backgroundColor = COLOR_THEME;
         [self.tail_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.tail_btn.titleLabel.font = kFONT18;
         [self.tail_btn addTarget:self action:@selector(signUp:) forControlEvents:UIControlEventTouchUpInside];
         [self.tail_btn setTitle:@"立即报名" forState:UIControlStateNormal];
+        self.tail_btn.layer.masksToBounds = YES;
+        self.tail_btn.layer.cornerRadius = 5;
         
     }
     return _tail_btn;
@@ -172,7 +177,7 @@
     }else if(indexPath.section == 1){
         UIImageView *image_pic = [cell viewWithTag:1002];
         if (!image_pic) {
-            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 0, 32, 32)];
+            image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 8, 16, 16)];
             image_pic.image = [UIImage imageNamed:self.image_arr[indexPath.row]];
             [cell.contentView addSubview:image_pic];
             cell.tag = 1002;
@@ -190,11 +195,11 @@
         }else if (indexPath.section == 2){
             UIImageView *image_pic = [cell viewWithTag:1004];
             if (!image_pic) {
-                image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 0, 32, 32)];
-                image_pic.image = [UIImage imageNamed:@"arrow"];
+                image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kMargin, 8, 16, 16)];
                 [cell.contentView addSubview:image_pic];
                 cell.tag = 1004;
             }
+            image_pic.image = [UIImage imageNamed:@"person"];
             UILabel *title_lab = [cell viewWithTag: 1005];
             if (!title_lab) {
                 title_lab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin + 32, 0, kScreen_Width - 100, 32)];
@@ -214,7 +219,6 @@
             UIImageView *share_pic = [cell viewWithTag:1007];
             if (!share_pic) {
                 share_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width - 32 - kMargin, 32, 32, 32)];
-                share_pic.image = [UIImage imageNamed:@"arrow"];
                 [cell.contentView addSubview:share_pic];
                 share_pic.tag = 1007;
             }

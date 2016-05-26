@@ -18,6 +18,8 @@
     drama.nickName = dic[@"nickname"];
     drama.cid = dic[@"cid"];
     drama.is_fans = dic[@"is_fans"];
+    drama.fans_count = dic[@"fans_count"];
+    drama.gift_list = dic[@"gift_list"];
     return drama;
 }
 

@@ -40,6 +40,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
+     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //友盟
     [UMSocialData setAppKey:@"57189b72e0f55ad2c30015b6"];
     [UMSocialWechatHandler setWXAppId:@"wx2201898143065bfd" appSecret:@"b38e8146284e786e41402ddcb0b93539" url:@"http://www.umeng.com/social"];
@@ -138,6 +139,7 @@
             NSLog(@"result = %@",resultDic);
         }];
     }
+    
     return result;
     return YES;
 }
@@ -171,6 +173,7 @@ didRegisterUserNotificationSettings:
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
    // NSLog(@"user info ------------%@", userInfo);
+     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"+++++++++收到通知:%@", [self logDic:userInfo]);
 }
@@ -180,7 +183,7 @@ didRegisterUserNotificationSettings:
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
-    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService handleRemoteNotification:userInfo];
      NSLog(@"+++++++++收到通知:%@", [self logDic:userInfo]);
     

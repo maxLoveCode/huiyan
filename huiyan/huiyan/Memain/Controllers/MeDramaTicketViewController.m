@@ -13,27 +13,26 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "LookTicketDetailViewController.h"
 #import <MJRefresh.h>
+#import "GifRefresher.h"
 @interface MeDramaTicketViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UIImageView *bg_image;
 @end
 static int number_page = 0;
 @implementation MeDramaTicketViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的戏票";
      [self.view addSubview:self.tableView];
-    self.serverManager = [ServerManager sharedInstance];
+        self.serverManager = [ServerManager sharedInstance];
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
      self.dataSource = [NSMutableArray array];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
-        [self getmy_opera_ticketData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        number_page ++;
         [self getmy_opera_ticketData:[NSString stringWithFormat:@"%d",number_page]];
     }];
     if (user_id) {
@@ -42,6 +41,14 @@ static int number_page = 0;
    
    
     // Do any additional setup after loading the view.
+}
+
+- (UIImageView *)bg_image{
+    if (!_bg_image) {
+        self.bg_image = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 94, 100, 188,106)];
+        self.bg_image.backgroundColor = [UIColor whiteColor];
+    }
+    return _bg_image;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -71,6 +78,8 @@ static int number_page = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.rowHeight = 130;
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonDramaTicketCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"drama"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
@@ -108,6 +117,7 @@ static int number_page = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     LookTicketDetailViewController *lookCon = [[LookTicketDetailViewController alloc]init];
     lookCon.payData = self.dataSource[indexPath.section];
+    lookCon.returntype = @"1";
     [self.navigationController pushViewController:lookCon animated:NO];
 }
 
@@ -121,7 +131,25 @@ static int number_page = 0;
                 PayData *model = [PayData paydataWithDic:dic];
                 [self.dataSource addObject:model];
             }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.tableView.mj_footer = nil;
+            }else {
+                if (!self.tableView.mj_footer) {
+                    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self getmy_opera_ticketData:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+                }
+            }
+            if (self.dataSource.count == 0 && [page isEqualToString:@"0"]) {
+                self.bg_image.image = [UIImage imageNamed:@"noTicket"];
+                
+                [self.tableView addSubview:self.bg_image];
+            }else{
+                [self.bg_image removeFromSuperview];
+            }
             [self.tableView reloadData];
+            
             [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];
         }

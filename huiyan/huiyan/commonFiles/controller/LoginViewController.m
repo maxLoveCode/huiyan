@@ -20,6 +20,7 @@
 #import "ThirdUser.h"
 #import "Tools.h"
 #import <AFNetworking.h>
+#import "ForgotPassTableViewController.h"
 #define animateDuration 0.25
 #define animateDelay 0.2
 
@@ -49,18 +50,12 @@
     self.navigationController.navigationBar.translucent = YES;
 
     [self navigationBarItem];
-
-    NSURL *url = [NSURL URLWithString:@"http://7xsnr6.com2.z0.glb.clouddn.com/123.png"];
-    [_mainview.bgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
-         _mainview.bgView.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
-        
-    }];
+    
     
     self.view = _mainview;
     [self.mainview.timer addTarget:self action:@selector(sendVcode) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -71,6 +66,48 @@
 {
     [self.tabBarController setHidden:YES];
     [super viewDidAppear:YES];
+    
+    NSString *launchImageName;
+    if([UIScreen mainScreen].bounds.size.height > 667.0f) {
+        launchImageName = @"LaunchImage-800-Portrait-736h"; // iphone6 plus
+    }
+    else if([UIScreen mainScreen].bounds.size.height > 568.0f) {
+        launchImageName = @"LaunchImage-800-667h"; // iphone6
+    }
+    else if([UIScreen mainScreen].bounds.size.height > 480.0f){
+        launchImageName = @"LaunchImage-700-568h";// iphone5/5plus
+    } else {
+        launchImageName = @"LaunchImage-700"; // iphone4 or below
+    }
+    UIImage *launchImage = [UIImage imageNamed:launchImageName];
+    
+    for (UIView* subview in [_mainview.bgView subviews]) {
+        subview.alpha = 0;
+        NSLog(@"111");
+        subview.hidden = YES;
+    }
+    
+    //get the lauch screen at runtime
+    NSURL *url = [NSURL URLWithString:@"http://7xsnr6.com2.z0.glb.clouddn.com/123.png"];
+    
+    //load online background image
+    [_mainview.bgView sd_setImageWithURL:url placeholderImage:launchImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image) {
+            
+            //animates fate after loaded
+            [UIView animateWithDuration:animateDuration*2 delay:0.0f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+                UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
+                _mainview.bgView.image =[image applyBlurWithRadius:30 tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.5 animations:^{
+                    for (UIView* subview in [_mainview.bgView subviews]) {
+                            subview.hidden = NO;
+                            subview.alpha = 1;
+                    }
+                }];
+            }];
+        }
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -95,6 +132,7 @@
 {
     _rightItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style: UIBarButtonItemStylePlain target:self action:@selector(signup)];
     _rightItem.tag = -1;
+    [_rightItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor],  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = _rightItem;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
 }
@@ -145,6 +183,8 @@
     _rightItem.tag = -_rightItem.tag;
 }
 
+#pragma mark - loginview delegates
+
 -(void)loginViewDidSelectLogin:(LoginView*)loginView
 {
     if ([loginView.mobile.text isEqualToString:@""] ||[loginView.mobile.text isEqualToString:@"请输入手机号"]) {
@@ -178,14 +218,17 @@
                 User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.confirmPass.text];
                 [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
             }
+            [self showAlert:responseObject[@"msg"]];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error = %@",error);
         }];
     }
-    
-    
-    
-   
+}
+
+-(void)loginViewDidSelectForgotPassword:(LoginView *)loginView
+{
+    ForgotPassTableViewController* fpt = [[ForgotPassTableViewController alloc] init];
+    [self.navigationController pushViewController:fpt animated:NO];
 }
 
 
@@ -204,16 +247,19 @@
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
             }
+            else
+                [self showAlert:responseObject[@"msg"]];
         }else{
             if ([responseObject[@"code"] integerValue] == 70000) {
                 NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
-                   kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
-                 kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
+                kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
+                kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
             }
+                [self showAlert:responseObject[@"msg"]];
 
         }
         
@@ -227,7 +273,7 @@
 {
     BOOL result = YES;
     if (!result) {
-        [self showAlert];
+        [self showAlert:@""];
     }
 }
 
@@ -263,16 +309,16 @@
     }
 }
 
--(void)showAlert
+-(void)showAlert:(NSString*)string
 {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:string message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {}];
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)qqLand{
+- (void)qqLogin{
     NSLog(@"qq");
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
@@ -301,7 +347,7 @@
         }});
 }
 
-- (void)weixinLand{
+- (void)weixinLogin{
     NSLog(@"weixin");
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
@@ -329,6 +375,16 @@
     });
 }
 
+//哪些界面支持自动转屏
+- (BOOL)shouldAutorotate{
+    
+    return NO;
+}
+
+//viewController 支持哪些转屏方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
 - (void)getThird_loginData:(ThirdUser *)thirdUser{
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"type":thirdUser.type,@"openid":thirdUser.opnid,@"nickname":thirdUser.nickname,@"sex":thirdUser.sex,@"avatar":thirdUser.avatar};
     [self.serverManager AnimatedPOST:@"third_login.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {

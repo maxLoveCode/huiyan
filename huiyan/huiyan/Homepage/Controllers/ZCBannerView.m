@@ -86,7 +86,7 @@ static NSString *const resuseIdentufier = @"banner";
         image_pic.tag = 1000;
     }
     
-    [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"1"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"noNetwork"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         UIImage *origin =  image_pic.image;
         origin = [ZCBannerView imageWithImage:origin scaledToSize:CGSizeMake(kScreen_Width ,self.height)];
         image_pic.image = origin;

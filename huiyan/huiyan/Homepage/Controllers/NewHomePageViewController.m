@@ -16,6 +16,7 @@
 #import "MessageViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "GifRefresher.h"
+#import "UITabBarController+ShowHideBar.h"
 @interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -27,7 +28,7 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
+    self.title = @"首  页";
     self.dataSource = [[NSMutableArray alloc]init];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"interaction"] style:UIBarButtonItemStylePlain target:self action:@selector(rightClick:)];
@@ -60,11 +61,18 @@ static int number_page = 0;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.tableView.alpha = 0;
+    
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    [UIView animateWithDuration:1 animations:^{
+        self.tableView.alpha = 1;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,7 +122,7 @@ static int number_page = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
     wikiCon.homePage = self.dataSource[indexPath.section];
-    NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    //NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^(void) {
                          //cell.transform = CGAffineTransformMakeScale(-1, kScreen_Height/cell.frame.size.height);
@@ -162,7 +170,6 @@ static int number_page = 0;
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     if (!_hidden) {
-        NSLog(@"1");
         [self.tabBarController setHidden:YES];
         _hidden = !_hidden;
     }
@@ -171,8 +178,6 @@ static int number_page = 0;
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (_hidden) {
-        NSLog(@"2");
-
         [self.tabBarController setHidden:NO];
         _hidden = !_hidden;
     }

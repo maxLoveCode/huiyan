@@ -10,4 +10,5 @@
 #import "PayData.h"
 @interface LookTicketDetailViewController : UIViewController
 @property (nonatomic, strong) PayData *payData;
+@property (nonatomic, copy) NSString *returntype;
 @end

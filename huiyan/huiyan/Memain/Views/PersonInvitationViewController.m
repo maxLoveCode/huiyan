@@ -14,42 +14,53 @@
 #import "Invitation.h"
 #import <MJRefresh.h>
 #import "ArticalViewController.h"
+#import "GifRefresher.h"
 @interface PersonInvitationViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) UIImageView *bg_image;
 @end
 static int number_page = 0;
 @implementation PersonInvitationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的邀约";
+     self.navigationController.navigationBar.translucent = NO;
     // Do any additional setup after loading the view.
+  
     self.serverManager = [ServerManager sharedInstance];
     self.dataSource = [NSMutableArray array];
     [self.view addSubview:self.tableView];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];
     }];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        number_page ++;
-        [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-        [self.tableView.mj_header beginRefreshing];
+           [self.tableView.mj_header beginRefreshing];
 
 }
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, - 64, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStyleGrouped];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.rowHeight = 160;
+        self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.tableView registerNib:[UINib nibWithNibName:@"PersonInvitationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"invatation"];
     }
     return _tableView;
+}
+
+- (UIImageView *)bg_image{
+    if (!_bg_image) {
+        self.bg_image = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 94, 100, 188,106)];
+        self.bg_image.backgroundColor = [UIColor whiteColor];
+    }
+    return _bg_image;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -63,8 +74,8 @@ static int number_page = 0;
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height)];
      [self.tabBarController setHidden:YES];
+     self.navigationController.navigationBar.translucent = YES;
 }
 
 #pragma mark -- TableViewDelegate
@@ -103,6 +114,24 @@ static int number_page = 0;
             for (NSDictionary *dic in responseObject[@"data"]) {
                 Invitation *model = [Invitation invitationWithDic:dic];
                 [self.dataSource addObject:model];
+            }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.tableView.mj_footer = nil;
+            }else {
+                if (!self.tableView.mj_footer) {
+                    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+
+                }
+            }
+            if (self.dataSource.count == 0 && [page isEqualToString:@"0"]) {
+                self.bg_image.image = [UIImage imageNamed:@"noInvitation"];
+                
+                [self.tableView addSubview:self.bg_image];
+            }else{
+                [self.bg_image removeFromSuperview];
             }
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];

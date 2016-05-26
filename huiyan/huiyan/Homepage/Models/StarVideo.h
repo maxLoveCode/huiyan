@@ -17,5 +17,6 @@
 @property (nonatomic,copy) NSString *like_count;
 @property (nonatomic,copy) NSString *is_like;
 @property (nonatomic,copy) NSString *comment_count;
+@property (nonatomic, copy) NSString *type;
 + (StarVideo *)starVideoWithDic:(NSDictionary *)dic;
 @end

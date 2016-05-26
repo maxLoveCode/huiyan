@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"xiaoxi";
+    self.title = @"消息";
     _page = 0;
     _server = [ServerManager sharedInstance];
     [self.tableView registerClass:[MessageTableViewCell class] forCellReuseIdentifier:@"msg"];
@@ -40,7 +40,15 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self.tabBarController setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:YES];
+   // [self.tabBarController setHidden:NO];
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

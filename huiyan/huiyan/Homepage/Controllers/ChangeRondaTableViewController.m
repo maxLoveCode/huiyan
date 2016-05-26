@@ -48,8 +48,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    [self.tabBarController setHidden:YES];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -58,7 +56,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
