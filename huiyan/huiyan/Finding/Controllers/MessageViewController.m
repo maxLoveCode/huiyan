@@ -12,11 +12,19 @@
 #import "ExploreViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "MessageListTableViewController.h"
+#import "FriendsViewController.h"
+
+#define cellHeight 44
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
+    CGFloat _height;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *title_arr;
 @property (nonatomic, strong) NSArray *image_arr;
+
+@property (nonatomic, strong) FriendsViewController* list;
 @end
 
 @implementation MessageViewController
@@ -27,12 +35,18 @@
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.translucent = NO;
+    _height =4*cellHeight;
+    
     [self.view addSubview:self.tableView];
      self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    self.title_arr = @[@"系统消息",@"推送消息",@"附近的戏友"];
+    self.title_arr = @[@"互动消息",@"系统消息",@"推送消息",@"附近的戏友"];
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
-    // Do any additional setup after loading the view.
+    
+    [self addChildViewController:self.list];
+    [self.list.view setFrame:CGRectMake(0, _height, kScreen_Width, kScreen_Height-_height)];
+    [self.view addSubview:self.list.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -53,9 +67,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return cellHeight;
+}
+
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, _height)];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.rowHeight = 60;
@@ -64,8 +83,16 @@
     return _tableView;
 }
 
+-(FriendsViewController *)list
+{
+    if (!_list) {
+        _list = [[FriendsViewController alloc] init];
+    }
+    return _list;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,7 +105,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.tabBarController.tabBar.hidden = YES;
-         if (indexPath.row == 0) {
+    if (indexPath.row == 0) {
         MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
         [list setStyle: MessageTypeSystem];
         [self.navigationController pushViewController:list animated:YES];

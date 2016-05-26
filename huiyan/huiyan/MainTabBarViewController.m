@@ -101,7 +101,6 @@
 }
 
 - (void)rightClick:(UIBarButtonItem *)sender{
-    NSLog(@"eeee");
 }
 
 - (void)didReceiveMemoryWarning {
