@@ -260,8 +260,6 @@
 		55C41E0B1CE428280055A58B /* failure.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C41E081CE428280055A58B /* failure.png */; };
 		55C41E0C1CE428280055A58B /* failure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C41E091CE428280055A58B /* failure@2x.png */; };
 		55C41E0D1CE428280055A58B /* successful.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C41E0A1CE428280055A58B /* successful.png */; };
-		55C41E111CE4492F0055A58B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C41E0F1CE4492F0055A58B /* MessageCell.m */; };
-		55C41E121CE4492F0055A58B /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C41E101CE4492F0055A58B /* MessageCell.xib */; };
 		55C41E151CE44A260055A58B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C41E141CE44A260055A58B /* MessageViewController.m */; };
 		55C41E1F1CE4559A0055A58B /* around@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C41E161CE4559A0055A58B /* around@2x.png */; };
 		55C41E201CE4559A0055A58B /* around@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C41E171CE4559A0055A58B /* around@3x.png */; };
@@ -307,6 +305,14 @@
 		55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFDA1CC9B4AB0093B180 /* Tools.m */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
+		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
+		5964F1C61CF5549C00E436CE /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5964F1C41CF5549C00E436CE /* MessageCell.xib */; };
+		5964F1CA1CF5551600E436CE /* DramaDetailHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C81CF5551600E436CE /* DramaDetailHeadCell.m */; };
+		5964F1CB1CF5551600E436CE /* DramaDetailHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5964F1C91CF5551600E436CE /* DramaDetailHeadCell.xib */; };
+		5964F1CE1CF577C500E436CE /* DramaStarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1CD1CF577C500E436CE /* DramaStarDetailViewController.m */; };
+		5964F1D11CF5919A00E436CE /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D01CF5919A00E436CE /* UIImage+Extension.m */; };
+		5964F1D71CF5964100E436CE /* DynamicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D61CF5964100E436CE /* DynamicDetailViewController.m */; };
+		5964F1DA1CF5976500E436CE /* FriendswordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D91CF5976500E436CE /* FriendswordsCell.m */; };
 		59934F871CF29E6800666B33 /* person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F851CF29E6800666B33 /* person@2x.png */; };
 		59934F881CF29E6800666B33 /* person@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F861CF29E6800666B33 /* person@3x.png */; };
 		59934F971CF2DBA500666B33 /* playnumber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F951CF2DBA500666B33 /* playnumber@2x.png */; };
@@ -794,9 +800,6 @@
 		55C41E081CE428280055A58B /* failure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = failure.png; sourceTree = "<group>"; };
 		55C41E091CE428280055A58B /* failure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "failure@2x.png"; sourceTree = "<group>"; };
 		55C41E0A1CE428280055A58B /* successful.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = successful.png; sourceTree = "<group>"; };
-		55C41E0E1CE4492F0055A58B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = ../../Homepage/Views/MessageCell.h; sourceTree = "<group>"; };
-		55C41E0F1CE4492F0055A58B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = ../../Homepage/Views/MessageCell.m; sourceTree = "<group>"; };
-		55C41E101CE4492F0055A58B /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCell.xib; path = ../../Homepage/Views/MessageCell.xib; sourceTree = "<group>"; };
 		55C41E131CE44A260055A58B /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = ../../Finding/Controllers/MessageViewController.h; sourceTree = "<group>"; };
 		55C41E141CE44A260055A58B /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = ../../Finding/Controllers/MessageViewController.m; sourceTree = "<group>"; };
 		55C41E161CE4559A0055A58B /* around@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "around@2x.png"; sourceTree = "<group>"; };
@@ -871,6 +874,20 @@
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
 		5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changePasswordTableViewController.m; path = HuiYan/Memain/Controllers/changePasswordTableViewController.m; sourceTree = SOURCE_ROOT; };
+		5964F1C21CF5549C00E436CE /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = HuiYan/Homepage/Views/MessageCell.h; sourceTree = SOURCE_ROOT; };
+		5964F1C31CF5549C00E436CE /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = HuiYan/Homepage/Views/MessageCell.m; sourceTree = SOURCE_ROOT; };
+		5964F1C41CF5549C00E436CE /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCell.xib; path = HuiYan/Homepage/Views/MessageCell.xib; sourceTree = SOURCE_ROOT; };
+		5964F1C71CF5551600E436CE /* DramaDetailHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DramaDetailHeadCell.h; path = HuiYan/Homepage/Views/DramaDetailHeadCell.h; sourceTree = SOURCE_ROOT; };
+		5964F1C81CF5551600E436CE /* DramaDetailHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DramaDetailHeadCell.m; path = HuiYan/Homepage/Views/DramaDetailHeadCell.m; sourceTree = SOURCE_ROOT; };
+		5964F1C91CF5551600E436CE /* DramaDetailHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DramaDetailHeadCell.xib; path = HuiYan/Homepage/Views/DramaDetailHeadCell.xib; sourceTree = SOURCE_ROOT; };
+		5964F1CC1CF577C500E436CE /* DramaStarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DramaStarDetailViewController.h; path = HuiYan/Homepage/Controllers/DramaStarDetailViewController.h; sourceTree = SOURCE_ROOT; };
+		5964F1CD1CF577C500E436CE /* DramaStarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DramaStarDetailViewController.m; path = HuiYan/Homepage/Controllers/DramaStarDetailViewController.m; sourceTree = SOURCE_ROOT; };
+		5964F1CF1CF5919A00E436CE /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
+		5964F1D01CF5919A00E436CE /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		5964F1D51CF5964100E436CE /* DynamicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicDetailViewController.h; path = HuiYan/Homepage/Controllers/DynamicDetailViewController.h; sourceTree = SOURCE_ROOT; };
+		5964F1D61CF5964100E436CE /* DynamicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DynamicDetailViewController.m; path = HuiYan/Homepage/Controllers/DynamicDetailViewController.m; sourceTree = SOURCE_ROOT; };
+		5964F1D81CF5976500E436CE /* FriendswordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendswordsCell.h; path = HuiYan/Homepage/Views/FriendswordsCell.h; sourceTree = SOURCE_ROOT; };
+		5964F1D91CF5976500E436CE /* FriendswordsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendswordsCell.m; path = HuiYan/Homepage/Views/FriendswordsCell.m; sourceTree = SOURCE_ROOT; };
 		59934F851CF29E6800666B33 /* person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@2x.png"; path = "HuiYan/ImageSource/person@2x.png"; sourceTree = SOURCE_ROOT; };
 		59934F861CF29E6800666B33 /* person@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@3x.png"; path = "HuiYan/ImageSource/person@3x.png"; sourceTree = SOURCE_ROOT; };
 		59934F951CF2DBA500666B33 /* playnumber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "playnumber@2x.png"; path = "HuiYan/ImageSource/playnumber@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -1445,6 +1462,10 @@
 				25E07DB71CB65D180015AD73 /* ArticalViewController.m */,
 				25C625491CBE1C650068BFE8 /* StarDetailViewController.h */,
 				25C6254A1CBE1C650068BFE8 /* StarDetailViewController.m */,
+				5964F1CC1CF577C500E436CE /* DramaStarDetailViewController.h */,
+				5964F1CD1CF577C500E436CE /* DramaStarDetailViewController.m */,
+				5964F1D51CF5964100E436CE /* DynamicDetailViewController.h */,
+				5964F1D61CF5964100E436CE /* DynamicDetailViewController.m */,
 				5586217D1CE5BA0E007D5049 /* NewHomePageViewController.h */,
 				5586217E1CE5BA0E007D5049 /* NewHomePageViewController.m */,
 			);
@@ -1702,11 +1723,11 @@
 		55CCD7DA1CB38A0600C3B8CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				55C41E0E1CE4492F0055A58B /* MessageCell.h */,
-				55C41E0F1CE4492F0055A58B /* MessageCell.m */,
-				55C41E101CE4492F0055A58B /* MessageCell.xib */,
 				59B23C681CEEF23100F2EB21 /* MessageTableViewCell.h */,
 				59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */,
+				5964F1C21CF5549C00E436CE /* MessageCell.h */,
+				5964F1C31CF5549C00E436CE /* MessageCell.m */,
+				5964F1C41CF5549C00E436CE /* MessageCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1867,6 +1888,11 @@
 				55A43E8E1CEC282700BB73EF /* DramaStarInvatationCell.h */,
 				55A43E8F1CEC282700BB73EF /* DramaStarInvatationCell.m */,
 				55A43E901CEC282700BB73EF /* DramaStarInvatationCell.xib */,
+				5964F1C71CF5551600E436CE /* DramaDetailHeadCell.h */,
+				5964F1C81CF5551600E436CE /* DramaDetailHeadCell.m */,
+				5964F1C91CF5551600E436CE /* DramaDetailHeadCell.xib */,
+				5964F1D81CF5976500E436CE /* FriendswordsCell.h */,
+				5964F1D91CF5976500E436CE /* FriendswordsCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1874,6 +1900,8 @@
 		55CCD7F91CB4A49500C3B8CA /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				5964F1CF1CF5919A00E436CE /* UIImage+Extension.h */,
+				5964F1D01CF5919A00E436CE /* UIImage+Extension.m */,
 				251F5E191CBCC327000BC47D /* UIImage+ImageEffects.h */,
 				251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */,
 				55CCD7FA1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.h */,
@@ -2060,6 +2088,7 @@
 				558F22D41CE85469008636E1 /* training@3x.png in Resources */,
 				25C6257A1CBE49C10068BFE8 /* tab_firend@3x.png in Resources */,
 				25C6257E1CBE49C10068BFE8 /* tab_homePage@3x.png in Resources */,
+				5964F1CB1CF5551600E436CE /* DramaDetailHeadCell.xib in Resources */,
 				59D4AA8B1CF40530002545A9 /* noInvitation.png in Resources */,
 				558621751CE49FB0007D5049 /* PersonHeadCell.xib in Resources */,
 				557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */,
@@ -2079,7 +2108,6 @@
 				5578A8A21CF06BCB00BD3061 /* gifrefesh2.png in Resources */,
 				59934F981CF2DBA500666B33 /* playnumber@3x.png in Resources */,
 				5578A8C31CF0825100BD3061 /* enter.png in Resources */,
-				55C41E121CE4492F0055A58B /* MessageCell.xib in Resources */,
 				550BFA221CBB2AF000E2E9DE /* top_shadow.png in Resources */,
 				550BFA1C1CBB2AF000E2E9DE /* player_not_download.png in Resources */,
 				5578A8521CF03F7000BD3061 /* right_se.png in Resources */,
@@ -2116,6 +2144,7 @@
 				550BFA151CBB2AF000E2E9DE /* kr-video-player-shrinkscreen@3x.png in Resources */,
 				55CCD7991CB3640600C3B8CA /* LaunchScreen.storyboard in Resources */,
 				558F22F51CE9B112008636E1 /* UnBindMobileViewController.xib in Resources */,
+				5964F1C61CF5549C00E436CE /* MessageCell.xib in Resources */,
 				5578A8531CF03F7000BD3061 /* weixinpay.png in Resources */,
 				55C41E041CE325C80055A58B /* TrainOrdersMessageCell.xib in Resources */,
 				55C41E241CE4559A0055A58B /* pushMes@3x.png in Resources */,
@@ -2239,6 +2268,7 @@
 			files = (
 				55A43E911CEC282700BB73EF /* DramaStarInvatationCell.m in Sources */,
 				558F5CBA1CBBAAFA006BD54D /* TrainingDetailsTableViewController.m in Sources */,
+				5964F1CA1CF5551600E436CE /* DramaDetailHeadCell.m in Sources */,
 				558F5CB71CBB9780006BD54D /* Training.m in Sources */,
 				25D965521CF3E28900B49A9B /* ForgotPassTableViewController.m in Sources */,
 				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
@@ -2251,6 +2281,7 @@
 				557EDE7F1CD0A4AB0039267E /* NSDataEx.m in Sources */,
 				5578A8451CEEF9CA00BD3061 /* MHDatePicker.m in Sources */,
 				55CCD7FC1CB4A4E400C3B8CA /* UITabBarController+ShowHideBar.m in Sources */,
+				5964F1D11CF5919A00E436CE /* UIImage+Extension.m in Sources */,
 				59F6AB201CF01F040000DFB0 /* InterestsTableViewController.m in Sources */,
 				558F5D051CBE50F0006BD54D /* RecommondedTableViewCell.m in Sources */,
 				5556CBF71CD0E30600CCD668 /* DramaTicketDetailTableViewController.m in Sources */,
@@ -2261,6 +2292,7 @@
 				55C41DD91CDDEC870055A58B /* SignUpMessageTableViewController.m in Sources */,
 				55942D421CB7D77100EB041A /* CommentContent.m in Sources */,
 				550BF97E1CB8ED6600E2E9DE /* ZFPlayerControlView.m in Sources */,
+				5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */,
 				557EDE811CD0A4AB0039267E /* RSADataSigner.m in Sources */,
 				25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */,
 				55DAFFC51CC8A37D0093B180 /* NSString+Md5.m in Sources */,
@@ -2272,6 +2304,8 @@
 				5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */,
 				25A7705B1CF2915600E3701D /* WalletTableViewController.m in Sources */,
 				5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */,
+				5964F1CE1CF577C500E436CE /* DramaStarDetailViewController.m in Sources */,
+				5964F1DA1CF5976500E436CE /* FriendswordsCell.m in Sources */,
 				25C216581CDB2246007C69BB /* chatUsers.m in Sources */,
 				25A770581CEDC72100E3701D /* MessageListTableViewController.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
@@ -2344,6 +2378,7 @@
 				59B23C6A1CEEF23100F2EB21 /* MessageTableViewCell.m in Sources */,
 				554B97C21CEDA25B00E471CB /* EditPersonMessageViewController.m in Sources */,
 				558F22D91CE856FB008636E1 /* MeDramaTicketViewController.m in Sources */,
+				5964F1D71CF5964100E436CE /* DynamicDetailViewController.m in Sources */,
 				55AD324F1CD9C748000ACE39 /* PayData.m in Sources */,
 				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
 				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
@@ -2355,7 +2390,6 @@
 				558F22F41CE9B112008636E1 /* UnBindMobileViewController.m in Sources */,
 				557001B11CCF667B003EB02F /* ApiXml.mm in Sources */,
 				55DAFFBC1CC5D9D90093B180 /* MoreDetailsTableViewCell.m in Sources */,
-				55C41E111CE4492F0055A58B /* MessageCell.m in Sources */,
 				554B97CC1CEEB03E00E471CB /* PersonInvitationCell.m in Sources */,
 				5570012B1CCF365E003EB02F /* WebViewJavascriptBridge_JS.m in Sources */,
 				55A43E8C1CEC08F100BB73EF /* DramaStarInvitionViewController.m in Sources */,

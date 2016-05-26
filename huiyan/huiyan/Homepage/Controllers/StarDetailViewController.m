@@ -49,6 +49,7 @@ static CGFloat const kWindowHeight = 244.0f;
     [super viewWillAppear:animated];
 //    [UIApplication sharedApplication].statusBarHidden = YES;
 //    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
@@ -96,7 +97,7 @@ static CGFloat const kWindowHeight = 244.0f;
 {
     if (!_mainTable) {
         self.mainTable = [[UITableView alloc] init];
-    self.mainTable.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame),kScreen_Height);
+        self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height);
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
         [_mainTable registerClass:[CoolNavi class] forCellReuseIdentifier:@"head"];

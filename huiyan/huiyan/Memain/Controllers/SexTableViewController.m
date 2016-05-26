@@ -28,6 +28,12 @@
     self.title=@"性别";
     self.tableView.bounces = NO;
     self.tableView.rowHeight = 50;
+    if ([self.sexType isEqualToString:@"1"]) {
+          flag = YES;
+    }else{
+        flag = NO;
+    }
+  
     self.serverManager = [ServerManager sharedInstance];
     self.sex_array=[[NSMutableArray alloc]initWithObjects:@"男",@"女", nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确认"  style:UIBarButtonItemStylePlain target:self action:@selector(finishClick)];

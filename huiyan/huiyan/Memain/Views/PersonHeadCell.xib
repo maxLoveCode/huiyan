@@ -97,7 +97,7 @@
                 <outlet property="likewiki_lab" destination="weL-fa-jiU" id="Qo0-TE-uYK"/>
                 <outlet property="name_lab" destination="a8F-6X-52p" id="taT-d8-cjh"/>
             </connections>
-            <point key="canvasLocation" x="500.5" y="476.5"/>
+            <point key="canvasLocation" x="383.5" y="403.5"/>
         </tableViewCell>
     </objects>
 </document>

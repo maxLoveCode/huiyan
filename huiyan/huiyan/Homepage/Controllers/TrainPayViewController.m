@@ -313,8 +313,8 @@
     //    //商品描述
     order.productDescription = @"描述";
     //    //商品价格
-    //order.amount = self.data_dic[@"total_price"];
-    order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
+    order.amount = self.data_dic[@"total_price"];
+    //order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
     
     //#pragma mark 疑问1.
     order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/train_alipay"; //回调URL

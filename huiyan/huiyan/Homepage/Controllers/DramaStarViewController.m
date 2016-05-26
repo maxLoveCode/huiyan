@@ -14,11 +14,10 @@
 #import "ServerManager.h"
 #import "MCSwipeMenu.h"
 #import "DramaStar.h"
-#import "StarDetailViewController.h"
+#import "DramaStarDetailViewController.h"
 #import "MessageViewController.h"
 #import "SignUpMessageTableViewController.h"
 #import "DramaStarInvitionViewController.h"
-#import "UITabBarController+ShowHideBar.h"
 #import "UITabBarController+ShowHideBar.h"
 #define kSwipeMenu 41
 #define kBannerHeight kScreen_Width / 2
@@ -71,6 +70,11 @@
         _dramaStarTableView.alpha = 1;
         [self.dramaStarTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController setHidden:NO];
 }
 
 - (MCSwipeMenu *)head_view{
@@ -150,12 +154,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    StarDetailViewController *star = [[StarDetailViewController alloc]init];
-//    star.drama = self.dataSource[indexPath.section -1];
-//    [self presentViewController:star animated:YES completion:^{
-//        
-//    }];
-    //[self.navigationController pushViewController:star animated:YES];
+    DramaStarDetailViewController *star = [[DramaStarDetailViewController alloc]init];
+    star.drama = self.dataSource[indexPath.section -1];
+    [self.navigationController pushViewController:star animated:YES];
 }
 
 - (void)get_actor_cateData{

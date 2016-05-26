@@ -38,13 +38,6 @@ static int number_page = 0;
       self.dataSource = [NSMutableArray array];
     self.serverManager = [ServerManager sharedInstance];
     [self configLocationManager];
-    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
-        number_page = 0;
-        [self.dataSource removeAllObjects];
-        [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-    
-    [self.tableView.mj_header beginRefreshing];
         // Do any additional setup after loading the view.
 }
 
@@ -88,7 +81,12 @@ static int number_page = 0;
         self.x_point = [NSString stringWithFormat:@"%f",cll.longitude];
         self.y_point = [NSString stringWithFormat:@"%f",cll.latitude];
         NSLog(@"location:%@ x = %@ y = %@", location,self.x_point,self.y_point);
-        [self getfind_listData:@"0"];
+        self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+            number_page = 0;
+            [self.dataSource removeAllObjects];
+            [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
+        }];
+           [self.tableView.mj_header beginRefreshing];
         if (regeocode)
         {
            // NSLog(@"reGeocode:%@", regeocode);
@@ -149,7 +147,8 @@ static int number_page = 0;
                         self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                             number_page ++;
                             [self getfind_listData:[NSString stringWithFormat:@"%d",number_page]];
-                        }];                    }
+                        }];
+                    }
                 }
 
                 [self.tableView reloadData];

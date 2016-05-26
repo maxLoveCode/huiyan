@@ -14,13 +14,14 @@
 #import "UIImageView+WebCache.h"
 #import "SexTableViewController.h"
 #import "Tools.h"
-
+#import <AFNetworking.h>
 @interface EditPersonMessageViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSArray *titleArr;
 @property (nonatomic, strong) PersonMessage *perData;
 @property(nonatomic,strong)UIImage * selfPhoto;
+@property (nonatomic, strong) UIImageView *imagePic;
 @end
 
 @implementation EditPersonMessageViewController
@@ -100,6 +101,7 @@
 
             [cell.contentView addSubview:imagePic];
             imagePic.tag = 1000;
+            self.imagePic = imagePic;
         }
         [imagePic sd_setImageWithURL:[NSURL URLWithString:self.perData.avatar]];
     }else if (indexPath.row == 1){
@@ -179,6 +181,7 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else {
         SexTableViewController *sexCon = [[SexTableViewController alloc]init];
+        sexCon.sexType = self.perData.sex;
         [self.navigationController pushViewController:sexCon animated:YES];
     }
 }
@@ -190,10 +193,56 @@
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         NSData *data = UIImageJPEGRepresentation(img, 1.0);
-        NSLog(@"----%@",data);
         [self getUploadImage:data];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)getUploadImage:(NSData *)image{
+    NSString *urlStr = [NSString stringWithFormat:@"http://139.196.32.98/huiyan/api1_0/index.php/Home/Qiniu/upload_file/access_token/%@",self.serverManager.accessToken];
+    NSDictionary *parameters = @{@"upload_file":image};
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFileData:image name:@"upload_file" fileName:@"somefilename.png" mimeType:@"image/png"];// you file to upload
+        
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:^(NSProgress * _Nonnull uploadProgress) {
+                      // This is not called back on the main queue.
+                      // You are responsible for dispatching to the main queue for UI updates
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          //Update the progress view
+                          //[progressView setProgress:uploadProgress.fractionCompleted];
+                      });
+                  }
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      NSLog(@"msg is %@", responseObject[@"msg"]);
+                      
+                      if (error) {
+                          NSLog(@"Error: %@", error);
+                      } else {
+                          NSLog(@"%@ %@", response, responseObject);
+                          if ([responseObject[@"data"] objectForKey:@"url"] != nil) {
+                              NSString *str = [responseObject[@"data"] objectForKey:@"url"];
+                              [self get_user_infoImageData:str];
+                              
+                          }else{
+                              [self presentViewController:[Tools showAlert:@"修改失败"] animated:YES completion:nil];
+                          }
+                          
+                      }
+                  }];
+    
+    [uploadTask resume];
+    
+    
+    
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -243,19 +292,18 @@
     return newimage;
 }
 
-- (void)getUploadImage:(NSData *)image{
-    NSString *user_id = kOBJECTDEFAULTS(@"user_id");
-        NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":user_id};
-        [self.serverManager AnimatedGET:@"" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-            if ([responseObject[@"code"]integerValue] == 80000) {
-              
-                [self.tableView reloadData];
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-        }];
-
-
+- (void)get_user_infoImageData:(NSString *)userImage{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"avatar":userImage};
+    [self.serverManager AnimatedPOST:@"edit_user_info.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 80010) {
+            [self get_user_infoData];
+            [self presentViewController:[Tools showAlert:@"修改成功"] animated:YES completion:nil];
+        }else{
+            [self presentViewController:[Tools showAlert:@"修改失败"] animated:YES completion:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
 }
 
 - (void)get_user_infoData{
