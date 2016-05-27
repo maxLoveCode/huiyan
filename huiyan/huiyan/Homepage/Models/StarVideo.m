@@ -13,11 +13,12 @@
     StarVideo *starVideo = [[StarVideo alloc]init];
     starVideo.ID = dic[@"id"];
     starVideo.title = dic[@"title"];
-    starVideo.movie = dic[@"movie"];
+    starVideo.content = dic[@"content"];
     starVideo.createtime = dic[@"createtime"];
     starVideo.play_count = dic[@"play_count"];
     starVideo.like_count = dic[@"like_count"];
     starVideo.is_like = dic[@"is_like"];
+    starVideo.type = dic[@"type"];
     starVideo.comment_count = dic[@"comment_count"];
     return starVideo;
 }

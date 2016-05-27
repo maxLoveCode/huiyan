@@ -102,7 +102,6 @@
 		5556CBEE1CD0BB3300CCD668 /* FindFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBED1CD0BB3300CCD668 /* FindFriend.m */; };
 		5556CBF11CD0C5FE00CCD668 /* MQPayClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBF01CD0C5FE00CCD668 /* MQPayClient.m */; };
 		5556CBF71CD0E30600CCD668 /* DramaTicketDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CBF61CD0E30600CCD668 /* DramaTicketDetailTableViewController.m */; };
-		5556CC071CD37C7300CCD668 /* CoolNavi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC061CD37C7300CCD668 /* CoolNavi.m */; };
 		5556CC0C1CD83F0100CCD668 /* PersonMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC0B1CD83F0100CCD668 /* PersonMessage.m */; };
 		5556CC0F1CD8992B00CCD668 /* LookTicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC0E1CD8992B00CCD668 /* LookTicketDetailViewController.m */; };
 		5556CC151CD89DD700CCD668 /* LookTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556CC141CD89DD700CCD668 /* LookTicketCell.m */; };
@@ -308,6 +307,8 @@
 		591C37EA1CF6CB6900E73CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */; };
 		591C37EC1CF6CB8700E73CB1 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */; };
 		591C37EE1CF6CEB200E73CB1 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37ED1CF6CEB200E73CB1 /* UMMobClick.framework */; };
+		591C37FD1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C37FB1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m */; };
+		591C37FE1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
@@ -327,6 +328,7 @@
 		5993500B1CF3027700666B33 /* noNetwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 599350071CF3027700666B33 /* noNetwork.png */; };
 		5993500C1CF3027700666B33 /* noTicket.png in Resources */ = {isa = PBXBuildFile; fileRef = 599350081CF3027700666B33 /* noTicket.png */; };
 		59B23C6A1CEEF23100F2EB21 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */; };
+		59B72EDB1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B72EDA1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m */; };
 		59D4AA8B1CF40530002545A9 /* noInvitation.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AA8A1CF40530002545A9 /* noInvitation.png */; };
 		59D4AB821CF46AE2002545A9 /* ticket_address.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB7C1CF46AE2002545A9 /* ticket_address.png */; };
 		59D4AB831CF46AE2002545A9 /* ticket_detail_address@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB7D1CF46AE2002545A9 /* ticket_detail_address@3x.png */; };
@@ -496,8 +498,6 @@
 		5556CBF01CD0C5FE00CCD668 /* MQPayClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQPayClient.m; sourceTree = "<group>"; };
 		5556CBF51CD0E30600CCD668 /* DramaTicketDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DramaTicketDetailTableViewController.h; sourceTree = "<group>"; };
 		5556CBF61CD0E30600CCD668 /* DramaTicketDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaTicketDetailTableViewController.m; sourceTree = "<group>"; };
-		5556CC051CD37C7300CCD668 /* CoolNavi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoolNavi.h; sourceTree = "<group>"; };
-		5556CC061CD37C7300CCD668 /* CoolNavi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolNavi.m; sourceTree = "<group>"; };
 		5556CC0A1CD83F0100CCD668 /* PersonMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMessage.h; sourceTree = "<group>"; };
 		5556CC0B1CD83F0100CCD668 /* PersonMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMessage.m; sourceTree = "<group>"; };
 		5556CC0D1CD8992B00CCD668 /* LookTicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookTicketDetailViewController.h; sourceTree = "<group>"; };
@@ -881,6 +881,9 @@
 		591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		591C37ED1CF6CEB200E73CB1 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
+		591C37FA1CF6EBB100E73CB1 /* DynamicTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicTextTableViewCell.h; path = HuiYan/Homepage/Views/DynamicTextTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		591C37FB1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DynamicTextTableViewCell.m; path = HuiYan/Homepage/Views/DynamicTextTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DynamicTextTableViewCell.xib; path = HuiYan/Homepage/Views/DynamicTextTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		5925EF581CF05C2F00E3ACF3 /* GifRefresher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifRefresher.h; path = HuiYan/commonFiles/controller/GifRefresher.h; sourceTree = SOURCE_ROOT; };
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -909,6 +912,8 @@
 		599350081CF3027700666B33 /* noTicket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noTicket.png; path = HuiYan/ImageSource/noTicket.png; sourceTree = SOURCE_ROOT; };
 		59B23C681CEEF23100F2EB21 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = HuiYan/Memain/Models/MessageTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		59B23C691CEEF23100F2EB21 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTableViewCell.m; path = HuiYan/Memain/Models/MessageTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		59B72ED91CF6F3AC00F79C37 /* DynamicImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicImageTableViewCell.h; path = HuiYan/Homepage/Views/DynamicImageTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		59B72EDA1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DynamicImageTableViewCell.m; path = HuiYan/Homepage/Views/DynamicImageTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		59D4AA8A1CF40530002545A9 /* noInvitation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noInvitation.png; path = HuiYan/ImageSource/noInvitation.png; sourceTree = SOURCE_ROOT; };
 		59D4AB7C1CF46AE2002545A9 /* ticket_address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticket_address.png; path = HuiYan/ImageSource/ticket_address.png; sourceTree = SOURCE_ROOT; };
 		59D4AB7D1CF46AE2002545A9 /* ticket_detail_address@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ticket_detail_address@3x.png"; path = "HuiYan/ImageSource/ticket_detail_address@3x.png"; sourceTree = SOURCE_ROOT; };
@@ -1260,8 +1265,6 @@
 				591C37E31CF6CAEC00E73CB1 /* BaiduTongji */,
 				5578A83F1CEEF97900BD3061 /* TimeDatePicker */,
 				558621801CE5C88F007D5049 /* JPush */,
-				5556CC051CD37C7300CCD668 /* CoolNavi.h */,
-				5556CC061CD37C7300CCD668 /* CoolNavi.m */,
 				55B2C8F21CD09DEC0070787A /* Alipay */,
 				557001A21CCF667B003EB02F /* WeixinPay */,
 				557001211CCF365E003EB02F /* WebViewJavascriptBridge */,
@@ -1914,6 +1917,11 @@
 				5964F1C91CF5551600E436CE /* DramaDetailHeadCell.xib */,
 				5964F1D81CF5976500E436CE /* FriendswordsCell.h */,
 				5964F1D91CF5976500E436CE /* FriendswordsCell.m */,
+				591C37FA1CF6EBB100E73CB1 /* DynamicTextTableViewCell.h */,
+				591C37FB1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m */,
+				591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */,
+				59B72ED91CF6F3AC00F79C37 /* DynamicImageTableViewCell.h */,
+				59B72EDA1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2027,7 +2035,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2191,6 +2199,7 @@
 				55B9191F1CCA1FAF00717F8E /* UMSCommentInputControlleriPad.xib in Resources */,
 				550BFA101CBB2AF000E2E9DE /* kr-video-player-pause@2x.png in Resources */,
 				55B919201CCA1FAF00717F8E /* UMShareEditViewController.xib in Resources */,
+				591C37FE1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib in Resources */,
 				55AD32581CDB2426000ACE39 /* evaluate@2x.png in Resources */,
 				55C41DF21CE2FFFD0055A58B /* WriteSignUpCell.xib in Resources */,
 				5578A8A61CF06BCB00BD3061 /* gifrefesh6.png in Resources */,
@@ -2331,6 +2340,7 @@
 				558F22EF1CE97585008636E1 /* BindMobileViewController.m in Sources */,
 				55C41DFA1CE321150055A58B /* TrainOrdersTableViewController.m in Sources */,
 				25C625571CBE48C90068BFE8 /* FriendsViewController.m in Sources */,
+				591C37FD1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m in Sources */,
 				550BF97F1CB8ED6600E2E9DE /* ZFBrightnessView.m in Sources */,
 				5556CBEB1CD0B8CB00CCD668 /* FindTableViewCell.m in Sources */,
 				25A7705B1CF2915600E3701D /* WalletTableViewController.m in Sources */,
@@ -2396,12 +2406,12 @@
 				55C41E071CE4223D0055A58B /* TrainPayViewController.m in Sources */,
 				25C625441CBE002E0068BFE8 /* LoginView.m in Sources */,
 				55C41DFE1CE322B20055A58B /* TrainOrdersCell.m in Sources */,
+				59B72EDB1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m in Sources */,
 				554B97BB1CED5E0B00E471CB /* PersonTrainingCell.m in Sources */,
 				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
 				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */,
-				5556CC071CD37C7300CCD668 /* CoolNavi.m in Sources */,
 				5556CC151CD89DD700CCD668 /* LookTicketCell.m in Sources */,
 				558621731CE49F92007D5049 /* PersonNormalCell.m in Sources */,
 				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
@@ -2709,7 +2719,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

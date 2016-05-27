@@ -16,30 +16,18 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self.contentView addSubview:self.videoIcon];
         [self.contentView addSubview:self.timeLabel];
-        [self.contentView addSubview:self.cellContent];
+        [self.contentView addSubview:self.picView];
+        [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.v_lab];
-        [self.cellContent addSubview:self.picView];
-        [self.cellContent addSubview:self.titleLabel];
-        [self.cellContent addSubview:self.h_lab];
-        [self.cellContent addSubview:self.number_playBtn];
-        [self.cellContent addSubview:self.number_likeBtn];
-        [self.cellContent addSubview:self.number_mesBtn];
+        [self.contentView addSubview:self.typePic];
+        [self.contentView addSubview:self.number_likeBtn];
+        [self.contentView addSubview:self.number_mesBtn];
         [self.picView addSubview:self.playBtn];
 
         
     }
     return self;
-}
-
--(UIImageView *)videoIcon:(int)number
-{
-    if (!_videoIcon) {
-        self.videoIcon = [[UIImageView alloc] init];
-        self.videoIcon.backgroundColor = [UIColor redColor];
-    }
-    return _videoIcon;
 }
 
 -(UILabel *)timeLabel
@@ -51,16 +39,6 @@
     }
     return _timeLabel;
 }
-
--(UIView *)cellContent
-{
-    if (!_cellContent) {
-        _cellContent = [[UIView alloc] init];
-        _cellContent.backgroundColor = COLOR_WithHex(0xf5f5f5);
-    }
-    return _cellContent;
-}
-
 
 -(UILabel *)titleLabel
 {
@@ -80,13 +58,6 @@
     return _v_lab;
 }
 
--(UILabel *)h_lab{
-    if (!_h_lab) {
-        self.h_lab = [[UILabel alloc]init];
-        self.h_lab.backgroundColor = COLOR_WithHex(0xdddddd);
-    }
-    return _h_lab;
-}
 
 - (UIButton *)playBtn{
     if (!_playBtn) {
@@ -101,7 +72,7 @@
     if (!_number_mesBtn) {
         self.number_mesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.number_mesBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.number_mesBtn.titleLabel.textAlignment = NSTextAlignmentRight;
+        self.number_mesBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _number_mesBtn;
 }
@@ -116,13 +87,11 @@
 }
 
 
-- (UIButton *)number_playBtn{
-    if (!_number_playBtn) {
-        self.number_playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.number_playBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.number_playBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+- (UIImageView *)typePic{
+    if (!_typePic) {
+    self.typePic = [[UIImageView alloc]init];
     }
-    return _number_playBtn;
+    return _typePic;
 }
 
 - (UIImageView *)picView{
@@ -136,16 +105,13 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.videoIcon.frame = CGRectMake(6, 8, 20, 20);
-    self.timeLabel.frame = CGRectMake(31, 8, kScreen_Width - 31, 14 * 1.5);
-    self.cellContent.frame = CGRectMake(31, CGRectGetMaxY(self.timeLabel.frame), kScreen_Width - 62, 235);
-    self.v_lab.frame = CGRectMake(15.5, 28, 1, CGRectGetHeight(self.cellContent.frame));
-    self.picView.frame = CGRectMake(7, 7, CGRectGetWidth(self.cellContent.frame) - 14, 167);
-    self.titleLabel.frame = CGRectMake(7, 7 + 167, CGRectGetWidth(self.picView.frame), 34);
-    self.h_lab.frame = CGRectMake(7, CGRectGetMaxY(self.picView.frame) + 32, CGRectGetWidth(self.picView.frame), 1);
-    self.number_playBtn.frame = CGRectMake(CGRectGetMinX(self.timeLabel.frame), CGRectGetMaxY(self.h_lab.frame), CGRectGetWidth(self.titleLabel.frame) / 3, 27);
-    self.number_likeBtn.frame = CGRectMake(CGRectGetMaxX(self.number_playBtn.frame), CGRectGetMaxY(self.h_lab.frame), CGRectGetWidth(self.titleLabel.frame) / 3, 27);
-    self.number_mesBtn.frame = CGRectMake(CGRectGetMaxX(self.number_likeBtn.frame), CGRectGetMaxY(self.h_lab.frame), CGRectGetWidth(self.titleLabel.frame) / 3, 27);
+    self.timeLabel.frame = CGRectMake(15, 22.5, 200, 14 );
+     self.titleLabel.frame = CGRectMake(15,CGRectGetMaxY(self.timeLabel.frame)+ 22.5, kScreen_Width - 30, 36);
+    self.picView.frame = CGRectMake(15, CGRectGetMaxY(self.titleLabel.frame) + 22.5, kScreen_Width - 30, (kScreen_Width - 30) / 2);
+   
+    self.v_lab.frame = CGRectMake(15, CGRectGetMaxY(self.picView.frame) + 10, CGRectGetWidth(self.picView.frame), 1);
+    self.number_likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.v_lab.frame), CGRectGetWidth(self.v_lab.frame) / 3, 50);
+    self.number_mesBtn.frame = CGRectMake(CGRectGetMaxX(self.number_likeBtn.frame), CGRectGetMinY(self.number_likeBtn.frame), CGRectGetWidth(self.number_likeBtn.frame), 50);
     [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.picView);
     }];
@@ -155,12 +121,10 @@
 }
 
 - (void)setContent:(StarVideo *)starVideo{
-    self.videoIcon.backgroundColor = [UIColor redColor];
-    NSString *pic = [NSString stringWithFormat:@"%@?vframe/png/offset/1",starVideo.movie];
+    NSString *pic = [NSString stringWithFormat:@"%@?vframe/png/offset/1",starVideo.content[0]];
     [self.picView sd_setImageWithURL:[NSURL URLWithString:pic] placeholderImage:[UIImage imageNamed:@"bg_view"]];
     self.timeLabel.text = starVideo.createtime;
     self.titleLabel.text = starVideo.title;
-    [self.number_playBtn setTitle:starVideo.play_count forState:UIControlStateNormal];
     [self.number_likeBtn setTitle:starVideo.like_count forState:UIControlStateNormal];
     [self.number_mesBtn setTitle:starVideo.comment_count forState:UIControlStateNormal];
         self.playBtn.userInteractionEnabled = YES;

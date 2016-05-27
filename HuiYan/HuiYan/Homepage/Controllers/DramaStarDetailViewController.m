@@ -14,6 +14,8 @@
 #import <Masonry.h>
 #import "UIImage+Extension.h"
 #import "StarVideoTableViewCell.h"
+#import "DynamicTextTableViewCell.h"
+#import "DynamicImageTableViewCell.h"
 #define HeadHight 274
 #define TailHeight kScreen_Height  - 44 - 64
 #define kVideoCellHeight 244.0
@@ -43,11 +45,14 @@
     
     // 隐藏导航栏,给导航栏设置空的图片
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = YES;
+
     
     // 隐藏导航栏底部阴影
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self get_actor_dongtaiData:@"0"];
   
     
 }
@@ -57,6 +62,7 @@
         self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, TailHeight)];
         self.downScrollow.contentSize = CGSizeMake(kScreen_Width * 2, TailHeight);
         self.downScrollow.backgroundColor = [UIColor greenColor];
+        [self.downScrollow addSubview:self.videoTable];
     }
     return _downScrollow;
 }
@@ -94,6 +100,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:1]];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.navigationController.navigationBar.translucent = NO;
+
+
      [self.playerView resetPlayer];
     
 }
@@ -103,7 +115,6 @@
     if (!_mainTable) {
         self.mainTable = [[UITableView alloc] init];
         self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height);
-        
         self.mainTable.bounces = NO;
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
@@ -117,10 +128,13 @@
 -(UITableView *)videoTable
 {
     if (!_videoTable) {
-        _videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height ) style:UITableViewStylePlain];
-        _videoTable.delegate = self;
-        _videoTable.dataSource = self;
-        [_videoTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"video"];
+        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height ) style:UITableViewStyleGrouped];
+         self.videoTable.delegate = self;
+         self.videoTable.dataSource = self;
+        [ self.videoTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"video"];
+        [ self.videoTable registerNib:[UINib nibWithNibName:@"DynamicTextTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"text"];
+        [ self.videoTable registerClass:[DynamicImageTableViewCell class] forCellReuseIdentifier:@"image"];
+          _mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _videoTable;
 }
@@ -141,6 +155,17 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView == self.videoTable) {
+        return 10;
+    }
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.mainTable) {
         if (indexPath.section == 0) {
@@ -148,6 +173,17 @@
         }else{
             return  TailHeight;
         }
+    }else if (tableView == _videoTable){
+        StarVideo *model = self.dataSource[indexPath.section];
+        if ([model.type isEqualToString:@"movie"]) {
+            return 185 + (kScreen_Width - 30) / 2;
+        }else if(
+                 [model.type isEqualToString:@"text"]){
+            return 160;
+        }else{
+            return 180 + (kScreen_Width - 60) / 3;
+        }
+        
     }
     return 1;
 }
@@ -184,27 +220,42 @@
             return cell;
         }
     }else if (tableView == self.videoTable){
-        StarVideoTableViewCell * cell = [_mainTable dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
-        StarVideo  *model = self.dataSource[indexPath.section];
-        [cell setContent:model];
-        NSURL *videoURL = [NSURL URLWithString:model.movie];
-        __block NSIndexPath *weakIndexPath = indexPath;
-        __block StarVideoTableViewCell *weakCell = cell;
-        __weak typeof(self) weakSelf = self;
-        cell.playBlock = ^(UIButton *btn){
-            weakSelf.playerView = [ZFPlayerView sharedPlayerView];
-            [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
-            [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
-            weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
-            [weakSelf write_play_recordData:model.ID];
+         StarVideo  *model = self.dataSource[indexPath.section];
+        if ([model.type isEqualToString:@"movie"]) {
+            StarVideoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"video" forIndexPath:indexPath];
             
-        };
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    return cell;
+            [cell setContent:model];
+            NSURL *videoURL = [NSURL URLWithString:model.content[0]];
+            __block NSIndexPath *weakIndexPath = indexPath;
+            __block StarVideoTableViewCell *weakCell = cell;
+            __weak typeof(self) weakSelf = self;
+            cell.playBlock = ^(UIButton *btn){
+                weakSelf.playerView = [ZFPlayerView sharedPlayerView];
+                [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
+                [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
+                weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
+                [weakSelf write_play_recordData:model.ID];
+                
+            };
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+
+        }else if([model.type isEqualToString:@"text"]){
+                DynamicTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"text"];
+            [cell setContent:model];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+            
+        }else{
+            DynamicImageTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"image" forIndexPath:indexPath];
+            [cell setContent:model];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+}
+    return nil;
+    
 }
 
 #pragma mark -- 关注
@@ -248,16 +299,17 @@
 }
 
 
-- (void)get_actor_movieData:(NSString *)page{
+- (void)get_actor_dongtaiData:(NSString *)page{
     self.dataSource = [NSMutableArray array];
-    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.cid,@"page":@"0"};
-    [self.serverManager AnimatedGET:@"get_actor_movie.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"actor_id":self.drama.userID,@"page":@"0"};
+    [self.serverManager AnimatedGET:@"get_actor_dongtai.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50030) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 StarVideo *model = [StarVideo starVideoWithDic:dic];
                 [self.dataSource addObject:model];
             }
             [self.mainTable reloadData];
+            [self.videoTable reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -283,8 +335,7 @@
         alpha = 0;
      
     }
-    UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/256.0 green:48 / 256.0 blue:63 / 256.0 alpha:alpha]];
-    
+         UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:alpha]];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     }
 }
