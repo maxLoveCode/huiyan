@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FindFriend.h"
 
 @interface FriendsDetailViewController : UIViewController
+
+@property (nonatomic, strong) id dataSource;
 
 @end

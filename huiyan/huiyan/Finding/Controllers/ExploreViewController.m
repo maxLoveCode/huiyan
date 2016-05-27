@@ -16,6 +16,8 @@
 #import <MJRefresh.h>
 #import "UITabBarController+ShowHideBar.h"
 #import "GifRefresher.h"
+#import "FriendsDetailViewController.h"
+
 @interface ExploreViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
@@ -95,6 +97,11 @@ static int number_page = 0;
 
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (UITableView *)tableView{
     if (!_tableView) {
         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height) style:UITableViewStylePlain];
@@ -125,9 +132,11 @@ static int number_page = 0;
     return cell;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FriendsDetailViewController* friendsDetail = [[FriendsDetailViewController alloc] init];
+    [friendsDetail setDataSource:self.dataSource[indexPath.section]];
+    [self.navigationController pushViewController:friendsDetail animated:YES];
 }
 
 - (void)getfind_listData:(NSString *)page{
@@ -161,6 +170,8 @@ static int number_page = 0;
     }
    
 }
+
+
 
 
 @end
