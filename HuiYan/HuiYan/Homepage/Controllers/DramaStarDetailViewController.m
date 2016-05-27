@@ -16,6 +16,9 @@
 #import "StarVideoTableViewCell.h"
 #import "DynamicTextTableViewCell.h"
 #import "DynamicImageTableViewCell.h"
+#import "DramaStarInvitionViewController.h"
+#import "DynamicDetailViewController.h"
+#import "Tools.h"
 #define HeadHight 274
 #define TailHeight kScreen_Height  - 44 - 64
 #define kVideoCellHeight 244.0
@@ -31,30 +34,58 @@
 @property (nonatomic, strong) UIScrollView *downScrollow;
 @property (nonatomic, strong) ZFPlayerView *playerView;
 @property (nonatomic, assign) CGFloat totalOffsetY;
+@property (nonatomic, strong) UIView *tailView;
+@property (nonatomic, strong) UIButton *videoBtn;
+@property (nonatomic, strong) UIButton *desBtn;
 @end
 
 @implementation DramaStarDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"动态";
     self.serverManager = [ServerManager sharedInstance];
     [self.view addSubview:self.mainTable];
+    [self.view addSubview:self.tailView];
     // Do any additional setup after loading the view.
-    // 关闭自动调整scrollView的内边距
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    // 隐藏导航栏,给导航栏设置空的图片
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.translucent = YES;
-
-    
-    // 隐藏导航栏底部阴影
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self get_actor_dongtaiData:@"0"];
   
     
+}
+
+- (UIView *)tailView{
+    if (!_tailView ) {
+        self.tailView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
+        UIButton *inviteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 3 - 2, 48);
+        [inviteBtn setTitle:@"邀约" forState:UIControlStateNormal];
+        [inviteBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        [inviteBtn addTarget:self action:@selector(inviteEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tailView addSubview:inviteBtn];
+        UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        sendBtn.frame = CGRectMake(kScreen_Width / 3, 0, kScreen_Width / 3 - 2, 48);
+        [sendBtn setTitle:@"送花" forState:UIControlStateNormal];
+        [sendBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        [sendBtn addTarget:self action:@selector(sendFlower:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tailView addSubview:sendBtn];
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
+        [shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        [self.tailView addSubview:shareBtn];
+        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3, 4, 1, 40)];
+        oneline.backgroundColor = COLOR_WithHex(0xdddddd);
+        [self.tailView addSubview:oneline];
+        UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
+        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
+        [self.tailView addSubview:twoline];
+        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
+        [self.tailView addSubview:w_line];
+    }
+    return _tailView;
 }
 
 - (UIScrollView *)downScrollow{
@@ -98,6 +129,22 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    // 关闭自动调整scrollView的内边距
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    // 隐藏导航栏,给导航栏设置空的图片
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = YES;
+    
+    
+    // 隐藏导航栏底部阴影
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:1]];
@@ -114,7 +161,7 @@
 {
     if (!_mainTable) {
         self.mainTable = [[UITableView alloc] init];
-        self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height);
+        self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height - 48);
         self.mainTable.bounces = NO;
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
@@ -128,7 +175,7 @@
 -(UITableView *)videoTable
 {
     if (!_videoTable) {
-        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height ) style:UITableViewStyleGrouped];
+        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, TailHeight ) style:UITableViewStyleGrouped];
          self.videoTable.delegate = self;
          self.videoTable.dataSource = self;
         [ self.videoTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"video"];
@@ -211,6 +258,12 @@
                     [weakref focus:@"follow"];
                 }
             };
+            self.videoBtn = cell.videoBtn;
+            self.desBtn = cell.descriptionBtn;
+            cell.videoBtn.tag = 110;
+            cell.descriptionBtn.tag = 112;
+            [cell.videoBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.descriptionBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else{
@@ -225,17 +278,20 @@
             StarVideoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"video" forIndexPath:indexPath];
             
             [cell setContent:model];
-            NSURL *videoURL = [NSURL URLWithString:model.content[0]];
-            __block NSIndexPath *weakIndexPath = indexPath;
-            __block StarVideoTableViewCell *weakCell = cell;
-            __weak typeof(self) weakSelf = self;
+            cell.playBtn.hidden = NO;
+//            NSURL *videoURL = [NSURL URLWithString:model.content[0]];
+//            __block NSIndexPath *weakIndexPath = indexPath;
+//            __block StarVideoTableViewCell *weakCell = cell;
+//            __weak typeof(self) weakSelf = self;
             cell.playBlock = ^(UIButton *btn){
-                weakSelf.playerView = [ZFPlayerView sharedPlayerView];
-                [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
-                [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
-                weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
-                [weakSelf write_play_recordData:model.ID];
-                
+//                weakSelf.playerView = [ZFPlayerView sharedPlayerView];
+//                [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
+//                [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
+//                weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
+//                [weakSelf write_play_recordData:model.ID];
+                DynamicDetailViewController * dynamicCon = [[DynamicDetailViewController alloc]init];
+                dynamicCon.starVideo = self.dataSource[indexPath.section];
+                [self.navigationController pushViewController:dynamicCon animated:YES];
             };
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -257,6 +313,16 @@
     return nil;
     
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.videoTable) {
+    DynamicDetailViewController * dynamicCon = [[DynamicDetailViewController alloc]init];
+        dynamicCon.starVideo = self.dataSource[indexPath.section];
+        [self.navigationController pushViewController:dynamicCon animated:YES];
+    }
+}
+
+
 
 #pragma mark -- 关注
 
@@ -339,6 +405,49 @@
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     }
 }
+
+
+//邀约
+- (void)inviteEvent:(UIButton *)sender{
+    DramaStarInvitionViewController *dramaCon = [[DramaStarInvitionViewController alloc]init];
+    dramaCon.ID = self.drama.userID;
+    dramaCon.cid = self.drama.cid;
+    [self.navigationController pushViewController:dramaCon animated:NO];
+
+}
+
+//送花
+- (void)sendFlower:(UIButton *)sender{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"follow_id":kOBJECTDEFAULTS(@"user_id")};
+    [self.serverManager AnimatedPOST:@"send_actor_flower.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 50040) {
+            [self presentViewController:[Tools showAlert:@"送花成功"] animated:YES completion:nil];
+            NSLog(@"成功");
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
+}
+
+//分享
+- (void)share:(UIButton *)sender{
+    
+}
+
+- (void)moveScrollow:(UIButton *)sender{
+    UIColor *color = COLOR_THEME;
+    if (sender.tag == 110) {
+        [self.downScrollow setContentOffset:CGPointMake(0, 0) animated:YES];
+        [self.videoBtn setTitleColor:color forState:UIControlStateNormal];
+        [self.desBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }else{
+        [self.downScrollow setContentOffset:CGPointMake(kScreen_Width, 0) animated:YES];
+        [self.videoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.desBtn setTitleColor:color forState:UIControlStateNormal];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

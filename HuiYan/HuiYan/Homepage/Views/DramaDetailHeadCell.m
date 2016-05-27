@@ -34,7 +34,7 @@
 
 - (UILabel *)lineLab{
     if (!_lineLab) {
-        self.lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 0.5, CGRectGetMaxY(self.bgPic.frame)+ 2, 1, 40)];
+        self.lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 0.5, CGRectGetMaxY(self.bgPic.frame)+ 4, 1, 36)];
         self.lineLab.backgroundColor = COLOR_WithHex(0xdddddd);
     }
     return _lineLab;

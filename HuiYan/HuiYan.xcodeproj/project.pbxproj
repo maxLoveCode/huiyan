@@ -309,6 +309,7 @@
 		591C37EE1CF6CEB200E73CB1 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37ED1CF6CEB200E73CB1 /* UMMobClick.framework */; };
 		591C37FD1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C37FB1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m */; };
 		591C37FE1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */; };
+		591CC0AA1CF7F02E008ECEA7 /* DynamicCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591CC0A91CF7F02E008ECEA7 /* DynamicCommentCell.m */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
@@ -884,6 +885,8 @@
 		591C37FA1CF6EBB100E73CB1 /* DynamicTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicTextTableViewCell.h; path = HuiYan/Homepage/Views/DynamicTextTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		591C37FB1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DynamicTextTableViewCell.m; path = HuiYan/Homepage/Views/DynamicTextTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DynamicTextTableViewCell.xib; path = HuiYan/Homepage/Views/DynamicTextTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		591CC0A81CF7F02E008ECEA7 /* DynamicCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicCommentCell.h; path = HuiYan/Homepage/Views/DynamicCommentCell.h; sourceTree = SOURCE_ROOT; };
+		591CC0A91CF7F02E008ECEA7 /* DynamicCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DynamicCommentCell.m; path = HuiYan/Homepage/Views/DynamicCommentCell.m; sourceTree = SOURCE_ROOT; };
 		5925EF581CF05C2F00E3ACF3 /* GifRefresher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifRefresher.h; path = HuiYan/commonFiles/controller/GifRefresher.h; sourceTree = SOURCE_ROOT; };
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1922,6 +1925,8 @@
 				591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */,
 				59B72ED91CF6F3AC00F79C37 /* DynamicImageTableViewCell.h */,
 				59B72EDA1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m */,
+				591CC0A81CF7F02E008ECEA7 /* DynamicCommentCell.h */,
+				591CC0A91CF7F02E008ECEA7 /* DynamicCommentCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2023,7 +2028,7 @@
 				TargetAttributes = {
 					55CCD7851CB3640500C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 8WV7FK6JAM;
+						DevelopmentTeam = 9ADEGQX38R;
 					};
 					55CCD79E1CB3640600C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
@@ -2035,7 +2040,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2331,6 +2336,7 @@
 				558621701CE49F7F007D5049 /* PersonHeadCell.m in Sources */,
 				55C41DD91CDDEC870055A58B /* SignUpMessageTableViewController.m in Sources */,
 				55942D421CB7D77100EB041A /* CommentContent.m in Sources */,
+				591CC0AA1CF7F02E008ECEA7 /* DynamicCommentCell.m in Sources */,
 				550BF97E1CB8ED6600E2E9DE /* ZFPlayerControlView.m in Sources */,
 				5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */,
 				557EDE811CD0A4AB0039267E /* RSADataSigner.m in Sources */,
@@ -2618,7 +2624,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0d0703b1-dfb5-4a7f-96bb-1699408fdd54";
 			};
 			name = Debug;
 		};
@@ -2666,7 +2672,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0d0703b1-dfb5-4a7f-96bb-1699408fdd54";
 			};
 			name = Release;
 		};
@@ -2719,7 +2725,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

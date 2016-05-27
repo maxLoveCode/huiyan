@@ -12,7 +12,6 @@ typedef void(^FocusActorBlock) (UIButton *);
 @interface DramaDetailHeadCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *bgPic;
 @property (weak, nonatomic) IBOutlet UIButton *videoBtn;
-@property (weak, nonatomic) IBOutlet UIButton *returnBtn;
 @property (weak, nonatomic) IBOutlet UIButton *descriptionBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *headPic;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
