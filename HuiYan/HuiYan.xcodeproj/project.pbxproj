@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251C22EB1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m in Sources */ = {isa = PBXBuildFile; fileRef = 251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */; };
 		251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */; };
 		257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC611CB64AE7004C3CDE /* WikiArtcleTableViewController.m */; };
 		257FFC651CB64B0E004C3CDE /* ArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FFC641CB64B0E004C3CDE /* ArticleTableViewCell.m */; };
@@ -18,6 +19,7 @@
 		25B4026E1CEDACCC0003D908 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B4026D1CEDACCC0003D908 /* SettingTableViewController.m */; };
 		25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */; };
 		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
+		25C20E3D1CF6F1DC009BA46C /* FriendsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C20E3C1CF6F1DC009BA46C /* FriendsDetailViewController.m */; };
 		25C216581CDB2246007C69BB /* chatUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C216571CDB2246007C69BB /* chatUsers.m */; };
 		25C625331CBCFA3E0068BFE8 /* qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252D1CBCFA3E0068BFE8 /* qq.png */; };
 		25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */; };
@@ -360,6 +362,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		251C22E91CF462DE0028D0E5 /* UIImage+UIImage_Crop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_Crop.h"; sourceTree = "<group>"; };
+		251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_Crop.m"; sourceTree = "<group>"; };
 		251F5E191CBCC327000BC47D /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		251F5E1A1CBCC327000BC47D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../../../huiyan/huiyan/Category/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		257FFC601CB64AE7004C3CDE /* WikiArtcleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiArtcleTableViewController.h; path = HuiYan/Homepage/Controllers/WikiArtcleTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -382,6 +386,8 @@
 		25B6B3761CB4F324000F99F1 /* TicketBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TicketBoxViewController.m; path = HuiYan/Homepage/Controllers/TicketBoxViewController.m; sourceTree = SOURCE_ROOT; };
 		25B6B37B1CB51380000F99F1 /* MCSwipeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSwipeMenu.h; path = HuiYan/Homepage/Controllers/MCSwipeMenu.h; sourceTree = SOURCE_ROOT; };
 		25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSwipeMenu.m; path = HuiYan/Homepage/Controllers/MCSwipeMenu.m; sourceTree = SOURCE_ROOT; };
+		25C20E3B1CF6F1DC009BA46C /* FriendsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsDetailViewController.h; sourceTree = "<group>"; };
+		25C20E3C1CF6F1DC009BA46C /* FriendsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsDetailViewController.m; sourceTree = "<group>"; };
 		25C216561CDB2246007C69BB /* chatUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chatUsers.h; path = huiyan/Homepage/Models/chatUsers.h; sourceTree = SOURCE_ROOT; };
 		25C216571CDB2246007C69BB /* chatUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = chatUsers.m; path = huiyan/Homepage/Models/chatUsers.m; sourceTree = SOURCE_ROOT; };
 		25C6252D1CBCFA3E0068BFE8 /* qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq.png; sourceTree = "<group>"; };
@@ -1734,6 +1740,8 @@
 				55C41E141CE44A260055A58B /* MessageViewController.m */,
 				25A770561CEDC72100E3701D /* MessageListTableViewController.h */,
 				25A770571CEDC72100E3701D /* MessageListTableViewController.m */,
+				25C20E3B1CF6F1DC009BA46C /* FriendsDetailViewController.h */,
+				25C20E3C1CF6F1DC009BA46C /* FriendsDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1944,6 +1952,8 @@
 				55DAFFC41CC8A37D0093B180 /* NSString+Md5.m */,
 				55C41E2B1CE463480055A58B /* NSString+ImageString.h */,
 				55C41E2C1CE463480055A58B /* NSString+ImageString.m */,
+				251C22E91CF462DE0028D0E5 /* UIImage+UIImage_Crop.h */,
+				251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2403,6 +2413,7 @@
 				59FE808A1CEECE480032318C /* Message.m in Sources */,
 				55C41DE91CE2CAE50055A58B /* SignUpCell.m in Sources */,
 				55C41E151CE44A260055A58B /* MessageViewController.m in Sources */,
+				251C22EB1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m in Sources */,
 				25C6255A1CBE48EA0068BFE8 /* MeMainViewController.m in Sources */,
 				5570012A1CCF365E003EB02F /* WebViewJavascriptBridge.m in Sources */,
 				558F5CB11CBB945D006BD54D /* TrainingTableViewCell.m in Sources */,
@@ -2431,6 +2442,7 @@
 				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
 				5586217F1CE5BA0E007D5049 /* NewHomePageViewController.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
+				25C20E3D1CF6F1DC009BA46C /* FriendsDetailViewController.m in Sources */,
 				557EDE821CD0A4AB0039267E /* RSADataVerifier.m in Sources */,
 				25C625511CBE1F8F0068BFE8 /* StarVideoTableViewCell.m in Sources */,
 				25C625431CBE002E0068BFE8 /* LoginViewController.m in Sources */,

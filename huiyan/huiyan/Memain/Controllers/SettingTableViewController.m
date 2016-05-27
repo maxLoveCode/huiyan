@@ -136,6 +136,8 @@
     }
     if (indexPath.section == 1) {
         //comment app
+        // app id is 1116890013
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps ://itunes.apple.com/gb/app/yi-dong-cai-bian/id1116890013?mt=8"]];
     }
 }
 /*
