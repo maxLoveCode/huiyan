@@ -89,6 +89,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"frienddetail" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section == 0) {
         [self setHeaderSection:cell];
     }
@@ -154,10 +155,7 @@
     [potrait sd_setImageWithURL:[NSURL URLWithString:model.avatar] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         NSLog(@"%@, %lf, %lf",image,image.size.width,image.size.width* (headerSection/kScreen_Width));
         UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
-        CGFloat param = 30;
-        if (image.size.width<100 || image.size.height<100) {
-            param =5;
-        }
+        CGFloat param = image.size.width/10;
         UIImage* blur = [image applyBlurWithRadius:param tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
         UIImage* croped = [blur crop:CGRectMake(0, 0, image.size.width, image.size.width* (headerSection/kScreen_Width))];
         bgView.image = croped;
@@ -240,10 +238,8 @@
         }
         [bgView sd_setImageWithURL:[NSURL URLWithString:model.avatar] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
-            CGFloat param = 30;
-            if (image.size.width<100 || image.size.height<100) {
-                param =5;
-            }
+            CGFloat param = image.size.width/10;
+    
             UIImage* blur = [image applyBlurWithRadius:param tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];
             UIImage* croped = [blur crop:CGRectMake(0, image.size.width* (headerSection/kScreen_Width), image.size.width, image.size.width* (headerSection/kScreen_Width)*2)];
             bgView.image = croped;
