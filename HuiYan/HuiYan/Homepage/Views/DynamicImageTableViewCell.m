@@ -94,6 +94,13 @@
     return _commentBtn;
 }
 
+- (UIImageView *)typePic{
+    if (!_typePic) {
+        self.typePic = [[UIImageView alloc]init];
+    }
+    return _typePic;
+}
+
 
 
 - (void)layoutSubviews{
@@ -106,7 +113,7 @@
     self.lineLab.frame = CGRectMake(15, CGRectGetMaxY(self.onePic.frame) + 10, kScreen_Width - 30, 1);
     self.likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.lineLab.frame), (kScreen_Width - 30) / 3, 50);
     self.commentBtn.frame = CGRectMake(CGRectGetMaxX(self.likeBtn.frame), CGRectGetMinY(self.likeBtn.frame), CGRectGetWidth(self.likeBtn.frame), 50);
-    self.typePic.frame = CGRectMake(kScreen_Width - 45, CGRectGetMaxY(self.lineLab.frame)+ 20, 30, 30);
+    self.typePic.frame = CGRectMake(kScreen_Width - 45, CGRectGetMaxY(self.lineLab.frame)+ 15, 25, 25);
 }
 
 - (void)setContent:(StarVideo *)model{

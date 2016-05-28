@@ -148,7 +148,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-            TrainOrdersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"one"];
+        TrainOrdersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"one"];
         [cell setContent:self.trainData];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

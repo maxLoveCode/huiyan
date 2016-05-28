@@ -20,7 +20,7 @@
 #import "DynamicDetailViewController.h"
 #import "Tools.h"
 #define HeadHight 274
-#define TailHeight kScreen_Height  - 44 - 64
+#define TailHeight kScreen_Height  - 44 - 64 - 210
 #define kVideoCellHeight 244.0
 // 头部视图的高度
 #define kHeadHeight 230
@@ -32,11 +32,12 @@
 @property (nonatomic, strong) UIButton *focus_btn;
 @property (nonnull, strong) ServerManager *serverManager;
 @property (nonatomic, strong) UIScrollView *downScrollow;
-@property (nonatomic, strong) ZFPlayerView *playerView;
+//@property (nonatomic, strong) ZFPlayerView *playerView;
 @property (nonatomic, assign) CGFloat totalOffsetY;
 @property (nonatomic, strong) UIView *tailView;
 @property (nonatomic, strong) UIButton *videoBtn;
 @property (nonatomic, strong) UIButton *desBtn;
+@property (nonatomic, strong) UIView *desView;
 @end
 
 @implementation DramaStarDetailViewController
@@ -92,10 +93,28 @@
     if (!_downScrollow) {
         self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, TailHeight)];
         self.downScrollow.contentSize = CGSizeMake(kScreen_Width * 2, TailHeight);
-        self.downScrollow.backgroundColor = [UIColor greenColor];
+        self.downScrollow.scrollEnabled = NO;
         [self.downScrollow addSubview:self.videoTable];
+        [self.downScrollow addSubview:self.desView];
     }
     return _downScrollow;
+}
+
+- (UIView *)desView{
+    if (!_desView) {
+        self.desView = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width, 0, kScreen_Width, TailHeight)];
+        CGSize size =  [self.drama.profile boundingRectWithSize:CGSizeMake(kScreen_Width - 30, MAXFLOAT)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                attributes:@{
+                                                             NSFontAttributeName :kFONT14
+                                                             }
+                                                   context:nil].size;
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, kScreen_Width- 30, size.height)];
+        lab.text = self.drama.profile;
+        lab.font = kFONT13;
+        [self.desView addSubview:lab];
+    }
+    return _desView;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -151,9 +170,6 @@
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.navigationController.navigationBar.translucent = NO;
-
-
-     [self.playerView resetPlayer];
     
 }
 
@@ -161,7 +177,8 @@
 {
     if (!_mainTable) {
         self.mainTable = [[UITableView alloc] init];
-        self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height - 48);
+        self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height );
+        self.mainTable.contentSize = CGSizeMake(kScreen_Width, kScreen_Height + 200);
         self.mainTable.bounces = NO;
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
@@ -176,12 +193,13 @@
 {
     if (!_videoTable) {
         self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, TailHeight ) style:UITableViewStyleGrouped];
+        self.videoTable.scrollEnabled = NO;
          self.videoTable.delegate = self;
          self.videoTable.dataSource = self;
         [ self.videoTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"video"];
         [ self.videoTable registerNib:[UINib nibWithNibName:@"DynamicTextTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"text"];
         [ self.videoTable registerClass:[DynamicImageTableViewCell class] forCellReuseIdentifier:@"image"];
-          _mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+          self.videoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _videoTable;
 }
@@ -218,7 +236,7 @@
         if (indexPath.section == 0) {
             return HeadHight;
         }else{
-            return  TailHeight;
+            return  TailHeight + 300;
         }
     }else if (tableView == _videoTable){
         StarVideo *model = self.dataSource[indexPath.section];
@@ -269,7 +287,7 @@
         }else{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scrollow"];
             [cell.contentView addSubview:self.downScrollow];
-            [cell.contentView setBackgroundColor: [UIColor redColor]];
+//            [cell.contentView setBackgroundColor: [UIColor redColor]];
             return cell;
         }
     }else if (tableView == self.videoTable){
@@ -293,6 +311,7 @@
                 dynamicCon.starVideo = self.dataSource[indexPath.section];
                 [self.navigationController pushViewController:dynamicCon animated:YES];
             };
+            cell.typePic.image = [UIImage imageNamed:@"videotype"];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -300,12 +319,14 @@
         }else if([model.type isEqualToString:@"text"]){
                 DynamicTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"text"];
             [cell setContent:model];
+            cell.typePic.image = [UIImage imageNamed:@"texttype"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             
         }else{
             DynamicImageTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"image" forIndexPath:indexPath];
             [cell setContent:model];
+             cell.typePic.image = [UIImage imageNamed:@"imgetype"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -397,6 +418,7 @@
     CGFloat alpha = 0;
     if (height <= kHeadMinHeight) {
         alpha = 0.99;
+        [self.videoTable setScrollEnabled:YES];
     } else {
         alpha = 0;
      
@@ -420,9 +442,11 @@
 - (void)sendFlower:(UIButton *)sender{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"follow_id":kOBJECTDEFAULTS(@"user_id")};
     [self.serverManager AnimatedPOST:@"send_actor_flower.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"%@, %@", responseObject[@"msg"],kOBJECTDEFAULTS(@"user_id"));
         if ([responseObject[@"code"] integerValue] == 50040) {
-            [self presentViewController:[Tools showAlert:@"送花成功"] animated:YES completion:nil];
-            NSLog(@"成功");
+            //[self presentViewController:[Tools showAlert:@"送花成功"] animated:YES completion:nil];
+            NSLog(@"anim");
+            [self flowerAnimates];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -454,14 +478,60 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)flowerAnimates{
+    UIImageView *imageViewForAnimation = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1.png"]];
+    [self.view addSubview:imageViewForAnimation];
+    [imageViewForAnimation setFrame:CGRectMake(kScreen_Width/2-44, kScreen_Height-44, 44, 44)];
+    imageViewForAnimation.alpha = 1.0f;
+    CGRect imageFrame = imageViewForAnimation.frame;
+    //Your image frame.origin from where the animation need to get start
+    CGPoint viewOrigin = imageViewForAnimation.frame.origin;
+    viewOrigin.y = viewOrigin.y + imageFrame.size.height / 2.0f;
+    viewOrigin.x = viewOrigin.x + imageFrame.size.width / 2.0f;
+    
+    imageViewForAnimation.frame = imageFrame;
+    imageViewForAnimation.layer.position = viewOrigin;
+    [self.view addSubview:imageViewForAnimation];
+    
+    // Set up fade out effect
+    CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeOutAnimation setToValue:[NSNumber numberWithFloat:0.3]];
+    fadeOutAnimation.fillMode = kCAFillModeForwards;
+    fadeOutAnimation.removedOnCompletion = NO;
+    
+    // Set up scaling
+    CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+    [resizeAnimation setToValue:[NSValue valueWithCGSize:CGSizeMake(40.0f, imageFrame.size.height * (40.0f / imageFrame.size.width))]];
+    resizeAnimation.fillMode = kCAFillModeForwards;
+    resizeAnimation.removedOnCompletion = NO;
+    
+    // Set up path movement
+    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.fillMode = kCAFillModeForwards;
+    pathAnimation.removedOnCompletion = NO;
+    //Setting Endpoint of the animation
+    CGPoint endPoint = CGPointMake(kScreen_Width/2, kScreen_Height/2);
+    //to end animation in last tab use
+    //CGPoint endPoint = CGPointMake( 320-40.0f, 480.0f);
+    CGMutablePathRef curvedPath = CGPathCreateMutable();
+    CGPathMoveToPoint(curvedPath, NULL, viewOrigin.x, viewOrigin.y);
+    CGPoint pt = CGPointMake(kScreen_Width/2+50, kScreen_Height/2-50);
+    CGPathAddCurveToPoint(curvedPath, NULL, <#CGFloat cp1x#>, <#CGFloat cp1y#>, <#CGFloat cp2x#>, <#CGFloat cp2y#>, <#CGFloat x#>, <#CGFloat y#>)
+    CGPathAddCurveToPoint(curvedPath, NULL, endPoint.x, viewOrigin.y, endPoint.x, viewOrigin.y, endPoint.x, endPoint.y);
+    pathAnimation.path = curvedPath;
+    CGPathRelease(curvedPath);
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.fillMode = kCAFillModeForwards;
+    group.removedOnCompletion = NO;
+    [group setAnimations:[NSArray arrayWithObjects:fadeOutAnimation, pathAnimation, resizeAnimation, nil]];
+    group.duration = 0.7f;
+    group.delegate = self;
+    [group setValue:imageViewForAnimation forKey:@"imageViewBeingAnimated"];
+    
+    [imageViewForAnimation.layer addAnimation:group forKey:@"savingAnimation"];
+    
 }
-*/
 
 @end

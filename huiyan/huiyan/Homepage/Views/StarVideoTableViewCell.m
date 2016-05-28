@@ -111,6 +111,7 @@
    
     self.v_lab.frame = CGRectMake(15, CGRectGetMaxY(self.picView.frame) + 10, CGRectGetWidth(self.picView.frame), 1);
     self.number_likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.v_lab.frame), CGRectGetWidth(self.v_lab.frame) / 3, 50);
+    self.typePic.frame = CGRectMake(kScreen_Width - 15 - 30, CGRectGetMaxY(self.v_lab.frame)+ 10, 30, 30);
     self.number_mesBtn.frame = CGRectMake(CGRectGetMaxX(self.number_likeBtn.frame), CGRectGetMinY(self.number_likeBtn.frame), CGRectGetWidth(self.number_likeBtn.frame), 50);
     [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.picView);
@@ -125,6 +126,8 @@
     [self.picView sd_setImageWithURL:[NSURL URLWithString:pic] placeholderImage:[UIImage imageNamed:@"bg_view"]];
     self.timeLabel.text = starVideo.createtime;
     self.titleLabel.text = starVideo.title;
+    [self.number_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    [self.number_mesBtn setImage:[UIImage imageNamed:@"information"] forState:UIControlStateNormal];
     [self.number_likeBtn setTitle:starVideo.like_count forState:UIControlStateNormal];
     [self.number_mesBtn setTitle:starVideo.comment_count forState:UIControlStateNormal];
         self.playBtn.userInteractionEnabled = YES;

@@ -40,6 +40,11 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+     [self.playerView resetPlayer];
+}
+
 - (void)setVideoView{
     //NSLog(@"%@",self.homePage.type);
     [[UIDevice currentDevice] setValue:
@@ -84,9 +89,9 @@
     [self.playerView cancelAutoFadeOutControlBar];
 }
 
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-}
+//- (BOOL)prefersStatusBarHidden{
+//    return YES;
+//}
 
 - (BOOL)shouldAutorotate{
     return YES;
@@ -101,18 +106,23 @@
     if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
         self.view.backgroundColor = [UIColor whiteColor];
         //if use Masonry,Please open this annotation
-        
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+        self.navigationController.navigationBarHidden = NO;
         [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(0);
         }];
+        [self.view addSubview:self.tableView];
+        
         
     }else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         self.view.backgroundColor = [UIColor blackColor];
         //if use Masonry,Please open this annotation
-        
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+        self.navigationController.navigationBarHidden = YES;
         [self.playerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(0);
         }];
+        [self.tableView removeFromSuperview];
 
         
     }
@@ -122,7 +132,7 @@
     if (!_tableView) {
         self.tableView = [[UITableView alloc] init];
         if ([self.starVideo.type isEqualToString:@"movie"]) {
-            self.tableView.frame = CGRectMake(0, CGRectGetHeight(self.playerView.frame), kScreen_Width,kScreen_Height);
+            self.tableView.frame = CGRectMake(0, CGRectGetHeight(self.playerView.frame), kScreen_Width,kScreen_Height - CGRectGetHeight(self.playerView.frame));
         }else{
         self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height);
         }
@@ -211,8 +221,6 @@
                 headView.backgroundColor = [UIColor redColor];
                 [cell.contentView addSubview:headView];
                 headView.tag = 1000;
-                [self setVideoView];
-                [headView addSubview:self.playerView];
             }
             self.headPic = 0;
             UILabel *titleLab = [cell viewWithTag:1008];
@@ -258,8 +266,8 @@
                                                                    NSFontAttributeName :headView.font
                                                                    }
                                                          context:nil].size;
-            headView.frame = CGRectMake(15, 0, kScreen_Width - 30, size.height);
-            self.headPic = size.height;
+            headView.frame = CGRectMake(15, 15, kScreen_Width - 30, size.height);
+            self.headPic = size.height + 15;
             UILabel *titleLab = [cell viewWithTag:1008];
             if (!titleLab) {
                 titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(headView.frame) +23, kScreen_Width - 30, 32)];

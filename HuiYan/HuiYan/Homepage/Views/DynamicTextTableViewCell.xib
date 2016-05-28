@@ -43,25 +43,26 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3k-8p-m8u">
-                        <rect key="frame" x="15" y="106" width="108" height="50"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3k-8p-m8u">
+                        <rect key="frame" x="22" y="111" width="94" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="eWi-Md-gYq"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
+                        <inset key="contentEdgeInsets" minX="-1" minY="-5" maxX="11" maxY="0.0"/>
+                        <state key="normal" title="Button" image="like.png"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVc-Iu-ch2">
-                        <rect key="frame" x="123" y="106" width="108.5" height="50"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVc-Iu-ch2">
+                        <rect key="frame" x="143" y="120" width="69" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="HGk-jg-YEJ"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
+                        <state key="normal" title="Button" image="information.png"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FMa-Me-8cM">
-                        <rect key="frame" x="283" y="116" width="30" height="30"/>
+                        <rect key="frame" x="283" y="116" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="pnW-mu-boU"/>
-                            <constraint firstAttribute="width" constant="30" id="xcw-1Z-0ab"/>
+                            <constraint firstAttribute="height" constant="25" id="pnW-mu-boU"/>
+                            <constraint firstAttribute="width" constant="25" id="xcw-1Z-0ab"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -72,7 +73,7 @@
                     <constraint firstItem="Uwl-eA-Npx" firstAttribute="top" secondItem="BOA-Vo-qRA" secondAttribute="bottom" constant="10" id="GN3-d0-w6N"/>
                     <constraint firstItem="SYL-cX-3bK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Gyx-dr-rBM"/>
                     <constraint firstItem="P3k-8p-m8u" firstAttribute="top" secondItem="Uwl-eA-Npx" secondAttribute="bottom" id="Ian-to-ZbF"/>
-                    <constraint firstAttribute="trailing" secondItem="FMa-Me-8cM" secondAttribute="trailing" constant="15" id="LFp-5K-y9k"/>
+                    <constraint firstAttribute="trailing" secondItem="FMa-Me-8cM" secondAttribute="trailing" constant="20" id="LFp-5K-y9k"/>
                     <constraint firstItem="DVc-Iu-ch2" firstAttribute="leading" secondItem="P3k-8p-m8u" secondAttribute="trailing" id="S9t-lF-rnh"/>
                     <constraint firstItem="FMa-Me-8cM" firstAttribute="top" secondItem="Uwl-eA-Npx" secondAttribute="bottom" constant="10" id="UxS-Qu-oCy"/>
                     <constraint firstItem="DVc-Iu-ch2" firstAttribute="top" secondItem="Uwl-eA-Npx" secondAttribute="bottom" id="Y2L-TQ-oIb"/>
@@ -94,4 +95,8 @@
             <point key="canvasLocation" x="177" y="186"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="information.png" width="15" height="15"/>
+        <image name="like.png" width="40" height="40"/>
+    </resources>
 </document>
