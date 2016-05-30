@@ -13,6 +13,7 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "MessageListTableViewController.h"
 #import "FriendsViewController.h"
+#import "followListController.h"
 
 #define cellHeight 44
 
@@ -40,7 +41,7 @@
     
     [self.view addSubview:self.tableView];
      self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    self.title_arr = @[@"互动消息",@"系统消息",@"推送消息",@"附近的戏友"];
+    self.title_arr = @[@"我的关注",@"系统消息",@"推送消息",@"附近的戏友"];
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
     
@@ -51,14 +52,14 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-      [super viewDidAppear:YES];
+    [super viewDidAppear:YES];
     [self.tabBarController setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
-    [self.tabBarController setHidden:NO];
+    //[self.tabBarController setHidden:NO];
    
 }
 
@@ -105,17 +106,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.tabBarController.tabBar.hidden = YES;
-    if (indexPath.row == 0) {
+    if (indexPath.row ==0)
+    {
+        followListController* follow =[[followListController alloc] init];
+        [self.navigationController pushViewController:follow animated:YES];
+    }
+    if (indexPath.row == 1) {
         MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
         [list setStyle: MessageTypeSystem];
         [self.navigationController pushViewController:list animated:YES];
     }
-    else if (indexPath.row == 1) {
+    else if (indexPath.row == 2) {
         MessageListTableViewController *list = [[MessageListTableViewController alloc] init];
         [list setStyle: MessageTypeNotification];
         [self.navigationController pushViewController:list animated:YES];
     }
-    else if (indexPath.row == 2) {
+    else if (indexPath.row == 3) {
         ExploreViewController *explore = [[ExploreViewController alloc]init];
         [self.navigationController pushViewController:explore animated:YES];
     }

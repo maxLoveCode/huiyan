@@ -59,6 +59,7 @@
 		25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6258A1CC0897C0068BFE8 /* DramaStarTableViewCell.m */; };
 		25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6258D1CC08CDC0068BFE8 /* DramaStar.m */; };
 		25D965521CF3E28900B49A9B /* ForgotPassTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D965511CF3E28900B49A9B /* ForgotPassTableViewController.m */; };
+		25DCB1191CFBDC3E00F4A63E /* followListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DCB1181CFBDC3E00F4A63E /* followListController.m */; };
 		25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E07DB71CB65D180015AD73 /* ArticalViewController.m */; };
 		550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */; };
 		550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9771CB8ED6600E2E9DE /* ZFPlayerSingleton.m */; };
@@ -457,6 +458,8 @@
 		25C6258D1CC08CDC0068BFE8 /* DramaStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DramaStar.m; sourceTree = "<group>"; };
 		25D965501CF3E28900B49A9B /* ForgotPassTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPassTableViewController.h; sourceTree = "<group>"; };
 		25D965511CF3E28900B49A9B /* ForgotPassTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPassTableViewController.m; sourceTree = "<group>"; };
+		25DCB1171CFBDC3E00F4A63E /* followListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = followListController.h; sourceTree = "<group>"; };
+		25DCB1181CFBDC3E00F4A63E /* followListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = followListController.m; sourceTree = "<group>"; };
 		25E07DB61CB65D180015AD73 /* ArticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticalViewController.h; path = HuiYan/Homepage/Controllers/ArticalViewController.h; sourceTree = SOURCE_ROOT; };
 		25E07DB71CB65D180015AD73 /* ArticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticalViewController.m; path = HuiYan/Homepage/Controllers/ArticalViewController.m; sourceTree = SOURCE_ROOT; };
 		2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.release.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.release.xcconfig"; sourceTree = "<group>"; };
@@ -1792,6 +1795,8 @@
 				25A770571CEDC72100E3701D /* MessageListTableViewController.m */,
 				25C20E3B1CF6F1DC009BA46C /* FriendsDetailViewController.h */,
 				25C20E3C1CF6F1DC009BA46C /* FriendsDetailViewController.m */,
+				25DCB1171CFBDC3E00F4A63E /* followListController.h */,
+				25DCB1181CFBDC3E00F4A63E /* followListController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2431,6 +2436,7 @@
 				5964F1DA1CF5976500E436CE /* FriendswordsCell.m in Sources */,
 				25C216581CDB2246007C69BB /* chatUsers.m in Sources */,
 				25A770581CEDC72100E3701D /* MessageListTableViewController.m in Sources */,
+				25DCB1191CFBDC3E00F4A63E /* followListController.m in Sources */,
 				55B3D9D41CB5151400277896 /* WikiWorksDetailsViewController.m in Sources */,
 				55942D3F1CB78D8400EB041A /* BuyTicketDetailsTableViewCell.m in Sources */,
 				557EDE1C1CD0A3980039267E /* Order.m in Sources */,

@@ -68,10 +68,15 @@
         _dramaStarTableView.alpha = 1;
         [self.dramaStarTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     }];
+    
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (self.tabBarController.tabBar.hidden == YES) {
+        self.tabBarController.tabBar.hidden = NO;
+    }
     [self.tabBarController setHidden:NO];
     self.navigationController.navigationBar.barTintColor = COLOR_THEME;
     [self.navigationController.navigationBar setTitleTextAttributes:

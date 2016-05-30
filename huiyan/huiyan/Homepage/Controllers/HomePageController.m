@@ -80,7 +80,8 @@
     if (self.tabBarController.tabBar.hidden == YES) {
         self.tabBarController.tabBar.hidden = NO;
     }
-    [self.tabBarController setHidden:NO];
+    
+    
     NSLog(@"homepage will appear");
 }
 
@@ -88,6 +89,10 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    self.tabBarController.tabBar.hidden = NO;
+    [self.tabBarController setHidden:NO];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -532,6 +537,7 @@
 - (void)get_opera_listData{
     self.serverManager = [ServerManager sharedInstance];
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
+    NSLog(@"%@", parameters);
     [self.serverManager AnimatedGET:@"get_opera_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30010) {
             for (NSDictionary *dic in responseObject[@"data"]) {

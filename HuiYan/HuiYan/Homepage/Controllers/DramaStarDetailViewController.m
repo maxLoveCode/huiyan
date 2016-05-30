@@ -41,6 +41,7 @@
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, strong) NSDate* target;
 @property (nonatomic, assign) BOOL color_Theme;
+@property (nonatomic, strong) NSTimer* timer;
 @end
 
 @implementation DramaStarDetailViewController
@@ -626,8 +627,14 @@
         if (sec <2) {
             self.target = [NSDate date];
             _count++;
-            NSLog(@"%ld",_count);
             [self animateCombos];
+            if(!_timer)
+                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:NO];
+            else if ([_timer isValid])
+            {
+                [_timer invalidate];
+                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:NO];
+            }
         }
         else
         {
@@ -657,11 +664,11 @@
                                    ];
         
         [self.view addSubview:view];
-        [UIView animateWithDuration:1.0 animations:^{
-            view.alpha = 0;
-        }completion:^(BOOL finished) {
-            [view removeFromSuperview];
-        }];
+//        [UIView animateWithDuration:1.0 animations:^{
+//            view.alpha = 0;
+//        }completion:^(BOOL finished) {
+//            [view removeFromSuperview];
+//        }];
     }
     else
     {
@@ -676,13 +683,24 @@
                                       NSFontAttributeName: kFONT(50)
                                       }
                          ];
-    [UIView animateWithDuration:1.0 animations:^{
-        view.alpha = 0;
-    }completion:^(BOOL finished) {
-        [view removeFromSuperview];
-    }];
+//    [UIView animateWithDuration:1.0 animations:^{
+//        view.alpha = 0;
+//    }completion:^(BOOL finished) {
+//        [view removeFromSuperview];
+//    }];
     }
 }
 
+-(void)countDown
+{
+    NSLog(@"countDown");
+    UILabel* view = [self.view viewWithTag:3131];
+    [UIView animateWithDuration:1.0 animations:^{
+                view.alpha = 0;
+            }completion:^(BOOL finished) {
+                [view removeFromSuperview];
+                _timer = nil;
+            }];
+}
 
 @end

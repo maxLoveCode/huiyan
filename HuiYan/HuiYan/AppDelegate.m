@@ -28,6 +28,8 @@
 #import "JPUSHService.h"//极光推送
 #import <RongIMKit/RongIMKit.h>
 #import "LoginViewController.h"
+#import "chatUsers.h"
+
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -98,6 +100,16 @@
     {
         [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
             NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+            chatUsers* chats = [chatUsers instance];
+            NSArray* conversationList = [[RCIMClient sharedRCIMClient]getConversationList:@[@1]];
+            NSLog(@"conversationList is %@", conversationList);
+            for (RCConversation* target  in conversationList) {
+                NSLog(@"target :%@", target);
+                [chats getUserInfoWithUserId:[target targetId] completion:^(RCUserInfo *userInfo) {
+                    	
+                }];
+            }
+
         } error:^(RCConnectErrorCode status) {
             NSLog(@"登陆的错误码为:%ld", (long)status);
         } tokenIncorrect:^{
@@ -161,7 +173,7 @@
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
     // 此处(startWithAppId之前)可以设置初始化的可选参数，具体有哪些参数，可详见BaiduMobStat.h文件，例如：
     statTracker.shortAppVersion  = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    statTracker.enableDebugOn = YES;
+    statTracker.enableDebugOn = NO;
     
     [statTracker startWithAppId:@"c0e0a9d8df"]; // 设置您在mtj网站上添加的app的appkey,此处AppId即为应用的appKey
 }
@@ -169,7 +181,7 @@
 //友盟统计
 - (void)umengTrack {
     //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    [MobClick setLogEnabled:YES];
+    [MobClick setLogEnabled:NO];
     
     UMConfigInstance.appKey = @"5746548967e58eb1d10025c4";
     
