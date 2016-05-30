@@ -76,11 +76,13 @@
     NSString *user_id = [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
     if (user_id) {
         NSSet *set = [[NSSet alloc] initWithObjects:@"ios",nil];
+        [JPUSHService setTags:set aliasInbackground:user_id];
+
         [JPUSHService setTags:set alias:user_id fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
-           // NSString *callbackString =
+            NSString *callbackString =
             [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
              [self logSet:iTags], iAlias];
-           // NSLog(@"TagsAlias回调:%@", callbackString);
+            NSLog(@"TagsAlias回调:%@", callbackString);
         }];
     }
     
@@ -261,6 +263,15 @@ fetchCompletionHandler:
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+    NSString *callbackString =
+    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+     [self logSet:tags], alias];
+    NSLog(@"TagsAlias回调:%@", callbackString);
 }
 
 - (NSString *)logSet:(NSSet *)dic {

@@ -116,7 +116,7 @@
     self.v_lab.frame = CGRectMake(15, CGRectGetMaxY(self.picView.frame) + 10, CGRectGetWidth(self.picView.frame), 1);
     self.number_likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.v_lab.frame) + 5, CGRectGetWidth(self.v_lab.frame) / 3, 40);
     self.typePic.frame = CGRectMake(kScreen_Width - 15 - 30, CGRectGetMaxY(self.v_lab.frame)+ 8, 30, 30);
-    self.number_mesBtn.frame = CGRectMake(CGRectGetMaxX(self.number_likeBtn.frame), CGRectGetMinY(self.number_likeBtn.frame) + 5, CGRectGetWidth(self.number_likeBtn.frame), 40);
+    self.number_mesBtn.frame = CGRectMake(CGRectGetMaxX(self.number_likeBtn.frame), CGRectGetMinY(self.v_lab.frame) + 5, CGRectGetWidth(self.number_likeBtn.frame), 40);
     [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.picView);
     }];
