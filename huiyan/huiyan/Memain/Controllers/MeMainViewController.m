@@ -45,8 +45,8 @@
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.title_arr = @[@"我的戏票",@"我的活动",@"我的邀约",@"我的兴趣",@"绑定手机号",@"设置"];
-    self.image_arr = @[@"ticket",@"training",@"training",@"interest",@"phone",@"set"];
+    self.title_arr = @[@"我的戏票",@"我的活动",@"我的邀约",@"我的钱包",@"我的兴趣",@"绑定手机号",@"设置"];
+    self.image_arr = @[@"ticket",@"actvity",@"training",@"wallet",@"interest",@"phone",@"set"];
 
     // Do any additional setup after loading the view.
 }
@@ -81,7 +81,7 @@
 #pragma mark - tableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -92,6 +92,8 @@
         case 1:
             return 3;
         case 2:
+            return 1;
+        case 3:
             return 1;
         default:
             if ([type isEqualToString:@"mobile"]) {
@@ -144,14 +146,18 @@
         }else if (indexPath.section == 2){
             cell.textLabel.text = self.title_arr[3];
              cell.imageView.image = [UIImage imageNamed:self.image_arr[3]];
+        }else if(indexPath.section == 3){
+            cell.textLabel.text = self.title_arr[4];
+            cell.imageView.image = [UIImage imageNamed:self.image_arr[4]];
+
         }else{
             if ([type isEqualToString:@"mobile"]) {
-                cell.textLabel.text = self.title_arr[5];
-                cell.imageView.image = [UIImage imageNamed:self.image_arr[5]];
+                cell.textLabel.text = self.title_arr[6];
+                cell.imageView.image = [UIImage imageNamed:self.image_arr[6]];
                 cell.detailTextLabel.text = self.perData.mobile;
             }else{
-            cell.textLabel.text = self.title_arr[indexPath.row + 4];
-             cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row + 4]];
+            cell.textLabel.text = self.title_arr[indexPath.row + 5];
+             cell.imageView.image = [UIImage imageNamed:self.image_arr[indexPath.row + 5]];
                 if (indexPath.row == 0) {
                     if ([self.perData.mobile isEqualToString:@""] || self.perData.mobile  == nil) {
                          cell.detailTextLabel.text = @"未绑定";
@@ -189,10 +195,13 @@
             [self.navigationController pushViewController:invaCon animated:YES];
         }
         
-    }else if (indexPath.section == 2){
+    }else if(indexPath.section == 2){
+        WalletTableViewController *wallCon = [[WalletTableViewController alloc]init];
+        [self.navigationController pushViewController:wallCon animated:YES];
+    }else if (indexPath.section == 3){
         InterestsTableViewController* interests = [[InterestsTableViewController alloc] init];
         [self.navigationController pushViewController:interests animated:YES];
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 4){
         if ([type isEqualToString:@"mobile"]) {
             SettingTableViewController * settingTable = [[SettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:settingTable animated:YES];

@@ -44,25 +44,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3k-8p-m8u">
-                        <rect key="frame" x="15" y="106" width="108" height="50"/>
+                        <rect key="frame" x="15" y="106" width="108" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="eWi-Md-gYq"/>
+                            <constraint firstAttribute="height" constant="40" id="eWi-Md-gYq"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="22" image="likewrong.png"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVc-Iu-ch2">
-                        <rect key="frame" x="123" y="106" width="108.5" height="50"/>
+                        <rect key="frame" x="123" y="106" width="108.5" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="HGk-jg-YEJ"/>
+                            <constraint firstAttribute="height" constant="40" id="HGk-jg-YEJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="Button" image="dramavideo.png"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FMa-Me-8cM">
-                        <rect key="frame" x="283" y="121" width="25" height="25"/>
+                        <rect key="frame" x="283" y="116" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="pnW-mu-boU"/>
                             <constraint firstAttribute="width" constant="25" id="xcw-1Z-0ab"/>
@@ -78,7 +78,7 @@
                     <constraint firstItem="P3k-8p-m8u" firstAttribute="top" secondItem="Uwl-eA-Npx" secondAttribute="bottom" id="Ian-to-ZbF"/>
                     <constraint firstAttribute="trailing" secondItem="FMa-Me-8cM" secondAttribute="trailing" constant="20" id="LFp-5K-y9k"/>
                     <constraint firstItem="DVc-Iu-ch2" firstAttribute="leading" secondItem="P3k-8p-m8u" secondAttribute="trailing" id="S9t-lF-rnh"/>
-                    <constraint firstItem="FMa-Me-8cM" firstAttribute="top" secondItem="Uwl-eA-Npx" secondAttribute="bottom" constant="15" id="UxS-Qu-oCy"/>
+                    <constraint firstItem="FMa-Me-8cM" firstAttribute="top" secondItem="Uwl-eA-Npx" secondAttribute="bottom" constant="10" id="UxS-Qu-oCy"/>
                     <constraint firstItem="DVc-Iu-ch2" firstAttribute="top" secondItem="Uwl-eA-Npx" secondAttribute="bottom" id="Y2L-TQ-oIb"/>
                     <constraint firstItem="P3k-8p-m8u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Zbi-e6-zzr"/>
                     <constraint firstItem="BOA-Vo-qRA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fI5-vd-ksI"/>
@@ -99,7 +99,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="dramavideo.png" width="15" height="15"/>
+        <image name="dramavideo.png" width="20" height="20"/>
         <image name="likewrong.png" width="20" height="20"/>
     </resources>
 </document>

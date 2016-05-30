@@ -31,8 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"动态详情";
-    self.serverManager = [ServerManager sharedInstance];
-    [self get_dongtai_commentData:@"0"];
     self.view.backgroundColor  = [UIColor whiteColor];
       [self.view addSubview:self.tableView];
 //
@@ -44,6 +42,8 @@
     if ([self.starVideo.type isEqualToString:@"movie"]) {
         [self setVideoView];
     }
+    self.serverManager = [ServerManager sharedInstance];
+    [self get_dongtai_commentData:@"0"];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{

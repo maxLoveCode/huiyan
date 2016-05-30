@@ -588,7 +588,7 @@
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_find_icon"};
     [self.serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 60000) {
-            NSLog(@"-------%@",responseObject[@"data"]);
+          //  NSLog(@"-------%@",responseObject[@"data"]);
             self.findIcon = [responseObject[@"data"] objectForKey:@"app_find_icon"];
             [self.menuView reloadData];
         }

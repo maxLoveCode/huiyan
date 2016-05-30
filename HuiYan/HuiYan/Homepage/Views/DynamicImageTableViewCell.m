@@ -111,9 +111,9 @@
     self.twoPic.frame = CGRectMake(CGRectGetMaxX(self.onePic.frame) + 15, CGRectGetMaxY(self.titleLab.frame) + 22.5, kImageWidth, kImageWidth);
     self.threePic.frame = CGRectMake(CGRectGetMaxX(self.twoPic.frame) + 15, CGRectGetMaxY(self.titleLab.frame) + 22.5, kImageWidth, kImageWidth);
     self.lineLab.frame = CGRectMake(15, CGRectGetMaxY(self.onePic.frame) + 10, kScreen_Width - 30, 1);
-    self.likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.lineLab.frame), (kScreen_Width - 30) / 3, 50);
-    self.commentBtn.frame = CGRectMake(CGRectGetMaxX(self.likeBtn.frame), CGRectGetMinY(self.likeBtn.frame), CGRectGetWidth(self.likeBtn.frame), 50);
-    self.typePic.frame = CGRectMake(kScreen_Width - 45, CGRectGetMaxY(self.lineLab.frame)+ 13, 25, 25);
+    self.likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.lineLab.frame), (kScreen_Width - 30) / 3, 40);
+    self.commentBtn.frame = CGRectMake(CGRectGetMaxX(self.likeBtn.frame), CGRectGetMinY(self.likeBtn.frame), CGRectGetWidth(self.likeBtn.frame), 40);
+    self.typePic.frame = CGRectMake(kScreen_Width - 45, CGRectGetMaxY(self.lineLab.frame)+ 8, 25, 25);
 }
 
 - (void)setContent:(StarVideo *)model{

@@ -64,32 +64,33 @@
         self.tailView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
         self.tailView.backgroundColor = [UIColor whiteColor];
         UIButton *inviteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 3 - 2, 48);
+        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 2 - 2, 48);
         [inviteBtn setTitle:@"邀约" forState:UIControlStateNormal];
         [inviteBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
         [inviteBtn addTarget:self action:@selector(inviteEvent:) forControlEvents:UIControlEventTouchUpInside];
         [self.tailView addSubview:inviteBtn];
         UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendBtn.frame = CGRectMake(kScreen_Width / 3, 0, kScreen_Width / 3 - 2, 48);
+        sendBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2 - 2, 48);
         [sendBtn setTitle:@"送花" forState:UIControlStateNormal];
+        [sendBtn setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateNormal];
         [sendBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
         [sendBtn addTarget:self action:@selector(sendFlower:) forControlEvents:UIControlEventTouchUpInside];
         [self.tailView addSubview:sendBtn];
-        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
-        [shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
-        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
-        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
-        [self.tailView addSubview:shareBtn];
-        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3, 4, 1, 40)];
+//        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
+//        [shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+//        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+//        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+//        [self.tailView addSubview:shareBtn];
+        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2, 4, 1, 40)];
         oneline.backgroundColor = COLOR_WithHex(0xdddddd);
         [self.tailView addSubview:oneline];
-        UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
-        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
-        [self.tailView addSubview:twoline];
-        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
-        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
-        [self.tailView addSubview:w_line];
+      //  UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
+//        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
+//        [self.tailView addSubview:twoline];
+//        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+//        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
+//        [self.tailView addSubview:w_line];
     }
     return _tailView;
 }
@@ -258,12 +259,12 @@
     }else if (tableView == _videoTable){
         StarVideo *model = self.dataSource[indexPath.section];
         if ([model.type isEqualToString:@"movie"]) {
-            return 185 + (kScreen_Width - 30) / 2;
+            return 175 + (kScreen_Width - 30) / 2;
         }else if(
                  [model.type isEqualToString:@"text"]){
-            return 160;
+            return 150;
         }else{
-            return 180 + (kScreen_Width - 60) / 3;
+            return 170 + (kScreen_Width - 60) / 3;
         }
         
     }
@@ -450,7 +451,7 @@
     if (scrollView == self.videoTable) {
          CGFloat offsetY = self.videoTable.contentOffset.y;
         CGFloat mainoffsetY = self.mainTable.contentOffset.y;
-        NSLog(@"delta = %f,main = %f",offsetY,mainoffsetY);
+     //   NSLog(@"delta = %f,main = %f",offsetY,mainoffsetY);
         CGFloat alpha = 0.99;
 //        if (height <= kHeadMinHeight ) {
 //            alpha = 0.99;
