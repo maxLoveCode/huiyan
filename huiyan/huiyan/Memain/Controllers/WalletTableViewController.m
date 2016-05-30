@@ -267,7 +267,7 @@
 -(void)pay:(UIButton *)sender
 {
     NSString* price = [[_dataSource objectAtIndex:select] objectForKey:@"price"];
-    //price = [NSString stringWithFormat:@"%d元", (int)[price integerValue]];
+    // price = [NSString stringWithFormat:@"%d元", (int)[price integerValue]];
     [self aliPay:price];
 }
 
@@ -301,7 +301,7 @@
     //    //商品标题
     order.productName = [NSString stringWithFormat:@"汇演订单:%@",order.tradeNO];
     //    //商品描述
-    order.productDescription = @"43:1000";
+    order.productDescription = [NSString stringWithFormat:@"%@:%@",  [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"],[[_dataSource objectAtIndex:select] objectForKey:@"diamond"] ];
     //    //商品价格
    // order.amount = price;
     order.amount = [NSString stringWithFormat:@"%.2f", [price floatValue]];
