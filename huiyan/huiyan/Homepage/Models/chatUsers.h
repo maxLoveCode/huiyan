@@ -13,5 +13,7 @@
 @interface chatUsers : NSObject<RCIMUserInfoDataSource>
 
 @property (nonatomic, strong) ServerManager* serverManager;
+@property (nonatomic, strong) NSMutableArray* dataArray;
++(chatUsers*)instance;
 
 @end
