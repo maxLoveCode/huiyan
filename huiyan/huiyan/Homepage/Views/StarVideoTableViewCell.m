@@ -72,7 +72,8 @@
     if (!_number_mesBtn) {
         self.number_mesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.number_mesBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
-        self.number_mesBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+        self.number_mesBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        self.number_mesBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         self.number_mesBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _number_mesBtn;
@@ -82,7 +83,8 @@
     if (!_number_likeBtn) {
         self.number_likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.number_likeBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
-        self.number_likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+        self.number_likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+         self.number_likeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         self.number_likeBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _number_likeBtn;
@@ -112,9 +114,9 @@
     self.picView.frame = CGRectMake(15, CGRectGetMaxY(self.titleLabel.frame) + 22.5, kScreen_Width - 30, (kScreen_Width - 30) / 2);
    
     self.v_lab.frame = CGRectMake(15, CGRectGetMaxY(self.picView.frame) + 10, CGRectGetWidth(self.picView.frame), 1);
-    self.number_likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.v_lab.frame), CGRectGetWidth(self.v_lab.frame) / 3, 50);
-    self.typePic.frame = CGRectMake(kScreen_Width - 15 - 30, CGRectGetMaxY(self.v_lab.frame)+ 10, 30, 30);
-    self.number_mesBtn.frame = CGRectMake(CGRectGetMaxX(self.number_likeBtn.frame), CGRectGetMinY(self.number_likeBtn.frame), CGRectGetWidth(self.number_likeBtn.frame), 50);
+    self.number_likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.v_lab.frame) + 5, CGRectGetWidth(self.v_lab.frame) / 3, 40);
+    self.typePic.frame = CGRectMake(kScreen_Width - 15 - 30, CGRectGetMaxY(self.v_lab.frame)+ 8, 30, 30);
+    self.number_mesBtn.frame = CGRectMake(CGRectGetMaxX(self.number_likeBtn.frame), CGRectGetMinY(self.number_likeBtn.frame) + 5, CGRectGetWidth(self.number_likeBtn.frame), 40);
     [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.picView);
     }];
@@ -128,7 +130,7 @@
     [self.picView sd_setImageWithURL:[NSURL URLWithString:pic] placeholderImage:[UIImage imageNamed:@"bg_view"]];
     self.timeLabel.text = starVideo.createtime;
     self.titleLabel.text = starVideo.title;
-    [self.number_likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
+    [self.number_likeBtn setImage:[UIImage imageNamed:@"likewrong"] forState:UIControlStateNormal];
     [self.number_mesBtn setImage:[UIImage imageNamed:@"dramavideo"] forState:UIControlStateNormal];
     [self.number_likeBtn setTitle:starVideo.like_count forState:UIControlStateNormal];
     [self.number_mesBtn setTitle:starVideo.comment_count forState:UIControlStateNormal];

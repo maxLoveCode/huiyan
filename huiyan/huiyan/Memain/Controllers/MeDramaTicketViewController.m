@@ -46,7 +46,7 @@ static int number_page = 0;
 - (UIImageView *)bg_image{
     if (!_bg_image) {
         self.bg_image = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 94, 100, 188,106)];
-        self.bg_image.backgroundColor = [UIColor whiteColor];
+//        self.bg_image.backgroundColor = [UIColor whiteColor];
     }
     return _bg_image;
 }

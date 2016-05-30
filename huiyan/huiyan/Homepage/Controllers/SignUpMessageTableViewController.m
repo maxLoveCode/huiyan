@@ -114,6 +114,7 @@
         return cell;
     }else{
         ImportantNotesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"three"];
+        cell.mes_lab.text = self.train.buy_tip;
         [cell.sure_btn addTarget:self action:@selector(sureOrders:) forControlEvents:UIControlEventTouchUpInside];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

@@ -43,22 +43,22 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3k-8p-m8u">
-                        <rect key="frame" x="15" y="106" width="108" height="50"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3k-8p-m8u">
+                        <rect key="frame" x="15" y="106" width="108" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="eWi-Md-gYq"/>
+                            <constraint firstAttribute="height" constant="40" id="eWi-Md-gYq"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-20" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="22" image="dramazan.png"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="22" image="likewrong.png"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVc-Iu-ch2">
-                        <rect key="frame" x="123" y="106" width="108.5" height="50"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVc-Iu-ch2">
+                        <rect key="frame" x="123" y="106" width="108.5" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="HGk-jg-YEJ"/>
+                            <constraint firstAttribute="height" constant="40" id="HGk-jg-YEJ"/>
                         </constraints>
-                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-20" maxY="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="Button" image="dramavideo.png"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FMa-Me-8cM">
@@ -100,6 +100,6 @@
     </objects>
     <resources>
         <image name="dramavideo.png" width="20" height="20"/>
-        <image name="dramazan.png" width="20" height="20"/>
+        <image name="likewrong.png" width="20" height="20"/>
     </resources>
 </document>

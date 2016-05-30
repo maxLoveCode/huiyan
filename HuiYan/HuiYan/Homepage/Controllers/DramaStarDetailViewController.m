@@ -20,7 +20,7 @@
 #import "DynamicDetailViewController.h"
 #import "Tools.h"
 #define HeadHight 230
-#define TailHeight kScreen_Height  - 44 - 64 - 210
+#define TailHeight kScreen_Height  - 40 - 64 - 210
 #define kVideoCellHeight 244.0
 // 头部视图的高度
 #define kHeadHeight 230
@@ -38,10 +38,9 @@
 @property (nonatomic, strong) UIButton *videoBtn;
 @property (nonatomic, strong) UIButton *desBtn;
 @property (nonatomic, strong) UIView *desView;
-
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, strong) NSDate* target;
-
+@property (nonatomic, assign) BOOL color_Theme;
 @property (nonatomic, strong) NSTimer* timer;
 @end
 
@@ -65,39 +64,40 @@
         self.tailView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
         self.tailView.backgroundColor = [UIColor whiteColor];
         UIButton *inviteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 3 - 2, 48);
+        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 2 - 2, 48);
         [inviteBtn setTitle:@"邀约" forState:UIControlStateNormal];
         [inviteBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
         [inviteBtn addTarget:self action:@selector(inviteEvent:) forControlEvents:UIControlEventTouchUpInside];
         [self.tailView addSubview:inviteBtn];
         UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendBtn.frame = CGRectMake(kScreen_Width / 3, 0, kScreen_Width / 3 - 2, 48);
+        sendBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2 - 2, 48);
         [sendBtn setTitle:@"送花" forState:UIControlStateNormal];
+        [sendBtn setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateNormal];
         [sendBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
         [sendBtn addTarget:self action:@selector(sendFlower:) forControlEvents:UIControlEventTouchUpInside];
         [self.tailView addSubview:sendBtn];
-        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
-        [shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
-        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
-        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
-        [self.tailView addSubview:shareBtn];
-        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3, 4, 1, 40)];
+//        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
+//        [shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+//        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+//        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+//        [self.tailView addSubview:shareBtn];
+        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2, 4, 1, 40)];
         oneline.backgroundColor = COLOR_WithHex(0xdddddd);
         [self.tailView addSubview:oneline];
-        UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
-        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
-        [self.tailView addSubview:twoline];
-        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
-        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
-        [self.tailView addSubview:w_line];
+      //  UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
+//        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
+//        [self.tailView addSubview:twoline];
+//        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+//        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
+//        [self.tailView addSubview:w_line];
     }
     return _tailView;
 }
 
 - (UIScrollView *)downScrollow{
     if (!_downScrollow) {
-        self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 44)];
+        self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 64 - 40)];
         self.downScrollow.contentSize = CGSizeMake(kScreen_Width * 2, kScreen_Height);
         self.downScrollow.scrollEnabled = NO;
         [self.downScrollow addSubview:self.videoTable];
@@ -112,11 +112,12 @@
         CGSize size =  [self.drama.profile boundingRectWithSize:CGSizeMake(kScreen_Width - 30, MAXFLOAT)
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:@{
-                                                             NSFontAttributeName :kFONT14
+                                                             NSFontAttributeName :kFONT13
                                                              }
                                                    context:nil].size;
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, kScreen_Width- 30, size.height)];
         lab.text = self.drama.profile;
+        lab.numberOfLines = 0;
         lab.font = kFONT13;
         [self.desView addSubview:lab];
     }
@@ -160,8 +161,14 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     // 隐藏导航栏,给导航栏设置空的图片
+    if (self.color_Theme == YES) {
+        UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:1]];
+        [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+         self.navigationController.navigationBar.translucent = YES;
+    }else{
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.translucent = YES;
+    }
     
     
     // 隐藏导航栏底部阴影
@@ -198,8 +205,7 @@
 -(UITableView *)videoTable
 {
     if (!_videoTable) {
-        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 44) style:UITableViewStyleGrouped];
-        self.videoTable.scrollEnabled = NO;
+        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width,kScreen_Height - 48 - 64 - 40) style:UITableViewStyleGrouped];
          self.videoTable.delegate = self;
          self.videoTable.dataSource = self;
         [ self.videoTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"video"];
@@ -229,7 +235,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (tableView == self.mainTable) {
         if (section == 1) {
-            return 32;
+            return 40;
         }
         return 0.01;
     }
@@ -248,17 +254,17 @@
         if (indexPath.section == 0) {
             return HeadHight;
         }else{
-            return  TailHeight + 300;
+            return  kScreen_Height - 64 - 48 - 40;
         }
     }else if (tableView == _videoTable){
         StarVideo *model = self.dataSource[indexPath.section];
         if ([model.type isEqualToString:@"movie"]) {
-            return 185 + (kScreen_Width - 30) / 2;
+            return 175 + (kScreen_Width - 30) / 2;
         }else if(
                  [model.type isEqualToString:@"text"]){
-            return 160;
+            return 150;
         }else{
-            return 180 + (kScreen_Width - 60) / 3;
+            return 170 + (kScreen_Width - 60) / 3;
         }
         
     }
@@ -267,22 +273,31 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (tableView == self.mainTable) {
-        UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
+        if (section == 1) {
+        UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
         headView .backgroundColor = [UIColor whiteColor];
         UIButton *videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        videoBtn.frame = CGRectMake(0, 0, kScreen_Width / 2, 32);
+        videoBtn.frame = CGRectMake(0, 0, kScreen_Width / 2, 40);
+        [videoBtn setTitle:@"动态" forState:UIControlStateNormal];
         [headView addSubview:videoBtn];
+       UILabel *lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 0.5, 4, 1, 32)];
+        lineLab.backgroundColor = COLOR_WithHex(0xdddddd);
+            [headView addSubview:lineLab];
         UIButton *desBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        desBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2, 32);
+        desBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2, 40);
+        [desBtn setTitle:@"简介" forState:UIControlStateNormal];
         [headView addSubview:desBtn];
         UIColor *color = COLOR_THEME;
         [videoBtn setTitleColor:color forState:UIControlStateNormal];
         [desBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.videoBtn = videoBtn;
+        self.desBtn = desBtn;
         videoBtn.tag = 110;
         desBtn.tag = 112;
         [videoBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
         [desBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
         return headView;
+        }
     }
     return nil;
 }
@@ -433,24 +448,48 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.videoTable) {
+         CGFloat offsetY = self.videoTable.contentOffset.y;
+        CGFloat mainoffsetY = self.mainTable.contentOffset.y;
+     //   NSLog(@"delta = %f,main = %f",offsetY,mainoffsetY);
+        CGFloat alpha = 0.99;
+//        if (height <= kHeadMinHeight ) {
+//            alpha = 0.99;
+//        } else {
+//            alpha = 0;
+//            //        [self.videoTable setScrollEnabled:YES];
+//            //        [self.mainTable setScrollEnabled:YES];
+//            
+//        }
+        UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:alpha]];
+        [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+        if (offsetY < 165) {
+            self.mainTable.contentOffset = CGPointMake(0, offsetY +5);
+
+        }else if (offsetY >=165)
+             self.mainTable.contentOffset = CGPointMake(0, 165);
+    }
     if (scrollView == self.mainTable) {
     CGFloat offsetY = self.mainTable.contentOffset.y;
     
     // 计算tabView滚动的偏移量
     CGFloat delta = offsetY - self.totalOffsetY;
-    
+
     CGFloat height = kHeadHeight - delta;
+
     
     height = height < 0 ? 0 : height;
     
     // 透明度
     CGFloat alpha = 0;
-    if (height <= kHeadMinHeight) {
+    if (height <= kHeadMinHeight ) {
         alpha = 0.99;
-        [self.videoTable setScrollEnabled:YES];
+        self.color_Theme = NO;
     } else {
         alpha = 0;
-        [self.videoTable setScrollEnabled:NO];
+//        [self.videoTable setScrollEnabled:YES];
+//        [self.mainTable setScrollEnabled:YES];
+        self.color_Theme = YES;
      
     }
          UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:alpha]];
@@ -494,8 +533,11 @@
         [self.downScrollow setContentOffset:CGPointMake(0, 0) animated:YES];
         [self.videoBtn setTitleColor:color forState:UIControlStateNormal];
         [self.desBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.mainTable.scrollEnabled = YES;
     }else{
         [self.downScrollow setContentOffset:CGPointMake(kScreen_Width, 0) animated:YES];
+        [self.mainTable setContentOffset:CGPointMake(0, 0)];
+        self.mainTable.scrollEnabled = NO;
         [self.videoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.desBtn setTitleColor:color forState:UIControlStateNormal];
     }

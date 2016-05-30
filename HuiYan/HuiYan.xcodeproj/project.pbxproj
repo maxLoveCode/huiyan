@@ -313,6 +313,14 @@
 		591C37FD1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C37FB1CF6EBB100E73CB1 /* DynamicTextTableViewCell.m */; };
 		591C37FE1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */; };
 		591CC0AA1CF7F02E008ECEA7 /* DynamicCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591CC0A91CF7F02E008ECEA7 /* DynamicCommentCell.m */; };
+		5923EDF01CFBD57E005F6A33 /* likewrong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EDEA1CFBD57D005F6A33 /* likewrong@2x.png */; };
+		5923EDFF1CFBDE8B005F6A33 /* likewrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EDFE1CFBDE8B005F6A33 /* likewrong.png */; };
+		5923EE031CFBDF82005F6A33 /* liketrue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EE021CFBDF82005F6A33 /* liketrue@2x.png */; };
+		5923EE051CFBDFF8005F6A33 /* liketrue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EE041CFBDFF8005F6A33 /* liketrue.png */; };
+		5923EE081CFBE1BC005F6A33 /* WriteCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5923EE071CFBE1BC005F6A33 /* WriteCommentViewController.m */; };
+		5923EE0A1CFC1B5C005F6A33 /* dramavideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EE091CFC1B5C005F6A33 /* dramavideo@2x.png */; };
+		5923EE0D1CFC4BBD005F6A33 /* actvity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EE0B1CFC4BBD005F6A33 /* actvity@2x.png */; };
+		5923EE0E1CFC4BBD005F6A33 /* actvity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EE0C1CFC4BBD005F6A33 /* actvity@3x.png */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
@@ -906,6 +914,15 @@
 		591C37FC1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DynamicTextTableViewCell.xib; path = HuiYan/Homepage/Views/DynamicTextTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		591CC0A81CF7F02E008ECEA7 /* DynamicCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicCommentCell.h; path = HuiYan/Homepage/Views/DynamicCommentCell.h; sourceTree = SOURCE_ROOT; };
 		591CC0A91CF7F02E008ECEA7 /* DynamicCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DynamicCommentCell.m; path = HuiYan/Homepage/Views/DynamicCommentCell.m; sourceTree = SOURCE_ROOT; };
+		5923EDEA1CFBD57D005F6A33 /* likewrong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "likewrong@2x.png"; path = "HuiYan/ImageSource/likewrong@2x.png"; sourceTree = SOURCE_ROOT; };
+		5923EDFE1CFBDE8B005F6A33 /* likewrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = likewrong.png; path = HuiYan/ImageSource/likewrong.png; sourceTree = SOURCE_ROOT; };
+		5923EE021CFBDF82005F6A33 /* liketrue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "liketrue@2x.png"; path = "HuiYan/ImageSource/liketrue@2x.png"; sourceTree = SOURCE_ROOT; };
+		5923EE041CFBDFF8005F6A33 /* liketrue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = liketrue.png; path = HuiYan/ImageSource/liketrue.png; sourceTree = SOURCE_ROOT; };
+		5923EE061CFBE1BC005F6A33 /* WriteCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteCommentViewController.h; path = HuiYan/Homepage/Controllers/WriteCommentViewController.h; sourceTree = SOURCE_ROOT; };
+		5923EE071CFBE1BC005F6A33 /* WriteCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteCommentViewController.m; path = HuiYan/Homepage/Controllers/WriteCommentViewController.m; sourceTree = SOURCE_ROOT; };
+		5923EE091CFC1B5C005F6A33 /* dramavideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dramavideo@2x.png"; path = "HuiYan/ImageSource/dramavideo@2x.png"; sourceTree = SOURCE_ROOT; };
+		5923EE0B1CFC4BBD005F6A33 /* actvity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "actvity@2x.png"; path = "HuiYan/ImageSource/actvity@2x.png"; sourceTree = SOURCE_ROOT; };
+		5923EE0C1CFC4BBD005F6A33 /* actvity@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "actvity@3x.png"; path = "HuiYan/ImageSource/actvity@3x.png"; sourceTree = SOURCE_ROOT; };
 		5925EF581CF05C2F00E3ACF3 /* GifRefresher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifRefresher.h; path = HuiYan/commonFiles/controller/GifRefresher.h; sourceTree = SOURCE_ROOT; };
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1522,6 +1539,8 @@
 				5964F1CD1CF577C500E436CE /* DramaStarDetailViewController.m */,
 				5964F1D51CF5964100E436CE /* DynamicDetailViewController.h */,
 				5964F1D61CF5964100E436CE /* DynamicDetailViewController.m */,
+				5923EE061CFBE1BC005F6A33 /* WriteCommentViewController.h */,
+				5923EE071CFBE1BC005F6A33 /* WriteCommentViewController.m */,
 				5586217D1CE5BA0E007D5049 /* NewHomePageViewController.h */,
 				5586217E1CE5BA0E007D5049 /* NewHomePageViewController.m */,
 			);
@@ -1562,6 +1581,13 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				5923EE0B1CFC4BBD005F6A33 /* actvity@2x.png */,
+				5923EE0C1CFC4BBD005F6A33 /* actvity@3x.png */,
+				5923EE091CFC1B5C005F6A33 /* dramavideo@2x.png */,
+				5923EE041CFBDFF8005F6A33 /* liketrue.png */,
+				5923EE021CFBDF82005F6A33 /* liketrue@2x.png */,
+				5923EDFE1CFBDE8B005F6A33 /* likewrong.png */,
+				5923EDEA1CFBD57D005F6A33 /* likewrong@2x.png */,
 				59E0794E1CFB47850064AB9C /* dramavideo.png */,
 				59E0794F1CFB47850064AB9C /* dramazan.png */,
 				59EF567A1CF85E7800308F78 /* texttype@3x.png */,
@@ -2126,6 +2152,7 @@
 				25C625811CBE49C10068BFE8 /* tab_mine@2x.png in Resources */,
 				558F22E11CE86016008636E1 /* PersonDramaTicketCell.xib in Resources */,
 				55AD32571CDB2426000ACE39 /* collect@3x.png in Resources */,
+				5923EE051CFBDFF8005F6A33 /* liketrue.png in Resources */,
 				5578A8A71CF06BCB00BD3061 /* gifrefesh7.png in Resources */,
 				25C625711CBE49C10068BFE8 /* 3.png in Resources */,
 				25C625781CBE49C10068BFE8 /* tab_firend_selected@3x.png in Resources */,
@@ -2168,10 +2195,12 @@
 				25C625351CBCFA3E0068BFE8 /* qq@3x.png in Resources */,
 				55C41DF71CE305800055A58B /* ImportantNotesCell.xib in Resources */,
 				5578A8BE1CF07C4B00BD3061 /* ticket_detail_price.png in Resources */,
+				5923EE0A1CFC1B5C005F6A33 /* dramavideo@2x.png in Resources */,
 				25C625821CBE49C10068BFE8 /* tab_mine@3x.png in Resources */,
 				25C625751CBE49C10068BFE8 /* tab_explorer@2x.png in Resources */,
 				554B97CD1CEEB03E00E471CB /* PersonInvitationCell.xib in Resources */,
 				55C41E231CE4559A0055A58B /* pushMes@2x.png in Resources */,
+				5923EE0D1CFC4BBD005F6A33 /* actvity@2x.png in Resources */,
 				558F22D61CE85469008636E1 /* wallet@3x.png in Resources */,
 				5578A8551CF0452900BD3061 /* finish_detail_phone.png in Resources */,
 				550BFA1F1CBB2AF000E2E9DE /* repeat_video@2x.png in Resources */,
@@ -2228,6 +2257,7 @@
 				25C625371CBCFA3E0068BFE8 /* weChat@2x.png in Resources */,
 				5578A8B51CF06ED400BD3061 /* mine@2x.png in Resources */,
 				550BFA111CBB2AF000E2E9DE /* kr-video-player-pause@3x.png in Resources */,
+				5923EE031CFBDF82005F6A33 /* liketrue@2x.png in Resources */,
 				5578A8BF1CF07C4B00BD3061 /* ticket_detail_time.png in Resources */,
 				59D4AB841CF46AE2002545A9 /* ticket_detail_price@3x.png in Resources */,
 				59EF56781CF85C4400308F78 /* imgetype@3x.png in Resources */,
@@ -2278,12 +2308,15 @@
 				55C41E0D1CE428280055A58B /* successful.png in Resources */,
 				59D4AB851CF46AE2002545A9 /* ticket_detail_time@3x.png in Resources */,
 				55B919241CCA1FAF00717F8E /* UMSShareListController.xib in Resources */,
+				5923EDFF1CFBDE8B005F6A33 /* likewrong.png in Resources */,
+				5923EE0E1CFC4BBD005F6A33 /* actvity@3x.png in Resources */,
 				59EF56771CF85C4400308F78 /* imgetype@2x.png in Resources */,
 				5578A8A01CF06BCB00BD3061 /* gifrefesh0.png in Resources */,
 				558F22D01CE85469008636E1 /* set@3x.png in Resources */,
 				55C41DED1CE2E11B0055A58B /* SignUp.xib in Resources */,
 				55C41E1F1CE4559A0055A58B /* around@2x.png in Resources */,
 				59EF56711CF85AE400308F78 /* information@3x.png in Resources */,
+				5923EDF01CFBD57E005F6A33 /* likewrong@2x.png in Resources */,
 				550BFA0F1CBB2AF000E2E9DE /* kr-video-player-fullscreen@3x.png in Resources */,
 				55CCD7961CB3640600C3B8CA /* Assets.xcassets in Resources */,
 				59934F871CF29E6800666B33 /* person@2x.png in Resources */,
@@ -2371,6 +2404,7 @@
 				5964F1CA1CF5551600E436CE /* DramaDetailHeadCell.m in Sources */,
 				558F5CB71CBB9780006BD54D /* Training.m in Sources */,
 				25D965521CF3E28900B49A9B /* ForgotPassTableViewController.m in Sources */,
+				5923EE081CFBE1BC005F6A33 /* WriteCommentViewController.m in Sources */,
 				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
 				25B4026E1CEDACCC0003D908 /* SettingTableViewController.m in Sources */,
 				25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */,

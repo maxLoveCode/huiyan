@@ -17,7 +17,7 @@
     self.sure_btn.layer.masksToBounds = YES;
     self.sure_btn.layer.cornerRadius = 5;
     self.sure_btn.backgroundColor = COLOR_THEME;
-    self.mes_lab.text = kMessage;
+  //  self.mes_lab.text = kMessage;
     self.line_lab.backgroundColor = COLOR_WithHex(0xdddddd);
     self.h_lab.layer.masksToBounds = YES;
     self.h_lab.layer.cornerRadius = 3;
