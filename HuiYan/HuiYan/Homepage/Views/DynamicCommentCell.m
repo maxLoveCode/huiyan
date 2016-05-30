@@ -73,7 +73,8 @@
                                                           NSFontAttributeName :self.commentLab.font
                                                           }
                                                 context:nil].size;
-    self.commentLab.frame = CGRectMake(15, 38, kScreen_Width - 30, size.height);
+    self.commentLab.frame = CGRectMake(15, 50, kScreen_Width - 30, size.height);
+    self.commentLab.text = dic[@"comment"];
     [self.headPic sd_setImageWithURL:[NSURL URLWithString:[NSString stringFormatting:dic[@"avatar"]]]];
     self.nameLab.text = dic[@"nickname"];
     self.timeLab.text = dic[@"createtime"];

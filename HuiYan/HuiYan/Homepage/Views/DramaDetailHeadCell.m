@@ -26,15 +26,6 @@
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 21;
     }
-    [self addSubview:self.lineLab];
-}
-
-- (UILabel *)lineLab{
-    if (!_lineLab) {
-        self.lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 0.5, CGRectGetMaxY(self.bgPic.frame)+ 4, 1, 36)];
-        self.lineLab.backgroundColor = COLOR_WithHex(0xdddddd);
-    }
-    return _lineLab;
 }
 
 - (void)setContent:(DramaStar *)model{

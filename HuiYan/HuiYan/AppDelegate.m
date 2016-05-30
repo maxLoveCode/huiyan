@@ -118,13 +118,13 @@
     
 #ifdef DEBUG
     UnitTest *test = [UnitTest instance];
-    NSLog(@"======== UNIT TEST START ========");
+//NSLog(@"======== UNIT TEST START ========");
     [test testResult:^(BOOL result) {
         if (result) {
-            NSLog(@"====== UNIT TEST COMPLETION =====");
+           // NSLog(@"====== UNIT TEST COMPLETION =====");
         }
         else{
-            NSLog(@"======= UNIT TEST FAILURE =======");
+           // NSLog(@"======= UNIT TEST FAILURE =======");
         }
     }];
 #endif

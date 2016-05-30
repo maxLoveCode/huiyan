@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSString *count;
 @property (nonatomic, copy) NSString *price;
 @property (nonatomic, strong) NSArray *imgs;
+@property (nonatomic, strong) NSString *buy_tip;
 
 + (Training *)dataWithDic:(NSDictionary *)dic;
 @end

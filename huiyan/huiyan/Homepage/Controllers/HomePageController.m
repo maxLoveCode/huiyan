@@ -46,6 +46,7 @@
 {
     [super viewDidLoad];
     self.title = @"发  现";
+    self.findIcon = [NSArray array];
     [self.tableView setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height -  64)];
     //侧滑关闭
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -68,6 +69,7 @@
     [self get_opera_listData];
     [self get_wiki_listData];
     [self get_train_listData];
+    [self app_find_iconData];
 
 }
 
@@ -387,6 +389,7 @@
         if (!image_pic) {
             image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width /
                                                                      3/ 2 - menuPicWidth/2, 28, menuPicWidth ,menuPicWidth)];
+           // [image_pic sd_setImageWithURL:[NSURL URLWithString:self.findIcon[indexPath.item +1]]];
             image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
@@ -568,6 +571,20 @@
                 [self.actArr addObject:model];
             }
             [self.activityTableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
+//发现图标
+- (void)app_find_iconData{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_find_icon"};
+    [self.serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 60000) {
+            NSLog(@"-------%@",responseObject[@"data"]);
+            self.findIcon = [responseObject[@"data"] objectForKey:@"app_find_icon"];
+            [self.menuView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

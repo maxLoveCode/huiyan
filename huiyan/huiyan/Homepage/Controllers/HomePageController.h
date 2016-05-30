@@ -26,4 +26,5 @@
 @property(nonatomic,strong) NSMutableArray *ticketArr;
 @property (nonatomic,strong) NSMutableArray *actArr;
 @property (nonatomic,strong) NSMutableArray *wikiArr;
+@property (nonatomic,strong) NSArray *findIcon;
 @end

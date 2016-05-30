@@ -15,11 +15,13 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <Masonry/Masonry.h>
 #import "ZFPlayer.h"
+#import "WriteCommentViewController.h"
 @interface DynamicDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)ServerManager *serverManager;
 @property (nonatomic, assign)CGFloat headPic;
 @property (nonatomic, assign)CGFloat comment;
 @property (nonatomic, strong) UIView *topView;
+@property (nonatomic, strong) UIButton *likeBtn;
 @property (strong, nonatomic) ZFPlayerView *playerView;
 
 @end
@@ -32,12 +34,16 @@
     self.serverManager = [ServerManager sharedInstance];
     [self get_dongtai_commentData:@"0"];
     self.view.backgroundColor  = [UIColor whiteColor];
-    if ([self.starVideo.type isEqualToString:@"movie"]) {
-        [self setVideoView];
-    }
       [self.view addSubview:self.tableView];
 //
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([self.starVideo.type isEqualToString:@"movie"]) {
+        [self setVideoView];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -132,9 +138,9 @@
     if (!_tableView) {
         self.tableView = [[UITableView alloc] init];
         if ([self.starVideo.type isEqualToString:@"movie"]) {
-            self.tableView.frame = CGRectMake(0, CGRectGetHeight(self.playerView.frame), kScreen_Width,kScreen_Height - CGRectGetHeight(self.playerView.frame));
+            self.tableView.frame = CGRectMake(0, kScreen_Width / 16 *9, kScreen_Width,kScreen_Height - kScreen_Width / 16 *9);
         }else{
-        self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height);
+        self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height );
         }
         self.tableView.bounces = NO;
         self.tableView.delegate = self;
@@ -179,7 +185,7 @@
     if (indexPath.section == 0) {
         return self.headPic + 112;
     }else{
-        return self.comment + 48;
+        return self.comment + 65;
     }
 }
 
@@ -199,15 +205,21 @@
         titleLab.text = @"戏友留言";
         titleLab.font = kFONT16;
         [headView addSubview:titleLab];
-        UILabel *lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 100, 5, 1, 25)];
+        UILabel *lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width - 100, 5, 0.5, 25)];
         lineLab.backgroundColor = COLOR_WithHex(0xdddddd);
         [headView addSubview:lineLab];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(kScreen_Width - 100, 0, 100, 35);
+        btn.frame = CGRectMake(kScreen_Width - 115, 0, 100, 35);
         [btn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@"dramavideo"] forState:UIControlStateNormal];
-        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+        [btn addTarget:self action:@selector(writeComment:) forControlEvents:UIControlEventTouchUpInside];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+        
         [btn setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)self.dataSource.count] forState:UIControlStateNormal];
+        UILabel *v_Lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 34, kScreen_Width - 30, 0.5)];
+        v_Lab.backgroundColor = COLOR_WithHex(0xdddddd);
+        [headView addSubview:v_Lab];
         [headView addSubview:btn];
         return headView;
     }
@@ -247,10 +259,18 @@
                 likeBtn.frame = CGRectMake(15, CGRectGetMaxY(lineLab.frame), 100, 35);
                 [cell.contentView addSubview:likeBtn];
                 [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal];
-                likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
-                [likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
+                likeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+                likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+                [likeBtn addTarget:self action:@selector(dropZan:) forControlEvents:UIControlEventTouchUpInside];
                 likeBtn.tag = 1012;
             }
+              self.likeBtn = likeBtn;
+            if ([self.starVideo.is_like isEqualToString:@"1"]) {
+                [self.likeBtn setImage:[UIImage imageNamed:@"liketrue"] forState:UIControlStateNormal];
+            }else{
+                [self.likeBtn setImage:[UIImage imageNamed:@"likewrong"] forState:UIControlStateNormal];
+            }
+          
             [likeBtn setTitle:self.starVideo.like_count forState:UIControlStateNormal];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -293,26 +313,41 @@
                 likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                  [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal];
                 likeBtn.frame = CGRectMake(15, CGRectGetMaxY(lineLab.frame), 100, 35);
-                likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
-                [likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
+                likeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+                likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+                 [likeBtn addTarget:self action:@selector(dropZan:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.contentView addSubview:likeBtn];
                 likeBtn.tag = 1012;
             }
+            self.likeBtn = likeBtn;
+            if ([self.starVideo.is_like isEqualToString:@"1"]) {
+                [self.likeBtn setImage:[UIImage imageNamed:@"liketrue"] forState:UIControlStateNormal];
+            }else{
+                [self.likeBtn setImage:[UIImage imageNamed:@"likewrong"] forState:UIControlStateNormal];
+            }
+
             [likeBtn setTitle:self.starVideo.like_count forState:UIControlStateNormal];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
 
             
         }else{
-            UIImageView *headView = [cell viewWithTag:1004];
+            
+            UIScrollView *headView = [cell viewWithTag:1004];
             if (!headView) {
-                headView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width / 16 *9)];
-                headView.backgroundColor = [UIColor blueColor];
+                headView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Width / 16 *9)];
+                headView.pagingEnabled = YES;
+                headView .contentSize = CGSizeMake(kScreen_Width * self.starVideo.content.count, kScreen_Width / 16 * 9);
+                for (int i = 0; i < self.starVideo.content.count; i++) {
+                    UIImageView *imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width * i, 0, kScreen_Width, kScreen_Width / 16 * 9)];
+                     [imagePic sd_setImageWithURL:[NSURL URLWithString:self.starVideo.content[i]]];
+                    [headView addSubview:imagePic];
+                }
                 [cell.contentView addSubview:headView];
                 headView.tag = 1004;
             }
             self.headPic = kScreen_Width / 16 *9;
-            [headView sd_setImageWithURL:[NSURL URLWithString:self.starVideo.content[0]]];
+           
             UILabel *titleLab = [cell viewWithTag:1008];
             if (!titleLab) {
                 titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(headView.frame) +23, kScreen_Width - 30, 32)];
@@ -333,11 +368,20 @@
             if (!likeBtn) {
                 likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 likeBtn.frame = CGRectMake(15, CGRectGetMaxY(lineLab.frame), 100, 35);
-                [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal]; likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
-                [likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
+                likeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+                [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal];
+                likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+                 [likeBtn addTarget:self action:@selector(dropZan:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.contentView addSubview:likeBtn];
                 likeBtn.tag = 1012;
             }
+            self.likeBtn = likeBtn;
+            if ([self.starVideo.is_like isEqualToString:@"1"]) {
+                [self.likeBtn setImage:[UIImage imageNamed:@"liketrue"] forState:UIControlStateNormal];
+            }else{
+                [self.likeBtn setImage:[UIImage imageNamed:@"likewrong"] forState:UIControlStateNormal];
+            }
+
             [likeBtn setTitle:self.starVideo.like_count forState:UIControlStateNormal];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -357,6 +401,39 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (void)dropZan:(UIButton *)sender{
+    NSLog(@"+++++%@",self.starVideo.is_like);
+    NSString *like = @"";
+    if ([self.starVideo.is_like isEqualToString:@"1"]) {
+        like = @"2";
+    }else{
+        like = @"1";
+    }
+    NSDictionary *dic = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"did":self.starVideo.ID,@"like":like};
+    [self.serverManager AnimatedPOST:@"write_dongtai_like.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"]integerValue] == 50060) {
+            if ([self.starVideo.is_like isEqualToString:@"1"]) {
+                [self.likeBtn setImage:[UIImage imageNamed:@"likewrong"] forState:UIControlStateNormal];
+                self.starVideo.is_like = @"0";
+                [self.likeBtn setTitle:[responseObject[@"data"]objectForKey:@"like_count"] forState:UIControlStateNormal];
+            }else{
+                [self.likeBtn setImage:[UIImage imageNamed:@"liketrue"] forState:UIControlStateNormal];
+                self.starVideo.is_like = @"1";
+                [self.likeBtn setTitle:[responseObject[@"data"]objectForKey:@"like_count"] forState:UIControlStateNormal];
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
+//写点评
+- (void)writeComment:(UIButton *)sender{
+    WriteCommentViewController *commentCon = [[WriteCommentViewController alloc]init];
+    commentCon.starVideo = self.starVideo;
+    [self.navigationController pushViewController:commentCon animated:YES];
 }
 
 - (void)get_dongtai_commentData:(NSString *)page{

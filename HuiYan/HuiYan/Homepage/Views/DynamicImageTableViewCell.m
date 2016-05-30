@@ -113,16 +113,18 @@
     self.lineLab.frame = CGRectMake(15, CGRectGetMaxY(self.onePic.frame) + 10, kScreen_Width - 30, 1);
     self.likeBtn.frame = CGRectMake(15, CGRectGetMaxY(self.lineLab.frame), (kScreen_Width - 30) / 3, 50);
     self.commentBtn.frame = CGRectMake(CGRectGetMaxX(self.likeBtn.frame), CGRectGetMinY(self.likeBtn.frame), CGRectGetWidth(self.likeBtn.frame), 50);
-    self.typePic.frame = CGRectMake(kScreen_Width - 45, CGRectGetMaxY(self.lineLab.frame)+ 15, 25, 25);
+    self.typePic.frame = CGRectMake(kScreen_Width - 45, CGRectGetMaxY(self.lineLab.frame)+ 13, 25, 25);
 }
 
 - (void)setContent:(StarVideo *)model{
     self.timeLab.text = model.createtime;
     self.titleLab.text = model.title;
-    [self.likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
+    [self.likeBtn setImage:[UIImage imageNamed:@"likewrong"] forState:UIControlStateNormal];
     [self.commentBtn setImage:[UIImage imageNamed:@"dramavideo"] forState:UIControlStateNormal];
-    self.commentBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
-    self.likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+    self.commentBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+     self.commentBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+     self.likeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    self.likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [self.likeBtn setTitle:model.like_count forState:UIControlStateNormal];
     [self.commentBtn setTitle:model.comment_count forState:UIControlStateNormal];
     if (model.content.count >=3) {
