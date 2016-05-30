@@ -278,9 +278,9 @@
     cell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     sendMsg.layer.cornerRadius = 4;
     request.layer.cornerRadius = 4;
-    
-    [cell.contentView addSubview:sendMsg];
-    [cell.contentView addSubview:request];
+#pragma warning 第二版加增加好友申请的功能
+    //[cell.contentView addSubview:sendMsg];
+    //[cell.contentView addSubview:request];
 }
 
 

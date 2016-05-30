@@ -12,6 +12,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "chatUsers.h"
 #import "UIImageView+WebCache.h"
+#import "Constant.h"
 
 @interface followListController()
 
@@ -30,6 +31,7 @@
     _servermanager = [ServerManager sharedInstance];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ppl"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _users = [chatUsers instance];
     [self requestData];
 }
@@ -47,6 +49,10 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -56,10 +62,26 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell* cell= [tableView dequeueReusableCellWithIdentifier:@"ppl" forIndexPath:indexPath];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[_dataSource objectAtIndex:indexPath.row] objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    
+
+    
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[_dataSource objectAtIndex:indexPath.row] objectForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
+    
+    
+    CGSize itemSize = CGSizeMake(40, 40);
+    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+    [cell.imageView.image drawInRect:imageRect];
+    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     cell.textLabel.text = [[_dataSource objectAtIndex:indexPath.row] objectForKey:@"nickname"];
+    
+    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(kMargin, CGRectGetMaxY(cell.contentView.frame)-1, kScreen_Width-2*kMargin, 0.5)];
+    [view setBackgroundColor:[UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0]];
+    [cell.contentView addSubview:view];
     return cell;
 }
 

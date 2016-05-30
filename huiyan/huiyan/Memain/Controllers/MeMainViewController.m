@@ -90,7 +90,7 @@
         case 0:
             return 1;
         case 1:
-            return 3;
+            return 4;
         case 2:
             return 1;
         case 3:
@@ -196,7 +196,7 @@
         }
         
     }else if(indexPath.section == 2){
-        WalletTableViewController *wallCon = [[WalletTableViewController alloc]init];
+        WalletTableViewController *wallCon = [[WalletTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:wallCon animated:YES];
     }else if (indexPath.section == 3){
         InterestsTableViewController* interests = [[InterestsTableViewController alloc] init];
