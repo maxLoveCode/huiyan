@@ -20,12 +20,13 @@
 
 @interface WalletTableViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 {
-    NSArray* topUpLevel;
     NSInteger select;
+    NSDictionary* basicInfo;
 }
 @property (nonatomic, strong) UICollectionView* topup;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+
 @end
 
 @implementation WalletTableViewController
@@ -37,7 +38,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"wallet"];
     
     self.title = @"我的钱包";
-    topUpLevel = @[@"6", @"15", @"30", @"50", @"100", @"300"];
+    [self getBasicInfo];
     select = 0;
 }
 
@@ -154,12 +155,22 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
             cell.textLabel.text = @"账户名称:";
-            cell.detailTextLabel.text = @"loading";
+            if (!basicInfo) {
+                
+                cell.detailTextLabel.text = @"loading";
+            }
+            else
+                cell.detailTextLabel.text = basicInfo[@"nickname"];
         }
         else
         {
             cell.textLabel.text = @"账户余额:";
-            cell.detailTextLabel.text = @"loading";
+            if (!basicInfo) {
+                
+                cell.detailTextLabel.text = @"loading";
+            }
+            else
+                cell.detailTextLabel.text = basicInfo[@"diamond"];
         }
     }
     else if (indexPath.section == 1)
@@ -212,22 +223,38 @@
         }
     }
     
-    NSString* price = topUpLevel[indexPath.item];
+    NSString* price = [[_dataSource objectAtIndex:indexPath.item] objectForKey:@"price"];
+    
+    NSLog(@"%@",price);
+    price = [NSString stringWithFormat:@"%d", (int)[price integerValue]];
     UILabel* pricelab= [[UILabel alloc] initWithFrame:CGRectMake(kMargin, kMargin, kScreen_Width/3-2*kMargin, topupheight/2-2*kMargin)];
     pricelab.textAlignment = NSTextAlignmentCenter;
     UIColor* color = COLOR_THEME;
    
     pricelab.backgroundColor = [UIColor whiteColor];
     pricelab.text =[NSString stringWithFormat:@"%@元", price];
+    pricelab.font = [UIFont boldSystemFontOfSize:18];
+    UILabel* diamond = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(pricelab.frame)-18, CGRectGetWidth(pricelab.frame), 16)];
+    
+    diamond.text = [NSString stringWithFormat:@"%@钻石", [[_dataSource objectAtIndex:indexPath.item] objectForKey:@"diamond"]];
+    diamond.textAlignment = NSTextAlignmentCenter;
+    diamond.font = kFONT12;
     if (indexPath.item == select) {
         pricelab.backgroundColor = color;
+        diamond.backgroundColor = color;
         pricelab.textColor = [UIColor whiteColor];
+        diamond.textColor = [UIColor whiteColor];
     }
+    
     pricelab.layer.borderColor = color.CGColor;
     pricelab.layer.borderWidth = 2.0f;
     pricelab.layer.cornerRadius = 10.0f;
     pricelab.layer.masksToBounds = YES;
+    
+    [pricelab addSubview:diamond];
     [item.contentView addSubview:pricelab];
+    
+    
     return item;
 }
 
@@ -239,11 +266,8 @@
 
 -(void)pay:(UIButton *)sender
 {
-//    if (!select) {
-//        return;
-//    }
-    NSString* price = topUpLevel[select];
-    NSLog(@"---%@",price);
+    NSString* price = [[_dataSource objectAtIndex:select] objectForKey:@"price"];
+    price = [NSString stringWithFormat:@"%d元", (int)[price integerValue]];
     [self aliPay:price];
 }
 
@@ -254,9 +278,6 @@
      *商户的唯一的parnter和seller。
      *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
      */
-    /*============================================================================*/
-    /*=======================需要填写商户app申请的===================================*/
-    /*============================================================================*/
     NSString *partner = @"2088021412701123";
     NSString *seller = @"zhifubao@huayinwenhua.com";
     NSString *privateKey = @"MIICXAIBAAKBgQDEcf//TAUh+3g+LyU08tLclkfp2mqzkQ5XEif23xeXuJhYsDTpzU0Ob15EB16aoUa4E5nOhcxwdnASaB18evvVQtf1ERkC2HQqjf/5fR/inNLtLlJ/nsCIaFQ+fmSPYivvbHYZ1ufpl78smPsVhHKPj9Z3E3zgvo6kAq3/QbUBlQIDAQABAoGAd4rL9saDBRfrJyQ3Zw4xROzqnCM+9UDbUh8JVNCToc9CXg30VSaKsrMQ0SMO7dggmdnLqgJ/0xwvvPPApcSNRDsIzQ+62XoN7oaaSiApDjExeTMRyz/HfR357K4EgDey9gAsh4yxz8aQ5TrIhRnqZJtNmw/QmDm1NASrBBCPN+ECQQDwqN7bDKnMklXXYzzjW4CtcRpAnOc9AaDFrxpkmLuQ2Y3itQDOBo4P+sv+3kGVrQdSmNsUzs0Nfh07YdsTOuHNAkEA0Pehro30WcTTYZLAFvoTd2lOW53/IO1nyiQ6f1Nt6CP6smcsqAvArhdaFrPU2QvUrgXYJT+FQ0ancI/3nC126QJAIm/nw+yh95YRFosq0VXsqeT/XrOVG1O6T89otXBtlqKq/P/tp42kkoDO5B+lvudNnvIkl2uoR//96ttr3+qTGQJAJdhDKtbAoyVXVvt52G9v6RdkPolttCvquRw4j+ivJfSmKXswBjsiqSTHhwcIjEptORsL2ysW2mlIV8VrBZjiSQJBANSRLnRbCM8hn6MlmjkhwEbWCRUBMg8bF1Y2jh0oXR5vBOWdAbFIzHEhw7IXt56F/AYoOi1iKvNEeIKQ3nCslNc=";
@@ -276,14 +297,14 @@
     Order *order = [[Order alloc] init];
     order.partner = partner;
     order.seller = seller;
-   // order.tradeNO = ; //订单ID（由商家自行制定）
+    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
     //    //商品标题
-  //  order.productName = [NSString stringWithFormat:@"汇演订单:%@",self.data_dic[@"ono"]];
+    order.productName = [NSString stringWithFormat:@"汇演订单:%@",order.tradeNO];
     //    //商品描述
-    order.productDescription = @"汇演充值";
+    order.productDescription = @"43:1000";
     //    //商品价格
    // order.amount = price;
-    order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
+    order.amount = [NSString stringWithFormat:@"%.2f", [price floatValue]];
     
     //#pragma mark 疑问1.
     order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/cz_alipay"; //回调URL
@@ -322,10 +343,11 @@
             {
                 NSLog(@"支付成功");
                 
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"支付成功" message:[NSString stringWithFormat:@"您获得了%@钻石！",price] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"支付成功" message:[NSString stringWithFormat:@"您已充值%@元！",price] preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                                       handler:^(UIAlertAction * action) {}];
                 [alert addAction:defaultAction];
+                [self getBasicInfo];
                 [self presentViewController:alert animated:YES completion:nil];
     
             }
@@ -353,16 +375,52 @@
     
 }
 
+#pragma mark- getDimondData
 - (void)get_recharge_diamondData{
-    NSDictionary *parameters = @{@"accesstoken":self.serverManager.accessToken};
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken};
     [self.serverManager AnimatedGET:@"get_recharge_diamond.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80090) {
-            
+            _dataSource = [[NSMutableArray alloc] init];
+            _dataSource = responseObject[@"data"];
+            [self.topup reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
 }
 
+#pragma mark- getBasicInfos
+-(void)getBasicInfo{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken, @"user_id":[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"]};
+    
+    NSLog(@"get baisc info%@", parameters);
+    [self.serverManager AnimatedGET:@"get_user_info.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        if ([responseObject[@"code"] integerValue] == 80000) {
+            basicInfo = [[NSDictionary alloc] init];
+            basicInfo = responseObject[@"data"];
+            NSLog(@"%@", basicInfo);
+            [self.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+}
+
+- (NSString *)generateTradeNO
+{
+    static int kNumber = 12;
+    NSString *sourceStr = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    NSMutableString *resultStr = [[NSMutableString alloc] init];
+    srand((int)time(0));
+    for (int i = 0; i < kNumber; i++)
+    {
+        unsigned index = rand() % [sourceStr length];
+        NSString *oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
+        [resultStr appendString:oneStr];
+    }
+    [resultStr appendString:[[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"]];
+    return resultStr;
+}
 
 @end

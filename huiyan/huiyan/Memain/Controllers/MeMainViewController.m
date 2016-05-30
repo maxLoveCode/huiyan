@@ -196,7 +196,7 @@
         }
         
     }else if(indexPath.section == 2){
-        WalletTableViewController *wallCon = [[WalletTableViewController alloc]init];
+        WalletTableViewController *wallCon = [[WalletTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:wallCon animated:YES];
     }else if (indexPath.section == 3){
         InterestsTableViewController* interests = [[InterestsTableViewController alloc] init];
