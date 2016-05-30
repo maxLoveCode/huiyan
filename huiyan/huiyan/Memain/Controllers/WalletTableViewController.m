@@ -305,9 +305,10 @@
     //    //商品价格
    // order.amount = price;
     order.amount = [NSString stringWithFormat:@"%.2f", [price floatValue]];
-    order.amount = @"0.01";
+    //order.amount = @"0.01";
     //#pragma mark 疑问1.
-    order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/cz_alipay"; //回调URL
+    NSString *strUrl = [NSString stringWithFormat:@"%@/index.php/Home/Pay/cz_alipay",kServerUrl];
+    order.notifyURL = strUrl; //回调URL
     
     //以下配置信息是默认信息,不需要更改.
     order.service = @"mobile.securitypay.pay";

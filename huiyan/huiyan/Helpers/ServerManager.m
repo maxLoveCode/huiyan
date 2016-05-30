@@ -12,7 +12,7 @@
 #ifdef DEBUG
     #define _BASE_URL @"http://139.196.32.98/huiyan"
 #else
-    #define _BASE_URL @"http://139.196.32.98/huiyan"
+    #define _BASE_URL @"http://www.mydreamovie.com/huiyan"
 #endif
 
 NSString *const b_URL = _BASE_URL;
