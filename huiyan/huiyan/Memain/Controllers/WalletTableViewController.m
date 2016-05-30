@@ -280,13 +280,13 @@
     //    //商品标题
   //  order.productName = [NSString stringWithFormat:@"汇演订单:%@",self.data_dic[@"ono"]];
     //    //商品描述
-    order.productDescription = @"描述";
+    order.productDescription = @"汇演充值";
     //    //商品价格
    // order.amount = price;
     order.amount = [NSString stringWithFormat:@"%.2f", 0.01];
     
     //#pragma mark 疑问1.
-    order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/opera_alipay"; //回调URL
+    order.notifyURL =  @"http://139.196.32.98/huiyan/api1_0/index.php/Home/Pay/cz_alipay"; //回调URL
     
     //以下配置信息是默认信息,不需要更改.
     order.service = @"mobile.securitypay.pay";

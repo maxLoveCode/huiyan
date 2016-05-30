@@ -45,8 +45,8 @@
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.title_arr = @[@"我的戏票",@"我的活动",@"我的邀约",@"我的兴趣",@"绑定手机号",@"设置"];
-    self.image_arr = @[@"ticket",@"training",@"training",@"interest",@"phone",@"set"];
+    self.title_arr = @[@"我的戏票",@"我的活动",@"我的邀约",@"我的钱包",@"我的兴趣",@"绑定手机号",@"设置"];
+    self.image_arr = @[@"ticket",@"training",@"training",@"wallet",@"interest",@"phone",@"set"];
 
     // Do any additional setup after loading the view.
 }
@@ -90,7 +90,7 @@
         case 0:
             return 1;
         case 1:
-            return 3;
+            return 4;
         case 2:
             return 1;
         default:

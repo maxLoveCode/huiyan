@@ -48,6 +48,7 @@
     [self addChildViewController:self.list];
     [self.list.view setFrame:CGRectMake(0, _height, kScreen_Width, kScreen_Height-_height)];
     [self.view addSubview:self.list.view];
+    self.tableView.scrollEnabled = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
