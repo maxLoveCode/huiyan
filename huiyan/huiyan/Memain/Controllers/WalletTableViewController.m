@@ -267,7 +267,7 @@
 -(void)pay:(UIButton *)sender
 {
     NSString* price = [[_dataSource objectAtIndex:select] objectForKey:@"price"];
-    price = [NSString stringWithFormat:@"%d元", (int)[price integerValue]];
+    //price = [NSString stringWithFormat:@"%d元", (int)[price integerValue]];
     [self aliPay:price];
 }
 
