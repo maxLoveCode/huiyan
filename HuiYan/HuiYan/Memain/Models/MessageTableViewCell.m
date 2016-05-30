@@ -25,7 +25,8 @@
 {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.font = kFONT18;
+        //_title.font = kFONT18;
+        _title.font = [UIFont boldSystemFontOfSize:18];
     }
     return _title;
 }
@@ -35,7 +36,7 @@
     if (!_content) {
         _content = [[UILabel alloc] init];
         _content.font = kFONT14;
-        _content.textColor = [UIColor darkTextColor];
+        _content.textColor = [UIColor darkGrayColor];
         _content.numberOfLines = 0;
     }
     return _content;
@@ -51,7 +52,7 @@
 {
     [super layoutSubviews];
     [self.title setFrame:CGRectMake(kMargin, kMargin, kScreen_Width, 18)];
-    [self.content setFrame:CGRectMake(kMargin, kMargin+18, kScreen_Width, 100-CGRectGetMaxY(self.title.frame)+20)];
+    [self.content setFrame:CGRectMake(kMargin, kMargin+16, kScreen_Width-2*kMargin, 100-CGRectGetMaxY(self.title.frame)+20)];
 }
 
 -(void)setCellContent:(Message*)msg
