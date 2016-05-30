@@ -11,6 +11,7 @@
 #import "UITabBarController+ShowHideBar.h"
 #import <RongIMKit/RongIMKit.h>
 #import "chatUsers.h"
+#import "UIImageView+WebCache.h"
 
 @interface followListController()
 
@@ -55,6 +56,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell* cell= [tableView dequeueReusableCellWithIdentifier:@"ppl" forIndexPath:indexPath];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[_dataSource objectAtIndex:indexPath.row] objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
     cell.textLabel.text = [[_dataSource objectAtIndex:indexPath.row] objectForKey:@"nickname"];
     return cell;
 }
