@@ -205,6 +205,8 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(kScreen_Width - 100, 0, 100, 35);
         [btn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"dramavideo"] forState:UIControlStateNormal];
+        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
         [btn setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)self.dataSource.count] forState:UIControlStateNormal];
         [headView addSubview:btn];
         return headView;
@@ -245,6 +247,8 @@
                 likeBtn.frame = CGRectMake(15, CGRectGetMaxY(lineLab.frame), 100, 35);
                 [cell.contentView addSubview:likeBtn];
                 [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal];
+                likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+                [likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
                 likeBtn.tag = 1012;
             }
             [likeBtn setTitle:self.starVideo.like_count forState:UIControlStateNormal];
@@ -289,6 +293,8 @@
                 likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                  [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal];
                 likeBtn.frame = CGRectMake(15, CGRectGetMaxY(lineLab.frame), 100, 35);
+                likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+                [likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
                 [cell.contentView addSubview:likeBtn];
                 likeBtn.tag = 1012;
             }
@@ -327,7 +333,8 @@
             if (!likeBtn) {
                 likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 likeBtn.frame = CGRectMake(15, CGRectGetMaxY(lineLab.frame), 100, 35);
-                 [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal];
+                [likeBtn setTitleColor:COLOR_WithHex(0x565656) forState:UIControlStateNormal]; likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+                [likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
                 [cell.contentView addSubview:likeBtn];
                 likeBtn.tag = 1012;
             }

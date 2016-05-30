@@ -119,6 +119,10 @@
 - (void)setContent:(StarVideo *)model{
     self.timeLab.text = model.createtime;
     self.titleLab.text = model.title;
+    [self.likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
+    [self.commentBtn setImage:[UIImage imageNamed:@"dramavideo"] forState:UIControlStateNormal];
+    self.commentBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+    self.likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
     [self.likeBtn setTitle:model.like_count forState:UIControlStateNormal];
     [self.commentBtn setTitle:model.comment_count forState:UIControlStateNormal];
     if (model.content.count >=3) {

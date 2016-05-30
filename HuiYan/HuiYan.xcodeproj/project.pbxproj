@@ -339,6 +339,8 @@
 		59D4AB851CF46AE2002545A9 /* ticket_detail_time@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB7F1CF46AE2002545A9 /* ticket_detail_time@3x.png */; };
 		59D4AB861CF46AE2002545A9 /* ticket_price.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB801CF46AE2002545A9 /* ticket_price.png */; };
 		59D4AB871CF46AE2002545A9 /* ticket_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4AB811CF46AE2002545A9 /* ticket_time.png */; };
+		59E079501CFB47850064AB9C /* dramavideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 59E0794E1CFB47850064AB9C /* dramavideo.png */; };
+		59E079511CFB47850064AB9C /* dramazan.png in Resources */ = {isa = PBXBuildFile; fileRef = 59E0794F1CFB47850064AB9C /* dramazan.png */; };
 		59EF56701CF85AE400308F78 /* information@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59EF566A1CF85AE300308F78 /* information@2x.png */; };
 		59EF56711CF85AE400308F78 /* information@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59EF566B1CF85AE400308F78 /* information@3x.png */; };
 		59EF56771CF85C4400308F78 /* imgetype@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59EF56741CF85C4400308F78 /* imgetype@2x.png */; };
@@ -938,6 +940,8 @@
 		59D4AB7F1CF46AE2002545A9 /* ticket_detail_time@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ticket_detail_time@3x.png"; path = "HuiYan/ImageSource/ticket_detail_time@3x.png"; sourceTree = SOURCE_ROOT; };
 		59D4AB801CF46AE2002545A9 /* ticket_price.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticket_price.png; path = HuiYan/ImageSource/ticket_price.png; sourceTree = SOURCE_ROOT; };
 		59D4AB811CF46AE2002545A9 /* ticket_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticket_time.png; path = HuiYan/ImageSource/ticket_time.png; sourceTree = SOURCE_ROOT; };
+		59E0794E1CFB47850064AB9C /* dramavideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dramavideo.png; path = HuiYan/ImageSource/dramavideo.png; sourceTree = SOURCE_ROOT; };
+		59E0794F1CFB47850064AB9C /* dramazan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dramazan.png; path = HuiYan/ImageSource/dramazan.png; sourceTree = SOURCE_ROOT; };
 		59EF566A1CF85AE300308F78 /* information@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "information@2x.png"; path = "HuiYan/ImageSource/information@2x.png"; sourceTree = SOURCE_ROOT; };
 		59EF566B1CF85AE400308F78 /* information@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "information@3x.png"; path = "HuiYan/ImageSource/information@3x.png"; sourceTree = SOURCE_ROOT; };
 		59EF56741CF85C4400308F78 /* imgetype@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "imgetype@2x.png"; path = "HuiYan/ImageSource/imgetype@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -1555,6 +1559,8 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				59E0794E1CFB47850064AB9C /* dramavideo.png */,
+				59E0794F1CFB47850064AB9C /* dramazan.png */,
 				59EF567A1CF85E7800308F78 /* texttype@3x.png */,
 				59EF567B1CF85E7800308F78 /* videotype@2x.png */,
 				59EF567C1CF85E7800308F78 /* videotype@3x.png */,
@@ -2074,7 +2080,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2127,6 +2133,7 @@
 				55C41E251CE4559A0055A58B /* successful@2x.png in Resources */,
 				55A43E771CEB03DF00BB73EF /* NewHomePageDetailCellTableViewCell.xib in Resources */,
 				5578A8351CEEF32200BD3061 /* cancel.png in Resources */,
+				59E079501CFB47850064AB9C /* dramavideo.png in Resources */,
 				5570012F1CCF54AE003EB02F /* back_arrow@2x.png in Resources */,
 				554B97BC1CED5E0B00E471CB /* PersonTrainingCell.xib in Resources */,
 				55C41E271CE4559A0055A58B /* system@3x.png in Resources */,
@@ -2220,6 +2227,7 @@
 				59D4AB841CF46AE2002545A9 /* ticket_detail_price@3x.png in Resources */,
 				59EF56781CF85C4400308F78 /* imgetype@3x.png in Resources */,
 				5578A8C71CF083EB00BD3061 /* service.png in Resources */,
+				59E079511CFB47850064AB9C /* dramazan.png in Resources */,
 				550BFA231CBB2AF000E2E9DE /* unlock-nor@2x.png in Resources */,
 				5578A8B21CF06ED400BD3061 /* foundSel@2x.png in Resources */,
 				5578A8381CEEF32200BD3061 /* show.png in Resources */,
@@ -2769,7 +2777,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

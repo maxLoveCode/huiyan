@@ -71,7 +71,8 @@
 - (UIButton *)number_mesBtn{
     if (!_number_mesBtn) {
         self.number_mesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.number_mesBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.number_mesBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        self.number_mesBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
         self.number_mesBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _number_mesBtn;
@@ -80,7 +81,8 @@
 - (UIButton *)number_likeBtn{
     if (!_number_likeBtn) {
         self.number_likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.number_likeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.number_likeBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        self.number_likeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
         self.number_likeBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _number_likeBtn;
@@ -126,8 +128,8 @@
     [self.picView sd_setImageWithURL:[NSURL URLWithString:pic] placeholderImage:[UIImage imageNamed:@"bg_view"]];
     self.timeLabel.text = starVideo.createtime;
     self.titleLabel.text = starVideo.title;
-    [self.number_likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-    [self.number_mesBtn setImage:[UIImage imageNamed:@"information"] forState:UIControlStateNormal];
+    [self.number_likeBtn setImage:[UIImage imageNamed:@"dramazan"] forState:UIControlStateNormal];
+    [self.number_mesBtn setImage:[UIImage imageNamed:@"dramavideo"] forState:UIControlStateNormal];
     [self.number_likeBtn setTitle:starVideo.like_count forState:UIControlStateNormal];
     [self.number_mesBtn setTitle:starVideo.comment_count forState:UIControlStateNormal];
         self.playBtn.userInteractionEnabled = YES;

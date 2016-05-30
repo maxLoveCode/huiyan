@@ -27,9 +27,6 @@
         imageView.layer.cornerRadius = 21;
     }
     [self addSubview:self.lineLab];
-    UIColor *color = COLOR_THEME;
-    [self.videoBtn setTitleColor:color forState:UIControlStateNormal];
-    [self.descriptionBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 - (UILabel *)lineLab{

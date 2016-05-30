@@ -19,7 +19,7 @@
 #import "DramaStarInvitionViewController.h"
 #import "DynamicDetailViewController.h"
 #import "Tools.h"
-#define HeadHight 274
+#define HeadHight 230
 #define TailHeight kScreen_Height  - 44 - 64 - 210
 #define kVideoCellHeight 244.0
 // 头部视图的高度
@@ -38,6 +38,9 @@
 @property (nonatomic, strong) UIButton *videoBtn;
 @property (nonatomic, strong) UIButton *desBtn;
 @property (nonatomic, strong) UIView *desView;
+
+@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) NSDate* target;
 @end
 
 @implementation DramaStarDetailViewController
@@ -52,12 +55,13 @@
     
     [self get_actor_dongtaiData:@"0"];
   
-    
+    _count =0;
 }
 
 - (UIView *)tailView{
     if (!_tailView ) {
         self.tailView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
+        self.tailView.backgroundColor = [UIColor whiteColor];
         UIButton *inviteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 3 - 2, 48);
         [inviteBtn setTitle:@"邀约" forState:UIControlStateNormal];
@@ -91,8 +95,8 @@
 
 - (UIScrollView *)downScrollow{
     if (!_downScrollow) {
-        self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, TailHeight)];
-        self.downScrollow.contentSize = CGSizeMake(kScreen_Width * 2, TailHeight);
+        self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 44)];
+        self.downScrollow.contentSize = CGSizeMake(kScreen_Width * 2, kScreen_Height);
         self.downScrollow.scrollEnabled = NO;
         [self.downScrollow addSubview:self.videoTable];
         [self.downScrollow addSubview:self.desView];
@@ -192,7 +196,7 @@
 -(UITableView *)videoTable
 {
     if (!_videoTable) {
-        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, TailHeight ) style:UITableViewStyleGrouped];
+        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 44) style:UITableViewStyleGrouped];
         self.videoTable.scrollEnabled = NO;
          self.videoTable.delegate = self;
          self.videoTable.dataSource = self;
@@ -221,6 +225,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView == self.mainTable) {
+        if (section == 1) {
+            return 32;
+        }
+        return 0.01;
+    }
     if (tableView == self.videoTable) {
         return 10;
     }
@@ -253,6 +263,28 @@
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (tableView == self.mainTable) {
+        UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 32)];
+        headView .backgroundColor = [UIColor whiteColor];
+        UIButton *videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        videoBtn.frame = CGRectMake(0, 0, kScreen_Width / 2, 32);
+        [headView addSubview:videoBtn];
+        UIButton *desBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        desBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2, 32);
+        [headView addSubview:desBtn];
+        UIColor *color = COLOR_THEME;
+        [videoBtn setTitleColor:color forState:UIControlStateNormal];
+        [desBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        videoBtn.tag = 110;
+        desBtn.tag = 112;
+        [videoBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
+        [desBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
+        return headView;
+    }
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.mainTable) {
         if (indexPath.section == 0) {
@@ -276,12 +308,7 @@
                     [weakref focus:@"follow"];
                 }
             };
-            self.videoBtn = cell.videoBtn;
-            self.desBtn = cell.descriptionBtn;
-            cell.videoBtn.tag = 110;
-            cell.descriptionBtn.tag = 112;
-            [cell.videoBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.descriptionBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
+    
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else{
@@ -421,6 +448,7 @@
         [self.videoTable setScrollEnabled:YES];
     } else {
         alpha = 0;
+        [self.videoTable setScrollEnabled:NO];
      
     }
          UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:alpha]];
@@ -442,10 +470,9 @@
 - (void)sendFlower:(UIButton *)sender{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"follow_id":kOBJECTDEFAULTS(@"user_id")};
     [self.serverManager AnimatedPOST:@"send_actor_flower.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"%@, %@", responseObject[@"msg"],kOBJECTDEFAULTS(@"user_id"));
         if ([responseObject[@"code"] integerValue] == 50040) {
             //[self presentViewController:[Tools showAlert:@"送花成功"] animated:YES completion:nil];
-            NSLog(@"anim");
+            [self combo:0];
             [self flowerAnimates];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -479,7 +506,8 @@
 }
 
 -(void)flowerAnimates{
-    UIImageView *imageViewForAnimation = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1.png"]];
+    UIImageView *imageViewForAnimation = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flower"]];
+    imageViewForAnimation.tag = 8201;
     [self.view addSubview:imageViewForAnimation];
     [imageViewForAnimation setFrame:CGRectMake(kScreen_Width/2-44, kScreen_Height-44, 44, 44)];
     imageViewForAnimation.alpha = 1.0f;
@@ -495,7 +523,7 @@
     
     // Set up fade out effect
     CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    [fadeOutAnimation setToValue:[NSNumber numberWithFloat:0.3]];
+    [fadeOutAnimation setToValue:[NSNumber numberWithFloat:0.1]];
     fadeOutAnimation.fillMode = kCAFillModeForwards;
     fadeOutAnimation.removedOnCompletion = NO;
     
@@ -516,9 +544,14 @@
     //CGPoint endPoint = CGPointMake( 320-40.0f, 480.0f);
     CGMutablePathRef curvedPath = CGPathCreateMutable();
     CGPathMoveToPoint(curvedPath, NULL, viewOrigin.x, viewOrigin.y);
-    CGPoint pt = CGPointMake(kScreen_Width/2+50, kScreen_Height/2-50);
-    CGPathAddCurveToPoint(curvedPath, NULL, <#CGFloat cp1x#>, <#CGFloat cp1y#>, <#CGFloat cp2x#>, <#CGFloat cp2y#>, <#CGFloat x#>, <#CGFloat y#>)
-    CGPathAddCurveToPoint(curvedPath, NULL, endPoint.x, viewOrigin.y, endPoint.x, viewOrigin.y, endPoint.x, endPoint.y);
+    int value = (arc4random() % 60) + 1;
+    int dir = (value%2 == 0)?1:-1;
+    CGPoint pt = CGPointMake(kScreen_Width/2+value*dir, kScreen_Height/2-value*dir);
+    
+    int value2 = (arc4random() % 20) + 1;
+    int dir2 = (value%2 == 0)?1:-1;
+    CGPathAddCurveToPoint(curvedPath, NULL, viewOrigin.x, viewOrigin.y, pt.x, pt.y, endPoint.x+value2*dir2, endPoint.y+value2*dir2);
+    //CGPathAddCurveToPoint(curvedPath, NULL, endPoint.x, viewOrigin.y, endPoint.x, viewOrigin.y, endPoint.x, endPoint.y);
     pathAnimation.path = curvedPath;
     CGPathRelease(curvedPath);
     
@@ -533,5 +566,81 @@
     [imageViewForAnimation.layer addAnimation:group forKey:@"savingAnimation"];
     
 }
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    UIView* view = [self.view viewWithTag:8201];
+    [view removeFromSuperview];
+}
+
+-(void)combo:(NSInteger*) counts
+{
+    if (!_target) {
+        self.target = [NSDate date];
+    }
+    else
+    {
+        NSTimeInterval sec = [[NSDate date] timeIntervalSinceDate:self.target];
+        if (sec <2) {
+            self.target = [NSDate date];
+            _count++;
+            NSLog(@"%ld",_count);
+            [self animateCombos];
+        }
+        else
+        {
+            self.target = nil;
+            _count = 0;
+        }
+    }
+}
+
+-(void)animateCombos
+{
+    UILabel* view = [self.view viewWithTag:3131];
+    UIColor* theme = COLOR_THEME
+    if (!view) {
+        view.alpha = 1;
+        UILabel* view = [[UILabel alloc] initWithFrame:CGRectMake(kScreen_Width/3*2, kScreen_Height/2+100, kScreen_Width/3, 60)];
+        view.tag = 3131;
+        
+        view.attributedText=[[NSAttributedString alloc]
+                                   initWithString:[NSString stringWithFormat:@"x %d", (int)_count+1]
+                                   attributes:@{
+                                                NSStrokeWidthAttributeName: @-5.0,
+                                                NSStrokeColorAttributeName:theme,
+                                                NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                NSFontAttributeName: kFONT(50)
+                                                }
+                                   ];
+        
+        [self.view addSubview:view];
+        [UIView animateWithDuration:1.0 animations:^{
+            view.alpha = 0;
+        }completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }
+    else
+    {
+        view.alpha = 1;
+
+    view.attributedText=[[NSAttributedString alloc]
+                         initWithString:[NSString stringWithFormat:@"x %d", (int)_count+1]
+                         attributes:@{
+                                      NSStrokeWidthAttributeName: @-5.0,
+                                      NSStrokeColorAttributeName:theme,
+                                      NSForegroundColorAttributeName:[UIColor whiteColor],
+                                      NSFontAttributeName: kFONT(50)
+                                      }
+                         ];
+    [UIView animateWithDuration:1.0 animations:^{
+        view.alpha = 0;
+    }completion:^(BOOL finished) {
+        [view removeFromSuperview];
+    }];
+    }
+}
+
 
 @end
