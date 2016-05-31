@@ -76,8 +76,6 @@
     NSString *user_id = [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
     if (user_id) {
         NSSet *set = [[NSSet alloc] initWithObjects:@"ios",nil];
-        [JPUSHService setTags:set aliasInbackground:user_id];
-
         [JPUSHService setTags:set alias:user_id fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
             NSString *callbackString =
             [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,

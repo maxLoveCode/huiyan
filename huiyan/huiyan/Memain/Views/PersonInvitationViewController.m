@@ -15,6 +15,7 @@
 #import <MJRefresh.h>
 #import "ArticalViewController.h"
 #import "GifRefresher.h"
+#import "InvitationDetailViewController.h"
 @interface PersonInvitationViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -69,13 +70,13 @@ static int number_page = 0;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
+   // [self.tabBarController setHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
      [self.tabBarController setHidden:YES];
-     self.navigationController.navigationBar.translucent = YES;
+    // self.navigationController.navigationBar.translucent = YES;
 }
 
 #pragma mark -- TableViewDelegate
@@ -143,10 +144,9 @@ static int number_page = 0;
 }
 
 - (void)lookMore:(UIButton *)sender{
-    ArticalViewController *artCon = [[ArticalViewController alloc]init];
-    Invitation *model = self.dataSource[sender.tag - 50];
-    artCon.originData = model.content;
-    [self.navigationController pushViewController:artCon animated:NO];
+    InvitationDetailViewController *invitationCon = [[InvitationDetailViewController alloc]init];
+    invitationCon.invitation = self.dataSource[sender.tag - 50];
+    [self.navigationController pushViewController:invitationCon animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
