@@ -46,6 +46,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
      [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    [self updateLocalData];
     //友盟
     [UMSocialData setAppKey:@"57189b72e0f55ad2c30015b6"];
     [UMSocialWechatHandler setWXAppId:@"wx2201898143065bfd" appSecret:@"b38e8146284e786e41402ddcb0b93539" url:@"http://www.umeng.com/social"];
@@ -304,6 +306,18 @@ fetchCompletionHandler:
     NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
     NSString *str = [NSPropertyListSerialization propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
     return str;
+}
+
+#pragma mark--version control
+-(void)updateLocalData
+{
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    NSString* build = [userdefault objectForKey:@"version"];
+    if (![build isEqualToString:version] || !build || [build isEqualToString:@""]) {
+        [userdefault removeObjectForKey:@"user_id"];
+        [userdefault removeObjectForKey:RongIdentity];
+    }
+    [userdefault setObject:version forKey:@"version"];
 }
 
 @end
