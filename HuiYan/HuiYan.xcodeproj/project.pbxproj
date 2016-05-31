@@ -61,6 +61,7 @@
 		25D965521CF3E28900B49A9B /* ForgotPassTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D965511CF3E28900B49A9B /* ForgotPassTableViewController.m */; };
 		25DCB1191CFBDC3E00F4A63E /* followListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DCB1181CFBDC3E00F4A63E /* followListController.m */; };
 		25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E07DB71CB65D180015AD73 /* ArticalViewController.m */; };
+		55067FE71CFD24CD00E574B7 /* InvitationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55067FE61CFD24CD00E574B7 /* InvitationDetailViewController.m */; };
 		550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */; };
 		550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9771CB8ED6600E2E9DE /* ZFPlayerSingleton.m */; };
 		550BF97E1CB8ED6600E2E9DE /* ZFPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9791CB8ED6600E2E9DE /* ZFPlayerControlView.m */; };
@@ -466,6 +467,8 @@
 		25E07DB71CB65D180015AD73 /* ArticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticalViewController.m; path = HuiYan/Homepage/Controllers/ArticalViewController.m; sourceTree = SOURCE_ROOT; };
 		2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.release.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.release.xcconfig"; sourceTree = "<group>"; };
 		3500AD8F3B45BD551DB23170 /* Pods-huiyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.debug.xcconfig"; sourceTree = "<group>"; };
+		55067FE51CFD24CD00E574B7 /* InvitationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationDetailViewController.h; sourceTree = "<group>"; };
+		55067FE61CFD24CD00E574B7 /* InvitationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationDetailViewController.m; sourceTree = "<group>"; };
 		550BF9731CB8ED5C00E2E9DE /* ZFPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayer.h; sourceTree = "<group>"; };
 		550BF9741CB8ED6600E2E9DE /* ZFPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerView.h; sourceTree = "<group>"; };
 		550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerView.m; sourceTree = "<group>"; };
@@ -1861,6 +1864,8 @@
 				554B97C41CEDB6F800E471CB /* SexTableViewController.m */,
 				554B97C61CEE9A4500E471CB /* PersonInvitationViewController.h */,
 				554B97C71CEE9A4500E471CB /* PersonInvitationViewController.m */,
+				55067FE51CFD24CD00E574B7 /* InvitationDetailViewController.h */,
+				55067FE61CFD24CD00E574B7 /* InvitationDetailViewController.m */,
 				59F6AB1E1CF01F040000DFB0 /* InterestsTableViewController.h */,
 				59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */,
 				5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */,
@@ -2512,6 +2517,7 @@
 				5556CC151CD89DD700CCD668 /* LookTicketCell.m in Sources */,
 				558621731CE49F92007D5049 /* PersonNormalCell.m in Sources */,
 				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
+				55067FE71CFD24CD00E574B7 /* InvitationDetailViewController.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
 				59B23C6A1CEEF23100F2EB21 /* MessageTableViewCell.m in Sources */,
 				554B97C21CEDA25B00E471CB /* EditPersonMessageViewController.m in Sources */,
@@ -2716,7 +2722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5ece549-1a3a-4efc-875f-6dcea5b73b51";
 			};
 			name = Debug;
 		};
@@ -2764,7 +2770,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5ece549-1a3a-4efc-875f-6dcea5b73b51";
 			};
 			name = Release;
 		};

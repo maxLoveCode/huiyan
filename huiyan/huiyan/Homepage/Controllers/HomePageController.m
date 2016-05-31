@@ -395,20 +395,22 @@
             image_pic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width /
                                                                      3/ 2 - menuPicWidth/2, 28, menuPicWidth ,menuPicWidth)];
            // [image_pic sd_setImageWithURL:[NSURL URLWithString:self.findIcon[indexPath.item +1]]];
-            image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
+          
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
         }
+          image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
         UILabel *title_lab = [cell viewWithTag:501];
         if (!title_lab) {
             title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame)+5, kScreen_Width / 3, 16)];
             title_lab.font = kFONT13;
             title_lab.textAlignment = NSTextAlignmentCenter;
             title_lab.textColor = COLOR_WithHex(0x020202);
-            title_lab.text = title[indexPath.item];
+           
             [cell.contentView addSubview:title_lab];
                         title_lab.tag = 501;
         }
+         title_lab.text = title[indexPath.item];
     UILabel *line_lab = [cell viewWithTag:502];
     if (!line_lab) {
     
