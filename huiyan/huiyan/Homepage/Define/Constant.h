@@ -44,7 +44,14 @@
 
 #define KALERTVIEW(msg) [[[UIAlertView alloc] initWithTitle:@"温馨提示" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show]
 
-#define RongIMKey @"bmdehs6pd30zs"
+#ifdef DEBUG
+    #define RongIMKey @"bmdehs6pd30zs"
+#else
+    #define RongIMKey @"pkfcgjstfl708"
+#endif
+
 #define RongIdentity @"chatToken"
+
+#define version @"1.1"
 
 #endif /* Constant_h */

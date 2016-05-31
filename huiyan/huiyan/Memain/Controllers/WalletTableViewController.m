@@ -27,7 +27,7 @@
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
-@end
+@end            
 
 @implementation WalletTableViewController
 
