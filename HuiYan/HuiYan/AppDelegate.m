@@ -304,11 +304,11 @@ fetchCompletionHandler:
 {
     NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
     NSString* builds = [userdefault objectForKey:@"version"];
-    if (![builds isEqualToString:version] || !builds || [builds isEqualToString:@""]) {
+    if (![builds isEqualToString:Build] || !builds || [builds isEqualToString:@""]) {
         [userdefault removeObjectForKey:@"user_id"];
         [userdefault removeObjectForKey:RongIdentity];
     }
-    [userdefault setObject:version forKey:@"version"];
+    [userdefault setObject:Build forKey:@"version"];
 }
 
 @end

@@ -53,6 +53,6 @@
 
 #define RongIdentity @"chatToken"
 
-#define build @"1.1"
+#define Build @"1.1"
 
 #endif /* Constant_h */
