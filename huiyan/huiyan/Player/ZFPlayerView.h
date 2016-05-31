@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "ZFPlayerControlView.h"
 // 返回按钮的block
 typedef void(^ZFPlayerGoBackBlock)(void);
 // playerLayer的填充模式（默认：等比例填充，直到一个维度到达区域边界）
@@ -37,6 +38,8 @@ typedef NS_ENUM(NSInteger, ZFPlayerLayerGravity) {
 @property (nonatomic, strong) NSURL                *videoURL;
 /** 返回按钮Block */
 @property (nonatomic, copy  ) ZFPlayerGoBackBlock  goBackBlock;
+/** 控制层View */
+@property (nonatomic, strong) ZFPlayerControlView *controlView;
 /** 设置playerLayer的填充模式 */
 @property (nonatomic, assign) ZFPlayerLayerGravity playerLayerGravity;
 /** 是否有下载功能(默认是关闭) */

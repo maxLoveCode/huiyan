@@ -44,16 +44,13 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
-       NSForegroundColorAttributeName:[UIColor whiteColor]}];
+  
 
     self.serverManager = [ServerManager sharedInstance];
-    [self.view addSubview:self.head_view];
     [self get_actor_cateData];
     [self get_actor_bannerData];
     [self get_actor_listData:@"0" page:@"0"];
+    [self.view addSubview:self.head_view];
     [self.view addSubview:self.dramaStarTableView];
    // self.automaticallyAdjustsScrollViewInsets  = NO;
     // Do any additional setup after loading the view.
@@ -63,18 +60,28 @@
 {
     [super viewDidAppear:animated];
     _dramaStarTableView.alpha = 0;
-    
+    self.navigationController.navigationBar.translucent = NO;
+
 
     [self.view setBackgroundColor:[UIColor blackColor]];
     [UIView animateWithDuration:1 animations:^{
         _dramaStarTableView.alpha = 1;
         [self.dramaStarTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     }];
+    
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (self.tabBarController.tabBar.hidden == YES) {
+        self.tabBarController.tabBar.hidden = NO;
+    }
     [self.tabBarController setHidden:NO];
+    self.navigationController.navigationBar.barTintColor = COLOR_THEME;
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 - (MCSwipeMenu *)head_view{
@@ -87,13 +94,13 @@
 
 - (UITableView *)dramaStarTableView{
     if (!_dramaStarTableView) {
-        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu + 20 , kScreen_Width, kScreen_Height - 44 - 64) style:UITableViewStyleGrouped];
+        self.dramaStarTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSwipeMenu, kScreen_Width, kScreen_Height - 48 - 64- kSwipeMenu) style:UITableViewStyleGrouped];
         self.dramaStarTableView.delegate = self;
         self.dramaStarTableView.dataSource = self;
         self.dramaStarTableView.separatorStyle = UITableViewCellAccessoryNone;
         [self.dramaStarTableView registerClass:[DramaStarTableViewCell class] forCellReuseIdentifier:@"dramaStar"];
         [self.dramaStarTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"normal"];
-        [self.dramaStarTableView setBackgroundColor:[UIColor blackColor]];
+    //    [self.dramaStarTableView setBackgroundColor:[UIColor blackColor]];
     }
     return _dramaStarTableView;
 }

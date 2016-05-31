@@ -15,7 +15,6 @@
 #import "ServerManager.h"
 #import "StarVideo.h"
 #import <Masonry.h>
-#import "CoolNavi.h"
 #define headCell 180
 #define menuCell 32
 static CGFloat const kWindowHeight = 244.0f;
@@ -100,7 +99,6 @@ static CGFloat const kWindowHeight = 244.0f;
         self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height);
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
-        [_mainTable registerClass:[CoolNavi class] forCellReuseIdentifier:@"head"];
         [_mainTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"main"];
         _mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
@@ -149,58 +147,58 @@ static CGFloat const kWindowHeight = 244.0f;
     return 0.01;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (tableView == _mainTable) {
-        if (indexPath.section == 0) {
-            CoolNavi *cell = [tableView dequeueReusableCellWithIdentifier:@"head" forIndexPath:indexPath];
-            [cell setContent:self.drama];
-             self.focus_btn = cell.focus_btn;
-                if ([self.drama.is_fans integerValue] == 1) {
-                    [cell.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
-                    [cell.focus_btn setBackgroundColor:[UIColor grayColor]];
-                }else{
-                    [cell.focus_btn setTitle:@"+  关注" forState:UIControlStateNormal];
-                    UIColor *color = COLOR_THEME;
-                    [cell.focus_btn setBackgroundColor:color];
-                }
-                __weak StarDetailViewController *weakref = self;
-                cell.focus = ^(UIButton *btn){
-                    if ([btn.titleLabel.text isEqualToString:@"取消关注"] ) {
-                        [weakref focus:@"cancel"];
-                    }else{
-                        [weakref focus:@"follow"];
-                    }
-                };
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
-        }
-       StarVideoTableViewCell * cell = [_mainTable dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
-            StarVideo  *model = self.dataSource[indexPath.section];
-            [cell setContent:model];
-            NSURL *videoURL = [NSURL URLWithString:model.movie];
-            __block NSIndexPath *weakIndexPath = indexPath;
-            __block StarVideoTableViewCell *weakCell = cell;
-            __weak typeof(self) weakSelf = self;
-            cell.playBlock = ^(UIButton *btn){
-                weakSelf.playerView = [ZFPlayerView sharedPlayerView];
-                [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
-                [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
-                weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
-                [weakSelf write_play_recordData:model.ID];
-                
-            };
-
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-        
-    }
-    else
-    {
-        StarVideoTableViewCell* cell = [_videoTable dequeueReusableCellWithIdentifier:@"video" forIndexPath:indexPath];
-        return cell;
-    }
-}
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (tableView == _mainTable) {
+//        if (indexPath.section == 0) {
+//            CoolNavi *cell = [tableView dequeueReusableCellWithIdentifier:@"head" forIndexPath:indexPath];
+//            [cell setContent:self.drama];
+//             self.focus_btn = cell.focus_btn;
+//                if ([self.drama.is_fans integerValue] == 1) {
+//                    [cell.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
+//                    [cell.focus_btn setBackgroundColor:[UIColor grayColor]];
+//                }else{
+//                    [cell.focus_btn setTitle:@"+  关注" forState:UIControlStateNormal];
+//                    UIColor *color = COLOR_THEME;
+//                    [cell.focus_btn setBackgroundColor:color];
+//                }
+//                __weak StarDetailViewController *weakref = self;
+//                cell.focus = ^(UIButton *btn){
+//                    if ([btn.titleLabel.text isEqualToString:@"取消关注"] ) {
+//                        [weakref focus:@"cancel"];
+//                    }else{
+//                        [weakref focus:@"follow"];
+//                    }
+//                };
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            return cell;
+//        }
+//       StarVideoTableViewCell * cell = [_mainTable dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
+//            StarVideo  *model = self.dataSource[indexPath.section];
+//            [cell setContent:model];
+//            NSURL *videoURL = [NSURL URLWithString:model.movie];
+//            __block NSIndexPath *weakIndexPath = indexPath;
+//            __block StarVideoTableViewCell *weakCell = cell;
+//            __weak typeof(self) weakSelf = self;
+//            cell.playBlock = ^(UIButton *btn){
+//                weakSelf.playerView = [ZFPlayerView sharedPlayerView];
+//                [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
+//                [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
+//                weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
+//                [weakSelf write_play_recordData:model.ID];
+//                
+//            };
+//
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        return cell;
+//        
+//    }
+//    else
+//    {
+//        StarVideoTableViewCell* cell = [_videoTable dequeueReusableCellWithIdentifier:@"video" forIndexPath:indexPath];
+//        return cell;
+//    }
+//}
 
 
 - (void)get_actor_movieData:(NSString *)page{

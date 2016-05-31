@@ -14,6 +14,9 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "MQPayClient.h"
+//百度统计
+#import "BaiduMobstat.h"
+#import "UMMobClick/MobClick.h"
 //友盟
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
@@ -25,6 +28,8 @@
 #import "JPUSHService.h"//极光推送
 #import <RongIMKit/RongIMKit.h>
 #import "LoginViewController.h"
+#import "chatUsers.h"
+
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -49,7 +54,9 @@
     //高德
     [MAMapServices sharedServices].apiKey = @"6858031d8908c18c7724109124d4125b";
     [AMapLocationServices sharedServices].apiKey = @"6858031d8908c18c7724109124d4125b";
-    
+    //百度统计
+    [self startBaiduMobileStat];
+    [self umengTrack];
     //Required
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
@@ -69,11 +76,13 @@
     NSString *user_id = [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
     if (user_id) {
         NSSet *set = [[NSSet alloc] initWithObjects:@"ios",nil];
+        [JPUSHService setTags:set aliasInbackground:user_id];
+
         [JPUSHService setTags:set alias:user_id fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
-           // NSString *callbackString =
+            NSString *callbackString =
             [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
              [self logSet:iTags], iAlias];
-           // NSLog(@"TagsAlias回调:%@", callbackString);
+            NSLog(@"TagsAlias回调:%@", callbackString);
         }];
     }
     
@@ -93,6 +102,16 @@
     {
         [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
             NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+            chatUsers* chats = [chatUsers instance];
+            NSArray* conversationList = [[RCIMClient sharedRCIMClient]getConversationList:@[@1]];
+            NSLog(@"conversationList is %@", conversationList);
+            for (RCConversation* target  in conversationList) {
+                NSLog(@"target :%@", target);
+                [chats getUserInfoWithUserId:[target targetId] completion:^(RCUserInfo *userInfo) {
+                    	
+                }];
+            }
+
         } error:^(RCConnectErrorCode status) {
             NSLog(@"登陆的错误码为:%ld", (long)status);
         } tokenIncorrect:^{
@@ -102,22 +121,24 @@
     if (user_id) {
         MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
         self.window.rootViewController = mainTab;
+        [MobClick profileSignInWithPUID:user_id];
     }else{
         LoginViewController *login = [[LoginViewController alloc]init];
            UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:login];
         self.window.rootViewController = navCon;
+        [MobClick profileSignInWithPUID:user_id];
     }
    
     
 #ifdef DEBUG
     UnitTest *test = [UnitTest instance];
-    NSLog(@"======== UNIT TEST START ========");
+//NSLog(@"======== UNIT TEST START ========");
     [test testResult:^(BOOL result) {
         if (result) {
-            NSLog(@"====== UNIT TEST COMPLETION =====");
+           // NSLog(@"====== UNIT TEST COMPLETION =====");
         }
         else{
-            NSLog(@"======= UNIT TEST FAILURE =======");
+           // NSLog(@"======= UNIT TEST FAILURE =======");
         }
     }];
 #endif
@@ -142,6 +163,33 @@
     
     return result;
     return YES;
+}
+
+// 启动百度移动统计
+- (void)startBaiduMobileStat{
+    /*若应用是基于iOS 9系统开发，需要在程序的info.plist文件中添加一项参数配置，确保日志正常发送，配置如下：
+     NSAppTransportSecurity(NSDictionary):
+     NSAllowsArbitraryLoads(Boolen):YES
+     详情参考本Demo的BaiduMobStatSample-Info.plist文件中的配置
+     */
+    BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
+    // 此处(startWithAppId之前)可以设置初始化的可选参数，具体有哪些参数，可详见BaiduMobStat.h文件，例如：
+    statTracker.shortAppVersion  = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    statTracker.enableDebugOn = NO;
+    
+    [statTracker startWithAppId:@"c0e0a9d8df"]; // 设置您在mtj网站上添加的app的appkey,此处AppId即为应用的appKey
+}
+
+//友盟统计
+- (void)umengTrack {
+    //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick setLogEnabled:NO];
+    
+    UMConfigInstance.appKey = @"5746548967e58eb1d10025c4";
+    
+    UMConfigInstance.secret = @"secretstringaldfkals";
+    //    UMConfigInstance.eSType = E_UM_GAME;
+    [MobClick startWithConfigure:UMConfigInstance];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
@@ -215,6 +263,15 @@ fetchCompletionHandler:
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias {
+    NSString *callbackString =
+    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+     [self logSet:tags], alias];
+    NSLog(@"TagsAlias回调:%@", callbackString);
 }
 
 - (NSString *)logSet:(NSSet *)dic {

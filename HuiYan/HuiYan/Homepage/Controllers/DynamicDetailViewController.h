@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "StarVideo.h"
 @interface DynamicDetailViewController : UIViewController
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray  *dataSource;
+@property (nonatomic, strong) StarVideo *starVideo;
+@property (nonatomic, strong) NSArray *dataSource;
 @end

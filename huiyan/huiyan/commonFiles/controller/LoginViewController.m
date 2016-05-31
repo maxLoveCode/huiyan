@@ -21,6 +21,9 @@
 #import "Tools.h"
 #import <AFNetworking.h>
 #import "ForgotPassTableViewController.h"
+#import "UMMobClick/MobClick.h"
+#import <RongIMKit/RongIMKit.h>
+#import "JPUSHService.h"
 #define animateDuration 0.25
 #define animateDelay 0.2
 
@@ -83,7 +86,6 @@
     
     for (UIView* subview in [_mainview.bgView subviews]) {
         subview.alpha = 0;
-        NSLog(@"111");
         subview.hidden = YES;
     }
     
@@ -201,7 +203,6 @@
 
 -(void)loginViewDidSelectSignUp:(LoginView*)loginView
 {
-     //NSLog(@"select2");
     if ([loginView.reg_mobile.text isEqualToString:@""] ||[loginView.reg_mobile.text isEqualToString:@"请输入手机号"]) {
         [self presentViewController:[Tools showAlert:@"请输入手机号"] animated:YES completion:nil];
         return;
@@ -217,6 +218,7 @@
             if ([responseObject[@"code"]integerValue] == 90010) {
                 User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.confirmPass.text];
                 [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
+                
             }
             [self showAlert:responseObject[@"msg"]];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -243,6 +245,18 @@
                 NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
+                
+                kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
+                
+                NSSet *set = [[NSSet alloc] initWithObjects:@"ios",nil];
+                [JPUSHService setTags:set alias:[responseObject[@"data"] objectForKey:@"user_id"] fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                    // NSString *callbackString =
+                    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+                     [self logSet:iTags], iAlias];
+                    // NSLog(@"TagsAlias回调:%@", callbackString);
+                }];
+                [self rongyunLogin];
+                  [MobClick profileSignInWithPUID:[responseObject[@"data"]objectForKey:@"user_id"]];
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
@@ -253,8 +267,17 @@
             if ([responseObject[@"code"] integerValue] == 70000) {
                 NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
+                 [MobClick profileSignInWithPUID:[responseObject[@"data"]objectForKey:@"user_id"]];
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                 kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
+                NSSet *set = [[NSSet alloc] initWithObjects:@"ios",nil];
+                [JPUSHService setTags:set alias:[responseObject[@"data"] objectForKey:@"user_id"] fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                    // NSString *callbackString =
+                    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+                     [self logSet:iTags], iAlias];
+                    // NSLog(@"TagsAlias回调:%@", callbackString);
+                }];
+                [self rongyunLogin];
                 MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
@@ -393,6 +416,17 @@
             kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
             kSETDEFAULTS([responseObject[@"data"] objectForKey:@"user_id"], @"user_id");
             kSETDEFAULTS([responseObject[@"data"] objectForKey:@"rongcloud_token"],RongIdentity);
+            
+            [self rongyunLogin];
+                NSSet *set = [[NSSet alloc] initWithObjects:@"ios",nil];
+                [JPUSHService setTags:set alias:[responseObject[@"data"] objectForKey:@"user_id"] fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                    // NSString *callbackString =
+                    [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+                     [self logSet:iTags], iAlias];
+                    // NSLog(@"TagsAlias回调:%@", callbackString);
+                }];
+            
+             [MobClick profileSignInWithPUID:[responseObject[@"data"]objectForKey:@"user_id"]];
             MainTabBarViewController *mainTabBar = [[MainTabBarViewController alloc]init];
             [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
             }];
@@ -402,6 +436,42 @@
         NSLog(@"error = %@",error);
     }];
 }
+
+-(void)rongyunLogin
+{
+    NSString* token = [[NSUserDefaults standardUserDefaults] objectForKey:RongIdentity];
+    if(token)
+    {
+        [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
+            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        } error:^(RCConnectErrorCode status) {
+            NSLog(@"登陆的错误码为:%ld", (long)status);
+        } tokenIncorrect:^{
+            NSLog(@"token错误");
+        }];
+    }
+}
+
+- (NSString *)logSet:(NSSet *)dic {
+    if (![dic count]) {
+        return nil;
+    }
+    NSString *tempStr1 =
+    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+                                                 withString:@"\\U"];
+    NSString *tempStr2 =
+    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 =
+    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *str =
+    [NSPropertyListSerialization propertyListFromData:tempData
+                                     mutabilityOption:NSPropertyListImmutable
+                                               format:NULL
+                                     errorDescription:NULL];
+    return str;
+}
+
 
 
 @end

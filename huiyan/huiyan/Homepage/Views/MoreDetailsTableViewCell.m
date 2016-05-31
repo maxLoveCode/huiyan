@@ -31,6 +31,7 @@
 - (UIImageView *)image_pic{
     if (!_image_pic) {
         self.image_pic = [[UIImageView alloc]init];
+        self.image_pic.image = [UIImage imageNamed:@"enter"];
     }
     return _image_pic;
 }
@@ -43,7 +44,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    self.image_pic.image = [UIImage imageNamed:@"enter"];
+    
     // Configure the view for the selected state
 }
 

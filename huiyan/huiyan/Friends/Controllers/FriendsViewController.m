@@ -9,7 +9,7 @@
 #import "FriendsViewController.h"
 #import "ZCBannerView.h"
 #import "LoginViewController.h"
-
+#import "UITabBarController+ShowHideBar.h"
 
 @implementation FriendsViewController
 
@@ -26,12 +26,9 @@
     [super viewDidLoad];
     self.title = @"戏友";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.hidesBottomBarWhenPushed=YES;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    //NSLog(@"%@",self.conversationListDataSource);
-}
 
 -(UIView *)loginRequest
 {
@@ -86,6 +83,7 @@
     vc.targetId = model.targetId;
     vc.conversationType = model.conversationType;
     
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:vc
                                          animated:YES];
 }

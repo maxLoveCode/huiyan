@@ -25,7 +25,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <Masonry/Masonry.h>
-#import "ZFPlayerControlView.h"
 #import "ZFBrightnessView.h"
 #import "ZFPlayer.h"
 #import "Tools.h"
@@ -58,8 +57,6 @@ typedef NS_ENUM(NSInteger, ZFPlayerState) {
 @property (nonatomic, strong) UISlider            *volumeViewSlider;
 /** 计时器 */
 @property (nonatomic, strong) NSTimer             *timer;
-/** 控制层View */
-@property (nonatomic, strong) ZFPlayerControlView *controlView;
 /** 用来保存快进的总时长 */
 @property (nonatomic, assign) CGFloat             sumTime;
 /** 定义一个实例变量，保存枚举值 */

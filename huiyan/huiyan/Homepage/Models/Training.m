@@ -20,6 +20,7 @@
     train.count = dic[@"count"];
     train.price = dic[@"price"];
     train.imgs = dic[@"imgs"] ;
+    train.buy_tip = dic[@"buy_tip"];
     return train;
 }
 

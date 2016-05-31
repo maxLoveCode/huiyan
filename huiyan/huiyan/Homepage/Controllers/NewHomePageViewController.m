@@ -61,6 +61,9 @@ static int number_page = 0;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (self.tabBarController.tabBar.hidden == YES) {
+        self.tabBarController.tabBar.hidden = NO;
+    }
     [self.tabBarController setHidden:NO];
 }
 
@@ -73,6 +76,7 @@ static int number_page = 0;
     [UIView animateWithDuration:1 animations:^{
         self.tableView.alpha = 1;
     }];
+    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {

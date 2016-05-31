@@ -199,7 +199,7 @@
 }
 
 - (void)getUploadImage:(NSData *)image{
-    NSString *urlStr = [NSString stringWithFormat:@"http://139.196.32.98/huiyan/api1_0/index.php/Home/Qiniu/upload_file/access_token/%@",self.serverManager.accessToken];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/index.php/Home/Qiniu/upload_file/access_token/%@",kServerUrl,self.serverManager.accessToken];
     NSDictionary *parameters = @{@"upload_file":image};
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

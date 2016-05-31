@@ -11,6 +11,7 @@
 #import "StarDetailViewController.h"
 #import "ZFPlayer.h"
 #import "DramaStarViewController.h"
+#import "DynamicDetailViewController.h"
 @interface MainTabBarViewController ()
 
 @end
@@ -19,6 +20,7 @@
 
 - (void)awakeFromNib{
     self.selectedIndex = 0;
+    
 }
 
 - (void)viewDidLoad {
@@ -79,7 +81,7 @@
 //哪些界面支持自动转屏
 - (BOOL)shouldAutorotate{
     UINavigationController *nav = self.viewControllers[self.selectedIndex];
-    if ([nav.topViewController isKindOfClass:[WikiWorksDetailsViewController class]] || [nav.topViewController isKindOfClass:[StarDetailViewController class]]  ) {
+    if ([nav.topViewController isKindOfClass:[WikiWorksDetailsViewController class]] || [nav.topViewController isKindOfClass:[DynamicDetailViewController class]]  ) {
         return !ZFPlayerShared.isLockScreen;
     }
     return NO;
@@ -90,7 +92,7 @@
     UINavigationController *nav = self.viewControllers[self.selectedIndex];
     if ([nav.topViewController isKindOfClass:[WikiWorksDetailsViewController class]]) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
-    }else if ([nav.topViewController isKindOfClass:[StarDetailViewController class]]){
+    }else if ([nav.topViewController isKindOfClass:[DynamicDetailViewController class]]){
         if (ZFPlayerShared.isAllowLandscape) {
             return UIInterfaceOrientationMaskAllButUpsideDown;
         }else{
@@ -101,7 +103,6 @@
 }
 
 - (void)rightClick:(UIBarButtonItem *)sender{
-    NSLog(@"eeee");
 }
 
 - (void)didReceiveMemoryWarning {

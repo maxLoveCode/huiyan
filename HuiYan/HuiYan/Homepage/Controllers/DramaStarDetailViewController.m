@@ -14,8 +14,13 @@
 #import <Masonry.h>
 #import "UIImage+Extension.h"
 #import "StarVideoTableViewCell.h"
-#define HeadHight 274
-#define TailHeight kScreen_Height  - 44 - 64
+#import "DynamicTextTableViewCell.h"
+#import "DynamicImageTableViewCell.h"
+#import "DramaStarInvitionViewController.h"
+#import "DynamicDetailViewController.h"
+#import "Tools.h"
+#define HeadHight 230
+#define TailHeight kScreen_Height  - 40 - 64 - 210
 #define kVideoCellHeight 244.0
 // 头部视图的高度
 #define kHeadHeight 230
@@ -27,38 +32,96 @@
 @property (nonatomic, strong) UIButton *focus_btn;
 @property (nonnull, strong) ServerManager *serverManager;
 @property (nonatomic, strong) UIScrollView *downScrollow;
-@property (nonatomic, strong) ZFPlayerView *playerView;
+//@property (nonatomic, strong) ZFPlayerView *playerView;
 @property (nonatomic, assign) CGFloat totalOffsetY;
+@property (nonatomic, strong) UIView *tailView;
+@property (nonatomic, strong) UIButton *videoBtn;
+@property (nonatomic, strong) UIButton *desBtn;
+@property (nonatomic, strong) UIView *desView;
+@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) NSDate* target;
+@property (nonatomic, assign) BOOL color_Theme;
+@property (nonatomic, strong) NSTimer* timer;
 @end
 
 @implementation DramaStarDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"动态";
     self.serverManager = [ServerManager sharedInstance];
     [self.view addSubview:self.mainTable];
+    [self.view addSubview:self.tailView];
     // Do any additional setup after loading the view.
-    // 关闭自动调整scrollView的内边距
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    // 隐藏导航栏,给导航栏设置空的图片
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    
-    // 隐藏导航栏底部阴影
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self get_actor_dongtaiData:@"0"];
   
-    
+    _count =0;
+}
+
+- (UIView *)tailView{
+    if (!_tailView ) {
+        self.tailView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
+        self.tailView.backgroundColor = [UIColor whiteColor];
+        UIButton *inviteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 2 - 2, 48);
+        [inviteBtn setTitle:@"邀约" forState:UIControlStateNormal];
+        [inviteBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        [inviteBtn addTarget:self action:@selector(inviteEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tailView addSubview:inviteBtn];
+        UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        sendBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2 - 2, 48);
+        [sendBtn setTitle:@"送花" forState:UIControlStateNormal];
+        [sendBtn setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateNormal];
+        [sendBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        [sendBtn addTarget:self action:@selector(sendFlower:) forControlEvents:UIControlEventTouchUpInside];
+        [self.tailView addSubview:sendBtn];
+//        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
+//        [shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+//        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+//        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+//        [self.tailView addSubview:shareBtn];
+        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2, 4, 1, 40)];
+        oneline.backgroundColor = COLOR_WithHex(0xdddddd);
+        [self.tailView addSubview:oneline];
+      //  UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
+//        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
+//        [self.tailView addSubview:twoline];
+//        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+//        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
+//        [self.tailView addSubview:w_line];
+    }
+    return _tailView;
 }
 
 - (UIScrollView *)downScrollow{
     if (!_downScrollow) {
-        self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, TailHeight)];
-        self.downScrollow.contentSize = CGSizeMake(kScreen_Width * 2, TailHeight);
-        self.downScrollow.backgroundColor = [UIColor greenColor];
+        self.downScrollow = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 48 - 64 - 40)];
+        self.downScrollow.contentSize = CGSizeMake(kScreen_Width * 2, kScreen_Height);
+        self.downScrollow.scrollEnabled = NO;
+        [self.downScrollow addSubview:self.videoTable];
+        [self.downScrollow addSubview:self.desView];
     }
     return _downScrollow;
+}
+
+- (UIView *)desView{
+    if (!_desView) {
+        self.desView = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width, 0, kScreen_Width, TailHeight)];
+        CGSize size =  [self.drama.profile boundingRectWithSize:CGSizeMake(kScreen_Width - 30, MAXFLOAT)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                attributes:@{
+                                                             NSFontAttributeName :kFONT13
+                                                             }
+                                                   context:nil].size;
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, kScreen_Width- 30, size.height)];
+        lab.text = self.drama.profile;
+        lab.numberOfLines = 0;
+        lab.font = kFONT13;
+        [self.desView addSubview:lab];
+    }
+    return _desView;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -92,9 +155,34 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    // 关闭自动调整scrollView的内边距
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    // 隐藏导航栏,给导航栏设置空的图片
+    if (self.color_Theme == YES) {
+        UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:1]];
+        [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+         self.navigationController.navigationBar.translucent = YES;
+    }else{
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = YES;
+    }
+    
+    
+    // 隐藏导航栏底部阴影
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-     [self.playerView resetPlayer];
+    UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:1]];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.navigationController.navigationBar.translucent = NO;
     
 }
 
@@ -102,8 +190,8 @@
 {
     if (!_mainTable) {
         self.mainTable = [[UITableView alloc] init];
-        self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height);
-        
+        self.mainTable.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height );
+        self.mainTable.contentSize = CGSizeMake(kScreen_Width, kScreen_Height + 200);
         self.mainTable.bounces = NO;
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
@@ -117,10 +205,13 @@
 -(UITableView *)videoTable
 {
     if (!_videoTable) {
-        _videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height ) style:UITableViewStylePlain];
-        _videoTable.delegate = self;
-        _videoTable.dataSource = self;
-        [_videoTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"video"];
+        self.videoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width,kScreen_Height - 48 - 64 - 40) style:UITableViewStyleGrouped];
+         self.videoTable.delegate = self;
+         self.videoTable.dataSource = self;
+        [ self.videoTable registerClass:[StarVideoTableViewCell class] forCellReuseIdentifier:@"video"];
+        [ self.videoTable registerNib:[UINib nibWithNibName:@"DynamicTextTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"text"];
+        [ self.videoTable registerClass:[DynamicImageTableViewCell class] forCellReuseIdentifier:@"image"];
+          self.videoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _videoTable;
 }
@@ -141,15 +232,74 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView == self.mainTable) {
+        if (section == 1) {
+            return 40;
+        }
+        return 0.01;
+    }
+    if (tableView == self.videoTable) {
+        return 10;
+    }
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.mainTable) {
         if (indexPath.section == 0) {
             return HeadHight;
         }else{
-            return  TailHeight;
+            return  kScreen_Height - 64 - 48 - 40;
         }
+    }else if (tableView == _videoTable){
+        StarVideo *model = self.dataSource[indexPath.section];
+        if ([model.type isEqualToString:@"movie"]) {
+            return 175 + (kScreen_Width - 30) / 2;
+        }else if(
+                 [model.type isEqualToString:@"text"]){
+            return 150;
+        }else{
+            return 170 + (kScreen_Width - 60) / 3;
+        }
+        
     }
     return 1;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (tableView == self.mainTable) {
+        if (section == 1) {
+        UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 40)];
+        headView .backgroundColor = [UIColor whiteColor];
+        UIButton *videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        videoBtn.frame = CGRectMake(0, 0, kScreen_Width / 2, 40);
+        [videoBtn setTitle:@"动态" forState:UIControlStateNormal];
+        [headView addSubview:videoBtn];
+       UILabel *lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 0.5, 4, 1, 32)];
+        lineLab.backgroundColor = COLOR_WithHex(0xdddddd);
+            [headView addSubview:lineLab];
+        UIButton *desBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        desBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2, 40);
+        [desBtn setTitle:@"简介" forState:UIControlStateNormal];
+        [headView addSubview:desBtn];
+        UIColor *color = COLOR_THEME;
+        [videoBtn setTitleColor:color forState:UIControlStateNormal];
+        [desBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.videoBtn = videoBtn;
+        self.desBtn = desBtn;
+        videoBtn.tag = 110;
+        desBtn.tag = 112;
+        [videoBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
+        [desBtn addTarget:self action:@selector(moveScrollow:) forControlEvents:UIControlEventTouchUpInside];
+        return headView;
+        }
+    }
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -175,37 +325,69 @@
                     [weakref focus:@"follow"];
                 }
             };
+    
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scrollow"];
             [cell.contentView addSubview:self.downScrollow];
-            [cell.contentView setBackgroundColor: [UIColor redColor]];
+//            [cell.contentView setBackgroundColor: [UIColor redColor]];
             return cell;
         }
     }else if (tableView == self.videoTable){
-        StarVideoTableViewCell * cell = [_mainTable dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
-        StarVideo  *model = self.dataSource[indexPath.section];
-        [cell setContent:model];
-        NSURL *videoURL = [NSURL URLWithString:model.movie];
-        __block NSIndexPath *weakIndexPath = indexPath;
-        __block StarVideoTableViewCell *weakCell = cell;
-        __weak typeof(self) weakSelf = self;
-        cell.playBlock = ^(UIButton *btn){
-            weakSelf.playerView = [ZFPlayerView sharedPlayerView];
-            [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
-            [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
-            weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
-            [weakSelf write_play_recordData:model.ID];
+         StarVideo  *model = self.dataSource[indexPath.section];
+        if ([model.type isEqualToString:@"movie"]) {
+            StarVideoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"video" forIndexPath:indexPath];
             
-        };
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    return cell;
+            [cell setContent:model];
+            cell.playBtn.hidden = NO;
+//            NSURL *videoURL = [NSURL URLWithString:model.content[0]];
+//            __block NSIndexPath *weakIndexPath = indexPath;
+//            __block StarVideoTableViewCell *weakCell = cell;
+//            __weak typeof(self) weakSelf = self;
+            cell.playBlock = ^(UIButton *btn){
+//                weakSelf.playerView = [ZFPlayerView sharedPlayerView];
+//                [weakSelf.playerView setVideoURL:videoURL withTableView:weakSelf.mainTable AtIndexPath:weakIndexPath withImageViewTag:101];
+//                [weakSelf.playerView addPlayerToCellImageView:weakCell.picView];
+//                weakSelf.playerView.playerLayerGravity =ZFPlayerLayerGravityResizeAspect;
+//                [weakSelf write_play_recordData:model.ID];
+                DynamicDetailViewController * dynamicCon = [[DynamicDetailViewController alloc]init];
+                dynamicCon.starVideo = self.dataSource[indexPath.section];
+                [self.navigationController pushViewController:dynamicCon animated:YES];
+            };
+            cell.typePic.image = [UIImage imageNamed:@"videotype"];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+
+        }else if([model.type isEqualToString:@"text"]){
+                DynamicTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"text"];
+            [cell setContent:model];
+            cell.typePic.image = [UIImage imageNamed:@"texttype"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+            
+        }else{
+            DynamicImageTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"image" forIndexPath:indexPath];
+            [cell setContent:model];
+             cell.typePic.image = [UIImage imageNamed:@"imgetype"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
 }
+    return nil;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.videoTable) {
+    DynamicDetailViewController * dynamicCon = [[DynamicDetailViewController alloc]init];
+        dynamicCon.starVideo = self.dataSource[indexPath.section];
+        [self.navigationController pushViewController:dynamicCon animated:YES];
+    }
+}
+
+
 
 #pragma mark -- 关注
 
@@ -248,16 +430,17 @@
 }
 
 
-- (void)get_actor_movieData:(NSString *)page{
+- (void)get_actor_dongtaiData:(NSString *)page{
     self.dataSource = [NSMutableArray array];
-    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.cid,@"page":@"0"};
-    [self.serverManager AnimatedGET:@"get_actor_movie.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"actor_id":self.drama.userID,@"page":@"0"};
+    [self.serverManager AnimatedGET:@"get_actor_dongtai.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50030) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 StarVideo *model = [StarVideo starVideoWithDic:dic];
                 [self.dataSource addObject:model];
             }
             [self.mainTable reloadData];
+            [self.videoTable reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -265,43 +448,264 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.videoTable) {
+         CGFloat offsetY = self.videoTable.contentOffset.y;
+        CGFloat mainoffsetY = self.mainTable.contentOffset.y;
+     //   NSLog(@"delta = %f,main = %f",offsetY,mainoffsetY);
+        CGFloat alpha = 0.99;
+//        if (height <= kHeadMinHeight ) {
+//            alpha = 0.99;
+//        } else {
+//            alpha = 0;
+//            //        [self.videoTable setScrollEnabled:YES];
+//            //        [self.mainTable setScrollEnabled:YES];
+//            
+//        }
+        UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:alpha]];
+        [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+        if (offsetY < 165) {
+            self.mainTable.contentOffset = CGPointMake(0, offsetY +5);
+
+        }else if (offsetY >=165)
+             self.mainTable.contentOffset = CGPointMake(0, 165);
+    }
     if (scrollView == self.mainTable) {
     CGFloat offsetY = self.mainTable.contentOffset.y;
     
     // 计算tabView滚动的偏移量
     CGFloat delta = offsetY - self.totalOffsetY;
-    
+
     CGFloat height = kHeadHeight - delta;
+
     
     height = height < 0 ? 0 : height;
     
     // 透明度
     CGFloat alpha = 0;
-    if (height <= kHeadMinHeight) {
+    if (height <= kHeadMinHeight ) {
         alpha = 0.99;
+        self.color_Theme = NO;
     } else {
         alpha = 0;
+//        [self.videoTable setScrollEnabled:YES];
+//        [self.mainTable setScrollEnabled:YES];
+        self.color_Theme = YES;
      
     }
-    UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/256.0 green:48 / 256.0 blue:63 / 256.0 alpha:alpha]];
-    
+         UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:alpha]];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     }
 }
+
+
+//邀约
+- (void)inviteEvent:(UIButton *)sender{
+    DramaStarInvitionViewController *dramaCon = [[DramaStarInvitionViewController alloc]init];
+    dramaCon.ID = self.drama.userID;
+    dramaCon.cid = self.drama.cid;
+    [self.navigationController pushViewController:dramaCon animated:NO];
+
+}
+
+//送花
+- (void)sendFlower:(UIButton *)sender{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"follow_id":kOBJECTDEFAULTS(@"user_id")};
+    [self.serverManager AnimatedPOST:@"send_actor_flower.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 50040) {
+            //[self presentViewController:[Tools showAlert:@"送花成功"] animated:YES completion:nil];
+            [self combo:0];
+            [self flowerAnimates];
+        }
+        else
+        {
+            [self presentViewController:[Tools showAlert:responseObject[@"msg"]] animated:YES completion:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
+}
+
+//分享
+- (void)share:(UIButton *)sender{
+    
+}
+
+- (void)moveScrollow:(UIButton *)sender{
+    UIColor *color = COLOR_THEME;
+    if (sender.tag == 110) {
+        [self.downScrollow setContentOffset:CGPointMake(0, 0) animated:YES];
+        [self.videoBtn setTitleColor:color forState:UIControlStateNormal];
+        [self.desBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.mainTable.scrollEnabled = YES;
+    }else{
+        [self.downScrollow setContentOffset:CGPointMake(kScreen_Width, 0) animated:YES];
+        [self.mainTable setContentOffset:CGPointMake(0, 0)];
+        self.mainTable.scrollEnabled = NO;
+        [self.videoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.desBtn setTitleColor:color forState:UIControlStateNormal];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)flowerAnimates{
+    UIImageView *imageViewForAnimation = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flower"]];
+    imageViewForAnimation.tag = 8201;
+    [self.view addSubview:imageViewForAnimation];
+    [imageViewForAnimation setFrame:CGRectMake(kScreen_Width/2-44, kScreen_Height-44, 44, 44)];
+    imageViewForAnimation.alpha = 1.0f;
+    CGRect imageFrame = imageViewForAnimation.frame;
+    //Your image frame.origin from where the animation need to get start
+    CGPoint viewOrigin = imageViewForAnimation.frame.origin;
+    viewOrigin.y = viewOrigin.y + imageFrame.size.height / 2.0f;
+    viewOrigin.x = viewOrigin.x + imageFrame.size.width / 2.0f;
+    
+    imageViewForAnimation.frame = imageFrame;
+    imageViewForAnimation.layer.position = viewOrigin;
+    [self.view addSubview:imageViewForAnimation];
+    
+    // Set up fade out effect
+    CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeOutAnimation setToValue:[NSNumber numberWithFloat:0.1]];
+    fadeOutAnimation.fillMode = kCAFillModeForwards;
+    fadeOutAnimation.removedOnCompletion = NO;
+    
+    // Set up scaling
+    CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+    [resizeAnimation setToValue:[NSValue valueWithCGSize:CGSizeMake(40.0f, imageFrame.size.height * (40.0f / imageFrame.size.width))]];
+    resizeAnimation.fillMode = kCAFillModeForwards;
+    resizeAnimation.removedOnCompletion = NO;
+    
+    // Set up path movement
+    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.fillMode = kCAFillModeForwards;
+    pathAnimation.removedOnCompletion = NO;
+    //Setting Endpoint of the animation
+    CGPoint endPoint = CGPointMake(kScreen_Width/2, kScreen_Height/2);
+    //to end animation in last tab use
+    //CGPoint endPoint = CGPointMake( 320-40.0f, 480.0f);
+    CGMutablePathRef curvedPath = CGPathCreateMutable();
+    CGPathMoveToPoint(curvedPath, NULL, viewOrigin.x, viewOrigin.y);
+    int value = (arc4random() % 60) + 1;
+    int dir = (value%2 == 0)?1:-1;
+    CGPoint pt = CGPointMake(kScreen_Width/2+value*dir, kScreen_Height/2-value*dir);
+    
+    int value2 = (arc4random() % 20) + 1;
+    int dir2 = (value%2 == 0)?1:-1;
+    CGPathAddCurveToPoint(curvedPath, NULL, viewOrigin.x, viewOrigin.y, pt.x, pt.y, endPoint.x+value2*dir2, endPoint.y+value2*dir2);
+    //CGPathAddCurveToPoint(curvedPath, NULL, endPoint.x, viewOrigin.y, endPoint.x, viewOrigin.y, endPoint.x, endPoint.y);
+    pathAnimation.path = curvedPath;
+    CGPathRelease(curvedPath);
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.fillMode = kCAFillModeForwards;
+    group.removedOnCompletion = NO;
+    [group setAnimations:[NSArray arrayWithObjects:fadeOutAnimation, pathAnimation, resizeAnimation, nil]];
+    group.duration = 0.7f;
+    group.delegate = self;
+    [group setValue:imageViewForAnimation forKey:@"imageViewBeingAnimated"];
+    
+    [imageViewForAnimation.layer addAnimation:group forKey:@"savingAnimation"];
+    
 }
-*/
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    UIView* view = [self.view viewWithTag:8201];
+    [view removeFromSuperview];
+}
+
+-(void)combo:(NSInteger*) counts
+{
+    if (!_target) {
+        self.target = [NSDate date];
+    }
+    else
+    {
+        NSTimeInterval sec = [[NSDate date] timeIntervalSinceDate:self.target];
+        if (sec <2) {
+            self.target = [NSDate date];
+            _count++;
+            [self animateCombos];
+            if(!_timer)
+                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:NO];
+            else if ([_timer isValid])
+            {
+                [_timer invalidate];
+                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:NO];
+            }
+        }
+        else
+        {
+            self.target = nil;
+            _count = 0;
+        }
+    }
+}
+
+-(void)animateCombos
+{
+    UILabel* view = [self.view viewWithTag:3131];
+    UIColor* theme = COLOR_THEME
+    if (!view) {
+        view.alpha = 1;
+        UILabel* view = [[UILabel alloc] initWithFrame:CGRectMake(kScreen_Width/3*2, kScreen_Height/2+100, kScreen_Width/3, 60)];
+        view.tag = 3131;
+        
+        view.attributedText=[[NSAttributedString alloc]
+                                   initWithString:[NSString stringWithFormat:@"x %d", (int)_count+1]
+                                   attributes:@{
+                                                NSStrokeWidthAttributeName: @-5.0,
+                                                NSStrokeColorAttributeName:theme,
+                                                NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                NSFontAttributeName: kFONT(50)
+                                                }
+                                   ];
+        
+        [self.view addSubview:view];
+//        [UIView animateWithDuration:1.0 animations:^{
+//            view.alpha = 0;
+//        }completion:^(BOOL finished) {
+//            [view removeFromSuperview];
+//        }];
+    }
+    else
+    {
+        view.alpha = 1;
+
+    view.attributedText=[[NSAttributedString alloc]
+                         initWithString:[NSString stringWithFormat:@"x %d", (int)_count+1]
+                         attributes:@{
+                                      NSStrokeWidthAttributeName: @-5.0,
+                                      NSStrokeColorAttributeName:theme,
+                                      NSForegroundColorAttributeName:[UIColor whiteColor],
+                                      NSFontAttributeName: kFONT(50)
+                                      }
+                         ];
+//    [UIView animateWithDuration:1.0 animations:^{
+//        view.alpha = 0;
+//    }completion:^(BOOL finished) {
+//        [view removeFromSuperview];
+//    }];
+    }
+}
+
+-(void)countDown
+{
+    NSLog(@"countDown");
+    UILabel* view = [self.view viewWithTag:3131];
+    [UIView animateWithDuration:1.0 animations:^{
+                view.alpha = 0;
+            }completion:^(BOOL finished) {
+                [view removeFromSuperview];
+                _timer = nil;
+            }];
+}
 
 @end

@@ -26,18 +26,6 @@
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 21;
     }
-    [self addSubview:self.lineLab];
-    UIColor *color = COLOR_THEME;
-    [self.videoBtn setTitleColor:color forState:UIControlStateNormal];
-    [self.descriptionBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-}
-
-- (UILabel *)lineLab{
-    if (!_lineLab) {
-        self.lineLab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 0.5, CGRectGetMaxY(self.bgPic.frame)+ 2, 1, 40)];
-        self.lineLab.backgroundColor = COLOR_WithHex(0xdddddd);
-    }
-    return _lineLab;
 }
 
 - (void)setContent:(DramaStar *)model{
