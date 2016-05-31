@@ -27,6 +27,8 @@
     self.title = @"戏友";
     self.view.backgroundColor = [UIColor whiteColor];
     self.hidesBottomBarWhenPushed=YES;
+    UIView* view = [[UIView alloc] init];
+    self.emptyConversationView = view;
 }
 
 

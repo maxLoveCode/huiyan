@@ -88,7 +88,7 @@
     
     [JPUSHService setupWithOption:launchOptions appKey:@"f84d27fb2c1b2db531924006"
                           channel:@"Publish channel"
-                 apsForProduction:FALSE
+                 apsForProduction:YES
             advertisingIdentifier:nil];
     
     
