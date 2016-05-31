@@ -12,7 +12,6 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-#import "Constant.h"
 @interface ServerManager : AFHTTPSessionManager
 
 @property (nonatomic, copy)  NSString* _Nonnull accessToken;
