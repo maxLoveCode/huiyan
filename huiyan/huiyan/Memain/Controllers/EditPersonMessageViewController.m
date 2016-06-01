@@ -223,12 +223,12 @@
                       });
                   }
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                      NSLog(@"msg is %@", responseObject[@"msg"]);
+                  //    NSLog(@"msg is %@", responseObject[@"msg"]);
                       
                       if (error) {
                           NSLog(@"Error: %@", error);
                       } else {
-                          NSLog(@"%@ %@", response, responseObject);
+                       //   NSLog(@"%@ %@", response, responseObject);
                           if ([responseObject[@"data"] objectForKey:@"url"] != nil) {
                               NSString *str = [responseObject[@"data"] objectForKey:@"url"];
                               [self get_user_infoImageData:str];

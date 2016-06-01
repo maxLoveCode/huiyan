@@ -76,7 +76,7 @@ static int number_page = 0;
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
      [self.tabBarController setHidden:YES];
-    // self.navigationController.navigationBar.translucent = YES;
+     self.navigationController.navigationBar.translucent = YES;
 }
 
 #pragma mark -- TableViewDelegate

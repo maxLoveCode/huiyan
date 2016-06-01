@@ -348,15 +348,15 @@
                        orderSpec, signedString, @"RSA"];
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"reslut = %@",resultDic);
-            NSLog(@"pay %@",resultDic);
-            NSLog(@"memo %@", [resultDic objectForKey:@"memo"]);
+            //NSLog(@"reslut = %@",resultDic);
+            //NSLog(@"pay %@",resultDic);
+            //NSLog(@"memo %@", [resultDic objectForKey:@"memo"]);
             NSNumber *resultCode = [resultDic objectForKey:@"resultStatus"];
             
             if(resultCode.integerValue == 9000)
             {
                 NSLog(@"支付成功");
-                NSLog(@"%@",self.data_dic[@"oid"]);
+             //   NSLog(@"%@",self.data_dic[@"oid"]);
                 DramaTicketDetailTableViewController *dramCon = [[DramaTicketDetailTableViewController alloc]init];
                 dramCon.ID = self.data_dic[@"oid"];
                 [self.navigationController pushViewController:dramCon animated:YES];

@@ -120,9 +120,9 @@
     
     type = (_style == MessageTypeSystem)?@"system":@"push";
      NSDictionary *parameters = @{@"access_token":_server.accessToken,@"user_id":user_id, @"type":type};
-    NSLog(@"%@",parameters);
+   // NSLog(@"%@",parameters);
     [_server AnimatedGET:@"get_message_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
+      //  NSLog(@"%@",responseObject);
         if ([responseObject[@"code"] integerValue] ==110000) {
             [_dataSource removeAllObjects];
             NSArray* data = responseObject[@"data"];

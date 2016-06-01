@@ -418,7 +418,7 @@ static int number_page = 0;
 }
 
 - (void)dropZan:(UIButton *)sender{
-    NSLog(@"+++++%@",self.starVideo.is_like);
+   // NSLog(@"+++++%@",self.starVideo.is_like);
     NSString *like = @"";
     if ([self.starVideo.is_like isEqualToString:@"1"]) {
         like = @"2";

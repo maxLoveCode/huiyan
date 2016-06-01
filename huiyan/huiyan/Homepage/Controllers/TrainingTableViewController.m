@@ -111,7 +111,7 @@ static int number_page = 0;
 }
 
 - (void)getTrainData:(NSString *)page{
-    NSDictionary *params = @{@"access_token":_serverManager.accessToken};
+    NSDictionary *params = @{@"access_token":_serverManager.accessToken,@"page":page};
     [self.serverManager AnimatedGET:@"get_train_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 40000) {
             for (NSDictionary *dic in responseObject[@"data"]) {

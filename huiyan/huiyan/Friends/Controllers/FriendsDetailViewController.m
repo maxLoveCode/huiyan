@@ -153,7 +153,7 @@
 - (void)setHeadContent:(FindFriend*)model bgView:(UIImageView*)bgView potrait:(UIImageView*)potrait name:(UILabel*)nameLabel sex:(UIImageView*)sex
 {
     [potrait sd_setImageWithURL:[NSURL URLWithString:model.avatar] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        NSLog(@"%@, %lf, %lf",image,image.size.width,image.size.width* (headerSection/kScreen_Width));
+     //   NSLog(@"%@, %lf, %lf",image,image.size.width,image.size.width* (headerSection/kScreen_Width));
         UIColor *tintColor = [UIColor colorWithWhite:0.7 alpha:0.5];
         CGFloat param = image.size.width/10;
         UIImage* blur = [image applyBlurWithRadius:param tintColor:tintColor saturationDeltaFactor:4 maskImage:nil];

@@ -169,7 +169,7 @@ static int number_page = 0;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.navigationBar.translucent = YES;
     // 隐藏导航栏,给导航栏设置空的图片
-     NSLog(@"self.color_Theme%d",self.color_Theme);
+    // NSLog(@"self.color_Theme%d",self.color_Theme);
     if (self.mainTable.contentOffset.y > 165) {
         UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:1]];
         [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
@@ -404,7 +404,7 @@ static int number_page = 0;
     NSDictionary *params = [NSDictionary dictionary];
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
     params = @{@"access_token":self.serverManager.accessToken,@"type":type,@"user_id":user_id,@"follow_id":self.drama.userID};
-    NSLog(@"params = %@",params);
+  //  NSLog(@"params = %@",params);
     [self.serverManager AnimatedPOST:@"do_fans.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80020) {
             if ([isfocus isEqualToString:@"cancel"]) {
@@ -415,7 +415,7 @@ static int number_page = 0;
                 [self.focus_btn setTitle:@"取消关注" forState:UIControlStateNormal];
                 [self.focus_btn setBackgroundColor:[UIColor grayColor]];
             }
-            NSLog(@"mag = %@",responseObject[@"msg"]);
+         //   NSLog(@"mag = %@",responseObject[@"msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -425,12 +425,12 @@ static int number_page = 0;
 }
 #pragma mark -- 记录播放次数
 - (void)write_play_recordData:(NSString *)movid_id{
-    NSLog(@"cid = %@   accessken = %@",movid_id,self.serverManager.accessToken);
+   // NSLog(@"cid = %@   accessken = %@",movid_id,self.serverManager.accessToken);
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"movie_id":movid_id};
-    NSLog(@"%@",params);
+   // NSLog(@"%@",params);
     [self.serverManager AnimatedPOST:@"write_play_record.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50050) {
-            NSLog(@"%@",responseObject[@"msg"]);
+          //  NSLog(@"%@",responseObject[@"msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -452,7 +452,7 @@ static int number_page = 0;
                 if (!self.videoTable.mj_footer) {
                     self.videoTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                         number_page ++;
-                        NSLog(@"numberPage = %d",number_page);
+                      //  NSLog(@"numberPage = %d",number_page);
                         [self get_actor_dongtaiData:[NSString stringWithFormat:@"%d",number_page]];
                     }];
                 }
@@ -726,7 +726,7 @@ static int number_page = 0;
 
 -(void)countDown
 {
-    NSLog(@"countDown");
+  //  NSLog(@"countDown");
     UILabel* view = [self.view viewWithTag:3131];
     [UIView animateWithDuration:1.0 animations:^{
                 view.alpha = 0;
