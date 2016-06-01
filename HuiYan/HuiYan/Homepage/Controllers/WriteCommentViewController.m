@@ -35,7 +35,7 @@
 - (UITextView *)writeField{
     if (!_writeField) {
         self.writeField = [[UITextView alloc]initWithFrame:CGRectMake(15, 50, kScreen_Width - 30, 200)];
-        self.writeField.returnKeyType = UIReturnKeyDefault;//返回键的类型
+        self.writeField.returnKeyType = UIReturnKeyDone;//返回键的类型
         
         self.writeField.keyboardType = UIKeyboardTypeDefault;//键盘类型
         
@@ -51,12 +51,40 @@
         self.confirmBtn.layer.masksToBounds = YES;
         self.confirmBtn.layer.cornerRadius = 5;
         self.confirmBtn.frame = CGRectMake(15, CGRectGetMaxY(self.writeField.frame)+ 50, kScreen_Width - 30, 40);
-        [self.confirmBtn addTarget:self action:@selector(WriteComment:) forControlEvents:UIControlEventTouchUpInside];
+        [self.confirmBtn addTarget:self action:@selector(writeComment:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _confirmBtn;
 }
 
-- (void)WriteComment:(UIButton *)sender{
+- (void)writeComment:(UIButton *)sender{
+    if ([self.writeType isEqualToString:@"ticket"]) {
+        [self writeTicketComment];
+    }else{
+        [self writeDramaStarComment];
+    }
+}
+
+- (void)writeTicketComment{
+    if (self.writeField.text != nil && ![self.writeField.text isEqualToString:@""]) {
+        NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"oid":self.buyTicket.ID,@"content":self.writeField.text};
+        [self.serverManager AnimatedPOST:@"comment_opera.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+            if ([responseObject[@"code"] integerValue] == 30050) {
+                UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"评论成功" preferredStyle:UIAlertControllerStyleActionSheet];
+                [alertCon addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self.navigationController popViewControllerAnimated:NO];
+                }]];
+                [self presentViewController:alertCon animated:YES completion:nil];
+            }else{
+                [self presentViewController:[Tools showAlert:responseObject[@"msg"]] animated:YES completion:nil];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error = %@",error);
+        }];
+    }
+
+}
+
+- (void)writeDramaStarComment{
     if (self.writeField.text != nil && ![self.writeField.text isEqualToString:@""]) {
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"did":self.starVideo.ID,@"comment":self.writeField.text};
     [self.serverManager AnimatedPOST:@"write_dongtai_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {

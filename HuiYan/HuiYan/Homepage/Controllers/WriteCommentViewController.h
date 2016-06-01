@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "StarVideo.h"
+#import "BuyTicket.h"
 @interface WriteCommentViewController : UIViewController
 @property (nonatomic, strong)StarVideo *starVideo;
+@property (nonatomic, strong)BuyTicket *buyTicket;
+@property (nonatomic,copy) NSString *writeType;
 @end

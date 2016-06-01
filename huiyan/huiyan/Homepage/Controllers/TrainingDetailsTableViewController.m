@@ -160,7 +160,7 @@
             binner_scr = [[ZCBannerView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, BinnerHeight)];
             binner_scr.dataSource = self.train.imgs;
             [binner_scr reloadMenu];
-            binner_scr.backgroundColor = [UIColor redColor];
+          //  binner_scr.backgroundColor = [UIColor redColor];
             binner_scr.tag = 1000;
             [cell.contentView addSubview:binner_scr];
         }

@@ -86,7 +86,7 @@ static NSString *const resuseIdentufier = @"banner";
         image_pic.tag = 1000;
     }
     
-    [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] placeholderImage:[UIImage imageNamed:@"noNetwork"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [image_pic sd_setImageWithURL:[NSURL URLWithString:self.dataSource[indexPath.item]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         UIImage *origin =  image_pic.image;
         origin = [ZCBannerView imageWithImage:origin scaledToSize:CGSizeMake(kScreen_Width ,self.height)];
         image_pic.image = origin;
@@ -116,7 +116,7 @@ static NSString *const resuseIdentufier = @"banner";
         self.pageCount = 0;
     }
     self.pageControl.currentPage = self.pageCount;
-
+    
    // [UIView animateWithDuration:1 animations:^{
     
 [self.bannerCollection selectItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageCount inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];

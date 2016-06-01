@@ -86,7 +86,7 @@
     self.title_lab.text = drama.title;
     self.actor_lab.text = drama.actor;
     self.description_lab.text = drama.profile;
-    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:drama.cover] placeholderImage:[UIImage imageNamed:@"arrow.png"]];
+    [self.image_pic sd_setImageWithURL:[NSURL URLWithString:drama.cover_1] placeholderImage:[UIImage imageNamed:@"arrow.png"]];
 }
 
 #pragma mark Debug

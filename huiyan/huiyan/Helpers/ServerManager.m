@@ -23,7 +23,7 @@ NSString *const version = @"api1_0";
 + (id)sharedInstance {
     static dispatch_once_t once;
     static ServerManager *sharedInstance;
-  
+   // NSLog(@"---------%@",_BASE_URL);
     dispatch_once(&once, ^{
     
         sharedInstance = [[self alloc] initWithBaseURL: [NSURL URLWithString:b_URL]];

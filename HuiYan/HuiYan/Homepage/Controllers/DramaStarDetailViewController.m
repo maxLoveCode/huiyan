@@ -19,6 +19,9 @@
 #import "DramaStarInvitionViewController.h"
 #import "DynamicDetailViewController.h"
 #import "Tools.h"
+#import "WalletTableViewController.h"
+#import <MJRefresh.h>
+#import "GifRefresher.h"
 #define HeadHight 230
 #define TailHeight kScreen_Height  - 40 - 64 - 210
 #define kVideoCellHeight 244.0
@@ -43,18 +46,23 @@
 @property (nonatomic, assign) BOOL color_Theme;
 @property (nonatomic, strong) NSTimer* timer;
 @end
-
+static int number_page = 0;
 @implementation DramaStarDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"动态";
+    self.dataSource = [NSMutableArray array];
     self.serverManager = [ServerManager sharedInstance];
     [self.view addSubview:self.mainTable];
     [self.view addSubview:self.tailView];
     // Do any additional setup after loading the view.
-    
-    [self get_actor_dongtaiData:@"0"];
+    self.videoTable.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self get_actor_dongtaiData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+     [self.videoTable.mj_header beginRefreshing];
   
     _count =0;
 }
@@ -159,15 +167,15 @@
     [super viewWillAppear:animated];
     // 关闭自动调整scrollView的内边距
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.navigationController.navigationBar.translucent = YES;
     // 隐藏导航栏,给导航栏设置空的图片
-    if (self.color_Theme == YES) {
+     NSLog(@"self.color_Theme%d",self.color_Theme);
+    if (self.mainTable.contentOffset.y > 165) {
         UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:1]];
         [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-         self.navigationController.navigationBar.translucent = YES;
+        
     }else{
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.translucent = YES;
     }
     
     
@@ -431,16 +439,27 @@
 
 
 - (void)get_actor_dongtaiData:(NSString *)page{
-    self.dataSource = [NSMutableArray array];
-    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"actor_id":self.drama.userID,@"page":@"0"};
+    NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"actor_id":self.drama.userID,@"page":page};
     [self.serverManager AnimatedGET:@"get_actor_dongtai.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50030) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 StarVideo *model = [StarVideo starVideoWithDic:dic];
                 [self.dataSource addObject:model];
             }
-            [self.mainTable reloadData];
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.videoTable.mj_footer = nil;
+            }else {
+                if (!self.videoTable.mj_footer) {
+                    self.videoTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        NSLog(@"numberPage = %d",number_page);
+                        [self get_actor_dongtaiData:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+                }
+            }
             [self.videoTable reloadData];
+            [self.videoTable.mj_header endRefreshing];
+            [self.videoTable.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -465,9 +484,10 @@
         [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
         if (offsetY < 165) {
             self.mainTable.contentOffset = CGPointMake(0, offsetY +5);
-
-        }else if (offsetY >=165)
+                }else if (offsetY >=165)
              self.mainTable.contentOffset = CGPointMake(0, 165);
+       
+
     }
     if (scrollView == self.mainTable) {
     CGFloat offsetY = self.mainTable.contentOffset.y;
@@ -484,13 +504,14 @@
     CGFloat alpha = 0;
     if (height <= kHeadMinHeight ) {
         alpha = 0.99;
-        self.color_Theme = NO;
+
+
+       
     } else {
         alpha = 0;
 //        [self.videoTable setScrollEnabled:YES];
 //        [self.mainTable setScrollEnabled:YES];
-        self.color_Theme = YES;
-     
+        
     }
          UIImage *image = [UIImage imageWithColor:[UIColor colorWithRed:229/255.0 green:72/255.0 blue:99/ 255.0 alpha:alpha]];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
@@ -518,7 +539,14 @@
         }
         else
         {
-            [self presentViewController:[Tools showAlert:responseObject[@"msg"]] animated:YES completion:nil];
+            UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的余额不足" preferredStyle:UIAlertControllerStyleAlert];
+            [alertCon addAction:[UIAlertAction actionWithTitle:@"去充值" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                WalletTableViewController *wallCon = [[WalletTableViewController alloc]init];
+                [self.navigationController pushViewController:wallCon animated:YES];
+            }]];
+            [alertCon addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            }]];
+            [self presentViewController:alertCon animated:YES completion:nil];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

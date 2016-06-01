@@ -14,18 +14,27 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
 #import "SignUpMessageTableViewController.h"
+#import <MJRefresh.h>
+#import "GifRefresher.h"
 @interface TrainingTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) UITableView *trainTableView;
 @end
-
+static int number_page = 0;
 @implementation TrainingTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.serverManager = [ServerManager sharedInstance];
     [self.view addSubview:self.trainTableView];
+    self.dataSource = [NSMutableArray array];
+    self.trainTableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self getTrainData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    [self.trainTableView.mj_header beginRefreshing];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -50,7 +59,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getTrainData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -102,8 +110,7 @@
     [self.navigationController pushViewController:traDetailCon animated:YES];
 }
 
-- (void)getTrainData{
-    self.dataSource = [NSMutableArray array];
+- (void)getTrainData:(NSString *)page{
     NSDictionary *params = @{@"access_token":_serverManager.accessToken};
     [self.serverManager AnimatedGET:@"get_train_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 40000) {
@@ -111,7 +118,19 @@
                 Training *train =  [Training dataWithDic:dic];
                 [self.dataSource addObject:train];
             }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.trainTableView.mj_footer = nil;
+            }else {
+                if (!self.trainTableView.mj_footer) {
+                    self.trainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self getTrainData:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+                }
+            }
             [self.trainTableView reloadData];
+            [self.trainTableView.mj_header endRefreshing];
+            [self.trainTableView.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);

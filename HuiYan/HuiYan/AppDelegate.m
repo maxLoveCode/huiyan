@@ -79,16 +79,15 @@
     if (user_id) {
         NSSet *set = [[NSSet alloc] initWithObjects:@"ios",nil];
         [JPUSHService setTags:set alias:user_id fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
-            NSString *callbackString =
-            [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
-             [self logSet:iTags], iAlias];
-            NSLog(@"TagsAlias回调:%@", callbackString);
+           // NSString *callbackString = [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,
+             //[self logSet:iTags], iAlias];
+           // NSLog(@"TagsAlias回调:%@", callbackString);
         }];
     }
     
     [JPUSHService setupWithOption:launchOptions appKey:@"f84d27fb2c1b2db531924006"
                           channel:@"Publish channel"
-                 apsForProduction:YES
+                 apsForProduction:false
             advertisingIdentifier:nil];
     
     
@@ -104,9 +103,9 @@
             NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
             chatUsers* chats = [chatUsers instance];
             NSArray* conversationList = [[RCIMClient sharedRCIMClient]getConversationList:@[@1]];
-            NSLog(@"conversationList is %@", conversationList);
+           // NSLog(@"conversationList is %@", conversationList);
             for (RCConversation* target  in conversationList) {
-                NSLog(@"target :%@", target);
+              //  NSLog(@"target :%@", target);
                 [chats getUserInfoWithUserId:[target targetId] completion:^(RCUserInfo *userInfo) {
                     	
                 }];
@@ -157,7 +156,7 @@
         }
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+           // NSLog(@"result = %@",resultDic);
         }];
     }
     
@@ -233,7 +232,7 @@ fetchCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService handleRemoteNotification:userInfo];
-     NSLog(@"+++++++++收到通知:%@", [self logDic:userInfo]);
+   //  NSLog(@"+++++++++收到通知:%@", [self logDic:userInfo]);
     
 }
 
@@ -252,7 +251,7 @@ fetchCompletionHandler:
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    NSLog(@"\n ===> 程序进入前台 !");
+   // NSLog(@"\n ===> 程序进入前台 !");
     [application cancelAllLocalNotifications];
 }
 

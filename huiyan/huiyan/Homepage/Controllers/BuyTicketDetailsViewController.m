@@ -17,6 +17,7 @@
 #import "MoreDetailsTableViewCell.h"
 #import "ArticalViewController.h"
 #import "ChangeRondaTableViewController.h"
+#import "WriteCommentViewController.h"
 @interface BuyTicketDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *ticketTableView;
 @property (nonatomic, strong) NSArray *head_title_arr;
@@ -155,7 +156,7 @@
         return 32;
     }else{
         if (indexPath.section == 3 && indexPath.row < self.dataSource.count) {
-            return 70;
+            return 80;
         }
             return 32;
 
@@ -203,14 +204,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    
     if (indexPath.section == 0) {
     BuyTicketDetailsTableViewCell *bt_cell
         = [tableView dequeueReusableCellWithIdentifier:@"ticket" forIndexPath:indexPath];
            bt_cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [bt_cell.contentView  setBackgroundColor:[UIColor whiteColor]];
-        [bt_cell.writeComment_btn addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
+        [bt_cell.writeComment_btn addTarget:self action:@selector(writeComment:) forControlEvents:UIControlEventTouchUpInside];
+        [bt_cell.share_btn addTarget:self action:@selector(shareTicket:) forControlEvents:UIControlEventTouchUpInside];
     [bt_cell setContent:self.ticket];
         return bt_cell;
     }else if(indexPath.section == 1){
@@ -231,7 +231,7 @@
             return cell;
             
         }else{
-            MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail" forIndexPath:indexPath];
+            MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -257,7 +257,7 @@
             return cell;
         }
         
-    }else{
+    }else if(indexPath.section == 3){
         if (indexPath.row < self.dataSource.count) {
             CommentContent *model = self.dataSource[indexPath.row];
             TicketCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment" forIndexPath:indexPath];
@@ -265,13 +265,14 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
 
-        }else{
+        }else if(indexPath.row == self.dataSource.count){
             MoreDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moreDetail" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         
     }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -340,8 +341,15 @@
     [self.navigationController pushViewController:rondaCon animated:YES];
 }
 
-- (void)confirm:(UIButton *)sender{
-    
+- (void)writeComment:(UIButton *)sender{
+    WriteCommentViewController *writeCon = [[WriteCommentViewController alloc]init];
+    writeCon.writeType = @"ticket";
+    writeCon.buyTicket = self.ticket;
+    [self.navigationController pushViewController:writeCon animated:YES];
+}
+
+- (void)shareTicket:(UIButton *)sender{
+    NSLog(@"分享");
 }
 
 @end

@@ -10,4 +10,5 @@
 
 @interface SettingTableViewController : UITableViewController
 @property (nonatomic,strong) UIButton *exitBtn;
+@property (nonatomic, strong) NSString *versionNumber;
 @end

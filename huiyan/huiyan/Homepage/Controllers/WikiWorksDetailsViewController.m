@@ -15,12 +15,15 @@
 #import "ZFPlayer.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "NewHomePageDetailCellTableViewCell.h"
+#import "ServerManager.h"
 #define kHeadHeight 187
 @interface WikiWorksDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *wikiDetailsTableView;
 @property (strong, nonatomic) ZFPlayerView *playerView;
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, assign) CGFloat height;
+@property (nonatomic, strong) UIButton *likeBtn;
+@property (nonatomic, strong) ServerManager *serverManager;
 @end
 
 @implementation WikiWorksDetailsViewController
@@ -29,7 +32,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor  = [UIColor whiteColor];
-    
+    self.serverManager = [ServerManager sharedInstance];
     //NSLog(@"%@",self.homePage.type);
     [[UIDevice currentDevice] setValue:
      [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
@@ -202,6 +205,8 @@
     if (indexPath.section == 0) {
         
         NewHomePageDetailCellTableViewCell *homecell = [tableView dequeueReusableCellWithIdentifier:@"homepage"];
+        self.likeBtn = homecell.good_btn;
+        [self.likeBtn addTarget:self action:@selector(dropZan:) forControlEvents:UIControlEventTouchUpInside];
         [homecell setContent:self.homePage];
            homecell.selectionStyle = UITableViewCellSelectionStyleNone;
             return homecell;
@@ -250,6 +255,31 @@
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+
+}
+
+- (void)dropZan:(UIButton *)sender{
+        NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"type":@"play_count",@"wid":[NSString stringWithFormat:@"%ld",(long)self.homePage.ID]};
+    NSLog(@"-----%@",parameters);
+        [self.serverManager AnimatedPOST:@"inc_wiki_pls.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 20020) {
+            if ([self.homePage.is_like isEqualToString:@"1"]) {
+                [self.likeBtn setImage:[UIImage imageNamed:@"heart"] forState:UIControlStateNormal];
+                self.homePage.is_like = @"0";
+                self.homePage.like_count = [NSString stringWithFormat:@"%d",[self.homePage.like_count intValue]- 1];
+                [self.likeBtn setTitle:self.homePage.like_count forState:UIControlStateNormal];
+                
+            }else{
+                [self.likeBtn setImage:[UIImage imageNamed:@"heartlike"] forState:UIControlStateNormal];
+                self.homePage.is_like = @"1";
+                self.homePage.like_count = [NSString stringWithFormat:@"%d",[self.homePage.like_count intValue]+ 1];
+                [self.likeBtn setTitle:self.homePage.like_count forState:UIControlStateNormal];
+            }
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error = %@",error);
+        }];
+    
 
 }
 

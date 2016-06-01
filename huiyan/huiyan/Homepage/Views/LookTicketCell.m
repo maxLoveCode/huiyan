@@ -104,7 +104,7 @@
 - (UIImageView *)barCode_pic{
     if (!_barCode_pic) {
         self.barCode_pic = [[UIImageView alloc]init];
-        self.barCode_pic.backgroundColor = [UIColor redColor];
+      //  self.barCode_pic.backgroundColor = [UIColor redColor];
     }
     return _barCode_pic;
 }

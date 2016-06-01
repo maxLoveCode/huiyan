@@ -36,7 +36,7 @@
     self.serverManager = [ServerManager sharedInstance];
     [self get_recharge_diamondData];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"wallet"];
-    
+     self.navigationController.navigationBar.translucent = NO;
     self.title = @"我的钱包";
     [self getBasicInfo];
     select = 0;
@@ -51,13 +51,15 @@
 {
     [self.tabBarController setHidden:YES];
     [super viewWillAppear:YES];
-    [self.tableView setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+   
+    //[self.tableView setFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.tabBarController setHidden:NO];
     [super viewWillDisappear:YES];
+    self.navigationController.navigationBar.translucent = YES;
+
 }
 
 #pragma setter

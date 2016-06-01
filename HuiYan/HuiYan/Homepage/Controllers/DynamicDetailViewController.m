@@ -16,6 +16,8 @@
 #import <Masonry/Masonry.h>
 #import "ZFPlayer.h"
 #import "WriteCommentViewController.h"
+#import <MJRefresh.h>
+#import "GifRefresher.h"
 @interface DynamicDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)ServerManager *serverManager;
 @property (nonatomic, assign)CGFloat headPic;
@@ -25,7 +27,7 @@
 @property (strong, nonatomic) ZFPlayerView *playerView;
 
 @end
-
+static int number_page = 0;
 @implementation DynamicDetailViewController
 
 - (void)viewDidLoad {
@@ -33,6 +35,14 @@
     self.title = @"动态详情";
     self.view.backgroundColor  = [UIColor whiteColor];
       [self.view addSubview:self.tableView];
+    self.serverManager = [ServerManager sharedInstance];
+    self.dataSource = [NSMutableArray array];
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self get_dongtai_commentData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    [self.tableView.mj_header beginRefreshing];
 //
     // Do any additional setup after loading the view.
 }
@@ -42,8 +52,7 @@
     if ([self.starVideo.type isEqualToString:@"movie"]) {
         [self setVideoView];
     }
-    self.serverManager = [ServerManager sharedInstance];
-    [self get_dongtai_commentData:@"0"];
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -65,7 +74,7 @@
     }];
     
     self.playerView = [[ZFPlayerView alloc] init];
-    self.playerView.backgroundColor = [UIColor redColor];
+  //  self.playerView.backgroundColor = [UIColor redColor];
     [self.view addSubview: self.playerView];
     [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(0);
@@ -142,7 +151,7 @@
         }else{
         self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height );
         }
-        self.tableView.bounces = NO;
+       // self.tableView.bounces = NO;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"head"];
@@ -232,7 +241,7 @@
             UIImageView *headView = [cell viewWithTag:1000];
             if (!headView) {
                 headView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 0)];
-                headView.backgroundColor = [UIColor redColor];
+              //  headView.backgroundColor = [UIColor redColor];
                 [cell.contentView addSubview:headView];
                 headView.tag = 1000;
             }
@@ -340,6 +349,8 @@
                 headView .contentSize = CGSizeMake(kScreen_Width * self.starVideo.content.count, kScreen_Width / 16 * 9);
                 for (int i = 0; i < self.starVideo.content.count; i++) {
                     UIImageView *imagePic = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width * i, 0, kScreen_Width, kScreen_Width / 16 * 9)];
+                    imagePic.backgroundColor = [UIColor groupTableViewBackgroundColor];
+                    imagePic.contentMode = UIViewContentModeScaleAspectFit;
                      [imagePic sd_setImageWithURL:[NSURL URLWithString:self.starVideo.content[i]]];
                     [headView addSubview:imagePic];
                 }
@@ -390,14 +401,17 @@
         
     }else{
         DynamicCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"comment"];
-        CGSize size =  [[self.dataSource[indexPath.row] objectForKey:@"comment"] boundingRectWithSize:CGSizeMake(kScreen_Width - 30, MAXFLOAT)
-                                                     options:NSStringDrawingUsesLineFragmentOrigin
-                                                  attributes:@{
-                                                               NSFontAttributeName :kFONT14
-                                                               }
-                                                     context:nil].size;
-        self.comment = size.height;
-        [cell setContent:self.dataSource[indexPath.row]];
+        if (self.dataSource.count > 0) {
+            CGSize size =  [[self.dataSource[indexPath.row] objectForKey:@"comment"] boundingRectWithSize:CGSizeMake(kScreen_Width - 30, MAXFLOAT)
+                                                                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                                                                               attributes:@{
+                                                                                                            NSFontAttributeName :kFONT14
+                                                                                                            }
+                                                                                                  context:nil].size;
+            self.comment = size.height;
+            [cell setContent:self.dataSource[indexPath.row]];
+        }
+       
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -433,6 +447,7 @@
 - (void)writeComment:(UIButton *)sender{
     WriteCommentViewController *commentCon = [[WriteCommentViewController alloc]init];
     commentCon.starVideo = self.starVideo;
+    commentCon.writeType = @"dramaStar";
     [self.navigationController pushViewController:commentCon animated:YES];
 }
 
@@ -440,9 +455,26 @@
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"did":self.starVideo.ID,@"page":page};
     [self.serverManager AnimatedGET:@"get_dongtai_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50080) {
-            self.dataSource = responseObject[@"data"];
+            NSArray *data = responseObject[@"data"];
+            for (NSDictionary *dic in data) {
+                [self.dataSource addObject:dic];
+            }
         }
+        
+        if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+            self.tableView.mj_footer = nil;
+        }else {
+            if (!self.tableView.mj_footer) {
+                self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                    number_page ++;
+                    [self get_dongtai_commentData:[NSString stringWithFormat:@"%d",number_page]];
+                }];
+            }
+        }
+
         [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];

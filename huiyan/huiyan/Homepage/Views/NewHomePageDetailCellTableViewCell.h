@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *name_lab;
 @property (weak, nonatomic) IBOutlet UILabel *actor_lab;
 @property (weak, nonatomic) IBOutlet UIButton *play_btn;
-@property (weak, nonatomic) IBOutlet UIButton *good_btn;
+@property (strong, nonatomic) UIButton *good_btn;
 @property (weak, nonatomic) IBOutlet UIButton *relay_btn;
 - (void)setContent:(HomePage *)model;
 @end

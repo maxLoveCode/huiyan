@@ -11,8 +11,10 @@
 #import "ArticleTableViewCell.h"
 #import "Constant.h"
 #import "WikiWorksDetailsViewController.h"
+#import "ServerManager.h"
+#import "HomePage.h"
 @interface WikiArtcleTableViewController ()
-
+@property (nonatomic, strong) ServerManager *serverManager;
 @end
 
 @implementation WikiArtcleTableViewController
@@ -20,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"WikiArticalTableViewController");
-    
+    self.serverManager = [ServerManager sharedInstance];
     [self.tableView registerClass:[ArticleTableViewCell class] forCellReuseIdentifier:@"article"];
     self.tableView.rowHeight = [ArticleTableViewCell cellHeight];
     self.tableView.frame = CGRectMake(kScreen_Width, 10, kScreen_Width, kScreen_Height - 41 - 48 - 44 + 20);
@@ -59,18 +61,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    ArticleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"article" forIndexPath:indexPath];
-    
-    [cell setContent:self.dataSource[indexPath.row]];
-    
+    if (self.dataSource.count > 0) {
+         [cell setContent:self.dataSource[indexPath.row]];
+    }
     // Configure the cell...
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
-    wikiCon.homePage = self.dataSource[indexPath.row];
+    if (self.dataSource.count > 0) {
+         wikiCon.homePage = self.dataSource[indexPath.row];
+    }
+   
+    HomePage *homepage = self.dataSource[indexPath.row];
+    [self getwiki_plsData:homepage];
     self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:wikiCon animated:YES];
+}
+
+- (void)getwiki_plsData:(HomePage *)homePage{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"type":@"play_count",@"wid":[NSString stringWithFormat:@"%ld",(long)homePage.ID]};
+    [self.serverManager AnimatedPOST:@"inc_wiki_pls.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 20020) {
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
 }
 
 /*
