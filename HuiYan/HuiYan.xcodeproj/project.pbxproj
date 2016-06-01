@@ -21,6 +21,7 @@
 		25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */; };
 		25C20E3D1CF6F1DC009BA46C /* FriendsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C20E3C1CF6F1DC009BA46C /* FriendsDetailViewController.m */; };
 		25C216581CDB2246007C69BB /* chatUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C216571CDB2246007C69BB /* chatUsers.m */; };
+		25C5068C1CFEF059008E5634 /* PendingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C5068B1CFEF059008E5634 /* PendingListViewController.m */; };
 		25C625331CBCFA3E0068BFE8 /* qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252D1CBCFA3E0068BFE8 /* qq.png */; };
 		25C625341CBCFA3E0068BFE8 /* qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */; };
 		25C625351CBCFA3E0068BFE8 /* qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C6252F1CBCFA3E0068BFE8 /* qq@3x.png */; };
@@ -410,6 +411,8 @@
 		25C20E3C1CF6F1DC009BA46C /* FriendsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsDetailViewController.m; sourceTree = "<group>"; };
 		25C216561CDB2246007C69BB /* chatUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chatUsers.h; path = huiyan/Homepage/Models/chatUsers.h; sourceTree = SOURCE_ROOT; };
 		25C216571CDB2246007C69BB /* chatUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = chatUsers.m; path = huiyan/Homepage/Models/chatUsers.m; sourceTree = SOURCE_ROOT; };
+		25C5068A1CFEF059008E5634 /* PendingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingListViewController.h; sourceTree = "<group>"; };
+		25C5068B1CFEF059008E5634 /* PendingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingListViewController.m; sourceTree = "<group>"; };
 		25C6252D1CBCFA3E0068BFE8 /* qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq.png; sourceTree = "<group>"; };
 		25C6252E1CBCFA3E0068BFE8 /* qq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@2x.png"; sourceTree = "<group>"; };
 		25C6252F1CBCFA3E0068BFE8 /* qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@3x.png"; sourceTree = "<group>"; };
@@ -1806,6 +1809,8 @@
 				25C20E3C1CF6F1DC009BA46C /* FriendsDetailViewController.m */,
 				25DCB1171CFBDC3E00F4A63E /* followListController.h */,
 				25DCB1181CFBDC3E00F4A63E /* followListController.m */,
+				25C5068A1CFEF059008E5634 /* PendingListViewController.h */,
+				25C5068B1CFEF059008E5634 /* PendingListViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2466,6 +2471,7 @@
 				25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */,
 				55C41DF61CE305800055A58B /* ImportantNotesCell.m in Sources */,
 				5556CC0F1CD8992B00CCD668 /* LookTicketDetailViewController.m in Sources */,
+				25C5068C1CFEF059008E5634 /* PendingListViewController.m in Sources */,
 				55A43E821CEC04AC00BB73EF /* DramaStarHeadView.m in Sources */,
 				25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */,
 				25B6B37D1CB51380000F99F1 /* MCSwipeMenu.m in Sources */,
@@ -2722,7 +2728,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b5ece549-1a3a-4efc-875f-6dcea5b73b51";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2770,7 +2776,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b5ece549-1a3a-4efc-875f-6dcea5b73b51";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
