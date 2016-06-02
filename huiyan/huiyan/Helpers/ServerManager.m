@@ -8,7 +8,6 @@
 //
 
 #import "ServerManager.h"
-
 #ifdef DEBUG
     #define _BASE_URL @"http://139.196.32.98/huiyan"
 #else
@@ -83,7 +82,6 @@ NSString *const version = @"api1_0";
 {
     
     [self GET:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
-        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
           success(task, responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

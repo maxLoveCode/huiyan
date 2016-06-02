@@ -13,6 +13,7 @@ pod 'AMapSearch’,’~> 3.3.0’
 pod 'AMapLocation’,’~> 1.2.2'
 pod 'AMap2DMap’,’~> 3.3.0’
 pod 'RongCloudIMKit’,’~> 2.5.0'
+pod 'TSMessagesNW’,’~> 0.9.15'
 end
 
 target 'huiyanTests' do
