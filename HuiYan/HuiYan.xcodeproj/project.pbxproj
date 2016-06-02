@@ -2106,6 +2106,7 @@
 		55CCD77E1CB3640500C3B8CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = com.huayin;
 				TargetAttributes = {
@@ -2737,7 +2738,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b5ece549-1a3a-4efc-875f-6dcea5b73b51";
+				PROVISIONING_PROFILE = "11abf5d9-4809-4c52-815c-cc830c3f4c81";
 			};
 			name = Debug;
 		};
@@ -2786,7 +2787,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b5ece549-1a3a-4efc-875f-6dcea5b73b51";
+				PROVISIONING_PROFILE = "11abf5d9-4809-4c52-815c-cc830c3f4c81";
 			};
 			name = Release;
 		};
