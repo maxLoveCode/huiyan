@@ -13,6 +13,7 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "Constant.h"
 #import <MJRefresh.h>
+#import "GifRefresher.h"
 @interface MoreCommentTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -24,19 +25,11 @@ static int number_page = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataSource = [[NSMutableArray alloc]init];;
-    self.tableView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64);
-    self.tableView.rowHeight = 70;
         self.serverManager = [ServerManager sharedInstance];
-    [self get_opera_commentData:@"0"];
-    [self.tableView registerClass:[TicketCommentTableViewCell class] forCellReuseIdentifier:@"comment"];
        [self.view addSubview:self.tableView];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
-        [self get_opera_commentData:[NSString stringWithFormat:@"%d",number_page]];
-    }];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        number_page ++;
         [self get_opera_commentData:[NSString stringWithFormat:@"%d",number_page]];
     }];
     [self.tableView.mj_header beginRefreshing];
@@ -52,6 +45,8 @@ static int number_page = 0;
         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
+        [self.tableView registerClass:[TicketCommentTableViewCell class] forCellReuseIdentifier:@"comment"];
+        self.tableView.rowHeight = 80;
     }
     return _tableView;
 }
@@ -107,6 +102,16 @@ static int number_page = 0;
             for (NSDictionary *dic in data) {
                 CommentContent *model = [CommentContent dataWithDic:dic];
                 [self.dataSource addObject:model];
+            }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.tableView.mj_footer = nil;
+            }else {
+                if (!self.tableView.mj_footer) {
+                    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self get_opera_commentData:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+                }
             }
             [self.tableView reloadData];
              [self.tableView.mj_header endRefreshing];

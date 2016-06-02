@@ -107,7 +107,7 @@
 - (UIImageView *)more_img{
     if (!_more_img) {
         self.more_img = [[UIImageView alloc]init];
-        self.more_img.backgroundColor = [UIColor redColor];
+      //  self.more_img.backgroundColor = [UIColor redColor];
     }
     return _more_img;
 }

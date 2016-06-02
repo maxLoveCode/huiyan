@@ -15,14 +15,17 @@
 #import "BuyTicketDetailsViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "ChangeRondaTableViewController.h"
+#import <MJRefresh.h>
+#import "GifRefresher.h"
 #define ticketHeight 132
 @interface TicketBoxViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
 @property (nonatomic, strong) UITableView *ticketBoxTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) MCSwipeMenu *head_view;
+@property (nonatomic, copy) NSString *cidType;
 @end
-
+static int number_page = 0;
 @implementation TicketBoxViewController
 
 - (void)viewDidLoad {
@@ -31,8 +34,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.head_view];
     [self.view addSubview:self.ticketBoxTableView];
+     self.cidType = @"0";
+        self.dataSource = [NSMutableArray array];
     _serverManager = [ServerManager sharedInstance];
-    [self getDataTicket:@"0"];
+    self.ticketBoxTableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self getDataTicket:self.cidType page:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    [self.ticketBoxTableView.mj_header beginRefreshing];
 
 }
 
@@ -129,8 +139,7 @@
     }];
 }
 
-- (void)getDataTicket:(NSString *)cid{
-    _dataSource = [NSMutableArray array];
+- (void)getDataTicket:(NSString *)cid page:(NSString *)page{
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,@"cid":cid};
     [_serverManager AnimatedGET:@"get_opera_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30010) {
@@ -138,7 +147,19 @@
                 BuyTicket *model = [BuyTicket dataWithDic:dic];
                 [_dataSource addObject:model];
             }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.ticketBoxTableView.mj_footer = nil;
+            }else {
+                if (!self.ticketBoxTableView.mj_footer) {
+                    self.ticketBoxTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self getDataTicket:self.cidType page:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+                }
+            }
             [self.ticketBoxTableView reloadData];
+            [self.ticketBoxTableView.mj_header endRefreshing];
+            [self.ticketBoxTableView.mj_footer endRefreshing];
             
         }
         
@@ -159,7 +180,9 @@
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableArray *source = menu.dataSource;
     NSString *cate = [source[indexPath.item]objectForKey:@"id"];
-    [self getDataTicket:cate];
+     self.cidType = cate;
+     number_page = 0;
+    [self.ticketBoxTableView.mj_header beginRefreshing];
 }
 
 

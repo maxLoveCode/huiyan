@@ -49,13 +49,17 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.name_lab.frame = CGRectMake(kMargin, 0, kScreen_Width - 2 * kMargin, 12*1.5);
+    self.name_lab.frame = CGRectMake(kMargin, 5, kScreen_Width - 2 * kMargin, 12*1.5);
     self.comment_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.name_lab.frame), kScreen_Width - 2* kMargin, 24 * 1.5);
     self.time_lab.frame = CGRectMake(kMargin, CGRectGetMaxY(self.comment_lab.frame), kScreen_Width - 2 * kMargin, 15);
 }
 
 - (void)setContent:(CommentContent *)comment{
+    if ([comment.user_name isEqualToString:@""] || comment.user_name == nil) {
+        self.name_lab.text = @"匿名";
+    }else{
     self.name_lab.text = comment.user_name;
+    }
     self.comment_lab.text = comment.content;
     self.time_lab.text = comment.createtime;
 }

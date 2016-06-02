@@ -12,6 +12,7 @@
 
 +(HomePage* )parseDramaJSON:(NSDictionary*)json
 {
+  
     HomePage* drama = [[HomePage alloc] init];
     [drama setCover: [self stringFormatting:[json objectForKey:@"cover"]]];
     [drama setContent:[json objectForKey:@"content"]];
@@ -21,7 +22,7 @@
     if ([drama.cover_1 isEqualToString:@""]) {
         [drama setCover_1:drama.cover];
     }
-    [drama setID:(NSInteger*)[[json objectForKey:@"id"] integerValue]];
+    [drama setID:[[json objectForKey:@"id"] integerValue]];
     [drama setActor:[json objectForKey:@"actor"]];
     [drama setTitle:[json objectForKey:@"title"]];
     [drama setProfile:[json objectForKey:@"profile"]];
@@ -29,6 +30,7 @@
     drama.like_count = json[@"like_count"];
     drama.play_count = json[@"play_count"];
     drama.share_count = json[@"share_count"];
+    drama.is_like = json[@"is_like"];
     return drama;
 }
 

@@ -112,7 +112,7 @@
     [xml startParse:d];
     NSMutableDictionary *resParams = [xml getDict];
     //判断返回
-    NSLog(@"%@, %@",resParams, [resParams objectForKey:@"return_msg"]);
+  //  NSLog(@"%@, %@",resParams, [resParams objectForKey:@"return_msg"]);
     NSString *return_code   = [resParams objectForKey:@"return_code"];
     NSString *result_code   = [resParams objectForKey:@"result_code"];
     if ([return_code isEqualToString:@"SUCCESS"] && [result_code isEqualToString:@"SUCCESS"]) {

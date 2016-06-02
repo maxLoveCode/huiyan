@@ -32,7 +32,6 @@
 		25C625431CBE002E0068BFE8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6253E1CBE002E0068BFE8 /* LoginViewController.m */; };
 		25C625441CBE002E0068BFE8 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625421CBE002E0068BFE8 /* LoginView.m */; };
 		25C625471CBE00460068BFE8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625461CBE00460068BFE8 /* User.m */; };
-		25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C6254A1CBE1C650068BFE8 /* StarDetailViewController.m */; };
 		25C625511CBE1F8F0068BFE8 /* StarVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625501CBE1F8F0068BFE8 /* StarVideoTableViewCell.m */; };
 		25C625541CBE48B90068BFE8 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625531CBE48B90068BFE8 /* ExploreViewController.m */; };
 		25C625571CBE48C90068BFE8 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C625561CBE48C90068BFE8 /* FriendsViewController.m */; };
@@ -63,6 +62,10 @@
 		25DCB1191CFBDC3E00F4A63E /* followListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DCB1181CFBDC3E00F4A63E /* followListController.m */; };
 		25E07DB81CB65D180015AD73 /* ArticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E07DB71CB65D180015AD73 /* ArticalViewController.m */; };
 		55067FE71CFD24CD00E574B7 /* InvitationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55067FE61CFD24CD00E574B7 /* InvitationDetailViewController.m */; };
+		55067FEA1CFD7C7000E574B7 /* shareTicket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55067FE81CFD7C7000E574B7 /* shareTicket@2x.png */; };
+		55067FEB1CFD7C7000E574B7 /* shareTicket@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55067FE91CFD7C7000E574B7 /* shareTicket@3x.png */; };
+		55067FEE1CFD977200E574B7 /* heartlike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55067FEC1CFD977200E574B7 /* heartlike@2x.png */; };
+		55067FEF1CFD977200E574B7 /* heartlike@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55067FED1CFD977200E574B7 /* heartlike@3x.png */; };
 		550BF97C1CB8ED6600E2E9DE /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */; };
 		550BF97D1CB8ED6600E2E9DE /* ZFPlayerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9771CB8ED6600E2E9DE /* ZFPlayerSingleton.m */; };
 		550BF97E1CB8ED6600E2E9DE /* ZFPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 550BF9791CB8ED6600E2E9DE /* ZFPlayerControlView.m */; };
@@ -427,8 +430,6 @@
 		25C625421CBE002E0068BFE8 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		25C625451CBE00460068BFE8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		25C625461CBE00460068BFE8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		25C625491CBE1C650068BFE8 /* StarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarDetailViewController.h; sourceTree = "<group>"; };
-		25C6254A1CBE1C650068BFE8 /* StarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarDetailViewController.m; sourceTree = "<group>"; };
 		25C6254F1CBE1F8F0068BFE8 /* StarVideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarVideoTableViewCell.h; sourceTree = "<group>"; };
 		25C625501CBE1F8F0068BFE8 /* StarVideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarVideoTableViewCell.m; sourceTree = "<group>"; };
 		25C625521CBE48B90068BFE8 /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
@@ -472,6 +473,10 @@
 		3500AD8F3B45BD551DB23170 /* Pods-huiyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huiyan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-huiyan/Pods-huiyan.debug.xcconfig"; sourceTree = "<group>"; };
 		55067FE51CFD24CD00E574B7 /* InvitationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationDetailViewController.h; sourceTree = "<group>"; };
 		55067FE61CFD24CD00E574B7 /* InvitationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationDetailViewController.m; sourceTree = "<group>"; };
+		55067FE81CFD7C7000E574B7 /* shareTicket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareTicket@2x.png"; sourceTree = "<group>"; };
+		55067FE91CFD7C7000E574B7 /* shareTicket@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareTicket@3x.png"; sourceTree = "<group>"; };
+		55067FEC1CFD977200E574B7 /* heartlike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heartlike@2x.png"; sourceTree = "<group>"; };
+		55067FED1CFD977200E574B7 /* heartlike@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heartlike@3x.png"; sourceTree = "<group>"; };
 		550BF9731CB8ED5C00E2E9DE /* ZFPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayer.h; sourceTree = "<group>"; };
 		550BF9741CB8ED6600E2E9DE /* ZFPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerView.h; sourceTree = "<group>"; };
 		550BF9751CB8ED6600E2E9DE /* ZFPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerView.m; sourceTree = "<group>"; };
@@ -1539,8 +1544,6 @@
 				25B6B37C1CB51380000F99F1 /* MCSwipeMenu.m */,
 				25E07DB61CB65D180015AD73 /* ArticalViewController.h */,
 				25E07DB71CB65D180015AD73 /* ArticalViewController.m */,
-				25C625491CBE1C650068BFE8 /* StarDetailViewController.h */,
-				25C6254A1CBE1C650068BFE8 /* StarDetailViewController.m */,
 				5964F1CC1CF577C500E436CE /* DramaStarDetailViewController.h */,
 				5964F1CD1CF577C500E436CE /* DramaStarDetailViewController.m */,
 				5964F1D51CF5964100E436CE /* DynamicDetailViewController.h */,
@@ -1587,6 +1590,10 @@
 		55CCD7D21CB3871800C3B8CA /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				55067FEC1CFD977200E574B7 /* heartlike@2x.png */,
+				55067FED1CFD977200E574B7 /* heartlike@3x.png */,
+				55067FE81CFD7C7000E574B7 /* shareTicket@2x.png */,
+				55067FE91CFD7C7000E574B7 /* shareTicket@3x.png */,
 				5923EE0B1CFC4BBD005F6A33 /* actvity@2x.png */,
 				5923EE0C1CFC4BBD005F6A33 /* actvity@3x.png */,
 				5923EE091CFC1B5C005F6A33 /* dramavideo@2x.png */,
@@ -2110,6 +2117,11 @@
 					55CCD7851CB3640500C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 8WV7FK6JAM;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					55CCD79E1CB3640600C3B8CA = {
 						CreatedOnToolsVersion = 7.3;
@@ -2152,6 +2164,7 @@
 				25C625771CBE49C10068BFE8 /* tab_firend_selected@2x.png in Resources */,
 				558F5CAB1CBB4762006BD54D /* bg_view.png in Resources */,
 				5578A8361CEEF32200BD3061 /* no_pay.png in Resources */,
+				55067FEF1CFD977200E574B7 /* heartlike@3x.png in Resources */,
 				550BFA211CBB2AF000E2E9DE /* slider@2x.png in Resources */,
 				59934F881CF29E6800666B33 /* person@3x.png in Resources */,
 				599350091CF3027700666B33 /* noActivity.png in Resources */,
@@ -2250,6 +2263,7 @@
 				55B919211CCA1FAF00717F8E /* UMShareEditViewControlleriPad.xib in Resources */,
 				558F22CD1CE85469008636E1 /* phone@2x.png in Resources */,
 				5578A8571CF0465C00BD3061 /* pay_finish.png in Resources */,
+				55067FEB1CFD7C7000E574B7 /* shareTicket@3x.png in Resources */,
 				59934F971CF2DBA500666B33 /* playnumber@2x.png in Resources */,
 				5578A8A11CF06BCB00BD3061 /* gifrefesh1.png in Resources */,
 				550BFA0B1CBB2AF000E2E9DE /* brightness_bg.png in Resources */,
@@ -2299,6 +2313,7 @@
 				55B919201CCA1FAF00717F8E /* UMShareEditViewController.xib in Resources */,
 				591C37FE1CF6EBB100E73CB1 /* DynamicTextTableViewCell.xib in Resources */,
 				55AD32581CDB2426000ACE39 /* evaluate@2x.png in Resources */,
+				55067FEA1CFD7C7000E574B7 /* shareTicket@2x.png in Resources */,
 				55C41DF21CE2FFFD0055A58B /* WriteSignUpCell.xib in Resources */,
 				5578A8A61CF06BCB00BD3061 /* gifrefesh6.png in Resources */,
 				25C625331CBCFA3E0068BFE8 /* qq.png in Resources */,
@@ -2326,6 +2341,7 @@
 				55C41DED1CE2E11B0055A58B /* SignUp.xib in Resources */,
 				55C41E1F1CE4559A0055A58B /* around@2x.png in Resources */,
 				59EF56711CF85AE400308F78 /* information@3x.png in Resources */,
+				55067FEE1CFD977200E574B7 /* heartlike@2x.png in Resources */,
 				5923EDF01CFBD57E005F6A33 /* likewrong@2x.png in Resources */,
 				550BFA0F1CBB2AF000E2E9DE /* kr-video-player-fullscreen@3x.png in Resources */,
 				55CCD7961CB3640600C3B8CA /* Assets.xcassets in Resources */,
@@ -2530,7 +2546,6 @@
 				558F22D91CE856FB008636E1 /* MeDramaTicketViewController.m in Sources */,
 				5964F1D71CF5964100E436CE /* DynamicDetailViewController.m in Sources */,
 				55AD324F1CD9C748000ACE39 /* PayData.m in Sources */,
-				25C6254B1CBE1C650068BFE8 /* StarDetailViewController.m in Sources */,
 				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
 				5586217F1CE5BA0E007D5049 /* NewHomePageViewController.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
@@ -2774,6 +2789,7 @@
 					"$(PROJECT_DIR)/huiyan/第三方/JPush",
 					"$(PROJECT_DIR)/HuiYan/第三方/BaiduTongji",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

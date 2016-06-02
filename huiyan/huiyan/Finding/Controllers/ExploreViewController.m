@@ -82,7 +82,7 @@ static int number_page = 0;
         CLLocationCoordinate2D cll = location.coordinate;
         self.x_point = [NSString stringWithFormat:@"%f",cll.longitude];
         self.y_point = [NSString stringWithFormat:@"%f",cll.latitude];
-        NSLog(@"location:%@ x = %@ y = %@", location,self.x_point,self.y_point);
+      //  NSLog(@"location:%@ x = %@ y = %@", location,self.x_point,self.y_point);
         self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
             number_page = 0;
             [self.dataSource removeAllObjects];

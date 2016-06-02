@@ -8,7 +8,6 @@
 
 #import "MainTabBarViewController.h"
 #import "WikiWorksDetailsViewController.h"
-#import "StarDetailViewController.h"
 #import "ZFPlayer.h"
 #import "DramaStarViewController.h"
 #import "DynamicDetailViewController.h"

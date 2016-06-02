@@ -23,21 +23,13 @@
         [self.bg_view  addSubview:self.address_pic];
         [self.bg_view  addSubview:self.price_pic];
         [self.bg_view  addSubview:self.price_lab];
-        //[self addSubview:self.write_textField];
         //[self addSubview:self.collect_btn];
-        //[self addSubview:self.writeComment_btn];
+        [self addSubview:self.writeComment_btn];
         [self addSubview:self.share_btn];
     }
     return self;
 }
 
-- (UITextField *)write_textField{
-    if (!_write_textField) {
-        self.write_textField = [[UITextField alloc]init];
-        self.write_textField.placeholder = @"写点评";
-    }
-    return _write_textField;
-}
 
 - (UIImageView *)bg_view{
     if (!_bg_view) {
@@ -135,7 +127,7 @@
         self.share_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.share_btn.layer.masksToBounds = YES;
         self.share_btn.layer.cornerRadius = 1;
-        [self.share_btn setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        [self.share_btn setImage:[UIImage imageNamed:@"shareTicket"] forState:UIControlStateNormal];
     }
     return _share_btn;
 }
@@ -150,16 +142,15 @@
     self.address_pic.frame = CGRectMake(CGRectGetMinX(self.title_lab.frame) , CGRectGetMaxY(self.time_pic.frame) + 10, 14, 14);
     self.address_lab.frame = CGRectMake(CGRectGetMaxX(self.address_pic.frame) + 5, CGRectGetMinY(self.address_pic.frame) , kScreen_Width - 150, 14);
     self.price_pic.frame = CGRectMake(CGRectGetMinX(self.address_pic.frame), CGRectGetMaxY(self.address_pic.frame) + 10, 14, 14);
-    self.write_textField.frame = CGRectMake(kMargin, CGRectGetMaxY(self.bg_view.frame)+ 5, kScreen_Width / 3 * 2 - 20, 40);
     self.price_lab.frame = CGRectMake(CGRectGetMaxX(self.price_pic.frame) + 5, CGRectGetMinY(self.price_pic.frame), kScreen_Width - 150, 14);
-    self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
-    self.writeComment_btn.frame = CGRectMake(15, CGRectGetMinY(self.collect_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1 );
-    self.share_btn.frame = CGRectMake(kScreen_Width - (kScreen_Width - 80) / 3 - 15 , CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
+//    self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
+    self.writeComment_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) +10, (kScreen_Width - 50) / 2, 40 );
+    self.share_btn.frame = CGRectMake(kScreen_Width - (kScreen_Width - 50) / 2 - 15, CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 50) / 2, 40);
     
 }
 
 + (CGFloat)cellHeight{
-    return 187;
+    return 187 + 60;
 }
 
 - (void)setContent:(BuyTicket *)ticket{

@@ -242,7 +242,7 @@
     [_serverManager AnimatedPOST:url parameters:dic  success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if (isLogin == YES) {
             if ([responseObject[@"code"] integerValue] == 70010) {
-                NSLog(@"%@",responseObject[@"msg"]);
+              //  NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
                 
@@ -307,10 +307,10 @@
     }else{
 
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"mobile":self.mainview.reg_mobile.text,@"scene":@"register"};
-        NSLog(@"%@",params);
+       // NSLog(@"%@",params);
     [self.serverManager AnimatedPOST:@"send_vcode.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 90000) {
-            NSLog(@"%@",responseObject[@"msg"]);
+          //  NSLog(@"%@",responseObject[@"msg"]);
             if (!_thetimer) {
                 self.thetimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fireTimer) userInfo:nil repeats:YES];
                 self.star = [NSDate date];
@@ -350,8 +350,8 @@
         if (response.responseCode == UMSResponseCodeSuccess) {
             
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-            NSLog(@"%@",response);
-            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+          //  NSLog(@"%@",response);
+           // NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
             NSString *sex = @"0";
             if ([response.thirdPlatformUserProfile[@"gender"] isEqualToString:@"男"]) {
                 sex = @"1";
@@ -364,7 +364,7 @@
             user.nickname = snsAccount.userName;
             user.sex = sex;
             user.avatar = snsAccount.iconURL;
-            NSLog(@"%@",user);
+         //   NSLog(@"%@",user);
             [self getThird_loginData:user];
             
         }});

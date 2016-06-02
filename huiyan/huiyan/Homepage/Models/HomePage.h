@@ -10,7 +10,7 @@
 
 @interface HomePage : NSObject
 
-@property (nonatomic,assign) NSInteger *ID;
+@property (nonatomic,assign) NSInteger ID;
 
 @property (nonatomic,copy) NSString *type;
 @property (nonatomic,assign) NSInteger *cid;
@@ -29,6 +29,7 @@
 @property (nonatomic,copy) NSString *play_count;
 @property (nonatomic,copy) NSString *like_count;
 @property (nonatomic,copy) NSString *share_count;
+@property (nonatomic,copy) NSString *is_like;
 
 +(HomePage* )parseDramaJSON:(NSDictionary*)json;
 

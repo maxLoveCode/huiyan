@@ -102,7 +102,7 @@
     NSDictionary* params =@{@"access_token":_servermanager.accessToken, @"user_id":userid};
     [_servermanager AnimatedGET:@"get_fans_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         
-        NSLog(@"response %@", responseObject);
+     //   NSLog(@"response %@", responseObject);
         if ([[responseObject objectForKey:@"code"] integerValue] == 80030) {
             self.dataSource = [[NSMutableArray alloc] init];
             for (NSDictionary* ppl in responseObject[@"data"]) {

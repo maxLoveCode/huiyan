@@ -82,7 +82,7 @@
     }
     
     
-    NSLog(@"homepage will appear");
+   // NSLog(@"homepage will appear");
 }
 
 
@@ -129,7 +129,7 @@
             }completion:^(BOOL finished) {
                 if(finished)
                     self.tabBarController.tabBar.hidden = YES;
-                NSLog(@"tabbar hidden is YES");
+            //    NSLog(@"tabbar hidden is YES");
             }];
         }
     }];
@@ -399,7 +399,9 @@
             [cell.contentView addSubview:image_pic];
             image_pic.tag = 500;
         }
-          image_pic.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld",indexPath.item + 1]];
+        if (self.findIcon.count > 0) {
+            [image_pic sd_setImageWithURL:[NSURL URLWithString:self.findIcon[indexPath.item]]];
+        }
         UILabel *title_lab = [cell viewWithTag:501];
         if (!title_lab) {
             title_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(image_pic.frame)+5, kScreen_Width / 3, 16)];
@@ -497,7 +499,7 @@
               btdCon.ticket = self.ticketArr[indexPath.item];
         }
       
-        NSLog(@"%@",btdCon.ticket);
+      //  NSLog(@"%@",btdCon.ticket);
         
         [self.navigationController pushViewController:btdCon animated:NO];
     }else if (collectionView == self.wikiCollectionView){
@@ -539,7 +541,7 @@
 - (void)get_opera_listData{
     self.serverManager = [ServerManager sharedInstance];
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
-    NSLog(@"%@", parameters);
+ //   NSLog(@"%@", parameters);
     [self.serverManager AnimatedGET:@"get_opera_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
@@ -590,8 +592,8 @@
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_find_icon"};
     [self.serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 60000) {
-          //  NSLog(@"-------%@",responseObject[@"data"]);
-            self.findIcon = [responseObject[@"data"] objectForKey:@"app_find_icon"];
+          //  NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"app_find_icon"]);
+            self.findIcon = [responseObject[@"data"]objectForKey:@"value"];
             [self.menuView reloadData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

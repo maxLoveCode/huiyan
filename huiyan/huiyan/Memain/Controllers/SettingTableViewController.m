@@ -32,6 +32,8 @@
     firstSection = @[@"修改密码"];
     secondSection = @[@"去评分"];
     thirdSection = @[@"退出登录"];
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    self.versionNumber = [NSString stringWithFormat:@"版本号:  %@",version];
     
     self.navigationController.navigationBar.barTintColor = COLOR_THEME;
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -45,7 +47,7 @@
         self.exitBtn.backgroundColor = COLOR_THEME;
         [self.exitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.exitBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        self.exitBtn.frame = CGRectMake(20, 200, kScreen_Width - 40, 42);
+        self.exitBtn.frame = CGRectMake(20, 280, kScreen_Width - 40, 42);
         self.exitBtn.layer.masksToBounds = YES;
         self.exitBtn.layer.cornerRadius = 5;
         [self.exitBtn addTarget:self action:@selector(logOut) forControlEvents:UIControlEventTouchUpInside];
@@ -77,7 +79,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -95,7 +97,7 @@
 
 -(CGFloat)tableView:( UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section !=2) {
+    if (indexPath.section !=3) {
         return 44;
     }
     else
@@ -113,13 +115,9 @@
         cell.textLabel.text = secondSection[indexPath.row];
     }
     if (indexPath.section == 2){
-//        cell.contentView.backgroundColor = COLOR_THEME;
-//        cell.textLabel.backgroundColor = COLOR_THEME;
-//        cell.textLabel.textColor = [UIColor whiteColor];
-//        cell.textLabel.textAlignment = NSTextAlignmentCenter;              
-//        cell.textLabel.text = thirdSection[indexPath.row];
+        cell.textLabel.text = self.versionNumber;
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

@@ -192,7 +192,8 @@
     
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-        NSData *data = UIImageJPEGRepresentation(img, 1.0);
+          UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
+        NSData *data = UIImageJPEGRepresentation(smallImage, 1.0);
         [self getUploadImage:data];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -222,12 +223,12 @@
                       });
                   }
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                      NSLog(@"msg is %@", responseObject[@"msg"]);
+                  //    NSLog(@"msg is %@", responseObject[@"msg"]);
                       
                       if (error) {
                           NSLog(@"Error: %@", error);
                       } else {
-                          NSLog(@"%@ %@", response, responseObject);
+                       //   NSLog(@"%@ %@", response, responseObject);
                           if ([responseObject[@"data"] objectForKey:@"url"] != nil) {
                               NSString *str = [responseObject[@"data"] objectForKey:@"url"];
                               [self get_user_infoImageData:str];
@@ -250,15 +251,6 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-// 改变图像的尺寸，方便上传服务器
-- (UIImage *) scaleFromImage: (UIImage *) image toSize: (CGSize) size
-{
-    UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
 //2.保持原来的长宽比，生成一个缩略图
 - (UIImage *)thumbnailWithImageWithoutScale:(UIImage *)image size:(CGSize)asize
 {

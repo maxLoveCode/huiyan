@@ -14,7 +14,8 @@
 #import "WikiArtcleTableViewController.h"
 #import "UITabBarController+ShowHideBar.h"
 #import "ArticalViewController.h"
-
+#import <MJRefresh.h>
+#import "GifRefresher.h"
 #define kLineNumber 3
 
 @interface WikiViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,MCSwipeMenuDelegate, UIViewControllerPreviewingDelegate>
@@ -22,16 +23,18 @@
 @property (nonatomic, strong) MCSwipeMenu* head_view;
 @property (nonatomic, strong) UIView *bg_view;
 @property (nonatomic, strong) NSMutableArray* dataSource;
+@property (nonatomic, strong) NSMutableArray *videoData;
 @property (nonatomic, strong) ServerManager* serverManager;
 @property (nonatomic, strong) UISegmentedControl *segement;
 @property (nonatomic, strong) WikiArtcleTableViewController *wikiArtcleTableView;
 @property (nonatomic, strong) UIScrollView *scrollView;
-
+@property (nonatomic, copy) NSString *cidType;
 //register for the preview context
 @property (nonatomic, strong) id previewingContext;
 
 @end
-
+static int number_page = 0;
+static int number_videoPage = 0;
 @implementation WikiViewController
 
 - (void)viewDidLoad{
@@ -47,11 +50,25 @@
     [self.scrollView addSubview:self.dramaTableView];
     [self addChildViewController:self.wikiArtcleTableView];
     [self.scrollView addSubview:self.wikiArtcleTableView.tableView];
-    
+    self.dataSource = [NSMutableArray array];
+    self.videoData = [NSMutableArray array];
     _serverManager = [ServerManager sharedInstance];
     self.navigationController.navigationBar.translucent = NO;
     [self getDramaCates];
-    [self getDramaList:@"0" page:0];
+    self.cidType = @"0";
+    self.dramaTableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+
+        [self getDramaList:self.cidType page:[NSString stringWithFormat:@"%d",number_page] type:@"1"];
+    }];
+    [self.dramaTableView.mj_header beginRefreshing];
+    self.wikiArtcleTableView.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_videoPage = 0;
+        [self.videoData removeAllObjects];
+        [self getDramaList:self.cidType page:[NSString stringWithFormat:@"%d",number_videoPage] type:@"2"];
+    }];
+    [self.wikiArtcleTableView.tableView.mj_header beginRefreshing];
     
     if ([self isForceTouchAvailable]) {
         self.previewingContext = [self registerForPreviewingWithDelegate:self sourceView:self.dramaTableView];
@@ -180,33 +197,64 @@
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableArray* source = menu.dataSource;
     NSString* cate = [[source objectAtIndex:indexPath.item] objectForKey:@"id"];
-    
-    [self getDramaList:cate page:0];
+    self.cidType = cate;
+   // NSLog(@"%@",self.cidType);
+    number_page = 0;
+    number_videoPage = 0;
+    [self.dramaTableView.mj_header beginRefreshing];
+    [self.wikiArtcleTableView.tableView.mj_header beginRefreshing];
 }
 
 
-- (void)getDramaList:(NSString*)category page:(NSInteger)page
+- (void)getDramaList:(NSString*)category page:(NSString *)page type:(NSString *)type
 {
-    if (!_dataSource) {
-        _dataSource = [[NSMutableArray alloc] init];
-    }
-    [_dataSource removeAllObjects];
-    
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,
                           @"cid":category,
-                          @"page":[NSString stringWithFormat:@"%ld", (long)page]};
+                          @"page":page,
+                          @"type":type};
     
     [_serverManager AnimatedGET:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
-                [_dataSource addObject:[HomePage parseDramaJSON:drama]];
+                if ([type isEqualToString:@"1"]) {
+                [self.dataSource addObject:[HomePage parseDramaJSON:drama]];
+                }else{
+                     [self.videoData addObject:[HomePage parseDramaJSON:drama]];
+                }
             }
-         //   NSLog(@"res%@", responseObject);
-            //[_dramaTableView setFrame:CGRectMake(0, 0, kScreen_Width, [HomePageCell cellHeight]*[_dataSource count]-10)];
-            self.wikiArtcleTableView.dataSource =_dataSource;
+            NSLog(@"==========%lu",(unsigned long)self.dataSource.count % 10);
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.dramaTableView.mj_footer = nil;
+            }else {
+                if (!self.dramaTableView.mj_footer) {
+                    self.dramaTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self getDramaList:self.cidType page:[NSString stringWithFormat:@"%d",number_page]type:@"1"];
+                        
+                    }];
+                }
+            }
+            if (self.videoData.count % 10 != 0 || self.videoData.count == 0) {
+                self.wikiArtcleTableView.tableView.mj_footer = nil;
+            }else {
+                if (!self.wikiArtcleTableView.tableView.mj_footer) {
+                    self.wikiArtcleTableView.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_videoPage ++;
+                        [self getDramaList:self.cidType page:[NSString stringWithFormat:@"%d",number_videoPage]type:@"2"];
+                    }];
+                }
+
+            }
+
+            self.wikiArtcleTableView.dataSource =self.videoData;
             [_dramaTableView reloadData];
             [_wikiArtcleTableView.tableView reloadData];
+            [self.dramaTableView.mj_header endRefreshing];
+            [self.dramaTableView.mj_footer endRefreshing];
+            [self.wikiArtcleTableView.tableView.mj_footer endRefreshing];
+            [self.wikiArtcleTableView.tableView.mj_header endRefreshing];
+            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);

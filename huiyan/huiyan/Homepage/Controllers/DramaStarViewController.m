@@ -19,6 +19,8 @@
 #import "SignUpMessageTableViewController.h"
 #import "DramaStarInvitionViewController.h"
 #import "UITabBarController+ShowHideBar.h"
+#import <MJRefresh.h>
+#import "GifRefresher.h"
 #define kSwipeMenu 41
 #define kBannerHeight kScreen_Width / 2
 @interface DramaStarViewController ()<UITableViewDelegate,UITableViewDataSource,MCSwipeMenuDelegate>
@@ -29,9 +31,9 @@
 @property (nonatomic, strong) NSArray *imgSource_arr;
 @property (nonatomic, strong) MCSwipeMenu *head_view;
 @property (nonatomic, strong) ZCBannerView *banner_view;
-
+@property (nonatomic, copy) NSString *cidType;
 @end
-
+static int number_page = 0;
 @implementation DramaStarViewController
 
 - (void)viewDidLoad {
@@ -44,12 +46,18 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-  
-
+    self.cidType = @"0";
     self.serverManager = [ServerManager sharedInstance];
     [self get_actor_cateData];
     [self get_actor_bannerData];
-    [self get_actor_listData:@"0" page:@"0"];
+    self.dataSource = [NSMutableArray array];
+    self.dramaStarTableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self get_actor_listData:self.cidType page:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+     [self.dramaStarTableView.mj_header beginRefreshing];
+
     [self.view addSubview:self.head_view];
     [self.view addSubview:self.dramaStarTableView];
    // self.automaticallyAdjustsScrollViewInsets  = NO;
@@ -141,7 +149,7 @@
         self.banner_view = [cell viewWithTag:1000];
         if (!self.banner_view) {
             self.banner_view = [[ZCBannerView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kBannerHeight )];
-            self.banner_view.bannerCollection.backgroundColor = [UIColor redColor];
+           // self.banner_view.bannerCollection.backgroundColor = [UIColor redColor];
             [cell.contentView addSubview:self.banner_view];
             self.banner_view.tag = 1000;
         }
@@ -150,7 +158,10 @@
         
     }else{
     DramaStarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dramaStar" forIndexPath:indexPath];
+        if (self.dataSource.count > 0) {
         [cell setContent:self.dataSource[indexPath.section -1]];
+        }
+       
         DramaStar *star = self.dataSource[indexPath.section -1];
         cell.invatation_btn.tag = [star.cid integerValue];
         [cell.invatation_btn addTarget:self action:@selector(invatation:) forControlEvents:UIControlEventTouchUpInside];
@@ -201,7 +212,6 @@
 }
 
 - (void)get_actor_listData:(NSString *)cid page:(NSString *)page{
-    self.dataSource = [NSMutableArray array];
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"cid":cid,@"page":page,@"user_id":user_id};
     [self.serverManager AnimatedGET:@"get_actor_list.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
@@ -210,7 +220,20 @@
                 DramaStar *drama = [DramaStar dramaWithDic:dic];
                 [self.dataSource addObject:drama];
             }
+            if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
+                self.dramaStarTableView.mj_footer = nil;
+            }else {
+                if (!self.dramaStarTableView.mj_footer) {
+                    self.dramaStarTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                        number_page ++;
+                        [self get_actor_listData:self.cidType page:[NSString stringWithFormat:@"%d",number_page]];
+                    }];
+                }
+            }
+
             [self.dramaStarTableView reloadData];
+            [self.dramaStarTableView.mj_header endRefreshing];
+            [self.dramaStarTableView.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
@@ -230,7 +253,11 @@
 - (void)swipeMenu:(MCSwipeMenu *)menu didSelectAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableArray *source = menu.dataSource;
     NSString *cate = [source[indexPath.item]objectForKey:@"id"];
-    [self get_actor_listData:cate page:@"0"];
+    self.cidType = cate;
+   // NSLog(@"%@",self.cidType);
+    number_page = 0;
+  //  [self get_actor_listData:self.cidType page:[NSString stringWithFormat:@"%d",number_page]];
+     [self.dramaStarTableView.mj_header beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {

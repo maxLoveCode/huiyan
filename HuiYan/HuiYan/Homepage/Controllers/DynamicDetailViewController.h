@@ -11,5 +11,5 @@
 @interface DynamicDetailViewController : UIViewController
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) StarVideo *starVideo;
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
