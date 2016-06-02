@@ -2111,6 +2111,7 @@
 		55CCD77E1CB3640500C3B8CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = com.huayin;
 				TargetAttributes = {

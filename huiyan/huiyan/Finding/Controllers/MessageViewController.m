@@ -14,6 +14,7 @@
 #import "MessageListTableViewController.h"
 #import "FriendsViewController.h"
 #import "followListController.h"
+#import "PendingListViewController.h"
 
 #define cellHeight 44
 
@@ -44,11 +45,18 @@
     self.title_arr = @[@"我的关注",@"系统消息",@"推送消息",@"附近的戏友"];
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
-    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Post" style:UIBarButtonItemStylePlain target:self action:@selector(rightButton:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
     [self addChildViewController:self.list];
     [self.list.view setFrame:CGRectMake(0, _height, kScreen_Width, kScreen_Height-_height)];
     [self.view addSubview:self.list.view];
     self.tableView.scrollEnabled = NO;
+}
+
+-(void)rightButton:(id)sender
+{
+    PendingListViewController* pending = [[PendingListViewController alloc] init];
+    [self.navigationController pushViewController:pending animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
