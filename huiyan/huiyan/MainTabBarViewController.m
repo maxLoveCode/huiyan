@@ -12,6 +12,9 @@
 #import "DramaStarViewController.h"
 #import "DynamicDetailViewController.h"
 #import <TSMessage.h>
+#import <TSBlurView.h>
+#import <TSMessageView.h>
+#import "UIImage+Extension.h"
 @interface MainTabBarViewController ()
 
 @end
@@ -35,8 +38,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)showNotifictionView:(NSNotification *)notifation{
-     NSDictionary *userInfo = notifation.userInfo;
-     [TSMessage showNotificationWithTitle:userInfo[@"title"] subtitle:[userInfo[@"aps"] objectForKey:@"alert"] type:TSMessageNotificationTypeMessage];
+    NSDictionary *userInfo = notifation.userInfo;
+   [[TSMessageView appearance] setContentTextColor:[UIColor whiteColor]];
+    [[TSMessageView appearance] setTitleTextColor:[UIColor whiteColor]];
+     [TSMessage showNotificationWithTitle:@"您有一条新的消息" subtitle:[userInfo[@"aps"] objectForKey:@"alert"] type:TSMessageNotificationTypeMessage];
 }
 
 - (void)addAllController{
