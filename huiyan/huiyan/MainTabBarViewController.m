@@ -11,6 +11,7 @@
 #import "ZFPlayer.h"
 #import "DramaStarViewController.h"
 #import "DynamicDetailViewController.h"
+#import <TSMessage.h>
 @interface MainTabBarViewController ()
 
 @end
@@ -26,8 +27,16 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addAllController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotifictionView:) name:@"notiction" object:nil];
     
      // Do any additional setup after loading the view.
+}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)showNotifictionView:(NSNotification *)notifation{
+     NSDictionary *userInfo = notifation.userInfo;
+     [TSMessage showNotificationWithTitle:userInfo[@"title"] subtitle:[userInfo[@"aps"] objectForKey:@"alert"] type:TSMessageNotificationTypeMessage];
 }
 
 - (void)addAllController{
