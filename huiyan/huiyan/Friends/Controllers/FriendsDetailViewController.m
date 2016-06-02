@@ -12,6 +12,7 @@
 
 #import "UIImage+ImageEffects.h"
 #import "UIImage+UIImage_Crop.h"
+#import "ServerManager.h"
 
 #define headerSection 200
 #define potraitWidth 90
@@ -24,6 +25,7 @@
 
 @property (nonatomic, strong) UITableView* mainTableView;
 @property (nonatomic, strong) UICollectionView* info;
+@property (nonatomic, strong) ServerManager* serverManager;
 
 @end
 
@@ -280,8 +282,17 @@
     request.layer.cornerRadius = 4;
 #pragma warning 第二版加增加好友申请的功能
     //[cell.contentView addSubview:sendMsg];
-    //[cell.contentView addSubview:request];
+    [cell.contentView addSubview:request];
 }
 
+-(void)friendRequest
+{
+    NSDictionary* dic = @{};
+    [_serverManager AnimatedPOST:@"add_friend.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
 
 @end

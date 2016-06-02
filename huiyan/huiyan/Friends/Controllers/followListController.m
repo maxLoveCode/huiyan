@@ -63,7 +63,7 @@
 {
     UITableViewCell* cell= [tableView dequeueReusableCellWithIdentifier:@"ppl" forIndexPath:indexPath];
     
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[_dataSource objectAtIndex:indexPath.row] objectForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
