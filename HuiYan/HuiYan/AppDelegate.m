@@ -313,8 +313,9 @@ fetchCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService handleRemoteNotification:userInfo];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"notiction" object:self userInfo:userInfo];
+
      NSLog(@"+++++++++收到通知:%@", [self logDic:userInfo]);
+       [[NSNotificationCenter defaultCenter]postNotificationName:@"notiction" object:self userInfo:userInfo];
     
 }
 

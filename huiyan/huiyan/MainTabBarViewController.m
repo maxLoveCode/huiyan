@@ -41,8 +41,8 @@
     NSDictionary *userInfo = notifation.userInfo;
    [[TSMessageView appearance] setContentTextColor:[UIColor whiteColor]];
     [[TSMessageView appearance] setTitleTextColor:[UIColor whiteColor]];
-    NSDictionary *alert = [userInfo[@"aps"] objectForKey:@"alert"];
-     [TSMessage showNotificationWithTitle:@"您有一条新的消息" subtitle:alert[@"alert"] type:TSMessageNotificationTypeMessage];
+    NSDictionary *aps = userInfo[@"aps"];
+     [TSMessage showNotificationWithTitle:@"您有一条新的消息" subtitle:aps[@"alert"] type:TSMessageNotificationTypeMessage];
 }
 
 - (void)addAllController{

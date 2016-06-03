@@ -148,7 +148,7 @@ static int number_page = 0;
 
 - (void)setJump_view{
 
-        self.jump_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height + 115, kScreen_Width, 115)];
+        self.jump_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height + 120, kScreen_Width, 120)];
         _jump_view.backgroundColor = [UIColor whiteColor];
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 30, 0, 60, 30)];
         label.text = @"分享到";
@@ -161,14 +161,14 @@ static int number_page = 0;
         [friendCircle_btn setImage:[UIImage imageNamed:@"icon_timeline"] forState:UIControlStateNormal];
         friendCircle_btn.titleLabel.font = [UIFont systemFontOfSize:13];
         [friendCircle_btn setTitleColor: [UIColor blackColor] forState:UIControlStateNormal];
-        [friendCircle_btn setTitleEdgeInsets:UIEdgeInsetsMake(55, -55, 0, 0)];
+        [friendCircle_btn setTitleEdgeInsets:UIEdgeInsetsMake(65, -55, 0, 0)];
         [friendCircle_btn setTitle:@"微信朋友圈" forState:UIControlStateNormal];
         [self.jump_view addSubview:friendCircle_btn];
         UIButton *friend_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         friend_btn.tag = 223;
         [friend_btn addTarget:self action:@selector(sharedFriend:) forControlEvents:UIControlEventTouchUpInside];
         friend_btn.frame = CGRectMake(CGRectGetMaxX(friendCircle_btn.frame) + 5, CGRectGetMinY(friendCircle_btn.frame) , 80, 80);
-        [friend_btn setTitleEdgeInsets:UIEdgeInsetsMake(55, -55, 0, 0)];
+        [friend_btn setTitleEdgeInsets:UIEdgeInsetsMake(65, -55, 0, 0)];
         [friend_btn setImageEdgeInsets:UIEdgeInsetsMake(-20, 10, 0, 0)];
         [friend_btn setImage:[UIImage imageNamed:@"icon_session"] forState:UIControlStateNormal];
         friend_btn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -604,7 +604,7 @@ static int number_page = 0;
     [self setbg_view];
      [[UIApplication sharedApplication].keyWindow addSubview:self.bg_view];
     [UIView animateWithDuration:0.5 animations:^{
-        _jump_view.frame = CGRectMake(0, kScreen_Height - 115, kScreen_Width, 115);
+        _jump_view.frame = CGRectMake(0, kScreen_Height - 120, kScreen_Width, 120);
     }];
     
 }
