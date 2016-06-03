@@ -22,6 +22,7 @@
 #import "WalletTableViewController.h"
 #import <MJRefresh.h>
 #import "GifRefresher.h"
+#import "WXApi.h"
 #define HeadHight 230
 #define TailHeight kScreen_Height  - 40 - 64 - 210
 #define kVideoCellHeight 244.0
@@ -45,6 +46,9 @@
 @property (nonatomic, strong) NSDate* target;
 @property (nonatomic, assign) BOOL color_Theme;
 @property (nonatomic, strong) NSTimer* timer;
+@property (nonatomic, strong) UIView *bg_view;
+@property (nonatomic, strong) UIView *jump_view;
+@property (nonatomic, strong) UIImage *wx_image;
 @end
 static int number_page = 0;
 @implementation DramaStarDetailViewController
@@ -57,12 +61,12 @@ static int number_page = 0;
     [self.view addSubview:self.mainTable];
     [self.view addSubview:self.tailView];
     // Do any additional setup after loading the view.
-    self.videoTable.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+    self.mainTable.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
         [self get_actor_dongtaiData:[NSString stringWithFormat:@"%d",number_page]];
     }];
-     [self.videoTable.mj_header beginRefreshing];
+     [self.mainTable.mj_header beginRefreshing];
   
     _count =0;
 }
@@ -72,33 +76,33 @@ static int number_page = 0;
         self.tailView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height - 48, kScreen_Width, 48)];
         self.tailView.backgroundColor = [UIColor whiteColor];
         UIButton *inviteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 2 - 2, 48);
+        inviteBtn.frame = CGRectMake(0, 0, kScreen_Width / 3 - 2, 48);
         [inviteBtn setTitle:@"邀约" forState:UIControlStateNormal];
         [inviteBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
         [inviteBtn addTarget:self action:@selector(inviteEvent:) forControlEvents:UIControlEventTouchUpInside];
         [self.tailView addSubview:inviteBtn];
         UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendBtn.frame = CGRectMake(kScreen_Width / 2, 0, kScreen_Width / 2 - 2, 48);
+        sendBtn.frame = CGRectMake(kScreen_Width / 3 , 0, kScreen_Width / 3 - 2, 48);
         [sendBtn setTitle:@"送花" forState:UIControlStateNormal];
         [sendBtn setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateNormal];
         [sendBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
         [sendBtn addTarget:self action:@selector(sendFlower:) forControlEvents:UIControlEventTouchUpInside];
         [self.tailView addSubview:sendBtn];
-//        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
-//        [shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
-//        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
-//        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
-//        [self.tailView addSubview:shareBtn];
-        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2, 4, 1, 40)];
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(kScreen_Width / 3 * 2, 0, kScreen_Width / 3 - 2, 48);
+        [shareBtn addTarget:self action:@selector(sharedWeixin:) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
+        [shareBtn setTitleColor:COLOR_WithHex(0xa5a5a5) forState:UIControlStateNormal];
+        [self.tailView addSubview:shareBtn];
+        UILabel *oneline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3, 4, 1, 40)];
         oneline.backgroundColor = COLOR_WithHex(0xdddddd);
         [self.tailView addSubview:oneline];
-      //  UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
-//        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
-//        [self.tailView addSubview:twoline];
-//        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
-//        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
-//        [self.tailView addSubview:w_line];
+        UILabel *twoline = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 3 *2, 4, 1, 40)];
+        twoline.backgroundColor = COLOR_WithHex(0xdddddd);
+        [self.tailView addSubview:twoline];
+        UILabel *w_line = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 1)];
+        w_line.backgroundColor =COLOR_WithHex(0xdddddd);
+        [self.tailView addSubview:w_line];
     }
     return _tailView;
 }
@@ -130,6 +134,47 @@ static int number_page = 0;
         [self.desView addSubview:lab];
     }
     return _desView;
+}
+
+- (void)setbg_view{
+        self.bg_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height)];
+        self.bg_view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeView)];
+        [self.bg_view addGestureRecognizer:tapGesture];
+        [self setJump_view];
+        [self.bg_view addSubview:self.jump_view];
+
+}
+
+- (void)setJump_view{
+
+        self.jump_view = [[UIView alloc]initWithFrame:CGRectMake(0, kScreen_Height + 115, kScreen_Width, 115)];
+        _jump_view.backgroundColor = [UIColor whiteColor];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 30, 0, 60, 30)];
+        label.text = @"分享到";
+        [self.jump_view addSubview:label];
+        UIButton *friendCircle_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        friendCircle_btn.tag = 222;
+        [friendCircle_btn addTarget:self action:@selector(sharedFriend:) forControlEvents:UIControlEventTouchUpInside];
+        friendCircle_btn.frame = CGRectMake(10, CGRectGetMaxY(label.frame), 80, 80);
+        [friendCircle_btn setImageEdgeInsets:UIEdgeInsetsMake(-20, 10, 0, 0)];
+        [friendCircle_btn setImage:[UIImage imageNamed:@"icon_timeline"] forState:UIControlStateNormal];
+        friendCircle_btn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [friendCircle_btn setTitleColor: [UIColor blackColor] forState:UIControlStateNormal];
+        [friendCircle_btn setTitleEdgeInsets:UIEdgeInsetsMake(55, -55, 0, 0)];
+        [friendCircle_btn setTitle:@"微信朋友圈" forState:UIControlStateNormal];
+        [self.jump_view addSubview:friendCircle_btn];
+        UIButton *friend_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        friend_btn.tag = 223;
+        [friend_btn addTarget:self action:@selector(sharedFriend:) forControlEvents:UIControlEventTouchUpInside];
+        friend_btn.frame = CGRectMake(CGRectGetMaxX(friendCircle_btn.frame) + 5, CGRectGetMinY(friendCircle_btn.frame) , 80, 80);
+        [friend_btn setTitleEdgeInsets:UIEdgeInsetsMake(55, -55, 0, 0)];
+        [friend_btn setImageEdgeInsets:UIEdgeInsetsMake(-20, 10, 0, 0)];
+        [friend_btn setImage:[UIImage imageNamed:@"icon_session"] forState:UIControlStateNormal];
+        friend_btn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [friend_btn setTitleColor: [UIColor blackColor] forState:UIControlStateNormal];
+        [friend_btn setTitle:@"微信好友" forState:UIControlStateNormal];
+        [self.jump_view addSubview:friend_btn];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -458,7 +503,7 @@ static int number_page = 0;
                 }
             }
             [self.videoTable reloadData];
-            [self.videoTable.mj_header endRefreshing];
+            [self.mainTable.mj_header endRefreshing];
             [self.videoTable.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -554,10 +599,71 @@ static int number_page = 0;
     
 }
 
-//分享
-- (void)share:(UIButton *)sender{
+//微信朋友圈分享
+- (void)sharedWeixin:(UIButton *)sender{
+    [self setbg_view];
+     [[UIApplication sharedApplication].keyWindow addSubview:self.bg_view];
+    [UIView animateWithDuration:0.5 animations:^{
+        _jump_view.frame = CGRectMake(0, kScreen_Height - 115, kScreen_Width, 115);
+    }];
     
 }
+- (void)sharedFriend:(UIButton *)sender{
+        if (![WXApi isWXAppInstalled]) {
+            [self presentViewController:[Tools showAlert:@"您还没有安装微信!"] animated:YES completion:nil];
+        }
+        if (sender.tag == 222) {
+            [self performActivity:@"Circle"];
+        }else{
+            [self performActivity:@"Friend"];
+        }
+}
+- (void)performActivity:(NSString *)type
+{
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    // req.scene = WXSceneTimeline;
+    // req.bText = NO;
+    if ([type isEqualToString:@"Circle"]) {
+        req.scene = WXSceneTimeline;
+    }else{
+        req.scene = WXSceneSession;
+    }
+    req.message = WXMediaMessage.message;
+    req.message.title = self.drama.nickName;
+    req.message.description = self.drama.profile;
+    [self setThumbImage:req];
+    NSString *url = kServerUrl;
+    NSString *url_str = [NSString stringWithFormat:@"%@/index.php/Home/Share/actor/aid/%@",url,self.drama.userID];
+    NSURL *url_weixin = [NSURL URLWithString:url_str];
+    if (url_weixin) {
+        WXWebpageObject *webObject = WXWebpageObject.object;
+        webObject.webpageUrl = [url_weixin absoluteString];
+        req.message.mediaObject = webObject;
+    } else if (self.wx_image) {
+        WXImageObject *imageObject = WXImageObject.object;
+        imageObject.imageData = UIImageJPEGRepresentation(self.wx_image, 1);
+        req.message.mediaObject = imageObject;
+    }
+    [WXApi sendReq:req];
+}
+- (void)setThumbImage:(SendMessageToWXReq *)req
+{
+    self.wx_image = [UIImage imageNamed:@"logo29"];
+    if (self.wx_image) {
+        CGFloat width = 100.0f;
+        CGFloat height = self.wx_image.size.height * 100.0f / self.wx_image.size.width;
+        UIGraphicsBeginImageContext(CGSizeMake(width, height));
+        [self.wx_image drawInRect:CGRectMake(0, 0, width, height)];
+        UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [req.message setThumbImage:scaledImage];
+    }
+}
+- (void)removeView{
+    [self.bg_view removeFromSuperview];
+}
+
+
 
 - (void)moveScrollow:(UIButton *)sender{
     UIColor *color = COLOR_THEME;

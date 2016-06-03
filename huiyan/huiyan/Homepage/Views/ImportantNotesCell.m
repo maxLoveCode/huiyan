@@ -21,6 +21,7 @@
     self.line_lab.backgroundColor = COLOR_WithHex(0xdddddd);
     self.h_lab.layer.masksToBounds = YES;
     self.h_lab.layer.cornerRadius = 3;
+    self.h_lab.backgroundColor = COLOR_THEME;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

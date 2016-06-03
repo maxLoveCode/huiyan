@@ -29,13 +29,14 @@
 #import <RongIMKit/RongIMKit.h>
 #import "LoginViewController.h"
 #import "chatUsers.h"
-
+#import "WXApi.h"
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
 
-@interface AppDelegate ()
-
+@interface AppDelegate ()<UIScrollViewDelegate>
+@property (strong, nonatomic)UIScrollView *scrollView;
+@property (strong, nonatomic)UIPageControl *pageControl;
 @end
 
 @implementation AppDelegate
@@ -59,6 +60,7 @@
     //百度统计
     [self startBaiduMobileStat];
     [self umengTrack];
+    
     //Required
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
@@ -90,7 +92,7 @@
                  apsForProduction:false
             advertisingIdentifier:nil];
     
-    
+    [WXApi registerApp:@"wxf254787475a723f1"];
     //微信支付
    // [[MQPayClient shareInstance]registerWeiXinApp:@"wxf40f735c21d329ae" mch_id:@"1268033901" mch_key:@"aTFiGZRxHCGoEBqj7KTKRMrF8IAYqVJ2" notifyUrl:@"www.qq.com"  withDescription:@"WeixinPay"];
     
@@ -123,10 +125,24 @@
         [MobClick profileSignInWithPUID:user_id];
     }else{
         LoginViewController *login = [[LoginViewController alloc]init];
-           UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:login];
+        UINavigationController *navCon = [[UINavigationController alloc]initWithRootViewController:login];
         self.window.rootViewController = navCon;
         [MobClick profileSignInWithPUID:user_id];
     }
+
+    
+    //设置UIScrollView和UIPageControl
+    //判断当前程序是否是第一次运行.如果不是第一次运行，则直接进入主界面即可，不需要再加载程序启动图
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    if ([userDefault boolForKey:@"first"] == NO) {
+        //如果取出来的值为NO，说明程序为第一次启动
+        [self setUpUIScrollViewAndUIPageControl];
+        //将该标志置为yes
+        [userDefault setBool:YES forKey:@"first"];
+    }else{
+       
+    }
+    return YES;
    
     
 #ifdef DEBUG
@@ -144,26 +160,91 @@
     return YES;
 }
 
+//引导页面
+-(void)setUpUIScrollViewAndUIPageControl{
+    //创建滚动视图对像
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.window.bounds];
+    //设置内容区域范围 contentSize
+    self.scrollView.contentSize = CGSizeMake(kScreen_Width * 4, kScreen_Height);
+    //设置整屏滚动
+    self.scrollView.pagingEnabled = YES;
+    //去掉水平方向上的滚动条
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    //设置代理对象
+    self.scrollView.delegate = self;
+    self.scrollView.bounces = NO;
+    //往scrollview上添加图片
+    for (int i = 0; i < 4; i++) {
+        UIImageView *_ImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"applinkpage%d",i + 1] ofType:@"png"]]];
+        _ImageView.frame = CGRectMake(kScreen_Width * i, 0, kScreen_Width, kScreen_Height);
+        _ImageView.userInteractionEnabled = YES;
+        if (i == 3) {
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+            //设置轻拍手势
+            tapGesture.numberOfTapsRequired = 1;
+            _ImageView.userInteractionEnabled = YES;
+            [_ImageView addGestureRecognizer:tapGesture];
+        }
+        [self.scrollView addSubview:_ImageView];
+        
+    }
+    [self.window addSubview:_scrollView];
+    
+    //创建UIPageControl
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, kScreen_Height - 40, kScreen_Width, 40)];
+    //设置分页数
+    //self.pageControl.backgroundColor = [UIColor redColor];
+    self.pageControl.numberOfPages = 4;
+    self.pageControl.currentPage = 0;
+    self.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+    [self.pageControl addTarget:self action:@selector(handleClickPage:) forControlEvents:UIControlEventValueChanged];
+    [self.window addSubview:self.pageControl];
+    
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    //先得到偏移量对应的分页下标
+    NSInteger index = scrollView.contentOffset.x / kScreen_Width;
+    //设置当前页数
+    self.pageControl.currentPage = index;
+}
+
+- (void)handleClickPage:(UIPageControl *)sender{
+    [self.scrollView setContentOffset:CGPointMake(kScreen_Width * sender.currentPage, 0)  animated:YES];
+}
+
+
+//单机手势的方法
+- (void)handleTapGesture:(UITapGestureRecognizer *)sender{
+    //首先移除滚动视图和分页视图
+    [self.scrollView removeFromSuperview];
+    [self.pageControl removeFromSuperview];
+    
+}
+
+
+
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     BOOL result = [UMSocialSnsService handleOpenURL:url];
-    if (result == FALSE) {
-        //微信返回
-        if ([sourceApplication hasPrefix:@"com.tencent"]) {
-            [MQPayClient weiXinHandleOpenURL:url];
-        }
-        //跳转支付宝钱包进行支付，处理支付结果
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-           // NSLog(@"result = %@",resultDic);
-        }];
-    }
-    
+//    if (result == FALSE) {
+//        //微信返回
+//        if ([sourceApplication hasPrefix:@"com.tencent"]) {
+//            [MQPayClient weiXinHandleOpenURL:url];
+//        }
+//        //跳转支付宝钱包进行支付，处理支付结果
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+//           // NSLog(@"result = %@",resultDic);
+//        }];
+//    }
     return result;
     return YES;
 }
 
+ 
 // 启动百度移动统计
 - (void)startBaiduMobileStat{
     /*若应用是基于iOS 9系统开发，需要在程序的info.plist文件中添加一项参数配置，确保日志正常发送，配置如下：

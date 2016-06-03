@@ -7,7 +7,7 @@
 //
 
 #import "WriteSignUpCell.h"
-
+#import "Constant.h"
 @implementation WriteSignUpCell
 
 - (void)awakeFromNib {
@@ -15,6 +15,7 @@
     // Initialization code
     self.h_lab.layer.masksToBounds = YES;
     self.h_lab.layer.cornerRadius = 3;
+    self.h_lab.backgroundColor = COLOR_THEME;
     self.name_textField.borderStyle = UITextBorderStyleRoundedRect;
     self.mobile_textField.borderStyle = UITextBorderStyleRoundedRect;
     self.mobile_textField.keyboardType = UIKeyboardTypeNumberPad;
