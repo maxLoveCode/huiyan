@@ -53,7 +53,6 @@ static int number_page = 0;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.tabBarController setHidden:YES];
     [super viewDidAppear:YES];
 }
 
@@ -63,7 +62,6 @@ static int number_page = 0;
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {

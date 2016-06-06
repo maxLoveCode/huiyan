@@ -147,9 +147,9 @@ static int number_page = 0;
     if (!_tableView) {
         self.tableView = [[UITableView alloc] init];
         if ([self.starVideo.type isEqualToString:@"movie"]) {
-            self.tableView.frame = CGRectMake(0, kScreen_Width / 16 *9, kScreen_Width,kScreen_Height - kScreen_Width / 16 *9);
+            self.tableView.frame = CGRectMake(0, kScreen_Width / 16 *9, kScreen_Width,kScreen_Height - kScreen_Width / 16 *9 - 10);
         }else{
-        self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height );
+        self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height - 10);
         }
        // self.tableView.bounces = NO;
         self.tableView.delegate = self;
