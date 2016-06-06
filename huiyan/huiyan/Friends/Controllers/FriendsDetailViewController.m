@@ -287,8 +287,10 @@
 
 -(void)friendRequest
 {
-    NSDictionary* dic = @{};
-    [_serverManager AnimatedPOST:@"add_friend.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    FindFriend* model = _dataSource;
+    NSString* userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
+    NSDictionary* params =@{@"access_token":_serverManager.accessToken, @"user_id":userid, @"follow_id":model.ID};
+    [_serverManager AnimatedPOST:@"add_friend.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

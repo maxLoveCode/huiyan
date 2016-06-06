@@ -45,7 +45,7 @@
     self.title_arr = @[@"我的关注",@"系统消息",@"推送消息",@"附近的戏友"];
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Post" style:UIBarButtonItemStylePlain target:self action:@selector(rightButton:)];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"好友请求" style:UIBarButtonItemStylePlain target:self action:@selector(rightButton:)];
     self.navigationItem.rightBarButtonItem = rightButton;
     [self addChildViewController:self.list];
     [self.list.view setFrame:CGRectMake(0, _height, kScreen_Width, kScreen_Height-_height)];
