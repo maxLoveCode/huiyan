@@ -35,10 +35,11 @@
 
 -(void)viewDidLoad
 {
+    self.title  = @"用户详情";
     _serverManager = [ServerManager sharedInstance];
     if (_dataSource) {
         if ([_dataSource isKindOfClass:[FindFriend class]]) {
-            
+
         }
     }
     [self.view addSubview:self.mainTableView];
