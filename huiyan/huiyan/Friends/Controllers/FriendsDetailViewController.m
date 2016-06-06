@@ -33,6 +33,7 @@
 
 -(void)viewDidLoad
 {
+    _serverManager = [ServerManager sharedInstance];
     if (_dataSource) {
         if ([_dataSource isKindOfClass:[FindFriend class]]) {
         
@@ -288,6 +289,7 @@
 
 -(void)friendRequest
 {
+    NSLog(@"click");
     FindFriend* model = _dataSource;
     NSString* userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
     NSDictionary* params =@{@"access_token":_serverManager.accessToken, @"user_id":userid, @"follow_id":model.ID};
