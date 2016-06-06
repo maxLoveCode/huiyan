@@ -28,8 +28,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.tabBarController setHidden:YES];
-    [self.view setFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64)];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -39,7 +37,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
     
 }
 
