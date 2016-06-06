@@ -282,6 +282,7 @@
     request.layer.cornerRadius = 4;
 #pragma warning 第二版加增加好友申请的功能
     //[cell.contentView addSubview:sendMsg];
+    [request addTarget:self action:@selector(friendRequest) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:request];
 }
 
