@@ -36,7 +36,7 @@
     _serverManager = [ServerManager sharedInstance];
     if (_dataSource) {
         if ([_dataSource isKindOfClass:[FindFriend class]]) {
-        
+            
         }
     }
     [self.view addSubview:self.mainTableView];
@@ -270,14 +270,14 @@
     UIButton* request = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect frame = CGRectMake(kMargin, kMargin, kScreen_Width-2*kMargin, 44);
     [sendMsg setFrame:frame];
-    [request setFrame:CGRectOffset(frame, 0, 44+10)];
-    
+    [request setFrame:frame];
     [sendMsg setTitle:@"发送消息" forState: UIControlStateNormal];
     [request setTitle:@"好友申请" forState: UIControlStateNormal];
     sendMsg.backgroundColor = [UIColor whiteColor];
     UIColor* theme = COLOR_WithHex(0xe54863);
     [sendMsg setTitleColor:theme forState:UIControlStateNormal];
     request.backgroundColor =COLOR_THEME;
+    
     cell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     sendMsg.layer.cornerRadius = 4;
     request.layer.cornerRadius = 4;
@@ -294,7 +294,7 @@
     NSString* userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
     NSDictionary* params =@{@"access_token":_serverManager.accessToken, @"user_id":userid, @"follow_id":model.ID};
     [_serverManager AnimatedPOST:@"add_friend.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        NSLog(@"%@", responseObject[@"msg"]);
+    
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];

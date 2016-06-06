@@ -29,7 +29,6 @@
 #import <RongIMKit/RongIMKit.h>
 #import "LoginViewController.h"
 #import "chatUsers.h"
-#import "WXApi.h"
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -51,12 +50,14 @@
     [self updateLocalData];
     //友盟
     [UMSocialData setAppKey:@"57189b72e0f55ad2c30015b6"];
-    [UMSocialWechatHandler setWXAppId:@"wx2201898143065bfd" appSecret:@"b38e8146284e786e41402ddcb0b93539" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:@"wxf254787475a723f1" appSecret:@"7d518ed4c0fcc39da091485eee1c1ace" url:@"http://www.umeng.com/social"];
     [UMSocialQQHandler setQQWithAppId:@"1105277071" appKey:@"x0ZYCDoulIQ2jjzi" url:@"http://www.umeng.com/social"];
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
+
     //高德
     [MAMapServices sharedServices].apiKey = @"6858031d8908c18c7724109124d4125b";
     [AMapLocationServices sharedServices].apiKey = @"6858031d8908c18c7724109124d4125b";
+    
     //百度统计
     [self startBaiduMobileStat];
     [self umengTrack];
@@ -92,8 +93,7 @@
                  apsForProduction:false
             advertisingIdentifier:nil];
     
-    [WXApi registerApp:@"wxf254787475a723f1"];
-    //微信支付
+       //微信支付
    // [[MQPayClient shareInstance]registerWeiXinApp:@"wxf40f735c21d329ae" mch_id:@"1268033901" mch_key:@"aTFiGZRxHCGoEBqj7KTKRMrF8IAYqVJ2" notifyUrl:@"www.qq.com"  withDescription:@"WeixinPay"];
     
 #pragma mark rongyun initialization
@@ -231,7 +231,7 @@
          annotation:(id)annotation {
     BOOL result = [UMSocialSnsService handleOpenURL:url];
 //    if (result == FALSE) {
-//        //微信返回
+////        //微信返回
 //        if ([sourceApplication hasPrefix:@"com.tencent"]) {
 //            [MQPayClient weiXinHandleOpenURL:url];
 //        }
@@ -239,7 +239,8 @@
 //        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
 //           // NSLog(@"result = %@",resultDic);
 //        }];
-//    }
+  //  }
+    
     return result;
     return YES;
 }
@@ -274,10 +275,12 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
+   
+    
     //微信返回
-    if ([url.absoluteString hasPrefix:@"com.tencent"]) {
-        [MQPayClient weiXinHandleOpenURL:url];
-    };
+//   if ([url.absoluteString hasPrefix:@"com.tencent"]) {
+//       [MQPayClient weiXinHandleOpenURL:url];
+//    };
     return YES;
 }
 
