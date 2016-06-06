@@ -12,6 +12,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import <SVProgressHUD/SVProgressHUD.h>  
 @interface ServerManager : AFHTTPSessionManager
 
 @property (nonatomic, copy)  NSString* _Nonnull accessToken;

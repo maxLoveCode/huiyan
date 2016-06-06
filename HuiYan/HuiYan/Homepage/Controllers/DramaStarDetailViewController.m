@@ -514,7 +514,7 @@ static int number_page = 0;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.videoTable) {
          CGFloat offsetY = self.videoTable.contentOffset.y;
-        CGFloat mainoffsetY = self.mainTable.contentOffset.y;
+      //  CGFloat mainoffsetY = self.mainTable.contentOffset.y;
      //   NSLog(@"delta = %f,main = %f",offsetY,mainoffsetY);
         CGFloat alpha = 0.99;
 //        if (height <= kHeadMinHeight ) {

@@ -8,6 +8,7 @@
 //
 
 #import "ServerManager.h"
+
 #ifdef DEBUG
     #define _BASE_URL @"http://139.196.32.98/huiyan"
 #else
@@ -82,10 +83,15 @@ NSString *const version = @"api1_0";
 {
     
     [self GET:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+         [SVProgressHUD showWithStatus:@"加载中..."];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
           success(task, responseObject);
+         [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+          [self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
           failure(task, error);
+         [SVProgressHUD showErrorWithStatus:@"请求网络失败"];
+          [self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
     }];
 }
 
@@ -96,12 +102,20 @@ NSString *const version = @"api1_0";
 {
         [self POST:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
             //show animates
+            [SVProgressHUD showWithStatus:@"加载中..."];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             success(task, responseObject);
+             [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+            [self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failure(task, error);
+              [SVProgressHUD showErrorWithStatus:@"请求网络失败"];
+              [self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
         }];
     
+}
+-(void)dismiss:(id)sender {
+    [SVProgressHUD dismiss];
 }
 
 @end
