@@ -11,12 +11,14 @@
 @implementation FindFriend
 + (FindFriend *)findFriendWithData:(NSDictionary *)dic{
     FindFriend *model = [[FindFriend alloc]init];
+    NSLog(@"%@",dic);
     model.ID = dic[@"id"];
     model.nickname = dic[@"nickname"];
     model.avatar = dic[@"avatar"];
     model.sex = dic[@"sex"];
     model.like_wiki = dic[@"like_wiki"];
     model.distance = dic[@"distance"];
+    model.is_friend = dic[@"is_friend"];
     return model;
 }
 @end

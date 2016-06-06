@@ -14,6 +14,8 @@
 #import "UIImage+UIImage_Crop.h"
 #import "ServerManager.h"
 
+#import <RongIMKit/RongIMKit.h>
+
 #define headerSection 200
 #define potraitWidth 90
 #define nameLabelFont 16
@@ -273,23 +275,32 @@
     [request setFrame:frame];
     [sendMsg setTitle:@"发送消息" forState: UIControlStateNormal];
     [request setTitle:@"好友申请" forState: UIControlStateNormal];
-    sendMsg.backgroundColor = [UIColor whiteColor];
-    UIColor* theme = COLOR_WithHex(0xe54863);
-    [sendMsg setTitleColor:theme forState:UIControlStateNormal];
-    request.backgroundColor =COLOR_THEME;
+    
+    //UIColor* theme = COLOR_WithHex(0xe54863);
+    //[sendMsg setTitleColor:theme forState:UIControlStateNormal];
+    request.backgroundColor = COLOR_THEME;
+    sendMsg.backgroundColor = COLOR_THEME;
     
     cell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     sendMsg.layer.cornerRadius = 4;
     request.layer.cornerRadius = 4;
 #pragma warning 第二版加增加好友申请的功能
-    //[cell.contentView addSubview:sendMsg];
+    
     [request addTarget:self action:@selector(friendRequest) forControlEvents:UIControlEventTouchUpInside];
-    [cell.contentView addSubview:request];
+    [sendMsg addTarget:self action:@selector(sendMsgact) forControlEvents:UIControlEventTouchUpInside];
+
+    FindFriend* model = _dataSource;
+    if ([model.is_friend isEqualToString:@"0"]) {
+        [cell.contentView addSubview:request];
+    }
+    else
+    {
+        [cell.contentView addSubview:sendMsg];
+    }
 }
 
 -(void)friendRequest
 {
-    NSLog(@"click");
     FindFriend* model = _dataSource;
     NSString* userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
     NSDictionary* params =@{@"access_token":_serverManager.accessToken, @"user_id":userid, @"follow_id":model.ID};
@@ -298,6 +309,16 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
+}
+
+-(void)sendMsgact
+{
+    FindFriend* model = _dataSource;
+    RCConversationViewController* chat = [[RCConversationViewController alloc] init];
+    chat.conversationType = ConversationType_PRIVATE;
+    chat.targetId = model.ID;
+    chat.title = model.nickname;
+    [self.navigationController pushViewController:chat animated:YES];
 }
 
 @end

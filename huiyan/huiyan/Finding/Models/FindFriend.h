@@ -15,5 +15,7 @@
 @property (nonatomic,copy) NSString *sex;
 @property (nonatomic,strong) NSArray *like_wiki;
 @property (nonatomic,copy) NSString *distance;
+@property (nonatomic,copy) NSString *is_friend;
+
 + (FindFriend *)findFriendWithData:(NSDictionary *)dic;
 @end
