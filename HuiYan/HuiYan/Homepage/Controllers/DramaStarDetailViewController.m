@@ -121,13 +121,16 @@ static int number_page = 0;
 - (UIView *)desView{
     if (!_desView) {
         self.desView = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width, 0, kScreen_Width, TailHeight)];
+        UILabel *grayLab  = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, 10)];
+        grayLab.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        [self.desView addSubview:grayLab];
         CGSize size =  [self.drama.profile boundingRectWithSize:CGSizeMake(kScreen_Width - 30, MAXFLOAT)
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:@{
                                                              NSFontAttributeName :kFONT13
                                                              }
                                                    context:nil].size;
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, kScreen_Width- 30, size.height)];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 20, kScreen_Width- 30, size.height)];
         lab.text = self.drama.profile;
         lab.numberOfLines = 0;
         lab.font = kFONT13;

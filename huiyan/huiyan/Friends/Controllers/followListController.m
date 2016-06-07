@@ -82,6 +82,7 @@
     UIView* view = [[UIView alloc] initWithFrame:CGRectMake(kMargin, CGRectGetMaxY(cell.contentView.frame)-1, kScreen_Width-2*kMargin, 0.5)];
     [view setBackgroundColor:[UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0]];
     [cell.contentView addSubview:view];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

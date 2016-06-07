@@ -75,7 +75,7 @@
      MessageTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"msg" forIndexPath:indexPath];
     
     [cell setCellContent:[_dataSource objectAtIndex:indexPath.row]];
-    
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

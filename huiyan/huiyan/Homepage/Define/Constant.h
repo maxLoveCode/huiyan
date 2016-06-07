@@ -29,7 +29,7 @@
 #ifdef DEBUG
 #define kServerUrl @"http://139.196.32.98/huiyan/api1_0"
 #else
-#define kServerUrl @"http://www.mydreamovie.com/huiyan/api1_0
+#define kServerUrl @"http://www.mydreamovie.com/huiyan/api1_0"
 #endif
 
 /**字体设置*/
@@ -57,6 +57,6 @@
 #endif
 #define RongIdentity @"chatToken"
 
-#define Build @"1.1"
+#define Build @"1.2"
 
 #endif /* Constant_h */

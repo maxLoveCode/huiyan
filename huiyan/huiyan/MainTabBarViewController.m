@@ -15,6 +15,7 @@
 #import <TSBlurView.h>
 #import <TSMessageView.h>
 #import "UIImage+Extension.h"
+#import "PendingListViewController.h"
 @interface MainTabBarViewController ()
 
 @end
@@ -41,8 +42,34 @@
     NSDictionary *userInfo = notifation.userInfo;
    [[TSMessageView appearance] setContentTextColor:[UIColor whiteColor]];
     [[TSMessageView appearance] setTitleTextColor:[UIColor whiteColor]];
+    
     NSDictionary *aps = userInfo[@"aps"];
-     [TSMessage showNotificationWithTitle:@"您有一条新的消息" subtitle:aps[@"alert"] type:TSMessageNotificationTypeMessage];
+    if ([userInfo[@"type"] isEqualToString:@"add_friend"]) {
+        [TSMessage showNotificationInViewController:self
+                                              title:@"您有一条新的消息"
+                                           subtitle:aps[@"alert"]
+                                              image:nil
+                                               type:TSMessageNotificationTypeMessage
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:@"去看看"
+                                     buttonCallback:^{
+                                         NSLog(@"按钮事件");
+                                         
+                                         NewHomePageViewController *vc = (NewHomePageViewController *)((UINavigationController *)self.selectedViewController).viewControllers[0];
+                                         [vc.navigationController popToRootViewControllerAnimated:NO];
+                                         PendingListViewController *followCon = [[PendingListViewController alloc]init];
+                                         [vc.navigationController pushViewController:followCon animated:YES];
+                                         
+                                     }
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+    }else{
+          [TSMessage showNotificationWithTitle:@"您有一条新的消息" subtitle:aps[@"alert"] type:TSMessageNotificationTypeMessage];
+    }
+    
+    
+ 
 }
 
 - (void)addAllController{

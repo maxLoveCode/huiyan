@@ -89,12 +89,12 @@ NSString *const version = @"api1_0";
          [SVProgressHUD showWithStatus:@"加载中..."];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
           success(task, responseObject);
-         [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
+        [SVProgressHUD dismiss];
+         //[SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
           //[self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
           failure(task, error);
          [SVProgressHUD showErrorWithStatus:@"请求网络失败"];
-          [self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
     }];
 }
 
@@ -108,17 +108,15 @@ NSString *const version = @"api1_0";
             [SVProgressHUD showWithStatus:@"加载中..."];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             success(task, responseObject);
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
+//            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD dismiss];
             //[self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failure(task, error);
-              [SVProgressHUD showErrorWithStatus:@"请求网络失败"];
-              [self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
+            [SVProgressHUD showErrorWithStatus:@"请求网络失败"];
         }];
     
 }
--(void)dismiss:(id)sender {
-    [SVProgressHUD dismiss];
-}
+
 
 @end
