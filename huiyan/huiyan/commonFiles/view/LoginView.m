@@ -167,6 +167,7 @@
         self.timer = timer;
         [_vericode setRightViewMode:UITextFieldViewModeAlways];
         [_vericode setRightView:timer];
+        [timer addTarget:self action:@selector(getVeriCodeBtn) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(timer.frame), 1, 1, itemHeight-2)];
         [label setBackgroundColor:[UIColor whiteColor]];
@@ -393,6 +394,11 @@
 
 -(void)forgotPassword{
     [self.delegate loginViewDidSelectForgotPassword:self];
+}
+
+-(void)getVeriCodeBtn{
+    NSLog(@"clickk");
+    [self.delegate loginViewDidSelectVeriCode:self];
 }
 
 @end

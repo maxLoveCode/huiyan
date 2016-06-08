@@ -406,26 +406,29 @@ fetchCompletionHandler:
 - (void)app_versionData{
     self.serverManager = [ServerManager sharedInstance];
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_version"};
-    [self.serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+
+    
+    [self.serverManager GETWithoutAnimation:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 60000) {
-             NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"value"]);
+            NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"value"]);
             NSDictionary *value = [responseObject[@"data"] objectForKey:@"value"];
             NSString *version = value[@"version"];
-                  kSETDEFAULTS(version, @"version");
-                [self updateLocalData];
-               NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            kSETDEFAULTS(version, @"version");
+            [self updateLocalData];
+            NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
             
-                    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"version"] || ![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:localVersion]) {
-                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
-                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login_type"];
-                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"rongcloud_token"];
-                    }
-           
+            if (![[NSUserDefaults standardUserDefaults]objectForKey:@"version"] || ![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:localVersion]) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login_type"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"rongcloud_token"];
             }
+            
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
+
 }
 
 

@@ -33,6 +33,14 @@ extern NSString  * _Nonnull const version;
              success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, id _Nullable responseObject))success
              failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure;
 
+- (void)POSTWithoutAnimation:(NSString * _Nonnull)URLString
+                  parameters:(nullable id)parameters
+                     success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, id _Nullable responseObject))success
+                     failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure;
 
+- (void)GETWithoutAnimation:(NSString * _Nonnull)URLString
+                  parameters:(nullable id)parameters
+                     success:(nullable void (^)(NSURLSessionDataTask * _Nullable task, id _Nullable responseObject))success
+                     failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error))failure;
 
 @end

@@ -94,7 +94,8 @@ static int number_page = 0;
 
 - (void)get_opera_commentData:(NSString *)page{
     NSDictionary *parameters = @{@"access_token":_serverManager.accessToken, @"oid":self.oid,@"page":page};
-    [_serverManager AnimatedGET:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+
+    [self.serverManager GETWithoutAnimation:@"get_opera_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30020) {
             NSArray *data = responseObject[@"data"];
             for (NSDictionary *dic in data) {
@@ -112,12 +113,13 @@ static int number_page = 0;
                 }
             }
             [self.tableView reloadData];
-             [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
+    
 }
 
 

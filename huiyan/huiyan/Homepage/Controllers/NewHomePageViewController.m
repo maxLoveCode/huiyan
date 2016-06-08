@@ -144,7 +144,8 @@ static int number_page = 0;
 #pragma mark - 网络请求
 - (void)get_wiki_listData:(NSString *)page{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"type":@"2"};
-    [self.serverManager AnimatedGET:@"get_wiki_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+
+    [self.serverManager GETWithoutAnimation:@"get_wiki_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 20010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 HomePage *model = [HomePage parseDramaJSON:dic];
@@ -160,6 +161,7 @@ static int number_page = 0;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
+
 }
 - (void)rightClick:(UIBarButtonItem *)sender{
      MessageViewController *mes = [[MessageViewController alloc]init];
@@ -191,13 +193,14 @@ static int number_page = 0;
 
 - (void)getappVersionData{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_version"};
-    [self.serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    
+    [self.serverManager GETWithoutAnimation:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 60000) {
             NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"value"]);
             NSDictionary *value = [responseObject[@"data"] objectForKey:@"value"];
             NSString *version = value[@"version"];
             kSETDEFAULTS(version, @"version");
-              NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
             if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:localVersion]) {
                 UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"温馨提示" message:value[@"tip"] preferredStyle:UIAlertControllerStyleAlert];
                 [alertCon addAction:[UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
