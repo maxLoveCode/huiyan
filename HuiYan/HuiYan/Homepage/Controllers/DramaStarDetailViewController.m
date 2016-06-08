@@ -488,7 +488,7 @@ static int number_page = 0;
 
 - (void)get_actor_dongtaiData:(NSString *)page{
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"actor_id":self.drama.userID,@"page":page};
-    [self.serverManager AnimatedGET:@"get_actor_dongtai.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [self.serverManager GETWithoutAnimation:@"get_actor_dongtai.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50030) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 StarVideo *model = [StarVideo starVideoWithDic:dic];
@@ -579,7 +579,7 @@ static int number_page = 0;
 //送花
 - (void)sendFlower:(UIButton *)sender{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":self.drama.userID,@"follow_id":kOBJECTDEFAULTS(@"user_id")};
-    [self.serverManager AnimatedPOST:@"send_actor_flower.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [self.serverManager POSTWithoutAnimation:@"send_actor_flower.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50040) {
             //[self presentViewController:[Tools showAlert:@"送花成功"] animated:YES completion:nil];
             [self combo:0];
@@ -806,11 +806,6 @@ static int number_page = 0;
                                    ];
         
         [self.view addSubview:view];
-//        [UIView animateWithDuration:1.0 animations:^{
-//            view.alpha = 0;
-//        }completion:^(BOOL finished) {
-//            [view removeFromSuperview];
-//        }];
     }
     else
     {
@@ -825,11 +820,6 @@ static int number_page = 0;
                                       NSFontAttributeName: kFONT(50)
                                       }
                          ];
-//    [UIView animateWithDuration:1.0 animations:^{
-//        view.alpha = 0;
-//    }completion:^(BOOL finished) {
-//        [view removeFromSuperview];
-//    }];
     }
 }
 

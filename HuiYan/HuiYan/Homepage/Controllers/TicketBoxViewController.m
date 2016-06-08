@@ -141,7 +141,7 @@ static int number_page = 0;
 
 - (void)getDataTicket:(NSString *)cid page:(NSString *)page{
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken,@"cid":cid};
-    [_serverManager AnimatedGET:@"get_opera_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [_serverManager GETWithoutAnimation:@"get_opera_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 BuyTicket *model = [BuyTicket dataWithDic:dic];
@@ -166,6 +166,8 @@ static int number_page = 0;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 
     }];
+    
+    
 }
 
 - (void)changeOpear:(UIButton *)sender{
