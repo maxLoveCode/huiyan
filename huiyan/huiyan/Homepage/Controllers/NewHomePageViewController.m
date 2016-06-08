@@ -29,6 +29,7 @@ static int number_page = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首  页";
+    
     self.dataSource = [[NSMutableArray alloc]init];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"interaction"] style:UIBarButtonItemStylePlain target:self action:@selector(rightClick:)];
@@ -43,6 +44,7 @@ static int number_page = 0;
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.view addSubview:self.tableView];
     self.serverManager = [ServerManager sharedInstance];
+    [self getappVersionData];
     [self get_wiki_listData:@"0"];
     self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
@@ -185,6 +187,33 @@ static int number_page = 0;
         [self.tabBarController setHidden:NO];
         _hidden = !_hidden;
     }
+}
+
+- (void)getappVersionData{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_version"};
+    [self.serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 60000) {
+            NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"value"]);
+            NSDictionary *value = [responseObject[@"data"] objectForKey:@"value"];
+            NSString *version = value[@"version"];
+            kSETDEFAULTS(version, @"version");
+              NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:localVersion]) {
+                UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"温馨提示" message:value[@"tip"] preferredStyle:UIAlertControllerStyleAlert];
+                [alertCon addAction:[UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/palringo-group-messenger-chat/id1116890013?mt=8"]];
+                    
+                }]];
+                [alertCon addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                }]];
+                [self presentViewController:alertCon animated:YES completion:nil];
+            }
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
 }
 
 /*

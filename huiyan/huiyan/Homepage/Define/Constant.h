@@ -57,6 +57,6 @@
 #endif
 #define RongIdentity @"chatToken"
 
-#define Build @"1.2"
+#define Build [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
 
 #endif /* Constant_h */

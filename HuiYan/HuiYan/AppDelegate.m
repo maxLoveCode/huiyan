@@ -46,9 +46,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
      [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [self app_versionData];
+    NSString *userID = kOBJECTDEFAULTS(@"user_id");
+    if (userID) {
+         [self app_versionData];
+    }
+   
     //友盟
     [UMSocialData setAppKey:@"57189b72e0f55ad2c30015b6"];
     [UMSocialWechatHandler setWXAppId:@"wxf254787475a723f1" appSecret:@"7d518ed4c0fcc39da091485eee1c1ace" url:@"http://www.umeng.com/social"];
@@ -408,11 +413,14 @@ fetchCompletionHandler:
             NSString *version = value[@"version"];
                   kSETDEFAULTS(version, @"version");
                 [self updateLocalData];
-                    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"version"] || ![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:@"1.1"]) {
+               NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            
+                    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"version"] || ![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:localVersion]) {
                         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
                         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login_type"];
                         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"rongcloud_token"];
                     }
+           
             }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
