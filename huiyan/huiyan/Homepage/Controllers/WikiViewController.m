@@ -213,17 +213,17 @@ static int number_videoPage = 0;
                           @"page":page,
                           @"type":type};
     
-    [_serverManager AnimatedGET:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    
+    [_serverManager GETWithoutAnimation:@"get_wiki_list.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20010) {
             for(NSDictionary* drama in [responseObject objectForKey:@"data"])
             {
                 if ([type isEqualToString:@"1"]) {
-                [self.dataSource addObject:[HomePage parseDramaJSON:drama]];
+                    [self.dataSource addObject:[HomePage parseDramaJSON:drama]];
                 }else{
-                     [self.videoData addObject:[HomePage parseDramaJSON:drama]];
+                    [self.videoData addObject:[HomePage parseDramaJSON:drama]];
                 }
             }
-            NSLog(@"==========%lu",(unsigned long)self.dataSource.count % 10);
             if (self.dataSource.count % 10 != 0 || self.dataSource.count == 0) {
                 self.dramaTableView.mj_footer = nil;
             }else {
@@ -244,9 +244,9 @@ static int number_videoPage = 0;
                         [self getDramaList:self.cidType page:[NSString stringWithFormat:@"%d",number_videoPage]type:@"2"];
                     }];
                 }
-
+                
             }
-
+            
             self.wikiArtcleTableView.dataSource =self.videoData;
             [_dramaTableView reloadData];
             [_wikiArtcleTableView.tableView reloadData];
@@ -259,13 +259,14 @@ static int number_videoPage = 0;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+
 }
 
 - (void)getDramaCates
 {
     NSDictionary *dic = @{@"access_token":_serverManager.accessToken};
     
-    [_serverManager AnimatedGET:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+    [_serverManager GETWithoutAnimation:@"get_wiki_cate.php" parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         if ([[responseObject objectForKey:@"code"] integerValue] == 20000) {
             [self.head_view setDataSource:responseObject[@"data"]];
             [self.head_view reloadMenu];

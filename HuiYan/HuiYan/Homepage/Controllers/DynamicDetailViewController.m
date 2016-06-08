@@ -426,7 +426,7 @@ static int number_page = 0;
         like = @"1";
     }
     NSDictionary *dic = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"did":self.starVideo.ID,@"like":like};
-    [self.serverManager AnimatedPOST:@"write_dongtai_like.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [self.serverManager GETWithoutAnimation:@"write_dongtai_like.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"]integerValue] == 50060) {
             if ([self.starVideo.is_like isEqualToString:@"1"]) {
                 [self.likeBtn setImage:[UIImage imageNamed:@"likewrong"] forState:UIControlStateNormal];
@@ -441,6 +441,7 @@ static int number_page = 0;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
     }];
+    
 }
 
 //写点评
