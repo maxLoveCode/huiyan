@@ -2772,7 +2772,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ecb7704f-110e-443b-a258-466265fcc851";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2821,7 +2821,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ecb7704f-110e-443b-a258-466265fcc851";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
