@@ -56,7 +56,6 @@
     
     
     self.view = _mainview;
-    [self.mainview.timer addTarget:self action:@selector(sendVcode) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -218,9 +217,9 @@
             if ([responseObject[@"code"]integerValue] == 90010) {
                 User* user = [[User alloc] initWithMobile:loginView.reg_mobile.text Password:loginView.confirmPass.text];
                 [self postToServerByUser:user Url:@"user_register.php" isLogin:NO];
-                
             }
-            [self showAlert:responseObject[@"msg"]];
+            else
+                [self showAlert:responseObject[@"msg"]];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error = %@",error);
         }];
@@ -233,6 +232,10 @@
     [self.navigationController pushViewController:fpt animated:NO];
 }
 
+-(void)loginViewDidSelectVeriCode:(LoginView *)loginView
+{
+    [self sendVcode];
+}
 
 -(void)postToServerByUser:(User*)user Url:(NSString*)url isLogin:(BOOL)isLogin
 {
@@ -240,9 +243,9 @@
                           @"mobile": user.mobile,
                           @"password": [NSString getMd5_32Bit_String:user.password]};
     [_serverManager AnimatedPOST:url parameters:dic  success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
         if (isLogin == YES) {
             if ([responseObject[@"code"] integerValue] == 70010) {
-              //  NSLog(@"%@",responseObject[@"msg"]);
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"login_type"], @"login_type");
                 kSETDEFAULTS([responseObject[@"data"]objectForKey:@"user_id"], @"user_id");
                 
@@ -282,6 +285,7 @@
                 [self.navigationController presentViewController:mainTabBar animated:NO completion:^{
                 }];
             }
+            else
                 [self showAlert:responseObject[@"msg"]];
 
         }
@@ -307,21 +311,23 @@
     }else{
 
     NSDictionary *params = @{@"access_token":self.serverManager.accessToken,@"mobile":self.mainview.reg_mobile.text,@"scene":@"register"};
-       // NSLog(@"%@",params);
-    [self.serverManager AnimatedPOST:@"send_vcode.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] integerValue] == 90000) {
-          //  NSLog(@"%@",responseObject[@"msg"]);
-            if (!_thetimer) {
-                self.thetimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fireTimer) userInfo:nil repeats:YES];
-                self.star = [NSDate date];
-                [_mainview.timer setEnabled:NO];
+        [self.serverManager POSTWithoutAnimation:@"send_vcode.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+            [self showAlert:responseObject[@"msg"]];
+            if ([responseObject[@"code"] integerValue] == 90000) {
+                //  NSLog(@"%@",responseObject[@"msg"]);
+                if (!_thetimer) {
+                    self.thetimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fireTimer) userInfo:nil repeats:YES];
+                    self.star = [NSDate date];
+                    [_mainview.timer setEnabled:NO];
+                }
             }
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error = %@",error);
-    }];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error = %@",error);
+        }];
+
     }
-}
+    
+    }
 
 - (void)fireTimer{
     [_mainview.timer setTitle:[NSString stringWithFormat:@"%i秒",(int)(60 + [self.star timeIntervalSinceNow])] forState:UIControlStateDisabled];

@@ -125,7 +125,8 @@ static int number_page = 0;
 - (void)getmy_opera_ticketData:(NSString *)page{
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
     NSDictionary *paramars = @{@"access_token":self.serverManager.accessToken,@"user_id":user_id,@"page":page};
-    [self.serverManager AnimatedGET:@"my_opera_ticket.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    
+    [self.serverManager GETWithoutAnimation:@"my_opera_ticket.php" parameters:paramars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80040) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 PayData *model = [PayData paydataWithDic:dic];

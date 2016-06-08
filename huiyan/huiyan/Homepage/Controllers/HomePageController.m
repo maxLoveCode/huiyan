@@ -541,8 +541,8 @@
 - (void)get_opera_listData{
     self.serverManager = [ServerManager sharedInstance];
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"length":@"3"};
- //   NSLog(@"%@", parameters);
-    [self.serverManager AnimatedGET:@"get_opera_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+ 
+    [self.serverManager GETWithoutAnimation:@"get_opera_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 30010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 BuyTicket *model = [BuyTicket dataWithDic:dic];
@@ -590,15 +590,16 @@
 //发现图标
 - (void)app_find_iconData{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_find_icon"};
-    [self.serverManager AnimatedGET:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] integerValue] == 60000) {
-          //  NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"app_find_icon"]);
-            self.findIcon = [responseObject[@"data"]objectForKey:@"value"];
-            [self.menuView reloadData];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error = %@",error);
-    }];
+    [self.serverManager GETWithoutAnimation:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+         if ([responseObject[@"code"] integerValue] == 60000) {
+             //  NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"app_find_icon"]);
+             self.findIcon = [responseObject[@"data"]objectForKey:@"value"];
+             [self.menuView reloadData];
+         }
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+         NSLog(@"error = %@",error);
+     }];
+
 }
 
 - (void)rightClick:(UIBarButtonItem *)sender{

@@ -42,7 +42,7 @@
     
     [self.view addSubview:self.tableView];
      self.navigationController.navigationBar.barTintColor = COLOR_THEME;
-    self.title_arr = @[@"我的关注",@"系统消息",@"推送消息",@"附近的戏友"];
+    self.title_arr = @[@"我的好友",@"系统消息",@"推送消息",@"附近的戏友"];
     self.image_arr = @[@"interaction",@"system",@"pushMes",@"around"];
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"好友请求" style:UIBarButtonItemStylePlain target:self action:@selector(rightButton:)];

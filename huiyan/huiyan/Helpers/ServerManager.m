@@ -8,6 +8,7 @@
 //
 
 #import "ServerManager.h"
+#import "MCGifLoadingHUD.h"
 
 #ifdef DEBUG
     #define _BASE_URL @"http://139.196.32.98/huiyan"
@@ -84,17 +85,18 @@ NSString *const version = @"api1_0";
             success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
             failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
+    NSLog(@"%@", URLString);
+    MCGifLoadingHUD* gifLoading = [[MCGifLoadingHUD alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    [MCGifLoadingHUD animatedwithView:gifLoading];
     
     [self GET:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
-         [SVProgressHUD showWithStatus:@"加载中..."];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
           success(task, responseObject);
-        [SVProgressHUD dismiss];
-         //[SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
-          //[self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
+        [MCGifLoadingHUD dismissView:gifLoading];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
           failure(task, error);
-         [SVProgressHUD showErrorWithStatus:@"请求网络失败"];
+        
+        [MCGifLoadingHUD dismissView:gifLoading];
     }];
 }
 
@@ -103,20 +105,48 @@ NSString *const version = @"api1_0";
              success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
              failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
 {
-        [self POST:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSLog(@"%@", URLString);
+    MCGifLoadingHUD* gifLoading = [[MCGifLoadingHUD alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    [MCGifLoadingHUD animatedwithView:gifLoading];
+    [self POST:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
             //show animates
-            [SVProgressHUD showWithStatus:@"加载中..."];
+            //[SVProgressHUD showWithStatus:@"加载中..."];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             success(task, responseObject);
-//            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
-            [SVProgressHUD dismiss];
-            //[self performSelector:@selector(dismiss:) withObject:nil afterDelay:0.5];
+            
+            [MCGifLoadingHUD dismissView:gifLoading];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failure(task, error);
-            [SVProgressHUD showErrorWithStatus:@"请求网络失败"];
+            
+            [MCGifLoadingHUD dismissView:gifLoading];
+            //[SVProgressHUD showErrorWithStatus:@"请求网络失败"];
         }];
-    
 }
 
+- (void)POSTWithoutAnimation:(NSString *)URLString parameters:(id)parameters success:(void (^)(NSURLSessionDataTask * _Nullable, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
+{
+    [self POST:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success(task, responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(task, error);
+        
+    }];
+}
+
+- (void)GETWithoutAnimation:(NSString *)URLString parameters:(id)parameters success:(void (^)(NSURLSessionDataTask * _Nullable, id _Nullable))success failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure
+{
+    [self GET:[self appendedURL:URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success(task, responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(task, error);
+        
+    }];
+}
 
 @end
