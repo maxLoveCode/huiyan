@@ -192,7 +192,7 @@ static int number_page = 0;
 }
 
 - (void)getappVersionData{
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_version"};
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"ios_app_version"};
     
     [self.serverManager GETWithoutAnimation:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 60000) {

@@ -49,10 +49,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
      [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    NSString *userID = kOBJECTDEFAULTS(@"user_id");
-    if (userID) {
-         [self app_versionData];
-    }
+    [self updateLocalData];
    
     //友盟
     [UMSocialData setAppKey:@"57189b72e0f55ad2c30015b6"];
@@ -125,6 +122,7 @@
             NSLog(@"token错误");
         }];
     }
+    NSLog(@"user_id = %@",user_id);
     if (user_id) {
         MainTabBarViewController *mainTab = [[MainTabBarViewController alloc]init];
         self.window.rootViewController = mainTab;
@@ -394,42 +392,21 @@ fetchCompletionHandler:
 -(void)updateLocalData
 {
     NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+  
     NSString* builds = [userdefault objectForKey:@"version"];
+    NSLog(@"build = %@",builds);
     if (![builds isEqualToString:Build] || !builds || [builds isEqualToString:@""]) {
         [userdefault removeObjectForKey:@"user_id"];
         [userdefault removeObjectForKey:RongIdentity];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login_type"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"rongcloud_token"];
     }
     [userdefault setObject:Build forKey:@"version"];
+    NSString* twobuilds = [userdefault objectForKey:@"version"];
+    NSLog(@"--build = %@",twobuilds);
 }
 
-#pragma mark --获取版本号
-- (void)app_versionData{
-    self.serverManager = [ServerManager sharedInstance];
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_version"};
 
-    
-    [self.serverManager GETWithoutAnimation:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] integerValue] == 60000) {
-            NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"value"]);
-            NSDictionary *value = [responseObject[@"data"] objectForKey:@"value"];
-            NSString *version = value[@"version"];
-            kSETDEFAULTS(version, @"version");
-            [self updateLocalData];
-            NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-            
-            if (![[NSUserDefaults standardUserDefaults]objectForKey:@"version"] || ![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:localVersion]) {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login_type"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"rongcloud_token"];
-            }
-            
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error = %@",error);
-    }];
-
-}
 
 
 @end
