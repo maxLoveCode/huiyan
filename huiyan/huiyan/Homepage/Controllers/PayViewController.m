@@ -57,7 +57,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.tabBarController setHidden:NO];
 }
 
 - (UITableView *)tableView{

@@ -110,7 +110,8 @@ static int number_page = 0;
 
 - (void)getmy_invitationData:(NSString *)page{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"page":page};
-    [self.serverManager AnimatedGET:@"my_invitation.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    
+    [self.serverManager GETWithoutAnimation:@"my_invitation.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80080) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 Invitation *model = [Invitation invitationWithDic:dic];
@@ -124,7 +125,7 @@ static int number_page = 0;
                         number_page ++;
                         [self getmy_invitationData:[NSString stringWithFormat:@"%d",number_page]];
                     }];
-
+                    
                 }
             }
             if (self.dataSource.count == 0 && [page isEqualToString:@"0"]) {

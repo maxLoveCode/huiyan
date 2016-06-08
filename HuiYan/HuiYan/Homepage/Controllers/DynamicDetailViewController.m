@@ -147,9 +147,9 @@ static int number_page = 0;
     if (!_tableView) {
         self.tableView = [[UITableView alloc] init];
         if ([self.starVideo.type isEqualToString:@"movie"]) {
-            self.tableView.frame = CGRectMake(0, kScreen_Width / 16 *9, kScreen_Width,kScreen_Height - kScreen_Width / 16 *9);
+            self.tableView.frame = CGRectMake(0, kScreen_Width / 16 *9, kScreen_Width,kScreen_Height - kScreen_Width / 16 *9 - 10);
         }else{
-        self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height );
+        self.tableView.frame = CGRectMake(0, 0, kScreen_Width,kScreen_Height - 10);
         }
        // self.tableView.bounces = NO;
         self.tableView.delegate = self;
@@ -453,7 +453,8 @@ static int number_page = 0;
 
 - (void)get_dongtai_commentData:(NSString *)page{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"did":self.starVideo.ID,@"page":page};
-    [self.serverManager AnimatedGET:@"get_dongtai_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    
+    [self.serverManager GETWithoutAnimation:@"get_dongtai_comment.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 50080) {
             NSArray *data = responseObject[@"data"];
             for (NSDictionary *dic in data) {
@@ -471,7 +472,7 @@ static int number_page = 0;
                 }];
             }
         }
-
+        
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

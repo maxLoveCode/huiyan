@@ -14,6 +14,8 @@
 #import "UIImage+UIImage_Crop.h"
 #import "ServerManager.h"
 
+#import <RongIMKit/RongIMKit.h>
+
 #define headerSection 200
 #define potraitWidth 90
 #define nameLabelFont 16
@@ -33,9 +35,11 @@
 
 -(void)viewDidLoad
 {
+    self.title  = @"用户详情";
+    _serverManager = [ServerManager sharedInstance];
     if (_dataSource) {
         if ([_dataSource isKindOfClass:[FindFriend class]]) {
-        
+
         }
     }
     [self.view addSubview:self.mainTableView];
@@ -269,30 +273,53 @@
     UIButton* request = [UIButton buttonWithType:UIButtonTypeCustom];
     CGRect frame = CGRectMake(kMargin, kMargin, kScreen_Width-2*kMargin, 44);
     [sendMsg setFrame:frame];
-    [request setFrame:CGRectOffset(frame, 0, 44+10)];
-    
+    [request setFrame:frame];
     [sendMsg setTitle:@"发送消息" forState: UIControlStateNormal];
     [request setTitle:@"好友申请" forState: UIControlStateNormal];
-    sendMsg.backgroundColor = [UIColor whiteColor];
-    UIColor* theme = COLOR_WithHex(0xe54863);
-    [sendMsg setTitleColor:theme forState:UIControlStateNormal];
-    request.backgroundColor =COLOR_THEME;
+    
+    //UIColor* theme = COLOR_WithHex(0xe54863);
+    //[sendMsg setTitleColor:theme forState:UIControlStateNormal];
+    request.backgroundColor = COLOR_THEME;
+    sendMsg.backgroundColor = COLOR_THEME;
+    
     cell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     sendMsg.layer.cornerRadius = 4;
     request.layer.cornerRadius = 4;
 #pragma warning 第二版加增加好友申请的功能
-    //[cell.contentView addSubview:sendMsg];
-    [cell.contentView addSubview:request];
+    
+    [request addTarget:self action:@selector(friendRequest) forControlEvents:UIControlEventTouchUpInside];
+    [sendMsg addTarget:self action:@selector(sendMsgact) forControlEvents:UIControlEventTouchUpInside];
+
+    FindFriend* model = _dataSource;
+    if ([model.is_friend isEqualToString:@"0"]) {
+        [cell.contentView addSubview:request];
+    }
+    else
+    {
+        [cell.contentView addSubview:sendMsg];
+    }
 }
 
 -(void)friendRequest
 {
-    NSDictionary* dic = @{};
-    [_serverManager AnimatedPOST:@"add_friend.php" parameters:dic success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        
+    FindFriend* model = _dataSource;
+    NSString* userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
+    NSDictionary* params =@{@"access_token":_serverManager.accessToken, @"user_id":userid, @"follow_id":model.ID};
+    [_serverManager AnimatedPOST:@"add_friend.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
+}
+
+-(void)sendMsgact
+{
+    FindFriend* model = _dataSource;
+    RCConversationViewController* chat = [[RCConversationViewController alloc] init];
+    chat.conversationType = ConversationType_PRIVATE;
+    chat.targetId = model.ID;
+    chat.title = model.nickname;
+    [self.navigationController pushViewController:chat animated:YES];
 }
 
 @end

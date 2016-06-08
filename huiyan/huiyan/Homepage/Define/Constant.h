@@ -29,7 +29,7 @@
 #ifdef DEBUG
 #define kServerUrl @"http://139.196.32.98/huiyan/api1_0"
 #else
-#define kServerUrl @"http://www.mydreamovie.com/huiyan/api1_0
+#define kServerUrl @"http://www.mydreamovie.com/huiyan/api1_0"
 #endif
 
 /**字体设置*/
@@ -49,10 +49,14 @@
 
 #define KALERTVIEW(msg) [[[UIAlertView alloc] initWithTitle:@"温馨提示" message:msg delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show]
 
-#define RongIMKey @"pkfcgjstfl708"
 
+#ifdef DEBUG
+    #define RongIMKey @"bmdehs6pd30zs"
+#else
+    #define RongIMKey @"pkfcgjstfl708"
+#endif
 #define RongIdentity @"chatToken"
 
-#define Build @"1.1"
+#define Build [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
 
 #endif /* Constant_h */

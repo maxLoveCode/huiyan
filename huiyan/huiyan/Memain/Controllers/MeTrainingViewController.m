@@ -118,7 +118,8 @@ static int number_page = 0;
 
 - (void)getMy_train_orderData:(NSString *)page{
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":kOBJECTDEFAULTS(@"user_id"),@"page":page};
-    [self.serverManager AnimatedGET:@"my_train_order.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+
+    [self.serverManager GETWithoutAnimation:@"my_train_order.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 80050) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 PersonTraining *model = [PersonTraining PersonTrainingWithDic:dic];
@@ -132,7 +133,7 @@ static int number_page = 0;
                         number_page ++;
                         [self getMy_train_orderData:[NSString stringWithFormat:@"%d",number_page]];
                     }];
-
+                    
                 }
             }
             if (self.dataSource.count == 0 && [page isEqualToString:@"0"]) {
@@ -145,7 +146,7 @@ static int number_page = 0;
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];
-           
+            
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);

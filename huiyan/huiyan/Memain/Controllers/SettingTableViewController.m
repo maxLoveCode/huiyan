@@ -135,7 +135,7 @@
     if (indexPath.section == 1) {
         //comment app
         // app id is 1116890013
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps ://itunes.apple.com/gb/app/yi-dong-cai-bian/id1116890013?mt=8"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/palringo-group-messenger-chat/id1116890013?mt=8"]];
     }
 }
 /*

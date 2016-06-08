@@ -143,7 +143,8 @@ static int number_page = 0;
     NSString *user_id = kOBJECTDEFAULTS(@"user_id");
     if (self.x_point && self.y_point && user_id) {
         NSDictionary *parmars = @{@"access_token":self.serverManager.accessToken,@"user_id":user_id,@"x_point":self.x_point,@"y_point":self.y_point,@"page":page};
-        [self.serverManager AnimatedGET:@"find_list.php" parameters:parmars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        
+        [self.serverManager GETWithoutAnimation:@"find_list.php" parameters:parmars success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
             if ([responseObject[@"code"] integerValue] == 100000) {
                 for (NSDictionary *dic in responseObject[@"data"]) {
                     FindFriend *model = [FindFriend findFriendWithData:dic];
@@ -159,7 +160,7 @@ static int number_page = 0;
                         }];
                     }
                 }
-
+                
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
                 [self.tableView.mj_footer endRefreshing];

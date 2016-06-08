@@ -29,7 +29,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "LoginViewController.h"
 #import "chatUsers.h"
-#import "WXApi.h"
+#import "ServerManager.h"
 #ifdef DEBUG
     #import "UnitTest.h"
 #endif
@@ -37,6 +37,7 @@
 @interface AppDelegate ()<UIScrollViewDelegate>
 @property (strong, nonatomic)UIScrollView *scrollView;
 @property (strong, nonatomic)UIPageControl *pageControl;
+@property (strong, nonatomic)ServerManager *serverManager;
 @end
 
 @implementation AppDelegate
@@ -45,18 +46,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
      [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
-    [self updateLocalData];
+    NSString *userID = kOBJECTDEFAULTS(@"user_id");
+    if (userID) {
+         [self app_versionData];
+    }
+   
     //友盟
     [UMSocialData setAppKey:@"57189b72e0f55ad2c30015b6"];
-    [UMSocialWechatHandler setWXAppId:@"wx2201898143065bfd" appSecret:@"b38e8146284e786e41402ddcb0b93539" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:@"wxf254787475a723f1" appSecret:@"7d518ed4c0fcc39da091485eee1c1ace" url:@"http://www.umeng.com/social"];
     [UMSocialQQHandler setQQWithAppId:@"1105277071" appKey:@"x0ZYCDoulIQ2jjzi" url:@"http://www.umeng.com/social"];
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
+
     //高德
     [MAMapServices sharedServices].apiKey = @"6858031d8908c18c7724109124d4125b";
     [AMapLocationServices sharedServices].apiKey = @"6858031d8908c18c7724109124d4125b";
+    
     //百度统计
     [self startBaiduMobileStat];
     [self umengTrack];
@@ -89,11 +96,10 @@
     
     [JPUSHService setupWithOption:launchOptions appKey:@"f84d27fb2c1b2db531924006"
                           channel:@"Publish channel"
-                 apsForProduction:false
+                 apsForProduction:YES
             advertisingIdentifier:nil];
     
-    [WXApi registerApp:@"wxf254787475a723f1"];
-    //微信支付
+       //微信支付
    // [[MQPayClient shareInstance]registerWeiXinApp:@"wxf40f735c21d329ae" mch_id:@"1268033901" mch_key:@"aTFiGZRxHCGoEBqj7KTKRMrF8IAYqVJ2" notifyUrl:@"www.qq.com"  withDescription:@"WeixinPay"];
     
 #pragma mark rongyun initialization
@@ -130,7 +136,7 @@
         [MobClick profileSignInWithPUID:user_id];
     }
 
-    
+  
     //设置UIScrollView和UIPageControl
     //判断当前程序是否是第一次运行.如果不是第一次运行，则直接进入主界面即可，不需要再加载程序启动图
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
@@ -231,7 +237,7 @@
          annotation:(id)annotation {
     BOOL result = [UMSocialSnsService handleOpenURL:url];
 //    if (result == FALSE) {
-//        //微信返回
+////        //微信返回
 //        if ([sourceApplication hasPrefix:@"com.tencent"]) {
 //            [MQPayClient weiXinHandleOpenURL:url];
 //        }
@@ -239,7 +245,8 @@
 //        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
 //           // NSLog(@"result = %@",resultDic);
 //        }];
-//    }
+  //  }
+    
     return result;
     return YES;
 }
@@ -274,10 +281,12 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
+   
+    
     //微信返回
-    if ([url.absoluteString hasPrefix:@"com.tencent"]) {
-        [MQPayClient weiXinHandleOpenURL:url];
-    };
+//   if ([url.absoluteString hasPrefix:@"com.tencent"]) {
+//       [MQPayClient weiXinHandleOpenURL:url];
+//    };
     return YES;
 }
 
@@ -392,5 +401,35 @@ fetchCompletionHandler:
     }
     [userdefault setObject:Build forKey:@"version"];
 }
+
+#pragma mark --获取版本号
+- (void)app_versionData{
+    self.serverManager = [ServerManager sharedInstance];
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"key":@"app_version"};
+
+    
+    [self.serverManager GETWithoutAnimation:@"get_app_config.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 60000) {
+            NSLog(@"-------%@",[responseObject[@"data"] objectForKey:@"value"]);
+            NSDictionary *value = [responseObject[@"data"] objectForKey:@"value"];
+            NSString *version = value[@"version"];
+            kSETDEFAULTS(version, @"version");
+            [self updateLocalData];
+            NSString *localVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            
+            if (![[NSUserDefaults standardUserDefaults]objectForKey:@"version"] || ![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:localVersion]) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login_type"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"rongcloud_token"];
+            }
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+
+}
+
 
 @end

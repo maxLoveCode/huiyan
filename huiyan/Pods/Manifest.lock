@@ -25,6 +25,7 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - SVProgressHUD (2.0.3)
   - TSMessagesNW (0.9.15):
     - HexColors (~> 2.3.0)
 
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - RealReachability (~> 1.1.3)
   - RongCloudIMKit (~> 2.5.0)
   - SDWebImage (~> 3.7.5)
+  - SVProgressHUD (~> 2.0.3)
   - TSMessagesNW (~> 0.9.15)
 
 SPEC CHECKSUMS:
@@ -51,6 +53,7 @@ SPEC CHECKSUMS:
   RealReachability: 9eb2aeccff2f26491dbaa9cf36f906ad28e8e7d9
   RongCloudIMKit: 3d8473f022c7588db80ef81caf0208e5c2fa4789
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   TSMessagesNW: a1e7b4b77d54aee4a0492adda948746252ef1f2d
 
 COCOAPODS: 0.39.0
