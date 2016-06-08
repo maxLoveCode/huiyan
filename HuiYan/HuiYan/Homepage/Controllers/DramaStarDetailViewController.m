@@ -589,7 +589,7 @@ static int number_page = 0;
         {
             UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的余额不足" preferredStyle:UIAlertControllerStyleAlert];
             [alertCon addAction:[UIAlertAction actionWithTitle:@"去充值" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                WalletTableViewController *wallCon = [[WalletTableViewController alloc]init];
+                WalletTableViewController *wallCon = [[WalletTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
                 [self.navigationController pushViewController:wallCon animated:YES];
             }]];
             [alertCon addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

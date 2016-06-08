@@ -128,7 +128,7 @@ static int number_page = 0;
 
 - (void)get_opera_cateData{
     NSDictionary *params = @{@"access_token":_serverManager.accessToken};
-    [_serverManager AnimatedGET:@"get_opera_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+    [_serverManager GETWithoutAnimation:@"get_opera_cate.php" parameters:params success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] ==
             30000) {
                 [self.head_view setDataSource:responseObject[@"data"]];
