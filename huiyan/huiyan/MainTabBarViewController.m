@@ -44,7 +44,7 @@
     [[TSMessageView appearance] setTitleTextColor:[UIColor whiteColor]];
     
     NSDictionary *aps = userInfo[@"aps"];
-    if ([userInfo[@"type"] isEqualToString:@"add_friend"]) {
+    if ([userInfo[@"type "] isEqualToString:@"add_friend"]) {
         [TSMessage showNotificationInViewController:self
                                               title:@"您有一条新的消息"
                                            subtitle:aps[@"alert"]
