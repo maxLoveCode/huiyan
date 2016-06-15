@@ -73,50 +73,33 @@
 }
 
 - (void)addAllController{
-    UIColor *color  = COLOR_THEME;
+     UIColor *color  = COLOR_THEME;
     NewHomePageViewController *homepage = [[NewHomePageViewController alloc]init];
-    
     DramaStarViewController *drama = [[DramaStarViewController alloc]init];
-    
     HomePageController *explore = [[HomePageController alloc]init];
-    
-    
     MeMainViewController *meMain = [[MeMainViewController alloc]init];
     
-    
-    UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homepage];
-    homeNav.tabBarItem.title = @"首  页";
-    [homeNav.tabBarItem setImage:[UIImage imageNamed:@"home"]];
-    [homeNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"homeSel"]];
-    homeNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [homeNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
-    UINavigationController *dramaNav = [[UINavigationController alloc]initWithRootViewController:drama];
-    dramaNav.tabBarItem.title = @"红  人";
-    [dramaNav.tabBarItem setImage:[UIImage imageNamed:@"drama"]];
-    [dramaNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"dramaSel"]];
-    dramaNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [dramaNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    UINavigationController *exploreNav = [[UINavigationController alloc]initWithRootViewController:explore];
-    
-    exploreNav.tabBarItem.title  = @"发  现";
-    [exploreNav.tabBarItem setImage:[UIImage imageNamed:@"found"]];
-    [exploreNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"foundSel"]];
-    exploreNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [exploreNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
-    UINavigationController *meMainNav = [[UINavigationController alloc]initWithRootViewController:meMain];
-    meMainNav.tabBarItem.title = @"我  的";
-    [meMainNav.tabBarItem setImage:[UIImage imageNamed:@"mine"]];
-    [meMainNav.tabBarItem setSelectedImage:[UIImage imageNamed:@"mineSel"]];
-    meMainNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    [meMainNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+     UINavigationController *exploreNav = [self setNavigationController:@"发现" Image:@"found" selectedImage:@"foundSel" controller:explore];
+     UINavigationController *dramaNav = [self setNavigationController:@"红人" Image:@"drama" selectedImage:@"dramaSel" controller:drama];
+     UINavigationController *homeNav = [self setNavigationController:@"首页" Image:@"home" selectedImage:@"homeSel" controller:homepage];
+    UINavigationController *meMainNav = [self setNavigationController:@"我的" Image:@"mine" selectedImage:@"mineSel" controller:meMain];
 
     [self.tabBar setTintColor:color];
     self.tabBar.translucent  = NO;
     self.tabBar.opaque = YES;
     NSArray *navCon = @[homeNav,dramaNav,exploreNav,meMainNav];
     [self setViewControllers:navCon animated:YES];
+}
+
+- (UINavigationController *)setNavigationController:(NSString *)title Image:(NSString *)imageStr selectedImage:(NSString *)selectedImageStr controller:(UIViewController *)controller{
+        UIColor *color  = COLOR_THEME;
+    UINavigationController *Nav = [[UINavigationController alloc]initWithRootViewController:controller];
+    Nav.tabBarItem.title = title;
+    [Nav.tabBarItem setImage:[UIImage imageNamed:imageStr]];
+    [Nav.tabBarItem setSelectedImage:[UIImage imageNamed:selectedImageStr]];
+    Nav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [Nav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    return Nav;
 }
 
 //哪些界面支持自动转屏
