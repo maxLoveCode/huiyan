@@ -144,13 +144,13 @@
     self.price_pic.frame = CGRectMake(CGRectGetMinX(self.address_pic.frame), CGRectGetMaxY(self.address_pic.frame) + 10, 14, 14);
     self.price_lab.frame = CGRectMake(CGRectGetMaxX(self.price_pic.frame) + 5, CGRectGetMinY(self.price_pic.frame), kScreen_Width - 150, 14);
 //    self.collect_btn.frame = CGRectMake(15, CGRectGetMaxY(self.bg_view.frame) + 10, (kScreen_Width - 80) / 3, (kScreen_Width - 80) / 3 / 3.1);
-    self.writeComment_btn.frame = CGRectMake(kScreen_Width - 130, CGRectGetMaxY(self.bg_view.frame)- 50, 130 , 40 );
+    self.writeComment_btn.frame = CGRectMake(kScreen_Width - 130, CGRectGetMaxY(self.bg_view.frame) + 5, 130 , 40 );
     self.share_btn.frame = CGRectMake(kScreen_Width - (kScreen_Width - 50) / 2 - 15, CGRectGetMinY(self.writeComment_btn.frame), (kScreen_Width - 50) / 2, 40);
     
 }
 
 + (CGFloat)cellHeight{
-    return 187 ;
+    return 187 + 50 ;
 }
 
 - (void)setContent:(BuyTicket *)ticket{
