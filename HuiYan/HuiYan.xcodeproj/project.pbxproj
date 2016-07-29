@@ -351,6 +351,8 @@
 		595B047A1D4B01DE005A1DEC /* tabBar_publish_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04741D4B01DE005A1DEC /* tabBar_publish_icon.png */; };
 		595B047B1D4B01DE005A1DEC /* tabBar_publish_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04751D4B01DE005A1DEC /* tabBar_publish_icon@2x.png */; };
 		595B047C1D4B01DE005A1DEC /* tabBar_publish_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04761D4B01DE005A1DEC /* tabBar_publish_icon@3x.png */; };
+		595B047F1D4B02AB005A1DEC /* UIView+ZCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 595B047E1D4B02AB005A1DEC /* UIView+ZCExtension.m */; };
+		595B04821D4B0304005A1DEC /* ZCTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 595B04811D4B0304005A1DEC /* ZCTabBar.m */; };
 		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
 		5964F1C61CF5549C00E436CE /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5964F1C41CF5549C00E436CE /* MessageCell.xib */; };
 		5964F1CA1CF5551600E436CE /* DramaDetailHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C81CF5551600E436CE /* DramaDetailHeadCell.m */; };
@@ -985,6 +987,11 @@
 		595B04741D4B01DE005A1DEC /* tabBar_publish_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar_publish_icon.png; path = HuiYan/ImageSource/tabBar_publish_icon.png; sourceTree = SOURCE_ROOT; };
 		595B04751D4B01DE005A1DEC /* tabBar_publish_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar_publish_icon@2x.png"; path = "HuiYan/ImageSource/tabBar_publish_icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		595B04761D4B01DE005A1DEC /* tabBar_publish_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar_publish_icon@3x.png"; path = "HuiYan/ImageSource/tabBar_publish_icon@3x.png"; sourceTree = SOURCE_ROOT; };
+		595B047D1D4B02AB005A1DEC /* UIView+ZCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZCExtension.h"; sourceTree = "<group>"; };
+		595B047E1D4B02AB005A1DEC /* UIView+ZCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZCExtension.m"; sourceTree = "<group>"; };
+		595B04801D4B0304005A1DEC /* ZCTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTabBar.h; sourceTree = "<group>"; };
+		595B04811D4B0304005A1DEC /* ZCTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTabBar.m; sourceTree = "<group>"; };
+		595B04831D4B0578005A1DEC /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = HuiYan/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		5964F1C21CF5549C00E436CE /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = HuiYan/Homepage/Views/MessageCell.h; sourceTree = SOURCE_ROOT; };
 		5964F1C31CF5549C00E436CE /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = HuiYan/Homepage/Views/MessageCell.m; sourceTree = SOURCE_ROOT; };
 		5964F1C41CF5549C00E436CE /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCell.xib; path = HuiYan/Homepage/Views/MessageCell.xib; sourceTree = SOURCE_ROOT; };
@@ -1505,6 +1512,7 @@
 				55CCD7951CB3640600C3B8CA /* Assets.xcassets */,
 				55CCD7971CB3640600C3B8CA /* LaunchScreen.storyboard */,
 				55CCD79A1CB3640600C3B8CA /* Info.plist */,
+				595B04831D4B0578005A1DEC /* PrefixHeader.pch */,
 				55CCD7891CB3640500C3B8CA /* Supporting Files */,
 			);
 			path = huiyan;
@@ -2002,6 +2010,8 @@
 			isa = PBXGroup;
 			children = (
 				55CCD7E31CB38D1C00C3B8CA /* Constant.h */,
+				595B04801D4B0304005A1DEC /* ZCTabBar.h */,
+				595B04811D4B0304005A1DEC /* ZCTabBar.m */,
 			);
 			name = Define;
 			path = Homepage/Define;
@@ -2103,6 +2113,8 @@
 				55C41E2C1CE463480055A58B /* NSString+ImageString.m */,
 				251C22E91CF462DE0028D0E5 /* UIImage+UIImage_Crop.h */,
 				251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */,
+				595B047D1D4B02AB005A1DEC /* UIView+ZCExtension.h */,
+				595B047E1D4B02AB005A1DEC /* UIView+ZCExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2205,7 +2217,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2522,6 +2534,7 @@
 				55A43E911CEC282700BB73EF /* DramaStarInvatationCell.m in Sources */,
 				2521A8121D07B05100721BA5 /* MCGifLoadingHUD.m in Sources */,
 				558F5CBA1CBBAAFA006BD54D /* TrainingDetailsTableViewController.m in Sources */,
+				595B047F1D4B02AB005A1DEC /* UIView+ZCExtension.m in Sources */,
 				5964F1CA1CF5551600E436CE /* DramaDetailHeadCell.m in Sources */,
 				558F5CB71CBB9780006BD54D /* Training.m in Sources */,
 				25D965521CF3E28900B49A9B /* ForgotPassTableViewController.m in Sources */,
@@ -2590,6 +2603,7 @@
 				557001B31CCF667B003EB02F /* MQUntils.m in Sources */,
 				55A43E761CEB03DF00BB73EF /* NewHomePageDetailCellTableViewCell.m in Sources */,
 				5570012D1CCF365E003EB02F /* WKWebViewJavascriptBridge.m in Sources */,
+				595B04821D4B0304005A1DEC /* ZCTabBar.m in Sources */,
 				558F22E01CE86016008636E1 /* PersonDramaTicketCell.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
 				55CCD7FF1CB4DB2E00C3B8CA /* BuyTicketDetailsViewController.m in Sources */,
@@ -2809,6 +2823,7 @@
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PROJECT_DIR)/huiyan/第三方",
 				);
+				GCC_PREFIX_HEADER = HuiYan/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2824,7 +2839,7 @@
 					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2857,6 +2872,7 @@
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PROJECT_DIR)/huiyan/第三方",
 				);
+				GCC_PREFIX_HEADER = HuiYan/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2872,7 +2888,7 @@
 					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2940,7 +2956,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

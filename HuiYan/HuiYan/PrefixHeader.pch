@@ -1,0 +1,24 @@
+//
+//  PrefixHeader.pch
+//  HuiYan
+//
+//  Created by zc on 16/7/29.
+//  Copyright © 2016年 com.huayin. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+/**只给OC语言的文件用**/
+#import "UIView+ZCExtension.h"
+//日志
+#ifdef DEBUG
+#define ZCLog(...) NSLog(__VA_ARGS__)
+#define ZCLogFunc ZCLog(@"%s",__func__);
+#else
+#define ZCLog(...)
+#endif
+#endif
+
+#endif /* PrefixHeader_pch */

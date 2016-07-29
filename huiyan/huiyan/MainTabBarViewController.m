@@ -16,28 +16,47 @@
 #import <TSMessageView.h>
 #import "UIImage+Extension.h"
 #import "PendingListViewController.h"
+#import "ZCTabBar.h"
 @interface MainTabBarViewController ()
 
 @end
 
 @implementation MainTabBarViewController
 
-- (void)awakeFromNib{
-    self.selectedIndex = 0;
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+   //  [self setupItemTitleTextAttributes];
     [self addAllController];
+     [self setupTabBar];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotifictionView:) name:@"notiction" object:nil];
+    // [self setupItemTitleTextAttributes];
     
      // Do any additional setup after loading the view.
 }
+    
+- (void)setupTabBar{
+    [self setValue:[[ZCTabBar alloc]init] forKey:@"tabBar"];
+}
+
+//- (void)setupItemTitleTextAttributes{
+//    UITabBarItem *item = [UITabBarItem appearance];
+//    
+//    //普通状态下文字属性
+//    NSMutableDictionary *normalAtts = [NSMutableDictionary dictionary];
+//    normalAtts[NSFontAttributeName] = [UIFont systemFontOfSize:12];
+//    normalAtts[NSForegroundColorAttributeName] = [UIColor grayColor];
+//    [item setTitleTextAttributes:normalAtts forState:UIControlStateNormal];
+//    //选中状态下文字属性
+//    NSMutableDictionary *selectedAtts = [NSMutableDictionary dictionary];
+//    selectedAtts[NSForegroundColorAttributeName] = [UIColor darkGrayColor];
+//    [item setTitleTextAttributes:selectedAtts forState:UIControlStateSelected];
+//}
+
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 - (void)showNotifictionView:(NSNotification *)notifation{
     NSDictionary *userInfo = notifation.userInfo;
    [[TSMessageView appearance] setContentTextColor:[UIColor whiteColor]];
@@ -83,21 +102,27 @@
      UINavigationController *dramaNav = [self setNavigationController:@"红人" Image:@"drama" selectedImage:@"dramaSel" controller:drama];
      UINavigationController *homeNav = [self setNavigationController:@"首页" Image:@"home" selectedImage:@"homeSel" controller:homepage];
     UINavigationController *meMainNav = [self setNavigationController:@"我的" Image:@"mine" selectedImage:@"mineSel" controller:meMain];
-
+    
     [self.tabBar setTintColor:color];
     self.tabBar.translucent  = NO;
     self.tabBar.opaque = YES;
     NSArray *navCon = @[homeNav,dramaNav,exploreNav,meMainNav];
     [self setViewControllers:navCon animated:YES];
+    
 }
+
+
+
 
 - (UINavigationController *)setNavigationController:(NSString *)title Image:(NSString *)imageStr selectedImage:(NSString *)selectedImageStr controller:(UIViewController *)controller{
         UIColor *color  = COLOR_THEME;
     UINavigationController *Nav = [[UINavigationController alloc]initWithRootViewController:controller];
     Nav.tabBarItem.title = title;
-    [Nav.tabBarItem setImage:[UIImage imageNamed:imageStr]];
-    [Nav.tabBarItem setSelectedImage:[UIImage imageNamed:selectedImageStr]];
-    Nav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    [Nav.tabBarItem setImage:[UIImage imageNamed:selectedImageStr]];
+    UIImage *image = [UIImage imageNamed:selectedImageStr];
+    image =  [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [Nav.tabBarItem setSelectedImage:image];
+  //  Nav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [Nav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     return Nav;
 }
