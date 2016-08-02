@@ -327,6 +327,8 @@
 		55DAFFD61CC8F82B0093B180 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DAFFD51CC8F82B0093B180 /* libstdc++.tbd */; };
 		55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DAFFD71CC8F8350093B180 /* libz.tbd */; };
 		55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DAFFDA1CC9B4AB0093B180 /* Tools.m */; };
+		5913B5941D4B505E003DE430 /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5913B5931D4B505E003DE430 /* PopView.m */; };
+		5913B5961D4B5070003DE430 /* PopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5913B5951D4B5070003DE430 /* PopView.xib */; };
 		591C37E61CF6CB1400E73CB1 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E51CF6CB1400E73CB1 /* libBaiduMobStat.a */; };
 		591C37E81CF6CB4D00E73CB1 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		591C37EA1CF6CB6900E73CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */; };
@@ -345,6 +347,8 @@
 		5923EE0E1CFC4BBD005F6A33 /* actvity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EE0C1CFC4BBD005F6A33 /* actvity@3x.png */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
+		5939755B1D4DFFE600576274 /* NewHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 593975591D4DFFE600576274 /* NewHomeCell.m */; };
+		5939755C1D4DFFE600576274 /* NewHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5939755A1D4DFFE600576274 /* NewHomeCell.xib */; };
 		595B04771D4B01DE005A1DEC /* tabBar_publish_click_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04711D4B01DE005A1DEC /* tabBar_publish_click_icon.png */; };
 		595B04781D4B01DE005A1DEC /* tabBar_publish_click_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04721D4B01DE005A1DEC /* tabBar_publish_click_icon@2x.png */; };
 		595B04791D4B01DE005A1DEC /* tabBar_publish_click_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04731D4B01DE005A1DEC /* tabBar_publish_click_icon@3x.png */; };
@@ -353,6 +357,10 @@
 		595B047C1D4B01DE005A1DEC /* tabBar_publish_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04761D4B01DE005A1DEC /* tabBar_publish_icon@3x.png */; };
 		595B047F1D4B02AB005A1DEC /* UIView+ZCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 595B047E1D4B02AB005A1DEC /* UIView+ZCExtension.m */; };
 		595B04821D4B0304005A1DEC /* ZCTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 595B04811D4B0304005A1DEC /* ZCTabBar.m */; };
+		595DFF561D4EDC1700655A95 /* HomePageHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595DFF551D4EDC1700655A95 /* HomePageHeadView.m */; };
+		595DFF581D4EDC3200655A95 /* HomePageHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 595DFF571D4EDC3200655A95 /* HomePageHeadView.xib */; };
+		595DFF5F1D4EF27100655A95 /* PostActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 595DFF5E1D4EF27100655A95 /* PostActivityController.m */; };
+		595DFF621D4F303100655A95 /* UITextField+ZCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 595DFF611D4F303100655A95 /* UITextField+ZCExtension.m */; };
 		5964F1C51CF5549C00E436CE /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C31CF5549C00E436CE /* MessageCell.m */; };
 		5964F1C61CF5549C00E436CE /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5964F1C41CF5549C00E436CE /* MessageCell.xib */; };
 		5964F1CA1CF5551600E436CE /* DramaDetailHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1C81CF5551600E436CE /* DramaDetailHeadCell.m */; };
@@ -957,6 +965,9 @@
 		55DAFFD71CC8F8350093B180 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		55DAFFD91CC9B4AB0093B180 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		55DAFFDA1CC9B4AB0093B180 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		5913B5921D4B505E003DE430 /* PopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopView.h; path = HuiYan/Homepage/Define/PopView.h; sourceTree = SOURCE_ROOT; };
+		5913B5931D4B505E003DE430 /* PopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopView.m; path = HuiYan/Homepage/Define/PopView.m; sourceTree = SOURCE_ROOT; };
+		5913B5951D4B5070003DE430 /* PopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopView.xib; sourceTree = "<group>"; };
 		591C37E41CF6CB1400E73CB1 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		591C37E51CF6CB1400E73CB1 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -981,6 +992,9 @@
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
 		5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changePasswordTableViewController.m; path = HuiYan/Memain/Controllers/changePasswordTableViewController.m; sourceTree = SOURCE_ROOT; };
+		593975581D4DFFE600576274 /* NewHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewHomeCell.h; path = HuiYan/Homepage/Views/NewHomeCell.h; sourceTree = SOURCE_ROOT; };
+		593975591D4DFFE600576274 /* NewHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewHomeCell.m; path = HuiYan/Homepage/Views/NewHomeCell.m; sourceTree = SOURCE_ROOT; };
+		5939755A1D4DFFE600576274 /* NewHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewHomeCell.xib; path = HuiYan/Homepage/Views/NewHomeCell.xib; sourceTree = SOURCE_ROOT; };
 		595B04711D4B01DE005A1DEC /* tabBar_publish_click_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar_publish_click_icon.png; path = HuiYan/ImageSource/tabBar_publish_click_icon.png; sourceTree = SOURCE_ROOT; };
 		595B04721D4B01DE005A1DEC /* tabBar_publish_click_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar_publish_click_icon@2x.png"; path = "HuiYan/ImageSource/tabBar_publish_click_icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		595B04731D4B01DE005A1DEC /* tabBar_publish_click_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar_publish_click_icon@3x.png"; path = "HuiYan/ImageSource/tabBar_publish_click_icon@3x.png"; sourceTree = SOURCE_ROOT; };
@@ -992,6 +1006,13 @@
 		595B04801D4B0304005A1DEC /* ZCTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTabBar.h; sourceTree = "<group>"; };
 		595B04811D4B0304005A1DEC /* ZCTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTabBar.m; sourceTree = "<group>"; };
 		595B04831D4B0578005A1DEC /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = HuiYan/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		595DFF541D4EDC1700655A95 /* HomePageHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageHeadView.h; path = HuiYan/Homepage/Views/HomePageHeadView.h; sourceTree = SOURCE_ROOT; };
+		595DFF551D4EDC1700655A95 /* HomePageHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageHeadView.m; path = HuiYan/Homepage/Views/HomePageHeadView.m; sourceTree = SOURCE_ROOT; };
+		595DFF571D4EDC3200655A95 /* HomePageHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageHeadView.xib; sourceTree = "<group>"; };
+		595DFF5D1D4EF27100655A95 /* PostActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostActivityController.h; sourceTree = "<group>"; };
+		595DFF5E1D4EF27100655A95 /* PostActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostActivityController.m; sourceTree = "<group>"; };
+		595DFF601D4F303100655A95 /* UITextField+ZCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+ZCExtension.h"; sourceTree = "<group>"; };
+		595DFF611D4F303100655A95 /* UITextField+ZCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ZCExtension.m"; sourceTree = "<group>"; };
 		5964F1C21CF5549C00E436CE /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = HuiYan/Homepage/Views/MessageCell.h; sourceTree = SOURCE_ROOT; };
 		5964F1C31CF5549C00E436CE /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = HuiYan/Homepage/Views/MessageCell.m; sourceTree = SOURCE_ROOT; };
 		5964F1C41CF5549C00E436CE /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCell.xib; path = HuiYan/Homepage/Views/MessageCell.xib; sourceTree = SOURCE_ROOT; };
@@ -1493,6 +1514,7 @@
 		55CCD7881CB3640500C3B8CA /* huiyan */ = {
 			isa = PBXGroup;
 			children = (
+				595DFF591D4EF1E700655A95 /* Activity */,
 				55B918F21CCA1D8800717F8E /* 第三方 */,
 				251F5E151CBCC251000BC47D /* commonFiles */,
 				550BF9721CB8EB9300E2E9DE /* Player */,
@@ -2012,6 +2034,9 @@
 				55CCD7E31CB38D1C00C3B8CA /* Constant.h */,
 				595B04801D4B0304005A1DEC /* ZCTabBar.h */,
 				595B04811D4B0304005A1DEC /* ZCTabBar.m */,
+				5913B5921D4B505E003DE430 /* PopView.h */,
+				5913B5931D4B505E003DE430 /* PopView.m */,
+				5913B5951D4B5070003DE430 /* PopView.xib */,
 			);
 			name = Define;
 			path = Homepage/Define;
@@ -2094,6 +2119,12 @@
 				59B72EDA1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m */,
 				591CC0A81CF7F02E008ECEA7 /* DynamicCommentCell.h */,
 				591CC0A91CF7F02E008ECEA7 /* DynamicCommentCell.m */,
+				593975581D4DFFE600576274 /* NewHomeCell.h */,
+				593975591D4DFFE600576274 /* NewHomeCell.m */,
+				5939755A1D4DFFE600576274 /* NewHomeCell.xib */,
+				595DFF541D4EDC1700655A95 /* HomePageHeadView.h */,
+				595DFF551D4EDC1700655A95 /* HomePageHeadView.m */,
+				595DFF571D4EDC3200655A95 /* HomePageHeadView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2115,6 +2146,8 @@
 				251C22EA1CF462DE0028D0E5 /* UIImage+UIImage_Crop.m */,
 				595B047D1D4B02AB005A1DEC /* UIView+ZCExtension.h */,
 				595B047E1D4B02AB005A1DEC /* UIView+ZCExtension.m */,
+				595DFF601D4F303100655A95 /* UITextField+ZCExtension.h */,
+				595DFF611D4F303100655A95 /* UITextField+ZCExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2128,6 +2161,40 @@
 			name = BaiduTongji;
 			path = "HuiYan/第三方/BaiduTongji";
 			sourceTree = SOURCE_ROOT;
+		};
+		595DFF591D4EF1E700655A95 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				595DFF5A1D4EF1E700655A95 /* Controllers */,
+				595DFF5B1D4EF1E700655A95 /* Models */,
+				595DFF5C1D4EF1E700655A95 /* Views */,
+			);
+			name = Activity;
+			path = HuiYan/Activity;
+			sourceTree = SOURCE_ROOT;
+		};
+		595DFF5A1D4EF1E700655A95 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				595DFF5D1D4EF27100655A95 /* PostActivityController.h */,
+				595DFF5E1D4EF27100655A95 /* PostActivityController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		595DFF5B1D4EF1E700655A95 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		595DFF5C1D4EF1E700655A95 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -2366,6 +2433,7 @@
 				55067FEB1CFD7C7000E574B7 /* shareTicket@3x.png in Resources */,
 				59934F971CF2DBA500666B33 /* playnumber@2x.png in Resources */,
 				5578A8A11CF06BCB00BD3061 /* gifrefesh1.png in Resources */,
+				595DFF581D4EDC3200655A95 /* HomePageHeadView.xib in Resources */,
 				550BFA0B1CBB2AF000E2E9DE /* brightness_bg.png in Resources */,
 				550BFA0E1CBB2AF000E2E9DE /* kr-video-player-fullscreen@2x.png in Resources */,
 				25C6257B1CBE49C10068BFE8 /* tab_homePage_selected@2x.png in Resources */,
@@ -2400,12 +2468,14 @@
 				558F22F51CE9B112008636E1 /* UnBindMobileViewController.xib in Resources */,
 				5964F1C61CF5549C00E436CE /* MessageCell.xib in Resources */,
 				5578A8531CF03F7000BD3061 /* weixinpay.png in Resources */,
+				5939755C1D4DFFE600576274 /* NewHomeCell.xib in Resources */,
 				55C41E041CE325C80055A58B /* TrainOrdersMessageCell.xib in Resources */,
 				55C41E241CE4559A0055A58B /* pushMes@3x.png in Resources */,
 				5578A8AB1CF06DF700BD3061 /* dramaSel@2x.png in Resources */,
 				59D4AB861CF46AE2002545A9 /* ticket_price.png in Resources */,
 				55B9191D1CCA1FAF00717F8E /* UMSCommentDetailController.xib in Resources */,
 				5578A8471CEEF9CA00BD3061 /* MHSelectPickerView.xib in Resources */,
+				5913B5961D4B5070003DE430 /* PopView.xib in Resources */,
 				5578A8C51CF0825100BD3061 /* like.png in Resources */,
 				550BFA1B1CBB2AF000E2E9DE /* player_download.png in Resources */,
 				55B919231CCA1FAF00717F8E /* UMSnsAccountViewController.xib in Resources */,
@@ -2588,6 +2658,7 @@
 				55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */,
 				5578A8461CEEF9CA00BD3061 /* MHSelectPickerView.m in Sources */,
 				557EDE7C1CD0A4AB0039267E /* DataSigner.m in Sources */,
+				595DFF621D4F303100655A95 /* UITextField+ZCExtension.m in Sources */,
 				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,
 				557EDE7E1CD0A4AB0039267E /* MD5DataSigner.m in Sources */,
 				25C625881CC089330068BFE8 /* DramaStarViewController.m in Sources */,
@@ -2603,6 +2674,7 @@
 				557001B31CCF667B003EB02F /* MQUntils.m in Sources */,
 				55A43E761CEB03DF00BB73EF /* NewHomePageDetailCellTableViewCell.m in Sources */,
 				5570012D1CCF365E003EB02F /* WKWebViewJavascriptBridge.m in Sources */,
+				595DFF561D4EDC1700655A95 /* HomePageHeadView.m in Sources */,
 				595B04821D4B0304005A1DEC /* ZCTabBar.m in Sources */,
 				558F22E01CE86016008636E1 /* PersonDramaTicketCell.m in Sources */,
 				25C625471CBE00460068BFE8 /* User.m in Sources */,
@@ -2638,6 +2710,7 @@
 				557EDE801CD0A4AB0039267E /* openssl_wrapper.m in Sources */,
 				55C41E071CE4223D0055A58B /* TrainPayViewController.m in Sources */,
 				25C625441CBE002E0068BFE8 /* LoginView.m in Sources */,
+				595DFF5F1D4EF27100655A95 /* PostActivityController.m in Sources */,
 				55C41DFE1CE322B20055A58B /* TrainOrdersCell.m in Sources */,
 				59B72EDB1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m in Sources */,
 				554B97BB1CED5E0B00E471CB /* PersonTrainingCell.m in Sources */,
@@ -2647,6 +2720,7 @@
 				55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */,
 				5556CC151CD89DD700CCD668 /* LookTicketCell.m in Sources */,
 				558621731CE49F92007D5049 /* PersonNormalCell.m in Sources */,
+				5913B5941D4B505E003DE430 /* PopView.m in Sources */,
 				55DAFFB71CC4D7A40093B180 /* StarVideo.m in Sources */,
 				55067FE71CFD24CD00E574B7 /* InvitationDetailViewController.m in Sources */,
 				55CCD78B1CB3640500C3B8CA /* main.m in Sources */,
@@ -2669,6 +2743,7 @@
 				5570012B1CCF365E003EB02F /* WebViewJavascriptBridge_JS.m in Sources */,
 				55A43E8C1CEC08F100BB73EF /* DramaStarInvitionViewController.m in Sources */,
 				55C41E031CE325C80055A58B /* TrainOrdersMessageCell.m in Sources */,
+				5939755B1D4DFFE600576274 /* NewHomeCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2839,7 +2914,7 @@
 					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2888,7 +2963,7 @@
 					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

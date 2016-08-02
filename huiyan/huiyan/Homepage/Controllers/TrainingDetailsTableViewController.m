@@ -32,6 +32,7 @@
          self.title_arr = @[self.train.date,self.train.address,self.train.price];
     }
     //NSLog(@"%@",self.train.content);
+    self.view.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:self.tail_btn];
     [self.view addSubview:self.trainDetailsTableView];
     

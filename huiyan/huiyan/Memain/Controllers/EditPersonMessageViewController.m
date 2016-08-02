@@ -242,8 +242,6 @@
     
     [uploadTask resume];
     
-    
-    
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {

@@ -1,0 +1,120 @@
+//
+//  HomePageHeadView.m
+//  huiyan
+//
+//  Created by zc on 16/8/1.
+//  Copyright © 2016年 com.huayin. All rights reserved.
+//
+
+#import "HomePageHeadView.h"
+
+@interface HomePageHeadView()<UIScrollViewDelegate>
+@property (nonatomic, strong) UIView *grayView;
+@property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger pageCount;
+@property (nonatomic, strong) UILabel *titleLab;
+
+@end
+
+@implementation HomePageHeadView
+
+
+- (void)awakeFromNib{
+    [self addSubview:self.grayView];
+    [self addSubview:self.pageControl];
+    [self addSubview:self.titleLab];
+    [self setupScrollow];
+}
+
+- (void)setupScrollow{
+    self.ScrollView.contentSize = CGSizeMake(kScreen_Width * 4, 0);
+    self.ScrollView.pagingEnabled = YES;
+    self.ScrollView.delegate = self;
+    for (int i = 0; i < 4; i++) {
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width * i, 0, kScreen_Width, kScreen_Width / 2)];
+        view.backgroundColor = ZCRandomColor;
+        [self.ScrollView addSubview:view];
+    }
+    [self addTimer];
+}
+
+- (void)setupOther{
+    self.timeLab.textColor = COLOR_THEME;
+}
+
+- (UIView *)grayView{
+    if (!_grayView) {
+        self.grayView = [[UIView alloc]init];
+        self.grayView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.1];
+    }
+    return _grayView;
+}
+
+- (UILabel *)titleLab{
+    if (!_titleLab) {
+        self.titleLab = [[UILabel alloc]init];
+        self.titleLab.font = kFONT14;
+        self.titleLab.textColor = [UIColor whiteColor];
+        self.titleLab.text = @"666666666666";
+        self.titleLab.textAlignment = NSTextAlignmentLeft;
+    }
+    return _titleLab;
+}
+
+- (UIPageControl *)pageControl{
+    if (!_pageControl) {
+        self.pageControl = [[UIPageControl alloc]init];
+        self.pageControl.numberOfPages = 4;
+        self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+        self.pageControl.currentPageIndicatorTintColor = COLOR_THEME;
+    }
+    return _pageControl;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    self.pageControl.center = CGPointMake(self.zc_width / 2, 50 + kScreen_Width / 2 - 30);
+    self.pageControl.zc_height = 30;
+    self.grayView.frame = CGRectMake(0, kScreen_Width / 2 + 10, kScreen_Width, 40);
+    self.titleLab.frame = CGRectMake(15, kScreen_Width / 2 - 10, 200, 20);
+}
+
+#pragma mark -- 滑动事件
+//开启定时器
+- (void)addTimer{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
+}
+
+//关闭定时器
+- (void)removeTimer{
+    [self.timer invalidate];
+}
+
+- (void)nextImage{
+    self.pageCount ++;
+    if (self.pageCount == 3) {
+        self.pageCount = 0;
+    }
+    self.pageControl.currentPage = self.pageCount;
+    [UIView animateWithDuration:1 animations:^{
+        self.ScrollView.contentOffset = CGPointMake(kScreen_Width * self.pageCount, 0);
+    }];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self addTimer];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSInteger index = scrollView.contentOffset.x / kScreen_Width;
+    self.pageControl.currentPage = index;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self removeTimer];
+}
+
+
+
+@end

@@ -32,11 +32,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotifictionView:) name:@"notiction" object:nil];
     // [self setupItemTitleTextAttributes];
     
+    
+    
      // Do any additional setup after loading the view.
 }
     
 - (void)setupTabBar{
     [self setValue:[[ZCTabBar alloc]init] forKey:@"tabBar"];
+
 }
 
 //- (void)setupItemTitleTextAttributes{
@@ -92,39 +95,39 @@
 }
 
 - (void)addAllController{
-     UIColor *color  = COLOR_THEME;
+     //UIColor *color  = COLOR_THEME;
     NewHomePageViewController *homepage = [[NewHomePageViewController alloc]init];
     DramaStarViewController *drama = [[DramaStarViewController alloc]init];
     HomePageController *explore = [[HomePageController alloc]init];
     MeMainViewController *meMain = [[MeMainViewController alloc]init];
+    [self setNavigationController:@"首页" Image:@"home" selectedImage:@"homeSel" controller:homepage];
+      [self setNavigationController:@"红人" Image:@"drama" selectedImage:@"dramaSel" controller:drama];
+     [self setNavigationController:@"发现" Image:@"found" selectedImage:@"foundSel" controller:explore];
+     [self setNavigationController:@"我的" Image:@"mine" selectedImage:@"mineSel" controller:meMain];
     
-     UINavigationController *exploreNav = [self setNavigationController:@"发现" Image:@"found" selectedImage:@"foundSel" controller:explore];
-     UINavigationController *dramaNav = [self setNavigationController:@"红人" Image:@"drama" selectedImage:@"dramaSel" controller:drama];
-     UINavigationController *homeNav = [self setNavigationController:@"首页" Image:@"home" selectedImage:@"homeSel" controller:homepage];
-    UINavigationController *meMainNav = [self setNavigationController:@"我的" Image:@"mine" selectedImage:@"mineSel" controller:meMain];
-    
-    [self.tabBar setTintColor:color];
-    self.tabBar.translucent  = NO;
-    self.tabBar.opaque = YES;
-    NSArray *navCon = @[homeNav,dramaNav,exploreNav,meMainNav];
-    [self setViewControllers:navCon animated:YES];
+//    [self.tabBar setTintColor:color];
+//    self.tabBar.translucent  = NO;
+//    self.tabBar.opaque = YES;
+//    NSArray *navCon = @[homeNav,dramaNav,exploreNav,meMainNav];
+//    [self setViewControllers:navCon animated:YES];
     
 }
 
 
 
 
-- (UINavigationController *)setNavigationController:(NSString *)title Image:(NSString *)imageStr selectedImage:(NSString *)selectedImageStr controller:(UIViewController *)controller{
-        UIColor *color  = COLOR_THEME;
+- (void)setNavigationController:(NSString *)title Image:(NSString *)imageStr selectedImage:(NSString *)selectedImageStr controller:(UIViewController *)controller{
+       UIColor *color  = COLOR_THEME;
     UINavigationController *Nav = [[UINavigationController alloc]initWithRootViewController:controller];
-    Nav.tabBarItem.title = title;
-    [Nav.tabBarItem setImage:[UIImage imageNamed:selectedImageStr]];
+    
+    [self addChildViewController:Nav];
+    
+   Nav.tabBarItem.title = title;
+   Nav.tabBarItem.image = [UIImage imageNamed:imageStr];
     UIImage *image = [UIImage imageNamed:selectedImageStr];
     image =  [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [Nav.tabBarItem setSelectedImage:image];
-  //  Nav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    Nav.tabBarItem.selectedImage = image;
     [Nav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:color,NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    return Nav;
 }
 
 //哪些界面支持自动转屏
@@ -137,19 +140,22 @@
 }
 
 //viewController 支持哪些转屏方向
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    UINavigationController *nav = self.viewControllers[self.selectedIndex];
-    if ([nav.topViewController isKindOfClass:[WikiWorksDetailsViewController class]]) {
-        return UIInterfaceOrientationMaskAllButUpsideDown;
-    }else if ([nav.topViewController isKindOfClass:[DynamicDetailViewController class]]){
-        if (ZFPlayerShared.isAllowLandscape) {
-            return UIInterfaceOrientationMaskAllButUpsideDown;
-        }else{
-            return UIInterfaceOrientationMaskPortrait;
-        }
-    }
-    return UIInterfaceOrientationMaskPortrait;
-}
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+////    UINavigationController *nav = self.viewControllers[self.selectedIndex];
+//    
+//    NSLog(@"----+++++%@",self.childViewControllers[self.selectedIndex]);
+//   UINavigationController *nav = self.childViewControllers[self.selectedIndex];
+//    if ([nav.topViewController isKindOfClass:[WikiWorksDetailsViewController class]]) {
+//        return UIInterfaceOrientationMaskAllButUpsideDown;
+//    }else if ([nav.topViewController isKindOfClass:[DynamicDetailViewController class]]){
+//        if (ZFPlayerShared.isAllowLandscape) {
+//            return UIInterfaceOrientationMaskAllButUpsideDown;
+//        }else{
+//            return UIInterfaceOrientationMaskPortrait;
+//        }
+//    }
+//    return UIInterfaceOrientationMaskPortrait;
+//}
 
 - (void)rightClick:(UIBarButtonItem *)sender{
 }

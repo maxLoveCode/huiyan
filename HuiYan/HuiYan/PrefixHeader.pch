@@ -12,6 +12,10 @@
 #ifdef __OBJC__
 /**只给OC语言的文件用**/
 #import "UIView+ZCExtension.h"
+#import "Constant.h"
+#define ZCColor(r,g,b)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/ 255.0 alpha:1]
+#define ZCRandomColor ZCColor(arc4random_uniform(255),arc4random_uniform(255),arc4random_uniform(255))
+#import "ServerManager.h"
 //日志
 #ifdef DEBUG
 #define ZCLog(...) NSLog(__VA_ARGS__)

@@ -9,7 +9,6 @@
 #import "NewHomePageViewController.h"
 #import "Constant.h"
 #import "HomePage.h"
-#import "NewHomePageCell.h"
 #import "ServerManager.h"
 #import "WikiWorksDetailsViewController.h"
 #import <MJRefresh.h>
@@ -17,6 +16,8 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "GifRefresher.h"
 #import "UITabBarController+ShowHideBar.h"
+#import "NewHomeCell.h"
+#import "HomePageHeadView.h"
 @interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
@@ -28,7 +29,7 @@ static int number_page = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首  页";
+ //   self.title = @"首  页";
     
     self.dataSource = [[NSMutableArray alloc]init];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -43,6 +44,10 @@ static int number_page = 0;
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.view addSubview:self.tableView];
+       NSArray *Views = [[NSBundle mainBundle]loadNibNamed:@"HomePageHeadView" owner:self options:nil];
+    HomePageHeadView *headView = [Views firstObject];
+    headView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Width / 2 + 50);
+    self.tableView.tableHeaderView = headView;
     self.serverManager = [ServerManager sharedInstance];
     [self getappVersionData];
     [self get_wiki_listData:@"0"];
@@ -93,8 +98,8 @@ static int number_page = 0;
         self.tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height )];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
-        [self.tableView registerClass:[NewHomePageCell class] forCellReuseIdentifier:@"home"];
-        self.tableView.rowHeight =  kScreen_Width *5/7-1;
+        [self.tableView registerNib:[UINib nibWithNibName:@"NewHomeCell" bundle:nil] forCellReuseIdentifier:@"home"];
+        self.tableView.rowHeight =  kScreen_Width + 88;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -113,14 +118,12 @@ static int number_page = 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.01;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NewHomePageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"home" forIndexPath:indexPath];
-    if (self.dataSource.count > 0) {
-        [cell setContent:self.dataSource[indexPath.section]];
-    }
+    NewHomeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"home" forIndexPath:indexPath];
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -218,6 +221,9 @@ static int number_page = 0;
         NSLog(@"error = %@",error);
     }];
 }
+
+#pragma mark -- ScrollViewDelegate
+
 
 /*
 #pragma mark - Navigation
