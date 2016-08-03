@@ -9,6 +9,7 @@
 #import "ZCTabBar.h"
 #import "PopView.h"
 #import "PostActivityController.h"
+#import "SendLivigViewController.h"
 @interface ZCTabBar()<ClickDelegate>
 @property (nonatomic, weak) UIButton *publishBtn;
 @property (nonatomic, strong) UIView *bgView;
@@ -21,6 +22,7 @@
         UIButton *publishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [publishBtn setImage:[UIImage imageNamed:@"tabBar_publish_icon"] forState:UIControlStateNormal
          ];
+        
         [publishBtn setImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] forState:UIControlStateHighlighted
          ];
         [publishBtn addTarget:self action:@selector(publishClick) forControlEvents:UIControlEventTouchUpInside];
@@ -53,6 +55,14 @@
 - (void)postActivity{
     PostActivityController *postCon = [[PostActivityController alloc]init];
     [self.window.rootViewController presentViewController:postCon animated:NO completion:^{
+        self.publishBtn.selected = NO;
+        [self.bgView removeFromSuperview];
+    }];
+}
+
+- (void)postLiving{
+    SendLivigViewController *sendCon = [[SendLivigViewController alloc]init];
+    [self.window.rootViewController presentViewController:sendCon animated:NO completion:^{
         self.publishBtn.selected = NO;
         [self.bgView removeFromSuperview];
     }];

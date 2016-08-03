@@ -369,6 +369,7 @@
 		5964F1D11CF5919A00E436CE /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D01CF5919A00E436CE /* UIImage+Extension.m */; };
 		5964F1D71CF5964100E436CE /* DynamicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D61CF5964100E436CE /* DynamicDetailViewController.m */; };
 		5964F1DA1CF5976500E436CE /* FriendswordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D91CF5976500E436CE /* FriendswordsCell.m */; };
+		596EED0F1D51EC1B00F6116F /* SendLivigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 596EED0E1D51EC1B00F6116F /* SendLivigViewController.m */; };
 		59934F871CF29E6800666B33 /* person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F851CF29E6800666B33 /* person@2x.png */; };
 		59934F881CF29E6800666B33 /* person@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F861CF29E6800666B33 /* person@3x.png */; };
 		59934F971CF2DBA500666B33 /* playnumber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F951CF2DBA500666B33 /* playnumber@2x.png */; };
@@ -1027,6 +1028,8 @@
 		5964F1D61CF5964100E436CE /* DynamicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DynamicDetailViewController.m; path = HuiYan/Homepage/Controllers/DynamicDetailViewController.m; sourceTree = SOURCE_ROOT; };
 		5964F1D81CF5976500E436CE /* FriendswordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendswordsCell.h; path = HuiYan/Homepage/Views/FriendswordsCell.h; sourceTree = SOURCE_ROOT; };
 		5964F1D91CF5976500E436CE /* FriendswordsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendswordsCell.m; path = HuiYan/Homepage/Views/FriendswordsCell.m; sourceTree = SOURCE_ROOT; };
+		596EED0D1D51EC1B00F6116F /* SendLivigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendLivigViewController.h; sourceTree = "<group>"; };
+		596EED0E1D51EC1B00F6116F /* SendLivigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendLivigViewController.m; sourceTree = "<group>"; };
 		59934F851CF29E6800666B33 /* person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@2x.png"; path = "HuiYan/ImageSource/person@2x.png"; sourceTree = SOURCE_ROOT; };
 		59934F861CF29E6800666B33 /* person@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@3x.png"; path = "HuiYan/ImageSource/person@3x.png"; sourceTree = SOURCE_ROOT; };
 		59934F951CF2DBA500666B33 /* playnumber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "playnumber@2x.png"; path = "HuiYan/ImageSource/playnumber@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -1514,6 +1517,7 @@
 		55CCD7881CB3640500C3B8CA /* huiyan */ = {
 			isa = PBXGroup;
 			children = (
+				596EED091D51EBC500F6116F /* Living */,
 				595DFF591D4EF1E700655A95 /* Activity */,
 				55B918F21CCA1D8800717F8E /* 第三方 */,
 				251F5E151CBCC251000BC47D /* commonFiles */,
@@ -2196,6 +2200,40 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		596EED091D51EBC500F6116F /* Living */ = {
+			isa = PBXGroup;
+			children = (
+				596EED0A1D51EBC500F6116F /* Contrlooers */,
+				596EED0B1D51EBC500F6116F /* Models */,
+				596EED0C1D51EBC500F6116F /* Views */,
+			);
+			name = Living;
+			path = HuiYan/Living;
+			sourceTree = SOURCE_ROOT;
+		};
+		596EED0A1D51EBC500F6116F /* Contrlooers */ = {
+			isa = PBXGroup;
+			children = (
+				596EED0D1D51EC1B00F6116F /* SendLivigViewController.h */,
+				596EED0E1D51EC1B00F6116F /* SendLivigViewController.m */,
+			);
+			path = Contrlooers;
+			sourceTree = "<group>";
+		};
+		596EED0B1D51EBC500F6116F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		596EED0C1D51EBC500F6116F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2657,6 +2695,7 @@
 				557001B51CCF667B003EB02F /* WXUtil.mm in Sources */,
 				55DAFFDB1CC9B4AB0093B180 /* Tools.m in Sources */,
 				5578A8461CEEF9CA00BD3061 /* MHSelectPickerView.m in Sources */,
+				596EED0F1D51EC1B00F6116F /* SendLivigViewController.m in Sources */,
 				557EDE7C1CD0A4AB0039267E /* DataSigner.m in Sources */,
 				595DFF621D4F303100655A95 /* UITextField+ZCExtension.m in Sources */,
 				257FFC6A1CB64B1A004C3CDE /* BuyTicketCell.m in Sources */,

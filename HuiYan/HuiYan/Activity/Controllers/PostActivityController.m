@@ -10,7 +10,10 @@
 #import "UITextField+ZCExtension.h"
 #import "MHDatePicker.h"
 #import "Tools.h"
-@interface PostActivityController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import <ELCImagePickerController.h>
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
+@interface PostActivityController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ELCImagePickerControllerDelegate>
 @property (nonatomic, strong) NSArray *titleArr;
 @property (nonatomic, strong) NSArray *secondTitleArr;
 @property (nonatomic, strong) NSArray *detailArr;
@@ -26,18 +29,21 @@
 @property (nonatomic, strong) UITextField *peopleCount_textField;
 @property (nonatomic, strong) UITextField *peopleMax_textField;
 @property (nonatomic, strong) UITextView *activityDes_textView;
-@property (nonatomic, strong) UIButton *addCover;
-@property (nonatomic, strong) UIButton *addMuchPic;
+@property (nonatomic, strong) UIImageView *addCover;
+@property (nonatomic, strong) UIImageView *addMuchPic;
 @property (nonatomic, strong) UIButton *startBtn;
 @property (nonatomic, strong) UIButton *endBtn;
 @property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) NSMutableArray *imagePicArr;
+@property (nonatomic, strong) NSString *imagePic;
+@property (nonatomic, strong) NSString *oneAndMore;
 @end
 
 @implementation PostActivityController
 static NSString *const normalCell = @"normal";
 static NSString *const timeCell = @"timeNormal";
 static NSString *const picCell = @"picCell";
-
+#define kImagePic kScreen_Width / 3 - 15
 - (UITextField *)price_textField{
     if (!_price_textField) {
         self.price_textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
@@ -171,6 +177,7 @@ static NSString *const picCell = @"picCell";
     [super viewDidLoad];
     self.view.userInteractionEnabled = YES;
     self.serverManager = [ServerManager sharedInstance];
+    self.imagePicArr = [NSMutableArray array];
     self.tabBarItem.title = @"活动发布";
     self.titleArr  = @[@"活动主题",@"截止日期",@"活动时间",@"活动地点",@"活动价格"];
     self.secondTitleArr = @[@"开团人数",@"报名上限"];
@@ -213,9 +220,14 @@ static NSString *const picCell = @"picCell";
     if (indexPath.section == 2) {
         return 132;
     }else if (indexPath.section == 3){
-        return 132;
+        return kScreen_Width / 3 + 50;
     }else if (indexPath.section == 4){
-        return 132;
+        if (self.imagePicArr.count >= 6) {
+            return kScreen_Width + 50;
+        }else if (self.imagePicArr.count >= 3){
+            return kScreen_Width / 3 * 2 + 50;
+        }else
+        return kScreen_Width / 3  + 50 ;
     }else{
         return 50;
     }
@@ -296,16 +308,22 @@ static NSString *const picCell = @"picCell";
             [cell.contentView addSubview:titleLab];
             titleLab.tag = 1004;
         }
-        UIButton *addCover = [cell viewWithTag:1006];
+        UIImageView *addCover = [cell viewWithTag:1006];
         if (!addCover) {
-            addCover = [UIButton buttonWithType:UIButtonTypeCustom];
-            addCover.frame = CGRectMake(kMargin, 50, 72, 72);
+            addCover = [[UIImageView alloc]init];;
+            addCover.frame = CGRectMake(kMargin, 50, kImagePic, kImagePic);
             addCover.backgroundColor = [UIColor redColor];
             [cell.contentView addSubview:addCover];
             addCover.tag = 1006;
-            [addCover addTarget:self action:@selector(postCover) forControlEvents:UIControlEventTouchUpInside];
+            addCover.userInteractionEnabled = YES;
+            [addCover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(postCover:)]];
              self.addCover = addCover;
         }
+        if (self.imagePic) {
+            [self.addCover sd_setImageWithURL:[NSURL URLWithString:self.imagePic] placeholderImage:nil];
+        }
+       
+
         return cell;
         
     }else {
@@ -314,21 +332,36 @@ static NSString *const picCell = @"picCell";
         UILabel *titleLab = [cell viewWithTag:1008];
         if (!titleLab) {
             titleLab = [[UILabel alloc]initWithFrame:CGRectMake(kMargin, 0, 100, 50)];
-            titleLab.text = @"宣传图片(0/9)";
             titleLab.font = kFONT14;
             [cell.contentView addSubview:titleLab];
             titleLab.tag = 1008;
         }
-        UIButton *addCover = [cell viewWithTag:1010];
-        if (!addCover) {
-            addCover = [UIButton buttonWithType:UIButtonTypeCustom];
-            addCover.frame = CGRectMake(kMargin, 50, 72, 72);
-            addCover.backgroundColor = [UIColor redColor];
-            [cell.contentView addSubview:addCover];
-            addCover.tag = 1010;
-            [addCover addTarget:self action:@selector(postCover) forControlEvents:UIControlEventTouchUpInside];
-            self.addMuchPic = addCover;
+          titleLab.text = [NSString stringWithFormat:@"宣传图片(%zd/9)",self.imagePicArr.count];
+         NSInteger count = self.imagePicArr.count;
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                UIImageView *imagePic = [[UIImageView alloc]init];
+                imagePic.frame = CGRectMake(i % 3  * (kImagePic + 10) + 10, i / 3 * (kImagePic + 10) + 60 , kImagePic,kImagePic);
+                [imagePic sd_setImageWithURL:[NSURL URLWithString:self.imagePicArr[i]] placeholderImage:nil];
+                imagePic.backgroundColor = [UIColor redColor];
+                [cell.contentView addSubview:imagePic];
+            }
+            
         }
+        if (count != 9) {
+            UIImageView *addCover = [cell viewWithTag:1010];
+            if (!addCover) {
+                addCover = [[UIImageView alloc]init];
+                addCover.backgroundColor = [UIColor yellowColor];
+                [cell.contentView addSubview:addCover];
+                addCover.tag = 1010;
+                addCover.userInteractionEnabled = YES;
+                [addCover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(postCover:)]];
+                self.addMuchPic = addCover;
+            }
+             addCover.frame = CGRectMake(count % 3 * (kImagePic + 10) + 10, count / 3 * (kImagePic + 10) + 60, kImagePic, kImagePic);
+        }
+       
         return cell;
     }
 }
@@ -347,7 +380,8 @@ static NSString *const picCell = @"picCell";
 }
 
 #pragma mark --上传图片
-- (void)postCover{
+- (void)postCover:(UITapGestureRecognizer *)sender{
+    ZCLog(@"+++%zd",sender.view.tag);
     UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"请选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alertCon addAction:[UIAlertAction actionWithTitle:@"照相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction *UIAlertAction){
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -357,11 +391,22 @@ static NSString *const picCell = @"picCell";
         [self presentViewController:imagePicker animated:YES completion:nil];
     }]];
     [alertCon addAction:[UIAlertAction actionWithTitle:@"从相册中选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction *UIAlertAction){
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.allowsEditing = YES;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        if (sender.view.tag == 1006) {
+            self.oneAndMore = @"one";
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.allowsEditing = YES;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }else{
+            self.oneAndMore = @"more";
+            ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc]init];
+            elcPicker.maximumImagesCount = 9;
+            elcPicker.imagePickerDelegate = self;
+            [self presentViewController:elcPicker animated:YES completion:nil];
+            
+        }
+        
     }]];
     [alertCon addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertCon animated:YES completion:nil];
@@ -413,7 +458,6 @@ static NSString *const picCell = @"picCell";
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
         NSData *data = UIImageJPEGRepresentation(smallImage, 1.0);
-        [self.addCover setImage:smallImage forState:UIControlStateNormal];
         [self getUploadImage:data];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -452,7 +496,14 @@ static NSString *const picCell = @"picCell";
                           if ([responseObject[@"data"] objectForKey:@"url"] != nil) {
                               NSString *str = [responseObject[@"data"] objectForKey:@"url"];
                               NSLog(@"str = %@",str);
-                             // [self get_user_infoImageData:str];
+                              if ([self.oneAndMore isEqualToString:@"one"]) {
+                                  self.imagePic = str;
+                                  [self.tableView reloadData];
+                                  self.addCover.userInteractionEnabled = NO;
+                              }else{
+                                  [self.imagePicArr addObject:str];
+                                  [self.tableView reloadData];
+                              }
                               
                           }else{
                               [self presentViewController:[Tools showAlert:@"修改失败"] animated:YES completion:nil];
@@ -501,6 +552,23 @@ static NSString *const picCell = @"picCell";
         UIGraphicsEndImageContext();
     }
     return newimage;
+}
+#pragma mark -- ELCImageDelegate
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info{
+    for (NSDictionary *dic in info) {
+        if ([[dic objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"ALAssetTypePhoto"]) {
+            UIImage *img = [dic objectForKey:UIImagePickerControllerOriginalImage];
+            UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
+            NSData *data = UIImageJPEGRepresentation(smallImage, 1.0);
+            [self getUploadImage:data];
+        }
+    }
+    ZCLog(@"+++++++++%@",self.imagePicArr);
+     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

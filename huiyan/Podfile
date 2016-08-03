@@ -15,6 +15,7 @@ pod 'AMap2DMap’,’~> 3.3.0’
 pod 'RongCloudIMKit’,’~> 2.5.0'
 pod 'TSMessagesNW’,’~> 0.9.15'
 pod 'SVProgressHUD’,’~> 2.0.3'
+pod 'ELCImagePickerController','~> 0.2.0'
 end
 
 target 'huiyanTests' do

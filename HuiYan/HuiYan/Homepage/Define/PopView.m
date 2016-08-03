@@ -22,10 +22,13 @@
 }
 
 - (IBAction)player:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(postLiving)]) {
+        [self.delegate postLiving];
+    }
 }
 
 - (IBAction)postActivity:(id)sender {
-    if (self.delegate && [self.delegate performSelector:@selector(postActivity)]) {
+    if (self.delegate && [self.delegate respondsToSelector  :@selector(postActivity)]) {
          [self.delegate postActivity];
     }
    

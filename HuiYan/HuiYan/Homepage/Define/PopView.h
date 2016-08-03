@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol ClickDelegate <NSObject>
 - (void)postActivity;
+- (void)postLiving;
 @end
 @interface PopView : UIView
 @property (nonatomic, assign) id<ClickDelegate> delegate;
