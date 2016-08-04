@@ -45,7 +45,6 @@ static NSString *const picCell = @"picCell";
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:normalCell];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:timeCell];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:picCell];
-        [self.tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnkeyBoard)]];
     }
     return _tableView;
 }
@@ -77,6 +76,7 @@ static NSString *const picCell = @"picCell";
     [self.view addSubview:self.navView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.sureBtn];
+     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnkeyBoard)]];
     // Do any additional setup after loading the view.
 }
 

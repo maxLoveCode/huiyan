@@ -9,7 +9,7 @@
 #import "ZCTabBar.h"
 #import "PopView.h"
 #import "PostActivityController.h"
-#import "SendLivigViewController.h"
+#import "LivingProjectViewController.h"
 @interface ZCTabBar()<ClickDelegate>
 @property (nonatomic, weak) UIButton *publishBtn;
 @property (nonatomic, strong) UIView *bgView;
@@ -61,7 +61,7 @@
 }
 
 - (void)postLiving{
-    SendLivigViewController *sendCon = [[SendLivigViewController alloc]init];
+    LivingProjectViewController *sendCon = [[LivingProjectViewController alloc]init];
     [self.window.rootViewController presentViewController:sendCon animated:NO completion:^{
         self.publishBtn.selected = NO;
         [self.bgView removeFromSuperview];

@@ -349,6 +349,8 @@
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
 		5939755B1D4DFFE600576274 /* NewHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 593975591D4DFFE600576274 /* NewHomeCell.m */; };
 		5939755C1D4DFFE600576274 /* NewHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5939755A1D4DFFE600576274 /* NewHomeCell.xib */; };
+		5958B49A1D530AAF0097EBA0 /* LivingNoticesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5958B4991D530AAF0097EBA0 /* LivingNoticesController.m */; };
+		5958B49D1D532A120097EBA0 /* LivingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5958B49C1D532A120097EBA0 /* LivingModel.m */; };
 		595B04771D4B01DE005A1DEC /* tabBar_publish_click_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04711D4B01DE005A1DEC /* tabBar_publish_click_icon.png */; };
 		595B04781D4B01DE005A1DEC /* tabBar_publish_click_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04721D4B01DE005A1DEC /* tabBar_publish_click_icon@2x.png */; };
 		595B04791D4B01DE005A1DEC /* tabBar_publish_click_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 595B04731D4B01DE005A1DEC /* tabBar_publish_click_icon@3x.png */; };
@@ -370,6 +372,9 @@
 		5964F1D71CF5964100E436CE /* DynamicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D61CF5964100E436CE /* DynamicDetailViewController.m */; };
 		5964F1DA1CF5976500E436CE /* FriendswordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5964F1D91CF5976500E436CE /* FriendswordsCell.m */; };
 		596EED0F1D51EC1B00F6116F /* SendLivigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 596EED0E1D51EC1B00F6116F /* SendLivigViewController.m */; };
+		596EED121D520C0600F6116F /* LivingProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 596EED111D520C0600F6116F /* LivingProjectViewController.m */; };
+		596EED161D5211E200F6116F /* LivingProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 596EED141D5211E200F6116F /* LivingProjectCell.m */; };
+		596EED171D5211E200F6116F /* LivingProjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 596EED151D5211E200F6116F /* LivingProjectCell.xib */; };
 		59934F871CF29E6800666B33 /* person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F851CF29E6800666B33 /* person@2x.png */; };
 		59934F881CF29E6800666B33 /* person@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F861CF29E6800666B33 /* person@3x.png */; };
 		59934F971CF2DBA500666B33 /* playnumber@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59934F951CF2DBA500666B33 /* playnumber@2x.png */; };
@@ -996,6 +1001,10 @@
 		593975581D4DFFE600576274 /* NewHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewHomeCell.h; path = HuiYan/Homepage/Views/NewHomeCell.h; sourceTree = SOURCE_ROOT; };
 		593975591D4DFFE600576274 /* NewHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewHomeCell.m; path = HuiYan/Homepage/Views/NewHomeCell.m; sourceTree = SOURCE_ROOT; };
 		5939755A1D4DFFE600576274 /* NewHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewHomeCell.xib; path = HuiYan/Homepage/Views/NewHomeCell.xib; sourceTree = SOURCE_ROOT; };
+		5958B4981D530AAF0097EBA0 /* LivingNoticesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivingNoticesController.h; sourceTree = "<group>"; };
+		5958B4991D530AAF0097EBA0 /* LivingNoticesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivingNoticesController.m; sourceTree = "<group>"; };
+		5958B49B1D532A120097EBA0 /* LivingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivingModel.h; sourceTree = "<group>"; };
+		5958B49C1D532A120097EBA0 /* LivingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivingModel.m; sourceTree = "<group>"; };
 		595B04711D4B01DE005A1DEC /* tabBar_publish_click_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar_publish_click_icon.png; path = HuiYan/ImageSource/tabBar_publish_click_icon.png; sourceTree = SOURCE_ROOT; };
 		595B04721D4B01DE005A1DEC /* tabBar_publish_click_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar_publish_click_icon@2x.png"; path = "HuiYan/ImageSource/tabBar_publish_click_icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		595B04731D4B01DE005A1DEC /* tabBar_publish_click_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar_publish_click_icon@3x.png"; path = "HuiYan/ImageSource/tabBar_publish_click_icon@3x.png"; sourceTree = SOURCE_ROOT; };
@@ -1030,6 +1039,11 @@
 		5964F1D91CF5976500E436CE /* FriendswordsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendswordsCell.m; path = HuiYan/Homepage/Views/FriendswordsCell.m; sourceTree = SOURCE_ROOT; };
 		596EED0D1D51EC1B00F6116F /* SendLivigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendLivigViewController.h; sourceTree = "<group>"; };
 		596EED0E1D51EC1B00F6116F /* SendLivigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendLivigViewController.m; sourceTree = "<group>"; };
+		596EED101D520C0600F6116F /* LivingProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivingProjectViewController.h; sourceTree = "<group>"; };
+		596EED111D520C0600F6116F /* LivingProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivingProjectViewController.m; sourceTree = "<group>"; };
+		596EED131D5211E200F6116F /* LivingProjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivingProjectCell.h; sourceTree = "<group>"; };
+		596EED141D5211E200F6116F /* LivingProjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivingProjectCell.m; sourceTree = "<group>"; };
+		596EED151D5211E200F6116F /* LivingProjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LivingProjectCell.xib; sourceTree = "<group>"; };
 		59934F851CF29E6800666B33 /* person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@2x.png"; path = "HuiYan/ImageSource/person@2x.png"; sourceTree = SOURCE_ROOT; };
 		59934F861CF29E6800666B33 /* person@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "person@3x.png"; path = "HuiYan/ImageSource/person@3x.png"; sourceTree = SOURCE_ROOT; };
 		59934F951CF2DBA500666B33 /* playnumber@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "playnumber@2x.png"; path = "HuiYan/ImageSource/playnumber@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -2216,6 +2230,10 @@
 			children = (
 				596EED0D1D51EC1B00F6116F /* SendLivigViewController.h */,
 				596EED0E1D51EC1B00F6116F /* SendLivigViewController.m */,
+				596EED101D520C0600F6116F /* LivingProjectViewController.h */,
+				596EED111D520C0600F6116F /* LivingProjectViewController.m */,
+				5958B4981D530AAF0097EBA0 /* LivingNoticesController.h */,
+				5958B4991D530AAF0097EBA0 /* LivingNoticesController.m */,
 			);
 			path = Contrlooers;
 			sourceTree = "<group>";
@@ -2223,6 +2241,8 @@
 		596EED0B1D51EBC500F6116F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5958B49B1D532A120097EBA0 /* LivingModel.h */,
+				5958B49C1D532A120097EBA0 /* LivingModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2230,6 +2250,9 @@
 		596EED0C1D51EBC500F6116F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				596EED131D5211E200F6116F /* LivingProjectCell.h */,
+				596EED141D5211E200F6116F /* LivingProjectCell.m */,
+				596EED151D5211E200F6116F /* LivingProjectCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2322,7 +2345,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2438,6 +2461,7 @@
 				557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */,
 				55AD32611CDB5034000ACE39 /* female@3x.png in Resources */,
 				550BFA131CBB2AF000E2E9DE /* kr-video-player-play@3x.png in Resources */,
+				596EED171D5211E200F6116F /* LivingProjectCell.xib in Resources */,
 				55C41E201CE4559A0055A58B /* around@3x.png in Resources */,
 				25C6257F1CBE49C10068BFE8 /* tab_mine_selected@2x.png in Resources */,
 				55A43E921CEC282700BB73EF /* DramaStarInvatationCell.xib in Resources */,
@@ -2647,6 +2671,7 @@
 				558F5CB71CBB9780006BD54D /* Training.m in Sources */,
 				25D965521CF3E28900B49A9B /* ForgotPassTableViewController.m in Sources */,
 				5923EE081CFBE1BC005F6A33 /* WriteCommentViewController.m in Sources */,
+				596EED121D520C0600F6116F /* LivingProjectViewController.m in Sources */,
 				257FFC621CB64AE7004C3CDE /* WikiArtcleTableViewController.m in Sources */,
 				25B4026E1CEDACCC0003D908 /* SettingTableViewController.m in Sources */,
 				25B6B3771CB4F324000F99F1 /* TicketBoxViewController.m in Sources */,
@@ -2704,6 +2729,7 @@
 				55A43E951CED549100BB73EF /* MeTrainingViewController.m in Sources */,
 				25C6258B1CC0897C0068BFE8 /* DramaStarTableViewCell.m in Sources */,
 				55C41DF61CE305800055A58B /* ImportantNotesCell.m in Sources */,
+				5958B49A1D530AAF0097EBA0 /* LivingNoticesController.m in Sources */,
 				5556CC0F1CD8992B00CCD668 /* LookTicketDetailViewController.m in Sources */,
 				25C5068C1CFEF059008E5634 /* PendingListViewController.m in Sources */,
 				55A43E821CEC04AC00BB73EF /* DramaStarHeadView.m in Sources */,
@@ -2754,6 +2780,7 @@
 				59B72EDB1CF6F3AC00F79C37 /* DynamicImageTableViewCell.m in Sources */,
 				554B97BB1CED5E0B00E471CB /* PersonTrainingCell.m in Sources */,
 				251F5E1B1CBCC327000BC47D /* UIImage+ImageEffects.m in Sources */,
+				596EED161D5211E200F6116F /* LivingProjectCell.m in Sources */,
 				25C6258E1CC08CDC0068BFE8 /* DramaStar.m in Sources */,
 				55CCD78E1CB3640600C3B8CA /* AppDelegate.m in Sources */,
 				55DAFFB41CC47EEE0093B180 /* StarDetailTableViewCell.m in Sources */,
@@ -2770,6 +2797,7 @@
 				55AD324F1CD9C748000ACE39 /* PayData.m in Sources */,
 				55DAFFAE1CC2208E0093B180 /* TicketCommentTableViewCell.m in Sources */,
 				5586217F1CE5BA0E007D5049 /* NewHomePageViewController.m in Sources */,
+				5958B49D1D532A120097EBA0 /* LivingModel.m in Sources */,
 				558F5CAE1CBB9429006BD54D /* TrainingTableViewController.m in Sources */,
 				25C20E3D1CF6F1DC009BA46C /* FriendsDetailViewController.m in Sources */,
 				557EDE821CD0A4AB0039267E /* RSADataVerifier.m in Sources */,
@@ -3070,7 +3098,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

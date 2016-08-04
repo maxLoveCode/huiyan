@@ -12,12 +12,17 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QGK-dg-amF">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QGK-dg-amF">
                     <rect key="frame" x="15" y="5" width="40" height="40"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="B93-gv-6D8"/>
                         <constraint firstAttribute="width" constant="40" id="es0-jR-KOP"/>
                     </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="ygJ-Jv-zH3" appends="YES" id="o6A-4g-lPM"/>
+                    </connections>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPo-QD-u6s">
                     <rect key="frame" x="70" y="5" width="1" height="40"/>
@@ -36,13 +41,13 @@
                         <constraint firstAttribute="height" constant="40" id="GmO-Es-S9u"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyQ-3t-k3f">
                     <rect key="frame" x="574" y="15" width="11" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqj-gy-CXq">
@@ -52,7 +57,7 @@
                         <constraint firstAttribute="height" constant="40" id="wi1-Bi-KMO"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jO-ro-yzw">
@@ -107,8 +112,15 @@
             <connections>
                 <outlet property="ScrollView" destination="5jO-ro-yzw" id="cmk-ul-xuj"/>
                 <outlet property="nameLab" destination="xan-pH-Gub" id="QKc-3V-qx8"/>
+                <outlet property="noticesPic" destination="QGK-dg-amF" id="H7U-3p-IFn"/>
                 <outlet property="timeLab" destination="bqj-gy-CXq" id="KJC-U1-P7X"/>
             </connections>
+            <point key="canvasLocation" x="118" y="58"/>
         </view>
+        <tapGestureRecognizer id="ygJ-Jv-zH3">
+            <connections>
+                <action selector="clickNotice:" destination="iN0-l3-epB" id="mIL-k6-Ao1"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LivingModel.h"
 @interface NewHomeCell : UITableViewCell
-
+- (void)setContent:(LivingModel *)model;
 @end

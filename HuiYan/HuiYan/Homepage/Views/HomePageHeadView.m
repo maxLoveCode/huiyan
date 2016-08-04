@@ -115,6 +115,11 @@
     [self removeTimer];
 }
 
+- (IBAction)clickNotice:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(clickNotices)]) {
+        [self.delegate clickNotices];
+    }
+}
 
 
 @end

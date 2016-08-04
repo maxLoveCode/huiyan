@@ -18,7 +18,9 @@
 #import "UITabBarController+ShowHideBar.h"
 #import "NewHomeCell.h"
 #import "HomePageHeadView.h"
-@interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "LivingNoticesController.h"
+
+@interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource,NoticesDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -46,19 +48,20 @@ static int number_page = 0;
     [self.view addSubview:self.tableView];
        NSArray *Views = [[NSBundle mainBundle]loadNibNamed:@"HomePageHeadView" owner:self options:nil];
     HomePageHeadView *headView = [Views firstObject];
+    headView.delegate = self;
     headView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Width / 2 + 50);
     self.tableView.tableHeaderView = headView;
     self.serverManager = [ServerManager sharedInstance];
     [self getappVersionData];
-    [self get_wiki_listData:@"0"];
+    [self getWebcastData:@"0"];
     self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
-        [self get_wiki_listData:[NSString stringWithFormat:@"%d",number_page]];
+        [self getWebcastData:[NSString stringWithFormat:@"%d",number_page]];
     }];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         number_page ++;
-        [self get_wiki_listData:[NSString stringWithFormat:@"%d",number_page]];
+        [self getWebcastData:[NSString stringWithFormat:@"%d",number_page]];
     }];
     [self.tableView.mj_header beginRefreshing];
     // Do any additional setup after loading the view.
@@ -89,6 +92,12 @@ static int number_page = 0;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)clickNotices{
+    LivingNoticesController *livCon = [[LivingNoticesController alloc]init];
+    livCon.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:livCon animated:NO];
 }
 
 #pragma mark -- tableViewDelegate
@@ -145,11 +154,11 @@ static int number_page = 0;
 }
 
 #pragma mark - 网络请求
-- (void)get_wiki_listData:(NSString *)page{
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"type":@"2"};
+- (void)getWebcastData:(NSString *)page{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"type":@"1"};
 
-    [self.serverManager GETWithoutAnimation:@"get_wiki_list.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
-        if ([responseObject[@"code"] integerValue] == 20010) {
+    [self.serverManager GETWithoutAnimation:@"get_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 130010) {
             for (NSDictionary *dic in responseObject[@"data"]) {
                 HomePage *model = [HomePage parseDramaJSON:dic];
                 [self.dataSource addObject:model];
