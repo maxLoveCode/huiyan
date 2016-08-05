@@ -49,7 +49,7 @@ static NSString *const picCell = @"picCell";
         self.price_textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
         self.price_textField.placeholder = @"请填写活动价格";
         self.price_textField.textAlignment = NSTextAlignmentRight;
-        self.price_textField.keyboardType = UIKeyboardTypePhonePad;
+        self.price_textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     return _price_textField;
 }
@@ -128,6 +128,8 @@ static NSString *const picCell = @"picCell";
         [postBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [postBtn addTarget:self action:@selector(postData) forControlEvents:UIControlEventTouchUpInside];
         [self.navView addSubview:postBtn];
+        self.navView.userInteractionEnabled = YES;
+        [self.navView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnkeyBoard)]];
     }
     return _navView;
 }
@@ -368,14 +370,39 @@ static NSString *const picCell = @"picCell";
 
 #pragma mark -- 上传数据
 - (void)postData{
-    NSDictionary *paramers = @{@"access_token":self.serverManager.accessToken,@"user_id":[[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"],@"title":self.title_textField.text,@"bm_deadline":self.deadlineBtn.currentTitle,@"date":[NSString stringWithFormat:@"%@-%@",self.startBtn.currentTitle,self.endBtn.currentTitle],@"address":self.address_textField.text,@"price":self.price_textField,@"begin_count":self.peopleCount_textField,@"end_count":self.peopleMax_textField,@"content":self.activityDes_textView,};
+    if ([self.title_textField.text isEqualToString:@""] || [self.title_textField.text isEqualToString:@"如暑假京剧夏令营培训"]) {
+        [self presentViewController:[Tools showAlert:@"请输入活动主题"] animated:YES completion:nil];
+    }else if ([self.deadlineBtn.currentTitle isEqualToString:@"请选择报名截止时间"]){
+        [self presentViewController:[Tools showAlert:@"请输入报名截止时间"] animated:YES completion:nil];
+    }else if ([self.startBtn.currentTitle isEqualToString:@"开始日期"]){
+        [self presentViewController:[Tools showAlert:@"请输入开始日期"] animated:YES completion:nil];
+    }else if([self.endBtn.currentTitle isEqualToString:@"结束日期"]){
+        [self presentViewController:[Tools showAlert:@"请输入结束日期"] animated:YES completion:nil];
+
+    }else if ([self.address_textField.text isEqualToString:@""] || [self.address_textField.text isEqualToString:@"请填写活动地址"]){
+        [self presentViewController:[Tools showAlert:@"请输入活动地址"] animated:YES completion:nil];
+    }else if ([self.price_textField.text isEqualToString:@""] || [self.price_textField.text isEqualToString:@"请填写活动价格"]){
+        [self presentViewController:[Tools showAlert:@"请输入活动价格"] animated:YES completion:nil];
+    }else if ([self.peopleCount_textField.text isEqualToString:@""] || [self.peopleCount_textField.text isEqualToString:@"如无限制，请输入“0“"]){
+        [self presentViewController:[Tools showAlert:@"请输入开团人数"] animated:YES completion:nil];
+    }else if ([self.peopleMax_textField.text isEqualToString:@""] || [self.peopleMax_textField.text isEqualToString:@"请填写报名人数上限"]){
+        [self presentViewController:[Tools showAlert:@"请输入报名人数上限"] animated:YES completion:nil];
+    }else if ([self.activityDes_textView.text isEqualToString:@""] || [self.activityDes_textView.text isEqualToString:@"详细介绍下活动的内容，例如活动内容，活动安排等"]){
+        [self presentViewController:[Tools showAlert:@"请填写活动简介"] animated:YES completion:nil];
+    }else if ([self.imagePic isEqualToString:@""] || self.imagePic == nil){
+        [self presentViewController:[Tools showAlert:@"请添加活动封面"] animated:YES completion:nil];
+    }else{
+    NSDictionary *paramers = @{@"access_token":self.serverManager.accessToken,@"user_id":[[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"],@"title":self.title_textField.text,@"bm_deadline":self.deadlineBtn.currentTitle,@"date":[NSString stringWithFormat:@"%@-%@",self.startBtn.currentTitle,self.endBtn.currentTitle],@"address":self.address_textField.text,@"price":self.price_textField.text,@"begin_count":self.peopleCount_textField.text,@"end_count":self.peopleMax_textField.text,@"content":self.activityDes_textView.text,@"cover":self.imagePic,@"imgs":self.imagePicArr};
     [self.serverManager POSTWithoutAnimation:@"publish_train.php" parameters:paramers success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 40030) {
-            ZCLog(@"成功");
+            [self dismissViewControllerAnimated:NO completion:^{
+                [self presentViewController:[Tools showAlert:@"发布成功"] animated:NO completion:nil];
+            }];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         ZCLog(@"error = %@",error);
     }];
+    }
 
 }
 
@@ -415,6 +442,7 @@ static NSString *const picCell = @"picCell";
 
 #pragma mark -- 选择时间
 - (void)changeTime:(UIButton *)sender{
+    [self.view endEditing:YES];
     _selectDatePicker = [[MHDatePicker alloc] init];
     _selectDatePicker.isBeforeTime = YES;
     _selectDatePicker.datePickerMode = UIDatePickerModeDate;
@@ -422,6 +450,7 @@ static NSString *const picCell = @"picCell";
     [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
         //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
         //        weakSelf.myLabel2.text = string;
+        [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [sender setTitle:[weakSelf dateStringWithDate:selectedDate DateFormat:@"yyyy-MM-dd"] forState:UIControlStateNormal];
     }];
 }
@@ -456,8 +485,8 @@ static NSString *const picCell = @"picCell";
     
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-        UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
-        NSData *data = UIImageJPEGRepresentation(smallImage, 1.0);
+       // UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
+        NSData *data = UIImageJPEGRepresentation(img, 1.0);
         [self getUploadImage:data];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -558,8 +587,8 @@ static NSString *const picCell = @"picCell";
     for (NSDictionary *dic in info) {
         if ([[dic objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"ALAssetTypePhoto"]) {
             UIImage *img = [dic objectForKey:UIImagePickerControllerOriginalImage];
-            UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
-            NSData *data = UIImageJPEGRepresentation(smallImage, 1.0);
+           // UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
+            NSData *data = UIImageJPEGRepresentation(img, 1.0);
             [self getUploadImage:data];
         }
     }

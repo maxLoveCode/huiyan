@@ -188,8 +188,8 @@ static NSString *const picCell = @"picCell";
     
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
-        UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
-        NSData *data = UIImageJPEGRepresentation(smallImage, 1.0);
+     //   UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
+        NSData *data = UIImageJPEGRepresentation(img, 1.0);
         [self getUploadImage:data];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -294,7 +294,7 @@ static NSString *const picCell = @"picCell";
       [self.textField resignFirstResponder];
     self.selectDatePicker = [[MHDatePicker alloc] init];
     _selectDatePicker.isBeforeTime = YES;
-    _selectDatePicker.datePickerMode = UIDatePickerModeDate;
+    _selectDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
     __weak typeof(self) weakSelf = self;
     [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
         //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
@@ -325,7 +325,6 @@ static NSString *const picCell = @"picCell";
     NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":[[NSUserDefaults   standardUserDefaults]objectForKey:@"user_id"],@"title":self.textField.text,@"time":self.selectTime.currentTitle,@"cover":self.updatePic};
     [self.serverManager POSTWithoutAnimation:@"publish_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 130000) {
-            [self presentViewController:[Tools showAlert:@"上传成功"] animated:YES completion:nil];
             [self dismissViewControllerAnimated:NO completion:^{
                 
             }];
