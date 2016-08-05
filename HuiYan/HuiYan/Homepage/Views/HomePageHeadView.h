@@ -18,4 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UIImageView *noticesPic;
 @property (nonatomic, weak) id <NoticesDelegate> delegate;
+- (void)uploaData:(NSArray *)dataSource;
 @end
+

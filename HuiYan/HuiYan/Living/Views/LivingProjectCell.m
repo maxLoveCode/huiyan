@@ -7,12 +7,12 @@
 //
 
 #import "LivingProjectCell.h"
+#import <UIImageView+WebCache.h>
 @interface LivingProjectCell()
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIImageView *imagePic;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
-@property (weak, nonatomic) IBOutlet UIButton *playLiving;
 @end
 
 @implementation LivingProjectCell
@@ -30,6 +30,13 @@
     self.playLiving.layer.masksToBounds = YES;
     self.playLiving.layer.cornerRadius = 3;
     self.playLiving.backgroundColor = COLOR_THEME;
+}
+
+- (void)setContentModel:(LivingModel *)model{
+    self.titleLab.text = model.title;
+    self.nameLab.text = model.nickname;
+    [self.imagePic sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+    self.timeLab.text = model.time;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

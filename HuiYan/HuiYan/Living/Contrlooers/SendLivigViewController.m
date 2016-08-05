@@ -8,6 +8,9 @@
 
 #import "SendLivigViewController.h"
 #import "MHDatePicker.h"
+#import "Tools.h"
+#import "ServerManager.h"
+#import <UIImageView+WebCache.h>
 @interface SendLivigViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UIView *navView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -17,6 +20,8 @@
 @property (nonatomic, strong) UIButton *selectPic;
 @property (nonatomic, strong) UIButton *sureBtn;
 @property (nonatomic, strong) MHDatePicker *selectDatePicker;
+@property (nonatomic, strong) ServerManager *serverManager;
+@property (nonatomic, strong) NSString *updatePic;
 @end
 
 @implementation SendLivigViewController
@@ -32,6 +37,7 @@ static NSString *const picCell = @"picCell";
         self.sureBtn.frame = CGRectMake(kMargin, CGRectGetMaxY(self.tableView.frame) + 50, kScreen_Width - 2 * kMargin, 50);
         [self.sureBtn setTitle:@"确认" forState:UIControlStateNormal];
         [self.sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.sureBtn addTarget:self action:@selector(sureUpdate:) forControlEvents:UIControlEventTouchUpInside];
         self.sureBtn.backgroundColor = COLOR_THEME;
     }
     return _sureBtn;
@@ -73,6 +79,7 @@ static NSString *const picCell = @"picCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.serverManager = [ServerManager sharedInstance];
     [self.view addSubview:self.navView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.sureBtn];
@@ -143,11 +150,135 @@ static NSString *const picCell = @"picCell";
             [selectBtn setTitle:@"观众们喜欢好看的封面哦" forState:UIControlStateNormal];
             [cell.contentView addSubview:selectBtn];
             selectBtn.tag = 1004;
+            [selectBtn addTarget:self action:@selector(selectPic:) forControlEvents:UIControlEventTouchUpInside];
             self.selectPic = selectBtn;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+#pragma mark -- 选择图片
+- (void)selectPic:(UIButton *)sender{
+  
+    UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"请选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertCon addAction:[UIAlertAction actionWithTitle:@"照相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction *UIAlertAction){
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = YES;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }]];
+    [alertCon addAction:[UIAlertAction actionWithTitle:@"从相册中选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction *UIAlertAction){
+    
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.allowsEditing = YES;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+           }]];
+    [alertCon addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alertCon animated:YES completion:nil];
+
+}
+
+#pragma mark------------UIImagePickerController Delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage]) {
+        UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
+        UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
+        NSData *data = UIImageJPEGRepresentation(smallImage, 1.0);
+        [self getUploadImage:data];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)getUploadImage:(NSData *)image{
+    NSString *urlStr = [NSString stringWithFormat:@"%@/index.php/Home/Qiniu/upload_file/access_token/%@",kServerUrl,self.serverManager.accessToken];
+    NSDictionary *parameters = @{@"upload_file":image};
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFileData:image name:@"upload_file" fileName:@"somefilename.png" mimeType:@"image/png"];// you file to upload
+        
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:^(NSProgress * _Nonnull uploadProgress) {
+                      // This is not called back on the main queue.
+                      // You are responsible for dispatching to the main queue for UI updates
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          //Update the progress view
+                          //[progressView setProgress:uploadProgress.fractionCompleted];
+                      });
+                  }
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      //    NSLog(@"msg is %@", responseObject[@"msg"]);
+                      
+                      if (error) {
+                          NSLog(@"Error: %@", error);
+                      } else {
+                          //   NSLog(@"%@ %@", response, responseObject);
+                          if ([responseObject[@"data"] objectForKey:@"url"] != nil) {
+                              NSString *str = [responseObject[@"data"] objectForKey:@"url"];
+                              NSLog(@"str = %@",str);
+                              self.updatePic = str;
+                              [self.imagePic sd_setImageWithURL:[NSURL URLWithString:str]];
+                              self.selectPic.enabled = NO;
+                              
+                          }else{
+                              [self presentViewController:[Tools showAlert:@"上传失败"] animated:YES completion:nil];
+                          }
+                          
+                      }
+                  }];
+    
+    [uploadTask resume];
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    //	[picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+//2.保持原来的长宽比，生成一个缩略图
+- (UIImage *)thumbnailWithImageWithoutScale:(UIImage *)image size:(CGSize)asize
+{
+    UIImage *newimage;
+    if (nil == image) {
+        newimage = nil;
+    }
+    else{
+        CGSize oldsize = image.size;
+        CGRect rect;
+        if (asize.width/asize.height > oldsize.width/oldsize.height) {
+            rect.size.width = asize.height*oldsize.width/oldsize.height;
+            rect.size.height = asize.height;
+            rect.origin.x = (asize.width - rect.size.width)/2;
+            rect.origin.y = 0;
+        }
+        else{
+            rect.size.width = asize.width;
+            rect.size.height = asize.width*oldsize.height/oldsize.width;
+            rect.origin.x = 0;
+            rect.origin.y = (asize.height - rect.size.height)/2;
+        }
+        UIGraphicsBeginImageContext(asize);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+        UIRectFill(CGRectMake(0, 0, asize.width, asize.height));//clear background
+        [image drawInRect:rect];
+        newimage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    return newimage;
 }
 
 - (void)returnkeyBoard{
@@ -160,13 +291,15 @@ static NSString *const picCell = @"picCell";
 
 #pragma mark -- 选择时间
 - (void)changeTime:(UIButton *)sender{
-    _selectDatePicker = [[MHDatePicker alloc] init];
+      [self.textField resignFirstResponder];
+    self.selectDatePicker = [[MHDatePicker alloc] init];
     _selectDatePicker.isBeforeTime = YES;
     _selectDatePicker.datePickerMode = UIDatePickerModeDate;
     __weak typeof(self) weakSelf = self;
     [_selectDatePicker didFinishSelectedDate:^(NSDate *selectedDate) {
         //        NSString *string = [NSString stringWithFormat:@"%@",[NSDate dateWithTimeInterval:3600*8 sinceDate:selectedDate]];
         //        weakSelf.myLabel2.text = string;
+        [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [sender setTitle:[weakSelf dateStringWithDate:selectedDate DateFormat:@"yyyy-MM-dd"] forState:UIControlStateNormal];
     }];
 }
@@ -178,6 +311,29 @@ static NSString *const picCell = @"picCell";
     [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
     NSString *str = [dateFormatter stringFromDate:date];
     return str ? str : @"";
+}
+
+#pragma mark --上传直播预告
+- (void)sureUpdate:(UIButton *)sender{
+    if ([self.textField.text isEqualToString:@""] || [self.textField.text isEqualToString:@"给你的直播写个标题吧(20字以内)"] ) {
+        [self presentViewController:[Tools showAlert:@"请输入您要直播的标题"] animated:YES completion:nil];
+    }else if([self.selectTime.currentTitle isEqualToString:@"直播时间"]){
+        [self presentViewController:[Tools showAlert:@"请选择您要直播的时间"] animated:YES completion:nil];
+    }else if(self.updatePic == nil || [self.updatePic isEqualToString:@""]){
+        [self presentViewController:[Tools showAlert:@"请选择您要直播的封面"] animated:YES completion:nil];
+    }else{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"user_id":[[NSUserDefaults   standardUserDefaults]objectForKey:@"user_id"],@"title":self.textField.text,@"time":self.selectTime.currentTitle,@"cover":self.updatePic};
+    [self.serverManager POSTWithoutAnimation:@"publish_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 130000) {
+            [self presentViewController:[Tools showAlert:@"上传成功"] animated:YES completion:nil];
+            [self dismissViewControllerAnimated:NO completion:^{
+                
+            }];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ZCLog(@"%@",error);
+    }];
+    }
 }
 
 

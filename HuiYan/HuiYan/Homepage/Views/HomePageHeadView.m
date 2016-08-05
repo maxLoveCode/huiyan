@@ -7,13 +7,14 @@
 //
 
 #import "HomePageHeadView.h"
-
+#import <UIImageView+WebCache.h>
 @interface HomePageHeadView()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView *grayView;
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) NSInteger pageCount;
-@property (nonatomic, strong) UILabel *titleLab;
+@property (nonatomic, assign) NSInteger arrayCount;
+
 
 @end
 
@@ -23,20 +24,14 @@
 - (void)awakeFromNib{
     [self addSubview:self.grayView];
     [self addSubview:self.pageControl];
-    [self addSubview:self.titleLab];
     [self setupScrollow];
+    [self setupOther];
 }
 
 - (void)setupScrollow{
-    self.ScrollView.contentSize = CGSizeMake(kScreen_Width * 4, 0);
     self.ScrollView.pagingEnabled = YES;
     self.ScrollView.delegate = self;
-    for (int i = 0; i < 4; i++) {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(kScreen_Width * i, 0, kScreen_Width, kScreen_Width / 2)];
-        view.backgroundColor = ZCRandomColor;
-        [self.ScrollView addSubview:view];
-    }
-    [self addTimer];
+    
 }
 
 - (void)setupOther{
@@ -51,21 +46,9 @@
     return _grayView;
 }
 
-- (UILabel *)titleLab{
-    if (!_titleLab) {
-        self.titleLab = [[UILabel alloc]init];
-        self.titleLab.font = kFONT14;
-        self.titleLab.textColor = [UIColor whiteColor];
-        self.titleLab.text = @"666666666666";
-        self.titleLab.textAlignment = NSTextAlignmentLeft;
-    }
-    return _titleLab;
-}
-
 - (UIPageControl *)pageControl{
     if (!_pageControl) {
         self.pageControl = [[UIPageControl alloc]init];
-        self.pageControl.numberOfPages = 4;
         self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
         self.pageControl.currentPageIndicatorTintColor = COLOR_THEME;
     }
@@ -74,10 +57,9 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.pageControl.center = CGPointMake(self.zc_width / 2, 50 + kScreen_Width / 2 - 30);
+    self.pageControl.center = CGPointMake(self.zc_width / 2, 50 + kScreen_Width / 2 - 10);
     self.pageControl.zc_height = 30;
-    self.grayView.frame = CGRectMake(0, kScreen_Width / 2 + 10, kScreen_Width, 40);
-    self.titleLab.frame = CGRectMake(15, kScreen_Width / 2 - 10, 200, 20);
+    self.grayView.frame = CGRectMake(0, kScreen_Width / 2 + 20, kScreen_Width, 30);
 }
 
 #pragma mark -- 滑动事件
@@ -93,7 +75,7 @@
 
 - (void)nextImage{
     self.pageCount ++;
-    if (self.pageCount == 3) {
+    if (self.pageCount == self.arrayCount - 1) {
         self.pageCount = 0;
     }
     self.pageControl.currentPage = self.pageCount;
@@ -121,5 +103,24 @@
     }
 }
 
+- (void)uploaData:(NSArray *)dataSource{
+    self.arrayCount = dataSource.count;
+    self.ScrollView.contentSize = CGSizeMake(kScreen_Width * dataSource.count, 0);
+      self.pageControl.numberOfPages = dataSource.count;
+    for (int i = 0; i < dataSource.count; i++) {
+        UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(kScreen_Width * i, 0, kScreen_Width, kScreen_Width / 2)];
+        [view sd_setImageWithURL:[NSURL URLWithString:[dataSource[i] objectForKey:@"cover"]]];
+        [self.ScrollView addSubview:view];
+        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(15 + (kScreen_Width * i), kScreen_Width / 2 - 50, 200, 20)];
+        titleLab.font = kFONT14;
+        titleLab.textColor = [UIColor whiteColor];
+        titleLab.text = [dataSource[i] objectForKey:@"title"];
+        titleLab.textAlignment = NSTextAlignmentLeft;
+        [self.ScrollView addSubview:titleLab];
+        
+    }
+    [self setNeedsLayout];
+    [self addTimer];
+}
 
 @end

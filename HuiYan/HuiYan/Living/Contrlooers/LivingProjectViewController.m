@@ -9,12 +9,18 @@
 #import "LivingProjectViewController.h"
 #import "SendLivigViewController.h"
 #import "LivingProjectCell.h"
+#import "GifRefresher.h"
+#import <MJRefresh.h>
+#import "ServerManager.h"
+#import <MJExtension.h>
+#import "LivingModel.h"
 @interface LivingProjectViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UIView  *navView;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) ServerManager *serverManager;
 @end
-
+static int number_page = 0;
 @implementation LivingProjectViewController
 static NSString *const livingCell = @"livingCell";
 
@@ -23,6 +29,17 @@ static NSString *const livingCell = @"livingCell";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.navView];
     [self.view addSubview:self.tableView];
+    self.serverManager  = [ServerManager sharedInstance];
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self getWebcastData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        number_page ++;
+        [self getWebcastData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    [self.tableView.mj_header beginRefreshing];
     // Do any additional setup after loading the view.
 }
 
@@ -67,13 +84,34 @@ static NSString *const livingCell = @"livingCell";
 
 #pragma mark -- tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     LivingProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:livingCell];
+    [cell setContentModel:self.dataSource[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+#pragma mark -- 网络请求
+- (void)getWebcastData:(NSString *)page{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"status":@"0",@"user_id":[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"]};
+    
+    [self.serverManager GETWithoutAnimation:@"get_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 130010) {
+            self.dataSource = [LivingModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+            if ([responseObject[@"data"] count] %10 !=0) {
+                self.tableView.mj_footer = nil;
+            }
+            [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
 }
 
 - (void)sendLiving{

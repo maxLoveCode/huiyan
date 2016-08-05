@@ -30,9 +30,12 @@
     self.statusLab.backgroundColor = COLOR_THEME;
     self.statusLab.layer.masksToBounds = YES;
     self.statusLab.layer.cornerRadius = 3;
+    self.headPic.layer.masksToBounds = YES;
+    self.headPic.layer.cornerRadius = 15;
 }
 
 - (void)setContent:(LivingModel *)model{
+    NSLog(@"%@",model);
     [self.headPic sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
     self.nameLab.text = model.nickname;
     self.professionLab.text = model.catename;

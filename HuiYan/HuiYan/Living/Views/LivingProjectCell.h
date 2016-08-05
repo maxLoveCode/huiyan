@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LivingModel.h"
 @interface LivingProjectCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UIButton *playLiving;
+- (void)setContentModel:(LivingModel *)model;
 @end

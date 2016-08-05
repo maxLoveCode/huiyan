@@ -19,12 +19,15 @@
 #import "NewHomeCell.h"
 #import "HomePageHeadView.h"
 #import "LivingNoticesController.h"
+#import <MJExtension.h>
 
 @interface NewHomePageViewController ()<UITableViewDelegate,UITableViewDataSource,NoticesDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ServerManager *serverManager;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) BOOL hidden;
+@property (nonatomic, strong) HomePageHeadView *headView;
+@property (nonatomic, strong) NSArray *bannerPic;
 @end
 static int number_page = 0;
 @implementation NewHomePageViewController
@@ -45,15 +48,10 @@ static int number_page = 0;
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:16],
        NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [self.view addSubview:self.tableView];
-       NSArray *Views = [[NSBundle mainBundle]loadNibNamed:@"HomePageHeadView" owner:self options:nil];
-    HomePageHeadView *headView = [Views firstObject];
-    headView.delegate = self;
-    headView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Width / 2 + 50);
-    self.tableView.tableHeaderView = headView;
     self.serverManager = [ServerManager sharedInstance];
+    [self.view addSubview:self.tableView];
+    [self getappbannerData];
     [self getappVersionData];
-    [self getWebcastData:@"0"];
     self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
         number_page = 0;
         [self.dataSource removeAllObjects];
@@ -69,13 +67,25 @@ static int number_page = 0;
     _hidden = NO;
 }
 
+- (HomePageHeadView *)headView{
+    if (!_headView) {
+        NSArray *Views = [[NSBundle mainBundle]loadNibNamed:@"HomePageHeadView" owner:self options:nil];
+        self.headView = [Views firstObject];
+        self.headView.delegate = self;
+        self.headView.frame = CGRectMake(0, 0, kScreen_Width, kScreen_Width / 2 + 50);
+    }
+    return _headView;
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.tabBarController.tabBar.hidden == YES) {
         self.tabBarController.tabBar.hidden = NO;
     }
+    [self getNoticesData:@"0"];
     [self.tabBarController setHidden:NO];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -108,7 +118,8 @@ static int number_page = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerNib:[UINib nibWithNibName:@"NewHomeCell" bundle:nil] forCellReuseIdentifier:@"home"];
-        self.tableView.rowHeight =  kScreen_Width + 88;
+        self.tableView.rowHeight =  kScreen_Width + 98;
+        self.tableView.tableHeaderView = self.headView;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -132,37 +143,34 @@ static int number_page = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NewHomeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"home" forIndexPath:indexPath];
-
+    [cell setContent:self.dataSource[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
-    wikiCon.homePage = self.dataSource[indexPath.section];
-    //NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^(void) {
-                         //cell.transform = CGAffineTransformMakeScale(-1, kScreen_Height/cell.frame.size.height);
-                     }
-                    completion:^(BOOL finished) {
-                        [self.navigationController pushViewController:wikiCon animated:NO];
-                        //cell.transform = CGAffineTransformMakeScale(1, 1);
-                    }];
+//    WikiWorksDetailsViewController *wikiCon = [[WikiWorksDetailsViewController alloc]init];
+//    wikiCon.homePage = self.dataSource[indexPath.section];
+//    //NewHomePageCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
+//                     animations:^(void) {
+//                         //cell.transform = CGAffineTransformMakeScale(-1, kScreen_Height/cell.frame.size.height);
+//                     }
+//                    completion:^(BOOL finished) {
+//                        [self.navigationController pushViewController:wikiCon animated:NO];
+//                        //cell.transform = CGAffineTransformMakeScale(1, 1);
+//                    }];
 
     //[self.navigationController pushViewController:wikiCon animated:YES];
 }
 
 #pragma mark - 网络请求
 - (void)getWebcastData:(NSString *)page{
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"type":@"1"};
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"status":@"1"};
 
     [self.serverManager GETWithoutAnimation:@"get_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 130010) {
-            for (NSDictionary *dic in responseObject[@"data"]) {
-                HomePage *model = [HomePage parseDramaJSON:dic];
-                [self.dataSource addObject:model];
-            }
+            self.dataSource = [LivingModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
             if ([responseObject[@"data"] count] %10 !=0) {
                 self.tableView.mj_footer = nil;
             }
@@ -175,6 +183,24 @@ static int number_page = 0;
     }];
 
 }
+
+#pragma mark --直播预告
+- (void)getNoticesData:(NSString *)page{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"status":@"0"};
+    [self.serverManager GETWithoutAnimation:@"get_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 130010) {
+           LivingModel *livingModel = [[LivingModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]] firstObject];
+            self.headView.timeLab.text = livingModel.time;
+            self.headView.nameLab.text = livingModel.title;
+            [self.tableView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
+}
+
+
 - (void)rightClick:(UIBarButtonItem *)sender{
      MessageViewController *mes = [[MessageViewController alloc]init];
     [self.navigationController pushViewController:mes animated:YES];
@@ -228,6 +254,20 @@ static int number_page = 0;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error = %@",error);
+    }];
+}
+
+#pragma mark -- 请求banner数据
+- (void)getappbannerData{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken};
+    [self.serverManager AnimatedGET:@"get_app_banner.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 60010) {
+            self.bannerPic = responseObject[@"data"];
+            [self.headView uploaData:self.bannerPic];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ZCLog(@"error = %@",error);
     }];
 }
 

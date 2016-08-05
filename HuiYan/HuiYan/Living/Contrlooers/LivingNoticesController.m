@@ -8,17 +8,35 @@
 
 #import "LivingNoticesController.h"
 #import "LivingProjectCell.h"
+#import "GifRefresher.h"
+#import <MJRefresh.h>
+#import "ServerManager.h"
+#import <MJExtension.h>
+#import "LivingModel.h"
 @interface LivingNoticesController ()
-
+@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) ServerManager *serverManager;
 @end
-
-@implementation LivingNoticesController
+static int number_page = 0;
 static NSString *const noticesCell = @"livingNotices";
+@implementation LivingNoticesController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tabBarItem.title = @"直播预告";
+    self.serverManager = [ServerManager sharedInstance];
     [self.tableView registerNib:[UINib nibWithNibName:@"LivingProjectCell" bundle:nil] forCellReuseIdentifier:noticesCell];
     self.tableView.rowHeight = 88;
+    self.tableView.mj_header = [GifRefresher headerWithRefreshingBlock:^{
+        number_page = 0;
+        [self.dataSource removeAllObjects];
+        [self getWebcastData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        number_page ++;
+        [self getWebcastData:[NSString stringWithFormat:@"%d",number_page]];
+    }];
+    [self.tableView.mj_header beginRefreshing];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -34,15 +52,36 @@ static NSString *const noticesCell = @"livingNotices";
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.dataSource.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LivingProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:noticesCell forIndexPath:indexPath];
+    cell.playLiving.hidden = YES;
+    [cell setContentModel:self.dataSource[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
+}
+
+#pragma mark -- 网络请求
+- (void)getWebcastData:(NSString *)page{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"status":@"1"};
+    
+    [self.serverManager GETWithoutAnimation:@"get_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 130010) {
+            self.dataSource = [LivingModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+            if ([responseObject[@"data"] count] %10 !=0) {
+                self.tableView.mj_footer = nil;
+            }
+            [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@",error);
+    }];
+    
 }
 
 
