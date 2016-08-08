@@ -183,7 +183,6 @@
 		557EDE181CD0A3980039267E /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557EDE121CD0A3980039267E /* AlipaySDK.bundle */; };
 		557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE131CD0A3980039267E /* AlipaySDK.framework */; };
 		557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE141CD0A3980039267E /* libcrypto.a */; };
-		557EDE1B1CD0A3980039267E /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 557EDE151CD0A3980039267E /* libssl.a */; };
 		557EDE1C1CD0A3980039267E /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 557EDE171CD0A3980039267E /* Order.m */; };
 		557EDE7B1CD0A4AB0039267E /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 557EDE6B1CD0A4AB0039267E /* base64.m */; };
 		557EDE7C1CD0A4AB0039267E /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 557EDE6E1CD0A4AB0039267E /* DataSigner.m */; };
@@ -347,6 +346,14 @@
 		5923EE0E1CFC4BBD005F6A33 /* actvity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5923EE0C1CFC4BBD005F6A33 /* actvity@3x.png */; };
 		5925EF5A1CF05C2F00E3ACF3 /* GifRefresher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */; };
 		5925EF5D1CF063C600E3ACF3 /* changePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */; };
+		592657561D55BC7000F89AA6 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 592657501D55BC7000F89AA6 /* libAFNetworking.a */; };
+		592657571D55BC7000F89AA6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 592657511D55BC7000F89AA6 /* libcrypto.a */; };
+		592657581D55BC7000F89AA6 /* libLeCloudStreaming.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 592657521D55BC7000F89AA6 /* libLeCloudStreaming.a */; };
+		5926575A1D55BC7000F89AA6 /* LCStreamingBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 592657551D55BC7000F89AA6 /* LCStreamingBundle.bundle */; };
+		5926575B1D55BC9000F89AA6 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FBF8DF1D54B03B006BF94C /* CoreMedia.framework */; };
+		5926575C1D55BCA300F89AA6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FBF8E11D54B04E006BF94C /* AudioToolbox.framework */; };
+		5926575D1D55BCFA00F89AA6 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FBF8E31D54B059006BF94C /* VideoToolbox.framework */; };
+		5926575F1D55BD6B00F89AA6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5926575E1D55BD6B00F89AA6 /* libssl.a */; };
 		5939755B1D4DFFE600576274 /* NewHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 593975591D4DFFE600576274 /* NewHomeCell.m */; };
 		5939755C1D4DFFE600576274 /* NewHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5939755A1D4DFFE600576274 /* NewHomeCell.xib */; };
 		5958B49A1D530AAF0097EBA0 /* LivingNoticesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5958B4991D530AAF0097EBA0 /* LivingNoticesController.m */; };
@@ -403,6 +410,8 @@
 		59EF567E1CF85E7800308F78 /* videotype@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59EF567B1CF85E7800308F78 /* videotype@2x.png */; };
 		59EF567F1CF85E7800308F78 /* videotype@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59EF567C1CF85E7800308F78 /* videotype@3x.png */; };
 		59F6AB201CF01F040000DFB0 /* InterestsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */; };
+		59FBF8E61D54B06A006BF94C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FBF8E51D54B06A006BF94C /* AVFoundation.framework */; };
+		59FBF8E81D54B09C006BF94C /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FBF8E71D54B09C006BF94C /* libiconv.2.4.0.tbd */; };
 		59FE808A1CEECE480032318C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE80891CEECE480032318C /* Message.m */; };
 		5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9295E751F9A708FD02E80F /* libPods-huiyan.a */; };
 /* End PBXBuildFile section */
@@ -998,6 +1007,14 @@
 		5925EF591CF05C2F00E3ACF3 /* GifRefresher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifRefresher.m; path = HuiYan/commonFiles/controller/GifRefresher.m; sourceTree = SOURCE_ROOT; };
 		5925EF5B1CF063C600E3ACF3 /* changePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changePasswordTableViewController.h; path = HuiYan/Memain/Controllers/changePasswordTableViewController.h; sourceTree = SOURCE_ROOT; };
 		5925EF5C1CF063C600E3ACF3 /* changePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changePasswordTableViewController.m; path = HuiYan/Memain/Controllers/changePasswordTableViewController.m; sourceTree = SOURCE_ROOT; };
+		5926574D1D55BC7000F89AA6 /* CaptureStreamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureStreamingViewController.h; sourceTree = "<group>"; };
+		5926574E1D55BC7000F89AA6 /* LCStreamingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCStreamingManager.h; sourceTree = "<group>"; };
+		5926574F1D55BC7000F89AA6 /* LCVidiconItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCVidiconItem.h; sourceTree = "<group>"; };
+		592657501D55BC7000F89AA6 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAFNetworking.a; sourceTree = "<group>"; };
+		592657511D55BC7000F89AA6 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		592657521D55BC7000F89AA6 /* libLeCloudStreaming.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLeCloudStreaming.a; sourceTree = "<group>"; };
+		592657551D55BC7000F89AA6 /* LCStreamingBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LCStreamingBundle.bundle; sourceTree = "<group>"; };
+		5926575E1D55BD6B00F89AA6 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		593975581D4DFFE600576274 /* NewHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewHomeCell.h; path = HuiYan/Homepage/Views/NewHomeCell.h; sourceTree = SOURCE_ROOT; };
 		593975591D4DFFE600576274 /* NewHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewHomeCell.m; path = HuiYan/Homepage/Views/NewHomeCell.m; sourceTree = SOURCE_ROOT; };
 		5939755A1D4DFFE600576274 /* NewHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewHomeCell.xib; path = HuiYan/Homepage/Views/NewHomeCell.xib; sourceTree = SOURCE_ROOT; };
@@ -1075,6 +1092,11 @@
 		59EF567C1CF85E7800308F78 /* videotype@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "videotype@3x.png"; path = "HuiYan/ImageSource/videotype@3x.png"; sourceTree = SOURCE_ROOT; };
 		59F6AB1E1CF01F040000DFB0 /* InterestsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterestsTableViewController.h; path = HuiYan/Memain/Controllers/InterestsTableViewController.h; sourceTree = SOURCE_ROOT; };
 		59F6AB1F1CF01F040000DFB0 /* InterestsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InterestsTableViewController.m; path = HuiYan/Memain/Controllers/InterestsTableViewController.m; sourceTree = SOURCE_ROOT; };
+		59FBF8DF1D54B03B006BF94C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		59FBF8E11D54B04E006BF94C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		59FBF8E31D54B059006BF94C /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		59FBF8E51D54B06A006BF94C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		59FBF8E71D54B09C006BF94C /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		59FE80881CEECE480032318C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Message.h; path = HuiYan/Memain/Models/Message.h; sourceTree = SOURCE_ROOT; };
 		59FE80891CEECE480032318C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Message.m; path = HuiYan/Memain/Models/Message.m; sourceTree = SOURCE_ROOT; };
 		FE9295E751F9A708FD02E80F /* libPods-huiyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-huiyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1085,9 +1107,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55DAFFD21CC8F8150093B180 /* libsqlite3.tbd in Frameworks */,
+				59FBF8E81D54B09C006BF94C /* libiconv.2.4.0.tbd in Frameworks */,
 				55DAFFD81CC8F8350093B180 /* libz.tbd in Frameworks */,
 				55DAFFD61CC8F82B0093B180 /* libstdc++.tbd in Frameworks */,
+				59FBF8E61D54B06A006BF94C /* AVFoundation.framework in Frameworks */,
+				5926575D1D55BCFA00F89AA6 /* VideoToolbox.framework in Frameworks */,
+				5926575C1D55BCA300F89AA6 /* AudioToolbox.framework in Frameworks */,
+				5926575B1D55BC9000F89AA6 /* CoreMedia.framework in Frameworks */,
+				55DAFFD21CC8F8150093B180 /* libsqlite3.tbd in Frameworks */,
 				591C37EC1CF6CB8700E73CB1 /* libz.1.2.5.tbd in Frameworks */,
 				591C37EA1CF6CB6900E73CB1 /* CoreLocation.framework in Frameworks */,
 				55DAFFCA1CC8F7DE0093B180 /* Security.framework in Frameworks */,
@@ -1100,7 +1127,9 @@
 				557EDE191CD0A3980039267E /* AlipaySDK.framework in Frameworks */,
 				55DAFFD41CC8F8210093B180 /* CoreTelephony.framework in Frameworks */,
 				55B919271CCA1FAF00717F8E /* TencentOpenAPI.framework in Frameworks */,
+				5926575F1D55BD6B00F89AA6 /* libssl.a in Frameworks */,
 				55B9191C1CCA1FAF00717F8E /* libUMSocial_Sdk_5.0.1.a in Frameworks */,
+				592657571D55BC7000F89AA6 /* libcrypto.a in Frameworks */,
 				55B919291CCA1FAF00717F8E /* libSocialWechat.a in Frameworks */,
 				558621831CE5C89F007D5049 /* jpush-ios-2.1.6.a in Frameworks */,
 				557EDE1A1CD0A3980039267E /* libcrypto.a in Frameworks */,
@@ -1110,8 +1139,9 @@
 				55DAFFCC1CC8F7EF0093B180 /* libiconv.tbd in Frameworks */,
 				550BF9B71CB8F06000E2E9DE /* MediaPlayer.framework in Frameworks */,
 				5E8DBD57091BEE67885EDC35 /* libPods-huiyan.a in Frameworks */,
-				557EDE1B1CD0A3980039267E /* libssl.a in Frameworks */,
+				592657561D55BC7000F89AA6 /* libAFNetworking.a in Frameworks */,
 				591C37E61CF6CB1400E73CB1 /* libBaiduMobStat.a in Frameworks */,
+				592657581D55BC7000F89AA6 /* libLeCloudStreaming.a in Frameworks */,
 				55B9192A1CCA1FAF00717F8E /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1136,6 +1166,11 @@
 		0ADB6E0A7C260ECCC8850B29 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				59FBF8E71D54B09C006BF94C /* libiconv.2.4.0.tbd */,
+				59FBF8E51D54B06A006BF94C /* AVFoundation.framework */,
+				59FBF8E31D54B059006BF94C /* VideoToolbox.framework */,
+				59FBF8E11D54B04E006BF94C /* AudioToolbox.framework */,
+				59FBF8DF1D54B03B006BF94C /* CoreMedia.framework */,
 				591C37EB1CF6CB8700E73CB1 /* libz.1.2.5.tbd */,
 				591C37E91CF6CB6900E73CB1 /* CoreLocation.framework */,
 				591C37E71CF6CB4D00E73CB1 /* JavaScriptCore.framework */,
@@ -1415,6 +1450,7 @@
 		55B918F21CCA1D8800717F8E /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				5926574B1D55BC7000F89AA6 /* LeCloudStreaming */,
 				591C37ED1CF6CEB200E73CB1 /* UMMobClick.framework */,
 				591C37E31CF6CAEC00E73CB1 /* BaiduTongji */,
 				5578A83F1CEEF97900BD3061 /* TimeDatePicker */,
@@ -2180,6 +2216,37 @@
 			path = "HuiYan/第三方/BaiduTongji";
 			sourceTree = SOURCE_ROOT;
 		};
+		5926574B1D55BC7000F89AA6 /* LeCloudStreaming */ = {
+			isa = PBXGroup;
+			children = (
+				5926574C1D55BC7000F89AA6 /* inc */,
+				592657501D55BC7000F89AA6 /* libAFNetworking.a */,
+				592657511D55BC7000F89AA6 /* libcrypto.a */,
+				5926575E1D55BD6B00F89AA6 /* libssl.a */,
+				592657521D55BC7000F89AA6 /* libLeCloudStreaming.a */,
+				592657541D55BC7000F89AA6 /* res */,
+			);
+			path = LeCloudStreaming;
+			sourceTree = "<group>";
+		};
+		5926574C1D55BC7000F89AA6 /* inc */ = {
+			isa = PBXGroup;
+			children = (
+				5926574D1D55BC7000F89AA6 /* CaptureStreamingViewController.h */,
+				5926574E1D55BC7000F89AA6 /* LCStreamingManager.h */,
+				5926574F1D55BC7000F89AA6 /* LCVidiconItem.h */,
+			);
+			path = inc;
+			sourceTree = "<group>";
+		};
+		592657541D55BC7000F89AA6 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				592657551D55BC7000F89AA6 /* LCStreamingBundle.bundle */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
 		595DFF591D4EF1E700655A95 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -2345,7 +2412,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */;
+			buildConfigurationList = 55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2455,6 +2522,7 @@
 				558F22D41CE85469008636E1 /* training@3x.png in Resources */,
 				25C6257A1CBE49C10068BFE8 /* tab_firend@3x.png in Resources */,
 				25C6257E1CBE49C10068BFE8 /* tab_homePage@3x.png in Resources */,
+				5926575A1D55BC7000F89AA6 /* LCStreamingBundle.bundle in Resources */,
 				5964F1CB1CF5551600E436CE /* DramaDetailHeadCell.xib in Resources */,
 				59D4AA8B1CF40530002545A9 /* noInvitation.png in Resources */,
 				558621751CE49FB0007D5049 /* PersonHeadCell.xib in Resources */,
@@ -2954,6 +3022,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3500AD8F3B45BD551DB23170 /* Pods-huiyan.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2981,7 +3050,7 @@
 					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2992,10 +3061,83 @@
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PROJECT_DIR)/huiyan/第三方/JPush",
 					"$(PROJECT_DIR)/HuiYan/第三方/BaiduTongji",
+					"$(PROJECT_DIR)/huiyan/第三方/LeCloudStreaming",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"ELCImagePickerController\"",
+					"-l\"HexColors\"",
+					"-l\"MJExtension\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"RealReachability\"",
+					"-l\"SDWebImage\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"TSMessagesNW\"",
+					"-l\"c++\"",
+					"-l\"c++abi\"",
+					"-l\"opencore-amrnb\"",
+					"-l\"sqlite3\"",
+					"-l\"stdc++\"",
+					"-l\"stdc++.6.0.9\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"AMapSearchKit\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AssetsLibrary\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreAudio\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"MapKit\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"RongIMKit\"",
+					"-framework",
+					"\"RongIMLib\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -3003,6 +3145,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2678B32960948D1A938A510E /* Pods-huiyan.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3030,7 +3173,7 @@
 					"\"${PODS_ROOT}/Headers/PublicUMengAnalytics/Framework",
 				);
 				INFOPLIST_FILE = huiyan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3041,11 +3184,83 @@
 					"$(PROJECT_DIR)/huiyan/第三方/Alipay",
 					"$(PROJECT_DIR)/huiyan/第三方/JPush",
 					"$(PROJECT_DIR)/HuiYan/第三方/BaiduTongji",
+					"$(PROJECT_DIR)/huiyan/第三方/LeCloudStreaming",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"ELCImagePickerController\"",
+					"-l\"HexColors\"",
+					"-l\"MJExtension\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"RealReachability\"",
+					"-l\"SDWebImage\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"TSMessagesNW\"",
+					"-l\"c++\"",
+					"-l\"c++abi\"",
+					"-l\"opencore-amrnb\"",
+					"-l\"sqlite3\"",
+					"-l\"stdc++\"",
+					"-l\"stdc++.6.0.9\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"AMapSearchKit\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AssetsLibrary\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreAudio\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"MapKit\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"RongIMKit\"",
+					"-framework",
+					"\"RongIMLib\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayin.huiyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -3098,7 +3313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "HuiYan" */ = {
+		55CCD7811CB3640500C3B8CA /* Build configuration list for PBXProject "huiyan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CCD7B11CB3640600C3B8CA /* Debug */,

@@ -14,12 +14,17 @@
 #import "ServerManager.h"
 #import <MJExtension.h>
 #import "LivingModel.h"
+#import <CommonCrypto/CommonDigest.h>
+#import "CaptureStreamingViewController.h"
 @interface LivingProjectViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UIView  *navView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
 @end
+#define kPushDomainName @"3858.mpull.live.lecloud.com"
+#define kPushKey @"RNC7HWCZXE278UB5NAFK"
+#define kPushstreamName @"huiyan"
 static int number_page = 0;
 @implementation LivingProjectViewController
 static NSString *const livingCell = @"livingCell";
@@ -90,6 +95,8 @@ static NSString *const livingCell = @"livingCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     LivingProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:livingCell];
     [cell setContentModel:self.dataSource[indexPath.row]];
+    cell.playLiving.tag = indexPath.row;
+    [cell.playLiving addTarget:self action:@selector(playLiving:) forControlEvents:UIControlEventTouchUpInside];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -126,6 +133,54 @@ static NSString *const livingCell = @"livingCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -- 生成推流地址
+
+- (NSString *)rtmpAddressWithDomain:(NSString *)domain streamName:(NSString *)stream appKey:(NSString *)appKey {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    
+    NSString *sign = [self md5:[NSString stringWithFormat:@"%@%@%@", stream, currentDateStr, appKey]];
+    NSString *ret = [NSString stringWithFormat:@"rtmp://%@/live/%@?&tm=%@&sign=%@", domain, stream, currentDateStr, sign];
+    
+    return ret;
+}
+
+- (NSString *)md5:(NSString *)str {
+    const char *cStr = [str UTF8String];
+    unsigned char result[16];
+    CC_MD5(cStr, strlen(cStr), result); // This is the md5 call
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];
+}
+
+#pragma mark --开启直播
+- (void)playLiving:(UIButton *)sender{
+    LivingModel *model = self.dataSource[sender.tag];
+    NSString *rtmpURL = [self rtmpAddressWithDomain:[kPushDomainName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] streamName:[kPushstreamName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] appKey:[kPushKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    NSLog(@"demo 推流地址：%@", rtmpURL);
+    [self set_webcast_status:rtmpURL livingModel:model];
+}
+
+- (void)set_webcast_status:(NSString *)pushUrl livingModel:(LivingModel *)livingModel{
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"id":livingModel.wid,@"status":@"1",@"play_url":pushUrl};
+    [self.serverManager AnimatedPOST:@"set_webcast_status.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] integerValue] == 130020) {
+            CaptureStreamingViewControllerOrientation orientation;
+            orientation = CaptureStreamingViewControllerOrientationPortrait;
+            CaptureStreamingViewController * viewController = [[CaptureStreamingViewController alloc] initWithRTMPURL:pushUrl title:livingModel.title orientation:orientation];
+            [self presentViewController:viewController animated:YES completion:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ZCLog(@"error = %@",error);
+    }];
 }
 
 /*

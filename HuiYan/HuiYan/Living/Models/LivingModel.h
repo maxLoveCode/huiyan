@@ -16,4 +16,6 @@
 @property (nonatomic, copy) NSString *cover;
 @property (nonatomic, copy) NSString *play_url;
 @property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSString *wid;
+
 @end
