@@ -114,7 +114,7 @@ static int number_page = 0;
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height - 64)];
+        self.tableView  = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height )];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView registerNib:[UINib nibWithNibName:@"NewHomeCell" bundle:nil] forCellReuseIdentifier:@"home"];
