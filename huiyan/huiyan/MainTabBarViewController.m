@@ -101,7 +101,7 @@
     HomePageController *explore = [[HomePageController alloc]init];
     MeMainViewController *meMain = [[MeMainViewController alloc]init];
     [self setNavigationController:@"首页" Image:@"home" selectedImage:@"homeSel" controller:homepage];
-      [self setNavigationController:@"红人" Image:@"drama" selectedImage:@"dramaSel" controller:drama];
+      [self setNavigationController:@"名家" Image:@"drama" selectedImage:@"dramaSel" controller:drama];
      [self setNavigationController:@"发现" Image:@"found" selectedImage:@"foundSel" controller:explore];
      [self setNavigationController:@"我的" Image:@"mine" selectedImage:@"mineSel" controller:meMain];
     

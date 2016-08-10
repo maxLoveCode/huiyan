@@ -343,7 +343,7 @@ static NSString *const picCell = @"picCell";
                 UIImageView *imagePic = [[UIImageView alloc]init];
                 imagePic.frame = CGRectMake(i % 3  * (kImagePic + 10) + 10, i / 3 * (kImagePic + 10) + 60 , kImagePic,kImagePic);
                 [imagePic sd_setImageWithURL:[NSURL URLWithString:self.imagePicArr[i]] placeholderImage:nil];
-                imagePic.backgroundColor = [UIColor redColor];
+
                 [cell.contentView addSubview:imagePic];
             }
             
@@ -485,7 +485,9 @@ static NSString *const picCell = @"picCell";
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
        // UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
         NSData *data = UIImageJPEGRepresentation(img, 1.0);
-        [self getUploadImage:data];
+        dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+            [self getUploadImage:data];
+        });
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -587,7 +589,9 @@ static NSString *const picCell = @"picCell";
             UIImage *img = [dic objectForKey:UIImagePickerControllerOriginalImage];
            // UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
             NSData *data = UIImageJPEGRepresentation(img, 1.0);
-            [self getUploadImage:data];
+            dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+                [self getUploadImage:data];
+            });
         }
     }
     ZCLog(@"+++++++++%@",self.imagePicArr);

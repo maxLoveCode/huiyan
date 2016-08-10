@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ServerManager *serverManager;
 @end
-#define kPushDomainName @"3858.mpull.live.lecloud.com"
+#define kPushDomainName @"3858.mpush.live.lecloud.com"
 #define kPushKey @"RNC7HWCZXE278UB5NAFK"
 #define kPushstreamName @"huiyan"
 static int number_page = 0;
@@ -99,7 +99,7 @@ static NSString *const livingCell = @"livingCell";
 
 #pragma mark -- 网络请求
 - (void)getWebcastData:(NSString *)page{
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"status":@"0",@"user_id":[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"]};
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"user_id":[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"]};
     
     [self.serverManager GETWithoutAnimation:@"get_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 130010) {
@@ -158,6 +158,7 @@ static NSString *const livingCell = @"livingCell";
 }
 
 #pragma mark --开启直播
+//push address
 - (void)playLiving:(UIButton *)sender{
     LivingModel *model = self.dataSource[sender.tag];
     NSString *rtmpURL = [self rtmpAddressWithDomain:[kPushDomainName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] streamName:[kPushstreamName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] appKey:[kPushKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
@@ -165,12 +166,21 @@ static NSString *const livingCell = @"livingCell";
     [self set_webcast_status:rtmpURL livingModel:model];
 }
 
+- (NSString *)stringWithpullStr{
+    NSString *pullDomain = [kPushDomainName stringByReplacingOccurrencesOfString:@"push" withString:@"pull"];
+    NSString *pullStr = [self rtmpAddressWithDomain:[pullDomain stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] streamName:[kPushstreamName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] appKey:[NSString stringWithFormat:@"%@lecloud", [kPushKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
+    return pullStr;
+}
+
 - (void)set_webcast_status:(NSString *)pushUrl livingModel:(LivingModel *)livingModel{
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"id":livingModel.wid,@"status":@"1",@"play_url":pushUrl};
+    
+    NSString *pullUrl = [self stringWithpullStr];
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"id":livingModel.wid,@"status":@"1",@"play_url":pullUrl};
     [self.serverManager AnimatedPOST:@"set_webcast_status.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 130020) {
             CaptureStreamingViewControllerOrientation orientation;
             orientation = CaptureStreamingViewControllerOrientationPortrait;
+            NSLog(@"-推流地址%@",pushUrl);
             CaptureStreamingViewController * viewController = [[CaptureStreamingViewController alloc] initWithRTMPURL:pushUrl title:livingModel.title orientation:orientation];
             [self presentViewController:viewController animated:YES completion:nil];
         }

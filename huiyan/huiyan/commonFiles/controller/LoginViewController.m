@@ -404,11 +404,6 @@
     });
 }
 
-//哪些界面支持自动转屏
-- (BOOL)shouldAutorotate{
-    
-    return NO;
-}
 
 //viewController 支持哪些转屏方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations{

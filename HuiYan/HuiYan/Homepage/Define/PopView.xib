@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWe-S3-dMK">
-                    <rect key="frame" x="210" y="250" width="80" height="100"/>
+                    <rect key="frame" x="180" y="250" width="80" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="3XQ-ul-ihy"/>
                         <constraint firstAttribute="height" constant="100" id="4yD-AG-khz"/>
@@ -27,7 +27,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryE-Un-GaW">
-                    <rect key="frame" x="310" y="250" width="80" height="100"/>
+                    <rect key="frame" x="340" y="250" width="80" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="9eU-fq-M4w"/>
                         <constraint firstAttribute="height" constant="100" id="AMO-Je-rA6"/>
@@ -46,8 +46,8 @@
             <constraints>
                 <constraint firstItem="jWe-S3-dMK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0PZ-03-exm"/>
                 <constraint firstItem="ryE-Un-GaW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6py-LZ-CeG"/>
-                <constraint firstItem="jWe-S3-dMK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-50" id="qwh-gm-SON"/>
-                <constraint firstItem="ryE-Un-GaW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="50" id="x2T-TW-RIu"/>
+                <constraint firstItem="jWe-S3-dMK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-80" id="qwh-gm-SON"/>
+                <constraint firstItem="ryE-Un-GaW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="80" id="x2T-TW-RIu"/>
             </constraints>
             <point key="canvasLocation" x="124" y="229"/>
         </view>

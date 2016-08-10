@@ -66,7 +66,7 @@ static NSString *const noticesCell = @"livingNotices";
 
 #pragma mark -- 网络请求
 - (void)getWebcastData:(NSString *)page{
-    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"status":@"1"};
+    NSDictionary *parameters = @{@"access_token":self.serverManager.accessToken,@"page":page,@"status":@""};
     
     [self.serverManager GETWithoutAnimation:@"get_webcast.php" parameters:parameters success:^(NSURLSessionDataTask * _Nullable task, id  _Nullable responseObject) {
         if ([responseObject[@"code"] integerValue] == 130010) {

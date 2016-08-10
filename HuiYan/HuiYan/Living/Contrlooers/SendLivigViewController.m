@@ -191,7 +191,10 @@ static NSString *const picCell = @"picCell";
         UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
      //   UIImage *smallImage = [self thumbnailWithImageWithoutScale:img size:CGSizeMake(100.0f, 100.0f)];
         NSData *data = UIImageJPEGRepresentation(img, 1.0);
-        [self getUploadImage:data];
+        dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+            [self getUploadImage:data];
+        });
+        
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -231,7 +234,7 @@ static NSString *const picCell = @"picCell";
                               NSLog(@"str = %@",str);
                               self.updatePic = str;
                               [self.imagePic sd_setImageWithURL:[NSURL URLWithString:str]];
-                              self.selectPic.enabled = NO;
+                              [self.selectPic removeFromSuperview];
                               
                           }else{
                               [self presentViewController:[Tools showAlert:@"上传失败"] animated:YES completion:nil];

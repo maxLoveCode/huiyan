@@ -76,7 +76,7 @@
     CGFloat width = self.zc_width;
     CGFloat height = self.zc_height;
     
-    self.publishBtn.center = CGPointMake(width * 0.5, height * 0.5);
+    self.publishBtn.center = CGPointMake(width * 0.5, height * 0.5 - 10);
     int index = 0;
     CGFloat tabBarBtnW = width / 5;
     CGFloat tabBarBtnH = height;
