@@ -131,13 +131,13 @@
 }
 
 //哪些界面支持自动转屏
-- (BOOL)shouldAutorotate{
-    UINavigationController *nav = self.viewControllers[self.selectedIndex];
-    if ([nav.topViewController isKindOfClass:[WikiWorksDetailsViewController class]] || [nav.topViewController isKindOfClass:[DynamicDetailViewController class]]  ) {
-        return !ZFPlayerShared.isLockScreen;
-    }
-    return NO;
-}
+//- (BOOL)shouldAutorotate{
+//    UINavigationController *nav = self.viewControllers[self.selectedIndex];
+//    if ([nav.topViewController isKindOfClass:[WikiWorksDetailsViewController class]] || [nav.topViewController isKindOfClass:[DynamicDetailViewController class]]  ) {
+//        return !ZFPlayerShared.isLockScreen;
+//    }
+//    return NO;
+//}
 
 //viewController 支持哪些转屏方向
 //- (UIInterfaceOrientationMask)supportedInterfaceOrientations{

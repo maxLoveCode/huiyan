@@ -43,12 +43,12 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWf-cP-n1T">
-                        <rect key="frame" x="53" y="48" width="100" height="44"/>
+                        <rect key="frame" x="53" y="48" width="150" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="x0K-ZE-h8d"/>
+                            <constraint firstAttribute="width" constant="150" id="x0K-ZE-h8d"/>
                             <constraint firstAttribute="height" constant="44" id="yCP-Ol-211"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>

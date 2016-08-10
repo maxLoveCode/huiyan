@@ -11,28 +11,30 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWe-S3-dMK">
-                    <rect key="frame" x="170" y="285" width="60" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWe-S3-dMK">
+                    <rect key="frame" x="210" y="250" width="80" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="3XQ-ul-ihy"/>
-                        <constraint firstAttribute="height" constant="30" id="4yD-AG-khz"/>
+                        <constraint firstAttribute="width" constant="80" id="3XQ-ul-ihy"/>
+                        <constraint firstAttribute="height" constant="100" id="4yD-AG-khz"/>
                     </constraints>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="15" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="视频直播">
+                    <inset key="titleEdgeInsets" minX="-57" minY="0.0" maxX="0.0" maxY="-79"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="-20" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="视频直播" image="videoLiving">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="player:" destination="iN0-l3-epB" eventType="touchUpInside" id="e7n-lv-1xm"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryE-Un-GaW">
-                    <rect key="frame" x="370" y="285" width="60" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryE-Un-GaW">
+                    <rect key="frame" x="310" y="250" width="80" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="9eU-fq-M4w"/>
-                        <constraint firstAttribute="height" constant="30" id="AMO-Je-rA6"/>
+                        <constraint firstAttribute="width" constant="80" id="9eU-fq-M4w"/>
+                        <constraint firstAttribute="height" constant="100" id="AMO-Je-rA6"/>
                     </constraints>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="15" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="活动发布">
+                    <inset key="titleEdgeInsets" minX="-57" minY="15" maxX="0.0" maxY="-66"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="-20" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="活动发布" image="sendActivity">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -44,9 +46,14 @@
             <constraints>
                 <constraint firstItem="jWe-S3-dMK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="0PZ-03-exm"/>
                 <constraint firstItem="ryE-Un-GaW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6py-LZ-CeG"/>
-                <constraint firstItem="jWe-S3-dMK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-100" id="qwh-gm-SON"/>
-                <constraint firstItem="ryE-Un-GaW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="100" id="x2T-TW-RIu"/>
+                <constraint firstItem="jWe-S3-dMK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-50" id="qwh-gm-SON"/>
+                <constraint firstItem="ryE-Un-GaW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="50" id="x2T-TW-RIu"/>
             </constraints>
+            <point key="canvasLocation" x="124" y="229"/>
         </view>
     </objects>
+    <resources>
+        <image name="sendActivity" width="61" height="61"/>
+        <image name="videoLiving" width="61" height="61"/>
+    </resources>
 </document>

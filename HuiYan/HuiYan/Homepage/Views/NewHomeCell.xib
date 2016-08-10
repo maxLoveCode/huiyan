@@ -78,21 +78,26 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="直播中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZf-bj-Zfc">
-                        <rect key="frame" x="431" y="66" width="60" height="20"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X3W-3o-qEp">
+                        <rect key="frame" x="36" y="28" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="5hY-t4-xP9"/>
-                            <constraint firstAttribute="width" constant="60" id="wY2-lH-ehe"/>
+                            <constraint firstAttribute="width" constant="15" id="0cx-d3-opL"/>
+                            <constraint firstAttribute="height" constant="15" id="4gh-CM-bqX"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="livingstatus" translatesAutoresizingMaskIntoConstraints="NO" id="Usb-kY-gTy">
+                        <rect key="frame" x="438" y="56" width="48" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="e9O-E9-dYe"/>
+                            <constraint firstAttribute="height" constant="19" id="o75-ro-9B8"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="w7K-dS-bvI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="0AY-nF-UMR"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kDJ-do-mYs" secondAttribute="trailing" id="50r-lJ-1PW"/>
                     <constraint firstItem="kDJ-do-mYs" firstAttribute="top" secondItem="15z-62-C2g" secondAttribute="bottom" id="80a-7i-0dP"/>
+                    <constraint firstItem="Usb-kY-gTy" firstAttribute="top" secondItem="lE4-Yi-xTM" secondAttribute="bottom" constant="20" id="ANW-XC-EgU"/>
                     <constraint firstItem="tMI-yj-caK" firstAttribute="top" secondItem="w7K-dS-bvI" secondAttribute="bottom" id="Ho4-8M-CfK"/>
                     <constraint firstItem="15z-62-C2g" firstAttribute="top" secondItem="NSX-n9-vaF" secondAttribute="bottom" constant="10" id="I8g-Od-AMq"/>
                     <constraint firstItem="tMI-yj-caK" firstAttribute="leading" secondItem="NSX-n9-vaF" secondAttribute="trailing" constant="10" id="LIh-1h-jgQ"/>
@@ -100,13 +105,14 @@
                     <constraint firstItem="15z-62-C2g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OAj-EM-rOF"/>
                     <constraint firstAttribute="trailing" secondItem="lE4-Yi-xTM" secondAttribute="trailing" constant="15" id="P9r-gb-Ios"/>
                     <constraint firstItem="NSX-n9-vaF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="Pvp-Xw-PWH"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="aZf-bj-Zfc" secondAttribute="trailing" constant="15" id="Tk0-8H-nsR"/>
+                    <constraint firstItem="X3W-3o-qEp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="28" id="REk-zd-Qz7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Usb-kY-gTy" secondAttribute="trailing" constant="20" id="VfJ-Sy-eTe"/>
                     <constraint firstItem="15z-62-C2g" firstAttribute="top" secondItem="NSX-n9-vaF" secondAttribute="bottom" constant="44" id="Vna-iQ-Hp2"/>
                     <constraint firstItem="NSX-n9-vaF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XfP-Mn-eIU"/>
-                    <constraint firstItem="aZf-bj-Zfc" firstAttribute="top" secondItem="lE4-Yi-xTM" secondAttribute="bottom" constant="30" id="dLL-k1-JDw"/>
                     <constraint firstItem="w7K-dS-bvI" firstAttribute="leading" secondItem="NSX-n9-vaF" secondAttribute="trailing" constant="10" id="iWS-U5-IJg"/>
                     <constraint firstItem="tMI-yj-caK" firstAttribute="top" secondItem="w7K-dS-bvI" secondAttribute="bottom" id="kt8-wc-Z2W"/>
                     <constraint firstAttribute="trailing" secondItem="15z-62-C2g" secondAttribute="trailing" id="ohF-UR-r9P"/>
+                    <constraint firstItem="X3W-3o-qEp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="tY8-Z6-NPq"/>
                     <constraint firstItem="15z-62-C2g" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="wEa-Bl-RXt"/>
                     <constraint firstItem="kDJ-do-mYs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="xlx-DT-K44"/>
                     <constraint firstItem="tMI-yj-caK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="xur-ah-IJd"/>
@@ -127,10 +133,12 @@
                 <outlet property="nameLab" destination="w7K-dS-bvI" id="PYD-ch-6kH"/>
                 <outlet property="peopleCount" destination="lE4-Yi-xTM" id="MJi-Uo-teX"/>
                 <outlet property="professionLab" destination="tMI-yj-caK" id="Adl-jQ-jm0"/>
-                <outlet property="statusLab" destination="aZf-bj-Zfc" id="cxE-fw-XBg"/>
                 <outlet property="titleLab" destination="kDJ-do-mYs" id="c7Z-UJ-C7e"/>
             </connections>
             <point key="canvasLocation" x="129" y="379.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="livingstatus" width="48" height="19"/>
+    </resources>
 </document>

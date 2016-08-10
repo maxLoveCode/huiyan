@@ -20,10 +20,10 @@
 - (UIButton *)publishBtn{
     if (!_publishBtn) {
         UIButton *publishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [publishBtn setImage:[UIImage imageNamed:@"tabBar_publish_icon"] forState:UIControlStateNormal
+        [publishBtn setImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal
          ];
         
-        [publishBtn setImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] forState:UIControlStateHighlighted
+        [publishBtn setImage:[UIImage imageNamed:@"selectedPublished"] forState:UIControlStateSelected
          ];
         [publishBtn addTarget:self action:@selector(publishClick) forControlEvents:UIControlEventTouchUpInside];
         [publishBtn sizeToFit];

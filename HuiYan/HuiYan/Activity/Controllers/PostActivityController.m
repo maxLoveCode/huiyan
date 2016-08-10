@@ -111,9 +111,7 @@ static NSString *const picCell = @"picCell";
         self.navView.backgroundColor = COLOR_THEME;
         UIButton *returnBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         returnBtn.frame = CGRectMake(15, 20, 30, 50);
-        [returnBtn setTitle:@"返回" forState:UIControlStateNormal];
-        returnBtn.titleLabel.font = kFONT14;
-        [returnBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [returnBtn setImage:[UIImage imageNamed:@"returnBack"] forState:UIControlStateNormal];
         [returnBtn addTarget:self action:@selector(returnNav) forControlEvents:UIControlEventTouchUpInside];
         [self.navView addSubview:returnBtn];
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(kScreen_Width / 2 - 30, 20, 60, 50)];
@@ -314,7 +312,7 @@ static NSString *const picCell = @"picCell";
         if (!addCover) {
             addCover = [[UIImageView alloc]init];;
             addCover.frame = CGRectMake(kMargin, 50, kImagePic, kImagePic);
-            addCover.backgroundColor = [UIColor redColor];
+              addCover.image = [UIImage imageNamed:@"addactivityPic"];
             [cell.contentView addSubview:addCover];
             addCover.tag = 1006;
             addCover.userInteractionEnabled = YES;
@@ -354,7 +352,7 @@ static NSString *const picCell = @"picCell";
             UIImageView *addCover = [cell viewWithTag:1010];
             if (!addCover) {
                 addCover = [[UIImageView alloc]init];
-                addCover.backgroundColor = [UIColor yellowColor];
+                  addCover.image = [UIImage imageNamed:@"addactivityPic"];
                 [cell.contentView addSubview:addCover];
                 addCover.tag = 1010;
                 addCover.userInteractionEnabled = YES;
